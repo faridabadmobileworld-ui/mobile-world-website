@@ -1,18 +1,39 @@
 @import "tailwindcss";
 
-/* Tailwind v4 में config इसी file में होती है — अलग tailwind.config.js नहीं। */
+/*
+ * Tailwind v4 में config इसी file में होती है — अलग tailwind.config.js नहीं।
+ *
+ * रंग बदलना हो तो सिर्फ़ नीचे की दो लाइनें बदलिए। पूरी website का रंग
+ * अपने आप बदल जाएगा। किसी component में रंग सीधा मत लिखिए।
+ */
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* दुकान का मुख्य रंग — गहरा नीला। Logo आने पर इसे बदल दीजिएगा। */
+  --color-brand: #0b4f9e;
+  --color-brand-dark: #08386f;
+  --color-brand-light: #eaf2fb;
+
+  /* WhatsApp का आधिकारिक हरा — इसे मत बदलिए, लोग इसी रंग से पहचानते हैं। */
+  --color-whatsapp: #25d366;
+  --color-whatsapp-dark: #1da851;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-}
-
+/*
+ * Font: कोई font download नहीं किया जा रहा — page हल्का रखने के लिए।
+ * फ़ोन में जो Devanagari font पहले से मौजूद है, वही इस्तेमाल होगा:
+ * Android पर Noto Sans Devanagari, iPhone पर Kohinoor Devanagari।
+ * इसके बिना "।" और मात्राएँ टूटी-फूटी दिखती हैं।
+ */
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: #ffffff;
+  color: #171717;
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Noto Sans Devanagari",
+    "Kohinoor Devanagari",
+    "Mangal",
+    sans-serif;
 }

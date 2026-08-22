@@ -25,7 +25,7 @@ export type Address = {
 };
 
 export type Phone = {
-  /** Screen पर दिखाने के लिए — "+91 99533 35535" */
+  /** Screen पर दिखाने के लिए — "+91 93152 12131" */
   display: string;
   /** Call button के लिए — <a href={shop.phone.tel}> */
   tel: string;

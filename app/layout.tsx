@@ -31,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="hi">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased text-[15px] sm:text-base">{children}</body>
     </html>
   );
 }
