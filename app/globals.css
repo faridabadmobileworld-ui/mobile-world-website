@@ -1,32 +1,39 @@
 @import "tailwindcss";
 
 /*
- * Tailwind v4 में config इसी file में होती है — अलग tailwind.config.js नहीं।
- *
- * रंग बदलना हो तो सिर्फ़ नीचे की दो लाइनें बदलिए। पूरी website का रंग
- * अपने आप बदल जाएगा। किसी component में रंग सीधा मत लिखिए।
+ * Mobile World — dark premium theme.
+ * रंग बदलना हो तो सिर्फ़ नीचे के tokens बदलिए।
  */
 
 @theme {
-  /* दुकान का मुख्य रंग — गहरा नीला। Logo आने पर इसे बदल दीजिएगा। */
-  --color-brand: #0b4f9e;
-  --color-brand-dark: #08386f;
-  --color-brand-light: #eaf2fb;
+  /* गहरा background */
+  --color-ink: #05070f;
+  --color-ink-2: #0a0f1e;
+  --color-surface: #0e1526;
+  --color-line: #1c2740;
 
-  /* WhatsApp का आधिकारिक हरा — इसे मत बदलिए, लोग इसी रंग से पहचानते हैं। */
+  /* चमकीले accent — यही page की जान हैं */
+  --color-brand: #3b82f6;
+  --color-electric: #22d3ee;
+  --color-violet: #8b5cf6;
+
+  /* लिखाई */
+  --color-cream: #eaf0fb;
+  --color-muted: #8fa0bd;
+
   --color-whatsapp: #25d366;
   --color-whatsapp-dark: #1da851;
 }
 
-/*
- * Font: कोई font download नहीं किया जा रहा — page हल्का रखने के लिए।
- * फ़ोन में जो Devanagari font पहले से मौजूद है, वही इस्तेमाल होगा:
- * Android पर Noto Sans Devanagari, iPhone पर Kohinoor Devanagari।
- * इसके बिना "।" और मात्राएँ टूटी-फूटी दिखती हैं।
- */
+html {
+  scroll-behavior: smooth;
+  background: var(--color-ink);
+}
+
 body {
-  background: #ffffff;
-  color: #171717;
+  background: var(--color-ink);
+  color: var(--color-cream);
+  overflow-x: hidden;
   font-family:
     system-ui,
     -apple-system,
@@ -34,6 +41,142 @@ body {
     Roboto,
     "Noto Sans Devanagari",
     "Kohinoor Devanagari",
-    "Mangal",
+    Mangal,
     sans-serif;
+}
+
+/* ── scroll पर उभरकर आना ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── चमकती हुई किनार ── */
+.glow-ring {
+  position: relative;
+}
+.glow-ring::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-electric) 70%, transparent),
+    transparent 40%,
+    color-mix(in srgb, var(--color-violet) 60%, transparent)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ── brands की चलती पट्टी ── */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee 32s linear infinite;
+}
+.marquee-wrap:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* ── button पर दौड़ती चमक ── */
+@keyframes sheen {
+  from {
+    transform: translateX(-120%) skewX(-20deg);
+  }
+  to {
+    transform: translateX(320%) skewX(-20deg);
+  }
+}
+.sheen::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 45%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(255 255 255 / 0.35),
+    transparent
+  );
+  animation: sheen 3.6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ── धीमे तैरते हुए ── */
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+/* ── हल्का grain, ताकि रंग सपाट न लगें ── */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── 3D झुकाव ── */
+.tilt-scene {
+  perspective: 900px;
+}
+.tilt-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+}
+
+/*
+ * जिन लोगों ने अपने फ़ोन में animation बंद कर रखी है (चक्कर आने की
+ * समस्या वग़ैरह), उनके लिए सब कुछ स्थिर कर दो। यह ज़रूरी है।
+ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .marquee-track,
+  .sheen::after,
+  .float-slow {
+    animation: none;
+  }
+  .tilt-card {
+    transition: none;
+  }
 }

@@ -56,9 +56,22 @@ iQOO, Realme, Tecno, Infinix, Lava, Nokia, Philips
 - ज़्यादातर visitors **Faridabad से, mobile phone पर, 4G/5G data पर**
 - कई users English से ज़्यादा Hindi पढ़ने में सहज हैं
 - इसलिए **mobile-first design अनिवार्य है**
-- Pages हल्के रखो — heavy animations और बड़ी unoptimized images मत डालो
 - हर page पर call और WhatsApp button आसानी से पहुँच में हो
 - Text सरल रखो। Corporate jargon नहीं।
+
+### Design का स्तर — owner का फ़ैसला
+Website **देखने में शानदार** होनी चाहिए — dark premium look, 3D, motion,
+scroll animations, WebGL। सादा/basic design मंज़ूर नहीं।
+
+पहले यहाँ लिखा था "heavy animations मत डालो" — owner ने वो नियम हटा दिया।
+
+दो शर्तें जो फिर भी निभानी हैं:
+- **लिखाई हमेशा पढ़ी जानी चाहिए।** रंग और effect कितने भी अच्छे हों,
+  अगर text नहीं पढ़ा जा रहा तो वो design फ़ेल है
+- जिस visitor ने फ़ोन में animation बंद कर रखी है
+  (`prefers-reduced-motion`), उसके लिए सब स्थिर कर दो
+- भारी library से पहले सोचो — वही असर हल्के तरीक़े से मिल सकता है तो
+  वही चुनो (जैसे three.js की जगह सीधा WebGL shader)
 
 ---
 
@@ -111,7 +124,8 @@ Visitor details save करना, customer login।
   opening hours, geo coordinates
 - `sitemap.xml` और `robots.txt` generate करो
 - Images optimized और सही size में
-- Page speed को हर feature से ऊपर रखो
+- Page तेज़ रखने की कोशिश करो, पर ऊपर section 3 वाला design स्तर
+  घटाकर नहीं — owner ने साफ़ कहा है कि website शानदार दिखनी चाहिए
 
 ---
 
