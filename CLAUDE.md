@@ -28,8 +28,12 @@ WhatsApp message, या physical visit।
 - **Address:** Shop No. 3896/661/29, Gurudwara Road, Block F,
   Near Bada Gurudwara and Disposal Chowk, Jawahar Colony,
   NIT Faridabad, Haryana – 121005
-- **Phone / WhatsApp:** +91 99533 35535
+- **Phone / WhatsApp:** +91 93152 12131
 - **Model:** एक ही physical shop। कोई branch नहीं।
+- **Timings:** रोज़ सुबह 9:00 – रात 11:00। हर महीने की आख़िरी तारीख़ को बंद।
+- **इतिहास:** 1973 — Aggarwal Kiryana Store · 2006 — Aggarwal Kiryana And
+  Communication · 2016 — Mobile World
+  **"Mobile World since 1973" कभी मत लिखो।** Mobile World 2016 से है।
 
 ### Categories
 Mobiles, Laptops, Televisions, Air Conditioners, Inverters & Batteries,
@@ -139,7 +143,7 @@ Visitor details save करना, customer login।
 
 - [ ] Shop की असली photos
 - [ ] Google Maps listing का exact URL
-- [ ] Opening / closing timings और weekly off
+- [x] ~~Opening / closing timings और weekly off~~ — हो गया (ऊपर section 2 में)
 - [ ] Repair / installation service करते हैं या नहीं
 - [ ] EMI / exchange offer करते हैं या नहीं
 - [ ] Logo file

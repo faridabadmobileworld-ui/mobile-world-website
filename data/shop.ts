@@ -57,6 +57,12 @@ export type OpeningHours = {
   closes: string;
 };
 
+/** दुकान के इतिहास का एक पड़ाव — About page के लिए। */
+export type Milestone = {
+  year: number;
+  event: string;
+};
+
 export type Category = {
   slug: string;
   name: string;
@@ -77,6 +83,9 @@ export type Shop = {
   social: Social;
   geo: Geo | null;
   openingHours: OpeningHours[];
+  /** हर महीने की आख़िरी तारीख़ को दुकान बंद रहती है। */
+  closedOnLastDayOfMonth: boolean;
+  milestones: Milestone[];
 };
 
 /**
@@ -133,11 +142,12 @@ export const shop: Shop = {
     country: "IN",
   },
 
-  // तीनों एक ही नंबर के अलग-अलग रूप हैं: +91 99533 35535
+  // तीनों एक ही नंबर के अलग-अलग रूप हैं: +91 93152 12131
+  // यही नंबर Google Business Profile और WhatsApp पर भी है।
   phone: {
-    display: "+91 99533 35535",
-    tel: "tel:+919953335535",
-    whatsapp: "https://wa.me/919953335535",
+    display: "+91 93152 12131",
+    tel: "tel:+919315212131",
+    whatsapp: "https://wa.me/919315212131",
   },
 
   social: {
@@ -152,12 +162,42 @@ export const shop: Shop = {
   // JSON-LD schema में तभी जाएँगे जब यह null न हो।
   geo: null,
 
-  // TODO (owner): दुकान का खुलने-बंद होने का समय और साप्ताहिक छुट्टी।
-  // उदाहरण: { day: "Monday", opens: "10:00", closes: "21:00" }
-  // जब तक खाली है, website पर कोई timing नहीं दिखेगी — गलत timing
-  // दिखाने से कुछ न दिखाना बेहतर है।
-  openingHours: [],
+  // सातों दिन सुबह 9 बजे से रात 11 बजे तक।
+  openingHours: [
+    { day: "Monday", opens: "09:00", closes: "23:00" },
+    { day: "Tuesday", opens: "09:00", closes: "23:00" },
+    { day: "Wednesday", opens: "09:00", closes: "23:00" },
+    { day: "Thursday", opens: "09:00", closes: "23:00" },
+    { day: "Friday", opens: "09:00", closes: "23:00" },
+    { day: "Saturday", opens: "09:00", closes: "23:00" },
+    { day: "Sunday", opens: "09:00", closes: "23:00" },
+  ],
+
+  // हर महीने की आख़िरी तारीख़ को दुकान बंद रहती है
+  // (31, या जिस महीने में जो आख़िरी दिन हो — February में 28/29)।
+  closedOnLastDayOfMonth: true,
+
+  // दुकान का इतिहास — About page के लिए।
+  // ध्यान: "Mobile World since 1973" कभी मत लिखना। Mobile World 2016 से है;
+  // 1973 परिवार के किराना business की शुरुआत है, अलग बात है।
+  milestones: [
+    { year: 1973, event: "Aggarwal Kiryana Store" },
+    { year: 2006, event: "Aggarwal Kiryana And Communication" },
+    { year: 2016, event: "Mobile World" },
+  ],
 };
+
+/**
+ * आज दुकान बंद है या नहीं — यानी क्या आज महीने की आख़िरी तारीख़ है।
+ * Visit Us page पर "आज बंद है" दिखाने के काम आएगा।
+ */
+export function isClosedOn(date: Date): boolean {
+  if (!shop.closedOnLastDayOfMonth) return false;
+  const tomorrow = new Date(date);
+  tomorrow.setDate(date.getDate() + 1);
+  // अगर कल नया महीना शुरू हो रहा है, तो आज आख़िरी तारीख़ है।
+  return tomorrow.getMonth() !== date.getMonth();
+}
 
 /**
  * पता एक लाइन में — footer और JSON-LD schema के काम आएगा।
