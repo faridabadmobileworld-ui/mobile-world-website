@@ -125,6 +125,32 @@ html = marked.html;
 const imageMap = {};
 for (const name of marked.names) imageMap[name] = await toDataUri(name);
 
+/* ── Home का device reel ──
+ * असली website पर यह React चलाता है। copy में React नहीं होता, इसलिए वही
+ * गणित साधे JavaScript में दोबारा लिखा है। DeviceReel.tsx में लगे
+ * data-reel निशानों से elements पकड़े जाते हैं।
+ */
+const devicesTs = readFileSync("data/devices.ts", "utf8");
+const pick = (re) => devicesTs.match(re)?.[1] ?? "";
+const REEL = {
+  acts: [
+    ...[...devicesTs.matchAll(/wash:\s*"([^"]+)",\s*\n\s*glowA:\s*"([^"]+)",\s*\n\s*glowB:\s*"([^"]+)",\s*\n\s*ink:\s*"([^"]+)"/g)].map(
+      (m) => ({ wash: m[1], glowA: m[2], glowB: m[3], ink: m[4] }),
+    ),
+  ],
+  bigTypes: [...devicesTs.matchAll(/bigType:\s*"([^"]+)"/g)].map((m) => m[1]),
+  hollow: [...devicesTs.matchAll(/hollowSecondLine:\s*(true|false)/g)].map(
+    (m) => m[1] === "true",
+  ),
+};
+if (REEL.acts.length !== REEL.bigTypes.length) {
+  console.error(
+    `⚠ reel: ${REEL.acts.length} रंग पर ${REEL.bigTypes.length} लिखाई — data/devices.ts का ढाँचा बदल गया लगता है`,
+  );
+  process.exit(1);
+}
+console.log(`reel: ${REEL.acts.length} पड़ाव पढ़े`);
+
 /* ── अब वो सब जो React करता था, साधे JavaScript में ── */
 const shader = readFileSync("components/AuroraCanvas.tsx", "utf8");
 const VERT = shader.match(/const VERT = `([\s\S]*?)`;/)[1];
@@ -236,7 +262,77 @@ const js = `
     if (c) c.style.transform = '';
   });
 
-  /* ── पीछे चलती हुई रोशनी (असली website वाला ही shader) ── */
+  /* ── Home का device reel — वही गणित जो DeviceReel.tsx में है ── */
+  var REEL = ${JSON.stringify(REEL)};
+  var rWash = document.querySelector('[data-reel="wash"]'),
+      rBig  = document.querySelector('[data-reel="big"]'),
+      rGA   = document.querySelector('[data-reel="glowA"]'),
+      rGB   = document.querySelector('[data-reel="glowB"]'),
+      rBar  = document.querySelector('[data-reel="bar"]'),
+      rLeaf = document.querySelector('[data-reel="leaf"]'),
+      rPen  = document.querySelector('[data-reel="pen"]'),
+      rDevs = [].slice.call(document.querySelectorAll('[data-reel-device]')),
+      rCards= [].slice.call(document.querySelectorAll('[data-reel-card]'));
+
+  if (rWash) {
+    var ACTS = REEL.acts.length, rAct = -1, rTarget = 0, rShown = 0, rTick = false;
+
+    function paintAct(i){
+      if (i === rAct) return; rAct = i;
+      var a = REEL.acts[i];
+      rWash.style.background = a.wash;
+      rGA.style.background = a.glowA;
+      rGB.style.background = a.glowB;
+      var lines = REEL.bigTypes[i].split('\\n');
+      rBig.style.color = a.ink;
+      rBig.innerHTML = lines.map(function(l,n){
+        return (REEL.hollow[i] && n===1) ? '<span class="hollow">'+l+'</span>' : '<span>'+l+'</span>';
+      }).join('\\n');
+      // आख़िरी पड़ाव पर भी Fold दिखता रहे
+      var liveIdx = Math.min(i, rDevs.length - 1);
+      rDevs.forEach(function(d,n){ d.style.opacity = n === liveIdx ? '1' : '0'; });
+      rCards.forEach(function(c,n){
+        c.style.opacity = n === i ? '1' : '0';
+        c.style.transform = n === i ? 'none' : 'translateY(16px)';
+        c.style.pointerEvents = n === i ? 'auto' : 'none';
+        c.style.color = a.ink;
+      });
+    }
+
+    function reelLoop(){
+      rShown += (rTarget - rShown) * (RM ? 1 : 0.085);
+      var p = rShown, f = p*ACTS, idx = Math.min(ACTS-1, Math.floor(f)), q = Math.min(1, f-idx);
+      paintAct(idx);
+      if (rBar) rBar.style.width = (p*100)+'%';
+      if (!RM) {
+        var foldIdx = rDevs.length - 1;
+        var isFold = idx >= foldIdx;
+        var spin = isFold ? Math.sin(q*Math.PI*2)*22 : (q*360 + idx*120);
+        var tilt = Math.sin(q*Math.PI)*(isFold?9:16);
+        var sc = 1 + Math.sin(q*Math.PI)*(isFold?0.05:0.12);
+        var ty = Math.sin(q*Math.PI*1.3)*-18;
+        var live = rDevs[Math.min(idx, foldIdx)];
+        if (live) live.style.transform =
+          'translateY('+ty+'px) rotateX('+tilt+'deg) rotateY('+spin+'deg) scale('+sc+')';
+        if (rPen) rPen.style.transform = 'translateY('+(q*26)+'px)';
+        if (rLeaf) {
+          var open = idx > foldIdx ? 1 : (idx === foldIdx ? Math.min(1, q*1.5) : 0);
+          rLeaf.style.transform = 'rotateY('+(-178*(1-open))+'deg)';
+        }
+      }
+      if (Math.abs(rTarget - rShown) > 0.0004) requestAnimationFrame(reelLoop); else rTick = false;
+    }
+
+    function reelRead(){
+      rTarget = Math.min(1, Math.max(0, scrollY/(ACTS*innerHeight)));
+      if (!rTick){ rTick = true; requestAnimationFrame(reelLoop); }
+    }
+    addEventListener('scroll', reelRead, {passive:true});
+    addEventListener('resize', reelRead);
+    reelRead();
+  }
+
+  /* ── पीछे चलती हुई रोशनी (अगर किसी page पर canvas हो) ── */
   var VERT = ${JSON.stringify(VERT)};
   var FRAG = ${JSON.stringify(FRAG)};
   function startAurora(canvas){

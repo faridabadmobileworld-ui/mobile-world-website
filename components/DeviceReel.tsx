@@ -139,14 +139,17 @@ export default function DeviceReel() {
         className="pointer-events-none fixed inset-0 z-10 overflow-hidden"
       >
         <div
+          data-reel="wash"
           className="absolute inset-0 transition-[background] duration-1000"
           style={{ background: stage.wash }}
         />
         <div
+          data-reel="glowA"
           className="absolute -left-[14vmin] top-[6vmin] h-[60vmin] w-[60vmin] rounded-full opacity-60 blur-[70px] transition-[background] duration-1000"
           style={{ background: stage.glowA }}
         />
         <div
+          data-reel="glowB"
           className="absolute -right-[12vmin] bottom-[8vmin] h-[52vmin] w-[52vmin] rounded-full opacity-60 blur-[70px] transition-[background] duration-1000"
           style={{ background: stage.glowB }}
         />
@@ -155,6 +158,7 @@ export default function DeviceReel() {
         <div className="absolute inset-0 grid place-items-center px-2">
           <p
             key={isFinal ? "final" : devices[act].slug}
+            data-reel="big"
             className="bigtype animate-[fadeUp_.5s_cubic-bezier(.16,1,.3,1)] text-center text-[clamp(58px,18.5vw,220px)]"
             style={{ color: stage.ink }}
           >
@@ -180,6 +184,7 @@ export default function DeviceReel() {
               ref={(el) => {
                 devRefs.current[i] = el;
               }}
+              data-reel-device={i}
               className={`absolute [transform-style:preserve-3d] transition-opacity duration-500 ${
                 i === liveIdx ? "opacity-100" : "opacity-0"
               }`}
@@ -205,6 +210,7 @@ export default function DeviceReel() {
         {[...devices, null].map((d, i) => (
           <div
             key={d?.slug ?? "final"}
+            data-reel-card={i}
             className={`pointer-events-auto col-start-1 row-start-1 max-w-[440px] text-center transition-all duration-500 ${
               i === act ? "opacity-100" : "pointer-events-none translate-y-4 opacity-0"
             }`}
@@ -275,7 +281,7 @@ export default function DeviceReel() {
 
       {/* प्रगति की लकीर */}
       <div className="fixed inset-x-0 bottom-0 z-40 h-0.5 bg-white/10">
-        <span ref={barRef} className="block h-full w-0 bg-electric" />
+        <span ref={barRef} data-reel="bar" className="block h-full w-0 bg-electric" />
       </div>
 
       {/* scroll की लंबाई — इतनी ही जगह में पूरा खेल चलता है */}
@@ -351,6 +357,7 @@ function UltraBody({
       </div>
       <span
         ref={penRef}
+        data-reel="pen"
         className="absolute -right-[3px] bottom-[8%] h-[34%] w-[6px] rounded bg-gradient-to-b from-[#8d7fc0] to-[#3a3159] transition-transform duration-500"
       />
       <span className="pointer-events-none absolute inset-0 z-[4] rounded-2xl shadow-[inset_0_0_0_1.5px_rgba(255,255,255,.18)]" />
@@ -372,6 +379,7 @@ function FoldBody({
         {/* बाएँ पन्ना — यही खुलता है */}
         <div
           ref={leafRef}
+          data-reel="leaf"
           className="relative h-full w-1/2 origin-right [transform-style:preserve-3d]"
         >
           <div className="absolute inset-0 overflow-hidden rounded-[9px] bg-gradient-to-br from-[#20242e] to-[#0b0d12] shadow-[inset_0_0_0_1.5px_rgba(255,255,255,.16)] [backface-visibility:hidden]">
