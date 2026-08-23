@@ -10,6 +10,9 @@ import AuroraCanvas from "@/components/AuroraCanvas";
 import Reveal from "@/components/Reveal";
 import TiltCard from "@/components/TiltCard";
 import BrandMarquee from "@/components/BrandMarquee";
+import PhotoFrame from "@/components/PhotoFrame";
+import PhotoGallery from "@/components/PhotoGallery";
+import { exteriorPhotos, interiorPhotos, galleryPhotos } from "@/data/photos";
 
 export const metadata: Metadata = {
   title: {
@@ -93,6 +96,23 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ─────────── दुकान की पहली झलक ─────────── */}
+      <section className="relative z-10 mx-auto -mt-8 max-w-5xl px-5 sm:-mt-14">
+        <Reveal>
+          <PhotoFrame
+            photo={exteriorPhotos[0]}
+            priority
+            sizes="(min-width: 1024px) 960px, 100vw"
+            className="aspect-[16/9] sm:aspect-[21/9]"
+          />
+        </Reveal>
+        <Reveal delay={120}>
+          <p className="mt-4 text-sm text-muted">
+            Gurudwara Road, {shop.address.locality} — रात 11 बजे तक खुली।
+          </p>
+        </Reveal>
+      </section>
+
       <main className="relative z-10 mx-auto max-w-5xl px-5">
         {/* ─────────── क्या-क्या मिलता है ─────────── */}
         <section className="py-20 sm:py-28">
@@ -158,8 +178,34 @@ export default function Home() {
           </Reveal>
         </section>
 
+        {/* ─────────── दुकान की झलक ─────────── */}
+        <section className="border-t border-line py-20 sm:py-28">
+          <Reveal>
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              दुकान की{" "}
+              <span className="bg-gradient-to-r from-electric to-violet bg-clip-text text-transparent">
+                झलक
+              </span>
+            </h2>
+            <p className="mt-3 text-muted">
+              showroom, display और हमारे ग्राहक — दुकान की असली तस्वीरें
+            </p>
+          </Reveal>
+
+          <div className="mt-10">
+            <PhotoGallery photos={galleryPhotos} />
+          </div>
+        </section>
+
         {/* ─────────── दुकान कहाँ है ─────────── */}
         <section className="border-t border-line py-20 sm:py-28">
+          <Reveal delay={80}>
+            <PhotoFrame
+              photo={interiorPhotos[0]}
+              sizes="(min-width: 1024px) 960px, 100vw"
+              className="mb-12 aspect-[16/10] sm:aspect-[21/9]"
+            />
+          </Reveal>
           <div className="grid gap-10 sm:grid-cols-2">
             <Reveal>
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">

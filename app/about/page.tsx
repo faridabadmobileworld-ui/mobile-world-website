@@ -4,6 +4,9 @@ import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import CallButton from "@/components/CallButton";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import PhotoFrame from "@/components/PhotoFrame";
+import PhotoGallery from "@/components/PhotoGallery";
+import { legacyBanner, customerPhotos, exteriorPhotos } from "@/data/photos";
 
 export const metadata: Metadata = {
   // template इसके आगे "| Mobile World" अपने आप जोड़ देता है
@@ -30,6 +33,17 @@ export default function About() {
       </PageHero>
 
       <main className="relative z-10 mx-auto max-w-5xl px-5">
+        {/* ─────────── सफ़र वाला banner ─────────── */}
+        <section className="pb-16">
+          <Reveal>
+            <PhotoFrame
+              photo={legacyBanner}
+              priority
+              sizes="(min-width: 1024px) 960px, 100vw"
+            />
+          </Reveal>
+        </section>
+
         {/* ─────────── समयरेखा ─────────── */}
         <section className="pb-20 sm:pb-28">
           <ol className="relative space-y-4">
@@ -110,6 +124,25 @@ export default function About() {
               Disposal Chowk के पास।
             </p>
           </Reveal>
+        </section>
+
+        {/* ─────────── हमारे ग्राहक ─────────── */}
+        <section className="border-t border-line py-20 sm:py-28">
+          <Reveal>
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              हमारे{" "}
+              <span className="bg-gradient-to-r from-electric to-violet bg-clip-text text-transparent">
+                ग्राहक
+              </span>
+            </h2>
+            <p className="mt-3 max-w-lg text-muted">
+              दुकान पर आने वाले कुछ ग्राहक, अपना सामान लेते हुए।
+            </p>
+          </Reveal>
+
+          <div className="mt-10">
+            <PhotoGallery photos={[...customerPhotos, exteriorPhotos[1]]} />
+          </div>
         </section>
 
         {/* ─────────── बुलावा ─────────── */}

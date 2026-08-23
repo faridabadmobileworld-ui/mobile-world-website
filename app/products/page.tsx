@@ -6,6 +6,8 @@ import TiltCard from "@/components/TiltCard";
 import BrandMarquee from "@/components/BrandMarquee";
 import CallButton from "@/components/CallButton";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import PhotoFrame from "@/components/PhotoFrame";
+import { interiorPhotos } from "@/data/photos";
 
 export const metadata: Metadata = {
   title: "Products — Mobiles, Laptops, TV aur Home Appliances",
@@ -27,6 +29,18 @@ export default function Products() {
       </PageHero>
 
       <main className="relative z-10 mx-auto max-w-5xl px-5">
+        {/* ─────────── दुकान का display ─────────── */}
+        <section className="pb-16">
+          <Reveal>
+            <PhotoFrame
+              photo={interiorPhotos[1]}
+              priority
+              sizes="(min-width: 1024px) 960px, 100vw"
+              className="aspect-[4/3] sm:aspect-[16/9]"
+            />
+          </Reveal>
+        </section>
+
         {/* ─────────── categories ─────────── */}
         <section className="pb-20 sm:pb-28">
           <div className="grid gap-4 sm:grid-cols-2">

@@ -45,9 +45,10 @@ iQOO, Realme, Tecno, Infinix, Lava, Nokia, Philips
 
 ### Social links
 - YouTube: https://youtube.com/@mobileworldfaridabad
-- Instagram: https://instagram.com/mobileworldfaridabad2026
-- Facebook: https://facebook.com/mobileworldfaridabad
-- Google Maps: (owner भरेगा)
+- Instagram: https://www.instagram.com/mobileworldfaridabad
+- Facebook: https://www.facebook.com/mobileworldfaridabad/
+- Google Maps: https://maps.app.goo.gl/zivMudFFatYYF3yf7
+- Coordinates: 28.36249, 77.28786
 
 ---
 
@@ -94,8 +95,8 @@ Home, Products, About, Contact, Visit Us.
 कोई database नहीं, कोई login नहीं। सारा content code में।
 
 पाँचों pages बन चुके हैं, sitemap.xml और robots.txt भी।
-बाक़ी है: दुकान की photos, logo, Google Maps URL और map coordinates —
-ये चारों owner से आने हैं (नीचे section 10 देखो)।
+Photos, logo, Google Maps URL और coordinates — चारों आ चुके हैं और लग चुके हैं।
+बाक़ी सिर्फ़ यह पूछना है कि repair/EMI/exchange करते हैं या नहीं (section 10)।
 
 **Phase 2 — Admin dashboard**
 Supabase Auth से सिर्फ़ owner login कर सके।
@@ -159,12 +160,12 @@ Visitor details save करना, customer login।
 
 ## 10. Pending — owner भरेगा
 
-- [ ] Shop की असली photos
-- [ ] Google Maps listing का exact URL
+- [x] ~~Shop की असली photos~~ — आ गईं, `public/photos/` में
+- [x] ~~Google Maps listing का exact URL~~ — हो गया
 - [x] ~~Opening / closing timings और weekly off~~ — हो गया (ऊपर section 2 में)
 - [ ] Repair / installation service करते हैं या नहीं
 - [ ] EMI / exchange offer करते हैं या नहीं
-- [ ] Logo file
+- [x] ~~Logo file~~ — आ गई, `public/logo-mark.png` और `public/logo.png`
 
 <!-- BEGIN:nextjs-agent-rules -->
 

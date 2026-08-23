@@ -6,6 +6,8 @@ import Reveal from "@/components/Reveal";
 import OpenStatus from "@/components/OpenStatus";
 import CallButton from "@/components/CallButton";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import PhotoFrame from "@/components/PhotoFrame";
+import { exteriorPhotos } from "@/data/photos";
 
 export const metadata: Metadata = {
   title: "Visit Us — Gurudwara Road, Jawahar Colony, NIT Faridabad",
@@ -27,6 +29,24 @@ export default function VisitUs() {
       </PageHero>
 
       <main className="relative z-10 mx-auto max-w-5xl px-5">
+        {/* ─────────── दुकान ऐसी दिखती है ─────────── */}
+        <section className="pb-16">
+          <Reveal>
+            <PhotoFrame
+              photo={exteriorPhotos[0]}
+              priority
+              sizes="(min-width: 1024px) 960px, 100vw"
+              className="aspect-[16/9] sm:aspect-[21/9]"
+            />
+          </Reveal>
+          <Reveal delay={100}>
+            <p className="mt-4 text-sm text-muted">
+              रात में दुकान ऐसी दिखती है — Mobile World का जगमगाता बोर्ड दूर से
+              दिख जाता है।
+            </p>
+          </Reveal>
+        </section>
+
         <section className="pb-20 sm:pb-28">
           <div className="grid gap-5 sm:grid-cols-2">
             {/* पता */}
@@ -89,6 +109,26 @@ export default function VisitUs() {
                   <OpenStatus />
                 </div>
               </div>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ─────────── दिन में दुकान ─────────── */}
+        <section className="border-t border-line py-16">
+          <div className="grid gap-4 sm:grid-cols-2">
+            <Reveal>
+              <PhotoFrame
+                photo={exteriorPhotos[2]}
+                sizes="(min-width: 640px) 50vw, 100vw"
+                className="aspect-[4/3]"
+              />
+            </Reveal>
+            <Reveal delay={120}>
+              <PhotoFrame
+                photo={exteriorPhotos[1]}
+                sizes="(min-width: 640px) 50vw, 100vw"
+                className="aspect-[4/3]"
+              />
             </Reveal>
           </div>
         </section>

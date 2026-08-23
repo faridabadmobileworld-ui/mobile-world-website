@@ -209,15 +209,16 @@ export const shop: Shop = {
 
   social: {
     youtube: "https://youtube.com/@mobileworldfaridabad",
-    instagram: "https://instagram.com/mobileworldfaridabad2026",
-    facebook: "https://facebook.com/mobileworldfaridabad",
-    // TODO (owner): Google Maps listing का URL यहाँ डालना है।
-    googleMaps: "",
+    instagram: "https://www.instagram.com/mobileworldfaridabad",
+    facebook: "https://www.facebook.com/mobileworldfaridabad/",
+    googleMaps: "https://maps.app.goo.gl/zivMudFFatYYF3yf7",
   },
 
-  // TODO (owner): दुकान के map coordinates (latitude, longitude)।
-  // JSON-LD schema में तभी जाएँगे जब यह null न हो।
-  geo: null,
+  // दुकान की जगह — Google को यही बताता है कि दुकान नक़्शे पर कहाँ है।
+  geo: {
+    latitude: 28.36249,
+    longitude: 77.28786,
+  },
 
   // सातों दिन सुबह 9 बजे से रात 11 बजे तक।
   openingHours: [

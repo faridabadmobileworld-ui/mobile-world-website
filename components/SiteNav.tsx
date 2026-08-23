@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { shop } from "@/data/shop";
@@ -20,12 +21,22 @@ export default function SiteNav() {
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-line/60 bg-ink/75 backdrop-blur-xl">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-3.5">
-        <Link href="/" className="shrink-0">
-          <span className="block bg-gradient-to-r from-cream via-electric to-brand bg-clip-text text-lg font-bold tracking-tight text-transparent">
-            {shop.name}
-          </span>
-          <span className="block text-xs text-muted">
-            {shop.address.locality}, {shop.address.city}
+        <Link href="/" className="flex shrink-0 items-center gap-2.5">
+          <Image
+            src="/logo-mark.png"
+            alt=""
+            width={400}
+            height={400}
+            priority
+            className="h-10 w-10 rounded-xl"
+          />
+          <span>
+            <span className="block bg-gradient-to-r from-cream via-electric to-brand bg-clip-text text-lg font-bold tracking-tight text-transparent">
+              {shop.name}
+            </span>
+            <span className="block text-xs text-muted">
+              {shop.address.locality}, {shop.address.city}
+            </span>
           </span>
         </Link>
 
