@@ -10,6 +10,7 @@ import AuroraCanvas from "@/components/AuroraCanvas";
 import Reveal from "@/components/Reveal";
 import TiltCard from "@/components/TiltCard";
 import BrandMarquee from "@/components/BrandMarquee";
+import ServicesSection from "@/components/ServicesSection";
 import PhotoFrame from "@/components/PhotoFrame";
 import PhotoGallery from "@/components/PhotoGallery";
 import { exteriorPhotos, interiorPhotos, galleryPhotos } from "@/data/photos";
@@ -20,9 +21,9 @@ export const metadata: Metadata = {
   },
   description:
     `${shop.name}, ${shop.address.locality}, ${shop.address.city} में smartphones, ` +
-    `laptops, televisions और home appliances मिलते हैं। दुकान रोज़ ` +
-    `${formatTime("09:00")} से ${formatTime("23:00")} तक खुली रहती है। ` +
-    `Call या WhatsApp कीजिए।`,
+    `laptops, televisions और home appliances मिलते हैं। Repair, EMI और exchange ` +
+    `की सुविधा भी। दुकान रोज़ ${formatTime("09:00")} से ${formatTime("23:00")} तक ` +
+    `खुली रहती है। Call या WhatsApp कीजिए।`,
   alternates: { canonical: "/" },
 };
 
@@ -151,6 +152,11 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
+        </section>
+
+        {/* ─────────── Repair · EMI · Exchange ─────────── */}
+        <section className="border-t border-line py-20 sm:py-28">
+          <ServicesSection heading="Repair, EMI" accent="और Exchange" />
         </section>
 
         {/* ─────────── Brands ─────────── */}

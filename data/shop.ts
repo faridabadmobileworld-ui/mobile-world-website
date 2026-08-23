@@ -63,6 +63,13 @@ export type Milestone = {
   event: string;
 };
 
+/** दुकान जो सुविधाएँ देती है — repair, EMI, exchange. */
+export type Service = {
+  slug: string;
+  name: string;
+  description: string;
+};
+
 export type Category = {
   slug: string;
   name: string;
@@ -158,6 +165,34 @@ export const categories: Category[] = [
     // owner की GMB लिखाई से
     description:
       "घर की रोज़मर्रा की ज़रूरतों के लिए अलग-अलग home appliances के options।",
+  },
+];
+
+/**
+ * दुकान जो सुविधाएँ देती है।
+ *
+ * Owner ने तीनों की पुष्टि की है। ध्यान: यहाँ कोई शर्त, दर या offer नहीं
+ * लिखा गया — जैसे "0% EMI" या "24 घंटे में repair" — क्योंकि वो अभी पता
+ * नहीं (CLAUDE.md §8)। हर जगह customer को पूछने के लिए कहा गया है।
+ */
+export const services: Service[] = [
+  {
+    slug: "repair",
+    name: "Repair",
+    description:
+      "Mobile और electronics की repair की सुविधा। सामान दुकान पर लाकर दिखा दीजिए — देखकर बता देंगे कि क्या हो सकता है।",
+  },
+  {
+    slug: "emi",
+    name: "EMI",
+    description:
+      "EMI पर सामान लेने की सुविधा उपलब्ध है। किस product पर कौन सा plan चल रहा है, यह पूछ लीजिए।",
+  },
+  {
+    slug: "exchange",
+    name: "Exchange",
+    description:
+      "पुराना phone देकर नया लेने की सुविधा। पुराने phone की क़ीमत उसकी हालत देखकर तय होती है।",
   },
 ];
 

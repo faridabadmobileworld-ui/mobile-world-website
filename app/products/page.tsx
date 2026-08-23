@@ -4,6 +4,7 @@ import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import TiltCard from "@/components/TiltCard";
 import BrandMarquee from "@/components/BrandMarquee";
+import ServicesSection from "@/components/ServicesSection";
 import CallButton from "@/components/CallButton";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import PhotoFrame from "@/components/PhotoFrame";
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
   description:
     `${shop.name}, ${shop.address.city} पर mobiles, laptops, televisions, air ` +
     `conditioners, washing machines, inverters और दूसरे home appliances के options। ` +
-    `Availability WhatsApp या call पर पूछ लीजिए।`,
+    `Repair, EMI और exchange की सुविधा भी। Availability WhatsApp या call पर पूछ लीजिए।`,
   alternates: { canonical: "/products" },
 };
 
@@ -60,6 +61,11 @@ export default function Products() {
               </Reveal>
             ))}
           </div>
+        </section>
+
+        {/* ─────────── Repair · EMI · Exchange ─────────── */}
+        <section className="border-t border-line py-20 sm:py-28">
+          <ServicesSection heading="Repair, EMI" accent="और Exchange" />
         </section>
 
         {/* ─────────── brands ─────────── */}

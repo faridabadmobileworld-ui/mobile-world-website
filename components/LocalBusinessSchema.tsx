@@ -1,4 +1,4 @@
-import { shop } from "@/data/shop";
+import { shop, services } from "@/data/shop";
 
 /**
  * Google को दुकान की जानकारी बताने वाला LocalBusiness JSON-LD.
@@ -35,6 +35,15 @@ export default function LocalBusinessSchema() {
     sameAs: [shop.social.youtube, shop.social.instagram, shop.social.facebook].filter(
       Boolean,
     ),
+    // Repair, EMI और Exchange — Google को भी पता चले कि ये सुविधाएँ हैं।
+    makesOffer: services.map((service) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: service.name,
+        description: service.description,
+      },
+    })),
     // geo और hasMap तभी जुड़ेंगे जब owner coordinates और Maps URL दे देगा।
     ...(shop.geo && {
       geo: {

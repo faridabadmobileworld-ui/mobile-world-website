@@ -31,6 +31,9 @@ WhatsApp message, या physical visit।
 - **Phone / WhatsApp:** +91 93152 12131
 - **Model:** एक ही physical shop। कोई branch नहीं।
 - **Timings:** रोज़ सुबह 9:00 – रात 11:00। हर महीने की आख़िरी तारीख़ को बंद।
+- **सुविधाएँ:** Repair · EMI · Exchange — तीनों देते हैं।
+  शर्तें/दरें अभी पता नहीं, इसलिए website पर "पूछ लीजिए" लिखा है।
+  "0% EMI" जैसी कोई बात बिना पूछे मत लिखो।
 - **इतिहास:** 1973 — Aggarwal Kiryana Store · 2006 — Aggarwal Kiryana And
   Communication · 2016 — Mobile World
   **"Mobile World since 1973" कभी मत लिखो।** Mobile World 2016 से है।
@@ -95,8 +98,8 @@ Home, Products, About, Contact, Visit Us.
 कोई database नहीं, कोई login नहीं। सारा content code में।
 
 पाँचों pages बन चुके हैं, sitemap.xml और robots.txt भी।
-Photos, logo, Google Maps URL और coordinates — चारों आ चुके हैं और लग चुके हैं।
-बाक़ी सिर्फ़ यह पूछना है कि repair/EMI/exchange करते हैं या नहीं (section 10)।
+Photos, logo, Google Maps URL, coordinates और repair/EMI/exchange — सब आ चुका
+और लग चुका है। Phase 1 पूरा; site live करने लायक़ है।
 
 **Phase 2 — Admin dashboard**
 Supabase Auth से सिर्फ़ owner login कर सके।
@@ -163,8 +166,8 @@ Visitor details save करना, customer login।
 - [x] ~~Shop की असली photos~~ — आ गईं, `public/photos/` में
 - [x] ~~Google Maps listing का exact URL~~ — हो गया
 - [x] ~~Opening / closing timings और weekly off~~ — हो गया (ऊपर section 2 में)
-- [ ] Repair / installation service करते हैं या नहीं
-- [ ] EMI / exchange offer करते हैं या नहीं
+- [x] ~~Repair / installation service करते हैं या नहीं~~ — हाँ, repair करते हैं
+- [x] ~~EMI / exchange offer करते हैं या नहीं~~ — हाँ, दोनों देते हैं
 - [x] ~~Logo file~~ — आ गई, `public/logo-mark.png` और `public/logo.png`
 
 <!-- BEGIN:nextjs-agent-rules -->
