@@ -31,3 +31,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# दिखाने के लिए बनी एक ही file वाली copy — build से बनती है, git में नहीं जाती
+/preview

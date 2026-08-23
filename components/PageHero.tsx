@@ -7,7 +7,7 @@ import Reveal from "@/components/Reveal";
  * हर page को अपना रंग मिलता है (`wash`, `glowA`, `glowB`) और पीछे अपनी
  * विशाल लिखाई। इससे हर page अलग लगता है, पर परिवार एक ही रहता है।
  *
- * Home page पर इसकी जगह DeviceReel है — वहाँ फ़ोन ख़ुद hero है।
+ * Home page पर इसकी जगह 3D वाला Experience है — वहाँ फ़ोन ख़ुद hero हैं।
  */
 export default function PageHero({
   eyebrow,

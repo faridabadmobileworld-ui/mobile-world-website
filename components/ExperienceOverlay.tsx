@@ -43,7 +43,13 @@ export function ExperienceOverlay({
    */
   lite?: boolean;
 }) {
-  const heroOpacity = useActOpacity(progress, 0, 0.02, 0.16, 0.26);
+  /*
+    ध्यान: पहली संख्या 0 ही रहनी चाहिए और उसकी opacity 1।
+    पहले यहाँ [0, 0.02, ...] → [0, 1, ...] था, जिससे page के बिलकुल ऊपर
+    (scroll = 0) दुकान का नाम और दोनों button पूरी तरह ग़ायब रहते थे —
+    यानी visitor को पहली नज़र में कुछ पढ़ने को ही नहीं मिलता था।
+  */
+  const heroOpacity = useTransform(progress, [0, 0.16, 0.26], [1, 1, 0]);
   const heroY = useTransform(progress, [0, 0.26], ["0%", "-14%"]);
 
   const explodeOpacity = useActOpacity(progress, 0.3, 0.37, 0.58, 0.66);
