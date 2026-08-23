@@ -1,10 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { shop } from "@/data/shop";
+import SiteNav from "@/components/SiteNav";
+import SiteFooter from "@/components/SiteFooter";
+import StickyContactBar from "@/components/StickyContactBar";
 import "./globals.css";
 
 /**
  * पूरी site की default metadata।
- * हर page अपना title और description इसके ऊपर override करेगा।
+ * हर page अपना title और description इसके ऊपर override करता है।
  */
 export const metadata: Metadata = {
   metadataBase: new URL(shop.siteUrl),
@@ -14,14 +17,20 @@ export const metadata: Metadata = {
   },
   description:
     `${shop.name}, ${shop.address.locality}, ${shop.address.city} — mobiles, laptops, ` +
-    `televisions, air conditioners, washing machines aur home appliances. ` +
-    `Dukaan par aakar dekhiye ya call kijiye.`,
+    `televisions, air conditioners, washing machines aur home appliances.`,
+  openGraph: {
+    type: "website",
+    locale: "hi_IN",
+    siteName: shop.name,
+    url: shop.siteUrl,
+  },
 };
 
 /** Mobile-first site है — zoom बंद नहीं करना, accessibility के लिए ज़रूरी। */
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  themeColor: "#05070f",
 };
 
 export default function RootLayout({
@@ -31,7 +40,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="hi">
-      <body className="antialiased text-[15px] sm:text-base">{children}</body>
+      <body className="grain relative antialiased">
+        <SiteNav />
+        {children}
+        <SiteFooter />
+        <StickyContactBar />
+      </body>
     </html>
   );
 }

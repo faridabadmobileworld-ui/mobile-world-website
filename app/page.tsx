@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { shop, categories, fullAddress } from "@/data/shop";
 import { formatTime } from "@/data/hours";
-import SiteHeader from "@/components/SiteHeader";
-import SiteFooter from "@/components/SiteFooter";
+import Link from "next/link";
 import CallButton from "@/components/CallButton";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import StickyContactBar from "@/components/StickyContactBar";
 import OpenStatus from "@/components/OpenStatus";
 import LocalBusinessSchema from "@/components/LocalBusinessSchema";
 import AuroraCanvas from "@/components/AuroraCanvas";
@@ -29,9 +27,8 @@ const dailyHours = shop.openingHours[0];
 
 export default function Home() {
   return (
-    <div className="grain relative">
+    <>
       <LocalBusinessSchema />
-      <SiteHeader />
 
       {/* ─────────── Hero — पीछे चलती हुई रोशनी ─────────── */}
       <section className="relative flex min-h-[92svh] items-center overflow-hidden">
@@ -107,6 +104,13 @@ export default function Home() {
               </span>
             </h2>
             <p className="mt-3 text-muted">दुकान पर मौजूद सामान की categories</p>
+            <Link
+              href="/products"
+              className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-electric hover:underline"
+            >
+              पूरी list देखें
+              <span aria-hidden="true">→</span>
+            </Link>
           </Reveal>
 
           <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3">
@@ -268,34 +272,7 @@ export default function Home() {
           </Reveal>
         </section>
 
-        {/* ─────────── Social ─────────── */}
-        <section className="border-t border-line py-16">
-          <Reveal>
-            <h2 className="text-xl font-bold">हमें follow कीजिए</h2>
-            <ul className="mt-5 flex flex-wrap gap-3">
-              {[
-                { name: "YouTube", url: shop.social.youtube },
-                { name: "Instagram", url: shop.social.instagram },
-                { name: "Facebook", url: shop.social.facebook },
-              ].map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="glow-ring inline-flex rounded-xl bg-surface/70 px-5 py-2.5 text-sm font-medium text-cream/90 transition-colors hover:text-electric"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-        </section>
       </main>
-
-      <SiteFooter />
-      <StickyContactBar />
-    </div>
+    </>
   );
 }

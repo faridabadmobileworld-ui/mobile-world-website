@@ -66,6 +66,12 @@ export type Milestone = {
 export type Category = {
   slug: string;
   name: string;
+  /**
+   * एक लाइन का परिचय। ज़्यादातर owner की अपनी GMB Services वाली लिखाई से
+   * लिए गए हैं। जो owner ने नहीं लिखे थे, उन पर नीचे निशान लगा है —
+   * owner उन्हें अपने शब्दों में बदल सकता है।
+   */
+  description: string;
 };
 
 export type Brand = {
@@ -93,15 +99,66 @@ export type Shop = {
  * `slug` URL में जाएगा (/products/mobiles), `name` screen पर दिखेगा।
  */
 export const categories: Category[] = [
-  { slug: "mobiles", name: "Mobiles" },
-  { slug: "laptops", name: "Laptops" },
-  { slug: "televisions", name: "Televisions" },
-  { slug: "air-conditioners", name: "Air Conditioners" },
-  { slug: "inverters-batteries", name: "Inverters & Batteries" },
-  { slug: "washing-machines", name: "Washing Machines" },
-  { slug: "air-fryers", name: "Air Fryers" },
-  { slug: "stabilizers", name: "Stabilizers" },
-  { slug: "home-appliances", name: "Other Home Appliances" },
+  {
+    slug: "mobiles",
+    name: "Mobiles",
+    // owner की GMB लिखाई से
+    description:
+      "Leading brands के smartphones के options, अलग-अलग budgets और रोज़मर्रा की ज़रूरतों के अनुसार।",
+  },
+  {
+    slug: "laptops",
+    name: "Laptops",
+    // owner की GMB लिखाई से
+    description:
+      "Study, work और रोज़मर्रा के काम के लिए laptops के अलग-अलग options।",
+  },
+  {
+    slug: "televisions",
+    name: "Televisions",
+    // owner की GMB लिखाई से
+    description:
+      "अलग-अलग viewing needs और budgets के हिसाब से televisions के options।",
+  },
+  {
+    slug: "air-conditioners",
+    name: "Air Conditioners",
+    // TODO (owner): यह लाइन मैंने लिखी है — अपने शब्दों में बदल लीजिए
+    description: "घर और कमरे की ज़रूरत के हिसाब से air conditioners के options।",
+  },
+  {
+    slug: "inverters-batteries",
+    name: "Inverters & Batteries",
+    // owner की GMB लिखाई से (Power Backup)
+    description:
+      "घर और रोज़मर्रा की ज़रूरतों के लिए power backup solutions के options।",
+  },
+  {
+    slug: "washing-machines",
+    name: "Washing Machines",
+    // TODO (owner): यह लाइन मैंने लिखी है — अपने शब्दों में बदल लीजिए
+    description: "घर की ज़रूरत और size के हिसाब से washing machines के options।",
+  },
+  {
+    slug: "air-fryers",
+    name: "Air Fryers",
+    // TODO (owner): यह लाइन मैंने लिखी है — अपने शब्दों में बदल लीजिए
+    description: "रसोई के रोज़मर्रा के इस्तेमाल के लिए air fryers के options।",
+  },
+  {
+    slug: "stabilizers",
+    name: "Stabilizers",
+    // owner की GMB लिखाई से
+    description:
+      "Televisions और दूसरे electrical appliances के लिए suitable stabilizer options।",
+  },
+  {
+    slug: "home-appliances",
+    name: "Other Home Appliances",
+    // owner की GMB लिखाई से
+    description:
+      "घर की रोज़मर्रा की ज़रूरतों के लिए अलग-अलग home appliances के options।",
+  },
 ];
 
 /** दुकान पर मिलने वाले brands। */

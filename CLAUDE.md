@@ -93,6 +93,10 @@ scroll animations, WebGL। सादा/basic design मंज़ूर नह�
 Home, Products, About, Contact, Visit Us.
 कोई database नहीं, कोई login नहीं। सारा content code में।
 
+पाँचों pages बन चुके हैं, sitemap.xml और robots.txt भी।
+बाक़ी है: दुकान की photos, logo, Google Maps URL और map coordinates —
+ये चारों owner से आने हैं (नीचे section 10 देखो)।
+
 **Phase 2 — Admin dashboard**
 Supabase Auth से सिर्फ़ owner login कर सके।
 Owner बिना developer के text, images, articles और About edit कर सके।
