@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { shop } from "@/data/shop";
+import { fontVars } from "@/app/fonts";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 import StickyContactBar from "@/components/StickyContactBar";
@@ -39,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="hi">
+    <html lang="hi" className={fontVars}>
       <body className="grain relative antialiased">
         <SiteNav />
         {children}

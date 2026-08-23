@@ -22,9 +22,13 @@ export default function About() {
   return (
     <>
       <PageHero
-        eyebrow={`${shop.milestones[0].year} से ${shop.address.locality} में`}
-        title="हमारा"
-        accent="सफ़र"
+        eyebrow={"1973 से Jawahar Colony में"}
+        title={"हमारा"}
+        accent={"सफ़र"}
+        bigType={"1973"}
+        wash={"radial-gradient(125% 95% at 50% 6%,#4a2f8f 0%,#170f2e 62%,#06070b 100%)"}
+        glowA={"#8b5cf6"}
+        glowB={"#c9a227"}
       >
         <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
           एक किराना दुकान से शुरू होकर आज mobiles और electronics तक — यह सफ़र
@@ -86,7 +90,7 @@ export default function About() {
         {/* ─────────── दुकान की जानकारी ─────────── */}
         <section className="border-t border-line py-20 sm:py-28">
           <Reveal>
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            <h2 className="font-[family-name:var(--font-head)] text-3xl font-extrabold tracking-tight sm:text-4xl">
               दुकान की{" "}
               <span className="bg-gradient-to-r from-brand to-electric bg-clip-text text-transparent">
                 जानकारी
@@ -129,7 +133,7 @@ export default function About() {
         {/* ─────────── हमारे ग्राहक ─────────── */}
         <section className="border-t border-line py-20 sm:py-28">
           <Reveal>
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            <h2 className="font-[family-name:var(--font-head)] text-3xl font-extrabold tracking-tight sm:text-4xl">
               हमारे{" "}
               <span className="bg-gradient-to-r from-electric to-violet bg-clip-text text-transparent">
                 ग्राहक
@@ -153,7 +157,7 @@ export default function About() {
                 aria-hidden="true"
                 className="absolute -top-24 left-1/2 h-48 w-48 -translate-x-1/2 rounded-full bg-violet/20 blur-3xl"
               />
-              <h2 className="relative text-2xl font-bold tracking-tight sm:text-3xl">
+              <h2 className="relative font-[family-name:var(--font-head)] text-2xl font-extrabold tracking-tight sm:text-3xl">
                 दुकान पर आइए
               </h2>
               <p className="relative mx-auto mt-4 max-w-md text-muted">

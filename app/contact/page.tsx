@@ -20,7 +20,15 @@ export const metadata: Metadata = {
 export default function Contact() {
   return (
     <>
-      <PageHero eyebrow="संपर्क" title="Contact" accent="कीजिए">
+      <PageHero
+        eyebrow={"संपर्क"}
+        title={"Contact"}
+        accent={"कीजिए"}
+        bigType={"CALL\nWHATSAPP"}
+        wash={"radial-gradient(125% 95% at 50% 6%,#0d6b3a 0%,#052818 62%,#06070b 100%)"}
+        glowA={"#25d366"}
+        glowB={"#4cc9f0"}
+      >
         <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted">
           जो पूछना हो सीधे पूछ लीजिए — model, availability, colour, variant।
         </p>
@@ -74,7 +82,7 @@ export default function Contact() {
         <section className="border-t border-line py-20 sm:py-28">
           <div className="grid gap-10 sm:grid-cols-2">
             <Reveal>
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              <h2 className="font-[family-name:var(--font-head)] text-3xl font-extrabold tracking-tight sm:text-4xl">
                 दुकान पर{" "}
                 <span className="bg-gradient-to-r from-brand to-electric bg-clip-text text-transparent">
                   आइए

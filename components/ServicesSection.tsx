@@ -37,7 +37,7 @@ export default function ServicesSection({
   return (
     <>
       <Reveal>
-        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+        <h2 className="font-[family-name:var(--font-head)] text-3xl font-extrabold tracking-tight sm:text-4xl">
           {heading}
           {accent && (
             <>
@@ -72,7 +72,7 @@ export default function ServicesSection({
                     {icons[service.slug]}
                   </svg>
                 </span>
-                <h3 className="text-lg font-bold text-cream">{service.name}</h3>
+                <h3 className="font-[family-name:var(--font-head)] text-lg font-extrabold text-cream">{service.name}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">
                   {service.description}
                 </p>

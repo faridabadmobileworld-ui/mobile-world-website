@@ -22,7 +22,15 @@ const dailyHours = shop.openingHours[0];
 export default function VisitUs() {
   return (
     <>
-      <PageHero eyebrow="दुकान कहाँ है" title="Visit" accent="Us">
+      <PageHero
+        eyebrow={"दुकान कहाँ है"}
+        title={"Visit"}
+        accent={"Us"}
+        bigType={"VISIT\nUS"}
+        wash={"radial-gradient(125% 95% at 50% 6%,#0a4f8c 0%,#04203f 60%,#06070b 100%)"}
+        glowA={"#4cc9f0"}
+        glowB={"#2678ff"}
+      >
         <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted">
           Gurudwara Road पर, Bada Gurudwara और Disposal Chowk के पास।
         </p>
@@ -136,7 +144,7 @@ export default function VisitUs() {
         {/* ─────────── हफ़्ते का पूरा समय ─────────── */}
         <section className="border-t border-line py-20 sm:py-28">
           <Reveal>
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            <h2 className="font-[family-name:var(--font-head)] text-3xl font-extrabold tracking-tight sm:text-4xl">
               हफ़्ते का{" "}
               <span className="bg-gradient-to-r from-brand to-electric bg-clip-text text-transparent">
                 समय
@@ -169,7 +177,7 @@ export default function VisitUs() {
                 aria-hidden="true"
                 className="absolute -top-24 left-1/2 h-48 w-48 -translate-x-1/2 rounded-full bg-electric/20 blur-3xl"
               />
-              <h2 className="relative text-2xl font-bold tracking-tight sm:text-3xl">
+              <h2 className="relative font-[family-name:var(--font-head)] text-2xl font-extrabold tracking-tight sm:text-3xl">
                 आने से पहले पूछ लीजिए
               </h2>
               <p className="relative mx-auto mt-4 max-w-md text-muted">

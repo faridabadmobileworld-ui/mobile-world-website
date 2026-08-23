@@ -22,7 +22,15 @@ export const metadata: Metadata = {
 export default function Products() {
   return (
     <>
-      <PageHero eyebrow="क्या-क्या मिलता है" title="Products" accent="और Brands">
+      <PageHero
+        eyebrow={"क्या-क्या मिलता है"}
+        title={"Products"}
+        accent={"और Brands"}
+        bigType={"PRO\nDUCTS"}
+        wash={"radial-gradient(125% 95% at 50% 6%,#e4002b 0%,#5c0013 62%,#06070b 100%)"}
+        glowA={"#e4002b"}
+        glowB={"#ff7a45"}
+      >
         <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted">
           दुकान पर मौजूद सामान की categories। किसी भी model की availability
           जाननी हो तो सीधे पूछ लीजिए।
@@ -52,7 +60,7 @@ export default function Products() {
                     <span className="float-slow mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand/25 to-electric/10 text-sm font-bold text-electric">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <h2 className="text-lg font-bold text-cream">{category.name}</h2>
+                    <h2 className="font-[family-name:var(--font-head)] text-lg font-extrabold text-cream">{category.name}</h2>
                     <p className="mt-2 text-sm leading-relaxed text-muted">
                       {category.description}
                     </p>
@@ -71,7 +79,7 @@ export default function Products() {
         {/* ─────────── brands ─────────── */}
         <section className="border-t border-line py-20 sm:py-28">
           <Reveal>
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            <h2 className="font-[family-name:var(--font-head)] text-3xl font-extrabold tracking-tight sm:text-4xl">
               <span className="bg-gradient-to-r from-violet to-electric bg-clip-text text-transparent">
                 Brands
               </span>
@@ -94,7 +102,7 @@ export default function Products() {
                 aria-hidden="true"
                 className="absolute -top-24 left-1/2 h-48 w-48 -translate-x-1/2 rounded-full bg-electric/20 blur-3xl"
               />
-              <h2 className="relative text-2xl font-bold tracking-tight sm:text-3xl">
+              <h2 className="relative font-[family-name:var(--font-head)] text-2xl font-extrabold tracking-tight sm:text-3xl">
                 कौन सा model चाहिए?
               </h2>
               <p className="relative mx-auto mt-4 max-w-md leading-relaxed text-muted">
