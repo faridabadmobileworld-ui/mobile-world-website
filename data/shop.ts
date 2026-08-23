@@ -37,7 +37,7 @@ export type Social = {
   youtube: string;
   instagram: string;
   facebook: string;
-  /** TODO (owner): Google Maps listing का पूरा URL। तब तक खाली। */
+  /** Google Maps listing का पूरा URL — नक़्शे वाले button और JSON-LD में जाता है। */
   googleMaps: string;
 };
 
