@@ -3,7 +3,7 @@ import Link from "next/link";
 import { shop, categories, fullAddress } from "@/data/shop";
 import { formatTime } from "@/data/hours";
 import { galleryPhotos, interiorPhotos } from "@/data/photos";
-import DeviceReel from "@/components/DeviceReel";
+import Experience from "@/components/Experience";
 import LocalBusinessSchema from "@/components/LocalBusinessSchema";
 import SectionHead from "@/components/SectionHead";
 import Reveal from "@/components/Reveal";
@@ -37,16 +37,16 @@ export default function Home() {
 
       {/*
         Page का असली शीर्षक। दिखता नहीं, पर Google और screen reader इसे
-        पढ़ते हैं। दिखने वाला hero तीन घूमते फ़ोन हैं, जिनकी लिखाई scroll पर
-        बदलती रहती है — वो <h1> के लायक़ नहीं, क्योंकि शीर्षक स्थिर होना चाहिए।
+        पढ़ते हैं। दिखने वाला hero एक 3D scene है जिसकी लिखाई scroll पर बदलती
+        रहती है — वो <h1> के लायक़ नहीं, क्योंकि शीर्षक स्थिर होना चाहिए।
       */}
       <h1 className="sr-only">
         {shop.name} — {shop.address.locality}, {shop.address.city} में
         smartphones, laptops, televisions और home appliances
       </h1>
 
-      {/* ─── तीन flagship फ़ोन, scroll पर घूमते हुए ─── */}
-      <DeviceReel />
+      {/* ─── 3D परिचय: गिरते फ़ोन → खुलता फ़ोन → बनते-बिगड़ते कण ─── */}
+      <Experience />
 
       {/* ─── बाक़ी page — reel के ऊपर आता है ─── */}
       <main className="relative z-20 bg-ink">
