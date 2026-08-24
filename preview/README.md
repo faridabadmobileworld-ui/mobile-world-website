@@ -52,3 +52,25 @@
 - `geo` coordinates (Google Maps पर right-click → दो नंबर)
 - `og-image.jpg` — 1200×630 दुकान की photo
 - `logo.png`
+
+---
+
+## इस folder की बाक़ी files
+
+| File | क्या है |
+|---|---|
+| `verify-suite.mjs` | 29 automated checks — Playwright से browser में चलते हैं |
+| `apply-audit-fixes.py` | जिस script ने ये सारे fixes लगाए। Original upload से `fixed.html` बनाती है |
+
+### Checks चलाने का तरीक़ा
+
+```bash
+npx http-server preview -p 8899 -s     # एक terminal में
+node preview/verify-suite.mjs           # दूसरे में
+```
+
+29 में से एक भी fail हो तो script exit code 1 देती है। Preview में कुछ भी
+बदलें तो ये चला लीजिए — पुरानी ग़लतियाँ चुपचाप वापस नहीं आएँगी।
+
+`apply-audit-fixes.py` हर replacement का count check करती है। कुछ मैच न हुआ
+तो वो साफ़ बताकर रुक जाती है, चुपचाप छोड़ती नहीं।
