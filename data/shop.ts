@@ -171,10 +171,11 @@ export const shop: Shop = {
     googleMaps: "https://maps.app.goo.gl/zivMudFFatYYF3yf7",
   },
 
-  // TODO (owner): दुकान के map coordinates (latitude, longitude)।
-  // Google Maps पर दुकान पर right-click → सबसे ऊपर जो दो नंबर दिखेंगे, वही हैं।
-  // JSON-LD schema में तभी जाएँगे जब यह null न हो।
-  geo: null,
+  // Owner ने 24 Aug 2026 को दिए। LocalBusiness JSON-LD schema में जाते हैं।
+  geo: {
+    latitude: 28.36249,
+    longitude: 77.28786,
+  },
 
   services: {
     repair: true,

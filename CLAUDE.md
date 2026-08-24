@@ -148,14 +148,13 @@ Visitor details save करना, customer login।
 - [x] ~~Repair / installation service करते हैं या नहीं~~ — हाँ, दोनों
 - [x] ~~EMI / exchange offer करते हैं या नहीं~~ — हाँ, दोनों
 - [x] ~~Google Maps listing का exact URL~~ — `data/shop.ts` में है
-- [ ] **Map के geo coordinates** (latitude, longitude) — LocalBusiness schema
-      के लिए ज़रूरी। Google Maps पर दुकान पर right-click कीजिए, सबसे ऊपर जो
-      दो नंबर दिखें वही हैं। `data/shop.ts` → `geo` में डालने हैं।
-- [ ] **`og-image.jpg`** — 1200×630 की दुकान की एक अच्छी photo। इसके बिना
-      WhatsApp / Instagram / Facebook पर link share करने पर कोई preview
-      नहीं दिखती।
-- [ ] **Logo file** (`logo.png`) — schema और favicon के लिए
-- [ ] Shop की और असली photos
+- [x] ~~Map के geo coordinates~~ — 28.36249, 77.28786 (24 Aug 2026)
+- [x] ~~`og-image.jpg`~~ — बन गई, पर source photo 720×340 की थी।
+      अगर दुकान की **1200px या चौड़ी** photo मिले तो बदल दीजिए।
+- [x] ~~Logo file~~ — `public/logo.png`, owner के brand graphic से MW mark काटकर
+- [ ] **साफ़ logo file** — सिर्फ़ MW mark, transparent PNG, 512×512+।
+      अभी वाला काटा हुआ है इसलिए किनारे soft हैं।
+- [ ] दुकान की और असली photos (अंदर की, ऊँची resolution में)
 
 ---
 
@@ -168,6 +167,22 @@ material से **मत** लो। वो उनका copyright है। ज
 जिस चीज़ की photo नहीं है, उसके लिए code वाली SVG illustration इस्तेमाल
 करो (जैसे preview में `#a-phone`, `#a-tv` हैं) — placeholder या किसी और
 की image नहीं।
+
+---
+
+## 12. दावे — जो साबित न हो सके, वो मत लिखो
+
+"Best price", "trusted brand", "सबसे अच्छी दुकान", "No.1" — ये सब मत लिखो।
+न page पर, न alt text में, न meta description में। Google इन्हें spam मानता
+है, और भारत में consumer law भी ऐसे दावों पर लागू होता है।
+
+इनकी जगह वो लिखो जो customer ख़ुद जाँच सके — 1973 से चल रही दुकान, GST bill,
+brand warranty, दुकान पर ही repair, एक ही address। ये सब सच है और इसीलिए
+ज़्यादा भरोसा दिलाता है।
+
+यही बात owner के brand graphic पर भी लागू है (`public/brand-profile-original.png`)
+— उसमें "BEST PRICE" और "TRUSTED BRAND" लिखा है, इसलिए वो website के logo
+की तरह इस्तेमाल नहीं होता। `public/README.md` में पूरी बात लिखी है।
 
 <!-- BEGIN:nextjs-agent-rules -->
 
