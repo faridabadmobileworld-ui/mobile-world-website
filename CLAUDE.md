@@ -112,7 +112,13 @@ Visitor details save करना, customer login।
   content में आएँ — keyword stuffing नहीं
 - **LocalBusiness JSON-LD schema** home page पर: name, address, phone,
   opening hours, geo coordinates
+  — हो चुका: `data/schema.ts` सारा schema `data/shop.ts` से बनाता है।
+  कोई जानकारी दोबारा मत लिखो, `shop.ts` बदलो — schema अपने आप बदल जाएगा।
+  महीने की आख़िरी तारीख़ वाली छुट्टियाँ हर build पर आगे तक गिन ली जाती हैं,
+  hardcode नहीं हैं।
 - `sitemap.xml` और `robots.txt` generate करो
+  — हो चुका: `app/robots.ts`, `app/sitemap.ts`. **नया page बनाओ तो
+  `app/sitemap.ts` में उसका URL जोड़ना मत भूलो**, वरना Google उसे ढूँढ़ेगा नहीं।
 - Images optimized और सही size में
 - Page speed को हर feature से ऊपर रखो
 

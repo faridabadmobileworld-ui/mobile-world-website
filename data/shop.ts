@@ -12,6 +12,8 @@
 export type Address = {
   /** "Shop No. 3896/661/29, Gurudwara Road, Block F" */
   street: string;
+  /** सिर्फ़ सड़क का नाम — "Gurudwara Road"। Short lines में काम आता है। */
+  road: string;
   /** पास की पहचान — "Near Bada Gurudwara and Disposal Chowk" */
   landmark: string;
   /** मोहल्ला — "Jawahar Colony" */
@@ -148,6 +150,7 @@ export const shop: Shop = {
 
   address: {
     street: "Shop No. 3896/661/29, Gurudwara Road, Block F",
+    road: "Gurudwara Road",
     landmark: "Near Bada Gurudwara and Disposal Chowk",
     locality: "Jawahar Colony",
     city: "NIT Faridabad",
