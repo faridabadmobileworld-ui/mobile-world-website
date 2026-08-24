@@ -28,8 +28,15 @@ WhatsApp message, या physical visit।
 - **Address:** Shop No. 3896/661/29, Gurudwara Road, Block F,
   Near Bada Gurudwara and Disposal Chowk, Jawahar Colony,
   NIT Faridabad, Haryana – 121005
-- **Phone / WhatsApp:** +91 99533 35535
+- **Phone / WhatsApp:** +91 93152 12131
 - **Model:** एक ही physical shop। कोई branch नहीं।
+- **Timings:** रोज़ सुबह 10 बजे से रात 10 बजे तक, सातों दिन
+- **छुट्टी:** हर महीने की आख़िरी तारीख़ (28/29/30/31 — जो भी हो)।
+  कोई weekly off नहीं।
+
+### Services — ये सब करते हैं
+Repair (screen, battery, charging port, software) · EMI (cards और finance) ·
+पुराना फ़ोन Exchange · Faridabad में Delivery · Installation (fitted and tested)
 
 ### Categories
 Mobiles, Laptops, Televisions, Air Conditioners, Inverters & Batteries,
@@ -137,12 +144,30 @@ Visitor details save करना, customer login।
 
 ## 10. Pending — owner भरेगा
 
-- [ ] Shop की असली photos
-- [ ] Google Maps listing का exact URL
-- [ ] Opening / closing timings और weekly off
-- [ ] Repair / installation service करते हैं या नहीं
-- [ ] EMI / exchange offer करते हैं या नहीं
-- [ ] Logo file
+- [x] ~~Opening / closing timings और weekly off~~ — confirmed 24 Aug 2026
+- [x] ~~Repair / installation service करते हैं या नहीं~~ — हाँ, दोनों
+- [x] ~~EMI / exchange offer करते हैं या नहीं~~ — हाँ, दोनों
+- [x] ~~Google Maps listing का exact URL~~ — `data/shop.ts` में है
+- [ ] **Map के geo coordinates** (latitude, longitude) — LocalBusiness schema
+      के लिए ज़रूरी। Google Maps पर दुकान पर right-click कीजिए, सबसे ऊपर जो
+      दो नंबर दिखें वही हैं। `data/shop.ts` → `geo` में डालने हैं।
+- [ ] **`og-image.jpg`** — 1200×630 की दुकान की एक अच्छी photo। इसके बिना
+      WhatsApp / Instagram / Facebook पर link share करने पर कोई preview
+      नहीं दिखती।
+- [ ] **Logo file** (`logo.png`) — schema और favicon के लिए
+- [ ] Shop की और असली photos
+
+---
+
+## 11. Images — सिर्फ़ अपनी photos
+
+Product images किसी brand की official launch slides, ads या marketing
+material से **मत** लो। वो उनका copyright है। जो चीज़ दुकान में है उसकी
+अपनी photo खींचो — वो ज़्यादा भरोसेमंद भी लगती है।
+
+जिस चीज़ की photo नहीं है, उसके लिए code वाली SVG illustration इस्तेमाल
+करो (जैसे preview में `#a-phone`, `#a-tv` हैं) — placeholder या किसी और
+की image नहीं।
 
 <!-- BEGIN:nextjs-agent-rules -->
 

@@ -25,7 +25,7 @@ export type Address = {
 };
 
 export type Phone = {
-  /** Screen पर दिखाने के लिए — "+91 99533 35535" */
+  /** Screen पर दिखाने के लिए — "+91 93152 12131" */
   display: string;
   /** Call button के लिए — <a href={shop.phone.tel}> */
   tel: string;
@@ -77,6 +77,29 @@ export type Shop = {
   social: Social;
   geo: Geo | null;
   openingHours: OpeningHours[];
+  /**
+   * दुकान हर महीने की आख़िरी तारीख़ को बंद रहती है (28/29/30/31 — जो भी हो)।
+   * कोई weekly off नहीं है।
+   */
+  monthlyClosure: "last-calendar-date";
+  services: Services;
+};
+
+/**
+ * ये सारी services owner ने 24 Aug 2026 को confirm कीं।
+ * जो service बंद हो जाए, उसे यहाँ false कर दीजिए — website से अपने आप हट जाएगी।
+ */
+export type Services = {
+  /** दुकान पर ही repair — screen, battery, charging port, software */
+  repair: boolean;
+  /** Cards और finance दोनों पर EMI */
+  emi: boolean;
+  /** पुराना फ़ोन exchange — estimate WhatsApp पर */
+  exchange: boolean;
+  /** Faridabad में home delivery */
+  delivery: boolean;
+  /** AC वग़ैरह की installation — fitted and tested */
+  installation: boolean;
 };
 
 /**
@@ -133,30 +156,48 @@ export const shop: Shop = {
     country: "IN",
   },
 
-  // तीनों एक ही नंबर के अलग-अलग रूप हैं: +91 99533 35535
+  // तीनों एक ही नंबर के अलग-अलग रूप हैं: +91 93152 12131
+  // (owner ने 24 Aug 2026 को confirm किया — यही चालू नंबर है)
   phone: {
-    display: "+91 99533 35535",
-    tel: "tel:+919953335535",
-    whatsapp: "https://wa.me/919953335535",
+    display: "+91 93152 12131",
+    tel: "tel:+919315212131",
+    whatsapp: "https://wa.me/919315212131",
   },
 
   social: {
     youtube: "https://youtube.com/@mobileworldfaridabad",
     instagram: "https://instagram.com/mobileworldfaridabad2026",
     facebook: "https://facebook.com/mobileworldfaridabad",
-    // TODO (owner): Google Maps listing का URL यहाँ डालना है।
-    googleMaps: "",
+    googleMaps: "https://maps.app.goo.gl/zivMudFFatYYF3yf7",
   },
 
   // TODO (owner): दुकान के map coordinates (latitude, longitude)।
+  // Google Maps पर दुकान पर right-click → सबसे ऊपर जो दो नंबर दिखेंगे, वही हैं।
   // JSON-LD schema में तभी जाएँगे जब यह null न हो।
   geo: null,
 
-  // TODO (owner): दुकान का खुलने-बंद होने का समय और साप्ताहिक छुट्टी।
-  // उदाहरण: { day: "Monday", opens: "10:00", closes: "21:00" }
-  // जब तक खाली है, website पर कोई timing नहीं दिखेगी — गलत timing
-  // दिखाने से कुछ न दिखाना बेहतर है।
-  openingHours: [],
+  services: {
+    repair: true,
+    emi: true,
+    exchange: true,
+    delivery: true,
+    installation: true,
+  },
+
+  // Owner ने 24 Aug 2026 को confirm किया: रोज़ 10 AM – 10 PM, सातों दिन।
+  openingHours: [
+    { day: "Monday", opens: "10:00", closes: "22:00" },
+    { day: "Tuesday", opens: "10:00", closes: "22:00" },
+    { day: "Wednesday", opens: "10:00", closes: "22:00" },
+    { day: "Thursday", opens: "10:00", closes: "22:00" },
+    { day: "Friday", opens: "10:00", closes: "22:00" },
+    { day: "Saturday", opens: "10:00", closes: "22:00" },
+    { day: "Sunday", opens: "10:00", closes: "22:00" },
+  ],
+
+  // साप्ताहिक छुट्टी नहीं है। दुकान हर महीने की आख़िरी तारीख़ को बंद रहती है —
+  // वो 28, 29, 30 या 31 जो भी हो। बाक़ी सारे दिन खुली।
+  monthlyClosure: "last-calendar-date",
 };
 
 /**
