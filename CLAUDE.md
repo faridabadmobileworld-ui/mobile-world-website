@@ -151,10 +151,10 @@ Visitor details save करना, customer login।
 - [x] ~~Map के geo coordinates~~ — 28.36249, 77.28786 (24 Aug 2026)
 - [x] ~~`og-image.jpg`~~ — बन गई, पर source photo 720×340 की थी।
       अगर दुकान की **1200px या चौड़ी** photo मिले तो बदल दीजिए।
-- [x] ~~Logo file~~ — `public/logo.png`, owner के brand graphic से MW mark काटकर
-- [ ] **साफ़ logo file** — सिर्फ़ MW mark, transparent PNG, 512×512+।
-      अभी वाला काटा हुआ है इसलिए किनारे soft हैं।
-- [ ] दुकान की और असली photos (अंदर की, ऊँची resolution में)
+- [x] ~~Logo file~~ — owner ने साफ़ logo भेज दी (24 Aug 2026)।
+      `public/logo.png`, favicon और apple-touch-icon सब इसी से बने।
+- [ ] दुकान की और असली photos — ख़ास तौर पर **1200px या चौड़ी** एक बाहर की
+      photo, ताकि `og-image.jpg` sharp हो जाए
 
 ---
 
