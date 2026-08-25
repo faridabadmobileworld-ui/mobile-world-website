@@ -159,8 +159,52 @@ Visitor details save करना, customer login।
       अगर दुकान की **1200px या चौड़ी** photo मिले तो बदल दीजिए।
 - [x] ~~Logo file~~ — owner ने साफ़ logo भेज दी (24 Aug 2026)।
       `public/logo.png`, favicon और apple-touch-icon सब इसी से बने।
+
+### Site live करने से पहले — ये चारों ज़रूरी हैं
+
+- [ ] **Domain** `www.mobileworldfaridabad.com` ख़रीदना है। अभी किसी के नाम
+      पर नहीं है। पूरा code इसी नाम को मानकर लिखा है — नाम बदला तो
+      `data/shop.ts` का `siteUrl` बदलना होगा, schema और sitemap अपने आप
+      ठीक हो जाएँगे।
+- [ ] **Vercel account** — hosting यहीं होगी (CLAUDE.md §4)
+- [ ] **Privacy page** CA या वकील से DPDP Act के हिसाब से check करवाना है।
+      ये बात page पर ख़ुद लिखी हुई है।
+- [ ] **Google Business Profile** verify करना, और हर महीने की आख़िरी तारीख़
+      को "Special hours → Closed" set करना। **Website का schema GBP के hours
+      control नहीं करता** — वो अलग जगह से आते हैं। ये न किया तो customer बंद
+      दुकान पर पहुँचेगा।
+
+### Owner से जवाब चाहिए — तब तक site पर मत लिखो
+
+- [ ] **Payment के तरीक़े** — schema में अभी `Cash, UPI, Credit Card,
+      Debit Card, EMI` लिखा है। ये **मानकर** लिखा है, पूछकर नहीं।
+- [ ] **Delivery** — कितनी दूर तक? सिर्फ़ NIT Faridabad या पूरा Faridabad?
+      मुफ़्त है या charge? कोई minimum amount?
+- [ ] **Installation** — मुफ़्त या charge? AC / washing machine / TV का
+      अलग-अलग?
+- [ ] **Repair** — कौन सा काम उसी दिन, कौन सा 2–3 दिन? Repair पर कोई
+      warranty (जैसे नए screen पर 1 महीना)?
+- [ ] **Exchange** — कौन से brands? कितना पुराना तक? टूटी screen वाला फ़ोन
+      लेते हैं या नहीं?
+- [ ] **EMI** — कौन से banks/cards? कोई finance company (Bajaj वग़ैरह)?
+- [ ] **Daikin** — preview के AC वाले alt text में Daikin **5 जगह** है, पर
+      ऊपर brand list में नहीं। या तो list में जोड़ो, या alt text बदलो।
+      और भी कोई brand रखते हों (LG, Voltas, Godrej, Whirlpool…) तो बताएँ।
+- [ ] **GST number** site पर दिखाना है या नहीं — owner की मर्ज़ी
+- [ ] **Redmi article का दाम** (₹27,999 / ₹30,999) रहने देना है?
+      साफ़ लिखा है कि ये Xiaomi का official launch price है, दुकान का rate
+      नहीं — फिर भी §8 कहती है दाम owner से पूछो।
+
+### बाद के लिए
+
 - [ ] दुकान की और असली photos — ख़ास तौर पर **1200px या चौड़ी** एक बाहर की
-      photo, ताकि `og-image.jpg` sharp हो जाए
+      photo, ताकि `og-image.jpg` sharp हो जाए। अभी वाली 720×340 की है और
+      1.85× बड़ी करनी पड़ी।
+- [ ] अपनी product photos — Redmi article से Xiaomi की slides हटाई गईं,
+      वहाँ अभी code वाली drawing है
+- [ ] Logo का transparent background वाला version (सफ़ेद header के लिए)
+- [ ] हर category में क्या-क्या रखते हैं (दाम नहीं — बस सूची)
+- [ ] दुकान की कहानी — 1973 से आज तक, दो-तीन सच्ची बातें
 
 ---
 
