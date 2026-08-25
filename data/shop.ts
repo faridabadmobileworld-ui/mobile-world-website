@@ -191,7 +191,7 @@ export const shop: Shop = {
 
   social: {
     youtube: "https://youtube.com/@mobileworldfaridabad",
-    instagram: "https://instagram.com/mobileworldfaridabad2026",
+    instagram: "https://www.instagram.com/mobileworldfaridabad",
     facebook: "https://facebook.com/mobileworldfaridabad",
     googleMaps: "https://maps.app.goo.gl/zivMudFFatYYF3yf7",
   },

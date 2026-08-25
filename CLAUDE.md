@@ -48,7 +48,7 @@ iQOO, Realme, Tecno, Infinix, Lava, Nokia, Philips
 
 ### Social links
 - YouTube: https://youtube.com/@mobileworldfaridabad
-- Instagram: https://instagram.com/mobileworldfaridabad2026
+- Instagram: https://www.instagram.com/mobileworldfaridabad
 - Facebook: https://facebook.com/mobileworldfaridabad
 - Google Maps: (owner भरेगा)
 
