@@ -8,6 +8,9 @@ import { posts } from "@/data/content";
  * **नया page बनाओ तो यहाँ उसका URL जोड़ना मत भूलो** — वरना Google उसे
  * ढूँढ़ नहीं पाएगा। Posts अपने आप जुड़ जाती हैं।
  */
+/** दोनों पूरी तरह static हैं — इससे `output: export` भी बन जाता है। */
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
