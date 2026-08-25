@@ -60,7 +60,6 @@ export function SiteFooter() {
             <h2 className="fh">Store info</h2>
             <ul>
               <li><LiveBadge /></li>
-              <li>Daily 10:00 AM – 10:00 PM</li>
               <li>Closed on the last date of every month</li>
               <li>Next closure: <NextClosure /></li>
               <li>Proprietor: {shop.owner}</li>

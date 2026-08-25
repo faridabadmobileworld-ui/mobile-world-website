@@ -212,7 +212,7 @@ export const slides: Slide[] = [
   {
     kicker: "Since 1973",
     heading: "Three generations\non one street",
-    body: `${shop.registeredName} opened in 1973. Mobile World has run from the same address since 2016.`,
+    body: `The shop opened in 1973 as a kirana store on ${shop.address.road}. It has traded as ${shop.name} from the same address since 2016.`,
     image: "/images/customers-at-mobile-world-jawahar-colony-nit-bc85762b.webp",
     alt: "Customers at Mobile World, Jawahar Colony, NIT Faridabad",
     bg: "var(--sky)",

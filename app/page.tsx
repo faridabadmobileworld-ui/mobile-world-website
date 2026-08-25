@@ -116,10 +116,6 @@ export default function Home() {
               </figure>
             ))}
           </div>
-          <p style={{ fontSize: 12, color: "var(--ink-3)", margin: "10px 0 0" }}>
-            Real photographs from the showroom. Everything else on this page that has no
-            photograph yet is drawn in code, so nothing ever fails to load.
-          </p>
         </section>
 
         <section className="sec">

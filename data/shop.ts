@@ -236,3 +236,37 @@ export const fullAddress = [
   shop.address.city,
   `${shop.address.state} – ${shop.address.postalCode}`,
 ].join(", ");
+
+/**
+ * दुकान का सफ़र — About page का timeline इसी से बनता है।
+ *
+ * ये तीनों बातें owner ने ख़ुद बताई हैं (25 Aug 2026)। कोई नई तारीख़ या
+ * कहानी अपने आप मत जोड़ो — पहले owner से पूछो (CLAUDE.md §8)।
+ */
+export type Milestone = {
+  year: string;
+  /** एक लाइन में क्या हुआ */
+  title: string;
+  body: string;
+};
+
+export const timeline: Milestone[] = [
+  {
+    year: "1973",
+    title: "दुकान शुरू हुई",
+    body: `परिवार ने ${shop.address.locality} में Aggarwal Kiryana Store के नाम से दुकान खोली। ` +
+      `पता वही, जो आज है।`,
+  },
+  {
+    year: "2006",
+    title: "नाम बदला",
+    body: `दुकान का registered नाम ${shop.registeredName} हुआ। ` +
+      `किराने के साथ mobile और recharge का काम भी शुरू हुआ।`,
+  },
+  {
+    year: "2016",
+    title: "Mobile World",
+    body: `${shop.owner} ने दुकान को पूरी तरह electronics पर मोड़ दिया। ` +
+      `तब से इसी counter से mobile, laptop, TV, AC और घर का बाक़ी सामान।`,
+  },
+];

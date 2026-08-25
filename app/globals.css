@@ -30,7 +30,7 @@ html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 html,body{max-width:100%;overflow-x:clip}
 body{
   margin:0;background:var(--bg);color:var(--ink);
-  font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-family:'Inter','Noto Sans Devanagari','Nirmala UI',system-ui,-apple-system,'Segoe UI',sans-serif;
   font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;
 }
 img{display:block;max-width:100%}
@@ -391,3 +391,35 @@ body.searching .qinfo{display:flex}
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
   .rv{opacity:1!important;transform:none!important}
 }
+
+/* ── dukaan ka safar (About page timeline) ── */
+.tline{display:grid;gap:10px;grid-template-columns:1fr}
+@media(min-width:820px){ .tline{grid-template-columns:repeat(3,1fr)} }
+.tline li{position:relative;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r);padding:18px 16px 16px}
+.tline .y{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.1em;
+  color:#fff;background:var(--brand);padding:3px 9px;border-radius:99px}
+.tline b{display:block;font-size:16px;font-weight:800;letter-spacing:-.02em;margin:10px 0 6px}
+.tline em{display:block;font-style:normal;font-size:13.5px;line-height:1.75;color:var(--ink-2)}
+
+/* ── "hum ye nahi karte" ── */
+.dontdo{display:grid;gap:10px;grid-template-columns:1fr}
+@media(min-width:760px){ .dontdo{grid-template-columns:repeat(2,1fr)} }
+.dontdo li{display:flex;gap:12px;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r);padding:15px 16px}
+.dontdo .x{flex:none;width:26px;height:26px;border-radius:99px;display:grid;place-items:center;
+  background:var(--hot-soft);color:var(--hot-ink)}
+.dontdo b{display:block;font-size:14.5px;font-weight:800;letter-spacing:-.015em;margin-bottom:5px}
+.dontdo em{display:block;font-style:normal;font-size:13.5px;line-height:1.75;color:var(--ink-2)}
+
+/* ── About page ka lead paragraph ── */
+.lede{max-width:60ch;margin:0 0 6px;font-size:clamp(15px,2.1vw,17px);line-height:1.8;color:var(--ink-2)}
+.lede + .lede{margin-top:14px}
+
+/* ── chips (category / brand list) ── */
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips li{font-size:12.5px;font-weight:700;color:var(--ink-2);background:var(--bg);
+  border:1px solid var(--line);border-radius:99px;padding:5px 11px}
+
+.cols2{display:grid;gap:10px;grid-template-columns:1fr}
+@media(min-width:820px){ .cols2{grid-template-columns:1fr 1fr} }
