@@ -1,0 +1,141 @@
+"use client";
+
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import { shop } from "@/data/shop";
+import { navCategories, whatsappGeneral } from "@/data/content";
+import { LiveBadge } from "./StoreStatus";
+import {
+  IconMenu, IconSearch, IconPhone, IconWhatsApp,
+  IconGrid, IconPost, IconTool, IconPin,
+} from "./Icons";
+
+export function SiteHeader() {
+  const [open, setOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+
+  // Category strip header के नीचे चिपकती है। Header की असली ऊँचाई नापो —
+  // 58px मान लेने से phone पर strip header के ऊपर चढ़ जाती थी।
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+    const sync = () =>
+      document.documentElement.style.setProperty(
+        "--hdr", `${Math.round(el.getBoundingClientRect().height)}px`,
+      );
+    sync();
+    addEventListener("resize", sync, { passive: true });
+    const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(sync) : null;
+    ro?.observe(el);
+    document.fonts?.ready.then(sync).catch(() => {});
+    return () => { removeEventListener("resize", sync); ro?.disconnect(); };
+  }, []);
+
+  // Drawer खुला हो तो page scroll बंद, और Escape से बंद हो।
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    const esc = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    addEventListener("keydown", esc);
+    return () => { removeEventListener("keydown", esc); document.body.style.overflow = ""; };
+  }, [open]);
+
+  return (
+    <>
+      <div className="ann">
+        <div className="wrap">
+          <LiveBadge />
+          <span className="r">
+            <span>{shop.address.road}, {shop.address.locality}, {shop.address.city}</span>
+            <a href={shop.phone.tel}><b>{shop.phone.display}</b></a>
+          </span>
+        </div>
+      </div>
+
+      <header className="hdr" ref={headerRef}>
+        <div className="wrap">
+          <button
+            className="iconbtn" aria-label="Open menu"
+            aria-expanded={open} aria-controls="drawer"
+            onClick={() => setOpen(true)}
+          ><IconMenu /></button>
+
+          <Link className="logo" href="/">
+            <i>MW</i><span>{shop.name}<s>EST. 1973</s></span>
+          </Link>
+
+          <SearchBox />
+
+          <div className="hdr-a">
+            <a className="iconbtn" href={shop.phone.tel} aria-label="Call the store"><IconPhone /></a>
+            <a className="btn btn-w btn-s" href={whatsappGeneral} target="_blank" rel="noopener"
+               aria-label="Message the store on WhatsApp">
+              <IconWhatsApp /> <span className="lbl">WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <nav className="cstrip" aria-label="Categories">
+        <div className="wrap">
+          {navCategories.map((c) => (
+            <Link key={c.slug} href={`/products#${c.slug}`}>{c.label}</Link>
+          ))}
+        </div>
+      </nav>
+
+      <div className={`drawer${open ? " open" : ""}`} id="drawer">
+        <div className="veil" onClick={() => setOpen(false)} />
+        <div className="panel">
+          <Link className="logo" href="/" onClick={() => setOpen(false)}>
+            <i>MW</i><span>{shop.name}<s>EST. 1973</s></span>
+          </Link>
+
+          <h2 className="dh">Shop by category</h2>
+          {navCategories.map((c) => (
+            <Link key={c.slug} className="d" href={`/products#${c.slug}`} onClick={() => setOpen(false)}>
+              <i><IconGrid /></i>{c.label}
+            </Link>
+          ))}
+
+          <h2 className="dh">Store</h2>
+          <Link className="d" href="/about" onClick={() => setOpen(false)}><i><IconGrid /></i>Our story</Link>
+          <Link className="d" href="/posts" onClick={() => setOpen(false)}><i><IconPost /></i>Latest posts</Link>
+          <Link className="d" href="/contact" onClick={() => setOpen(false)}><i><IconTool /></i>Service &amp; support</Link>
+          <Link className="d" href="/visit" onClick={() => setOpen(false)}><i><IconPin /></i>Visit the store</Link>
+
+          <div className="btns" style={{ marginTop: 18 }}>
+            <a className="btn btn-w" href={whatsappGeneral} target="_blank" rel="noopener">
+              <IconWhatsApp /> WhatsApp
+            </a>
+            <a className="btn btn-o" href={shop.phone.tel}>Call</a>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+/** Search सिर्फ़ browser में चलता है — कुछ भी कहीं भेजा नहीं जाता। */
+function SearchBox() {
+  const [q, setQ] = useState("");
+  const router = useRouter();
+
+  function submit(e: React.FormEvent) {
+    e.preventDefault();
+    const v = q.trim();
+    if (v) router.push(`/products?q=${encodeURIComponent(v)}`);
+  }
+
+  return (
+    <form className="searchbox" onSubmit={submit} role="search">
+      <label className="sr" htmlFor="q">Search products</label>
+      <input
+        id="q" type="search" autoComplete="off" value={q}
+        onChange={(e) => setQ(e.target.value)}
+        placeholder="Search a product — televisions, AC, laptop…"
+      />
+      <button type="submit" aria-label="Search"><IconSearch /></button>
+    </form>
+  );
+}
