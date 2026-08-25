@@ -139,6 +139,28 @@ export const brands: Brand[] = [
   { slug: "philips", name: "Philips" },
 ];
 
+/**
+ * Website का पता।
+ *
+ * Domain अभी ख़रीदा नहीं है, इसलिए यह अपने आप तय होता है:
+ *
+ *  1. अगर Vercel में `NEXT_PUBLIC_SITE_URL` भरा है — वही (domain आने पर यही भरना है)
+ *  2. वरना Vercel जो मुफ़्त पता देता है — जैसे `mobile-world-website.vercel.app`
+ *  3. वरना (अपने computer पर) आने वाला domain
+ *
+ * यह ज़रूरी क्यों है: canonical, sitemap, schema और share वाली तस्वीर —
+ * सब इसी पते से बनते हैं। ग़लत पता होगा तो Google ऐसी जगह ढूँढ़ेगा जो है ही नहीं।
+ */
+function resolveSiteUrl(): string {
+  const explicit = process.env.NEXT_PUBLIC_SITE_URL;
+  if (explicit) return explicit.replace(/\/+$/, "");
+
+  const vercel = process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL;
+  if (vercel) return `https://${vercel}`;
+
+  return "https://www.mobileworldfaridabad.com";
+}
+
 export const shop: Shop = {
   /** Public नाम — website पर यही दिखेगा। */
   name: "Mobile World",
@@ -146,7 +168,7 @@ export const shop: Shop = {
   registeredName: "Aggarwal Kiryana And Communication",
   owner: "Tarun Gupta",
 
-  siteUrl: "https://www.mobileworldfaridabad.com",
+  siteUrl: resolveSiteUrl(),
 
   address: {
     street: "Shop No. 3896/661/29, Gurudwara Road, Block F",
