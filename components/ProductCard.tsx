@@ -9,7 +9,11 @@ import { IconArrow } from "./Icons";
  */
 export function ProductCard({ item, badge }: { item: Item; badge?: string }) {
   return (
-    <a className="pc rv in" href={ask(item.title)} target="_blank" rel="noopener">
+    <a
+      className="pc rv in" href={ask(item.title)} target="_blank" rel="noopener"
+      /* search isi text mein dhoondhta hai */
+      data-search={`${item.title} ${item.kicker} ${item.category} ${item.tags.join(" ")}`.toLowerCase()}
+    >
       <div className="pc-m">
         {badge && <span className="badge v">{badge}</span>}
         {item.image ? (

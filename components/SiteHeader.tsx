@@ -64,7 +64,7 @@ export function SiteHeader() {
             <i>MW</i><span>{shop.name}<s>EST. 1973</s></span>
           </Link>
 
-          <SearchBox />
+          <SearchBox id="q-header" />
 
           <div className="hdr-a">
             <a className="iconbtn" href={shop.phone.tel} aria-label="Call the store"><IconPhone /></a>
@@ -90,6 +90,8 @@ export function SiteHeader() {
           <Link className="logo" href="/" onClick={() => setOpen(false)}>
             <i>MW</i><span>{shop.name}<s>EST. 1973</s></span>
           </Link>
+
+          <SearchBox id="q-drawer" onDone={() => setOpen(false)} />
 
           <h2 className="dh">Shop by category</h2>
           {navCategories.map((c) => (
@@ -117,21 +119,30 @@ export function SiteHeader() {
 }
 
 /** Search सिर्फ़ browser में चलता है — कुछ भी कहीं भेजा नहीं जाता। */
-function SearchBox() {
+/**
+ * Search do jagah rehta hai — bade screen par header mein, phone par
+ * menu ke andar. CSS tay karta hai kaunsa dikhega.
+ *
+ * `id` alag isliye chahiye ki ek hi page par do input hote hain, aur
+ * label ka `htmlFor` sahi input se juda rehna chahiye.
+ */
+function SearchBox({ id, onDone }: { id: string; onDone?: () => void }) {
   const [q, setQ] = useState("");
   const router = useRouter();
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
     const v = q.trim();
-    if (v) router.push(`/products?q=${encodeURIComponent(v)}`);
+    if (!v) return;
+    onDone?.();
+    router.push(`/products?q=${encodeURIComponent(v)}`);
   }
 
   return (
     <form className="searchbox" onSubmit={submit} role="search">
-      <label className="sr" htmlFor="q">Search products</label>
+      <label className="sr" htmlFor={id}>Search products</label>
       <input
-        id="q" type="search" autoComplete="off" value={q}
+        id={id} type="search" autoComplete="off" value={q}
         onChange={(e) => setQ(e.target.value)}
         placeholder="Search a product — televisions, AC, laptop…"
       />

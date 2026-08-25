@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { shop } from "@/data/shop";
 import { items, navCategories } from "@/data/content";
 import { ProductCard } from "@/components/ProductCard";
+import { ProductFilter } from "@/components/ProductFilter";
 
 export const metadata: Metadata = {
   title: "What we stock",
@@ -17,11 +18,7 @@ export default function Products() {
     <div className="wrap">
       <section className="sec">
         <div className="shead"><h1>What we stock</h1></div>
-        <p style={{ color: "var(--ink-2)", maxWidth: "62ch", margin: "0 0 6px" }}>
-          Daam yahaan nahi likhe. Rate roz badalta hai aur bank offers alag-alag hote hain —
-          isliye jo chahiye uska naam WhatsApp par bhej dijiye, hum stock aur aaj ka rate
-          bata denge.
-        </p>
+        <ProductFilter />
       </section>
 
       {navCategories.map((c) => {

@@ -65,8 +65,10 @@ ul{list-style:none;margin:0;padding:0}
 .searchbox{display:none;flex:1;max-width:520px;position:relative}
 .searchbox input{width:100%;height:40px;border:1px solid var(--line);border-radius:9px;padding:0 40px 0 14px;font-size:14px;background:var(--bg)}
 .searchbox button{position:absolute;right:4px;top:4px;width:32px;height:32px;border-radius:7px;display:grid;place-items:center;color:var(--ink-3)}
-@media(min-width:560px){ .searchbox{display:block} }
-@media(max-width:559px){ .drawer .searchbox{display:block;max-width:none;margin:4px 0 2px} }
+/* Bade screen par search header mein, phone par menu ke andar. */
+@media(min-width:560px){ .hdr .searchbox{display:block} }
+.drawer .searchbox{display:block;flex:none;max-width:none;margin:14px 0 2px}
+@media(min-width:560px){ .drawer .searchbox{display:none} }
 
 /* Phone par header mein jagah kam padti hai. Pehle WhatsApp ka label
    hatta hai, phir logo chhota hota hai — buttons kabhi 44px se chhote
@@ -83,6 +85,12 @@ ul{list-style:none;margin:0;padding:0}
   .hdr .logo{font-size:13.5px;gap:7px}
   .hdr .logo s{display:none}
 }
+
+/* Search ka natija — kitna mila, aur saaf karne ka rasta. */
+.searchnote{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0 0 4px;
+  padding:13px 15px;background:var(--brand-soft);border-radius:var(--r);
+  font-size:14.5px;font-weight:600;color:var(--ink)}
+.searchnote>span{flex:1 1 16ch;min-width:0}
 
 /* ── category strip ── */
 .cstrip{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:var(--hdr);z-index:55}
