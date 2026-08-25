@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { slides, whatsappGeneral } from "@/data/content";
+import { slides, whatsappGeneral, hasDevanagari } from "@/data/content";
 import { IconArrow, IconChevL, IconChevR, IconPause, IconPlay } from "./Icons";
 
 export function Hero() {
@@ -62,14 +62,14 @@ export function Hero() {
               aria-hidden={k !== i}
             >
               <div className="hs-c">
-                <span className="hs-k">{s.kicker}</span>
+                <span className={hasDevanagari(s.kicker) ? "hs-k dev" : "hs-k"}>{s.kicker}</span>
                 {k === 0
-                  ? <h1 className="hs-h">{s.heading.split("\n").map((l, n) => <span key={n}>{l}<br /></span>)}</h1>
-                  : <h2 className="hs-h">{s.heading.split("\n").map((l, n) => <span key={n}>{l}<br /></span>)}</h2>}
+                  ? <h1 className={hasDevanagari(s.heading) ? "hs-h dev" : "hs-h"}>{s.heading.split("\n").map((l, n) => <span key={n}>{l}<br /></span>)}</h1>
+                  : <h2 className={hasDevanagari(s.heading) ? "hs-h dev" : "hs-h"}>{s.heading.split("\n").map((l, n) => <span key={n}>{l}<br /></span>)}</h2>}
                 <p className="hs-p">{s.body}</p>
                 <div className="btns">
                   <a className="btn btn-d" href={whatsappGeneral} target="_blank" rel="noopener">
-                    Ask on WhatsApp <IconArrow />
+                    💬 आज का Rate पूछें <IconArrow />
                   </a>
                 </div>
               </div>

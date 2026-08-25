@@ -61,7 +61,7 @@ export function SiteHeader() {
           ><IconMenu /></button>
 
           <Link className="logo" href="/">
-            <i>MW</i><span>{shop.name}<s>EST. 1973</s></span>
+            <i>MW</i><span>{shop.name}<s>SINCE 2016</s></span>
           </Link>
 
           <SearchBox id="q-header" />
@@ -88,7 +88,7 @@ export function SiteHeader() {
         <div className="veil" onClick={() => setOpen(false)} />
         <div className="panel">
           <Link className="logo" href="/" onClick={() => setOpen(false)}>
-            <i>MW</i><span>{shop.name}<s>EST. 1973</s></span>
+            <i>MW</i><span>{shop.name}<s>SINCE 2016</s></span>
           </Link>
 
           <SearchBox id="q-drawer" onDone={() => setOpen(false)} />

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { shop, categories, brands, timeline } from "@/data/shop";
-import { storePhotos, whatsappGeneral } from "@/data/content";
+import { shop, categories, brands, legacy } from "@/data/shop";
+import { storePhotos, ask } from "@/data/content";
 import { WhatWeDontDo } from "@/components/WhatWeDontDo";
 import { IconArrow, IconWhatsApp, IconPin, IconYouTube } from "@/components/Icons";
 import { NextClosure } from "@/components/StoreStatus";
@@ -10,9 +10,9 @@ import { NextClosure } from "@/components/StoreStatus";
 export const metadata: Metadata = {
   title: "हमारे बारे में",
   description:
-    `${shop.address.locality}, ${shop.address.city} की यह दुकान 1973 से इसी पते पर है। ` +
-    `${shop.owner} के साथ 2016 से ${shop.name} के नाम से — mobile, laptop, TV, AC ` +
-    `और घर का बाक़ी सामान, GST bill और brand warranty के साथ।`,
+    `परिवार का business सफ़र ${shop.legacyStartYear} में Aggarwal Kiryana Store से शुरू हुआ, ` +
+    `और ${shop.foundingYear} में इसी विरासत को आगे बढ़ाते हुए MOBILE WORLD की शुरुआत हुई। ` +
+    `${shop.address.road}, ${shop.address.locality}, ${shop.address.city}।`,
   alternates: { canonical: "/about" },
 };
 
@@ -23,39 +23,66 @@ export default function About() {
     // <html lang="hi"> कर दीजिए, फिर यह line हटा दीजिए।
     <div className="wrap" lang="hi">
       <section className="sec">
-        <div className="shead" style={{ display: "block" }}>
-          <h1 style={{ fontSize: "clamp(1.5rem,4.4vw,2.3rem)", fontWeight: 800,
-                       letterSpacing: "-.03em", margin: "0 0 6px", lineHeight: 1.2 }}>
-            1973 से Faridabad के साथ
-          </h1>
-          <h2 style={{ fontSize: "clamp(1rem,2.4vw,1.25rem)", fontWeight: 700,
-                       color: "var(--brand)", margin: "0 0 16px" }}>
-            तीन पीढ़ियाँ। एक ही भरोसा।
-          </h2>
-        </div>
+        <h1 style={{ fontSize: "clamp(1.5rem,4.4vw,2.3rem)", fontWeight: 800,
+                     letterSpacing: "-.03em", margin: "0 0 6px", lineHeight: 1.22 }}>
+          {shop.legacyStartYear} से Faridabad के साथ
+        </h1>
+        <p style={{ fontSize: "clamp(1rem,2.4vw,1.2rem)", fontWeight: 700,
+                    color: "var(--brand)", margin: "0 0 20px" }}>
+          तीन पड़ाव। एक ही सफ़र। एक ही भरोसा।
+        </p>
 
-        <p className="lede">
-          {shop.address.locality} की {shop.address.road} पर एक ही दुकान है, और वो 1973 से
-          वहीं है। पहले किराने की थी, आज {shop.name} है। पता कभी नहीं बदला।
+        {/* ── आवाज़ owner की अपनी है (approved brand post, 25 Aug 2026)।
+              इसे बदलना हो तो पहले owner से पूछिए — यही पूरी website की
+              master voice है, CLAUDE.md §13 देखिए। ── */}
+        <p className="lede" style={{ fontWeight: 700, color: "var(--ink)" }}>
+          हर सफ़र की शुरुआत एक भरोसे से होती है। ❤️
         </p>
         <p className="lede">
-          हमारी कोई branch नहीं है, कोई franchise नहीं। जो सामान आप यहाँ से ले जाते हैं,
-          उसमें कुछ गड़बड़ हो तो उसी counter पर वापस आइए जहाँ से लिया था — वही लोग
-          मिलेंगे। पचास साल से ज़्यादा एक ही जगह रहने का यही मतलब है।
+          हमारे परिवार का business सफ़र {shop.legacyStartYear} में Aggarwal Kiryana Store
+          से शुरू हुआ।
+        </p>
+        <p className="lede">
+          2006 में यह सफ़र Aggarwal Kiryana &amp; Communication के रूप में आगे बढ़ा।
+        </p>
+        <p className="lede">
+          और {shop.foundingYear} में इसी विरासत को आगे बढ़ाते हुए MOBILE WORLD की
+          शुरुआत हुई।
+        </p>
+        <p className="lede">
+          तब से लेकर आज तक, हमारे साथ जुड़े हर ग्राहक ने इस सफ़र को आगे बढ़ाने में
+          अपना योगदान दिया है।
+        </p>
+        <p className="lede">
+          हम उन सभी ग्राहकों का दिल से धन्यवाद करते हैं, जिन्होंने वर्षों से हम पर
+          अपना भरोसा बनाए रखा और MOBILE WORLD को अपने परिवार का हिस्सा माना।
         </p>
       </section>
 
       <section className="sec">
         <div className="shead"><h2>हमारा सफ़र</h2></div>
-        <ul className="tline">
-          {timeline.map((m) => (
+        <ol className="tline">
+          {legacy.map((m) => (
             <li className="rv in" key={m.year}>
               <span className="y">{m.year}</span>
-              <b>{m.title}</b>
+              <b>{m.name}</b>
               <em>{m.body}</em>
             </li>
           ))}
-        </ul>
+        </ol>
+      </section>
+
+      <section className="sec">
+        <div className="cband rv in">
+          <p style={{ fontSize: "clamp(14.5px,2.2vw,16.5px)", lineHeight: 1.8,
+                      color: "var(--ink)", maxWidth: "56ch" }}>
+            आज भी हमारा प्रयास वही है — Genuine Products, सही Guidance और भरोसेमंद
+            Customer Experience के साथ अपने ग्राहकों को बेहतर experience देना।
+          </p>
+          <p style={{ marginTop: 14, fontWeight: 700, color: "var(--ink)" }}>
+            🙏 आपका स्वागत है।
+          </p>
+        </div>
       </section>
 
       <section className="sec">
@@ -100,8 +127,8 @@ export default function About() {
           <div className="panel rv in">
             <h3>Brands</h3>
             <p style={{ margin: "0 0 12px", fontSize: 13.5, color: "var(--ink-2)" }}>
-              सब कुछ official, GST bill और पूरी company warranty के साथ।
-              कोई brand दिख न रहा हो तो WhatsApp पर पूछ लीजिए।
+              सब कुछ Genuine, पक्के GST Bill और पूरी Brand Warranty के साथ।
+              कोई brand यहाँ न दिखे तो WhatsApp पर पूछ लीजिए।
             </p>
             <ul className="chips">
               {brands.map((b) => <li key={b.slug}>{b.name}</li>)}
@@ -111,37 +138,31 @@ export default function About() {
       </section>
 
       <section className="sec">
-        <div className="shead"><h2>दुकान के पीछे</h2></div>
-        <div className="ptiles">
-          <div className="ptile sand rv in">
-            <span className="k">मालिक</span>
-            <h3 style={{ textTransform: "none" }}>{shop.owner}</h3>
-            <p>
-              दुकान {shop.owner} चलाते हैं। ज़्यादातर वक़्त वो ख़ुद counter पर
-              मिलते हैं — यही वजह है कि सवाल का जवाब किसी call centre से नहीं,
-              सीधे दुकान से मिलता है।
+        <div className="shead"><h2>दुकान के बारे में</h2></div>
+        <div className="cols3">
+          <div className="panel rv in">
+            <h3>एक ही दुकान</h3>
+            <p style={{ margin: 0, fontSize: 13.5, lineHeight: 1.75, color: "var(--ink-2)" }}>
+              हमारी कोई branch नहीं है, कोई franchise नहीं। {shop.address.road},
+              {" "}{shop.address.locality} — यही एक पता है।
+            </p>
+          </div>
+          <div className="panel rv in">
+            <h3>Proprietor</h3>
+            <p style={{ margin: 0, fontSize: 13.5, lineHeight: 1.75, color: "var(--ink-2)" }}>
+              {shop.owner}। कुछ पूछना हो तो सीधे दुकान से जवाब मिलेगा, किसी
+              call centre से नहीं।
             </p>
             {/* TODO (owner): अपने बारे में दो-तीन सच्ची लाइनें और अपनी एक photo
-                भेज दीजिए, यहीं लग जाएगी। जब तक आप ख़ुद नहीं बताते, हम आपकी
-                तरफ़ से कुछ नहीं लिखेंगे (CLAUDE.md §8)। */}
+                भेज दीजिए, यहीं लग जाएगी। जब तक आप ख़ुद नहीं बताते, आपकी तरफ़ से
+                हम कुछ नहीं लिखेंगे (CLAUDE.md §8, §13)। */}
           </div>
-          <div className="pstack">
-            <div className="ptile mint rv in">
-              <span className="k">टीम</span>
-              <h3 style={{ textTransform: "none" }}>वही चेहरे, हर बार</h3>
-              <p>
-                जिससे आपने सामान लिया, दिक्कत आने पर वही आपको दोबारा मिलेगा।
-                नया ticket number नहीं, नई कहानी नहीं।
-              </p>
-            </div>
-            <div className="ptile sky rv in">
-              <span className="k">समय</span>
-              <h3 style={{ textTransform: "none" }}>रोज़ 10 से 10</h3>
-              <p>
-                सातों दिन खुली। सिर्फ़ हर महीने की आख़िरी तारीख़ को बंद —
-                अगली छुट्टी <NextClosure />।
-              </p>
-            </div>
+          <div className="panel rv in">
+            <h3>खुलने का समय</h3>
+            <p style={{ margin: 0, fontSize: 13.5, lineHeight: 1.75, color: "var(--ink-2)" }}>
+              रोज़ सुबह 10 से रात 10, सातों दिन। सिर्फ़ हर महीने की आख़िरी तारीख़
+              को बंद — अगली छुट्टी <NextClosure />।
+            </p>
           </div>
         </div>
       </section>
@@ -151,7 +172,7 @@ export default function About() {
           <div>
             <b>हम YouTube पर भी हैं</b>
             <p>
-              नए फ़ोन का unboxing, दो models की तुलना, और ख़रीदने से पहले किन बातों
+              नए phone का unboxing, दो models की तुलना, और ख़रीदने से पहले किन बातों
               पर ध्यान देना है — सब हमारे channel पर। देखिए, फिर दुकान आकर हाथ में
               लेकर देख लीजिए।
             </p>
@@ -164,21 +185,22 @@ export default function About() {
 
       <section className="sec">
         <div className="cband rv in">
-          <h2>दुकान पर आइए</h2>
+          <h2>📍 दुकान पर आइए</h2>
           <p>
             {shop.address.street}, {shop.address.landmark}, {shop.address.locality},
-            {" "}{shop.address.city}, {shop.address.state} {shop.address.postalCode}
+            {" "}{shop.address.city}, {shop.address.state} – {shop.address.postalCode}
           </p>
           <p style={{ marginTop: 8 }}>
-            आने से पहले WhatsApp कर दीजिए — बता देंगे कि जो चाहिए वो आज दुकान पर है या नहीं।
+            आने से पहले model का नाम WhatsApp कर दीजिए। हम stock और आज का rate
+            confirm कर देंगे — ताकि आपका चक्कर बेकार न जाए।
           </p>
           <div className="btns" style={{ justifyContent: "center" }}>
             <a className="btn btn-d" href={shop.social.googleMaps} target="_blank" rel="noopener">
               <IconPin /> रास्ता देखिए
             </a>
             <a className="btn btn-o" href={shop.phone.tel}>{shop.phone.display}</a>
-            <a className="btn btn-w" href={whatsappGeneral} target="_blank" rel="noopener">
-              <IconWhatsApp /> WhatsApp
+            <a className="btn btn-w" href={ask("aaj ka rate")} target="_blank" rel="noopener">
+              <IconWhatsApp /> Model बताइए, Rate बता देंगे
             </a>
           </div>
         </div>

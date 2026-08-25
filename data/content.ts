@@ -21,6 +21,16 @@ export const whatsappGeneral = `${shop.phone.whatsapp}?text=${encodeURIComponent
   "Hello Mobile World! I have a question about a product.",
 )}`;
 
+/**
+ * Text देवनागरी में है या नहीं।
+ *
+ * ज़रूरत क्यों: kicker और heading पर हमने चौड़ी letter-spacing और UPPERCASE
+ * रखी है — English में अच्छी लगती है, पर देवनागरी में मात्राएँ अक्षर से
+ * दूर हो जाती हैं और पढ़ने में दिक़्क़त होती है। ऐसे text पर `.dev` class
+ * लगती है, जो दोनों बंद कर देती है।
+ */
+export const hasDevanagari = (text: string): boolean => /[\u0900-\u097F]/.test(text);
+
 /** Header और drawer की category list। */
 export type NavCategory = { label: string; slug: string };
 
@@ -194,33 +204,36 @@ export type Slide = {
 
 export const slides: Slide[] = [
   {
-    kicker: "New this week",
+    kicker: "MOBILE WORLD",
     heading: "Every big brand,\none counter",
-    body: `Smartphones, laptops, televisions and home appliances — all in one shop on ${shop.address.road}.`,
+    body: `Smartphones, laptops, televisions और home appliances — सब एक ही दुकान पर, ${shop.address.road} पर। `
+      + `${shop.legacyStartYear} से परिवार का business सफ़र, ${shop.foundingYear} से MOBILE WORLD।`,
     image: "/images/inside-mobile-world-jawahar-colony-the-phone-37da6e97.webp",
     alt: "Inside Mobile World, Jawahar Colony — the phone counter and brand displays",
     bg: "var(--lav)",
   },
   {
-    kicker: "Cooling season",
+    kicker: "गर्मी का मौसम",
     heading: "Air conditioners\nfitted & tested",
-    body: "We size the tonnage to your room, deliver it, install it and run it before we leave.",
+    body: "AC का tonnage सिर्फ़ कमरे के size से तय नहीं होता — धूप, floor और room की condition भी देखनी पड़ती है। "
+      + "हम कमरे के हिसाब से चुनते हैं, लगाते हैं, और चलाकर देखने के बाद ही जाते हैं।",
     image: "/images/daikin-1-5-ton-inverter-split-air-conditione-e14be4db.webp",
     alt: "1.5 ton inverter split air conditioner stocked at Mobile World",
     bg: "var(--peach)",
   },
   {
-    kicker: "Since 1973",
-    heading: "Three generations\non one street",
-    body: `The shop opened in 1973 as a kirana store on ${shop.address.road}. It has traded as ${shop.name} from the same address since 2016.`,
+    kicker: "हमारा सफ़र",
+    heading: "हर सफ़र की शुरुआत\nएक भरोसे से होती है",
+    body: `परिवार का business सफ़र ${shop.legacyStartYear} में Aggarwal Kiryana Store से शुरू हुआ। `
+      + `इसी विरासत को आगे बढ़ाते हुए ${shop.foundingYear} में MOBILE WORLD की शुरुआत हुई।`,
     image: "/images/customers-at-mobile-world-jawahar-colony-nit-bc85762b.webp",
     alt: "Customers at Mobile World, Jawahar Colony, NIT Faridabad",
     bg: "var(--sky)",
   },
   {
-    kicker: "After sales",
-    heading: "Service stays\nin the shop",
-    body: "Something fails in month four? Walk in. No courier, no fifteen-day wait, no ticket number.",
+    kicker: "ख़रीदने के बाद",
+    heading: "जो यहाँ से लिया,\nउसकी बात यहीं होगी",
+    body: "चौथे महीने में कुछ गड़बड़ हुई? सीधे दुकान पर आ जाइए। न courier, न पंद्रह दिन का इंतज़ार, न ticket number।",
     image: "/images/redmi-smartphone-available-at-mobile-world-f-c4835de5.webp",
     alt: "Redmi smartphone available at Mobile World Faridabad",
     bg: "var(--mint)",

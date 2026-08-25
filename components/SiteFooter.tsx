@@ -11,7 +11,7 @@ export function SiteFooter() {
       <div className="wrap">
         <div className="fgrid">
           <div>
-            <Link className="logo" href="/"><i>MW</i><span>{shop.name}<s>EST. 1973</s></span></Link>
+            <Link className="logo" href="/"><i>MW</i><span>{shop.name}<s>SINCE 2016</s></span></Link>
             <address style={{ marginTop: 12 }}>
               {shop.address.street}<br />
               {shop.address.landmark}<br />

@@ -226,13 +226,38 @@ material से **मत** लो। वो उनका copyright है। ज
 न page पर, न alt text में, न meta description में। Google इन्हें spam मानता
 है, और भारत में consumer law भी ऐसे दावों पर लागू होता है।
 
-इनकी जगह वो लिखो जो customer ख़ुद जाँच सके — 1973 से चल रही दुकान, GST bill,
+इनकी जगह वो लिखो जो customer ख़ुद जाँच सके — 1973 से चला आ रहा परिवार का
+business और 2016 से Mobile World, GST bill,
 brand warranty, दुकान पर ही repair, एक ही address। ये सब सच है और इसीलिए
 ज़्यादा भरोसा दिलाता है।
 
 यही बात owner के brand graphic पर भी लागू है (`public/brand-profile-original.png`)
 — उसमें "BEST PRICE" और "TRUSTED BRAND" लिखा है, इसलिए वो website के logo
 की तरह इस्तेमाल नहीं होता। `public/README.md` में पूरी बात लिखी है।
+
+---
+
+## 13. आवाज़ — पूरी website एक ही आवाज़ में बोले
+
+**कोई भी copy लिखने से पहले `docs/BRAND-VOICE.md` पढ़ो।** वो owner का approve
+किया हुआ standard है, और उसी में पूरी बात लिखी है। यहाँ सिर्फ़ सबसे ज़रूरी बातें:
+
+- **हिन्दी main भाषा है, हमेशा देवनागरी में।** Roman Hinglish में हिन्दी
+  वाक्य मत लिखो। रोज़ बोले जाने वाले English शब्द (rate, stock, model, GST
+  Bill, Warranty, EMI, WhatsApp…) English में ही रहने दो।
+- ऐसा लगे जैसे दुकान ख़ुद ग्राहक से बात कर रही है — गर्मजोशी से, इज़्ज़त से,
+  बिना शेखी के। Advertising agency या corporate brochure जैसा कभी नहीं।
+- **कहानी कभी मत गड़बड़ाओ:**
+  1973 = परिवार के business की शुरुआत (Aggarwal Kiryana Store) ·
+  2006 = Aggarwal Kiryana & Communication ·
+  **2016 = MOBILE WORLD की शुरुआत**।
+  "Mobile World 1973 में शुरू हुई" लिखना ग़लत है। Code में यह
+  `shop.foundingYear` (2016), `shop.legacyStartYear` (1973) और `legacy`
+  से आता है — दोबारा मत लिखो।
+- **"तीन पीढ़ियाँ", "1973 से एक ही पता", "53 साल"** — ये तीनों owner ने
+  confirm नहीं किए। मत लिखो।
+- लिखने के बाद ख़ुद से पूछो: *"क्या यह उसी आवाज़ में है — 'हर सफ़र की शुरुआत
+  एक भरोसे से होती है' ?"* अगर नहीं, दोबारा लिखो।
 
 <!-- BEGIN:nextjs-agent-rules -->
 

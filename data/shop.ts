@@ -85,6 +85,17 @@ export type Shop = {
    */
   monthlyClosure: "last-calendar-date";
   services: Services;
+  /**
+   * MOBILE WORLD किस साल शुरू हुई — 2016।
+   * Google को schema में यही तारीख़ जाती है।
+   */
+  foundingYear: number;
+  /**
+   * परिवार का business किस साल शुरू हुआ — 1973।
+   * यह दुकान की कहानी है, MOBILE WORLD की founding date नहीं।
+   * इसे schema की `foundingDate` में कभी मत डालो।
+   */
+  legacyStartYear: number;
 };
 
 /**
@@ -202,6 +213,11 @@ export const shop: Shop = {
     longitude: 77.28786,
   },
 
+  // MOBILE WORLD 2016 में शुरू हुई। 1973 परिवार के business की शुरुआत है —
+  // दोनों अलग बातें हैं, मिलाना मत (ऊपर `legacy` का note देखिए)।
+  foundingYear: 2016,
+  legacyStartYear: 1973,
+
   services: {
     repair: true,
     emi: true,
@@ -238,35 +254,41 @@ export const fullAddress = [
 ].join(", ");
 
 /**
- * दुकान का सफ़र — About page का timeline इसी से बनता है।
+ * दुकान का सफ़र — तीन पड़ाव।
  *
- * ये तीनों बातें owner ने ख़ुद बताई हैं (25 Aug 2026)। कोई नई तारीख़ या
- * कहानी अपने आप मत जोड़ो — पहले owner से पूछो (CLAUDE.md §8)।
+ * ये तीनों owner के approved brand post से हैं (25 Aug 2026)। नाम बिलकुल
+ * वैसे ही लिखे हैं जैसे owner लिखते हैं।
+ *
+ * ⚠️ सबसे ज़रूरी बात — इन्हें कभी मिलाकर मत लिखो:
+ *
+ *   1973 = परिवार के business की शुरुआत (Aggarwal Kiryana Store)
+ *   2016 = MOBILE WORLD की शुरुआत
+ *
+ * "Mobile World 1973 में शुरू हुई" या "Aggarwal Kiryana & Communication
+ * 1973 में खुली" — दोनों ग़लत हैं। दुकान 1973 से इसी पते पर है, ये भी
+ * owner ने confirm नहीं किया, इसलिए ये भी मत लिखो।
  */
 export type Milestone = {
   year: string;
-  /** एक लाइन में क्या हुआ */
-  title: string;
+  /** उस वक़्त दुकान का नाम — owner के अपने शब्दों में */
+  name: string;
   body: string;
 };
 
-export const timeline: Milestone[] = [
+export const legacy: Milestone[] = [
   {
     year: "1973",
-    title: "दुकान शुरू हुई",
-    body: `परिवार ने ${shop.address.locality} में Aggarwal Kiryana Store के नाम से दुकान खोली। ` +
-      `पता वही, जो आज है।`,
+    name: "Aggarwal Kiryana Store",
+    body: "हमारे परिवार का business सफ़र यहीं से शुरू हुआ।",
   },
   {
     year: "2006",
-    title: "नाम बदला",
-    body: `दुकान का registered नाम ${shop.registeredName} हुआ। ` +
-      `किराने के साथ mobile और recharge का काम भी शुरू हुआ।`,
+    name: "Aggarwal Kiryana & Communication",
+    body: "यह सफ़र आगे बढ़ा, और नाम बदलकर यह हुआ।",
   },
   {
     year: "2016",
-    title: "Mobile World",
-    body: `${shop.owner} ने दुकान को पूरी तरह electronics पर मोड़ दिया। ` +
-      `तब से इसी counter से mobile, laptop, TV, AC और घर का बाक़ी सामान।`,
+    name: "MOBILE WORLD",
+    body: "इसी विरासत को आगे बढ़ाते हुए MOBILE WORLD की शुरुआत हुई।",
   },
 ];

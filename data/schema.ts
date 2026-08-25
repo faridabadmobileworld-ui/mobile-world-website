@@ -83,7 +83,9 @@ export function localBusinessSchema(now: Date = new Date()) {
     name: shop.name,
     legalName: shop.registeredName,
     founder: { "@type": "Person", name: shop.owner },
-    foundingDate: "1973",
+    // MOBILE WORLD 2016 में शुरू हुई। 1973 परिवार के business की शुरुआत है
+    // — वो कहानी About page पर है, schema की foundingDate में नहीं।
+    foundingDate: String(shop.foundingYear),
     url: `${shop.siteUrl}/`,
     telephone: shop.phone.display,
     image: `${shop.siteUrl}/og-image.jpg`,

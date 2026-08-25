@@ -393,7 +393,7 @@ body.searching .qinfo{display:flex}
 }
 
 /* ── dukaan ka safar (About page timeline) ── */
-.tline{display:grid;gap:10px;grid-template-columns:1fr}
+.tline{display:grid;gap:10px;grid-template-columns:1fr;list-style:none;margin:0;padding:0}
 @media(min-width:820px){ .tline{grid-template-columns:repeat(3,1fr)} }
 .tline li{position:relative;background:var(--card);border:1px solid var(--line);
   border-radius:var(--r);padding:18px 16px 16px}
@@ -423,3 +423,9 @@ body.searching .qinfo{display:flex}
 
 .cols2{display:grid;gap:10px;grid-template-columns:1fr}
 @media(min-width:820px){ .cols2{grid-template-columns:1fr 1fr} }
+
+/* Devanagari text par chaudi letter-spacing aur UPPERCASE nahi chalti —
+   matraayen akshar se door ho jaati hain. `hasDevanagari()` ye class lagati hai. */
+.dev{letter-spacing:normal;text-transform:none}
+/* 10px devanagari mein bahut chhota padta hai — kicker thoda bada. */
+.hs-k.dev{font-size:11.5px}
