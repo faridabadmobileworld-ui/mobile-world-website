@@ -3,7 +3,12 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { slides, whatsappGeneral, hasDevanagari } from "@/data/content";
-import { IconArrow, IconChevL, IconChevR, IconPause, IconPlay } from "./Icons";
+import Link from "next/link";
+import { shop } from "@/data/shop";
+import {
+  IconArrow, IconChevL, IconChevR, IconPause, IconPlay,
+  IconYouTube, IconInstagram, IconFacebook, IconWhatsApp,
+} from "./Icons";
 
 export function Hero() {
   const [i, setI] = useState(0);
@@ -61,24 +66,33 @@ export function Hero() {
               aria-roledescription="slide" aria-label={`Slide ${k + 1} of ${slides.length}`}
               aria-hidden={k !== i}
             >
+              <Image
+                className="hs-bg" src={s.image} alt={s.alt}
+                fill priority={k === 0} sizes="100vw"
+                style={{ objectPosition: s.focus ?? "center" }}
+              />
+              <span className="hs-veil" aria-hidden="true" />
+
               <div className="hs-c">
                 <span className={hasDevanagari(s.kicker) ? "hs-k dev" : "hs-k"}>{s.kicker}</span>
                 {k === 0
                   ? <h1 className={hasDevanagari(s.heading) ? "hs-h dev" : "hs-h"}>{s.heading.split("\n").map((l, n) => <span key={n}>{l}<br /></span>)}</h1>
                   : <h2 className={hasDevanagari(s.heading) ? "hs-h dev" : "hs-h"}>{s.heading.split("\n").map((l, n) => <span key={n}>{l}<br /></span>)}</h2>}
                 <p className="hs-p">{s.body}</p>
-                <div className="btns">
-                  <a className="btn btn-d" href={whatsappGeneral} target="_blank" rel="noopener">
-                    💬 WhatsApp पर पूछिए <IconArrow />
-                  </a>
+
+                <div className="hs-cta">
+                  <Link className="btn btn-h" href="/products">
+                    Shop Now <IconArrow />
+                  </Link>
+                  <a className="hs-soc yt" href={shop.social.youtube} target="_blank"
+                     rel="noopener" aria-label="YouTube"><IconYouTube /></a>
+                  <a className="hs-soc ig" href={shop.social.instagram} target="_blank"
+                     rel="noopener" aria-label="Instagram"><IconInstagram /></a>
+                  <a className="hs-soc fb" href={shop.social.facebook} target="_blank"
+                     rel="noopener" aria-label="Facebook"><IconFacebook /></a>
+                  <a className="hs-soc wa" href={whatsappGeneral} target="_blank"
+                     rel="noopener" aria-label="WhatsApp"><IconWhatsApp size={17} /></a>
                 </div>
-              </div>
-              <div className="hs-m">
-                <Image
-                  className="ph-img" src={s.image} alt={s.alt}
-                  width={1000} height={562} priority={k === 0}
-                  sizes="(max-width:768px) 100vw, 620px"
-                />
               </div>
             </div>
           ))}

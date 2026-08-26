@@ -115,28 +115,70 @@ ul{list-style:none;margin:0;padding:0}
 .drawer a.d:hover{background:var(--bg)}
 .drawer a.d i{width:28px;height:28px;border-radius:7px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;flex:none}
 
-/* ── hero slider ── */
+/* ── hero slider ──
+   Tasveer poore box mein bharti hai; text usi ke upar aata hai. Padhne
+   layak rahe isliye peeche ek gehra parda (.hs-veil) hai — bina uske
+   safed akshar chamakdaar tasveer par gum ho jaate hain. */
 .hero{padding:12px 0}
-.hs{position:relative;border-radius:var(--r-lg);overflow:hidden;background:var(--lav)}
-.hs-t{position:relative;min-height:300px}
-@media(min-width:768px){ .hs-t{min-height:400px} }
-.hs-s{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .6s var(--ease),visibility .6s;display:grid;grid-template-columns:1fr;align-items:center}
-.hs-s.on{opacity:1;visibility:visible;position:relative}
-.hs-c{padding:26px 20px;z-index:2}
-@media(min-width:768px){ .hs-s{grid-template-columns:1fr 1fr} .hs-c{padding:44px} }
-.hs-k{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);background:#fff;padding:5px 10px;border-radius:6px;margin-bottom:12px}
-.hs-h{font-size:clamp(1.5rem,4.4vw,2.5rem);font-weight:800;line-height:1.12;letter-spacing:-.03em;margin:0;text-transform:uppercase}
-.hs-p{margin:10px 0 0;font-size:14px;color:var(--ink-2);max-width:38ch}
-.hs-m{position:relative;min-height:170px;display:grid;place-items:center;padding:16px}
-.hs-m img{width:100%;height:100%;object-fit:contain}
+.hs{position:relative;border-radius:var(--r-lg);overflow:hidden;background:var(--ink)}
+/* Saari slides ek hi grid cell mein — isse box ki oonchai sabse lambi
+   slide se tay hoti hai, aur tasveer poori oonchai bharti hai. Pehle
+   slide relative/absolute ke beech badalti thi aur neeche patti bach
+   jaati thi. */
+.hs-t{position:relative;display:grid;min-height:420px}
+@media(min-width:560px){ .hs-t{min-height:440px} }
+@media(min-width:768px){ .hs-t{min-height:480px} }
+@media(min-width:1100px){ .hs-t{min-height:520px} }
+
+.hs-s{grid-area:1/1;position:relative;opacity:0;visibility:hidden;
+  transition:opacity .6s var(--ease),visibility .6s}
+.hs-s.on{opacity:1;visibility:visible}
+
+.hs-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+
+/* Neeche-baayen se gehra, upar-daayen tak halka — text wahin baithta hai. */
+.hs-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(to top,rgba(8,8,18,.94) 0%,rgba(8,8,18,.82) 34%,
+    rgba(8,8,18,.52) 60%,rgba(8,8,18,.22) 100%)}
+@media(min-width:768px){
+  .hs-veil{background:linear-gradient(100deg,rgba(8,8,18,.94) 0%,rgba(8,8,18,.86) 34%,
+    rgba(8,8,18,.55) 60%,rgba(8,8,18,.15) 100%)}
+}
+
+.hs-c{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;
+  justify-content:flex-end;padding:22px 18px 62px;max-width:34rem}
+@media(min-width:768px){ .hs-c{justify-content:center;padding:40px 40px 40px;max-width:33rem} }
+
+.hs-k{display:inline-block;align-self:flex-start;font-size:10px;font-weight:800;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:#fff;
+  padding:5px 10px;border-radius:6px;margin-bottom:10px}
+.hs-h{font-size:clamp(1.35rem,3.4vw,2.1rem);font-weight:800;line-height:1.16;
+  letter-spacing:-.028em;margin:0;text-transform:uppercase;color:#fff;
+  text-shadow:0 2px 14px rgba(0,0,0,.45)}
+.hs-p{margin:9px 0 0;font-size:13.5px;line-height:1.7;color:#E4E2F2;max-width:40ch;
+  text-shadow:0 1px 10px rgba(0,0,0,.5)}
+@media(min-width:768px){ .hs-p{font-size:14.5px} }
+
+/* Shop now + social — har slide par */
+.hs-cta{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:16px}
+.hs-soc{width:40px;height:40px;border-radius:9px;display:grid;place-items:center;
+  color:#fff;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.26);
+  backdrop-filter:blur(4px);transition:background .2s var(--ease),transform .15s}
+.hs-soc:hover{transform:translateY(-2px)}
+.hs-soc.yt:hover{background:#FF0000;border-color:#FF0000}
+.hs-soc.ig:hover{background:#C13584;border-color:#C13584}
+.hs-soc.fb:hover{background:#1877F2;border-color:#1877F2}
+.hs-soc.wa:hover{background:#25D366;border-color:#25D366;color:#04240F}
+
 .ph{display:grid;place-items:center;text-align:center;width:100%;height:100%;min-height:150px;border-radius:var(--r);background:rgba(255,255,255,.55);border:1px dashed rgba(20,20,43,.16)}
 .ph span{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);max-width:22ch;line-height:1.9}
-.hs-ui{position:absolute;left:20px;bottom:16px;display:flex;gap:6px;z-index:3}
-@media(min-width:768px){ .hs-ui{left:44px;bottom:22px} }
-.hs-ui button{width:8px;height:8px;border-radius:99px;background:rgba(20,20,43,.25);transition:width .3s var(--ease),background .3s var(--ease)}
-.hs-ui button.on{width:22px;background:var(--brand)}
+
+.hs-ui{position:absolute;left:18px;bottom:18px;display:flex;gap:6px;z-index:3}
+@media(min-width:768px){ .hs-ui{left:40px;bottom:22px} }
+.hs-ui button{width:8px;height:8px;border-radius:99px;background:rgba(255,255,255,.4);transition:width .3s var(--ease),background .3s var(--ease)}
+.hs-ui button.on{width:22px;background:#fff}
 .hs-ar{position:absolute;right:14px;bottom:14px;display:flex;gap:6px;z-index:3}
-.hs-ar button{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.9);display:grid;place-items:center;border:1px solid var(--line)}
+.hs-ar button{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.92);display:grid;place-items:center;border:1px solid rgba(255,255,255,.5);color:var(--ink)}
 
 /* ── buttons ── */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:40px;padding:0 17px;border-radius:8px;font-size:13.5px;font-weight:700;transition:background .2s var(--ease),color .2s,border-color .2s,transform .15s}

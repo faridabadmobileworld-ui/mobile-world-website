@@ -241,44 +241,51 @@ export type Slide = {
   body: string;
   image: string;
   alt: string;
+  /** Text पीछे न घुल जाए, इसलिए हर slide के पीछे अपना रंग रहता है। */
   bg: string;
+  /**
+   * Tasveer poore box mein भरती है, इसलिए ऊपर-नीचे थोड़ा कट जाता है।
+   * यह बताता है कि कौन सा हिस्सा ज़रूर दिखना चाहिए (CSS object-position)।
+   */
+  focus?: string;
 };
 
 export const slides: Slide[] = [
   {
     kicker: "MOBILE WORLD",
-    heading: "Every big brand,\none counter",
-    body: `Smartphones, laptops, televisions और home appliances — सब एक ही दुकान पर, ${shop.address.road} पर। `
-      + `${shop.legacyStartYear} से परिवार का business सफ़र, ${shop.foundingYear} से MOBILE WORLD।`,
-    image: "/images/inside-the-mobile-world-showroom-bright-4a8926d5.webp",
-    alt: "MOBILE WORLD की दुकान — mobile, laptop, TV, AC, fridge और washing machine, सब एक ही जगह",
-    bg: "var(--lav)",
+    heading: "हर बड़ा brand,\nएक ही counter",
+    body: `Smartphone, Laptop, TV, AC, Refrigerator, Washing Machine और घर का बाक़ी सामान — सब ${shop.address.road} पर।`,
+    image: "/images/hero-showroom-e594f39c.webp",
+    alt: "MOBILE WORLD की दुकान के अंदर — mobile, laptop, TV, AC, fridge और washing machine",
+    bg: "#141428",
+    focus: "center 62%",
   },
   {
     kicker: "गर्मी का मौसम",
     heading: "Air Conditioners\n1 ton से 2 ton तक",
-    body: "AC का tonnage सिर्फ़ कमरे के size से तय नहीं होता — धूप, floor और कमरे की हालत भी देखनी पड़ती है। "
-      + "कौन सा आपके कमरे के लिए ठीक रहेगा, यह दुकान पर बता देंगे।",
-    image: "/images/split-air-conditioner-in-a-room-17b0cbd3.webp",
-    alt: "कमरे में लगा हुआ split air conditioner, चलता हुआ",
-    bg: "var(--peach)",
+    body: "कौन सा AC आपके कमरे के लिए ठीक रहेगा — धूप, floor और कमरे की हालत देखकर दुकान पर बता देंगे।",
+    image: "/images/hero-air-conditioner-d24b9473.webp",
+    alt: "कमरे में लगा हुआ split air conditioner",
+    bg: "#1B2436",
+    focus: "center 55%",
   },
   {
     kicker: "हमारा सफ़र",
     heading: "हर सफ़र की शुरुआत\nएक भरोसे से होती है",
-    body: `परिवार का business सफ़र ${shop.legacyStartYear} में Aggarwal Kiryana Store से शुरू हुआ। `
-      + `इसी विरासत को आगे बढ़ाते हुए ${shop.foundingYear} में MOBILE WORLD की शुरुआत हुई।`,
-    image: "/images/hamari-jaden-bharose-ki-1973-2006-2016-190f9abe.webp",
-    alt: "हमारी जड़ें भरोसे की — 1973 Aggarwal Kiryana, 2006 Aggarwal Kiryana & Communication, 2016 MOBILE WORLD",
-    bg: "var(--sky)",
+    body: `${shop.legacyStartYear} में Aggarwal Kiryana Store से शुरू हुआ परिवार का business सफ़र, और ${shop.foundingYear} से MOBILE WORLD।`,
+    image: "/images/hero-hamara-safar-bffea417.webp",
+    alt: "1973 Aggarwal Kiryana, 2006 Aggarwal Kiryana & Communication, 2016 MOBILE WORLD",
+    bg: "#2A1E12",
+    focus: "center 58%",
   },
   {
     kicker: "एक ही पता",
     heading: "हाथ में लेकर\nदेखिए, फिर लीजिए",
-    body: "Display, वज़न और पकड़ — ये photo में पूरी तरह समझ नहीं आते। दुकान पर आइए, हाथ में लेकर देखिए, फिर तय कीजिए।",
-    image: "/images/expert-mobile-repairing-at-mobile-world-f65f73a0.webp",
-    alt: "दुकान पर ही phone की repair — screen, battery और charging port",
-    bg: "var(--mint)",
+    body: "Display, वज़न और पकड़ — ये photo में पूरी तरह समझ नहीं आते। दुकान पर आइए और ख़ुद देख लीजिए।",
+    image: "/images/iphone-display-at-the-mobile-world-counter-346d3e71.webp",
+    alt: `${shop.name} के counter पर phones का display`,
+    bg: "#101018",
+    focus: "center 32%",
   },
 ];
 
