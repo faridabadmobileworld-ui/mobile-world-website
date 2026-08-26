@@ -35,10 +35,10 @@ function computeStatus(now: Date): Status {
   return {
     open,
     label: closedToday
-      ? "Closed today — last date of the month"
+      ? "आज बंद — महीने की आख़िरी तारीख़"
       : open
-        ? "Open now · until 10 PM"
-        : "Closed · opens 10 AM",
+        ? "अभी खुली है · रात 10 बजे तक"
+        : "अभी बंद है · सुबह 10 बजे खुलेगी",
     nextClosure: `${next.getDate()} ${MONTHS[next.getMonth()]}`,
   };
 }
@@ -63,7 +63,7 @@ export function LiveBadge() {
   return (
     <span className="live">
       <i className={s && !s.open ? "shut" : undefined} />
-      <span>{s ? s.label : "Daily 10 AM – 10 PM"}</span>
+      <span>{s ? s.label : "रोज़ 10 AM – 10 PM"}</span>
     </span>
   );
 }

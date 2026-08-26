@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { shop, categories, brands, legacy } from "@/data/shop";
-import { storePhotos, ask } from "@/data/content";
-import { WhatWeDontDo } from "@/components/WhatWeDontDo";
-import { IconArrow, IconWhatsApp, IconPin, IconYouTube } from "@/components/Icons";
+import { shop, brands, legacy } from "@/data/shop";
+import { storePhotos, navCategories, ask } from "@/data/content";
+import { FollowUs } from "@/components/FollowUs";
+import { IconArrow, IconWhatsApp, IconPin, IconPhone } from "@/components/Icons";
 import { NextClosure } from "@/components/StoreStatus";
 
 export const metadata: Metadata = {
@@ -105,8 +105,6 @@ export default function About() {
         </div>
       </section>
 
-      <WhatWeDontDo />
-
       <section className="sec">
         <div className="shead">
           <h2>हमारे पास क्या मिलेगा</h2>
@@ -117,10 +115,10 @@ export default function About() {
           <div className="panel rv in">
             <h3>सामान</h3>
             <p style={{ margin: "0 0 12px", fontSize: 13.5, color: "var(--ink-2)" }}>
-              घर का लगभग हर electric सामान एक ही counter पर।
+              Consumer Electronics &amp; Home Appliances का सभी सामान — एक ही counter पर।
             </p>
             <ul className="chips">
-              {categories.map((c) => <li key={c.slug}>{c.name}</li>)}
+              {navCategories.map((c) => <li key={c.slug}>{c.label}</li>)}
             </ul>
           </div>
 
@@ -167,25 +165,11 @@ export default function About() {
         </div>
       </section>
 
-      <section className="sec">
-        <div className="strip rv in">
-          <div>
-            <b>हम YouTube पर भी हैं</b>
-            <p>
-              नए phone का unboxing, दो models की तुलना, और ख़रीदने से पहले किन बातों
-              पर ध्यान देना है — सब हमारे channel पर। देखिए, फिर दुकान आकर हाथ में
-              लेकर देख लीजिए।
-            </p>
-          </div>
-          <a className="btn btn-h go" href={shop.social.youtube} target="_blank" rel="noopener">
-            <IconYouTube /> Channel देखिए
-          </a>
-        </div>
-      </section>
+      <FollowUs />
 
       <section className="sec">
         <div className="cband rv in">
-          <h2>📍 दुकान पर आइए</h2>
+          <h2>📍 दुकान पर आइए, और हमें सेवा का मौक़ा दीजिए</h2>
           <p>
             {shop.address.street}, {shop.address.landmark}, {shop.address.locality},
             {" "}{shop.address.city}, {shop.address.state} – {shop.address.postalCode}
@@ -198,7 +182,7 @@ export default function About() {
             <a className="btn btn-d" href={shop.social.googleMaps} target="_blank" rel="noopener">
               <IconPin /> रास्ता देखिए
             </a>
-            <a className="btn btn-o" href={shop.phone.tel}>{shop.phone.display}</a>
+            <a className="btn btn-o" href={shop.phone.tel}><IconPhone /> {shop.phone.display}</a>
             <a className="btn btn-w" href={ask("aaj ka rate")} target="_blank" rel="noopener">
               <IconWhatsApp /> Model बताइए, Rate बता देंगे
             </a>

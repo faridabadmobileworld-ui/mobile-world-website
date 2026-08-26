@@ -71,6 +71,12 @@ export type Brand = {
 
 export type Shop = {
   name: string;
+  /**
+   * दुकान के board वाला दूसरा हिस्सा — "Consumer Electronics & Home Appliances"।
+   * Owner हर जगह (Google, Instagram, Facebook, YouTube) यही naam रख रहे हैं,
+   * इसलिए website के title, header, footer और schema में भी यही जाता है।
+   */
+  tagline: string;
   registeredName: string;
   owner: string;
   siteUrl: string;
@@ -116,19 +122,26 @@ export type Services = {
 };
 
 /**
- * दुकान जो सामान बेचती है।
- * `slug` URL में जाएगा (/products/mobiles), `name` screen पर दिखेगा।
+ * दुकान जो सामान बेचती है — **पूरी website की इकलौती category list**।
+ *
+ * `slug` URL में जाता है (/products#smartphones) और `name` screen पर
+ * दिखता है — header की strip, drawer, footer, Products page और About
+ * page, सब यहीं से बनते हैं।
+ *
+ * यहाँ कुछ जोड़ने से पहले `data/content.ts` के `items` में उसी slug का
+ * कम से कम एक सामान डालिए, वरना Products page पर वो heading ख़ाली रहेगी।
  */
 export const categories: Category[] = [
-  { slug: "mobiles", name: "Mobiles" },
-  { slug: "laptops", name: "Laptops" },
+  { slug: "smartphones", name: "Smartphones" },
+  { slug: "laptops-tablets", name: "Laptops & Tablets" },
   { slug: "televisions", name: "Televisions" },
   { slug: "air-conditioners", name: "Air Conditioners" },
-  { slug: "inverters-batteries", name: "Inverters & Batteries" },
   { slug: "washing-machines", name: "Washing Machines" },
-  { slug: "air-fryers", name: "Air Fryers" },
-  { slug: "stabilizers", name: "Stabilizers" },
-  { slug: "home-appliances", name: "Other Home Appliances" },
+  { slug: "refrigerators", name: "Refrigerators" },
+  { slug: "inverters-batteries", name: "Inverters & Batteries" },
+  { slug: "audio-wearables", name: "Audio & Wearables" },
+  { slug: "kitchen-appliances", name: "Kitchen Appliances" },
+  { slug: "accessories", name: "Accessories" },
 ];
 
 /** दुकान पर मिलने वाले brands। */
@@ -173,8 +186,10 @@ function resolveSiteUrl(): string {
 }
 
 export const shop: Shop = {
-  /** Public नाम — website पर यही दिखेगा। */
-  name: "Mobile World",
+  /** Public नाम — website पर यही दिखेगा। Owner हर जगह capital में लिखते हैं। */
+  name: "MOBILE WORLD",
+  /** Board वाला दूसरा हिस्सा। Title और header में naam के साथ जाता है। */
+  tagline: "Consumer Electronics & Home Appliances",
   /** Registered नाम — सिर्फ़ legal/footer के लिए। */
   registeredName: "Aggarwal Kiryana And Communication",
   owner: "Tarun Gupta",

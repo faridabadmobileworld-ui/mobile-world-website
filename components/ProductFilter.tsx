@@ -33,9 +33,8 @@ export function ProductFilter() {
   if (!q) {
     return (
       <p style={{ color: "var(--ink-2)", maxWidth: "62ch", margin: "0 0 6px" }}>
-        Daam yahaan nahi likhe. Rate roz badalta hai aur bank offers alag-alag hote
-        hain — isliye jo chahiye uska naam WhatsApp par bhej dijiye, hum stock aur
-        aaj ka rate bata denge.
+दाम यहाँ नहीं लिखे हैं। Rate रोज़ बदलता है और bank offers अलग-अलग होते हैं —
+        इसलिए जो चाहिए उसका नाम WhatsApp पर भेज दीजिए, हम stock और आज का rate बता देंगे।
       </p>
     );
   }
@@ -44,13 +43,13 @@ export function ProductFilter() {
     <div className="searchnote">
       <span>
         {hits
-          ? `${hits} cheez${hits === 1 ? "" : "ein"} mili “${q}” ke liye.`
-          : `“${q}” ke liye kuch nahi mila. Stock roz badalta hai — WhatsApp par pooch lijiye.`}
+          ? `“${q}” के लिए ${hits} चीज़${hits === 1 ? "" : "ें"} मिलीं।`
+          : `“${q}” के लिए कुछ नहीं मिला। Stock रोज़ बदलता है — WhatsApp पर पूछ लीजिए।`}
       </span>
-      <Link className="btn btn-o btn-s" href="/products">Saaf kijiye</Link>
+      <Link className="btn btn-o btn-s" href="/products">साफ़ कीजिए</Link>
       {!hits && (
         <a className="btn btn-w btn-s" href={ask(q)} target="_blank" rel="noopener">
-          <IconWhatsApp /> Poochhiye
+          <IconWhatsApp /> पूछिए
         </a>
       )}
     </div>

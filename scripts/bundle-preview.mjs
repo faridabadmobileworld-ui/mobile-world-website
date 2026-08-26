@@ -155,7 +155,7 @@ ${favicon ? `<link rel="icon" href="${favicon}">` : ""}
 </head>
 <body>
 ${shell}
-<div class="pv-note">Preview — asli site par har page ka apna address hoga</div>
+<div class="pv-note">Preview — असली site पर हर page का अपना address होगा</div>
 <script>
 /* JSON ke andar "<" escape hota hai — page ke HTML mein JSON-LD ka
    closing script tag hota hai, jo warna is script ko jaldi band kar

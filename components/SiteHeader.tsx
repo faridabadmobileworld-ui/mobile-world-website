@@ -55,21 +55,21 @@ export function SiteHeader() {
       <header className="hdr" ref={headerRef}>
         <div className="wrap">
           <button
-            className="iconbtn" aria-label="Open menu"
+            className="iconbtn" aria-label="Menu kholiye"
             aria-expanded={open} aria-controls="drawer"
             onClick={() => setOpen(true)}
           ><IconMenu /></button>
 
           <Link className="logo" href="/">
-            <i>MW</i><span>{shop.name}<s>SINCE 2016</s></span>
+            <i>MW</i><span>{shop.name}<s>{shop.tagline}</s></span>
           </Link>
 
           <SearchBox id="q-header" />
 
           <div className="hdr-a">
-            <a className="iconbtn" href={shop.phone.tel} aria-label="Call the store"><IconPhone /></a>
+            <a className="iconbtn" href={shop.phone.tel} aria-label="दुकान को call कीजिए"><IconPhone /></a>
             <a className="btn btn-w btn-s" href={whatsappGeneral} target="_blank" rel="noopener"
-               aria-label="Message the store on WhatsApp">
+               aria-label="WhatsApp पर message कीजिए">
               <IconWhatsApp /> <span className="lbl">WhatsApp</span>
             </a>
           </div>
@@ -88,29 +88,29 @@ export function SiteHeader() {
         <div className="veil" onClick={() => setOpen(false)} />
         <div className="panel">
           <Link className="logo" href="/" onClick={() => setOpen(false)}>
-            <i>MW</i><span>{shop.name}<s>SINCE 2016</s></span>
+            <i>MW</i><span>{shop.name}<s>{shop.tagline}</s></span>
           </Link>
 
           <SearchBox id="q-drawer" onDone={() => setOpen(false)} />
 
-          <h2 className="dh">Shop by category</h2>
+          <h2 className="dh">Category से चुनिए</h2>
           {navCategories.map((c) => (
             <Link key={c.slug} className="d" href={`/products#${c.slug}`} onClick={() => setOpen(false)}>
               <i><IconGrid /></i>{c.label}
             </Link>
           ))}
 
-          <h2 className="dh">Store</h2>
-          <Link className="d" href="/about" onClick={() => setOpen(false)}><i><IconGrid /></i>Our story</Link>
-          <Link className="d" href="/posts" onClick={() => setOpen(false)}><i><IconPost /></i>Latest posts</Link>
-          <Link className="d" href="/contact" onClick={() => setOpen(false)}><i><IconTool /></i>Service &amp; support</Link>
-          <Link className="d" href="/visit" onClick={() => setOpen(false)}><i><IconPin /></i>Visit the store</Link>
+          <h2 className="dh">दुकान</h2>
+          <Link className="d" href="/about" onClick={() => setOpen(false)}><i><IconGrid /></i>हमारे बारे में</Link>
+          <Link className="d" href="/posts" onClick={() => setOpen(false)}><i><IconPost /></i>नई जानकारी</Link>
+          <Link className="d" href="/contact" onClick={() => setOpen(false)}><i><IconTool /></i>Service और support</Link>
+          <Link className="d" href="/visit" onClick={() => setOpen(false)}><i><IconPin /></i>दुकान पर आइए</Link>
 
           <div className="btns" style={{ marginTop: 18 }}>
             <a className="btn btn-w" href={whatsappGeneral} target="_blank" rel="noopener">
               <IconWhatsApp /> WhatsApp
             </a>
-            <a className="btn btn-o" href={shop.phone.tel}>Call</a>
+            <a className="btn btn-o" href={shop.phone.tel}><IconPhone /> Call</a>
           </div>
         </div>
       </div>
@@ -140,13 +140,13 @@ function SearchBox({ id, onDone }: { id: string; onDone?: () => void }) {
 
   return (
     <form className="searchbox" onSubmit={submit} role="search">
-      <label className="sr" htmlFor={id}>Search products</label>
+      <label className="sr" htmlFor={id}>सामान ढूँढ़िए</label>
       <input
         id={id} type="search" autoComplete="off" value={q}
         onChange={(e) => setQ(e.target.value)}
-        placeholder="Search a product — televisions, AC, laptop…"
+        placeholder="क्या ढूँढ़ रहे हैं — TV, AC, Laptop…"
       />
-      <button type="submit" aria-label="Search"><IconSearch /></button>
+      <button type="submit" aria-label="ढूँढ़िए"><IconSearch /></button>
     </form>
   );
 }

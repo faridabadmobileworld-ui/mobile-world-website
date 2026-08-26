@@ -15,21 +15,21 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(shop.siteUrl),
   title: {
-    default: `${shop.name} — Mobile, Laptop aur Home Appliances, ${shop.address.city}`,
+    default: `${shop.name} — ${shop.tagline}, ${shop.address.city}`,
     template: `%s | ${shop.name}`,
   },
   description:
-    `${shop.name}, ${shop.address.locality}, ${shop.address.city} — mobiles, laptops, ` +
-    `televisions, air conditioners, washing machines aur home appliances. ` +
-    `Dukaan par aakar dekhiye ya call kijiye.`,
+    `${shop.name} — ${shop.tagline}। ${shop.address.road}, ${shop.address.locality}, ` +
+    `${shop.address.city}। Smartphone, Laptop, TV, AC, Refrigerator, Washing Machine, ` +
+    `Inverter और घर का बाक़ी सामान। दुकान पर आइए या WhatsApp पर पूछ लीजिए।`,
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     siteName: shop.name,
     locale: "hi_IN",
     url: "/",
-    title: `${shop.name} — Electronics Store, ${shop.address.city}`,
-    description: `Har bada brand, ek counter. ${shop.address.road}, ${shop.address.locality}.`,
+    title: `${shop.name} — ${shop.tagline}, ${shop.address.city}`,
+    description: `हर बड़ा brand, एक ही counter। ${shop.address.road}, ${shop.address.locality}।`,
     images: [{
       url: "/og-image.jpg", width: 1200, height: 630,
       alt: `${shop.name} — ${shop.address.locality}, ${shop.address.city}`,
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${shop.name} — Electronics Store, ${shop.address.city}`,
+    title: `${shop.name} — ${shop.tagline}, ${shop.address.city}`,
     images: ["/og-image.jpg"],
   },
   robots: {
@@ -55,9 +55,9 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="hi">
       <body>
-        <a className="skip" href="#main">Skip to content</a>
+        <a className="skip" href="#main">सीधे content पर जाइए</a>
         <ArtSprite />
         <SiteHeader />
         <main id="main">{children}</main>

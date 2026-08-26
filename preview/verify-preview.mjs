@@ -134,7 +134,7 @@ await p.waitForTimeout(6600);
 T(await slide() !== beforePause, 'slider: play se apne aap badalta hai');
 
 // ── menu drawer ─────────────────────────────────────────────────────
-await p.click('[aria-label="Open menu"]');
+await p.click('[aria-label="Menu kholiye"]');
 await p.waitForTimeout(420);
 const d1 = await p.evaluate(() => {
   const panel = document.querySelector('.drawer .panel');
@@ -143,7 +143,7 @@ const d1 = await p.evaluate(() => {
   while (el && el.tagName !== 'H2') { if (el.tagName === 'A') n++; el = el.nextElementSibling; }
   return { open: document.querySelector('.drawer').classList.contains('open'),
            onScreen: panel.getBoundingClientRect().x >= 0, catLinks: n,
-           expanded: document.querySelector('[aria-label="Open menu"]').getAttribute('aria-expanded') };
+           expanded: document.querySelector('[aria-label="Menu kholiye"]').getAttribute('aria-expanded') };
 });
 T(d1.open && d1.onScreen, 'menu khulta hai');
 T(d1.catLinks === 10, 'menu mein 10 category links', String(d1.catLinks));
@@ -154,13 +154,13 @@ await p.waitForTimeout(420);
 T(await p.evaluate(() => !document.querySelector('.drawer').classList.contains('open')),
   'menu bahar click se band hota hai');
 
-await p.click('[aria-label="Open menu"]'); await p.waitForTimeout(350);
+await p.click('[aria-label="Menu kholiye"]'); await p.waitForTimeout(350);
 await p.keyboard.press('Escape'); await p.waitForTimeout(350);
 T(await p.evaluate(() => !document.querySelector('.drawer').classList.contains('open')),
   'menu Escape se band hota hai');
 
 // menu ke link se page badalta hai aur menu band hota hai
-await p.click('[aria-label="Open menu"]'); await p.waitForTimeout(350);
+await p.click('[aria-label="Menu kholiye"]'); await p.waitForTimeout(350);
 await p.evaluate(() => [...document.querySelectorAll('.drawer a.d')]
   .find(a => a.getAttribute('href') === '/visit').click());
 await p.waitForTimeout(400);
@@ -170,7 +170,7 @@ T(await p.evaluate(() => location.hash.includes('/visit')
 
 // ── search ──────────────────────────────────────────────────────────
 await p.evaluate(() => { location.hash = '/'; }); await p.waitForTimeout(320);
-await p.click('[aria-label="Open menu"]'); await p.waitForTimeout(350);
+await p.click('[aria-label="Menu kholiye"]'); await p.waitForTimeout(350);
 await p.fill('.drawer input[type="search"]', 'laptop');
 await p.press('.drawer input[type="search"]', 'Enter');
 await p.waitForTimeout(600);
@@ -196,7 +196,7 @@ const st = await p.evaluate(() => {
   const live = document.querySelector('.live span:last-child');
   return { label: live ? live.textContent.trim() : '' };
 });
-T(/Open now|Closed/.test(st.label), 'dukaan ka status bharta hai', st.label);
+T(/खुली है|बंद है|आज बंद/.test(st.label), 'dukaan ka status bharta hai', st.label);
 
 // ── har width par layout ────────────────────────────────────────────
 await ctx.close();

@@ -8,17 +8,17 @@
  * में है। दोनों को मिलाओ मत।
  */
 
-import { shop } from "@/data/shop";
+import { shop, categories } from "@/data/shop";
 
 /** WhatsApp पर सवाल भेजने का link। Text हमेशा encode होकर जाता है। */
 export function ask(topic: string): string {
   return `${shop.phone.whatsapp}?text=${encodeURIComponent(
-    `Hello Mobile World! I would like to know about ${topic}.`,
+    `Namaste MOBILE WORLD! मुझे ${topic} के बारे में जानना है।`,
   )}`;
 }
 
 export const whatsappGeneral = `${shop.phone.whatsapp}?text=${encodeURIComponent(
-  "Hello Mobile World! I have a question about a product.",
+  "Namaste MOBILE WORLD! मुझे एक सामान के बारे में पूछना है।",
 )}`;
 
 /**
@@ -31,21 +31,19 @@ export const whatsappGeneral = `${shop.phone.whatsapp}?text=${encodeURIComponent
  */
 export const hasDevanagari = (text: string): boolean => /[\u0900-\u097F]/.test(text);
 
-/** Header और drawer की category list। */
+/**
+ * Header, drawer, footer और Products page की category list।
+ *
+ * यह अपनी अलग list नहीं है — सीधे `data/shop.ts` की `categories` से बनती
+ * है। पहले दो list थीं और दोनों अलग हो गई थीं (About page पर Refrigerators
+ * ग़ायब थे)। अब category जोड़नी या हटानी हो तो सिर्फ़ `shop.ts` बदलिए।
+ */
 export type NavCategory = { label: string; slug: string };
 
-export const navCategories: NavCategory[] = [
-  { label: "Smartphones", slug: "smartphones" },
-  { label: "Laptops & Tablets", slug: "laptops-tablets" },
-  { label: "Televisions", slug: "televisions" },
-  { label: "Air Conditioners", slug: "air-conditioners" },
-  { label: "Washing Machines", slug: "washing-machines" },
-  { label: "Refrigerators", slug: "refrigerators" },
-  { label: "Inverters & Batteries", slug: "inverters-batteries" },
-  { label: "Audio & Wearables", slug: "audio-wearables" },
-  { label: "Kitchen Appliances", slug: "kitchen-appliances" },
-  { label: "Accessories", slug: "accessories" },
-];
+export const navCategories: NavCategory[] = categories.map((c) => ({
+  label: c.name,
+  slug: c.slug,
+}));
 
 /**
  * एक product card। `image` हो तो असली photo लगती है, वरना code वाली
@@ -67,126 +65,126 @@ export const items: Item[] = [
   {
     category: "smartphones",
     kicker: "Smartphones",
-    title: "5G smartphones — every major brand",
-    tags: ["5G", "All brands", "Exchange"],
+    title: "हर बड़े brand के 5G Smartphones",
+    tags: ["5G", "सभी brands", "Exchange"],
     image: "/images/redmi-5g-smartphones-in-three-colours-21ed89c6.webp",
   },
   {
     category: "smartphones",
     kicker: "Smartphones",
-    title: "Flagship phones — Apple & Samsung",
-    tags: ["Genuine", "Full warranty"],
+    title: "Flagship phones — Apple और Samsung",
+    tags: ["Genuine", "पूरी Warranty"],
     image: "/images/apple-iphone-16-in-five-colours-d6654067.webp",
   },
   {
     category: "smartphones",
     kicker: "Smartphones",
-    title: "Mid-range 5G — 3 to 4 year phones",
-    tags: ["Long updates", "Fast charge"],
+    title: "Mid-range 5G — तीन-चार साल चलने वाले",
+    tags: ["लंबे updates", "Fast charge"],
     image: "/images/redmi-5g-phone-front-and-back-c0a78bf9.webp",
   },
   {
     category: "laptops-tablets",
     kicker: "Laptops",
-    title: "Study, office and everyday laptops",
-    tags: ["All brands", "Setup"],
+    title: "पढ़ाई, office और रोज़ के Laptops",
+    tags: ["सभी brands", "Setup"],
     art: "a-laptop",
   },
   {
     category: "laptops-tablets",
     kicker: "Tablets",
-    title: "Tablets for study and work",
-    tags: ["All sizes", "Setup"],
+    title: "पढ़ाई और काम के लिए Tablets",
+    tags: ["हर size", "Setup"],
     art: "a-tablet",
   },
   {
     category: "televisions",
     kicker: "Televisions",
-    title: "Smart TVs from 32″ to 75″",
+    title: "32″ से 75″ तक Smart TV",
     tags: ["4K", "Wall mount", "Setup"],
     art: "a-tv",
   },
   {
     category: "air-conditioners",
     kicker: "Air Conditioners",
-    title: "Split & window AC with installation",
+    title: "Split और Window AC, installation के साथ",
     tags: ["1–2 ton", "Fitted", "Serviced"],
     image: "/images/daikin-split-air-conditioner-indoor-unit-6c2ee913.webp",
   },
   {
     category: "washing-machines",
     kicker: "Washing Machines",
-    title: "Semi, top load and front load",
-    tags: ["6–8 kg", "Home demo"],
+    title: "Semi, Top Load और Front Load",
+    tags: ["6–8 kg", "घर पर demo"],
     art: "a-wash",
   },
   {
     category: "refrigerators",
     kicker: "Refrigerators",
-    title: "Single door, double door, frost-free",
-    tags: ["Delivered", "Installed"],
+    title: "Single door, Double door, Frost-free",
+    tags: ["Delivery", "Installation"],
     art: "a-fridge",
   },
   {
     category: "inverters-batteries",
     kicker: "Inverters & Batteries",
-    title: "Inverter, battery and stabilizer",
+    title: "Inverter, Battery और Stabilizer",
     tags: ["Load check", "Fitted"],
     art: "a-inverter",
   },
   {
     category: "audio-wearables",
     kicker: "Audio & Wearables",
-    title: "Earbuds, speakers and smart watches",
-    tags: ["Try in store", "Warranty"],
+    title: "Earbuds, Speakers और Smart Watches",
+    tags: ["दुकान पर सुनकर देखिए", "Warranty"],
     art: "a-speaker",
   },
   {
     category: "audio-wearables",
     kicker: "Audio",
-    title: "Bluetooth speakers",
-    tags: ["Try in store"],
+    title: "Bluetooth Speakers",
+    tags: ["दुकान पर सुनकर देखिए"],
     art: "a-speaker",
   },
   {
     category: "audio-wearables",
     kicker: "Wearables",
-    title: "Smart watches & bands",
-    tags: ["All brands"],
+    title: "Smart Watches और Bands",
+    tags: ["सभी brands"],
     art: "a-watch",
   },
   {
     category: "audio-wearables",
     kicker: "Audio",
-    title: "Headphones & earbuds",
-    tags: ["ANC options"],
+    title: "Headphones और Earbuds",
+    tags: ["ANC वाले भी"],
     art: "a-buds",
   },
   {
     category: "kitchen-appliances",
     kicker: "Kitchen",
-    title: "Air fryers, microwaves, mixers",
-    tags: ["In stock"],
+    title: "Air Fryer, Microwave, Mixer",
+    tags: ["Stock में"],
     art: "a-kitchen",
   },
   {
     category: "kitchen-appliances",
     kicker: "Home Appliances",
-    title: "Water purifiers & geysers",
-    tags: ["Installed"],
+    title: "Water Purifier और Geyser",
+    tags: ["Installation के साथ"],
     art: "a-accessory",
   },
   {
     category: "accessories",
     kicker: "Accessories",
-    title: "Covers, tempered glass, chargers",
-    tags: ["Every model"],
+    title: "Cover, Tempered Glass, Charger",
+    tags: ["हर model का"],
     image: "/images/tempered-glass-protecting-a-smartphone-scree-90c6724b.webp",
   },
   {
     category: "accessories",
     kicker: "Accessories",
-    title: "Power banks & cables",
+    title: "Power Bank और Cable",
     tags: ["Fast charge"],
     art: "a-charger",
   },
@@ -247,32 +245,32 @@ export const storePhotos = [
     w: 720,
     h: 340,
     alt: `Mobile World storefront on ${shop.address.road}, ${shop.address.locality}, lit up at night`,
-    title: "The shop",
-    caption: `${shop.address.road}, ${shop.address.locality} — open until 10 at night.`,
+    title: "दुकान",
+    caption: `${shop.address.road}, ${shop.address.locality} — रात 10 बजे तक खुली।`,
   },
   {
     src: "/images/customers-with-the-mobile-world-thank-you-bo-8f346a1e.webp",
     w: 1000,
     h: 1000,
     alt: "Customers with the Mobile World thank-you board",
-    title: "The counter",
-    caption: `Staff and customers inside the showroom on ${shop.address.road}.`,
+    title: "Counter",
+    caption: `${shop.address.road} की दुकान के अंदर — staff और ग्राहक।`,
   },
   {
     src: "/images/a-family-collecting-their-purchase-at-mobile-4e86f3cb.webp",
     w: 900,
     h: 1125,
     alt: `A family collecting their purchase at Mobile World, ${shop.address.locality}`,
-    title: "Our customers",
-    caption: `Families from ${shop.address.locality} and across ${shop.address.city}.`,
+    title: "हमारे ग्राहक",
+    caption: `${shop.address.locality} और पूरे ${shop.address.city} से आने वाले परिवार।`,
   },
   {
     src: "/images/mobile-world-team-handing-over-a-purchase-to-b3645f82.webp",
     w: 900,
     h: 1125,
     alt: "Mobile World team handing over a purchase to customers",
-    title: "The team",
-    caption: "The people who will still be here when you come back.",
+    title: "हमारी टीम",
+    caption: "वही लोग, जो आपके दोबारा आने पर भी यहीं मिलेंगे।",
   },
 ];
 
@@ -280,38 +278,38 @@ export const storePhotos = [
 export const serviceCards = [
   {
     key: "repair" as const,
-    kicker: "Service",
-    title: "Repairs stay in the shop",
-    body: "Screen, battery, charging port or software — we look at it in front of you first.",
-    cta: "Ask about a repair",
-    topic: "mobile repair",
+    kicker: "Repair",
+    title: "Repair दुकान पर ही होती है",
+    body: "Screen, battery, charging port या software — पहले आपके सामने खोलकर देखते हैं, फिर बताते हैं।",
+    cta: "Repair के बारे में पूछिए",
+    topic: "repair",
     tone: "mint",
   },
   {
     key: "exchange" as const,
     kicker: "Exchange",
-    title: "Trade in your old phone",
-    body: "Send the model and its condition for an estimate. Final figure at the counter.",
-    cta: "Get an estimate",
-    topic: "exchanging my old phone",
+    title: "पुराना phone Exchange कीजिए",
+    body: "Model और उसकी हालत बता दीजिए, अंदाज़ा बता देंगे। पक्का valuation counter पर आपके सामने।",
+    cta: "Exchange का अंदाज़ा लीजिए",
+    topic: "पुराने phone के Exchange",
     tone: "sand",
   },
   {
     key: "emi" as const,
-    kicker: "Finance",
-    title: "EMI on cards and finance",
-    body: "Terms and approval are set by your bank, not by the shop.",
-    cta: "Ask about EMI",
-    topic: "EMI options",
+    kicker: "EMI",
+    title: "Cards और finance पर EMI",
+    body: "कौन सा plan मिलेगा और कितना approval होगा, यह आपका bank तय करता है — दुकान नहीं।",
+    cta: "EMI के बारे में पूछिए",
+    topic: "EMI",
     tone: "lav",
   },
   {
     key: "installation" as const,
     kicker: "Installation",
-    title: "Fitted, run and checked",
-    body: "AC, washing machine or TV — we install it and run it before we leave.",
-    cta: "Ask about installation",
-    topic: "installation and service",
+    title: "लगाकर, चलाकर दिखाते हैं",
+    body: "AC, Washing Machine या TV — लगाने के बाद चलाकर देखने तक हम रुकते हैं।",
+    cta: "Installation के बारे में पूछिए",
+    topic: "Installation और service",
     tone: "sky",
   },
 ];
@@ -334,64 +332,66 @@ export type Post = {
 export const posts: Post[] = [
   {
     slug: "ac-tonnage",
-    kicker: "Buying Guides",
+    kicker: "Buying Guide",
     date: "20 August 2026",
     dateISO: "2026-08-20",
-    title: "How to pick the right AC tonnage for your room",
+    title: "अपने कमरे के लिए सही AC tonnage कैसे चुनें",
     excerpt:
-      "A bigger air conditioner is not automatically a better one. Here is how we size it at the counter.",
+      "बड़ा AC अपने आप बेहतर नहीं होता। हम counter पर कमरे का हिसाब कैसे लगाते हैं, वही यहाँ लिखा है।",
     image: "/images/daikin-split-ac-indoor-unit-mounted-on-a-wal-ea182a93.webp",
     imageW: 900,
     imageH: 900,
-    alt: "Split AC indoor unit mounted on a wall",
+    alt: "दीवार पर लगी split AC की indoor unit",
     body: `
-<p>A bigger air conditioner is not automatically a better one. An oversized unit cools the room fast, switches off, and switches back on again minutes later — which uses more electricity and leaves the room damp. An undersized one never stops running.</p>
-<p>As a rough starting point: a room up to about 110 square feet suits 1 ton, 110 to 180 square feet suits 1.5 ton, and anything larger usually needs 2 ton. Those numbers move if the room is on the top floor, has a west-facing wall, has a high ceiling, or holds more than three or four people at a time.</p>
-<p>Bring the room measurements — length, width and ceiling height — and tell us which floor it is on and which direction the main wall faces. We will size it in front of you rather than guessing.</p>
-<p>Installation matters as much as the unit. The outdoor position, the drain slope and the copper run all change how well it cools and how long it lasts. We fit it, run it and check the cooling before we leave.</p>`,
+<p>बड़ा AC अपने आप बेहतर नहीं होता। ज़रूरत से बड़ा AC कमरे को झट से ठंडा करके बंद हो जाता है, फिर थोड़ी देर में दोबारा चालू — इससे bijli ज़्यादा लगती है और कमरे में नमी बनी रहती है। छोटा AC कभी बंद ही नहीं होता।</p>
+<p>मोटा-मोटी हिसाब यह है: लगभग 110 square feet तक का कमरा 1 ton में, 110 से 180 square feet तक 1.5 ton में, और उससे बड़ा आमतौर पर 2 ton में। लेकिन यह हिसाब बदल जाता है अगर कमरा सबसे ऊपर की मंज़िल पर है, दीवार पश्चिम की तरफ़ है, छत ऊँची है, या कमरे में तीन-चार से ज़्यादा लोग एक साथ बैठते हैं।</p>
+<p>इसीलिए tonnage सिर्फ़ size से तय नहीं होता — धूप, floor और कमरे की हालत भी देखनी पड़ती है।</p>
+<p>कमरे की लंबाई, चौड़ाई और छत की ऊँचाई नाप कर आइए, और यह भी बता दीजिए कि कौन सी मंज़िल है और मुख्य दीवार किस दिशा में है। हम आपके सामने हिसाब लगाकर बताएँगे, अंदाज़े से नहीं।</p>
+<p>AC जितना ज़रूरी है, उसकी installation भी उतनी ही ज़रूरी है। बाहर की unit कहाँ लगी है, पानी की निकासी का ढलान कैसा है, और copper की लंबाई कितनी है — ये तीनों तय करते हैं कि कूलिंग कैसी रहेगी और AC कितने साल चलेगा। हम लगाते हैं, चलाकर देखते हैं, और कूलिंग जाँचने के बाद ही जाते हैं।</p>`,
   },
   {
     slug: "new-phones",
     kicker: "New Arrivals",
     date: "14 August 2026",
     dateISO: "2026-08-14",
-    title: "New smartphones on the counter this week",
+    title: "इस हफ़्ते counter पर आए नए Smartphones",
     excerpt:
-      "Stock changes every week, so here is how to think about the three bands people actually buy in.",
+      "Stock हर हफ़्ते बदलता है, इसलिए model के नाम गिनाने की जगह यह समझिए कि लोग असल में किन तीन तरह के phones लेते हैं।",
     image: "/images/a-customer-collecting-a-redmi-note-17-at-mob-c8b22cc4.webp",
     imageW: 900,
     imageH: 1125,
-    alt: "A customer collecting a new phone at Mobile World",
+    alt: "MOBILE WORLD पर नया phone लेते हुए एक ग्राहक",
     body: `
-<p>Stock changes every week, so rather than list model numbers that go out of date, here is how to think about the three bands people actually buy in.</p>
-<p>For a first phone, or a phone for a student, battery life and screen quality matter far more than the camera megapixel number printed on the box. A phone that lasts a full day and stays readable in sunlight will feel better every single day than one with a headline camera spec.</p>
-<p>If you plan to keep the phone three or four years, look at the processor and how long the manufacturer promises software updates. That single decision is what separates a phone that still feels fine in year three from one that does not.</p>
-<p>For flagship phones, come and hold them. Weight, grip and screen brightness are the three things that never come across in photographs.</p>
-<p>Send a model name on WhatsApp and we will confirm whether it is on the shelf today before you make the trip.</p>`,
+<p>Stock हर हफ़्ते बदलता है। इसलिए ऐसे model के नाम गिनाने का कोई फ़ायदा नहीं जो अगले हफ़्ते बदल जाएँ। इसकी जगह यह समझ लीजिए कि लोग असल में किन तीन तरह के phones में से चुनते हैं।</p>
+<p>पहला phone हो, या बच्चे की पढ़ाई के लिए हो — तो battery और screen डिब्बे पर छपे camera के megapixel से कहीं ज़्यादा मायने रखते हैं। जो phone पूरा दिन चल जाए और धूप में भी साफ़ दिखे, वो रोज़ ज़्यादा अच्छा लगेगा, चाहे उसका camera कितने भी megapixel का हो।</p>
+<p>अगर phone तीन-चार साल चलाने का इरादा है तो processor देखिए, और यह भी कि company कितने साल software update देने का वादा कर रही है। साल तीन में phone अच्छा लगेगा या नहीं — फ़र्क़ बस यही एक बात डालती है।</p>
+<p>Gaming के लिए सिर्फ़ RAM मत देखिए। Processor और cooling भी उतने ही important हैं।</p>
+<p>Flagship phone लेना हो तो दुकान पर आकर हाथ में लेकर देखिए। वज़न, पकड़ और screen की brightness — ये तीनों photo में कभी पूरी तरह समझ नहीं आते।</p>
+<p>Model का नाम WhatsApp कर दीजिए। चलने से पहले हम बता देंगे कि वो आज shelf पर है या नहीं।</p>`,
   },
   {
     slug: "monthly-closure",
-    kicker: "Store Updates",
+    kicker: "Store Update",
     date: "1 August 2026",
     dateISO: "2026-08-01",
-    title: "We close on the last calendar date of every month",
+    title: "हर महीने की आख़िरी तारीख़ को दुकान बंद रहती है",
     excerpt:
-      "That is the 28th, 29th, 30th or 31st depending on the month. Every other day we are open 10 to 10.",
+      "यानी 28, 29, 30 या 31 — जो भी उस महीने की आख़िरी हो। बाक़ी हर दिन हम 10 से 10 खुले हैं।",
     image: "/images/customers-at-the-mobile-world-counter-aa76e06b.webp",
     imageW: 800,
     imageH: 450,
-    alt: "Customers at the Mobile World counter",
+    alt: "MOBILE WORLD के counter पर ग्राहक",
     body: `
-<p>The store, and the market around it, stays shut on the last calendar date of every month. That is the 28th, 29th, 30th or 31st depending on the month.</p>
-<p>The live status at the top of this page works this out on its own, so it will always show the correct next closure date.</p>
-<p>Every other day of the year we are open from 10 in the morning until 10 at night, including Sundays.</p>
-<p>If you are travelling in from outside ${shop.address.locality}, send a message before you leave. We will confirm both that we are open and that what you want is in stock.</p>`,
+<p>दुकान और आस-पास का पूरा बाज़ार हर महीने की आख़िरी तारीख़ को बंद रहता है। यानी 28, 29, 30 या 31 — जो भी उस महीने की आख़िरी तारीख़ हो।</p>
+<p>इस website पर ऊपर जो live status दिखता है, वो यह ख़ुद गिन लेता है — इसलिए अगली छुट्टी की तारीख़ हमेशा सही दिखेगी।</p>
+<p>साल के बाक़ी हर दिन हम सुबह 10 बजे से रात 10 बजे तक खुले रहते हैं, रविवार को भी।</p>
+<p>अगर आप ${shop.address.locality} से बाहर से आ रहे हैं तो निकलने से पहले एक message कर दीजिए। हम दोनों बातें confirm कर देंगे — दुकान खुली है, और जो चाहिए वो मौजूद है।</p>`,
   },
 ];
 
-/** Buying guides वग़ैरह — छोटे links, अपना page नहीं। */
+/** छोटे buying guides — अपना page नहीं, सीधे WhatsApp पर सवाल। */
 export const guides = [
-  { kicker: "Buying Guides", title: "Washing machine: 6.5, 7 or 8 kg?", note: "By household size" },
-  { kicker: "Buying Guides", title: "TV size vs seating distance", note: "Measure first" },
-  { kicker: "Trust", title: "Why the GST bill matters", note: "Warranty proof" },
+  { kicker: "Buying Guide", title: "Washing Machine — 6.5, 7 या 8 kg?", note: "घर में कितने लोग हैं" },
+  { kicker: "Buying Guide", title: "TV का size कितना — कितनी दूर से देखेंगे?", note: "पहले दूरी नापिए" },
+  { kicker: "भरोसा", title: "GST Bill क्यों ज़रूरी है", note: "Warranty का सबूत" },
 ];

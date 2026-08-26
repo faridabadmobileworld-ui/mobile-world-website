@@ -5,9 +5,10 @@ import { shop } from "@/data/shop";
 import { posts } from "@/data/content";
 
 export const metadata: Metadata = {
-  title: "Latest posts",
+  title: "नई जानकारी",
   description:
-    `Buying guides aur store updates — ${shop.name}, ${shop.address.locality}, ${shop.address.city}.`,
+    `ख़रीदने से पहले काम आने वाली बातें और दुकान की नई ख़बरें — ${shop.name}, ` +
+    `${shop.address.locality}, ${shop.address.city}।`,
   alternates: { canonical: "/posts" },
 };
 
@@ -15,7 +16,11 @@ export default function Posts() {
   return (
     <div className="wrap">
       <section className="sec">
-        <div className="shead"><h1>Latest posts</h1></div>
+        <h1 style={{ fontSize: "clamp(1.4rem,4vw,2rem)", fontWeight: 800,
+                     letterSpacing: "-.03em", margin: "0 0 6px" }}>नई जानकारी</h1>
+        <p style={{ color: "var(--ink-2)", maxWidth: "60ch", margin: "0 0 16px" }}>
+          ख़रीदने से पहले जो बातें काम आती हैं, और दुकान की नई ख़बरें।
+        </p>
         <div className="posts">
           {posts.map((p) => (
             <Link className="post rv in" key={p.slug} href={`/posts/${p.slug}`}>

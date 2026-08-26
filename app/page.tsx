@@ -6,7 +6,8 @@ import { items, storePhotos, serviceCards, posts, guides, ask, whatsappGeneral, 
 import { Hero } from "@/components/Hero";
 import { ProductCard } from "@/components/ProductCard";
 import { Art } from "@/components/ArtSprite";
-import { IconArrow, IconWhatsApp, IconPin, IconYouTube } from "@/components/Icons";
+import { IconArrow, IconWhatsApp, IconPin, IconPhone } from "@/components/Icons";
+import { FollowUs } from "@/components/FollowUs";
 import { NextClosure } from "@/components/StoreStatus";
 
 export default function Home() {
@@ -25,31 +26,31 @@ export default function Home() {
           {shop.services.emi && (
             <a className="pmini rv in" href={ask("EMI options")} target="_blank" rel="noopener">
               <span className="m"><Art id="a-charger" /></span>
-              <span><b>EMI available</b><s>Ask in store ›</s></span>
+              <span><b>EMI उपलब्ध है</b><s>दुकान पर पूछिए ›</s></span>
             </a>
           )}
           {shop.services.delivery && (
             <a className="pmini rv in" href={ask("home delivery")} target="_blank" rel="noopener">
               <span className="m"><Art id="a-wash" /></span>
-              <span><b>Delivery in {shop.address.city.replace("NIT ", "")}</b><s>Large appliances ›</s></span>
+              <span><b>{shop.address.city.replace("NIT ", "")} में Delivery</b><s>बड़ा सामान ›</s></span>
             </a>
           )}
           {shop.services.installation && (
             <a className="pmini rv in" href={ask("installation and service")} target="_blank" rel="noopener">
               <span className="m"><Art id="a-ac" /></span>
-              <span><b>Installation &amp; service</b><s>Fitted and tested ›</s></span>
+              <span><b>Installation और service</b><s>लगाकर, चलाकर ›</s></span>
             </a>
           )}
         </div>
 
         <section className="sec">
           <div className="shead">
-            <h2>Top Categories</h2>
-            <Link href="/products">View All <IconArrow /></Link>
+            <h2>क्या-क्या मिलता है</h2>
+            <Link href="/products">सब देखिए <IconArrow /></Link>
           </div>
           <div className="pgrid">
             {top.map((it, n) => (
-              <ProductCard key={it.title} item={it} badge={n === 0 ? "Popular" : undefined} />
+              <ProductCard key={it.title} item={it} badge={n === 0 ? "लोकप्रिय" : undefined} />
             ))}
           </div>
         </section>
@@ -57,17 +58,17 @@ export default function Home() {
         <section className="sec">
           <div className="strip rv in">
             <div>
-              <b>Send us a model name on WhatsApp</b>
-              <p>We confirm stock and today&rsquo;s rate before you make the trip. No online ordering, no account needed.</p>
+              <b>Model बताइए, Rate बता देंगे</b>
+              <p>आने से पहले हम stock और आज का rate confirm कर देंगे। यहाँ से order नहीं होता, किसी account की ज़रूरत नहीं।</p>
             </div>
             <a className="btn btn-h go" href={whatsappGeneral} target="_blank" rel="noopener">
-              <IconWhatsApp /> Message the store
+              <IconWhatsApp /> दुकान को Message कीजिए
             </a>
           </div>
         </section>
 
         <section className="sec">
-          <div className="shead"><h2>Browse by Category</h2></div>
+          <div className="shead"><h2>Category से चुनिए</h2></div>
           <div className="ctiles">
             {navCategories.map((c) => (
               <Link key={c.slug} className="ct rv in" href={`/products#${c.slug}`}>
@@ -80,7 +81,7 @@ export default function Home() {
 
         {services.length > 0 && (
           <section className="sec">
-            <div className="shead"><h2>Service &amp; Support</h2></div>
+            <div className="shead"><h2>Service और Support</h2></div>
             <div className="ptiles">
               <a className={`ptile ${services[0].tone} rv in`} href={ask(services[0].topic)} target="_blank" rel="noopener">
                 <span className="k">{services[0].kicker}</span>
@@ -102,8 +103,8 @@ export default function Home() {
 
         <section className="sec" id="store-photos">
           <div className="shead">
-            <h2>Inside the Store</h2>
-            <a href={shop.social.googleMaps} target="_blank" rel="noopener">Get directions <IconArrow /></a>
+            <h2>दुकान के अंदर</h2>
+            <a href={shop.social.googleMaps} target="_blank" rel="noopener">रास्ता देखिए <IconArrow /></a>
           </div>
           <div className="shots">
             {storePhotos.map((p) => (
@@ -120,8 +121,8 @@ export default function Home() {
 
         <section className="sec">
           <div className="shead">
-            <h2>Latest Posts</h2>
-            <Link href="/posts">View All <IconArrow /></Link>
+            <h2>नई जानकारी</h2>
+            <Link href="/posts">सब देखिए <IconArrow /></Link>
           </div>
           <div className="posts">
             {posts.map((p) => (
@@ -140,9 +141,9 @@ export default function Home() {
         </section>
 
         <section className="sec">
-          <div className="cols3">
+          <div className="cols2">
             <div className="panel rv in">
-              <h2 style={{ fontSize: "1.05rem", margin: "0 0 10px" }}>Popular Guides</h2>
+              <h2 style={{ fontSize: "1.05rem", margin: "0 0 10px" }}>काम की बातें</h2>
               {guides.map((g) => (
                 <a className="lrow" key={g.title} href={ask(g.title)} target="_blank" rel="noopener">
                   <span className="m"><Art id="a-accessory" /></span>
@@ -151,16 +152,8 @@ export default function Home() {
               ))}
             </div>
 
-            <a className="ptile lav rv in" href={shop.social.youtube} target="_blank" rel="noopener"
-               style={{ minHeight: 260 }}>
-              <span className="k">On our channel</span>
-              <h3>Unboxings, comparisons and buying guides</h3>
-              <p>Watch before you decide, then come in and hold it in your hand.</p>
-              <span className="go"><IconYouTube /> YouTube <IconArrow /></span>
-            </a>
-
             <div className="panel rv in">
-              <h2 style={{ fontSize: "1.05rem", margin: "0 0 10px" }}>Recommended For You</h2>
+              <h2 style={{ fontSize: "1.05rem", margin: "0 0 10px" }}>आपके काम की services</h2>
               {services.slice(0, 3).map((s) => (
                 <a className="lrow" key={s.key} href={ask(s.topic)} target="_blank" rel="noopener">
                   <span className="m"><Art id="a-phone" /></span>
@@ -171,22 +164,24 @@ export default function Home() {
           </div>
         </section>
 
+        <FollowUs />
+
         <section className="sec" id="visit">
           <div className="cband rv in">
-            <h2>Visit the store</h2>
+            <h2>📍 दुकान पर आइए, और हमें सेवा का मौक़ा दीजिए</h2>
             <p>{shop.address.street}, {shop.address.landmark}, {shop.address.locality},
               {" "}{shop.address.city}, {shop.address.state} {shop.address.postalCode}.</p>
             <p style={{ marginTop: 8 }}>
-              <b>Open daily 10:00 AM – 10:00 PM.</b> Closed on the last calendar date of
-              every month — next closure <NextClosure />.
+              <b>रोज़ सुबह 10 से रात 10, सातों दिन।</b> सिर्फ़ हर महीने की आख़िरी
+              तारीख़ को बंद — अगली छुट्टी <NextClosure />।
             </p>
             <div className="btns" style={{ justifyContent: "center" }}>
               <a className="btn btn-d" href={shop.social.googleMaps} target="_blank" rel="noopener">
-                <IconPin /> Get directions
+                <IconPin /> रास्ता देखिए
               </a>
-              <a className="btn btn-o" href={shop.phone.tel}>{shop.phone.display}</a>
+              <a className="btn btn-o" href={shop.phone.tel}><IconPhone /> {shop.phone.display}</a>
               <a className="btn btn-w" href={whatsappGeneral} target="_blank" rel="noopener">
-                <IconWhatsApp /> WhatsApp
+                <IconWhatsApp /> Model बताइए, Rate बता देंगे
               </a>
             </div>
           </div>
@@ -208,16 +203,16 @@ function artFor(slug: string): string {
 
 function blurbFor(slug: string): string {
   const m: Record<string, string> = {
-    smartphones: "Every major brand, every budget",
-    "laptops-tablets": "Study, office and gaming",
-    televisions: "32″ to 75″, 4K and smart",
-    "air-conditioners": "Sized, delivered and fitted",
-    "washing-machines": "Semi, top load and front load",
-    refrigerators: "Single door, double door, frost-free",
-    "inverters-batteries": "Load check and installation",
-    "audio-wearables": "Speakers, earbuds, smart watches",
-    "kitchen-appliances": "Air fryer, microwave, mixer, RO",
-    accessories: "Covers, glass, chargers, cables",
+    smartphones: "हर बड़ा brand, हर budget",
+    "laptops-tablets": "पढ़ाई, office और gaming",
+    televisions: "32″ से 75″ तक, 4K और Smart",
+    "air-conditioners": "कमरे के हिसाब से, लगाकर",
+    "washing-machines": "Semi, Top Load, Front Load",
+    refrigerators: "Single door, Double door, Frost-free",
+    "inverters-batteries": "Load check और installation",
+    "audio-wearables": "Speaker, Earbuds, Smart Watch",
+    "kitchen-appliances": "Air Fryer, Microwave, Mixer, RO",
+    accessories: "Cover, Glass, Charger, Cable",
   };
   return m[slug] ?? "";
 }

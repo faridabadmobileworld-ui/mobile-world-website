@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { shop } from "@/data/shop";
 import { posts } from "@/data/content";
 import { jsonLdScript } from "@/data/schema";
-import { IconWhatsApp } from "@/components/Icons";
+import { IconWhatsApp, IconPhone } from "@/components/Icons";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -64,7 +64,7 @@ export default async function PostPage({ params }: Params) {
       <div className="readerwrap">
         <div className="wrap">
           <article className="reader">
-            <Link className="btn btn-o btn-s rback" href="/posts">← Back to posts</Link>
+            <Link className="btn btn-o btn-s rback" href="/posts">← सारी जानकारी</Link>
 
             <div className="rhead">
               <span className="k">{post.kicker}<em>{post.date}</em></span>
@@ -80,18 +80,18 @@ export default async function PostPage({ params }: Params) {
             <div className="rbody" dangerouslySetInnerHTML={{ __html: post.body }} />
 
             <div className="rcta">
-              <b>Is baare mein poochhna hai?</b>
-              <p>Store ko message kijiye, seedha jawab milega.</p>
+              <b>इस बारे में कुछ पूछना है?</b>
+              <p>दुकान को message कीजिए — जवाब सीधे counter से मिलेगा।</p>
               <div className="btns">
                 <a className="btn btn-w" href={
                   `${shop.phone.whatsapp}?text=${encodeURIComponent(
-                    `Hello Mobile World! I have a question about "${post.title}".`)}`
-                } target="_blank" rel="noopener"><IconWhatsApp /> Ask on WhatsApp</a>
-                <a className="btn btn-o" href={shop.phone.tel}>Call the store</a>
+                    `Namaste MOBILE WORLD! मुझे "${post.title}" के बारे में पूछना है।`)}`
+                } target="_blank" rel="noopener"><IconWhatsApp /> WhatsApp पर पूछिए</a>
+                <a className="btn btn-o" href={shop.phone.tel}><IconPhone /> {shop.phone.display}</a>
               </div>
             </div>
 
-            <div className="shead" style={{ marginTop: 26 }}><h2>More updates</h2></div>
+            <div className="shead" style={{ marginTop: 26 }}><h2>और भी पढ़िए</h2></div>
             <div className="posts">
               {others.map((p) => (
                 <Link className="post" key={p.slug} href={`/posts/${p.slug}`}>

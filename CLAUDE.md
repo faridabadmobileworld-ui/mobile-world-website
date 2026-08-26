@@ -22,7 +22,10 @@ WhatsApp message, या physical visit।
 
 ## 2. Business facts — इन्हें कभी बदलकर मत लिखो
 
-- **Shop name (public):** Mobile World
+- **Shop name (public):** MOBILE WORLD
+- **Board/tagline:** Consumer Electronics & Home Appliances
+  — owner हर जगह (Google, Instagram, Facebook, YouTube) यही रख रहे हैं।
+  Code में `shop.name` और `shop.tagline`.
 - **Registered name:** Aggarwal Kiryana And Communication
 - **Owner:** Tarun Gupta
 - **Address:** Shop No. 3896/661/29, Gurudwara Road, Block F,
@@ -39,8 +42,12 @@ Repair (screen, battery, charging port, software) · EMI (cards और finance) 
 पुराना फ़ोन Exchange · Faridabad में Delivery · Installation (fitted and tested)
 
 ### Categories
-Mobiles, Laptops, Televisions, Air Conditioners, Inverters & Batteries,
-Washing Machines, Air Fryers, Stabilizers, अन्य home appliances
+Smartphones, Laptops & Tablets, Televisions, Air Conditioners,
+Washing Machines, Refrigerators, Inverters & Batteries, Audio & Wearables,
+Kitchen Appliances (Air Fryer, Microwave, Mixer), Accessories
+
+पूरी website की इकलौती category list `data/shop.ts` के `categories` में है।
+`navCategories` उसी से बनती है — दोबारा कहीं मत लिखो।
 
 ### Brands
 Apple, Samsung, Xiaomi / Redmi, OnePlus, Vivo, Oppo, Motorola, Nothing,

@@ -66,7 +66,7 @@ for(const w of [320,360,390,414,768,1280]){
 {
   const ctx=await b.newContext({viewport:{width:390,height:844}});
   const p=await ctx.newPage(); await p.goto(B+'/',{waitUntil:'load'}); await p.waitForTimeout(500);
-  await p.click('[aria-label="Open menu"]'); await p.waitForTimeout(500);
+  await p.click('[aria-label="Menu kholiye"]'); await p.waitForTimeout(500);
   const d=await p.evaluate(()=>{
     const panel=document.querySelector('.drawer .panel');
     const first=[...panel.querySelectorAll('h2')][0];

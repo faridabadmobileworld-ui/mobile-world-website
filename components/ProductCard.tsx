@@ -29,7 +29,7 @@ export function ProductCard({ item, badge }: { item: Item; badge?: string }) {
         <span className="pc-k">{item.kicker}</span>
         <h3 className="pc-t">{item.title}</h3>
         <div className="pc-s">{item.tags.map((t) => <span key={t}>{t}</span>)}</div>
-        <div className="pc-f"><span className="ask">Ask availability <IconArrow /></span></div>
+        <div className="pc-f"><span className="ask">Stock पूछिए <IconArrow /></span></div>
       </div>
     </a>
   );

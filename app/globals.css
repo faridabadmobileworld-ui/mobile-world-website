@@ -429,3 +429,49 @@ body.searching .qinfo{display:flex}
 .dev{letter-spacing:normal;text-transform:none}
 /* 10px devanagari mein bahut chhota padta hai — kicker thoda bada. */
 .hs-k.dev{font-size:11.5px}
+
+/* ── "hamse jude rahiye" — chaaron social ke alag buttons ── */
+.follow{border-radius:var(--r-lg);background:linear-gradient(135deg,#241C4D,#4B31C4);
+  color:#fff;padding:22px 20px}
+.follow b{display:block;font-size:clamp(1.05rem,2.4vw,1.35rem);font-weight:800;letter-spacing:-.022em}
+.follow p{margin:8px 0 0;font-size:13.5px;line-height:1.75;color:#D3CCF4;max-width:62ch}
+.fbtns{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:16px}
+@media(min-width:760px){ .fbtns{display:flex;flex-wrap:wrap} }
+.fbtns .btn{height:46px}
+.btn-yt{background:#FF0000;color:#fff}
+.btn-yt:hover{background:#D90000}
+.btn-ig{background:#C13584;color:#fff}
+.btn-ig:hover{background:#A32B6F}
+.btn-fb{background:#1877F2;color:#fff}
+.btn-fb:hover{background:#1462C6}
+
+/* ── logo ka doosra hissa: "Consumer Electronics & Home Appliances" ──
+   Naam lamba hai. Header mein jagah tabhi hai jab screen chaudi ho —
+   chhoti screen par sirf MOBILE WORLD dikhta hai, poora naam title,
+   drawer aur footer mein rehta hai. */
+.logo s{letter-spacing:.06em;max-width:100%}
+.hdr .logo s{display:none}
+@media(min-width:900px){ .hdr .logo s{display:block;font-size:8.5px} }
+.drawer .logo span,.ftr .logo span{white-space:normal}
+.drawer .logo s,.ftr .logo s{font-size:8.5px;line-height:1.5;max-width:22ch}
+
+/* "MOBILE WORLD" capital mein "Mobile World" se chauda hai. 320px wale
+   phone par header ke teenon hisse (menu, logo, call+WhatsApp) tabhi
+   samaate hain jab gap aur logo dono thoda chhote ho jaayein. */
+@media(max-width:360px){
+  .hdr .wrap{gap:8px;padding-inline:12px}
+  .hdr .logo{font-size:12.5px;gap:6px}
+  .hdr .logo i{width:25px;height:25px;font-size:9px}
+}
+
+/* ── Devanagari aur UPPERCASE ─────────────────────────────────────
+   Hindi ke akshar bade-chhote nahi hote, par ek Hindi vaakya ke andar
+   ke English shabd UPPERCASE ho jaate hain — "REPAIR dukaan par hi
+   hoti hai" padhne mein bura lagta hai. Isliye jin jagah ab Hindi
+   likhi hai, wahan uppercase aur chaudi spacing hata di gayi hai.
+   Jahan text pakka English hai (category strip, product kicker,
+   post ka kicker) wahan waisa hi rehne diya hai. */
+.ptile h3{text-transform:none;max-width:22ch;letter-spacing:-.02em}
+.drawer .dh,.shot .t,.lrow s,.ftr .fh{text-transform:none;letter-spacing:.02em}
+.drawer .dh,.shot .t,.lrow s,.ftr .fh{font-size:11.5px}
+.ftr .fh{font-size:12.5px}

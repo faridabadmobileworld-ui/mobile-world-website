@@ -89,7 +89,7 @@
   /* ── 3. Menu drawer ───────────────────────────────────────────── */
 
   var drawer = document.getElementById("drawer");
-  var menuBtn = document.querySelector('[aria-label="Open menu"]');
+  var menuBtn = document.querySelector('[aria-label="Menu kholiye"]');
 
   function setDrawer(open) {
     if (!drawer) return;
@@ -217,8 +217,8 @@
     // Aaj hi aakhri tareekh hai to agli chhutti agle mahine ki aakhri tareekh.
     var next = closedToday ? new Date(now.getFullYear(), now.getMonth() + 2, 0) : last;
 
-    var label = closedToday ? "Closed today — last date of the month"
-      : open ? "Open now · until 10 PM" : "Closed · opens 10 AM";
+    var label = closedToday ? "आज बंद — महीने की आख़िरी तारीख़"
+      : open ? "अभी खुली है · रात 10 बजे तक" : "अभी बंद है · सुबह 10 बजे खुलेगी";
 
     document.querySelectorAll(".live").forEach(function (el) {
       var dot = el.querySelector("i"), txt = el.querySelector("span");
@@ -265,10 +265,10 @@
     var note = document.createElement("p");
     note.className = "pv-searchnote";
     note.innerHTML = hits
-      ? hits + ' cheez' + (hits === 1 ? "" : "ein") + ' mili "' + esc(q) + '" ke liye. '
-        + '<button type="button" class="pv-clear">Saaf kijiye</button>'
-      : 'Kuch nahi mila "' + esc(q) + '" ke liye. WhatsApp par pooch lijiye. '
-        + '<button type="button" class="pv-clear">Saaf kijiye</button>';
+      ? '"' + esc(q) + '" के लिए ' + hits + ' चीज़' + (hits === 1 ? "" : "ें") + ' मिलीं। '
+        + '<button type="button" class="pv-clear">साफ़ कीजिए</button>'
+      : '"' + esc(q) + '" के लिए कुछ नहीं मिला। WhatsApp पर पूछ लीजिए। '
+        + '<button type="button" class="pv-clear">साफ़ कीजिए</button>';
 
     var old = main.querySelector(".pv-searchnote");
     if (old) old.remove();

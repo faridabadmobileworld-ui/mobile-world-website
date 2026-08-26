@@ -3,7 +3,7 @@ import { shop } from "@/data/shop";
 
 export const metadata: Metadata = {
   title: "Privacy",
-  description: `${shop.name} kya jaankari rakhta hai aur kya nahi.`,
+  description: `${shop.name} आपकी कौन सी जानकारी रखता है और कौन सी नहीं।`,
   alternates: { canonical: "/privacy" },
 };
 
@@ -11,33 +11,34 @@ export default function Privacy() {
   return (
     <div className="wrap">
       <section className="sec">
-        <div className="shead"><h1>Privacy</h1></div>
+        <h1 style={{ fontSize: "clamp(1.4rem,4vw,2rem)", fontWeight: 800,
+                     letterSpacing: "-.03em", margin: "0 0 16px" }}>Privacy</h1>
         <div className="panel rv in" style={{ maxWidth: 820 }}>
           <p style={{ fontSize: 14.5, color: "var(--ink-2)", margin: "0 0 12px" }}>
-            Ye website kuch bhi collect nahi karti. Koi account nahi, koi cart nahi,
-            koi contact form nahi aur koi tracking pixel nahi. Search box poori tarah
-            aapke apne browser mein chalta hai — jo aap likhte hain wo kahin nahi jaata.
+            यह website आपकी कोई जानकारी इकट्ठा नहीं करती। न कोई account, न cart,
+            न contact form, न कोई tracking pixel। Search box पूरी तरह आपके अपने
+            browser में चलता है — जो आप लिखते हैं वो कहीं नहीं जाता।
           </p>
           <p style={{ fontSize: 14.5, color: "var(--ink-2)", margin: "0 0 12px" }}>
-            Jab aap WhatsApp ya Call dabate hain to aap un apps par chale jaate hain, aur
-            wahan jo bhejte hain wo unki apni terms ke hisaab se chalta hai. Message mein
-            di gayi jaankari — naam, number aur kya chahiye — sirf aapke sawaal ka jawab
-            dene, aur kharidne par bill aur warranty record banane ke liye use hoti hai.
+            जब आप WhatsApp या Call दबाते हैं तो आप उन apps पर चले जाते हैं, और वहाँ जो
+            भेजते हैं वो उनकी अपनी terms के हिसाब से चलता है। Message में दी गई जानकारी —
+            नाम, number और क्या चाहिए — सिर्फ़ आपके सवाल का जवाब देने, और ख़रीदने पर
+            Bill और Warranty का record बनाने के लिए इस्तेमाल होती है।
           </p>
           <p style={{ fontSize: 14.5, color: "var(--ink-2)", margin: 0 }}>
-            Hum aapke baare mein kya rakhte hain ye poochhna ho, usse theek karwana ho ya
-            hatwana ho to{" "}
+            हमारे पास आपकी कौन सी जानकारी है यह पूछना हो, उसे ठीक करवाना हो या हटवाना
+            हो तो{" "}
             <a href={shop.phone.tel} style={{ color: "var(--brand)", fontWeight: 700 }}>
               {shop.phone.display}
             </a>{" "}
-            par call kijiye.
+            {" "}पर call कीजिए।
           </p>
           <p style={{
             fontSize: 12.5, color: "var(--ink-3)", borderTop: "1px solid var(--line)",
             paddingTop: 14, marginTop: 18, marginBottom: 0,
           }}>
-            <b>Note:</b> Site live karne se pehle owner ko ye page kisi CA ya vakil se
-            DPDP Act ke hisaab se check karwana chahiye.
+            <b>ज़रूरी:</b> Site live करने से पहले यह page किसी CA या वकील से
+            DPDP Act के हिसाब से check करवा लीजिए।
           </p>
         </div>
       </section>
