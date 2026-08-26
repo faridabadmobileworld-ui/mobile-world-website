@@ -35,7 +35,13 @@ export default function Visit() {
             {shop.address.landmark}<br />
             {shop.address.locality}, {shop.address.city}, {shop.address.state} {shop.address.postalCode}
           </p>
-          <p style={{ marginTop: 10 }}><LiveBadge /></p>
+          <p style={{ marginTop: 12, fontSize: "clamp(14px,2.1vw,15.5px)",
+                      lineHeight: 1.85, color: "var(--ink)", maxWidth: "48ch",
+                      marginInline: "auto" }}>
+            आपकी ज़रूरत हमारी प्राथमिकता है। हम देते हैं आपको भरोसा, गुणवत्ता
+            और बेहतरीन सेवा — हमेशा।
+          </p>
+          <p style={{ marginTop: 12 }}><LiveBadge /></p>
           <p style={{ marginTop: 6 }}>
             <b>रोज़ सुबह 10 से रात 10, सातों दिन।</b> सिर्फ़ हर महीने की आख़िरी
             तारीख़ को बंद — अगली छुट्टी <NextClosure />।
@@ -85,6 +91,12 @@ export default function Visit() {
             </p>
           </div>
         </div>
+      </section>
+
+      <section className="sec">
+        <p className="thanks rv in">
+          ❤️ आपकी संतुष्टि, हमारा संकल्प।
+        </p>
       </section>
 
       <FollowUs />

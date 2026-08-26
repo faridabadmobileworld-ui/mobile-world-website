@@ -287,6 +287,8 @@ export type Milestone = {
   year: string;
   /** उस वक़्त दुकान का नाम — owner के अपने शब्दों में */
   name: string;
+  /** छोटी सी पंक्ति — owner के अपने brand graphic से */
+  tag: string;
   body: string;
 };
 
@@ -294,16 +296,41 @@ export const legacy: Milestone[] = [
   {
     year: "1973",
     name: "Aggarwal Kiryana Store",
-    body: "हमारे परिवार का business सफ़र यहीं से शुरू हुआ।",
+    tag: "शुरुआत एक भरोसे की",
+    body: "छोटी सी किराना दुकान, बड़ा सपना, सच्ची मेहनत।",
   },
   {
     year: "2006",
     name: "Aggarwal Kiryana & Communication",
-    body: "यह सफ़र आगे बढ़ा, और नाम बदलकर यह हुआ।",
+    tag: "ज़रूरत बदली, हमने साथ बढ़ाया",
+    body: "किराने के साथ जुड़ी communication सेवाएँ — आपकी हर ज़रूरत, एक ही जगह।",
   },
   {
     year: "2016",
     name: "MOBILE WORLD",
-    body: "इसी विरासत को आगे बढ़ाते हुए MOBILE WORLD की शुरुआत हुई।",
+    tag: "विरासत वही, सोच नई, सेवा बेहतर",
+    body: "नए दौर की technology, आपके विश्वास के साथ आगे बढ़ते क़दम।",
   },
+];
+
+/**
+ * दुकान किन बातों पर चलती है — owner के अपने brand graphics से उठाई गई।
+ *
+ * ⚠️ यहाँ सिर्फ़ वही बात आती है जो customer ख़ुद जाँच सके।
+ * Owner के graphic में "BEST PRICES GUARANTEED", "100% GENUINE" और
+ * "best brands" भी लिखा था — तीनों जान-बूझकर नहीं लाए गए, क्योंकि owner
+ * का अपना standard (docs/BRAND-VOICE.md §4) ऐसे दावों को मना करता है।
+ * उनकी जगह पक्का GST Bill और Brand Warranty लिखा है, जो साबित हो सकते हैं।
+ */
+export type Value = {
+  title: string;
+  body: string;
+};
+
+export const values: Value[] = [
+  { title: "ग्राहक पहले", body: "आपकी ज़रूरत और आपकी संतुष्टि — सबसे ऊपर।" },
+  { title: "भरोसा और साफ़ बात", body: "ईमानदार सौदा और पूरी जानकारी, हर बार।" },
+  { title: "Genuine Products", body: "पक्के GST Bill और पूरी Brand Warranty के साथ।" },
+  { title: "सही Guidance", body: "आपकी असल ज़रूरत के हिसाब से सही product चुनने में मदद।" },
+  { title: "After Sales Support", body: "ख़रीदने के बाद भी, जब भी ज़रूरत पड़े।" },
 ];

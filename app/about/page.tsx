@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { shop, brands, legacy } from "@/data/shop";
+import { shop, brands, legacy, values } from "@/data/shop";
 import { storePhotos, navCategories, ask } from "@/data/content";
 import { FollowUs } from "@/components/FollowUs";
 import { IconArrow, IconWhatsApp, IconPin, IconPhone } from "@/components/Icons";
@@ -66,6 +66,7 @@ export default function About() {
             <li className="rv in" key={m.year}>
               <span className="y">{m.year}</span>
               <b>{m.name}</b>
+              <i>{m.tag}</i>
               <em>{m.body}</em>
             </li>
           ))}
@@ -163,6 +164,35 @@ export default function About() {
             </p>
           </div>
         </div>
+      </section>
+
+      <section className="sec">
+        <div className="shead"><h2>हमारी टीम</h2></div>
+
+        <figure className="teamshot rv in">
+          <Image src="/images/mobile-world-team-at-the-counter-670c828b.webp"
+            alt={`${shop.name} की टीम — ${shop.address.locality} की दुकान के counter पर`}
+            width={1340} height={500} sizes="(max-width:1000px) 100vw, 1200px" />
+        </figure>
+
+        <div className="teamlead rv in">
+          <b>एक टीम। एक परिवार। एक वादा।</b>
+          <p>आपके भरोसे के साथ, हर दिन बेहतर बनाते हुए।</p>
+        </div>
+
+        <ul className="vals">
+          {values.map((v) => (
+            <li className="rv in" key={v.title}>
+              <b>{v.title}</b>
+              <em>{v.body}</em>
+            </li>
+          ))}
+        </ul>
+
+        <p className="thanks rv in">
+          हम सिर्फ़ product नहीं, भरोसा देते हैं। ❤️<br />
+          धन्यवाद कि आपने {shop.name} को अपने परिवार का हिस्सा बनाया।
+        </p>
       </section>
 
       <FollowUs />

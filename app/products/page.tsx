@@ -20,7 +20,7 @@ export default function Products() {
         <h1 style={{ fontSize: "clamp(1.4rem,4vw,2rem)", fontWeight: 800,
                      letterSpacing: "-.03em", margin: "0 0 6px" }}>क्या-क्या मिलता है</h1>
         <p style={{ color: "var(--ink-2)", maxWidth: "60ch", margin: "0 0 16px" }}>
-          {shop.tagline} का सभी सामान, एक ही counter पर।
+          सब कुछ, एक ही छत के नीचे — {shop.tagline} का सभी सामान।
         </p>
         <ProductFilter />
       </section>

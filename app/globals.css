@@ -475,3 +475,22 @@ body.searching .qinfo{display:flex}
 .drawer .dh,.shot .t,.lrow s,.ftr .fh{text-transform:none;letter-spacing:.02em}
 .drawer .dh,.shot .t,.lrow s,.ftr .fh{font-size:11.5px}
 .ftr .fh{font-size:12.5px}
+
+/* ── About: hamari team ── */
+.teamshot{margin:0 0 14px;border-radius:var(--r-lg);overflow:hidden;background:var(--card)}
+.teamshot img{width:100%;height:auto}
+.teamlead{text-align:center;margin:0 0 16px}
+.teamlead b{display:block;font-size:clamp(1.1rem,2.6vw,1.5rem);font-weight:800;letter-spacing:-.024em}
+.teamlead p{margin:6px 0 0;font-size:14px;color:var(--ink-2)}
+
+.vals{display:grid;gap:10px;grid-template-columns:1fr}
+@media(min-width:640px){ .vals{grid-template-columns:repeat(2,1fr)} }
+@media(min-width:1040px){ .vals{grid-template-columns:repeat(5,1fr)} }
+.vals li{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:15px 16px}
+.vals b{display:block;font-size:14.5px;font-weight:800;letter-spacing:-.015em;color:var(--brand);margin-bottom:6px}
+.vals em{display:block;font-style:normal;font-size:13.5px;line-height:1.7;color:var(--ink-2)}
+
+.thanks{margin:18px 0 0;text-align:center;font-size:14.5px;line-height:1.9;font-weight:600;color:var(--ink)}
+
+/* timeline ka tag — owner ke graphic wali chhoti pankti */
+.tline i{display:block;font-style:normal;font-size:12.5px;font-weight:700;color:var(--brand);margin:0 0 7px}
