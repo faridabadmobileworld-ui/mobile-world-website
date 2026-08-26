@@ -1,4 +1,10 @@
 import { chromium } from '/opt/node22/lib/node_modules/playwright/index.mjs';
+import { readFileSync } from 'node:fs';
+// Kitni category hain ye shop.ts se ginte hain — hardcode karenge to
+// nayi category jodte hi test jhootha fail dega.
+const CATS = (readFileSync('data/shop.ts', 'utf8')
+  .match(/export const categories: Category\[\] = \[([\s\S]*?)\];/)[1]
+  .match(/slug:/g) || []).length;
 const B='http://127.0.0.1:3111';
 const paths=['/','/products','/about','/contact','/visit','/posts','/posts/ac-tonnage','/posts/new-phones','/posts/monthly-closure','/privacy'];
 const b=await chromium.launch(); const fail=[],ok=[];
@@ -74,7 +80,7 @@ for(const w of [320,360,390,414,768,1280]){
     while(el&&el.tagName!=='H2'){if(el.tagName==='A')n++;el=el.nextElementSibling;}
     return {links:n, visible:panel.getBoundingClientRect().x>=0};
   });
-  T(d.links===10 && d.visible,'drawer has 10 category links',`${d.links} links`);
+  T(d.links===CATS && d.visible,`drawer has ${CATS} category links`,`${d.links} links`);
   await ctx.close();
 }
 await b.close();

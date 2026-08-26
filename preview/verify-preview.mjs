@@ -5,6 +5,10 @@
  * Ek bhi fail hui to script exit code 1 deti hai.
  */
 import { chromium } from '/opt/node22/lib/node_modules/playwright/index.mjs';
+import { readFileSync } from 'node:fs';
+const CATS = (readFileSync('data/shop.ts', 'utf8')
+  .match(/export const categories: Category\[\] = \[([\s\S]*?)\];/)[1]
+  .match(/slug:/g) || []).length;
 
 const F = 'file://' + process.cwd() + '/preview/index.html';
 const ROUTES = ['/', '/products', '/about', '/contact', '/visit', '/posts',
@@ -146,7 +150,7 @@ const d1 = await p.evaluate(() => {
            expanded: document.querySelector('[aria-label="Menu kholiye"]').getAttribute('aria-expanded') };
 });
 T(d1.open && d1.onScreen, 'menu khulta hai');
-T(d1.catLinks === 10, 'menu mein 10 category links', String(d1.catLinks));
+T(d1.catLinks === CATS, `menu mein ${CATS} category links`, String(d1.catLinks));
 T(d1.expanded === 'true', 'menu button ka aria-expanded sahi');
 
 await p.evaluate(() => document.querySelector('.drawer .veil').click());

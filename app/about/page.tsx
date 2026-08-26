@@ -4,6 +4,7 @@ import Link from "next/link";
 import { shop, brands, legacy, values } from "@/data/shop";
 import { storePhotos, navCategories, ask } from "@/data/content";
 import { FollowUs } from "@/components/FollowUs";
+import { Banner } from "@/components/Banner";
 import { IconArrow, IconWhatsApp, IconPin, IconPhone } from "@/components/Icons";
 import { NextClosure } from "@/components/StoreStatus";
 
@@ -61,6 +62,8 @@ export default function About() {
 
       <section className="sec">
         <div className="shead"><h2>हमारा सफ़र</h2></div>
+        <Banner src="/images/mobile-world-ka-safar-1973-2006-2016-e38c681c.webp"
+          alt="एक सफ़र, एक परिवार, एक भरोसा — 1973 Aggarwal Kiryana Store, 2006 Aggarwal Kiryana &amp; Communication, 2016 MOBILE WORLD" />
         <ol className="tline">
           {legacy.map((m) => (
             <li className="rv in" key={m.year}>
@@ -169,11 +172,8 @@ export default function About() {
       <section className="sec">
         <div className="shead"><h2>हमारी टीम</h2></div>
 
-        <figure className="teamshot rv in">
-          <Image src="/images/mobile-world-team-at-the-counter-670c828b.webp"
-            alt={`${shop.name} की टीम — ${shop.address.locality} की दुकान के counter पर`}
-            width={1340} height={500} sizes="(max-width:1000px) 100vw, 1200px" />
-        </figure>
+        <Banner src="/images/mobile-world-our-team-one-family-e41374d7.webp"
+          alt={`${shop.name} की टीम — ${shop.address.locality} की दुकान के counter पर`} />
 
         <div className="teamlead rv in">
           <b>एक टीम। एक परिवार। एक वादा।</b>

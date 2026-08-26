@@ -3,6 +3,7 @@ import { shop } from "@/data/shop";
 import { serviceCards, ask, whatsappGeneral } from "@/data/content";
 import { IconArrow, IconWhatsApp, IconPhone, IconPin } from "@/components/Icons";
 import { FollowUs } from "@/components/FollowUs";
+import { Banner } from "@/components/Banner";
 import { LiveBadge } from "@/components/StoreStatus";
 
 export const metadata: Metadata = {
@@ -43,6 +44,8 @@ export default function Contact() {
       </section>
 
       <section className="sec" id="service">
+        <Banner src="/images/mobile-world-team-people-behind-our-promise-5f1d17e7.webp"
+          alt={`${shop.name} की टीम — जो लोग आपका काम करते हैं`} />
         <div className="shead"><h2>किस बारे में पूछना है?</h2></div>
         <div className="ctiles">
           {services.map((s) => (

@@ -4,6 +4,7 @@ import { shop } from "@/data/shop";
 import { whatsappGeneral } from "@/data/content";
 import { IconWhatsApp, IconPin, IconPhone } from "@/components/Icons";
 import { FollowUs } from "@/components/FollowUs";
+import { Banner } from "@/components/Banner";
 import { LiveBadge, NextClosure } from "@/components/StoreStatus";
 
 export const metadata: Metadata = {
@@ -27,6 +28,9 @@ export default function Visit() {
           आने से पहले model का नाम WhatsApp कर दीजिए। हम stock और आज का rate confirm
           कर देंगे — ताकि आपका चक्कर बेकार न जाए।
         </p>
+
+        <Banner src="/images/visit-mobile-world-store-gurudwara-road-3656c82d.webp"
+          alt={`${shop.name} — ${shop.address.road}, ${shop.address.locality}, ${shop.address.city}`} />
 
         <div className="cband rv in">
           <h2>{shop.name}</h2>

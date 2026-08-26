@@ -38,11 +38,32 @@ export const hasDevanagari = (text: string): boolean => /[\u0900-\u097F]/.test(t
  * है। पहले दो list थीं और दोनों अलग हो गई थीं (About page पर Refrigerators
  * ग़ायब थे)। अब category जोड़नी या हटानी हो तो सिर्फ़ `shop.ts` बदलिए।
  */
-export type NavCategory = { label: string; slug: string };
+export type NavCategory = { label: string; slug: string; image?: string };
+
+/**
+ * Category tile पर दिखने वाली तस्वीर।
+ *
+ * जिस category की तस्वीर यहाँ नहीं है, उसके tile पर code वाली SVG
+ * drawing लग जाती है — कोई डिब्बा कभी ख़ाली नहीं दिखता।
+ */
+const categoryImages: Record<string, string> = {
+  smartphones: "/images/flagship-phones-apple-and-samsung-7eb024cc.webp",
+  "laptops-tablets": "/images/laptops-and-tablets-at-mobile-world-563b92a9.webp",
+  televisions: "/images/smart-televisions-at-mobile-world-3cc7aa29.webp",
+  "air-conditioners": "/images/split-air-conditioner-fitted-in-a-room-17b0cbd3.webp",
+  "washing-machines": "/images/front-load-and-top-load-washing-machines-337dbf77.webp",
+  refrigerators: "/images/refrigerators-at-mobile-world-10a76a77.webp",
+  "inverters-batteries": "/images/inverter-and-batteries-at-mobile-world-4c7d7bb1.webp",
+  "audio-wearables": "/images/wireless-earbuds-0e160569.webp",
+  cameras: "/images/mirrorless-camera-with-lens-3be70d11.webp",
+  "kitchen-appliances": "/images/kitchen-appliances-at-mobile-world-0409b7f4.webp",
+  accessories: "/images/mobile-accessories-at-mobile-world-55dedbfe.webp",
+};
 
 export const navCategories: NavCategory[] = categories.map((c) => ({
   label: c.name,
   slug: c.slug,
+  image: categoryImages[c.slug],
 }));
 
 /**
@@ -74,7 +95,7 @@ export const items: Item[] = [
     kicker: "Smartphones",
     title: "Flagship phones — Apple और Samsung",
     tags: ["Genuine", "पूरी Warranty"],
-    image: "/images/flagship-phones-apple-and-samsung-7eb024cc.webp",
+    image: "/images/flagship-smartphone-e6739d50.webp",
   },
   {
     category: "smartphones",
@@ -88,56 +109,63 @@ export const items: Item[] = [
     kicker: "Laptops",
     title: "पढ़ाई, office और रोज़ के Laptops",
     tags: ["सभी brands", "Setup"],
-    image: "/images/laptops-and-tablets-at-mobile-world-563b92a9.webp",
+    image: "/images/laptop-for-study-and-office-a146b020.webp",
   },
   {
     category: "laptops-tablets",
     kicker: "Tablets",
     title: "पढ़ाई और काम के लिए Tablets",
     tags: ["हर size", "Setup"],
-    art: "a-tablet",
+    image: "/images/laptops-and-tablets-at-mobile-world-563b92a9.webp",
+  },
+  {
+    category: "laptops-tablets",
+    kicker: "Monitors",
+    title: "Office और gaming के Monitors",
+    tags: ["हर size", "Setup"],
+    image: "/images/computer-monitor-579cd6b9.webp",
   },
   {
     category: "televisions",
     kicker: "Televisions",
     title: "32″ से 75″ तक Smart TV",
     tags: ["4K", "Wall mount", "Setup"],
-    image: "/images/smart-televisions-at-mobile-world-3cc7aa29.webp",
+    image: "/images/smart-television-4k-07c36f7d.webp",
   },
   {
     category: "air-conditioners",
     kicker: "Air Conditioners",
     title: "Split और Window AC, installation के साथ",
     tags: ["1–2 ton", "Fitted", "Serviced"],
-    image: "/images/split-air-conditioner-fitted-in-a-room-17b0cbd3.webp",
+    image: "/images/split-air-conditioner-indoor-unit-24422a50.webp",
   },
   {
     category: "washing-machines",
     kicker: "Washing Machines",
     title: "Semi, Top Load और Front Load",
     tags: ["6–8 kg", "घर पर demo"],
-    image: "/images/front-load-and-top-load-washing-machines-337dbf77.webp",
+    image: "/images/front-load-washing-machine-fb1ba13b.webp",
   },
   {
     category: "refrigerators",
     kicker: "Refrigerators",
     title: "Single door, Double door, Frost-free",
     tags: ["Delivery", "Installation"],
-    image: "/images/refrigerators-at-mobile-world-10a76a77.webp",
+    image: "/images/double-door-refrigerator-8c144446.webp",
   },
   {
     category: "inverters-batteries",
     kicker: "Inverters & Batteries",
     title: "Inverter, Battery और Stabilizer",
     tags: ["Load check", "Fitted"],
-    image: "/images/inverter-and-batteries-at-mobile-world-4c7d7bb1.webp",
+    image: "/images/inverter-and-battery-fbb02fc5.webp",
   },
   {
     category: "audio-wearables",
     kicker: "Audio & Wearables",
     title: "Earbuds, Speakers और Smart Watches",
     tags: ["दुकान पर सुनकर देखिए", "Warranty"],
-    art: "a-speaker",
+    image: "/images/wireless-earbuds-0e160569.webp",
   },
   {
     category: "audio-wearables",
@@ -161,11 +189,25 @@ export const items: Item[] = [
     art: "a-buds",
   },
   {
+    category: "cameras",
+    kicker: "Cameras",
+    title: "Camera और Lens",
+    tags: ["दुकान पर देखिए"],
+    image: "/images/mirrorless-camera-with-lens-3be70d11.webp",
+  },
+  {
     category: "kitchen-appliances",
     kicker: "Kitchen",
     title: "Air Fryer, Microwave, Mixer",
     tags: ["Stock में"],
-    image: "/images/kitchen-appliances-at-mobile-world-0409b7f4.webp",
+    image: "/images/kitchen-appliances-on-the-counter-a35bd84a.webp",
+  },
+  {
+    category: "kitchen-appliances",
+    kicker: "Home Appliances",
+    title: "Vacuum Cleaner",
+    tags: ["Cordless भी"],
+    image: "/images/cordless-vacuum-cleaner-d6335ad5.webp",
   },
   {
     category: "kitchen-appliances",
@@ -179,14 +221,14 @@ export const items: Item[] = [
     kicker: "Accessories",
     title: "Cover, Tempered Glass, Charger",
     tags: ["हर model का"],
-    image: "/images/tempered-glass-protecting-a-smartphone-scree-90c6724b.webp",
+    image: "/images/mobile-accessories-at-mobile-world-55dedbfe.webp",
   },
   {
     category: "accessories",
     kicker: "Accessories",
     title: "Power Bank और Cable",
     tags: ["Fast charge"],
-    image: "/images/mobile-accessories-at-mobile-world-55dedbfe.webp",
+    image: "/images/fast-charger-and-cable-93b9db0d.webp",
   },
 ];
 

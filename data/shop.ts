@@ -140,6 +140,7 @@ export const categories: Category[] = [
   { slug: "refrigerators", name: "Refrigerators" },
   { slug: "inverters-batteries", name: "Inverters & Batteries" },
   { slug: "audio-wearables", name: "Audio & Wearables" },
+  { slug: "cameras", name: "Cameras" },
   { slug: "kitchen-appliances", name: "Kitchen Appliances" },
   { slug: "accessories", name: "Accessories" },
 ];

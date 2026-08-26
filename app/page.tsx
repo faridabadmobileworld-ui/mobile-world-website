@@ -8,6 +8,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { Art } from "@/components/ArtSprite";
 import { IconArrow, IconWhatsApp, IconPin, IconPhone } from "@/components/Icons";
 import { FollowUs } from "@/components/FollowUs";
+import { Banner } from "@/components/Banner";
 import { NextClosure } from "@/components/StoreStatus";
 
 export default function Home() {
@@ -44,6 +45,11 @@ export default function Home() {
         </div>
 
         <section className="sec">
+          <Banner src="/images/mobile-world-trust-since-1973-505ed6ee.webp"
+            alt={`${shop.legacyStartYear} से चला आ रहा परिवार का business, और ${shop.foundingYear} से ${shop.name}`} />
+        </section>
+
+        <section className="sec">
           <div className="shead">
             <h2>क्या-क्या मिलता है</h2>
             <Link href="/products">सब देखिए <IconArrow /></Link>
@@ -68,11 +74,17 @@ export default function Home() {
         </section>
 
         <section className="sec">
-          <div className="shead"><h2>Category से चुनिए</h2></div>
+          <div className="shead"><h2>सब कुछ, एक ही छत के नीचे</h2></div>
+          <Banner src="/images/everything-under-one-roof-mobile-world-4a8926d5.webp"
+            alt={`सब कुछ एक ही छत के नीचे — ${shop.name}, ${shop.tagline}`} />
           <div className="ctiles">
             {navCategories.map((c) => (
               <Link key={c.slug} className="ct rv in" href={`/products#${c.slug}`}>
-                <span className="m"><Art id={artFor(c.slug)} /></span>
+                <span className="m">
+                  {c.image
+                    ? <Image className="ph-img" src={c.image} alt="" width={200} height={200} sizes="58px" />
+                    : <Art id={artFor(c.slug)} />}
+                </span>
                 <span><b>{c.label}</b><s>{blurbFor(c.slug)}</s></span>
               </Link>
             ))}
@@ -197,6 +209,7 @@ function artFor(slug: string): string {
     "air-conditioners": "a-ac", "washing-machines": "a-wash", refrigerators: "a-fridge",
     "inverters-batteries": "a-inverter", "audio-wearables": "a-speaker",
     "kitchen-appliances": "a-kitchen", accessories: "a-accessory",
+    cameras: "a-accessory",
   };
   return m[slug] ?? "a-accessory";
 }
@@ -212,6 +225,7 @@ function blurbFor(slug: string): string {
     "inverters-batteries": "Load check और installation",
     "audio-wearables": "Speaker, Earbuds, Smart Watch",
     "kitchen-appliances": "Air Fryer, Microwave, Mixer, RO",
+    cameras: "Camera, Lens और accessories",
     accessories: "Cover, Glass, Charger, Cable",
   };
   return m[slug] ?? "";
