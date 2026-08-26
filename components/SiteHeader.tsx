@@ -62,7 +62,7 @@ export function SiteHeader() {
           ><IconMenu /></button>
 
           <Link className="logo" href="/">
-            <i><Image src="/images/mobile-world-logo-49447c57.webp" alt="" width={240} height={182} sizes="46px" /></i><span>{shop.name}<s>{shop.tagline}</s></span>
+            <i><Image src="/images/mobile-world-logo-87f0b7f5.webp" alt="" width={240} height={240} sizes="40px" /></i><span>{shop.name}<s>{shop.tagline}</s></span>
           </Link>
 
           <SearchBox id="q-header" />
@@ -89,7 +89,7 @@ export function SiteHeader() {
         <div className="veil" onClick={() => setOpen(false)} />
         <div className="panel">
           <Link className="logo" href="/" onClick={() => setOpen(false)}>
-            <i><Image src="/images/mobile-world-logo-49447c57.webp" alt="" width={240} height={182} sizes="46px" /></i><span>{shop.name}<s>{shop.tagline}</s></span>
+            <i><Image src="/images/mobile-world-logo-87f0b7f5.webp" alt="" width={240} height={240} sizes="40px" /></i><span>{shop.name}<s>{shop.tagline}</s></span>
           </Link>
 
           <SearchBox id="q-drawer" onDone={() => setOpen(false)} />

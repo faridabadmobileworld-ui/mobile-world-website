@@ -10,6 +10,7 @@ import { Art } from "@/components/ArtSprite";
 import { IconArrow, IconWhatsApp, IconPin, IconPhone } from "@/components/Icons";
 import { FollowUs } from "@/components/FollowUs";
 import { Banner } from "@/components/Banner";
+import { GoogleQR } from "@/components/GoogleQR";
 import { NextClosure } from "@/components/StoreStatus";
 
 export default function Home() {
@@ -25,21 +26,27 @@ export default function Home() {
 
         <div className="prow">
           {shop.services.emi && (
-            <a className="pmini rv in" href={ask("EMI options")} target="_blank" rel="noopener">
-              <span className="m"><Art id="a-charger" /></span>
-              <span><b>EMI उपलब्ध है</b><s>दुकान पर पूछिए ›</s></span>
+            <a className="pmini rv in" href={ask("EMI")} target="_blank" rel="noopener">
+              <span className="m">
+                <Image className="ph-img" src="/images/icon-emi-e6aad705.webp" alt="" width={200} height={200} sizes="66px" />
+              </span>
+              <span><b>EMI उपलब्ध है</b><s>Cards और finance ›</s></span>
             </a>
           )}
           {shop.services.delivery && (
-            <a className="pmini rv in" href={ask("home delivery")} target="_blank" rel="noopener">
-              <span className="m"><Art id="a-wash" /></span>
+            <a className="pmini rv in" href={ask("Delivery")} target="_blank" rel="noopener">
+              <span className="m">
+                <Image className="ph-img" src="/images/icon-guidance-0e26ba46.webp" alt="" width={200} height={200} sizes="66px" />
+              </span>
               <span><b>{shop.address.city.replace("NIT ", "")} में Delivery</b><s>बड़ा सामान ›</s></span>
             </a>
           )}
-          {shop.services.installation && (
-            <a className="pmini rv in" href={ask("installation and service")} target="_blank" rel="noopener">
-              <span className="m"><Art id="a-ac" /></span>
-              <span><b>Installation और service</b><s>लगाकर, चलाकर ›</s></span>
+          {shop.services.exchange && (
+            <a className="pmini rv in" href={ask("पुराने phone के Exchange")} target="_blank" rel="noopener">
+              <span className="m">
+                <Image className="ph-img" src="/images/icon-exchange-bc53d7d0.webp" alt="" width={200} height={200} sizes="66px" />
+              </span>
+              <span><b>पुराना phone Exchange</b><s>दुकान पर valuation ›</s></span>
             </a>
           )}
         </div>
@@ -64,8 +71,8 @@ export default function Home() {
         <section className="sec">
           <div className="strip rv in">
             <div>
-              <b>Model बताइए, हम बता देंगे</b>
-              <p>आने से पहले बता देंगे कि जो चाहिए वो दुकान पर मौजूद है या नहीं, और आपके काम का कौन सा model रहेगा। यहाँ से order नहीं होता, किसी account की ज़रूरत नहीं।</p>
+              <b>किसी भी जानकारी के लिए सीधे संपर्क कीजिए</b>
+              <p>किसी भी product के बारे में जानना हो तो हमसे सीधे बात कीजिए। यहाँ से order नहीं होता, किसी account की ज़रूरत नहीं।</p>
             </div>
             <a className="btn btn-h go" href={whatsappGeneral} target="_blank" rel="noopener">
               <IconWhatsApp /> दुकान को Message कीजिए
@@ -90,7 +97,7 @@ export default function Home() {
         </section>
 
         <section className="sec">
-          <div className="shead"><h2>Service और Support</h2></div>
+          <div className="shead"><h2>EMI, Exchange और Repairing</h2></div>
           <div className="sbanners">
             {serviceBanners.filter((b) => shop.services[b.key]).map((b) => (
               <a className="sbanner rv in" key={b.key} href={ask(b.topic)}
@@ -177,6 +184,7 @@ export default function Home() {
               <Image src="/images/icon-shop-2b14210e.webp" alt="" width={200} height={200} sizes="96px" />
             </span>
             <h2>दुकान पर आइए, और हमें सेवा का मौक़ा दीजिए</h2>
+            <GoogleQR />
             <p>{shop.address.street}, {shop.address.landmark}, {shop.address.locality},
               {" "}{shop.address.city}, {shop.address.state} {shop.address.postalCode}.</p>
             <p style={{ marginTop: 8 }}>
@@ -215,10 +223,10 @@ function blurbFor(slug: string): string {
     smartphones: "हर बड़ा brand, हर budget",
     "laptops-tablets": "पढ़ाई, office और gaming",
     televisions: "32″ से 75″ तक, 4K और Smart",
-    "air-conditioners": "कमरे के हिसाब से, लगाकर",
+    "air-conditioners": "1 ton से 2 ton तक",
     "washing-machines": "Semi, Top Load, Front Load",
     refrigerators: "Single door, Double door, Frost-free",
-    "inverters-batteries": "Load check और installation",
+    "inverters-batteries": "Inverter, Battery, Stabilizer",
     "audio-wearables": "Speaker, Earbuds, Smart Watch",
     "kitchen-appliances": "Air Fryer, Microwave, Mixer, RO",
     cameras: "Camera, Lens और accessories",

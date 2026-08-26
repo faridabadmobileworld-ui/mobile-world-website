@@ -5,6 +5,7 @@ import { whatsappGeneral } from "@/data/content";
 import { IconWhatsApp, IconPin, IconPhone } from "@/components/Icons";
 import { FollowUs } from "@/components/FollowUs";
 import { Banner } from "@/components/Banner";
+import { GoogleQR } from "@/components/GoogleQR";
 import { LiveBadge, NextClosure } from "@/components/StoreStatus";
 
 export const metadata: Metadata = {
@@ -54,15 +55,7 @@ export default function Visit() {
             तारीख़ को बंद — अगली छुट्टी <NextClosure />।
           </p>
 
-          <div className="qr-card">
-            <Image src="/images/qr-code-to-find-mobile-world-on-google-a899f382.webp"
-              alt={`${shop.name} को Google पर ढूँढ़ने का QR code`} width={280} height={280} />
-            <span>
-              <b>Google पर हमें ढूँढ़िए</b>
-              <span>Scan कीजिए — Google Maps पर दुकान, खुलने का समय, और आने के बाद
-                चाहें तो अपना review भी।</span>
-            </span>
-          </div>
+          <GoogleQR />
 
           <div className="btns" style={{ justifyContent: "center" }}>
             <a className="btn btn-d" href={shop.social.googleMaps} target="_blank" rel="noopener">

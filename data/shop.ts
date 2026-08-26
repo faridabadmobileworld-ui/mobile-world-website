@@ -109,7 +109,11 @@ export type Shop = {
  * जो service बंद हो जाए, उसे यहाँ false कर दीजिए — website से अपने आप हट जाएगी।
  */
 export type Services = {
-  /** दुकान पर ही repair — screen, battery, charging port, software */
+  /**
+   * Mobile repairing की सुविधा है।
+   * ⚠️ इसे बढ़ा-चढ़ाकर मत लिखो — यह अलग department है, अलग service है।
+   * "जो यहाँ से लिया वो यहीं ठीक होगा" जैसा कोई वादा मत करो।
+   */
   repair: boolean;
   /** Cards और finance दोनों पर EMI */
   emi: boolean;
@@ -117,7 +121,11 @@ export type Services = {
   exchange: boolean;
   /** Faridabad में home delivery */
   delivery: boolean;
-  /** AC वग़ैरह की installation — fitted and tested */
+  /**
+   * ⚠️ Owner ने 26 Aug 2026 को साफ़ किया: **दुकान installation या service
+   * नहीं करती। सिर्फ़ सामान बेचती है।** इसे कभी true मत करो जब तक owner
+   * ख़ुद न कहे।
+   */
   installation: boolean;
 };
 
@@ -239,7 +247,7 @@ export const shop: Shop = {
     emi: true,
     exchange: true,
     delivery: true,
-    installation: true,
+    installation: false,
   },
 
   // Owner ने 24 Aug 2026 को confirm किया: रोज़ 10 AM – 10 PM, सातों दिन।
@@ -333,5 +341,5 @@ export const values: Value[] = [
   { title: "भरोसा और साफ़ बात", body: "ईमानदार सौदा और पूरी जानकारी, हर बार।" },
   { title: "Genuine Products", body: "पक्के GST Bill और पूरी Brand Warranty के साथ।" },
   { title: "सही Guidance", body: "आपकी असल ज़रूरत के हिसाब से सही product चुनने में मदद।" },
-  { title: "After Sales Support", body: "ख़रीदने के बाद भी, जब भी ज़रूरत पड़े।" },
+  { title: "एक ही पता", body: "कोई branch नहीं, कोई franchise नहीं।" },
 ];

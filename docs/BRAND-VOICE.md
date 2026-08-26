@@ -33,7 +33,7 @@
   business · products · service · experience · brand · model · stock ·
   WhatsApp · Smartphone · Laptop · TV · AC · Refrigerator · Washing Machine ·
   Inverter & Batteries · Kitchen Appliances · GST Bill · Warranty · Exchange ·
-  EMI · Installation · Support
+  EMI · Support
 - इन्हें ज़बरदस्ती हिन्दी में मत बदलो ("मूल्य दर", "प्रशीतक" — ऐसा कुछ नहीं)।
 - **"rate" जान-बूझकर इस list में नहीं है** — नीचे §7 देखिए।
 
@@ -139,7 +139,7 @@ Code में यह `data/shop.ts` से आता है:
 
 - 💬 WhatsApp पर पूछिए
 - 💬 दुकान को Message कीजिए
-- 💬 Model बताइए, हम बता देंगे
+- 💬 किसी भी जानकारी के लिए हमसे सीधे संपर्क कीजिए
 
 Corporate CTA ("Enquire now", "Submit your requirement") मत लिखो।
 
@@ -155,6 +155,7 @@ description, alt text, blog — यह मत लिखो:
 
 - ❌ "आज का Rate पूछें"
 - ❌ "Model बताइए, Rate बता देंगे"
+- ❌ "आज का भाव"
 - ❌ "Rate रोज़ बदलता है"
 - ❌ "stock और rate confirm कर देंगे"
 
@@ -169,11 +170,22 @@ description, alt text, blog — यह मत लिखो:
 
 ## 8. Service
 
-> "जो यहाँ से लिया, उसकी ज़रूरत पड़ने पर guidance भी यहीं मिलेगी।"
+दुकान **सिर्फ़ सामान बेचती है**। इसके साथ EMI, Exchange, Faridabad में
+Delivery, और Mobile Repairing — बस इतना।
 
-फिर सिर्फ़ वो services बताओ जो सच में हैं (`shop.services` देखो)। Repair,
-Installation, Exchange, EMI, Delivery — इनमें से कोई भी promise सिर्फ़ इसलिए
-मत लिखो कि marketing में अच्छा लगता है।
+### ⛔ ये तीन बातें कभी मत लिखो
+
+1. **Installation या service का कोई वादा।** दुकान न AC लगाती है, न washing
+   machine, न TV। "fitted and tested", "लगाकर, चलाकर", "Setup", "Wall mount",
+   "Load check", "घर पर demo" — सब बंद।
+2. **Warranty या after-sales का वादा।** "जो यहाँ से लिया उसकी बात यहीं होगी",
+   "after sales support", "Warranty support" — कुछ नहीं। सामान पर brand की
+   warranty होती है, यह लिखना ठीक है; पर उसे दुकान निभाएगी, यह मत लिखो।
+   *(इसकी वजह भी page पर मत समझाओ — बस वादा मत करो।)*
+3. **Repairing को बढ़ा-चढ़ाकर।** होती है, पर एक लाइन में — "Repairing की
+   सुविधा भी दुकान पर है।" Screen, battery, water damage की list मत गिनाओ।
+
+`shop.services` में जो `false` है, उसे website पर कभी मत लाओ।
 
 ---
 

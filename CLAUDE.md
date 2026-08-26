@@ -37,9 +37,22 @@ WhatsApp message, या physical visit।
 - **छुट्टी:** हर महीने की आख़िरी तारीख़ (28/29/30/31 — जो भी हो)।
   कोई weekly off नहीं।
 
-### Services — ये सब करते हैं
-Repair (screen, battery, charging port, software) · EMI (cards और finance) ·
-पुराना फ़ोन Exchange · Faridabad में Delivery · Installation (fitted and tested)
+### Services — ये करते हैं
+EMI (cards और finance) · पुराना फ़ोन Exchange · Faridabad में Delivery ·
+Mobile Repairing
+
+### ⛔ ये नहीं करते — कभी मत लिखो (owner, 26 Aug 2026)
+
+- **Installation नहीं करते। Service नहीं करते। दुकान सिर्फ़ सामान बेचती है।**
+  "AC fitted and tested", "लगाकर, चलाकर दिखाते हैं", "Setup", "Wall mount",
+  "Load check" — ऐसा कुछ भी मत लिखो। Code में `shop.services.installation`
+  अब `false` है।
+- **Warranty दुकान से नहीं, brand के service centre से मिलती है।** इसलिए
+  "जो यहाँ से लिया, उसकी बात यहीं होगी" या "after sales support" जैसा कोई
+  वादा मत करो। *(यह वजह भी page पर मत लिखो — बस वादा मत करो।)*
+- **Repairing होती है, पर उसे बढ़ा-चढ़ाकर मत लिखो।** वो अलग department है,
+  अलग service है। एक लाइन काफ़ी है — "Repairing की सुविधा भी दुकान पर है।"
+  Screen/battery/water damage की list मत गिनाओ।
 
 ### Categories
 Smartphones, Laptops & Tablets, Televisions, Air Conditioners,
@@ -158,7 +171,8 @@ Visitor details save करना, customer login।
 ## 10. Pending — owner भरेगा
 
 - [x] ~~Opening / closing timings और weekly off~~ — confirmed 24 Aug 2026
-- [x] ~~Repair / installation service करते हैं या नहीं~~ — हाँ, दोनों
+- [x] ~~Repair / installation service करते हैं या नहीं~~ — Repairing हाँ,
+      **Installation और service नहीं** (owner ने 26 Aug 2026 को साफ़ किया)
 - [x] ~~EMI / exchange offer करते हैं या नहीं~~ — हाँ, दोनों
 - [x] ~~Google Maps listing का exact URL~~ — `data/shop.ts` में है
 - [x] ~~Map के geo coordinates~~ — 28.36249, 77.28786 (24 Aug 2026)

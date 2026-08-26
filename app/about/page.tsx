@@ -5,6 +5,7 @@ import { shop, brands, legacy, values } from "@/data/shop";
 import { storePhotos, navCategories, whatsappGeneral } from "@/data/content";
 import { FollowUs } from "@/components/FollowUs";
 import { Banner } from "@/components/Banner";
+import { GoogleQR } from "@/components/GoogleQR";
 import { IconArrow, IconWhatsApp, IconPin, IconPhone } from "@/components/Icons";
 import { NextClosure } from "@/components/StoreStatus";
 
@@ -172,7 +173,7 @@ export default function About() {
       <section className="sec">
         <div className="shead"><h2>हमारी टीम</h2></div>
 
-        <Banner src="/images/mobile-world-our-team-one-family-e41374d7.webp"
+        <Banner src="/images/mobile-world-team-people-behind-our-promise-v2-5f1d17e7.webp"
           alt={`${shop.name} की टीम — ${shop.address.locality} की दुकान के counter पर`} />
 
         <div className="teamlead rv in">
@@ -203,6 +204,7 @@ export default function About() {
             <Image src="/images/icon-shop-2b14210e.webp" alt="" width={200} height={200} sizes="96px" />
           </span>
           <h2>दुकान पर आइए, और हमें सेवा का मौक़ा दीजिए</h2>
+          <GoogleQR />
           <p>
             {shop.address.street}, {shop.address.landmark}, {shop.address.locality},
             {" "}{shop.address.city}, {shop.address.state} – {shop.address.postalCode}

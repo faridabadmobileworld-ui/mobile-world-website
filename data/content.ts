@@ -18,7 +18,7 @@ export function ask(topic: string): string {
 }
 
 export const whatsappGeneral = `${shop.phone.whatsapp}?text=${encodeURIComponent(
-  "Namaste MOBILE WORLD! मुझे एक सामान के बारे में पूछना है।",
+  "Namaste MOBILE WORLD! मुझे एक product के बारे में जानकारी चाहिए।",
 )}`;
 
 /**
@@ -47,17 +47,19 @@ export type NavCategory = { label: string; slug: string; image?: string };
  * drawing लग जाती है — कोई डिब्बा कभी ख़ाली नहीं दिखता।
  */
 const categoryImages: Record<string, string> = {
-  smartphones: "/images/flagship-phones-apple-and-samsung-7eb024cc.webp",
-  "laptops-tablets": "/images/laptops-and-tablets-at-mobile-world-563b92a9.webp",
-  televisions: "/images/smart-televisions-at-mobile-world-3cc7aa29.webp",
-  "air-conditioners": "/images/split-air-conditioner-fitted-in-a-room-17b0cbd3.webp",
-  "washing-machines": "/images/front-load-and-top-load-washing-machines-337dbf77.webp",
-  refrigerators: "/images/refrigerators-at-mobile-world-10a76a77.webp",
-  "inverters-batteries": "/images/inverter-and-batteries-at-mobile-world-4c7d7bb1.webp",
+  smartphones: "/images/mid-range-5g-phones-five-colours-v2-7c07be19.webp",
+  "laptops-tablets": "/images/laptop-for-study-and-office-a146b020.webp",
+  televisions: "/images/smart-television-on-white-4b38b4f8.webp",
+  "air-conditioners": "/images/split-air-conditioner-indoor-unit-24422a50.webp",
+  "washing-machines": "/images/semi-and-front-load-washing-machines-28ae1060.webp",
+  refrigerators: "/images/double-door-refrigerator-8c144446.webp",
+  "inverters-batteries": "/images/inverter-and-battery-fbb02fc5.webp",
   "audio-wearables": "/images/wireless-earbuds-0e160569.webp",
   cameras: "/images/mirrorless-camera-with-lens-3be70d11.webp",
-  "kitchen-appliances": "/images/kitchen-appliances-at-mobile-world-0409b7f4.webp",
-  accessories: "/images/mobile-accessories-at-mobile-world-55dedbfe.webp",
+  // TODO (owner): Kitchen Appliances की safed background वाली photo चाहिए।
+  // तब तक यहाँ कुछ नहीं — tile पर code वाली साफ़ drawing लग जाती है,
+  // क्योंकि बाक़ी सब tiles safed हैं और एक गहरी तस्वीर अलग दिखती है।
+  accessories: "/images/fast-charger-and-cable-93b9db0d.webp",
 };
 
 export const navCategories: NavCategory[] = categories.map((c) => ({
@@ -88,13 +90,13 @@ export const items: Item[] = [
     kicker: "Smartphones",
     title: "हर बड़े brand के 5G Smartphones",
     tags: ["5G", "सभी brands", "Exchange"],
-    image: "/images/5g-smartphones-every-brand-216fa70a.webp",
+    image: "/images/flagship-phones-apple-samsung-xiaomi-vivo-c3df528a.webp",
   },
   {
     category: "smartphones",
     kicker: "Smartphones",
     title: "Flagship phones — Apple और Samsung",
-    tags: ["Genuine", "पूरी Warranty"],
+    tags: ["Genuine", "Brand Warranty"],
     image: "/images/flagship-smartphone-e6739d50.webp",
   },
   {
@@ -102,62 +104,62 @@ export const items: Item[] = [
     kicker: "Smartphones",
     title: "Mid-range 5G — तीन-चार साल चलने वाले",
     tags: ["लंबे updates", "Fast charge"],
-    image: "/images/mid-range-5g-phones-five-colours-7c07be19.webp",
+    image: "/images/mid-range-5g-phones-five-colours-v2-7c07be19.webp",
   },
   {
     category: "laptops-tablets",
     kicker: "Laptops",
     title: "पढ़ाई, office और रोज़ के Laptops",
-    tags: ["सभी brands", "Setup"],
+    tags: ["सभी brands"],
     image: "/images/laptop-for-study-and-office-a146b020.webp",
   },
   {
     category: "laptops-tablets",
     kicker: "Tablets",
     title: "पढ़ाई और काम के लिए Tablets",
-    tags: ["हर size", "Setup"],
+    tags: ["हर size"],
     image: "/images/tablets-in-four-colours-9b68921c.webp",
   },
   {
     category: "laptops-tablets",
     kicker: "Monitors",
     title: "Office और gaming के Monitors",
-    tags: ["हर size", "Setup"],
+    tags: ["हर size"],
     image: "/images/computer-monitor-579cd6b9.webp",
   },
   {
     category: "televisions",
     kicker: "Televisions",
     title: "32″ से 75″ तक Smart TV",
-    tags: ["4K", "Wall mount", "Setup"],
-    image: "/images/smart-television-4k-07c36f7d.webp",
+    tags: ["4K", "32″ से 75″"],
+    image: "/images/smart-television-on-white-4b38b4f8.webp",
   },
   {
     category: "air-conditioners",
     kicker: "Air Conditioners",
-    title: "Split और Window AC, installation के साथ",
-    tags: ["1–2 ton", "Fitted", "Serviced"],
+    title: "Split और Window AC",
+    tags: ["1–2 ton", "हर brand"],
     image: "/images/split-air-conditioner-indoor-unit-24422a50.webp",
   },
   {
     category: "washing-machines",
     kicker: "Washing Machines",
     title: "Semi, Top Load और Front Load",
-    tags: ["6–8 kg", "घर पर demo"],
-    image: "/images/front-load-washing-machine-fb1ba13b.webp",
+    tags: ["6–8 kg", "Semi और Front Load"],
+    image: "/images/semi-and-front-load-washing-machines-28ae1060.webp",
   },
   {
     category: "refrigerators",
     kicker: "Refrigerators",
     title: "Single door, Double door, Frost-free",
-    tags: ["Delivery", "Installation"],
+    tags: ["Single, Double door"],
     image: "/images/double-door-refrigerator-8c144446.webp",
   },
   {
     category: "inverters-batteries",
     kicker: "Inverters & Batteries",
     title: "Inverter, Battery और Stabilizer",
-    tags: ["Load check", "Fitted"],
+    tags: ["Inverter + Battery"],
     image: "/images/inverter-and-battery-fbb02fc5.webp",
   },
   {
@@ -213,7 +215,7 @@ export const items: Item[] = [
     category: "kitchen-appliances",
     kicker: "Home Appliances",
     title: "Water Purifier और Geyser",
-    tags: ["Installation के साथ"],
+    tags: ["हर brand"],
     image: "/images/home-appliances-at-mobile-world-0f587ac6.webp",
   },
   {
@@ -248,16 +250,16 @@ export const slides: Slide[] = [
     heading: "Every big brand,\none counter",
     body: `Smartphones, laptops, televisions और home appliances — सब एक ही दुकान पर, ${shop.address.road} पर। `
       + `${shop.legacyStartYear} से परिवार का business सफ़र, ${shop.foundingYear} से MOBILE WORLD।`,
-    image: "/images/inside-the-mobile-world-showroom-a58ffaa8.webp",
+    image: "/images/inside-the-mobile-world-showroom-bright-4a8926d5.webp",
     alt: "MOBILE WORLD की दुकान — mobile, laptop, TV, AC, fridge और washing machine, सब एक ही जगह",
     bg: "var(--lav)",
   },
   {
     kicker: "गर्मी का मौसम",
-    heading: "Air conditioners\nfitted & tested",
-    body: "AC का tonnage सिर्फ़ कमरे के size से तय नहीं होता — धूप, floor और room की condition भी देखनी पड़ती है। "
-      + "हम कमरे के हिसाब से चुनते हैं, लगाते हैं, और चलाकर देखने के बाद ही जाते हैं।",
-    image: "/images/split-air-conditioner-fitted-in-a-room-17b0cbd3.webp",
+    heading: "Air Conditioners\n1 ton से 2 ton तक",
+    body: "AC का tonnage सिर्फ़ कमरे के size से तय नहीं होता — धूप, floor और कमरे की हालत भी देखनी पड़ती है। "
+      + "कौन सा आपके कमरे के लिए ठीक रहेगा, यह दुकान पर बता देंगे।",
+    image: "/images/split-air-conditioner-in-a-room-17b0cbd3.webp",
     alt: "कमरे में लगा हुआ split air conditioner, चलता हुआ",
     bg: "var(--peach)",
   },
@@ -266,14 +268,14 @@ export const slides: Slide[] = [
     heading: "हर सफ़र की शुरुआत\nएक भरोसे से होती है",
     body: `परिवार का business सफ़र ${shop.legacyStartYear} में Aggarwal Kiryana Store से शुरू हुआ। `
       + `इसी विरासत को आगे बढ़ाते हुए ${shop.foundingYear} में MOBILE WORLD की शुरुआत हुई।`,
-    image: "/images/customers-at-mobile-world-jawahar-colony-nit-bc85762b.webp",
-    alt: "Customers at Mobile World, Jawahar Colony, NIT Faridabad",
+    image: "/images/hamari-jaden-bharose-ki-1973-2006-2016-190f9abe.webp",
+    alt: "हमारी जड़ें भरोसे की — 1973 Aggarwal Kiryana, 2006 Aggarwal Kiryana & Communication, 2016 MOBILE WORLD",
     bg: "var(--sky)",
   },
   {
-    kicker: "ख़रीदने के बाद",
-    heading: "जो यहाँ से लिया,\nउसकी बात यहीं होगी",
-    body: "चौथे महीने में कुछ गड़बड़ हुई? सीधे दुकान पर आ जाइए। न courier, न पंद्रह दिन का इंतज़ार, न ticket number।",
+    kicker: "एक ही पता",
+    heading: "हाथ में लेकर\nदेखिए, फिर लीजिए",
+    body: "Display, वज़न और पकड़ — ये photo में पूरी तरह समझ नहीं आते। दुकान पर आइए, हाथ में लेकर देखिए, फिर तय कीजिए।",
     image: "/images/expert-mobile-repairing-at-mobile-world-f65f73a0.webp",
     alt: "दुकान पर ही phone की repair — screen, battery और charging port",
     bg: "var(--mint)",
@@ -283,11 +285,11 @@ export const slides: Slide[] = [
 /** दुकान की असली photos। */
 export const storePhotos = [
   {
-    src: "/images/inside-mobile-world-jawahar-colony-the-phone-37da6e97.webp",
-    w: 1000,
-    h: 562,
-    alt: `${shop.name} के अंदर — phone counter और brands का display`,
-    title: "Counter के पीछे",
+    src: "/images/iphone-display-at-the-mobile-world-counter-346d3e71.webp",
+    w: 772,
+    h: 1524,
+    alt: `${shop.name} के counter पर iPhone का display`,
+    title: "Counter",
     caption: "जहाँ से हर सामान आपके हाथ में जाता है।",
   },
   {
@@ -329,9 +331,9 @@ export const serviceCards = [
   {
     key: "repair" as const,
     kicker: "Repair",
-    title: "Repair दुकान पर ही होती है",
-    body: "Screen, battery, charging port या software — पहले आपके सामने खोलकर देखते हैं, फिर बताते हैं।",
-    cta: "Repair के बारे में पूछिए",
+    title: "Mobile Repairing",
+    body: "Repairing की सुविधा भी दुकान पर है।",
+    cta: "Repairing के बारे में पूछिए",
     topic: "repair",
     tone: "mint",
   },
@@ -352,15 +354,6 @@ export const serviceCards = [
     cta: "EMI के बारे में पूछिए",
     topic: "EMI",
     tone: "lav",
-  },
-  {
-    key: "installation" as const,
-    kicker: "Installation",
-    title: "लगाकर, चलाकर दिखाते हैं",
-    body: "AC, Washing Machine या TV — लगाने के बाद चलाकर देखने तक हम रुकते हैं।",
-    cta: "Installation के बारे में पूछिए",
-    topic: "Installation और service",
-    tone: "sky",
   },
 ];
 
@@ -388,7 +381,7 @@ export const posts: Post[] = [
     title: "अपने कमरे के लिए सही AC tonnage कैसे चुनें",
     excerpt:
       "बड़ा AC अपने आप बेहतर नहीं होता। हम counter पर कमरे का हिसाब कैसे लगाते हैं, वही यहाँ लिखा है।",
-    image: "/images/split-ac-fitted-and-tested-wide-8c7ac6ae.webp",
+    image: "/images/split-ac-indoor-unit-wide-8c7ac6ae.webp",
     imageW: 1200,
     imageH: 675,
     alt: "दीवार पर लगी split AC की indoor unit",
@@ -397,7 +390,7 @@ export const posts: Post[] = [
 <p>मोटा-मोटी हिसाब यह है: लगभग 110 square feet तक का कमरा 1 ton में, 110 से 180 square feet तक 1.5 ton में, और उससे बड़ा आमतौर पर 2 ton में। लेकिन यह हिसाब बदल जाता है अगर कमरा सबसे ऊपर की मंज़िल पर है, दीवार पश्चिम की तरफ़ है, छत ऊँची है, या कमरे में तीन-चार से ज़्यादा लोग एक साथ बैठते हैं।</p>
 <p>इसीलिए tonnage सिर्फ़ size से तय नहीं होता — धूप, floor और कमरे की हालत भी देखनी पड़ती है।</p>
 <p>कमरे की लंबाई, चौड़ाई और छत की ऊँचाई नाप कर आइए, और यह भी बता दीजिए कि कौन सी मंज़िल है और मुख्य दीवार किस दिशा में है। हम आपके सामने हिसाब लगाकर बताएँगे, अंदाज़े से नहीं।</p>
-<p>AC जितना ज़रूरी है, उसकी installation भी उतनी ही ज़रूरी है। बाहर की unit कहाँ लगी है, पानी की निकासी का ढलान कैसा है, और copper की लंबाई कितनी है — ये तीनों तय करते हैं कि कूलिंग कैसी रहेगी और AC कितने साल चलेगा। हम लगाते हैं, चलाकर देखते हैं, और कूलिंग जाँचने के बाद ही जाते हैं।</p>`,
+<p>दुकान पर आकर बता दीजिए, हम आपके कमरे के हिसाब से सही tonnage निकालने में मदद कर देंगे।</p>`,
   },
   {
     slug: "new-phones",
@@ -478,9 +471,9 @@ export const helpPoints = [
 export const serviceList = [
   {
     icon: "/images/icon-repair-56383a67.webp",
-    title: "Repair",
-    body: "दुकान पर ही, आपके सामने खोलकर।",
-    topic: "repair",
+    title: "Mobile Repairing",
+    body: "Repairing की सुविधा भी दुकान पर है।",
+    topic: "repairing",
   },
   {
     icon: "/images/icon-exchange-bc53d7d0.webp",
@@ -502,9 +495,9 @@ export const serviceList = [
   },
   {
     icon: "/images/icon-support-0ba4e4a1.webp",
-    title: "Expert Support",
-    body: "ख़रीदने के बाद भी, हर क़दम पर।",
-    topic: "support",
+    title: "सीधे दुकान से बात",
+    body: "किसी भी जानकारी के लिए हमसे सीधे संपर्क कीजिए।",
+    topic: "एक product",
   },
   {
     icon: "/images/icon-genuine-d7ae5712.webp",

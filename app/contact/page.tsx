@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: "बात कीजिए",
   description:
     `${shop.name} से सीधे बात कीजिए — ${shop.phone.display}। Repair, EMI, Exchange, ` +
-    `Delivery और Installation के सवाल WhatsApp पर पूछ लीजिए। कोई form नहीं।`,
+    `Delivery और Exchange के सवाल WhatsApp पर पूछ लीजिए। कोई form नहीं।`,
   alternates: { canonical: "/contact" },
 };
 
@@ -44,7 +44,7 @@ export default function Contact() {
       </section>
 
       <section className="sec" id="service">
-        <Banner src="/images/mobile-world-team-people-behind-our-promise-5f1d17e7.webp"
+        <Banner src="/images/mobile-world-team-people-behind-our-promise-v2-5f1d17e7.webp"
           alt={`${shop.name} की टीम — जो लोग आपका काम करते हैं`} />
         <div className="shead"><h2>किस बारे में पूछना है?</h2></div>
         <div className="ctiles">
@@ -61,8 +61,8 @@ export default function Contact() {
         <div className="panel rv in" style={{ maxWidth: 820 }}>
           <h2 style={{ fontSize: "1.1rem", margin: "0 0 10px" }}>आने से पहले</h2>
           <p style={{ fontSize: 14.5, color: "var(--ink-2)", margin: "0 0 10px" }}>
-            जो model चाहिए उसका नाम WhatsApp पर भेज दीजिए। हम पहले ही बता देंगे कि
-            वो दुकान पर मौजूद है या नहीं — एक ही चक्कर में काम हो जाएगा।
+            जो चाहिए उसका नाम WhatsApp पर भेज दीजिए। किसी भी product की जानकारी के
+            लिए हमसे सीधे संपर्क कीजिए।
           </p>
           <p style={{ fontSize: 14.5, color: "var(--ink-2)", margin: 0 }}>
             बाहर से आ रहे हैं तो निकलने से पहले एक message कर दीजिए। हम बता देंगे कि

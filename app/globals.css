@@ -58,8 +58,9 @@ ul{list-style:none;margin:0;padding:0}
 .logo{display:flex;align-items:center;min-height:44px;gap:9px;font-weight:800;letter-spacing:-.03em;font-size:17px}
 /* MOBILE WORLD ka logo — owner ne 26 Aug 2026 ko diya. Peeche kaala
    background isi tasveer ka hissa hai, isliye dabba bhi kaala hai. */
-.logo i{width:46px;height:35px;border-radius:7px;overflow:hidden;background:#000;flex:none;display:block}
-.logo i img{width:100%;height:100%;object-fit:cover}
+/* MOBILE WORLD ka logo — paardarshi hai, isliye peeche koi dabba nahi. */
+.logo i{width:40px;height:40px;flex:none;display:block}
+.logo i img{width:100%;height:100%;object-fit:contain}
 .logo span{white-space:nowrap}
 .logo s{display:block;text-decoration:none;font-size:9px;letter-spacing:.14em;color:var(--ink-3);font-weight:600;margin-top:1px}
 .hdr-a{margin-left:auto;display:flex;align-items:center;gap:8px}
@@ -82,7 +83,7 @@ ul{list-style:none;margin:0;padding:0}
 }
 @media(max-width:400px){
   .hdr .logo{font-size:15px}
-  .hdr .logo i{width:40px;height:30px}
+  .hdr .logo i{width:34px;height:34px}
 }
 @media(max-width:344px){
   .hdr .logo{font-size:13.5px;gap:7px}
@@ -464,7 +465,7 @@ body.searching .qinfo{display:flex}
 @media(max-width:360px){
   .hdr .wrap{gap:8px;padding-inline:12px}
   .hdr .logo{font-size:12.5px;gap:6px}
-  .hdr .logo i{width:36px;height:27px}
+  .hdr .logo i{width:31px;height:31px}
 }
 
 /* ── Devanagari aur UPPERCASE ─────────────────────────────────────
@@ -536,3 +537,9 @@ body.searching .qinfo{display:flex}
 
 /* dukaan ki paanch asli photo — bade screen par ek hi kataar mein */
 @media(min-width:1200px){ .shots{grid-template-columns:repeat(5,1fr)} }
+
+/* ── Google ka QR ── */
+.gqr{display:inline-flex;flex-direction:column;align-items:center;gap:6px;margin:14px auto 0}
+.gqr img{width:150px;height:auto}
+.gqr span{font-size:12px;font-weight:700;color:var(--ink-2)}
+.gqr:hover span{color:var(--brand)}

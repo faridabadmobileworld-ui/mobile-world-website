@@ -27,7 +27,7 @@ export default function Products() {
       </section>
 
       <section className="sec">
-        <Banner src="/images/everything-under-one-roof-mobile-world-4a8926d5.webp"
+        <Banner src="/images/inside-the-mobile-world-showroom-bright-4a8926d5.webp"
           alt={`सब कुछ एक ही छत के नीचे — ${shop.name}, ${shop.tagline}`} />
       </section>
 
