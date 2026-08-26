@@ -69,6 +69,23 @@ export const navCategories: NavCategory[] = categories.map((c) => ({
 }));
 
 /**
+ * जिस category की photo नहीं है, उसके लिए code वाली SVG drawing।
+ *
+ * Header का drawer और home page के tiles — दोनों यही इस्तेमाल करते हैं,
+ * ताकि icon दोनों जगह एक जैसा रहे।
+ */
+export function artForCategory(slug: string): string {
+  const m: Record<string, string> = {
+    smartphones: "a-phone", "laptops-tablets": "a-laptop", televisions: "a-tv",
+    "air-conditioners": "a-ac", "washing-machines": "a-wash", refrigerators: "a-fridge",
+    "inverters-batteries": "a-inverter", "audio-wearables": "a-speaker",
+    "kitchen-appliances": "a-kitchen", accessories: "a-accessory",
+    cameras: "a-accessory",
+  };
+  return m[slug] ?? "a-accessory";
+}
+
+/**
  * एक product card। `image` हो तो असली photo लगती है, वरना code वाली
  * SVG drawing (`art`) — ताकि कोई खाली डिब्बा कभी न दिखे।
  */

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { shop } from "@/data/shop";
 import { localBusinessSchema, jsonLdScript } from "@/data/schema";
 import { items, storePhotos, serviceBanners, posts, helpPoints, serviceList,
-         ask, whatsappGeneral, navCategories } from "@/data/content";
+         artForCategory, ask, whatsappGeneral, navCategories } from "@/data/content";
 import { Hero } from "@/components/Hero";
 import { ProductCard } from "@/components/ProductCard";
 import { Art } from "@/components/ArtSprite";
@@ -88,7 +88,7 @@ export default function Home() {
                 <span className="m">
                   {c.image
                     ? <Image className="ph-img" src={c.image} alt="" width={200} height={200} sizes="58px" />
-                    : <Art id={artFor(c.slug)} />}
+                    : <Art id={artForCategory(c.slug)} />}
                 </span>
                 <span><b>{c.label}</b><s>{blurbFor(c.slug)}</s></span>
               </Link>
@@ -205,17 +205,6 @@ export default function Home() {
       </div>
     </>
   );
-}
-
-function artFor(slug: string): string {
-  const m: Record<string, string> = {
-    smartphones: "a-phone", "laptops-tablets": "a-laptop", televisions: "a-tv",
-    "air-conditioners": "a-ac", "washing-machines": "a-wash", refrigerators: "a-fridge",
-    "inverters-batteries": "a-inverter", "audio-wearables": "a-speaker",
-    "kitchen-appliances": "a-kitchen", accessories: "a-accessory",
-    cameras: "a-accessory",
-  };
-  return m[slug] ?? "a-accessory";
 }
 
 function blurbFor(slug: string): string {

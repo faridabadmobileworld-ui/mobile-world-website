@@ -5,7 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { shop } from "@/data/shop";
-import { navCategories, whatsappGeneral } from "@/data/content";
+import { navCategories, artForCategory, whatsappGeneral } from "@/data/content";
+import { Art } from "./ArtSprite";
 import { LiveBadge } from "./StoreStatus";
 import {
   IconMenu, IconSearch, IconPhone, IconWhatsApp,
@@ -97,7 +98,12 @@ export function SiteHeader() {
           <h2 className="dh">Category से चुनिए</h2>
           {navCategories.map((c) => (
             <Link key={c.slug} className="d" href={`/products#${c.slug}`} onClick={() => setOpen(false)}>
-              <i><IconGrid /></i>{c.label}
+              <i className="pic">
+                {c.image
+                  ? <Image src={c.image} alt="" width={200} height={200} sizes="34px" />
+                  : <Art id={artForCategory(c.slug)} />}
+              </i>
+              {c.label}
             </Link>
           ))}
 
