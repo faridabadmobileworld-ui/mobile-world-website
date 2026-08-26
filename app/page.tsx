@@ -64,8 +64,8 @@ export default function Home() {
         <section className="sec">
           <div className="strip rv in">
             <div>
-              <b>Model बताइए, Rate बता देंगे</b>
-              <p>आने से पहले हम stock और आज का rate confirm कर देंगे। यहाँ से order नहीं होता, किसी account की ज़रूरत नहीं।</p>
+              <b>Model बताइए, हम बता देंगे</b>
+              <p>आने से पहले बता देंगे कि जो चाहिए वो दुकान पर मौजूद है या नहीं, और आपके काम का कौन सा model रहेगा। यहाँ से order नहीं होता, किसी account की ज़रूरत नहीं।</p>
             </div>
             <a className="btn btn-h go" href={whatsappGeneral} target="_blank" rel="noopener">
               <IconWhatsApp /> दुकान को Message कीजिए
@@ -75,8 +75,6 @@ export default function Home() {
 
         <section className="sec">
           <div className="shead"><h2>सब कुछ, एक ही छत के नीचे</h2></div>
-          <Banner src="/images/everything-under-one-roof-mobile-world-4a8926d5.webp"
-            alt={`सब कुछ एक ही छत के नीचे — ${shop.name}, ${shop.tagline}`} />
           <div className="ctiles">
             {navCategories.map((c) => (
               <Link key={c.slug} className="ct rv in" href={`/products#${c.slug}`}>
@@ -191,7 +189,7 @@ export default function Home() {
               </a>
               <a className="btn btn-o" href={shop.phone.tel}><IconPhone /> {shop.phone.display}</a>
               <a className="btn btn-w" href={whatsappGeneral} target="_blank" rel="noopener">
-                <IconWhatsApp /> Model बताइए, Rate बता देंगे
+                <IconWhatsApp /> WhatsApp पर पूछिए
               </a>
             </div>
           </div>

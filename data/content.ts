@@ -102,7 +102,7 @@ export const items: Item[] = [
     kicker: "Smartphones",
     title: "Mid-range 5G — तीन-चार साल चलने वाले",
     tags: ["लंबे updates", "Fast charge"],
-    image: "/images/mid-range-5g-phones-b8368948.webp",
+    image: "/images/mid-range-5g-phones-five-colours-7c07be19.webp",
   },
   {
     category: "laptops-tablets",
@@ -248,8 +248,8 @@ export const slides: Slide[] = [
     heading: "Every big brand,\none counter",
     body: `Smartphones, laptops, televisions और home appliances — सब एक ही दुकान पर, ${shop.address.road} पर। `
       + `${shop.legacyStartYear} से परिवार का business सफ़र, ${shop.foundingYear} से MOBILE WORLD।`,
-    image: "/images/smartphones-counter-wide-0f945e6d.webp",
-    alt: "MOBILE WORLD के counter पर हर बड़े brand के smartphones",
+    image: "/images/inside-the-mobile-world-showroom-a58ffaa8.webp",
+    alt: "MOBILE WORLD की दुकान — mobile, laptop, TV, AC, fridge और washing machine, सब एक ही जगह",
     bg: "var(--lav)",
   },
   {

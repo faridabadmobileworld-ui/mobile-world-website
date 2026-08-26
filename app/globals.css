@@ -56,7 +56,10 @@ ul{list-style:none;margin:0;padding:0}
 .hdr{position:sticky;top:0;z-index:60;background:var(--card);border-bottom:1px solid var(--line)}
 .hdr .wrap{display:flex;align-items:center;gap:12px;min-height:58px}
 .logo{display:flex;align-items:center;min-height:44px;gap:9px;font-weight:800;letter-spacing:-.03em;font-size:17px}
-.logo i{width:30px;height:30px;border-radius:8px;background:linear-gradient(140deg,var(--brand),var(--hot));display:grid;place-items:center;color:#fff;font-size:11px;font-weight:900;flex:none}
+/* MOBILE WORLD ka logo — owner ne 26 Aug 2026 ko diya. Peeche kaala
+   background isi tasveer ka hissa hai, isliye dabba bhi kaala hai. */
+.logo i{width:46px;height:35px;border-radius:7px;overflow:hidden;background:#000;flex:none;display:block}
+.logo i img{width:100%;height:100%;object-fit:cover}
 .logo span{white-space:nowrap}
 .logo s{display:block;text-decoration:none;font-size:9px;letter-spacing:.14em;color:var(--ink-3);font-weight:600;margin-top:1px}
 .hdr-a{margin-left:auto;display:flex;align-items:center;gap:8px}
@@ -79,7 +82,7 @@ ul{list-style:none;margin:0;padding:0}
 }
 @media(max-width:400px){
   .hdr .logo{font-size:15px}
-  .hdr .logo i{width:27px;height:27px;font-size:10px}
+  .hdr .logo i{width:40px;height:30px}
 }
 @media(max-width:344px){
   .hdr .logo{font-size:13.5px;gap:7px}
@@ -461,7 +464,7 @@ body.searching .qinfo{display:flex}
 @media(max-width:360px){
   .hdr .wrap{gap:8px;padding-inline:12px}
   .hdr .logo{font-size:12.5px;gap:6px}
-  .hdr .logo i{width:25px;height:25px;font-size:9px}
+  .hdr .logo i{width:36px;height:27px}
 }
 
 /* ── Devanagari aur UPPERCASE ─────────────────────────────────────

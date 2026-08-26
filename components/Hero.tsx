@@ -69,7 +69,7 @@ export function Hero() {
                 <p className="hs-p">{s.body}</p>
                 <div className="btns">
                   <a className="btn btn-d" href={whatsappGeneral} target="_blank" rel="noopener">
-                    💬 आज का Rate पूछें <IconArrow />
+                    💬 WhatsApp पर पूछिए <IconArrow />
                   </a>
                 </div>
               </div>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { shop } from "@/data/shop";
 import { ask, navCategories } from "@/data/content";
@@ -11,7 +12,7 @@ export function SiteFooter() {
       <div className="wrap">
         <div className="fgrid">
           <div>
-            <Link className="logo" href="/"><i>MW</i><span>{shop.name}<s>{shop.tagline}</s></span></Link>
+            <Link className="logo" href="/"><i><Image src="/images/mobile-world-logo-49447c57.webp" alt="" width={240} height={182} sizes="46px" /></i><span>{shop.name}<s>{shop.tagline}</s></span></Link>
             <address style={{ marginTop: 12 }}>
               {shop.address.street}<br />
               {shop.address.landmark}<br />

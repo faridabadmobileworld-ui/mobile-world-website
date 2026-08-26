@@ -25,8 +25,8 @@ export default function Visit() {
           दुकान पर आइए, और हमें सेवा का मौक़ा दीजिए
         </h1>
         <p style={{ color: "var(--ink-2)", maxWidth: "60ch", margin: "0 0 16px" }}>
-          आने से पहले model का नाम WhatsApp कर दीजिए। हम stock और आज का rate confirm
-          कर देंगे — ताकि आपका चक्कर बेकार न जाए।
+          आने से पहले model का नाम WhatsApp कर दीजिए। हम बता देंगे कि वो दुकान पर
+          मौजूद है या नहीं — ताकि आपका चक्कर बेकार न जाए।
         </p>
 
         <Banner src="/images/visit-mobile-world-store-gurudwara-road-3656c82d.webp"
@@ -70,7 +70,7 @@ export default function Visit() {
             </a>
             <a className="btn btn-o" href={shop.phone.tel}><IconPhone /> {shop.phone.display}</a>
             <a className="btn btn-w" href={whatsappGeneral} target="_blank" rel="noopener">
-              <IconWhatsApp /> Model बताइए, Rate बता देंगे
+              <IconWhatsApp /> WhatsApp पर पूछिए
             </a>
           </div>
         </div>

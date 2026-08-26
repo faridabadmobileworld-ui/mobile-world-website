@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { shop, brands, legacy, values } from "@/data/shop";
-import { storePhotos, navCategories, ask } from "@/data/content";
+import { storePhotos, navCategories, whatsappGeneral } from "@/data/content";
 import { FollowUs } from "@/components/FollowUs";
 import { Banner } from "@/components/Banner";
 import { IconArrow, IconWhatsApp, IconPin, IconPhone } from "@/components/Icons";
@@ -208,16 +208,16 @@ export default function About() {
             {" "}{shop.address.city}, {shop.address.state} – {shop.address.postalCode}
           </p>
           <p style={{ marginTop: 8 }}>
-            आने से पहले model का नाम WhatsApp कर दीजिए। हम stock और आज का rate
-            confirm कर देंगे — ताकि आपका चक्कर बेकार न जाए।
+            आने से पहले model का नाम WhatsApp कर दीजिए। हम बता देंगे कि वो दुकान पर
+            मौजूद है या नहीं — ताकि आपका चक्कर बेकार न जाए।
           </p>
           <div className="btns" style={{ justifyContent: "center" }}>
             <a className="btn btn-d" href={shop.social.googleMaps} target="_blank" rel="noopener">
               <IconPin /> रास्ता देखिए
             </a>
             <a className="btn btn-o" href={shop.phone.tel}><IconPhone /> {shop.phone.display}</a>
-            <a className="btn btn-w" href={ask("aaj ka rate")} target="_blank" rel="noopener">
-              <IconWhatsApp /> Model बताइए, Rate बता देंगे
+            <a className="btn btn-w" href={whatsappGeneral} target="_blank" rel="noopener">
+              <IconWhatsApp /> WhatsApp पर पूछिए
             </a>
           </div>
         </div>

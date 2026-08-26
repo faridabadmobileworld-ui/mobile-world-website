@@ -33,8 +33,8 @@ export function ProductFilter() {
   if (!q) {
     return (
       <p style={{ color: "var(--ink-2)", maxWidth: "62ch", margin: "0 0 6px" }}>
-दाम यहाँ नहीं लिखे हैं। Rate रोज़ बदलता है और bank offers अलग-अलग होते हैं —
-        इसलिए जो चाहिए उसका नाम WhatsApp पर भेज दीजिए, हम stock और आज का rate बता देंगे।
+यहाँ दुकान का पूरा सामान एक जगह है। जो चाहिए उसका नाम WhatsApp पर भेज दीजिए —
+        हम बता देंगे कि वो मौजूद है या नहीं, और आपके काम का कौन सा model रहेगा।
       </p>
     );
   }
@@ -44,7 +44,7 @@ export function ProductFilter() {
       <span>
         {hits
           ? `“${q}” के लिए ${hits} चीज़${hits === 1 ? "" : "ें"} मिलीं।`
-          : `“${q}” के लिए कुछ नहीं मिला। Stock रोज़ बदलता है — WhatsApp पर पूछ लीजिए।`}
+          : `“${q}” के लिए कुछ नहीं मिला। WhatsApp पर पूछ लीजिए, शायद दुकान पर हो।`}
       </span>
       <Link className="btn btn-o btn-s" href="/products">साफ़ कीजिए</Link>
       {!hits && (

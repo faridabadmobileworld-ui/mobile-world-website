@@ -3,13 +3,14 @@ import { shop } from "@/data/shop";
 import { items, navCategories } from "@/data/content";
 import { ProductCard } from "@/components/ProductCard";
 import { ProductFilter } from "@/components/ProductFilter";
+import { Banner } from "@/components/Banner";
 
 export const metadata: Metadata = {
   title: "क्या-क्या मिलता है",
   description:
     `${shop.tagline} का सभी सामान — Smartphone, Laptop, TV, AC, Refrigerator, ` +
     `Washing Machine, Inverter और Kitchen Appliances। ${shop.name}, ` +
-    `${shop.address.locality}, ${shop.address.city}। Stock और आज का rate WhatsApp पर पूछ लीजिए।`,
+    `${shop.address.locality}, ${shop.address.city}। क्या-क्या मौजूद है, WhatsApp पर पूछ लीजिए।`,
   alternates: { canonical: "/products" },
 };
 
@@ -23,6 +24,11 @@ export default function Products() {
           सब कुछ, एक ही छत के नीचे — {shop.tagline} का सभी सामान।
         </p>
         <ProductFilter />
+      </section>
+
+      <section className="sec">
+        <Banner src="/images/everything-under-one-roof-mobile-world-4a8926d5.webp"
+          alt={`सब कुछ एक ही छत के नीचे — ${shop.name}, ${shop.tagline}`} />
       </section>
 
       {navCategories.map((c) => {

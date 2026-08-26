@@ -33,7 +33,7 @@ export default function Contact() {
           <p>रोज़ सुबह 10 बजे से रात 10 बजे तक, सातों दिन।</p>
           <div className="btns" style={{ justifyContent: "center" }}>
             <a className="btn btn-w" href={whatsappGeneral} target="_blank" rel="noopener">
-              <IconWhatsApp /> Model बताइए, Rate बता देंगे
+              <IconWhatsApp /> WhatsApp पर पूछिए
             </a>
             <a className="btn btn-d" href={shop.phone.tel}><IconPhone /> {shop.phone.display}</a>
             <a className="btn btn-o" href={shop.social.googleMaps} target="_blank" rel="noopener">
@@ -61,8 +61,8 @@ export default function Contact() {
         <div className="panel rv in" style={{ maxWidth: 820 }}>
           <h2 style={{ fontSize: "1.1rem", margin: "0 0 10px" }}>आने से पहले</h2>
           <p style={{ fontSize: 14.5, color: "var(--ink-2)", margin: "0 0 10px" }}>
-            जो model चाहिए उसका नाम WhatsApp पर भेज दीजिए। हम stock और आज का rate
-            पहले ही बता देंगे — एक ही चक्कर में काम हो जाएगा।
+            जो model चाहिए उसका नाम WhatsApp पर भेज दीजिए। हम पहले ही बता देंगे कि
+            वो दुकान पर मौजूद है या नहीं — एक ही चक्कर में काम हो जाएगा।
           </p>
           <p style={{ fontSize: 14.5, color: "var(--ink-2)", margin: 0 }}>
             बाहर से आ रहे हैं तो निकलने से पहले एक message कर दीजिए। हम बता देंगे कि

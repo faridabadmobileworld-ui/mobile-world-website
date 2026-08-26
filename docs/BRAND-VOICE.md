@@ -30,16 +30,17 @@
 - **हिन्दी main भाषा है, और हमेशा देवनागरी में।**
 - Roman Hinglish में हिन्दी वाक्य **मत** लिखो — "Aaj ka rate poochiye" ग़लत है।
 - जो English business/technical शब्द रोज़ बोले जाते हैं, वो English में ही रहें:
-  business · products · service · experience · brand · model · stock · rate ·
+  business · products · service · experience · brand · model · stock ·
   WhatsApp · Smartphone · Laptop · TV · AC · Refrigerator · Washing Machine ·
   Inverter & Batteries · Kitchen Appliances · GST Bill · Warranty · Exchange ·
   EMI · Installation · Support
 - इन्हें ज़बरदस्ती हिन्दी में मत बदलो ("मूल्य दर", "प्रशीतक" — ऐसा कुछ नहीं)।
+- **"rate" जान-बूझकर इस list में नहीं है** — नीचे §7 देखिए।
 
 | | |
 |---|---|
-| ✅ सही | आज का rate WhatsApp पर पूछिए। |
-| ❌ ग़लत | आज की मूल्य दर के संबंध में WhatsApp के माध्यम से जानकारी प्राप्त करें। |
+| ✅ सही | जो model चाहिए उसका नाम WhatsApp पर भेज दीजिए। |
+| ❌ ग़लत | अपेक्षित मॉडल की जानकारी WhatsApp के माध्यम से प्रेषित करें। |
 
 ---
 
@@ -88,7 +89,7 @@ Code में यह `data/shop.ts` से आता है:
 | पक्का GST Bill | 100% trusted |
 | Brand Warranty | Best service |
 | ख़रीदने से पहले product हाथ में लेकर देखिए | Unmatched quality |
-| Stock और आज का rate पहले पूछ लीजिए | Number one store |
+| आने से पहले पूछ लीजिए कि सामान मौजूद है | Number one store |
 | Exchange valuation आपके सामने | Best in class / World class |
 | | Unbeatable prices · One stop shop · Wide range |
 | | Trusted by thousands · Customer satisfaction is our priority |
@@ -109,7 +110,7 @@ Code में यह `data/shop.ts` से आता है:
 > दुकान पर आकर phone हाथ में लेकर देखिए। Display, weight और grip — ये photo में
 > पूरी तरह समझ नहीं आते।
 >
-> 💬 Model बताइए, stock और आज का rate बता देंगे।
+> 💬 Model बताइए, बता देंगे कि दुकान पर है या नहीं।
 
 ❌ "सबसे बेहतरीन Smartphones की शानदार range!"
 
@@ -136,11 +137,33 @@ Code में यह `data/shop.ts` से आता है:
 
 ## 7. WhatsApp CTA
 
-- 💬 आज का Rate पूछें
-- 💬 दुकान को Message करें
-- 💬 Model बताइए, Rate बता देंगे
+- 💬 WhatsApp पर पूछिए
+- 💬 दुकान को Message कीजिए
+- 💬 Model बताइए, हम बता देंगे
 
 Corporate CTA ("Enquire now", "Submit your requirement") मत लिखो।
+
+### ⛔ "आज का rate पूछिए" — कभी नहीं
+
+Owner ने 26 Aug 2026 को साफ़ मना किया:
+
+> *"कहीं भी ये मत लिखो कि आज का rate पूछो। ये कोई सब्ज़ी मंडी नहीं है
+> जो rate पता करने के लिए बोले website पे।"*
+
+यह सबसे सख़्त नियम है। Website पर **कहीं भी** — button, heading, meta
+description, alt text, blog — यह मत लिखो:
+
+- ❌ "आज का Rate पूछें"
+- ❌ "Model बताइए, Rate बता देंगे"
+- ❌ "Rate रोज़ बदलता है"
+- ❌ "stock और rate confirm कर देंगे"
+
+दाम की बात दुकान पर counter पर होती है, website पर नहीं। इसकी जगह
+**stock और सलाह** की बात कीजिए:
+
+- ✅ "Model बताइए, बता देंगे कि दुकान पर मौजूद है या नहीं।"
+- ✅ "आपके काम का कौन सा model रहेगा — यह बता देंगे।"
+- ✅ "WhatsApp पर पूछिए।"
 
 ---
 
