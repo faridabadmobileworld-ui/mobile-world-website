@@ -22,7 +22,7 @@ export default function Visit() {
       <section className="sec">
         <h1 style={{ fontSize: "clamp(1.4rem,4vw,2rem)", fontWeight: 800,
                      letterSpacing: "-.03em", margin: "0 0 6px" }}>
-          📍 दुकान पर आइए, और हमें सेवा का मौक़ा दीजिए
+          दुकान पर आइए, और हमें सेवा का मौक़ा दीजिए
         </h1>
         <p style={{ color: "var(--ink-2)", maxWidth: "60ch", margin: "0 0 16px" }}>
           आने से पहले model का नाम WhatsApp कर दीजिए। हम stock और आज का rate confirm
@@ -33,6 +33,9 @@ export default function Visit() {
           alt={`${shop.name} — ${shop.address.road}, ${shop.address.locality}, ${shop.address.city}`} />
 
         <div className="cband rv in">
+          <span className="cico" aria-hidden="true">
+            <Image src="/images/icon-shop-2b14210e.webp" alt="" width={200} height={200} sizes="96px" />
+          </span>
           <h2>{shop.name}</h2>
           <p>
             {shop.address.street}<br />

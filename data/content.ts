@@ -116,7 +116,7 @@ export const items: Item[] = [
     kicker: "Tablets",
     title: "पढ़ाई और काम के लिए Tablets",
     tags: ["हर size", "Setup"],
-    image: "/images/laptops-and-tablets-at-mobile-world-563b92a9.webp",
+    image: "/images/tablets-in-four-colours-9b68921c.webp",
   },
   {
     category: "laptops-tablets",
@@ -248,8 +248,8 @@ export const slides: Slide[] = [
     heading: "Every big brand,\none counter",
     body: `Smartphones, laptops, televisions और home appliances — सब एक ही दुकान पर, ${shop.address.road} पर। `
       + `${shop.legacyStartYear} से परिवार का business सफ़र, ${shop.foundingYear} से MOBILE WORLD।`,
-    image: "/images/inside-mobile-world-jawahar-colony-the-phone-37da6e97.webp",
-    alt: "Inside Mobile World, Jawahar Colony — the phone counter and brand displays",
+    image: "/images/smartphones-counter-wide-0f945e6d.webp",
+    alt: "MOBILE WORLD के counter पर हर बड़े brand के smartphones",
     bg: "var(--lav)",
   },
   {
@@ -257,8 +257,8 @@ export const slides: Slide[] = [
     heading: "Air conditioners\nfitted & tested",
     body: "AC का tonnage सिर्फ़ कमरे के size से तय नहीं होता — धूप, floor और room की condition भी देखनी पड़ती है। "
       + "हम कमरे के हिसाब से चुनते हैं, लगाते हैं, और चलाकर देखने के बाद ही जाते हैं।",
-    image: "/images/split-ac-fitted-and-tested-wide-8c7ac6ae.webp",
-    alt: "कमरे में लगा हुआ split air conditioner",
+    image: "/images/split-air-conditioner-fitted-in-a-room-17b0cbd3.webp",
+    alt: "कमरे में लगा हुआ split air conditioner, चलता हुआ",
     bg: "var(--peach)",
   },
   {
@@ -274,14 +274,22 @@ export const slides: Slide[] = [
     kicker: "ख़रीदने के बाद",
     heading: "जो यहाँ से लिया,\nउसकी बात यहीं होगी",
     body: "चौथे महीने में कुछ गड़बड़ हुई? सीधे दुकान पर आ जाइए। न courier, न पंद्रह दिन का इंतज़ार, न ticket number।",
-    image: "/images/smartphones-counter-wide-0f945e6d.webp",
-    alt: "MOBILE WORLD के counter पर हर बड़े brand के smartphones",
+    image: "/images/expert-mobile-repairing-at-mobile-world-f65f73a0.webp",
+    alt: "दुकान पर ही phone की repair — screen, battery और charging port",
     bg: "var(--mint)",
   },
 ];
 
 /** दुकान की असली photos। */
 export const storePhotos = [
+  {
+    src: "/images/inside-mobile-world-jawahar-colony-the-phone-37da6e97.webp",
+    w: 1000,
+    h: 562,
+    alt: `${shop.name} के अंदर — phone counter और brands का display`,
+    title: "Counter के पीछे",
+    caption: "जहाँ से हर सामान आपके हाथ में जाता है।",
+  },
   {
     src: "/images/mobile-world-storefront-on-gurudwara-road-ja-a182b026.webp",
     w: 720,
@@ -431,9 +439,102 @@ export const posts: Post[] = [
   },
 ];
 
-/** छोटे buying guides — अपना page नहीं, सीधे WhatsApp पर सवाल। */
-export const guides = [
-  { kicker: "Buying Guide", title: "Washing Machine — 6.5, 7 या 8 kg?", note: "घर में कितने लोग हैं" },
-  { kicker: "Buying Guide", title: "TV का size कितना — कितनी दूर से देखेंगे?", note: "पहले दूरी नापिए" },
-  { kicker: "भरोसा", title: "GST Bill क्यों ज़रूरी है", note: "Warranty का सबूत" },
+/**
+ * "काम की बातें" — home page का बायाँ panel।
+ *
+ * Icon owner के अपने design से आए हैं (26 Aug 2026)। हर line WhatsApp
+ * पर उसी विषय का सवाल खोलती है।
+ */
+export const helpPoints = [
+  {
+    icon: "/images/icon-guidance-0e26ba46.webp",
+    title: "सही Product चुनने में मदद",
+    body: "आपकी ज़रूरत और budget के हिसाब से सुझाव।",
+    topic: "सही product चुनने",
+  },
+  {
+    icon: "/images/icon-info-cd0b739c.webp",
+    title: "पूरी जानकारी, पहले ही",
+    body: "Features, Warranty और Offers — सब ख़रीदने से पहले।",
+    topic: "features और warranty",
+  },
+  {
+    icon: "/images/icon-savings-aeb79a07.webp",
+    title: "पैसे की बचत, बेहतर फ़ैसला",
+    body: "कौन सा model आपके काम का है और कौन सा नहीं — साफ़ बताते हैं।",
+    topic: "सही Deal चुनने",
+  },
+];
+
+/**
+ * "आपके काम की services" — home page का दायाँ panel।
+ *
+ * ⚠️ Owner के design में आख़िरी line "100% Genuine — Original Products
+ * की गारंटी" थी। "100%" और "गारंटी" जैसे दावे उनके अपने standard
+ * (docs/BRAND-VOICE.md §4) में मना हैं, इसलिए यहाँ वही बात उस रूप में
+ * लिखी है जो customer ख़ुद जाँच सके — GST Bill और Brand Warranty।
+ * Icon owner का ही है।
+ */
+export const serviceList = [
+  {
+    icon: "/images/icon-repair-56383a67.webp",
+    title: "Repair",
+    body: "दुकान पर ही, आपके सामने खोलकर।",
+    topic: "repair",
+  },
+  {
+    icon: "/images/icon-exchange-bc53d7d0.webp",
+    title: "Exchange",
+    body: "पुराने phone की आसान Exchange।",
+    topic: "पुराने phone के Exchange",
+  },
+  {
+    icon: "/images/icon-emi-e6aad705.webp",
+    title: "Card & EMI Finance",
+    body: "Cards और finance दोनों पर EMI।",
+    topic: "EMI",
+  },
+  {
+    icon: "/images/icon-gst-fbdd378a.webp",
+    title: "GST Bill",
+    body: "हर ख़रीद पर पक्का GST Bill।",
+    topic: "GST Bill",
+  },
+  {
+    icon: "/images/icon-support-0ba4e4a1.webp",
+    title: "Expert Support",
+    body: "ख़रीदने के बाद भी, हर क़दम पर।",
+    topic: "support",
+  },
+  {
+    icon: "/images/icon-genuine-d7ae5712.webp",
+    title: "Genuine Products",
+    body: "Original सामान, पूरी Brand Warranty के साथ।",
+    topic: "genuine products और warranty",
+  },
+];
+
+/**
+ * Repair, Exchange और EMI के बड़े poster — home page पर।
+ * ये अभी sample हैं, owner की असली तस्वीरें बाद में आएँगी।
+ */
+export const serviceBanners = [
+  {
+    key: "repair" as const,
+    src: "/images/expert-mobile-repairing-at-mobile-world-f65f73a0.webp",
+    alt: "Mobile repairing — screen, battery, charging port और software",
+    topic: "repair",
+  },
+  {
+    key: "exchange" as const,
+    src: "/images/mobile-exchange-at-mobile-world-e15aba81.webp",
+    alt: "पुराना phone Exchange करके नया लीजिए",
+    topic: "पुराने phone के Exchange",
+  },
+  {
+    key: "emi" as const,
+    src: "/images/easy-emi-finance-at-mobile-world-61ddf8e4.webp",
+    alt: "Cards और finance पर EMI",
+    topic: "EMI",
+  },
 ];

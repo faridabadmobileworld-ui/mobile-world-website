@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { shop } from "@/data/shop";
 import { localBusinessSchema, jsonLdScript } from "@/data/schema";
-import { items, storePhotos, serviceCards, posts, guides, ask, whatsappGeneral, navCategories } from "@/data/content";
+import { items, storePhotos, serviceBanners, posts, helpPoints, serviceList,
+         ask, whatsappGeneral, navCategories } from "@/data/content";
 import { Hero } from "@/components/Hero";
 import { ProductCard } from "@/components/ProductCard";
 import { Art } from "@/components/ArtSprite";
@@ -13,7 +14,6 @@ import { NextClosure } from "@/components/StoreStatus";
 
 export default function Home() {
   const top = items.slice(0, 8);
-  const services = serviceCards.filter((s) => shop.services[s.key]);
 
   return (
     <>
@@ -91,27 +91,18 @@ export default function Home() {
           </div>
         </section>
 
-        {services.length > 0 && (
-          <section className="sec">
-            <div className="shead"><h2>Service और Support</h2></div>
-            <div className="ptiles">
-              <a className={`ptile ${services[0].tone} rv in`} href={ask(services[0].topic)} target="_blank" rel="noopener">
-                <span className="k">{services[0].kicker}</span>
-                <h3>{services[0].title}</h3>
-                <p>{services[0].body}</p>
-                <span className="go">{services[0].cta} <IconArrow /></span>
+        <section className="sec">
+          <div className="shead"><h2>Service और Support</h2></div>
+          <div className="sbanners">
+            {serviceBanners.filter((b) => shop.services[b.key]).map((b) => (
+              <a className="sbanner rv in" key={b.key} href={ask(b.topic)}
+                 target="_blank" rel="noopener">
+                <Image src={b.src} alt={b.alt} width={1400} height={933}
+                  sizes="(max-width:900px) 100vw, 33vw" />
               </a>
-              <div className="pstack">
-                {services.slice(1, 3).map((s) => (
-                  <a key={s.key} className={`ptile ${s.tone} rv in`} href={ask(s.topic)} target="_blank" rel="noopener">
-                    <span className="k">{s.kicker}</span><h3>{s.title}</h3>
-                    <span className="go">{s.cta} <IconArrow /></span>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
+            ))}
+          </div>
+        </section>
 
         <section className="sec" id="store-photos">
           <div className="shead">
@@ -155,21 +146,25 @@ export default function Home() {
         <section className="sec">
           <div className="cols2">
             <div className="panel rv in">
-              <h2 style={{ fontSize: "1.05rem", margin: "0 0 10px" }}>काम की बातें</h2>
-              {guides.map((g) => (
-                <a className="lrow" key={g.title} href={ask(g.title)} target="_blank" rel="noopener">
-                  <span className="m"><Art id="a-accessory" /></span>
-                  <span><s>{g.kicker}</s><b>{g.title}</b><em>{g.note}</em></span>
+              <h2 style={{ fontSize: "1.05rem", margin: "0 0 12px" }}>काम की बातें</h2>
+              {helpPoints.map((h) => (
+                <a className="lrow" key={h.title} href={ask(h.topic)} target="_blank" rel="noopener">
+                  <span className="m">
+                    <Image className="ph-img" src={h.icon} alt="" width={200} height={200} sizes="66px" />
+                  </span>
+                  <span><b>{h.title}</b><em>{h.body}</em></span>
                 </a>
               ))}
             </div>
 
             <div className="panel rv in">
-              <h2 style={{ fontSize: "1.05rem", margin: "0 0 10px" }}>आपके काम की services</h2>
-              {services.slice(0, 3).map((s) => (
-                <a className="lrow" key={s.key} href={ask(s.topic)} target="_blank" rel="noopener">
-                  <span className="m"><Art id="a-phone" /></span>
-                  <span><s>{s.kicker}</s><b>{s.title}</b><em>{s.cta}</em></span>
+              <h2 style={{ fontSize: "1.05rem", margin: "0 0 12px" }}>आपके काम की services</h2>
+              {serviceList.map((v) => (
+                <a className="lrow tight" key={v.title} href={ask(v.topic)} target="_blank" rel="noopener">
+                  <span className="m sm">
+                    <Image className="ph-img" src={v.icon} alt="" width={200} height={200} sizes="48px" />
+                  </span>
+                  <span><b>{v.title}</b><em>{v.body}</em></span>
                 </a>
               ))}
             </div>
@@ -180,7 +175,10 @@ export default function Home() {
 
         <section className="sec" id="visit">
           <div className="cband rv in">
-            <h2>📍 दुकान पर आइए, और हमें सेवा का मौक़ा दीजिए</h2>
+            <span className="cico" aria-hidden="true">
+              <Image src="/images/icon-shop-2b14210e.webp" alt="" width={200} height={200} sizes="96px" />
+            </span>
+            <h2>दुकान पर आइए, और हमें सेवा का मौक़ा दीजिए</h2>
             <p>{shop.address.street}, {shop.address.landmark}, {shop.address.locality},
               {" "}{shop.address.city}, {shop.address.state} {shop.address.postalCode}.</p>
             <p style={{ marginTop: 8 }}>

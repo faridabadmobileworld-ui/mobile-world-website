@@ -8,6 +8,7 @@
  * से customer सीधे बात कर सकता है।
  */
 
+import Image from "next/image";
 import { shop } from "@/data/shop";
 import { whatsappGeneral } from "@/data/content";
 import { IconYouTube, IconInstagram, IconFacebook, IconWhatsApp } from "./Icons";
@@ -16,11 +17,14 @@ export function FollowUs({ heading = "हमसे जुड़े रहिए"
   return (
     <section className="sec">
       <div className="follow rv in">
+        <span className="fico" aria-hidden="true">
+          <Image src="/images/icon-gift-7b8c26a3.webp" alt="" width={200} height={200} sizes="88px" />
+        </span>
         <div>
           <b>{heading}</b>
           <p>
-            भारी discounts, gifts, offers और नए stock की जानकारी सबसे पहले यहीं
-            मिलती है। हमें YouTube, Instagram, Facebook और WhatsApp पर follow कीजिए।
+            भारी discounts, gifts, offers और New Arrivals की जानकारी सबसे पहले पाइए।
+            हमें YouTube, Instagram, Facebook और WhatsApp पर follow कीजिए।
           </p>
         </div>
         <div className="fbtns">

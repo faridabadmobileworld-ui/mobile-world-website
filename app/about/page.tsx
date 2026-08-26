@@ -199,7 +199,10 @@ export default function About() {
 
       <section className="sec">
         <div className="cband rv in">
-          <h2>📍 दुकान पर आइए, और हमें सेवा का मौक़ा दीजिए</h2>
+          <span className="cico" aria-hidden="true">
+            <Image src="/images/icon-shop-2b14210e.webp" alt="" width={200} height={200} sizes="96px" />
+          </span>
+          <h2>दुकान पर आइए, और हमें सेवा का मौक़ा दीजिए</h2>
           <p>
             {shop.address.street}, {shop.address.landmark}, {shop.address.locality},
             {" "}{shop.address.city}, {shop.address.state} – {shop.address.postalCode}
