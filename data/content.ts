@@ -13,12 +13,12 @@ import { shop, categories } from "@/data/shop";
 /** WhatsApp पर सवाल भेजने का link। Text हमेशा encode होकर जाता है। */
 export function ask(topic: string): string {
   return `${shop.phone.whatsapp}?text=${encodeURIComponent(
-    `Namaste MOBILE WORLD! मुझे ${topic} के बारे में जानना है।`,
+    `Namaste Mobile World! मुझे ${topic} के बारे में जानना है।`,
   )}`;
 }
 
 export const whatsappGeneral = `${shop.phone.whatsapp}?text=${encodeURIComponent(
-  "Namaste MOBILE WORLD! मुझे एक product के बारे में जानकारी चाहिए।",
+  "Namaste Mobile World! मुझे एक product के बारे में जानकारी चाहिए।",
 )}`;
 
 /**
@@ -269,11 +269,11 @@ export type Slide = {
 
 export const slides: Slide[] = [
   {
-    kicker: "MOBILE WORLD",
+    kicker: "Mobile World",
     heading: "हर बड़ा brand,\nएक ही counter",
     body: `Smartphone, Laptop, TV, AC, Refrigerator, Washing Machine और घर का बाक़ी सामान — सब ${shop.address.road} पर।`,
     image: "/images/hero-showroom-e594f39c.webp",
-    alt: "MOBILE WORLD की दुकान के अंदर — mobile, laptop, TV, AC, fridge और washing machine",
+    alt: "Mobile World की दुकान के अंदर — mobile, laptop, TV, AC, fridge और washing machine",
     bg: "#141428",
     focus: "center 62%",
   },
@@ -289,9 +289,9 @@ export const slides: Slide[] = [
   {
     kicker: "हमारा सफ़र",
     heading: "हर सफ़र की शुरुआत\nएक भरोसे से होती है",
-    body: `${shop.legacyStartYear} में Aggarwal Kiryana Store से शुरू हुआ परिवार का business सफ़र, और ${shop.foundingYear} से MOBILE WORLD।`,
+    body: `${shop.legacyStartYear} में Aggarwal Kiryana Store से शुरू हुआ परिवार का business सफ़र, और ${shop.foundingYear} से Mobile World।`,
     image: "/images/hero-hamara-safar-bffea417.webp",
-    alt: "1973 Aggarwal Kiryana, 2006 Aggarwal Kiryana & Communication, 2016 MOBILE WORLD",
+    alt: "1973 Aggarwal Kiryana, 2006 Aggarwal Kiryana & Communication, 2016 Mobile World",
     bg: "#2A1E12",
     focus: "center 58%",
   },
@@ -427,7 +427,7 @@ export const posts: Post[] = [
     image: "/images/a-customer-collecting-a-redmi-note-17-at-mob-c8b22cc4.webp",
     imageW: 900,
     imageH: 1125,
-    alt: "MOBILE WORLD पर नया phone लेते हुए एक ग्राहक",
+    alt: "Mobile World पर नया phone लेते हुए एक ग्राहक",
     body: `
 <p>Stock हर हफ़्ते बदलता है। इसलिए ऐसे model के नाम गिनाने का कोई फ़ायदा नहीं जो अगले हफ़्ते बदल जाएँ। इसकी जगह यह समझ लीजिए कि लोग असल में किन तीन तरह के phones में से चुनते हैं।</p>
 <p>पहला phone हो, या बच्चे की पढ़ाई के लिए हो — तो battery और screen डिब्बे पर छपे camera के megapixel से कहीं ज़्यादा मायने रखते हैं। जो phone पूरा दिन चल जाए और धूप में भी साफ़ दिखे, वो रोज़ ज़्यादा अच्छा लगेगा, चाहे उसका camera कितने भी megapixel का हो।</p>
@@ -447,7 +447,7 @@ export const posts: Post[] = [
     image: "/images/customers-at-the-mobile-world-counter-aa76e06b.webp",
     imageW: 800,
     imageH: 450,
-    alt: "MOBILE WORLD के counter पर ग्राहक",
+    alt: "Mobile World के counter पर ग्राहक",
     body: `
 <p>दुकान और आस-पास का पूरा बाज़ार हर महीने की आख़िरी तारीख़ को बंद रहता है। यानी 28, 29, 30 या 31 — जो भी उस महीने की आख़िरी तारीख़ हो।</p>
 <p>इस website पर ऊपर जो live status दिखता है, वो यह ख़ुद गिन लेता है — इसलिए अगली छुट्टी की तारीख़ हमेशा सही दिखेगी।</p>

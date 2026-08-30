@@ -72,7 +72,7 @@ export type Brand = {
 export type Shop = {
   name: string;
   /**
-   * दुकान के board वाला दूसरा हिस्सा — "Consumer Electronics & Home Appliances"।
+   * दुकान के board वाला दूसरा हिस्सा — "Mobile • Laptop • Electronics • Home Appliances"।
    * Owner हर जगह (Google, Instagram, Facebook, YouTube) यही naam रख रहे हैं,
    * इसलिए website के title, header, footer और schema में भी यही जाता है।
    */
@@ -92,13 +92,13 @@ export type Shop = {
   monthlyClosure: "last-calendar-date";
   services: Services;
   /**
-   * MOBILE WORLD किस साल शुरू हुई — 2016।
+   * Mobile World किस साल शुरू हुई — 2016।
    * Google को schema में यही तारीख़ जाती है।
    */
   foundingYear: number;
   /**
    * परिवार का business किस साल शुरू हुआ — 1973।
-   * यह दुकान की कहानी है, MOBILE WORLD की founding date नहीं।
+   * यह दुकान की कहानी है, Mobile World की founding date नहीं।
    * इसे schema की `foundingDate` में कभी मत डालो।
    */
   legacyStartYear: number;
@@ -195,10 +195,10 @@ function resolveSiteUrl(): string {
 }
 
 export const shop: Shop = {
-  /** Public नाम — website पर यही दिखेगा। Owner हर जगह capital में लिखते हैं। */
-  name: "MOBILE WORLD",
+  /** Public नाम — website पर हर जगह यही। Owner ने 27 Aug 2026 को final किया। */
+  name: "Mobile World",
   /** Board वाला दूसरा हिस्सा। Title और header में naam के साथ जाता है। */
-  tagline: "Consumer Electronics & Home Appliances",
+  tagline: "Mobile • Laptop • Electronics • Home Appliances",
   /** Registered नाम — सिर्फ़ legal/footer के लिए। */
   registeredName: "Aggarwal Kiryana And Communication",
   owner: "Tarun Gupta",
@@ -237,7 +237,7 @@ export const shop: Shop = {
     longitude: 77.28786,
   },
 
-  // MOBILE WORLD 2016 में शुरू हुई। 1973 परिवार के business की शुरुआत है —
+  // Mobile World 2016 में शुरू हुई। 1973 परिवार के business की शुरुआत है —
   // दोनों अलग बातें हैं, मिलाना मत (ऊपर `legacy` का note देखिए)।
   foundingYear: 2016,
   legacyStartYear: 1973,
@@ -286,7 +286,7 @@ export const fullAddress = [
  * ⚠️ सबसे ज़रूरी बात — इन्हें कभी मिलाकर मत लिखो:
  *
  *   1973 = परिवार के business की शुरुआत (Aggarwal Kiryana Store)
- *   2016 = MOBILE WORLD की शुरुआत
+ *   2016 = Mobile World की शुरुआत
  *
  * "Mobile World 1973 में शुरू हुई" या "Aggarwal Kiryana & Communication
  * 1973 में खुली" — दोनों ग़लत हैं। दुकान 1973 से इसी पते पर है, ये भी
@@ -316,7 +316,7 @@ export const legacy: Milestone[] = [
   },
   {
     year: "2016",
-    name: "MOBILE WORLD",
+    name: "Mobile World",
     tag: "विरासत वही, सोच नई, सेवा बेहतर",
     body: "नए दौर की technology, आपके विश्वास के साथ आगे बढ़ते क़दम।",
   },

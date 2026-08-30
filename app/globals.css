@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ═══════════════════════════════════════════════════════════
-   MOBILE WORLD — design system
+   Mobile World — design system
    Ye styles preview build se aayi hain. Enquiry-only site:
    koi cart nahi, koi daam nahi.
 
@@ -10,7 +10,7 @@
    ═══════════════════════════════════════════════════════════ */
 
 /* ═══════════════════════════════════════════════════════════
-   MOBILE WORLD — electronics store layout
+   Mobile World — electronics store layout
    Light marketplace grid. Enquiry-only: no cart, no prices.
    ═══════════════════════════════════════════════════════════ */
 :root{
@@ -56,9 +56,9 @@ ul{list-style:none;margin:0;padding:0}
 .hdr{position:sticky;top:0;z-index:60;background:var(--card);border-bottom:1px solid var(--line)}
 .hdr .wrap{display:flex;align-items:center;gap:12px;min-height:58px}
 .logo{display:flex;align-items:center;min-height:44px;gap:9px;font-weight:800;letter-spacing:-.03em;font-size:17px}
-/* MOBILE WORLD ka logo — owner ne 26 Aug 2026 ko diya. Peeche kaala
+/* Mobile World ka logo — owner ne 26 Aug 2026 ko diya. Peeche kaala
    background isi tasveer ka hissa hai, isliye dabba bhi kaala hai. */
-/* MOBILE WORLD ka logo — paardarshi hai, isliye peeche koi dabba nahi. */
+/* Mobile World ka logo — paardarshi hai, isliye peeche koi dabba nahi. */
 .logo i{width:40px;height:40px;flex:none;display:block}
 .logo i img{width:100%;height:100%;object-fit:contain}
 .logo span{white-space:nowrap}
@@ -491,9 +491,9 @@ body.searching .qinfo{display:flex}
 .btn-fb{background:#1877F2;color:#fff}
 .btn-fb:hover{background:#1462C6}
 
-/* ── logo ka doosra hissa: "Consumer Electronics & Home Appliances" ──
+/* ── logo ka doosra hissa: shop.tagline ──
    Naam lamba hai. Header mein jagah tabhi hai jab screen chaudi ho —
-   chhoti screen par sirf MOBILE WORLD dikhta hai, poora naam title,
+   chhoti screen par sirf Mobile World dikhta hai, poora naam title,
    drawer aur footer mein rehta hai. */
 .logo s{letter-spacing:.06em;max-width:100%}
 .hdr .logo s{display:none}
@@ -501,7 +501,7 @@ body.searching .qinfo{display:flex}
 .drawer .logo span,.ftr .logo span{white-space:normal}
 .drawer .logo s,.ftr .logo s{font-size:8.5px;line-height:1.5;max-width:22ch}
 
-/* "MOBILE WORLD" capital mein "Mobile World" se chauda hai. 320px wale
+/* 320px wale
    phone par header ke teenon hisse (menu, logo, call+WhatsApp) tabhi
    samaate hain jab gap aur logo dono thoda chhote ho jaayein. */
 @media(max-width:360px){

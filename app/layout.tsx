@@ -15,7 +15,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(shop.siteUrl),
   title: {
-    default: `${shop.name} — ${shop.tagline}, ${shop.address.city}`,
+    default: `${shop.name}, ${shop.address.city} — ${shop.tagline}`,
     template: `%s | ${shop.name}`,
   },
   description:
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     siteName: shop.name,
     locale: "hi_IN",
     url: "/",
-    title: `${shop.name} — ${shop.tagline}, ${shop.address.city}`,
+    title: `${shop.name}, ${shop.address.city} — ${shop.tagline}`,
     description: `हर बड़ा brand, एक ही counter। ${shop.address.road}, ${shop.address.locality}।`,
     images: [{
       url: "/og-image.jpg", width: 1200, height: 630,
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${shop.name} — ${shop.tagline}, ${shop.address.city}`,
+    title: `${shop.name}, ${shop.address.city} — ${shop.tagline}`,
     images: ["/og-image.jpg"],
   },
   robots: {

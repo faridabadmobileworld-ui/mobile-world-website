@@ -22,8 +22,9 @@ WhatsApp message, या physical visit।
 
 ## 2. Business facts — इन्हें कभी बदलकर मत लिखो
 
-- **Shop name (public):** MOBILE WORLD
-- **Board/tagline:** Consumer Electronics & Home Appliances
+- **Shop name (public):** Mobile World
+- **Board/tagline:** Mobile • Laptop • Electronics • Home Appliances
+  *(owner ने 27 Aug 2026 को final किया — bullet `•` समेत, बिलकुल ऐसे ही)*
   — owner हर जगह (Google, Instagram, Facebook, YouTube) यही रख रहे हैं।
   Code में `shop.name` और `shop.tagline`.
 - **Registered name:** Aggarwal Kiryana And Communication
@@ -271,7 +272,7 @@ brand warranty, दुकान पर ही repair, एक ही address। �
 - **कहानी कभी मत गड़बड़ाओ:**
   1973 = परिवार के business की शुरुआत (Aggarwal Kiryana Store) ·
   2006 = Aggarwal Kiryana & Communication ·
-  **2016 = MOBILE WORLD की शुरुआत**।
+  **2016 = Mobile World की शुरुआत**।
   "Mobile World 1973 में शुरू हुई" लिखना ग़लत है। Code में यह
   `shop.foundingYear` (2016), `shop.legacyStartYear` (1973) और `legacy`
   से आता है — दोबारा मत लिखो।

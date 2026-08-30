@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: "हमारे बारे में",
   description:
     `परिवार का business सफ़र ${shop.legacyStartYear} में Aggarwal Kiryana Store से शुरू हुआ, ` +
-    `और ${shop.foundingYear} में इसी विरासत को आगे बढ़ाते हुए MOBILE WORLD की शुरुआत हुई। ` +
+    `और ${shop.foundingYear} में इसी विरासत को आगे बढ़ाते हुए Mobile World की शुरुआत हुई। ` +
     `${shop.address.road}, ${shop.address.locality}, ${shop.address.city}।`,
   alternates: { canonical: "/about" },
 };
@@ -48,7 +48,7 @@ export default function About() {
           2006 में यह सफ़र Aggarwal Kiryana &amp; Communication के रूप में आगे बढ़ा।
         </p>
         <p className="lede">
-          और {shop.foundingYear} में इसी विरासत को आगे बढ़ाते हुए MOBILE WORLD की
+          और {shop.foundingYear} में इसी विरासत को आगे बढ़ाते हुए Mobile World की
           शुरुआत हुई।
         </p>
         <p className="lede">
@@ -57,14 +57,14 @@ export default function About() {
         </p>
         <p className="lede">
           हम उन सभी ग्राहकों का दिल से धन्यवाद करते हैं, जिन्होंने वर्षों से हम पर
-          अपना भरोसा बनाए रखा और MOBILE WORLD को अपने परिवार का हिस्सा माना।
+          अपना भरोसा बनाए रखा और Mobile World को अपने परिवार का हिस्सा माना।
         </p>
       </section>
 
       <section className="sec">
         <div className="shead"><h2>हमारा सफ़र</h2></div>
         <Banner src="/images/mobile-world-ka-safar-1973-2006-2016-e38c681c.webp"
-          alt="एक सफ़र, एक परिवार, एक भरोसा — 1973 Aggarwal Kiryana Store, 2006 Aggarwal Kiryana &amp; Communication, 2016 MOBILE WORLD" />
+          alt="एक सफ़र, एक परिवार, एक भरोसा — 1973 Aggarwal Kiryana Store, 2006 Aggarwal Kiryana &amp; Communication, 2016 Mobile World" />
         <ol className="tline">
           {legacy.map((m) => (
             <li className="rv in" key={m.year}>
@@ -120,7 +120,7 @@ export default function About() {
           <div className="panel rv in">
             <h3>सामान</h3>
             <p style={{ margin: "0 0 12px", fontSize: 13.5, color: "var(--ink-2)" }}>
-              Consumer Electronics &amp; Home Appliances का सभी सामान — एक ही counter पर।
+              {shop.tagline} — दुकान का सारा सामान एक ही counter पर।
             </p>
             <ul className="chips">
               {navCategories.map((c) => <li key={c.slug}>{c.label}</li>)}

@@ -1,4 +1,4 @@
-# MOBILE WORLD — Brand Voice & Copy Standard
+# Mobile World — Brand Voice & Copy Standard
 
 **Owner ने 25 Aug 2026 को approve किया। यही पूरी website की master voice है।**
 नई copy लिखने से पहले यह पूरा पढ़िए। CLAUDE.md §13 इसी की तरफ़ इशारा करती है।
@@ -13,11 +13,11 @@
 >
 > हमारे परिवार का business सफ़र 1973 में Aggarwal Kiryana Store से शुरू हुआ।
 > 2006 में यह सफ़र Aggarwal Kiryana & Communication के रूप में आगे बढ़ा और
-> 2016 में इसी विरासत को आगे बढ़ाते हुए MOBILE WORLD की शुरुआत हुई।
+> 2016 में इसी विरासत को आगे बढ़ाते हुए Mobile World की शुरुआत हुई।
 >
 > तब से लेकर आज तक, हमारे साथ जुड़े हर ग्राहक ने इस सफ़र को आगे बढ़ाने में अपना
 > योगदान दिया है। हम उन सभी ग्राहकों का दिल से धन्यवाद करते हैं, जिन्होंने
-> वर्षों से हम पर अपना भरोसा बनाए रखा और MOBILE WORLD को अपने परिवार का
+> वर्षों से हम पर अपना भरोसा बनाए रखा और Mobile World को अपने परिवार का
 > हिस्सा माना।
 >
 > आज भी हमारा प्रयास वही है — Genuine Products, सही Guidance और भरोसेमंद
@@ -46,7 +46,7 @@
 
 ## 2. Tone
 
-ऐसा लगे जैसे **MOBILE WORLD ख़ुद ग्राहक से बात कर रही है** — गर्मजोशी से,
+ऐसा लगे जैसे **Mobile World ख़ुद ग्राहक से बात कर रही है** — गर्मजोशी से,
 इज़्ज़त से, सादगी से, बिना शेखी के।
 
 **कभी ऐसा मत लगने दो:** advertising agency · SEO agency · corporate brochure ·
@@ -63,10 +63,10 @@ generic ecommerce site · ज़बरदस्ती बेचता हुआ 
 ```
 1973 — Aggarwal Kiryana Store               ← परिवार के business की शुरुआत
 2006 — Aggarwal Kiryana & Communication
-2016 — MOBILE WORLD                          ← MOBILE WORLD की शुरुआत
+2016 — Mobile World                          ← Mobile World की शुरुआत
 ```
 
-**1973 परिवार के सफ़र की शुरुआत है। MOBILE WORLD 2016 में शुरू हुई।**
+**1973 परिवार के सफ़र की शुरुआत है। Mobile World 2016 में शुरू हुई।**
 
 ❌ "Mobile World started in 1973."
 ❌ "Aggarwal Kiryana & Communication opened in 1973."
@@ -203,7 +203,7 @@ Delivery, और Mobile Repairing — बस इतना।
 
 ## 10. लिखने से पहले हर बार यह पूछो
 
-> **"क्या यह MOBILE WORLD की उसी आवाज़ में है जिसमें यह लिखा गया था —**
+> **"क्या यह Mobile World की उसी आवाज़ में है जिसमें यह लिखा गया था —**
 > **'हर सफ़र की शुरुआत एक भरोसे से होती है। ❤️' ?"**
 
 अगर नहीं, तो दोबारा लिखो।
