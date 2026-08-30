@@ -184,11 +184,15 @@ Visitor details save करना, customer login।
 
 ### Site live करने से पहले — ये चारों ज़रूरी हैं
 
-- [ ] **Domain** `www.mobileworldfaridabad.com` ख़रीदना है। अभी किसी के नाम
-      पर नहीं है। पूरा code इसी नाम को मानकर लिखा है — नाम बदला तो
-      `data/shop.ts` का `siteUrl` बदलना होगा, schema और sitemap अपने आप
-      ठीक हो जाएँगे।
-- [ ] **Vercel account** — hosting यहीं होगी (CLAUDE.md §4)
+- [x] ~~**Domain**~~ — `mobileworldfaridabad.com` owner ने 30 Aug 2026 को
+      ख़रीद लिया। Code अब सीधे `https://www.mobileworldfaridabad.com` इस्तेमाल
+      करता है (`data/shop.ts` का `SITE_URL`)। बदलना हो तो Vercel में
+      `NEXT_PUBLIC_SITE_URL` भर दीजिए — code छूने की ज़रूरत नहीं।
+- [x] ~~**Vercel account**~~ — project `mobile-world-website`, team
+      `faridabadmobileworld-2892`
+- [ ] **Domain को Vercel से जोड़ना** — Vercel → Settings → Domains में
+      `www.mobileworldfaridabad.com` और `mobileworldfaridabad.com` दोनों जोड़िए,
+      `www` को primary रखिए। यह owner को dashboard से करना है।
 - [ ] **Privacy page** CA या वकील से DPDP Act के हिसाब से check करवाना है।
       ये बात page पर ख़ुद लिखी हुई है।
 - [ ] **Google Business Profile** verify करना, और हर महीने की आख़िरी तारीख़

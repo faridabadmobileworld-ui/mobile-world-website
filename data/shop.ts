@@ -175,23 +175,28 @@ export const brands: Brand[] = [
 /**
  * Website का पता।
  *
- * Domain अभी ख़रीदा नहीं है, इसलिए यह अपने आप तय होता है:
+ * Domain ख़रीदा जा चुका है — `www.mobileworldfaridabad.com`.
  *
- *  1. अगर Vercel में `NEXT_PUBLIC_SITE_URL` भरा है — वही (domain आने पर यही भरना है)
- *  2. वरना Vercel जो मुफ़्त पता देता है — जैसे `mobile-world-website.vercel.app`
- *  3. वरना (अपने computer पर) आने वाला domain
+ *  1. अगर Vercel में `NEXT_PUBLIC_SITE_URL` भरा है — वही
+ *  2. वरना नीचे लिखा असली domain
+ *
+ * Vercel का अपना `.vercel.app` पता अब जान-बूझकर इस्तेमाल नहीं होता —
+ * वरना Google को canonical, sitemap और schema में वही पता जाता रहता,
+ * और असली domain कभी index नहीं होता।
  *
  * यह ज़रूरी क्यों है: canonical, sitemap, schema और share वाली तस्वीर —
  * सब इसी पते से बनते हैं। ग़लत पता होगा तो Google ऐसी जगह ढूँढ़ेगा जो है ही नहीं।
  */
+/** Domain owner ने 30 Aug 2026 को ख़रीद लिया। यही website का असली पता है। */
+const SITE_URL = "https://www.mobileworldfaridabad.com";
+
 function resolveSiteUrl(): string {
+  // Vercel में `NEXT_PUBLIC_SITE_URL` भरा हो तो वही — domain बदलने पर
+  // सिर्फ़ वही एक जगह बदलनी पड़ेगी, code छूना नहीं पड़ेगा।
   const explicit = process.env.NEXT_PUBLIC_SITE_URL;
   if (explicit) return explicit.replace(/\/+$/, "");
 
-  const vercel = process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL;
-  if (vercel) return `https://${vercel}`;
-
-  return "https://www.mobileworldfaridabad.com";
+  return SITE_URL;
 }
 
 export const shop: Shop = {
