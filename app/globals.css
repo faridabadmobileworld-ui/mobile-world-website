@@ -56,8 +56,6 @@ ul{list-style:none;margin:0;padding:0}
 .hdr{position:sticky;top:0;z-index:60;background:var(--card);border-bottom:1px solid var(--line)}
 .hdr .wrap{display:flex;align-items:center;gap:12px;min-height:58px}
 .logo{display:flex;align-items:center;min-height:44px;gap:9px;font-weight:800;letter-spacing:-.03em;font-size:17px}
-/* Mobile World ka logo — owner ne 26 Aug 2026 ko diya. Peeche kaala
-   background isi tasveer ka hissa hai, isliye dabba bhi kaala hai. */
 /* Mobile World ka logo — paardarshi hai, isliye peeche koi dabba nahi. */
 .logo i{width:40px;height:40px;flex:none;display:block}
 .logo i img{width:100%;height:100%;object-fit:contain}
@@ -342,7 +340,9 @@ ul{list-style:none;margin:0;padding:0}
 .ftr{background:var(--card);border-top:1px solid var(--line);margin-top:24px;padding:30px 0 14px}
 .fgrid{display:grid;gap:26px;grid-template-columns:1fr}
 @media(min-width:640px){ .fgrid{grid-template-columns:repeat(2,1fr)} }
-@media(min-width:1000px){ .fgrid{grid-template-columns:1.6fr 1fr 1fr 1fr 1fr} }
+/* Pehla khaana thoda chauda — tagline ek line mein poori aani chahiye,
+   1.6fr par wo 1000px ke aas-paas kinare se bahar nikal rahi thi. */
+@media(min-width:1000px){ .fgrid{grid-template-columns:2fr 1fr 1fr 1fr 1fr} }
 .ftr .fh{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin:0 0 12px}
 .ftr li{margin-bottom:8px}
 .ftr li a{font-size:13px;color:var(--ink-2)}
@@ -495,11 +495,14 @@ body.searching .qinfo{display:flex}
    Naam lamba hai. Header mein jagah tabhi hai jab screen chaudi ho —
    chhoti screen par sirf Mobile World dikhta hai, poora naam title,
    drawer aur footer mein rehta hai. */
-.logo s{letter-spacing:.06em;max-width:100%}
+/* Tagline hamesha EK line mein — header, drawer, footer, sab jagah.
+   Pehle footer aur drawer mein wo teen line mein toot jaati thi. */
+.logo s{white-space:nowrap;letter-spacing:.03em;font-size:8px;line-height:1.5}
 .hdr .logo s{display:none}
-@media(min-width:900px){ .hdr .logo s{display:block;font-size:8.5px} }
-.drawer .logo span,.ftr .logo span{white-space:normal}
-.drawer .logo s,.ftr .logo s{font-size:8.5px;line-height:1.5;max-width:22ch}
+@media(min-width:900px){ .hdr .logo s{display:block;font-size:8.5px;letter-spacing:.05em} }
+.drawer .logo s,.ftr .logo s{display:block}
+/* Bahut chhoti screen par thoda aur chhota, taaki line na toote. */
+@media(max-width:360px){ .logo s{font-size:7.4px;letter-spacing:.01em} }
 
 /* 320px wale
    phone par header ke teenon hisse (menu, logo, call+WhatsApp) tabhi
