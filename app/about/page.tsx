@@ -12,8 +12,9 @@ import { NextClosure } from "@/components/StoreStatus";
 export const metadata: Metadata = {
   title: "हमारे बारे में",
   description:
-    `परिवार का business ${shop.legacyStartYear} में Aggarwal Kiryana से शुरू हुआ, और ` +
-    `${shop.foundingYear} में ${shop.name} — ${shop.address.road}, ${shop.address.locality}।`,
+    `परिवार का business सफ़र ${shop.legacyStartYear} में Aggarwal Kiryana Store से शुरू हुआ, ` +
+    `और ${shop.foundingYear} में इसी विरासत को आगे बढ़ाते हुए Mobile World की शुरुआत हुई। ` +
+    `${shop.address.road}, ${shop.address.locality}, ${shop.address.city}।`,
   alternates: { canonical: "/about" },
 };
 
@@ -172,13 +173,12 @@ export default function About() {
       <section className="sec">
         <div className="shead"><h2>हमारी टीम</h2></div>
 
-        <Banner src="/images/mobile-world-team-handing-over-a-purchase-to-b3645f82.webp"
-          w={900} h={1125} tall
-          alt={`${shop.name} की टीम, ${shop.address.locality} की दुकान के counter पर ग्राहकों के साथ`} />
+        <Banner src="/images/mobile-world-team-people-behind-our-promise-v2-5f1d17e7.webp"
+          alt={`${shop.name} की टीम — ${shop.address.locality} की दुकान के counter पर`} />
 
         <div className="teamlead rv in">
-          <b>वही चेहरे, जो आपको दोबारा आने पर भी यहीं मिलेंगे।</b>
-          <p>एक ही दुकान, एक ही पता — कोई branch नहीं, कोई franchise नहीं।</p>
+          <b>एक टीम। एक परिवार। एक वादा।</b>
+          <p>आपके भरोसे के साथ, हर दिन बेहतर बनाते हुए।</p>
         </div>
 
         <ul className="vals">

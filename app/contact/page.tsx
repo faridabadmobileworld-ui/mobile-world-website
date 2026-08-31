@@ -44,9 +44,8 @@ export default function Contact() {
       </section>
 
       <section className="sec" id="service">
-        <Banner src="/images/mobile-world-team-handing-over-a-purchase-to-b3645f82.webp"
-          w={900} h={1125} tall
-          alt={`${shop.name} के counter पर सामान लेते हुए ग्राहक`} />
+        <Banner src="/images/mobile-world-team-people-behind-our-promise-v2-5f1d17e7.webp"
+          alt={`${shop.name} की टीम — जो लोग आपका काम करते हैं`} />
         <div className="shead"><h2>किस बारे में पूछना है?</h2></div>
         <div className="ctiles">
           {services.map((s) => (

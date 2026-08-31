@@ -554,8 +554,6 @@ body.searching .qinfo{display:flex}
 .banner{margin:0 0 16px;border-radius:var(--r-lg);overflow:hidden;background:var(--card);
   border:1px solid var(--line)}
 .banner img{width:100%;height:auto;display:block}
-/* khadi photo ko upar se crop kar dete hain, warna desktop par poora page bhar jaati hai */
-.banner.tall img{max-height:min(72vh,520px);object-fit:cover;object-position:center 20%}
 
 /* category tile ki tasveer — chhote se dabbe mein poori dikhni chahiye */
 .ct .m{overflow:hidden}
@@ -564,16 +562,10 @@ body.searching .qinfo{display:flex}
 /* ── service ke bade poster ── */
 .sbanners{display:grid;gap:10px;grid-template-columns:1fr}
 @media(min-width:900px){ .sbanners{grid-template-columns:repeat(3,1fr)} }
-.sbanner{display:block;border-radius:var(--r-lg);background:var(--card);padding:18px 18px 16px;
+.sbanner{display:block;border-radius:var(--r-lg);overflow:hidden;background:var(--card);
   border:1px solid var(--line);transition:box-shadow .22s var(--ease),transform .22s var(--ease)}
 .sbanner:hover{box-shadow:0 10px 26px -14px rgba(20,20,43,.3);transform:translateY(-2px)}
-.sbanner .sb-i{display:block;width:56px;height:56px;margin:0 0 12px}
-.sbanner .sb-i img{width:100%;height:100%;object-fit:contain;display:block}
-.sbanner b{display:block;font-size:16px;font-weight:800;letter-spacing:-.02em;margin:0 0 6px}
-.sbanner s{display:block;text-decoration:none;font-size:13.5px;line-height:1.65;color:var(--ink-2)}
-.sbanner em{display:inline-flex;align-items:center;gap:5px;font-style:normal;margin:12px 0 0;
-  font-size:13px;font-weight:700;color:var(--hot)}
-@media(min-width:900px){ .sbanner{padding:22px 20px 18px} .sbanner b{font-size:17px} }
+.sbanner img{width:100%;height:100%;object-fit:cover;display:block}
 
 /* 3D icon wali list — chhota icon, tight rows */
 .lrow.tight{padding:9px 0}

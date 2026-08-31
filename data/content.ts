@@ -523,38 +523,26 @@ export const serviceList = [
 ];
 
 /**
- * Repair, Exchange और EMI — home page के तीन बड़े cards।
- *
- * पहले ये तीनों तस्वीरें थीं जिनके अंदर text छपा था। 31 Aug 2026 के audit में
- * पकड़ा गया कि उनमें "BEST VALUE", "COMPLETE SATISFACTION GUARANTEED",
- * "No Cost EMI", "QUICK APPROVAL" और screen/battery/water damage की पूरी list
- * छपी थी — यानी वो दावे जो owner ने कभी confirm नहीं किए। तस्वीर के अंदर का
- * text किसी scan में पकड़ा नहीं जाता, इसलिए अब ये तीनों code से बनते हैं।
- * Icon साफ़ हैं — उनमें कोई शब्द नहीं।
+ * Repair, Exchange और EMI के बड़े poster — home page पर।
+ * ये अभी sample हैं, owner की असली तस्वीरें बाद में आएँगी।
  */
 export const serviceBanners = [
   {
     key: "repair" as const,
-    icon: "/images/icon-repair-56383a67.webp",
-    title: "Mobile Repairing",
-    body: "दुकान पर repairing की सुविधा भी है। नए phone का warranty वाला काम brand के service centre पर ही होता है।",
-    cta: "Repairing के बारे में पूछिए",
+    src: "/images/expert-mobile-repairing-at-mobile-world-f65f73a0.webp",
+    alt: "Mobile repairing — screen, battery, charging port और software",
     topic: "repair",
   },
   {
     key: "exchange" as const,
-    icon: "/images/icon-exchange-bc53d7d0.webp",
-    title: "पुराना phone Exchange",
-    body: "पुराने phone की value लगाकर नए के दाम में से कम कर देते हैं — बाक़ी पैसे ही देने होते हैं।",
-    cta: "Exchange के बारे में पूछिए",
+    src: "/images/mobile-exchange-at-mobile-world-e15aba81.webp",
+    alt: "पुराना phone Exchange करके नया लीजिए",
     topic: "पुराने phone के Exchange",
   },
   {
     key: "emi" as const,
-    icon: "/images/icon-emi-e6aad705.webp",
-    title: "Cards और finance पर EMI",
-    body: "Credit card, debit card और finance — तीनों पर EMI। कौन सा plan मिलेगा और कितना approval होगा, यह आपका bank तय करता है।",
-    cta: "EMI के बारे में पूछिए",
+    src: "/images/easy-emi-finance-at-mobile-world-61ddf8e4.webp",
+    alt: "Cards और finance पर EMI",
     topic: "EMI",
   },
 ];
