@@ -102,6 +102,8 @@ export type Shop = {
    * इसे schema की `foundingDate` में कभी मत डालो।
    */
   legacyStartYear: number;
+  /** Cash, UPI, card, EMI — owner ने 31 Aug 2026 को confirm किया। */
+  paymentMethods: readonly string[];
 };
 
 /**
@@ -111,8 +113,15 @@ export type Shop = {
 export type Services = {
   /**
    * Mobile repairing की सुविधा है।
-   * ⚠️ इसे बढ़ा-चढ़ाकर मत लिखो — यह अलग department है, अलग service है।
-   * "जो यहाँ से लिया वो यहीं ठीक होगा" जैसा कोई वादा मत करो।
+   *
+   * Owner ने 31 Aug 2026 को साफ़ किया: दुकान retail shop भी है और repairing
+   * shop भी — दोनों। कोई पूछे "आपके यहाँ repairing होती है क्या?" तो जवाब
+   * हाँ है। **पर नए phone का warranty वाला काम brand के service centre पर
+   * ही होता है** — दुकान उसका दावा नहीं करती।
+   *
+   * ⚠️ फिर भी इसे बढ़ा-चढ़ाकर मत लिखो। Screen / battery / water damage की
+   * पूरी list मत गिनाओ — वो repairing shop का इश्तिहार लगता है, retail
+   * दुकान का नहीं।
    */
   repair: boolean;
   /** Cards और finance दोनों पर EMI */
@@ -127,6 +136,19 @@ export type Services = {
    * ख़ुद न कहे।
    */
   installation: boolean;
+  /**
+   * बेचने के बाद ग्राहक की सुनना और मदद करना — **हाँ, यह करते हैं।**
+   *
+   * Owner की परिभाषा (31 Aug 2026): ग्राहक phone लेकर गया, अब उसे data
+   * transfer करवाना है, settings समझनी हैं, कोई दिक़्क़त आ गई, या service
+   * centre पर बात नहीं बन रही — तो वो आमने-सामने आकर बात कर सकता है।
+   * "Amazon-Flipkart पर ग्राहक और service centre के बीच कोई नहीं होता।
+   * यहाँ हम ख़ुद सामान देते हैं और आगे सुनते भी हैं।"
+   *
+   * ⚠️ इसका मतलब warranty या guarantee **नहीं** है। वो brand के service
+   * centre से ही मिलती है। यह सिर्फ़ मदद है, कोई वादा नहीं।
+   */
+  afterSaleSupport: boolean;
 };
 
 /**
@@ -148,7 +170,6 @@ export const categories: Category[] = [
   { slug: "refrigerators", name: "Refrigerators" },
   { slug: "inverters-batteries", name: "Inverters & Batteries" },
   { slug: "audio-wearables", name: "Audio & Wearables" },
-  { slug: "cameras", name: "Cameras" },
   { slug: "kitchen-appliances", name: "Kitchen Appliances" },
   { slug: "accessories", name: "Accessories" },
 ];
@@ -253,7 +274,15 @@ export const shop: Shop = {
     exchange: true,
     delivery: true,
     installation: false,
+    afterSaleSupport: true,
   },
+
+  /**
+   * Owner ने 31 Aug 2026 को confirm किया — ये पाँचों तरीक़े दुकान पर चलते हैं।
+   * इससे पहले यह list मानकर लिखी गई थी। अब पूछकर लिखी है।
+   * Schema और page — दोनों यहीं से बनते हैं, दोबारा कहीं मत लिखना।
+   */
+  paymentMethods: ["Cash", "UPI", "Credit Card", "Debit Card", "EMI"],
 
   // Owner ने 24 Aug 2026 को confirm किया: रोज़ 10 AM – 10 PM, सातों दिन।
   openingHours: [
@@ -342,7 +371,7 @@ export type Value = {
 };
 
 export const values: Value[] = [
-  { title: "ग्राहक पहले", body: "आपकी ज़रूरत और आपकी संतुष्टि — सबसे ऊपर।" },
+  { title: "लेने के बाद भी साथ", body: "Data transfer, settings या कोई दिक़्क़त — दुकान पर आकर पूछ लीजिए।" },
   { title: "भरोसा और साफ़ बात", body: "ईमानदार सौदा और पूरी जानकारी, हर बार।" },
   { title: "Genuine Products", body: "पक्के GST Bill और पूरी Brand Warranty के साथ।" },
   { title: "सही Guidance", body: "आपकी असल ज़रूरत के हिसाब से सही product चुनने में मदद।" },

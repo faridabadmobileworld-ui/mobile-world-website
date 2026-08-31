@@ -37,8 +37,7 @@ export default function Privacy() {
             fontSize: 12.5, color: "var(--ink-3)", borderTop: "1px solid var(--line)",
             paddingTop: 14, marginTop: 18, marginBottom: 0,
           }}>
-            <b>ज़रूरी:</b> Site live करने से पहले यह page किसी CA या वकील से
-            DPDP Act के हिसाब से check करवा लीजिए।
+            {shop.registeredName} · {shop.address.locality}, {shop.address.city}
           </p>
         </div>
       </section>

@@ -8,9 +8,8 @@ import { Banner } from "@/components/Banner";
 export const metadata: Metadata = {
   title: "क्या-क्या मिलता है",
   description:
-    `${shop.tagline} का सभी सामान — Smartphone, Laptop, TV, AC, Refrigerator, ` +
-    `Washing Machine, Inverter और Kitchen Appliances। ${shop.name}, ` +
-    `${shop.address.locality}, ${shop.address.city}। क्या-क्या मौजूद है, WhatsApp पर पूछ लीजिए।`,
+    `Smartphone, Laptop, TV, AC, Fridge, Washing Machine, Inverter और Kitchen ` +
+    `Appliances — ${shop.name}, ${shop.address.locality}, ${shop.address.city}।`,
   alternates: { canonical: "/products" },
 };
 

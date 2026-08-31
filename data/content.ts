@@ -55,7 +55,6 @@ const categoryImages: Record<string, string> = {
   refrigerators: "/images/double-door-refrigerator-8c144446.webp",
   "inverters-batteries": "/images/inverter-and-battery-fbb02fc5.webp",
   "audio-wearables": "/images/wireless-earbuds-0e160569.webp",
-  cameras: "/images/mirrorless-camera-with-lens-3be70d11.webp",
   // TODO (owner): Kitchen Appliances की safed background वाली photo चाहिए।
   // तब तक यहाँ कुछ नहीं — tile पर code वाली साफ़ drawing लग जाती है,
   // क्योंकि बाक़ी सब tiles safed हैं और एक गहरी तस्वीर अलग दिखती है।
@@ -80,7 +79,6 @@ export function artForCategory(slug: string): string {
     "air-conditioners": "a-ac", "washing-machines": "a-wash", refrigerators: "a-fridge",
     "inverters-batteries": "a-inverter", "audio-wearables": "a-speaker",
     "kitchen-appliances": "a-kitchen", accessories: "a-accessory",
-    cameras: "a-accessory",
   };
   return m[slug] ?? "a-accessory";
 }
@@ -206,13 +204,6 @@ export const items: Item[] = [
     title: "Headphones और Earbuds",
     tags: ["ANC वाले भी"],
     art: "a-buds",
-  },
-  {
-    category: "cameras",
-    kicker: "Cameras",
-    title: "Camera और Lens",
-    tags: ["दुकान पर देखिए"],
-    image: "/images/mirrorless-camera-with-lens-3be70d11.webp",
   },
   {
     category: "kitchen-appliances",
@@ -418,10 +409,10 @@ export const posts: Post[] = [
   },
   {
     slug: "new-phones",
-    kicker: "New Arrivals",
+    kicker: "ख़रीदने से पहले",
     date: "14 August 2026",
     dateISO: "2026-08-14",
-    title: "इस हफ़्ते counter पर आए नए Smartphones",
+    title: "नया Smartphone लेना है? पहले ये तीन बातें देख लीजिए",
     excerpt:
       "Stock हर हफ़्ते बदलता है, इसलिए model के नाम गिनाने की जगह यह समझिए कि लोग असल में किन तीन तरह के phones लेते हैं।",
     image: "/images/a-customer-collecting-a-redmi-note-17-at-mob-c8b22cc4.webp",
@@ -532,26 +523,38 @@ export const serviceList = [
 ];
 
 /**
- * Repair, Exchange और EMI के बड़े poster — home page पर।
- * ये अभी sample हैं, owner की असली तस्वीरें बाद में आएँगी।
+ * Repair, Exchange और EMI — home page के तीन बड़े cards।
+ *
+ * पहले ये तीनों तस्वीरें थीं जिनके अंदर text छपा था। 31 Aug 2026 के audit में
+ * पकड़ा गया कि उनमें "BEST VALUE", "COMPLETE SATISFACTION GUARANTEED",
+ * "No Cost EMI", "QUICK APPROVAL" और screen/battery/water damage की पूरी list
+ * छपी थी — यानी वो दावे जो owner ने कभी confirm नहीं किए। तस्वीर के अंदर का
+ * text किसी scan में पकड़ा नहीं जाता, इसलिए अब ये तीनों code से बनते हैं।
+ * Icon साफ़ हैं — उनमें कोई शब्द नहीं।
  */
 export const serviceBanners = [
   {
     key: "repair" as const,
-    src: "/images/expert-mobile-repairing-at-mobile-world-f65f73a0.webp",
-    alt: "Mobile repairing — screen, battery, charging port और software",
+    icon: "/images/icon-repair-56383a67.webp",
+    title: "Mobile Repairing",
+    body: "दुकान पर repairing की सुविधा भी है। नए phone का warranty वाला काम brand के service centre पर ही होता है।",
+    cta: "Repairing के बारे में पूछिए",
     topic: "repair",
   },
   {
     key: "exchange" as const,
-    src: "/images/mobile-exchange-at-mobile-world-e15aba81.webp",
-    alt: "पुराना phone Exchange करके नया लीजिए",
+    icon: "/images/icon-exchange-bc53d7d0.webp",
+    title: "पुराना phone Exchange",
+    body: "पुराने phone की value लगाकर नए के दाम में से कम कर देते हैं — बाक़ी पैसे ही देने होते हैं।",
+    cta: "Exchange के बारे में पूछिए",
     topic: "पुराने phone के Exchange",
   },
   {
     key: "emi" as const,
-    src: "/images/easy-emi-finance-at-mobile-world-61ddf8e4.webp",
-    alt: "Cards और finance पर EMI",
+    icon: "/images/icon-emi-e6aad705.webp",
+    title: "Cards और finance पर EMI",
+    body: "Credit card, debit card और finance — तीनों पर EMI। कौन सा plan मिलेगा और कितना approval होगा, यह आपका bank तय करता है।",
+    cta: "EMI के बारे में पूछिए",
     topic: "EMI",
   },
 ];

@@ -70,8 +70,9 @@ generic ecommerce site · ज़बरदस्ती बेचता हुआ 
 
 ❌ "Mobile World started in 1973."
 ❌ "Aggarwal Kiryana & Communication opened in 1973."
-❌ "तीन पीढ़ियाँ" — owner ने generations की गिनती confirm नहीं की
-❌ "1973 से एक ही पते पर" — यह भी confirm नहीं हुआ
+❌ "तीन पीढ़ियाँ" — **सच है** (दादा → Tarun Gupta → Sarthak), पर owner ने
+   31 Aug 2026 को कहा कि website पर यह अभी नहीं लिखना। इसलिए मत लिखो।
+❌ "1973 से एक ही पते पर" — यह अब भी confirm नहीं हुआ
 ❌ "53 साल" / "पचास साल" — जब तक सही context में गिना न गया हो
 
 Code में यह `data/shop.ts` से आता है:
@@ -193,9 +194,12 @@ Delivery, और Mobile Repairing — बस इतना।
 
 - ग्राहकों की गिनती · सालों का तजुर्बा (confirmed timeline से बाहर)
 - awards · authorization · dealership status
-- service, delivery, installation या warranty का कोई वादा जो confirm नहीं हुआ
+- installation या warranty का कोई वादा — ये दुकान करती ही नहीं
+  (after-sale **support** अलग बात है और वो करते हैं — CLAUDE.md §2 पढ़िए)
+- delivery की शर्तें (कितनी दूर, मुफ़्त या नहीं) — अभी confirm नहीं
+- EMI के bank/card के नाम, tenure, "No Cost EMI" — अभी confirm नहीं
 - **Tarun Gupta के नाम से कोई quote**
-- "तीन पीढ़ियाँ" · "1973 से एक ही पता" · "53 साल"
+- "1973 से एक ही पता" · "53 साल" · "तीन पीढ़ियाँ" (सच है, पर owner ने site पर लिखने से मना किया)
 
 जो confirm नहीं है, उसे छोड़ दो या owner से पूछने के लिए mark कर दो।
 

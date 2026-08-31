@@ -92,7 +92,7 @@ export function localBusinessSchema(now: Date = new Date()) {
     logo: `${shop.siteUrl}/logo.png`,
     priceRange: "$$",
     currenciesAccepted: "INR",
-    paymentAccepted: "Cash, UPI, Credit Card, Debit Card, EMI",
+    paymentAccepted: shop.paymentMethods.join(", "),
     address: {
       "@type": "PostalAddress",
       streetAddress: `${shop.address.street}, ${shop.address.landmark}, ${shop.address.locality}`,

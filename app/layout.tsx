@@ -18,10 +18,10 @@ export const metadata: Metadata = {
     default: `${shop.name}, ${shop.address.city} — ${shop.tagline}`,
     template: `%s | ${shop.name}`,
   },
+  // Google 155–160 अक्षर के बाद काट देता है, इसलिए हर description उतनी ही रखिए।
   description:
-    `${shop.name} — ${shop.tagline}। ${shop.address.road}, ${shop.address.locality}, ` +
-    `${shop.address.city}। Smartphone, Laptop, TV, AC, Refrigerator, Washing Machine, ` +
-    `Inverter और घर का बाक़ी सामान। दुकान पर आइए या WhatsApp पर पूछ लीजिए।`,
+    `Mobile, Laptop, TV, AC, Fridge, Washing Machine और घर का बाक़ी सामान — ` +
+    `${shop.name}, ${shop.address.road}, ${shop.address.locality}, ${shop.address.city}।`,
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",

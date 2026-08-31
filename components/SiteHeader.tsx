@@ -110,7 +110,7 @@ export function SiteHeader() {
           <h2 className="dh">दुकान</h2>
           <Link className="d" href="/about" onClick={() => setOpen(false)}><i><IconGrid /></i>हमारे बारे में</Link>
           <Link className="d" href="/posts" onClick={() => setOpen(false)}><i><IconPost /></i>नई जानकारी</Link>
-          <Link className="d" href="/contact" onClick={() => setOpen(false)}><i><IconTool /></i>Service और support</Link>
+          <Link className="d" href="/contact" onClick={() => setOpen(false)}><i><IconTool /></i>मदद और after-sale support</Link>
           <Link className="d" href="/visit" onClick={() => setOpen(false)}><i><IconPin /></i>दुकान पर आइए</Link>
 
           <div className="btns" style={{ marginTop: 18 }}>

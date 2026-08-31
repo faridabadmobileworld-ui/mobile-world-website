@@ -9,7 +9,6 @@ import { ProductCard } from "@/components/ProductCard";
 import { Art } from "@/components/ArtSprite";
 import { IconArrow, IconWhatsApp, IconPin, IconPhone } from "@/components/Icons";
 import { FollowUs } from "@/components/FollowUs";
-import { Banner } from "@/components/Banner";
 import { GoogleQR } from "@/components/GoogleQR";
 import { NextClosure } from "@/components/StoreStatus";
 
@@ -50,11 +49,6 @@ export default function Home() {
             </a>
           )}
         </div>
-
-        <section className="sec">
-          <Banner src="/images/mobile-world-trust-since-1973-505ed6ee.webp"
-            alt={`${shop.legacyStartYear} से चला आ रहा परिवार का business, और ${shop.foundingYear} से ${shop.name}`} />
-        </section>
 
         <section className="sec">
           <div className="shead">
@@ -102,8 +96,12 @@ export default function Home() {
             {serviceBanners.filter((b) => shop.services[b.key]).map((b) => (
               <a className="sbanner rv in" key={b.key} href={ask(b.topic)}
                  target="_blank" rel="noopener">
-                <Image src={b.src} alt={b.alt} width={1400} height={933}
-                  sizes="(max-width:900px) 100vw, 33vw" />
+                <span className="sb-i" aria-hidden="true">
+                  <Image src={b.icon} alt="" width={200} height={200} sizes="72px" />
+                </span>
+                <b>{b.title}</b>
+                <s>{b.body}</s>
+                <em>{b.cta} <IconArrow /></em>
               </a>
             ))}
           </div>
@@ -218,7 +216,6 @@ function blurbFor(slug: string): string {
     "inverters-batteries": "Inverter, Battery, Stabilizer",
     "audio-wearables": "Speaker, Earbuds, Smart Watch",
     "kitchen-appliances": "Air Fryer, Microwave, Mixer, RO",
-    cameras: "Camera, Lens और accessories",
     accessories: "Cover, Glass, Charger, Cable",
   };
   return m[slug] ?? "";

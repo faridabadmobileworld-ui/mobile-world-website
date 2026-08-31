@@ -11,9 +11,8 @@ import { LiveBadge, NextClosure } from "@/components/StoreStatus";
 export const metadata: Metadata = {
   title: "दुकान पर आइए",
   description:
-    `${shop.name} — ${shop.address.street}, ${shop.address.landmark}, ` +
-    `${shop.address.locality}, ${shop.address.city} – ${shop.address.postalCode}। ` +
-    `रोज़ सुबह 10 से रात 10, सातों दिन। हर महीने की आख़िरी तारीख़ को बंद।`,
+    `${shop.name} — ${shop.address.road}, ${shop.address.locality}, ${shop.address.city} ` +
+    `– ${shop.address.postalCode}। रोज़ 10 AM से 10 PM। महीने की आख़िरी तारीख़ को बंद।`,
   alternates: { canonical: "/visit" },
 };
 
@@ -30,8 +29,9 @@ export default function Visit() {
           मौजूद है या नहीं — ताकि आपका चक्कर बेकार न जाए।
         </p>
 
-        <Banner src="/images/visit-mobile-world-store-gurudwara-road-3656c82d.webp"
-          alt={`${shop.name} — ${shop.address.road}, ${shop.address.locality}, ${shop.address.city}`} />
+        <Banner src="/images/mobile-world-storefront-on-gurudwara-road-ja-a182b026.webp"
+          w={720} h={340}
+          alt={`${shop.name} की दुकान — ${shop.address.road}, ${shop.address.locality}, रात में`} />
 
         <div className="cband rv in">
           <span className="cico" aria-hidden="true">
@@ -46,8 +46,9 @@ export default function Visit() {
           <p style={{ marginTop: 12, fontSize: "clamp(14px,2.1vw,15.5px)",
                       lineHeight: 1.85, color: "var(--ink)", maxWidth: "48ch",
                       marginInline: "auto" }}>
-            आपकी ज़रूरत हमारी प्राथमिकता है। हम देते हैं आपको भरोसा, गुणवत्ता
-            और बेहतरीन सेवा — हमेशा।
+            सामान लेकर जाने के बाद भी बात यहीं ख़त्म नहीं होती। Data transfer
+            करवाना हो, settings समझनी हों, या कोई दिक़्क़त आ जाए — दुकान पर आकर
+            आमने-सामने पूछ लीजिए।
           </p>
           <p style={{ marginTop: 12 }}><LiveBadge /></p>
           <p style={{ marginTop: 6 }}>
@@ -90,12 +91,25 @@ export default function Visit() {
               {shop.address.landmark}। {shop.address.road} पर, {shop.address.locality} में।
             </p>
           </div>
+          <div className="panel rv in">
+            <h2 style={{ fontSize: "1.05rem", margin: "0 0 8px" }}>पैसे कैसे दे सकते हैं</h2>
+            <p style={{ fontSize: 14.5, color: "var(--ink-2)", margin: 0 }}>
+              {shop.paymentMethods.join(" · ")}। हर सामान पर GST Bill मिलता है।
+            </p>
+          </div>
+          <div className="panel rv in">
+            <h2 style={{ fontSize: "1.05rem", margin: "0 0 8px" }}>लेने के बाद भी</h2>
+            <p style={{ fontSize: 14.5, color: "var(--ink-2)", margin: 0 }}>
+              कोई सवाल हो तो दुकान पर आ जाइए। Warranty का काम brand के service
+              centre पर होता है — पहुँचने में हम मदद कर देंगे।
+            </p>
+          </div>
         </div>
       </section>
 
       <section className="sec">
         <p className="thanks rv in">
-          ❤️ आपकी संतुष्टि, हमारा संकल्प।
+          ❤️ दुकान पर आइए, और हमें सेवा का मौक़ा दीजिए।
         </p>
       </section>
 

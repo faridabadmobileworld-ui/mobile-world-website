@@ -33,6 +33,8 @@ WhatsApp message, या physical visit।
   Near Bada Gurudwara and Disposal Chowk, Jawahar Colony,
   NIT Faridabad, Haryana – 121005
 - **Phone / WhatsApp:** +91 93152 12131
+  ⚠️ पुराना नंबर **+91 99533 35535 अब बंद है** (owner, 31 Aug 2026)। वो एक
+  banner की तस्वीर में छपा रह गया था। कहीं भी दिखे तो तुरंत हटाइए।
 - **Model:** एक ही physical shop। कोई branch नहीं।
 - **Timings:** रोज़ सुबह 10 बजे से रात 10 बजे तक, सातों दिन
 - **छुट्टी:** हर महीने की आख़िरी तारीख़ (28/29/30/31 — जो भी हो)।
@@ -40,20 +42,60 @@ WhatsApp message, या physical visit।
 
 ### Services — ये करते हैं
 EMI (cards और finance) · पुराना फ़ोन Exchange · Faridabad में Delivery ·
-Mobile Repairing
+Mobile Repairing · बेचने के बाद ग्राहक की मदद (after-sale support)
 
-### ⛔ ये नहीं करते — कभी मत लिखो (owner, 26 Aug 2026)
+### Payment — ये पाँचों चलते हैं (owner, 31 Aug 2026)
+Cash · UPI · Credit Card · Debit Card · EMI
+`data/shop.ts` के `paymentMethods` में हैं। Schema और `/visit` page दोनों
+वहीं से बनते हैं — दोबारा कहीं मत लिखो।
 
-- **Installation नहीं करते। Service नहीं करते। दुकान सिर्फ़ सामान बेचती है।**
-  "AC fitted and tested", "लगाकर, चलाकर दिखाते हैं", "Setup", "Wall mount",
-  "Load check" — ऐसा कुछ भी मत लिखो। Code में `shop.services.installation`
-  अब `false` है।
-- **Warranty दुकान से नहीं, brand के service centre से मिलती है।** इसलिए
-  "जो यहाँ से लिया, उसकी बात यहीं होगी" या "after sales support" जैसा कोई
-  वादा मत करो। *(यह वजह भी page पर मत लिखो — बस वादा मत करो।)*
-- **Repairing होती है, पर उसे बढ़ा-चढ़ाकर मत लिखो।** वो अलग department है,
-  अलग service है। एक लाइन काफ़ी है — "Repairing की सुविधा भी दुकान पर है।"
-  Screen/battery/water damage की list मत गिनाओ।
+### ⛔ ये नहीं करते — कभी मत लिखो
+
+- **Installation नहीं करते। दुकान सामान बेचती है, लगाने नहीं आती।**
+  (owner, 26 Aug 2026) — "AC fitted and tested", "लगाकर, चलाकर दिखाते हैं",
+  "Setup", "Wall mount", "Load check" — ऐसा कुछ भी मत लिखो।
+  Code में `shop.services.installation` = `false`.
+- **Warranty या guarantee दुकान से नहीं मिलती।** वो brand के service centre
+  से आती है। "हमारी warranty", "जो यहाँ से लिया उसकी guarantee यहीं" —
+  ऐसा कोई वादा कभी मत करो।
+- **कोई ऐसा दावा नहीं जो साबित न हो सके** — §12 पढ़िए।
+
+### ✅ ये करते हैं — owner ने 31 Aug 2026 को साफ़ किया
+
+ये तीन बातें पहले ग़लत समझी गई थीं। अब owner के अपने शब्दों में:
+
+- **After-sale support — हाँ, यह करते हैं।**
+  Owner: *"ग्राहक product लेकर गया, अब उसे data transfer चाहिए, settings
+  समझनी हैं, कोई दिक़्क़त आ गई, service centre पर बात नहीं बन रही — वो आमने-सामने
+  आकर बात कर सकता है। Amazon-Flipkart पर customer और service centre के बीच
+  कोई नहीं होता। यहाँ हम ख़ुद सामान देते हैं और आगे सुनते भी हैं।"*
+  Code में `shop.services.afterSaleSupport` = `true`.
+  ⚠️ यह **मदद** है, **warranty नहीं**। दोनों को कभी मत मिलाओ।
+- **Repairing — हाँ, यह दुकान retail shop भी है और repairing shop भी।**
+  Owner: *"कोई पूछता है भाई मेरे phone में ये दिक़्क़त है, आपके यहाँ repairing
+  होती है क्या? तो हाँ, हमारे यहाँ वो भी होता है।"*
+  ⚠️ पर नए device का **warranty वाला काम service centre पर ही होता है** —
+  उसका दावा मत करो। और screen / battery / water damage की पूरी list मत गिनाओ,
+  वरना retail दुकान repairing shop का इश्तिहार लगने लगती है।
+- **Exchange — पुराने phone की value लगाकर नए के दाम में से कम कर देते हैं।**
+  Owner: *"उसके पुराने phone की value लगाते हैं, और उस value को नए phone में
+  कम करके बचे हुए पैसे लेते हैं।"* बाक़ी शर्तें (कौन से brand, टूटी screen वाला
+  लेते हैं या नहीं) अभी owner से पूछनी बाक़ी हैं।
+
+### 🖼️ तस्वीरों का नियम — 31 Aug 2026 के audit के बाद बना
+
+**तस्वीर के अंदर कोई दावा, कोई फ़ोन नंबर, कोई timing मत छपने दो।**
+
+उस दिन के audit में पकड़ा गया कि sample banners के अंदर छपा हुआ था —
+"BEST PRICES GUARANTEED", "TRUSTED SINCE 1973", "Three Generations of
+Service", "AFTER SALES SERVICE YOU CAN RELY ON", "No Cost EMI",
+और **एक पुराना बंद हो चुका फ़ोन नंबर (99533 35535) + ग़लत timing
+(10 AM–9 PM, All Days Open)**। वो सारी तस्वीरें हटा दी गईं।
+
+तस्वीर के अंदर का text किसी scan में नहीं पकड़ा जाता, Google उसे पढ़ नहीं
+सकता, और phone पर वो पढ़ने लायक़ भी नहीं रहता। इसलिए:
+जो कहना है वो **असली HTML text में लिखो**, तस्वीर सिर्फ़ दिखाने के लिए हो।
+कोई नई banner जोड़ने से पहले उसे खोलकर पढ़ो — हर शब्द।
 
 ### Categories
 Smartphones, Laptops & Tablets, Televisions, Air Conditioners,
@@ -62,6 +104,10 @@ Kitchen Appliances (Air Fryer, Microwave, Mixer), Accessories
 
 पूरी website की इकलौती category list `data/shop.ts` के `categories` में है।
 `navCategories` उसी से बनती है — दोबारा कहीं मत लिखो।
+
+⚠️ **Cameras और Lens दुकान नहीं बेचती** (owner, 31 Aug 2026)। ये code में
+ग़लती से जुड़ गए थे और menu + `/products` दोनों पर दिख रहे थे — हटा दिए गए।
+ऊपर वाली list ही आख़िरी सच है। उसमें जो नहीं है, वो website पर नहीं आएगा।
 
 ### Brands
 Apple, Samsung, Xiaomi / Redmi, OnePlus, Vivo, Oppo, Motorola, Nothing,
@@ -190,11 +236,14 @@ Visitor details save करना, customer login।
       `NEXT_PUBLIC_SITE_URL` भर दीजिए — code छूने की ज़रूरत नहीं।
 - [x] ~~**Vercel account**~~ — project `mobile-world-website`, team
       `faridabadmobileworld-2892`
-- [ ] **Domain को Vercel से जोड़ना** — Vercel → Settings → Domains में
-      `www.mobileworldfaridabad.com` और `mobileworldfaridabad.com` दोनों जोड़िए,
-      `www` को primary रखिए। यह owner को dashboard से करना है।
+- [x] ~~**Domain को Vercel से जोड़ना**~~ — 31 Aug 2026 को हो गया।
+      GoDaddy में `A @ → 216.198.79.1` और
+      `CNAME www → 8013409ecfeaa2f5.vercel-dns-017.com` लगे हैं।
+      बिना www वाला पता अपने आप www पर चला जाता है (308)। HTTPS चालू है।
 - [ ] **Privacy page** CA या वकील से DPDP Act के हिसाब से check करवाना है।
-      ये बात page पर ख़ुद लिखी हुई है।
+      ⚠️ पहले यह reminder page पर ही छपा हुआ था और हर ग्राहक को दिख रहा था —
+      31 Aug 2026 को हटा दिया गया। **यह note अब सिर्फ़ यहाँ है, site पर नहीं।**
+      Owner के लिए लिखी कोई बात कभी page पर मत छोड़ो।
 - [ ] **Google Business Profile** verify करना, और हर महीने की आख़िरी तारीख़
       को "Special hours → Closed" set करना। **Website का schema GBP के hours
       control नहीं करता** — वो अलग जगह से आते हैं। ये न किया तो customer बंद
@@ -202,24 +251,31 @@ Visitor details save करना, customer login।
 
 ### Owner से जवाब चाहिए — तब तक site पर मत लिखो
 
-- [ ] **Payment के तरीक़े** — schema में अभी `Cash, UPI, Credit Card,
-      Debit Card, EMI` लिखा है। ये **मानकर** लिखा है, पूछकर नहीं।
+- [x] ~~**Payment के तरीक़े**~~ — owner ने 31 Aug 2026 को confirm किया:
+      **Cash, UPI, Credit Card, Debit Card, EMI — पाँचों चलते हैं।**
+      अब `shop.paymentMethods` में हैं, schema और `/visit` वहीं से बनते हैं।
+- [x] ~~**Cameras**~~ — दुकान camera/lens नहीं बेचती (31 Aug 2026)। हटा दिए गए।
+- [x] ~~**Installation**~~ — करते ही नहीं, इसलिए दाम का सवाल ही नहीं।
+- [x] ~~**Daikin**~~ — alt text से हट चुका है, अब कहीं नहीं।
+- [x] ~~**Redmi article का दाम**~~ — कोई दाम अब पूरी site पर नहीं है।
 - [ ] **Delivery** — कितनी दूर तक? सिर्फ़ NIT Faridabad या पूरा Faridabad?
       मुफ़्त है या charge? कोई minimum amount?
-- [ ] **Installation** — मुफ़्त या charge? AC / washing machine / TV का
-      अलग-अलग?
 - [ ] **Repair** — कौन सा काम उसी दिन, कौन सा 2–3 दिन? Repair पर कोई
       warranty (जैसे नए screen पर 1 महीना)?
 - [ ] **Exchange** — कौन से brands? कितना पुराना तक? टूटी screen वाला फ़ोन
-      लेते हैं या नहीं?
-- [ ] **EMI** — कौन से banks/cards? कोई finance company (Bajaj वग़ैरह)?
-- [ ] **Daikin** — preview के AC वाले alt text में Daikin **5 जगह** है, पर
-      ऊपर brand list में नहीं। या तो list में जोड़ो, या alt text बदलो।
-      और भी कोई brand रखते हों (LG, Voltas, Godrej, Whirlpool…) तो बताएँ।
+      लेते हैं या नहीं? *(तरीक़ा owner ने समझा दिया — पुराने की value लगाकर
+      नए के दाम में से कम — पर ये शर्तें अभी बाक़ी हैं।)*
+- [ ] **EMI की शर्तें** — कौन से banks/cards? कोई finance company
+      (Bajaj वग़ैरह)? "No Cost EMI" सच में है? कितने महीने का tenure?
+      *(Owner ने कहा था "सभी EMI वालों के logo लगाओ" — पर बिना पक्की
+      जानकारी के bank/finance company के logo लगाना ग़लत दावा बन जाता है,
+      इसलिए अभी सिर्फ़ text है: "Credit card, debit card और finance पर EMI"।)*
+- [ ] **ग्राहकों की photos** — `customers-with-the-mobile-world-thank-you-bo`
+      में एक ग्राहक का नाम (Manohar Jha) लिखा है, और दो photos में **बच्चे**
+      पहचान में आते हैं। Instagram पर डालना और website पर डालना अलग बात है
+      (DPDP Act, बच्चों के मामले में और सख़्त)। इन ग्राहकों से एक बार पूछ लीजिए,
+      या चेहरे न दिखने वाली photo लगा दीजिए।
 - [ ] **GST number** site पर दिखाना है या नहीं — owner की मर्ज़ी
-- [ ] **Redmi article का दाम** (₹27,999 / ₹30,999) रहने देना है?
-      साफ़ लिखा है कि ये Xiaomi का official launch price है, दुकान का rate
-      नहीं — फिर भी §8 कहती है दाम owner से पूछो।
 
 ### बाद के लिए
 
@@ -280,8 +336,13 @@ brand warranty, दुकान पर ही repair, एक ही address। �
   "Mobile World 1973 में शुरू हुई" लिखना ग़लत है। Code में यह
   `shop.foundingYear` (2016), `shop.legacyStartYear` (1973) और `legacy`
   से आता है — दोबारा मत लिखो।
-- **"तीन पीढ़ियाँ", "1973 से एक ही पता", "53 साल"** — ये तीनों owner ने
-  confirm नहीं किए। मत लिखो।
+- **"तीन पीढ़ियाँ" सच है, पर website पर अभी नहीं लिखनी।**
+  Owner ने 31 Aug 2026 को बताया कि तीन पीढ़ियाँ असल में हैं —
+  **दादा → Tarun Gupta → Sarthak** (अभी college में है, रोज़ दुकान पर बैठता है,
+  आगे यही सँभालेगा)। फिर भी उन्होंने कहा *"generation भी हटा देते हैं चलो"* —
+  इसलिए यह दावा **site से हटा दिया गया है**। बाद में owner कहें तो लगा दीजिए,
+  तब तक नहीं। यह बात यहाँ इसलिए लिखी है ताकि दोबारा "confirm नहीं है" न समझा जाए।
+- **"1973 से एक ही पता", "53 साल"** — ये अब भी confirm नहीं हैं। मत लिखो।
 - **⛔ "आज का rate पूछिए" कभी मत लिखो** — न button पर, न meta description
   में, न कहीं और। Owner के शब्दों में: *"ये कोई सब्ज़ी मंडी नहीं है जो rate
   पता करने के लिए बोले website पे।"* दाम की बात counter पर होती है। इसकी
