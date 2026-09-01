@@ -24,7 +24,7 @@ export default function Privacy() {
         <h1 style={{ fontSize: "clamp(1.4rem,4vw,2rem)", fontWeight: 800,
                      letterSpacing: "-.03em", margin: "0 0 16px" }}>Privacy</h1>
         <TableOfContents items={toc} />
-        <div className="panel rv in" style={{ maxWidth: 820 }}>
+        <div className="panel rv in" style={{ maxWidth: "var(--measure)" }}>
           <h2 id="kya-nahi" style={{ fontSize: "1.05rem", margin: "0 0 8px" }}>
             यह website क्या इकट्ठा नहीं करती
           </h2>

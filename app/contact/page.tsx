@@ -83,7 +83,7 @@ export default function Contact() {
       </section>
 
       <section className="sec">
-        <div className="panel rv in" style={{ maxWidth: 820 }}>
+        <div className="panel rv in" style={{ maxWidth: "var(--measure)" }}>
           <h2 id="pata" style={{ fontSize: "1.1rem", margin: "0 0 10px" }}>
             हमारी दुकान का exact पता
           </h2>
@@ -104,7 +104,7 @@ export default function Contact() {
       </section>
 
       <section className="sec">
-        <div className="panel rv in" style={{ maxWidth: 820 }}>
+        <div className="panel rv in" style={{ maxWidth: "var(--measure)" }}>
           <h2 id="pehle-message" style={{ fontSize: "1.1rem", margin: "0 0 10px" }}>
             आने से पहले एक छोटा सा WhatsApp message कर दीजिए
           </h2>
@@ -131,50 +131,50 @@ export default function Contact() {
         </p>
 
         <dl className="gmb">
-          <li>
+          <div>
             <dt>Business का नाम</dt>
             <dd>{shop.name}</dd>
-          </li>
-          <li>
+          </div>
+          <div>
             <dt>क्या-क्या है</dt>
             <dd>{shop.tagline}</dd>
-          </li>
-          <li>
+          </div>
+          <div>
             <dt>पूरा पता</dt>
             <dd>
               {shop.address.street}, {shop.address.landmark},<br />
               {shop.address.locality}, {shop.address.city}, {shop.address.state},
               {" "}India – {shop.address.postalCode}
             </dd>
-          </li>
-          <li>
+          </div>
+          <div>
             <dt>Phone और WhatsApp</dt>
             <dd><a href={shop.phone.tel}>{shop.phone.display}</a></dd>
-          </li>
-          <li>
+          </div>
+          <div>
             <dt>खुलने का समय</dt>
             <dd>रोज़ सुबह 10:00 से रात 10:00 बजे तक, सातों दिन।</dd>
-          </li>
-          <li>
+          </div>
+          <div>
             <dt>छुट्टी</dt>
             <dd>हर महीने की आख़िरी तारीख़ — अगली <NextClosure />।</dd>
-          </li>
-          <li>
+          </div>
+          <div>
             <dt>Payment के तरीक़े</dt>
             <dd>{shop.paymentMethods.join(" · ")}</dd>
-          </li>
-          <li>
+          </div>
+          <div>
             <dt>Website</dt>
             <dd><a href={shop.siteUrl}>{shop.siteUrl.replace("https://", "")}</a></dd>
-          </li>
-          <li>
+          </div>
+          <div>
             <dt>Proprietor</dt>
             <dd>{shop.owner}</dd>
-          </li>
-          <li>
+          </div>
+          <div>
             <dt>Registered नाम</dt>
             <dd>{shop.registeredName}</dd>
-          </li>
+          </div>
         </dl>
 
         <div className="btns" style={{ marginTop: 16 }}>
