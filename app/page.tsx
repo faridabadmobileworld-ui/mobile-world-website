@@ -21,7 +21,7 @@ const toc: TocItem[] = [
   { id: "kya-milta-hai", label: "क्या-क्या मिलता है" },
   { id: "ek-chhat", label: "सब कुछ, एक ही छत के नीचे" },
   { id: "emi-exchange-repair", label: "EMI, Exchange और Repairing" },
-  { id: "finance", label: "EMI किन-किन से मिल जाता है" },
+  { id: "finance", label: "Paper Finance पर EMI किन-किन bank से मिलती है" },
   { id: "dukaan-ke-andar", label: "दुकान के अंदर" },
   { id: "nai-jaankari", label: "नई जानकारी" },
   { id: "dukaan-par-aaiye", label: "दुकान पर आइए" },
@@ -126,11 +126,14 @@ export default function Home() {
         </section>
 
         <section className="sec">
-          <div className="shead"><h2 id="finance">EMI किन-किन से मिल जाता है</h2></div>
+          <div className="shead">
+            <h2 id="finance">Paper Finance पर EMI किन-किन bank से मिलती है</h2>
+          </div>
           <p style={{ color: "var(--ink-2)", maxWidth: "62ch", margin: "0 0 14px" }}>
-            Credit card, debit card और नीचे दिखने वाली finance companies — इन सब पर
-            EMI बन जाती है। कौन सा plan मिलेगा और कितना approval होगा, यह आपका bank
-            या finance company तय करती है — दुकान नहीं।
+            Aadhaar, PAN और bank की details पर बनने वाली EMI — यानी paper finance —
+            नीचे दिखने वाली companies से हो जाती है। Credit card और कुछ bank के
+            debit card पर भी EMI बन जाती है। कौन सा plan मिलेगा और approval होगा या
+            नहीं, यह आपका bank या finance company तय करती है — दुकान नहीं।
           </p>
           <FinanceStrip />
           <div className="btns" style={{ marginTop: 14 }}>

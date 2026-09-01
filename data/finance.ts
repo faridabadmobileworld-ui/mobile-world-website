@@ -1,15 +1,15 @@
 /**
- * EMI और finance वाली कंपनियाँ — owner ने 1 Sep 2026 को यह list दी।
+ * EMI और finance वाली कंपनियाँ — owner ने 1 Sep 2026 को यह list दी,
+ * और उसी दिन असली logo भी भेज दिए।
  *
- * ⚠️ **Logo अभी नहीं लगे हैं।** Owner ने असली logos लगाने को कहा है, पर
- * किसी company का logo internet से उठाकर लगाना उनका trademark इस्तेमाल
- * करना होता है — वो file owner से ही आनी चाहिए।
+ * Logo की fileें `public/images/finance/` में हैं। सातों एक ही नाप की हैं —
+ * 420×132, सफ़ेद background — इसलिए चलती पट्टी में सब एक जैसे बैठते हैं।
+ * (Bajaj, IDFC, TVS और HDB दुकान के अपने poster में से काटे गए हैं;
+ * Home Credit, Axio और DMI अलग file के रूप में मिले।)
  *
- * जब logo मिल जाएँ: हर entry में `logo: "/images/finance/bajaj.webp"`
- * जोड़ दीजिए। `FinanceStrip` अपने आप नाम की जगह logo दिखाने लगेगी —
- * component में कुछ बदलने की ज़रूरत नहीं।
- *
- * Logo की नाप: चौड़ाई 240px तक, background साफ़/सफ़ेद, .webp या .png।
+ * ⚠️ `logo` हटा दीजिए तो पट्टी में उस company का **नाम** दिखने लगेगा —
+ * `FinanceStrip` दोनों सँभाल लेती है। नई company जोड़ें तो logo भी उसी
+ * 420×132 नाप में बनाइए, तरीक़ा `public/images/finance/README.md` में है।
  */
 
 export type FinancePartner = {
@@ -17,16 +17,20 @@ export type FinancePartner = {
   name: string;
   /** छोटा सा उपनाम — जैसे Axio का पुराना नाम */
   note?: string;
-  /** logo की file, जब owner भेज दें */
+  /** logo की file — 420×132, सफ़ेद background */
   logo?: string;
 };
 
 export const financePartners: FinancePartner[] = [
-  { name: "Bajaj Finserv" },
-  { name: "IDFC FIRST Bank" },
-  { name: "TVS Credit" },
-  { name: "HDB Financial Services" },
-  { name: "Home Credit" },
-  { name: "Axio", note: "Xiaomi Easy Finance" },
-  { name: "DMI Finance" },
+  { name: "Bajaj Finserv", logo: "/images/finance/bajaj-finserv.webp" },
+  { name: "IDFC FIRST Bank", logo: "/images/finance/idfc-first-bank.webp" },
+  { name: "TVS Credit", logo: "/images/finance/tvs-credit.webp" },
+  { name: "HDB Financial Services", logo: "/images/finance/hdb-financial-services.webp" },
+  { name: "Home Credit", logo: "/images/finance/home-credit.webp" },
+  { name: "Axio", note: "Xiaomi Easy Finance", logo: "/images/finance/axio.webp" },
+  { name: "DMI Finance", logo: "/images/finance/dmi-finance.webp" },
 ];
+
+/** पट्टी और cards में हर logo इसी नाप का है — एक जगह लिखा, सब जगह वही। */
+export const LOGO_W = 420;
+export const LOGO_H = 132;

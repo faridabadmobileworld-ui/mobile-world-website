@@ -1,33 +1,42 @@
-# Finance companies के logo यहाँ रखिए
+# Finance companies के logo
 
-Owner ने 1 Sep 2026 को कहा: EMI वाली पट्टी में असली logo लगें।
+Owner ने 1 Sep 2026 को कहा: EMI वाली पट्टी में असली logo लगें — और उसी दिन
+logo भेज भी दिए। **सातों लग चुके हैं।**
 
-**अभी logo यहाँ नहीं हैं** — इस environment से internet बंद है, इसलिए कोई
-logo download नहीं किया जा सकता। और किसी company का logo internet से उठाकर
-लगाना उनका trademark इस्तेमाल करना होता है — file उन्हीं से या owner से आनी
-चाहिए (finance company अपने merchant को brand kit देती है)।
+| File | कहाँ से आई |
+|---|---|
+| `bajaj-finserv.webp` | दुकान के अपने poster में से काटी गई |
+| `idfc-first-bank.webp` | दुकान के अपने poster में से काटी गई |
+| `tvs-credit.webp` | दुकान के अपने poster में से काटी गई |
+| `hdb-financial-services.webp` | दुकान के अपने poster में से काटी गई |
+| `home-credit.webp` | owner ने अलग file भेजी |
+| `axio.webp` | owner ने अलग file भेजी |
+| `dmi-finance.webp` | owner ने अलग file भेजी |
 
-## File कैसी हो
-- नाप: चौड़ाई 240px तक (ऊँचाई अपने आप)
-- Background: पारदर्शी (transparent) या सफ़ेद
-- Format: `.png` या `.webp`
-- हर file 50 KB से कम
+## नाप — सातों एक जैसी हैं
 
-## नाम इसी तरह रखिए
-```
-bajaj.png · idfc.png · tvs.png · hdb.png · home-credit.png · axio.png · dmi.png
-```
+हर file **420×132 px, सफ़ेद background** की है और logo उसके बीच में बैठा है।
+एक ही नाप इसलिए रखी है कि चलती पट्टी में सब एक कतार में, एक जैसे दिखें।
+Website उन्हें 140×44 पर दिखाती है — यानी नाप तीन गुनी है, ताकि आजकल के
+phone (2x–3x screen) पर भी logo साफ़ रहे। सातों मिलाकर 45 KB से कम हैं।
 
-## फिर एक ही file बदलनी है
-`data/finance.ts` में हर entry में logo का पता जोड़ दीजिए:
+## बेहतर file मिल जाए तो
 
-```ts
-{ name: "Bajaj Finserv", logo: "/images/finance/bajaj.png" },
-```
+Poster में से काटे गए चार logo उतने ही साफ़ हैं जितना poster था। अगर finance
+company के brand kit से असली file मिल जाए, तो उसी नाम से, उसी 420×132 नाप में
+बनाकर यहाँ रख दीजिए — और कहीं कुछ नहीं बदलना।
 
-`FinanceStrip` अपने आप नाम की जगह logo दिखाने लगेगी — component या CSS में
-कुछ नहीं बदलना पड़ेगा।
+## नई company जोड़नी हो
 
-⚠️ Logo लगाते ही `/finance` page पर trademark वाली बात ज़रूरी हो जाती है।
+1. logo इसी 420×132 नाप में बनाइए और यहाँ रखिए
+2. `data/finance.ts` में एक line जोड़िए:
+   ```ts
+   { name: "XYZ Finance", logo: "/images/finance/xyz.webp" },
+   ```
+
+`logo` न लिखें तो पट्टी में उस company का **नाम** दिखने लगेगा — `FinanceStrip`
+दोनों सँभाल लेती है। Component या CSS में कुछ नहीं बदलना पड़ता।
+
+⚠️ Logo लगे होने की वजह से `/finance` page पर trademark वाली बात ज़रूरी है।
 वो पहले से लिखी हुई है (`app/finance/page.tsx` का disclaimer वाला हिस्सा) —
 उसे हटाइए मत।

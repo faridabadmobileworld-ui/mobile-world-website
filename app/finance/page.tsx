@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 };
 
 const toc: TocItem[] = [
-  { id: "partners", label: "हमारे Finance Partners" },
+  { id: "partners", label: "Paper Finance पर EMI किन-किन bank से मिलती है" },
   { id: "card", label: "Credit Card पर EMI" },
   { id: "rules", label: "Approval और rules — साफ़ बात" },
   { id: "documents", label: "Finance के लिए ज़रूरी documents" },
@@ -48,10 +48,14 @@ export default function Finance() {
       </section>
 
       <section className="sec">
-        <div className="shead"><h2 id="partners">हमारे Finance Partners</h2></div>
+        <div className="shead">
+          <h2 id="partners">Paper Finance पर EMI किन-किन bank से मिलती है?</h2>
+        </div>
         <div className="prose" style={{ marginBottom: 14 }}>
           <p>
-            इन finance companies की EMI सुविधा हमारी दुकान पर उपलब्ध है:
+            Aadhaar, PAN और bank की details देकर जो EMI बनवाई जाती है, दुकानदारी की
+            भाषा में उसे <strong>paper finance</strong> कहते हैं। उसके लिए हमारी दुकान
+            पर इन finance companies और bank की सुविधा उपलब्ध है:
           </p>
         </div>
 
@@ -65,6 +69,12 @@ export default function Finance() {
             </li>
           ))}
         </ul>
+
+        <div className="prose" style={{ marginTop: 14 }}>
+          <p>
+            Credit card वाली EMI इनसे अलग होती है — उसकी बात नीचे लिखी है।
+          </p>
+        </div>
       </section>
 
       <section className="sec">

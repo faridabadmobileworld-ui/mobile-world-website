@@ -9,10 +9,13 @@
  *
  * ⚠️ जिस phone में "reduce motion" चालू है, वहाँ यह अपने आप रुक जाती है
  * और उँगली से खिसकाई जा सकती है — कुछ लोगों को चलती चीज़ों से चक्कर आता है।
+ *
+ * Owner ने 1 Sep 2026 को असली logo भेज दिए, इसलिए अब पट्टी में नाम नहीं,
+ * logo चलते हैं। किसी company का logo न हो तो उसका नाम अपने आप दिखने लगेगा।
  */
 
 import Image from "next/image";
-import { financePartners } from "@/data/finance";
+import { financePartners, LOGO_W, LOGO_H } from "@/data/finance";
 
 export function FinanceStrip() {
   // एक ही list दो बार — इसी से पट्टी बिना रुके चलती दिखती है।
@@ -35,7 +38,11 @@ export function FinanceStrip() {
             aria-hidden={i >= financePartners.length || undefined}
           >
             {f.logo ? (
-              <Image src={f.logo} alt={f.name} width={240} height={80} sizes="140px" />
+              /* पट्टी चलती रहती है, इसलिए logo "बाद में" नहीं आ सकते — वरना
+                 खिसकते-खिसकते खाली जगह दिखती है। सातों मिलाकर 30 KB से भी कम
+                 हैं और दोनों बार वही file है, इसलिए request भी सात ही जाती हैं। */
+              <Image src={f.logo} alt={f.name} width={LOGO_W} height={LOGO_H}
+                     sizes="140px" loading="eager" />
             ) : (
               <span className="fin-n">
                 {f.name}

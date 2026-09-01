@@ -704,7 +704,9 @@ body.searching .qinfo{display:flex}
 .fin:hover .fin-t{animation-play-state:paused}
 @keyframes fin-run{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
 .fin-c{flex:none;display:grid;place-items:center;min-width:132px;height:52px;padding:0 6px}
-.fin-c img{max-width:140px;max-height:44px;width:auto;height:auto;object-fit:contain}
+.fin-c img{width:140px;height:44px;object-fit:contain}  /* Naap pakki rakhi hai — nahi to 2x/3x screen par browser logo ko chhota
+     kar deta hai. Sabhi logo ek hi 420x132 canvas par hain, isliye contain
+     se koi khinchav nahi aata. */
 .fin-n{display:block;text-align:center;font-size:14.5px;font-weight:800;
   letter-spacing:-.02em;color:var(--ink);line-height:1.25;white-space:nowrap}
 .fin-n s{display:block;text-decoration:none;font-size:10.5px;font-weight:600;

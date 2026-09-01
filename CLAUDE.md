@@ -319,14 +319,21 @@ Visitor details save करना, customer login।
 - [x] ~~**EMI किन कंपनियों से**~~ — owner ने 1 Sep 2026 को list दी:
       **Bajaj, IDFC, TVS, HDB, Home Credit, Axio (Xiaomi Easy Finance), DMI।**
       `data/finance.ts` में हैं, home page के बीच में चलती हुई पट्टी बनती है।
-- [ ] **Finance companies के असली logo** — owner ने 1 Sep 2026 को माँगे।
-      ⚠️ इस environment से internet बंद है, इसलिए यहाँ से कोई logo download
-      नहीं हो सकता। और वैसे भी किसी company का logo internet से उठाकर लगाना
-      उनका trademark इस्तेमाल करना है — file finance company के brand kit से
-      या owner से ही आनी चाहिए।
-      पूरा तरीक़ा `public/images/finance/README.md` में लिखा है। File रखते ही
-      `data/finance.ts` में `logo: "/images/finance/…"` जोड़ दीजिए —
-      `FinanceStrip` अपने आप logo दिखाने लगेगी।
+- [x] ~~**Finance companies के असली logo**~~ — owner ने 1 Sep 2026 को ख़ुद भेज
+      दिए, और सातों लग चुके हैं (`public/images/finance/`)। Home Credit, Axio और
+      DMI अलग file के रूप में आए; Bajaj, IDFC, TVS और HDB **दुकान के अपने poster**
+      में से काटे गए — इसलिए वो poster जितने ही साफ़ हैं। Brand kit से बेहतर file
+      मिल जाए तो उसी नाम, उसी नाप में बदल दीजिए, code छूने की ज़रूरत नहीं।
+      ⚠️ Logo internet से उठाकर कभी मत लगाइए — वो उनका trademark है, file
+      owner से या company के brand kit से ही आनी चाहिए।
+      पूरा तरीक़ा `public/images/finance/README.md` में है।
+      📌 Owner के poster में **Samsung Finance, benow और pine labs** भी छपे हैं।
+      वो owner की बताई सात वाली list में नहीं हैं, इसलिए site पर नहीं डाले —
+      चाहिए हों तो पहले owner से पूछिए।
+
+      **नाप का नियम:** हर logo 420×132 की सफ़ेद canvas पर बीच में बैठा है और
+      website उसे 140×44 पर दिखाती है। CSS में नाप पक्की (`width`/`height`) रखी
+      गई है — `max-width` से 2x/3x वाले phone पर logo अपने आप छोटा हो जाता था।
 
 ### ⚖️ Trademark वाली बात — सिर्फ़ `/finance` पर
 
