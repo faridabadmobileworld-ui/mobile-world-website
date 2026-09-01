@@ -387,17 +387,24 @@ scroll पर text और cards का उभरना · heading के नी�
 
 ### 📸 Instagram वाली पट्टी — home page पर
 
-`components/InstagramFeed.tsx`, तस्वीरें `data/content.ts` के `instaTiles` में।
+`components/InstagramFeed.tsx` (slides), `components/InstaArrows.tsx` (तीर),
+और असली post लाने वाला `lib/instagram.ts`।
 
-⚠️ **यह दुकान की अपनी photos दिखाती है, Instagram की live feed नहीं** — और
-page पर कहीं यह दावा भी नहीं किया गया। असली feed के दो ही रास्ते हैं:
-Meta का embed script (वो ग्राहक को track करता है — और हमारी Privacy Policy
-में साफ़ लिखा है कि इस website पर कोई tracking नहीं है, तो पहले वो page
-बदलना पड़ेगा) या Instagram का API token (owner के account से बनता है, समय-समय
-पर बदलना पड़ता है)। Owner जो कहें, वो लगेगा।
+**Live feed चालू करने का पूरा तरीक़ा `docs/INSTAGRAM-SETUP.md` में है** —
+owner के लिए step-by-step, आसान भाषा में।
 
-Banner वाली तस्वीरें इसमें जान-बूझकर नहीं लीं — उनके अंदर के दावे और पुराना
-नंबर अब भी ठीक नहीं हुए हैं।
+- Vercel में `IG_TOKEN` भरा हो → Instagram से **असली post और reels**, हर घंटे
+  ताज़ा (`revalidate: 3600`)। Video पर play का निशान और "3 दिन पहले" अपने आप।
+- Token न हो, ग़लत हो, या Instagram जवाब न दे → चुपचाप **दुकान की अपनी photos**
+  (`instaTiles`) दिखने लगती हैं और नीचे की line भी बदल जाती है। **Page कभी
+  नहीं टूटता, और कभी झूठा दावा नहीं करता** कि ये latest post हैं।
+- ⚠️ Token कभी code में मत लिखिए — सिर्फ़ Vercel के environment variable में।
+  Instagram की यह चाबी **60 दिन** चलती है; उसके बाद दोबारा बनानी पड़ती है
+  (या Business Manager का system user token, जो ख़त्म नहीं होता)।
+- तस्वीरें सीधे Instagram के CDN से आती हैं (`unoptimized`, क्योंकि उनके पते
+  हर घंटे बदलते हैं)। **यह बात Privacy page पर साफ़ लिखी है** — छुपाई नहीं।
+- Banner वाली तस्वीरें fallback में जान-बूझकर नहीं लीं — उनके अंदर के दावे और
+  पुराना नंबर अब भी ठीक नहीं हुए हैं।
 
 ### 📝 Tech Blog & Guides — `/posts`
 

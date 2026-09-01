@@ -128,6 +128,13 @@ export default function Privacy() {
             उन links पर click करके आप उन platforms पर चले जाते हैं, जहाँ उनकी अपनी
             privacy policy लागू होती है — हमारी नहीं।
           </p>
+          <p>
+            <strong>एक बात साफ़-साफ़:</strong> home page पर हमारी Instagram वाली पट्टी
+            में जो तस्वीरें दिखती हैं, वो सीधे <strong>Instagram के server से</strong>
+            {" "}आती हैं। यानी उतनी देर के लिए Instagram को इतना पता चल जाता है कि
+            किसी ने वो तस्वीर खोली। यह हमारी तरफ़ से कोई tracking नहीं है — हम अब भी
+            आपकी कोई जानकारी इकट्ठा नहीं करते।
+          </p>
 
           <h2 id="updates">6. इस policy में बदलाव</h2>
           <p>

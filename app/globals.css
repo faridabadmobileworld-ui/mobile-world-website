@@ -1042,17 +1042,52 @@ main .panel:hover,.toc:hover{box-shadow:var(--sh-3),var(--ring)}
 .igw-n b{display:block;font-size:15px;font-weight:800;letter-spacing:-.02em}
 .igw-n s{display:block;text-decoration:none;font-size:12.5px;color:var(--ink-3);font-weight:600}
 .igw-cta{margin-left:auto;flex:none}
-.igrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:0;padding:0;list-style:none}
-@media(min-width:760px){ .igrid{grid-template-columns:repeat(6,1fr);gap:8px} }
-.igrid a{position:relative;display:block;aspect-ratio:1;border-radius:10px;overflow:hidden;
-  background:#fff;box-shadow:var(--ring);isolation:isolate}
-.igrid img{width:100%;height:100%;object-fit:cover;transition:transform .55s var(--ease)}
-.igrid a:hover img{transform:scale(1.09)}
-.igrid-i{position:absolute;inset:0;display:grid;place-items:center;color:#fff;opacity:0;
-  background:linear-gradient(140deg,rgba(221,42,123,.72),rgba(81,91,212,.72));
-  transition:opacity .28s var(--ease)}
-.igrid a:hover .igrid-i,.igrid a:focus-visible .igrid-i{opacity:1}
-.igrid-i svg{width:26px;height:26px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.35))}
+/* ── slides — Instagram की post एक कतार में, उँगली से खिसकती हुई ── */
+.igs-wrap{position:relative;margin:0 -14px}
+.igs{display:flex;gap:10px;margin:0;padding:2px 14px 6px;list-style:none;
+  overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;scroll-behavior:smooth}
+.igs::-webkit-scrollbar{display:none}
+.igs-c{flex:none;width:min(74vw,260px);scroll-snap-align:start}
+@media(min-width:700px){ .igs-wrap{margin:0} .igs{padding:2px 2px 6px} .igs-c{width:260px} }
+.igs-c>a{display:flex;flex-direction:column;height:100%;background:var(--card);
+  border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;
+  box-shadow:var(--sh-2),var(--ring);
+  transition:transform .24s var(--ease),box-shadow .26s var(--ease)}
+.igs-c>a:hover{transform:translateY(-3px);box-shadow:var(--sh-3),var(--ring)}
+/* card के ऊपर वाली पट्टी — दुकान का नाम, कब की post, और Instagram का निशान */
+.igs-top{display:flex;align-items:center;gap:8px;padding:8px 10px}
+.igs-dp{width:28px;height:28px;flex:none;border-radius:50%;padding:2px;
+  background:linear-gradient(45deg,var(--ig1),var(--ig2),var(--ig3),var(--ig4))}
+.igs-dp img{width:100%;height:100%;border-radius:50%;background:#fff;object-fit:contain}
+.igs-who{min-width:0;flex:1}
+.igs-who b{display:block;font-size:12px;font-weight:800;letter-spacing:-.01em;color:var(--ink);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.igs-who em{display:block;font-style:normal;font-size:10.5px;color:var(--ink-3);font-weight:600}
+.igs-ig{flex:none;color:var(--ig2);display:grid;place-items:center}
+.igs-ig svg{width:17px;height:17px}
+/* तस्वीर — हमेशा एक ही नाप का डिब्बा, ताकि कतार सीधी दिखे */
+.igs-m{position:relative;display:block;aspect-ratio:4/5;background:#fff;overflow:hidden}
+.igs-m img{width:100%;height:100%;object-fit:cover;transition:transform .55s var(--ease)}
+.igs-c>a:hover .igs-m img{transform:scale(1.06)}
+.igs-play{position:absolute;inset:0;margin:auto;width:52px;height:52px;border-radius:50%;
+  display:grid;place-items:center;color:#fff;background:rgba(20,20,43,.42);
+  backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+  box-shadow:0 8px 20px -8px rgba(0,0,0,.5)}
+.igs-cap{display:block;padding:9px 10px 11px;font-size:12px;line-height:1.55;color:var(--ink-2);
+  overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+/* दोनों तीर — सिर्फ़ बड़ी screen पर, phone पर उँगली ही काफ़ी है */
+.igs-nav{display:none}
+@media(min-width:700px){
+  .igs-nav{display:grid;place-items:center;position:absolute;top:50%;z-index:3;
+    width:40px;height:40px;margin-top:-20px;border-radius:50%;
+    background:var(--card);color:var(--ink);border:1px solid var(--line);
+    box-shadow:var(--sh-2);
+    transition:transform .2s var(--ease),color .2s,box-shadow .24s var(--ease)}
+  .igs-nav:hover{color:var(--brand);transform:scale(1.08);box-shadow:var(--sh-3)}
+  .igs-nav.prev{left:-6px}
+  .igs-nav.next{right:-6px}
+}
 .igw-f{margin:12px 0 2px;font-size:13px;line-height:1.7;color:var(--ink-2);text-align:center}
 .igw-f a{display:inline-flex;align-items:center;gap:5px;margin-left:6px;
   color:var(--ig2);font-weight:800}
