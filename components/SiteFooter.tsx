@@ -73,7 +73,7 @@ export function SiteFooter() {
         <div className="fbot">
           <span>© {new Date().getFullYear()} {shop.name} · {shop.registeredName}</span>
           <span>
-            <Link href="/privacy">Privacy</Link> · सिर्फ़ पूछताछ के लिए — यहाँ से order नहीं होता
+            <Link href="/terms">Terms &amp; Conditions</Link> · <Link href="/privacy">Privacy</Link> · सिर्फ़ पूछताछ के लिए — यहाँ से order नहीं होता
           </span>
         </div>
       </div>

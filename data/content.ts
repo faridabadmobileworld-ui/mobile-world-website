@@ -356,10 +356,19 @@ export const serviceCards = [
     key: "exchange" as const,
     kicker: "Exchange",
     title: "पुराना phone Exchange कीजिए",
-    body: "Model और उसकी हालत बता दीजिए, अंदाज़ा बता देंगे। पक्का valuation counter पर आपके सामने।",
+    body: "Phone देखकर उसकी हालत के हिसाब से value लगती है, और वो नए के दाम में से कम हो जाती है। Bill या original डिब्बा — दोनों में से एक होना ज़रूरी है।",
     cta: "Exchange का अंदाज़ा लीजिए",
     topic: "पुराने phone के Exchange",
     tone: "sand",
+  },
+  {
+    key: "delivery" as const,
+    kicker: "Delivery",
+    title: `${shop.address.city.replace("NIT ", "")} में Delivery`,
+    body: "सामान घर तक पहुँचाने का इंतज़ाम हम करवा देते हैं। भाड़ा ग्राहक को देना होता है — delivery मुफ़्त नहीं है।",
+    cta: "Delivery के बारे में पूछिए",
+    topic: "Delivery",
+    tone: "sky",
   },
   {
     key: "emi" as const,
@@ -502,7 +511,7 @@ export const serviceList = [
   {
     icon: "/images/icon-exchange-bc53d7d0.webp",
     title: "Exchange",
-    body: "पुराने phone की आसान Exchange।",
+    body: "पुराने phone की value लगाकर नए के दाम में से कम।",
     topic: "पुराने phone के Exchange",
   },
   {

@@ -29,6 +29,15 @@ export type Address = {
 export type Phone = {
   /** Screen पर दिखाने के लिए — "+91 93152 12131" */
   display: string;
+  /**
+   * Tarun Gupta जी का सीधा नंबर — सिर्फ़ शिकायत (grievance) के लिए।
+   *
+   * ⚠️ यह दुकान का आम नंबर **नहीं** है। ग्राहक को हमेशा ऊपर वाला
+   * `display` नंबर ही दिखाइए। यह सिर्फ़ Contact page के grievance
+   * वाले हिस्से में आता है (owner, 1 Sep 2026)।
+   */
+  grievanceDisplay: string;
+  grievanceTel: string;
   /** Call button के लिए — <a href={shop.phone.tel}> */
   tel: string;
   /** WhatsApp button के लिए — <a href={shop.phone.whatsapp}> */
@@ -251,6 +260,8 @@ export const shop: Shop = {
   phone: {
     display: "+91 93152 12131",
     tel: "tel:+919315212131",
+    grievanceDisplay: "+91 99533 35535",
+    grievanceTel: "tel:+919953335535",
     whatsapp: "https://wa.me/919315212131",
   },
 

@@ -33,8 +33,12 @@ WhatsApp message, या physical visit।
   Near Bada Gurudwara and Disposal Chowk, Jawahar Colony,
   NIT Faridabad, Haryana – 121005
 - **Phone / WhatsApp:** +91 93152 12131
-  ⚠️ पुराना नंबर **+91 99533 35535 अब बंद है** (owner, 31 Aug 2026)। वो एक
-  banner की तस्वीर में छपा रह गया था। कहीं भी दिखे तो तुरंत हटाइए।
+- **Grievance नंबर:** +91 99533 35535 — यह **Tarun Gupta जी का सीधा नंबर** है,
+  सिर्फ़ शिकायत के लिए। Owner ने 1 Sep 2026 को इसे Contact page पर डालने को कहा।
+  ⚠️ यह दुकान का आम नंबर **नहीं** है — ग्राहक को हमेशा ऊपर वाला 93152 12131 ही
+  दिखाइए। यह सिर्फ़ `/contact` के grievance वाले हिस्से में आता है।
+  ⚠️ 31 Aug को इसे "बंद नंबर" समझकर एक banner से हटाया गया था — वो banner फिर भी
+  ग़लत था (उसमें यह दुकान के मुख्य नंबर की तरह छपा था)।
 - **Model:** एक ही physical shop। कोई branch नहीं।
 - **Timings:** रोज़ सुबह 10 बजे से रात 10 बजे तक, सातों दिन
 - **छुट्टी:** हर महीने की आख़िरी तारीख़ (28/29/30/31 — जो भी हो)।
@@ -121,7 +125,8 @@ iQOO, Realme, Tecno, Infinix, Lava, Nokia, Philips
 ### Pages — website पर कौन-कौन से page हैं
 
 Home · Products · **Repairing Services** · **After Sales Support** ·
-**हमारी Team** · About · नई जानकारी (posts) · Contact · दुकान पर आइए · Privacy
+**हमारी Team** · About · नई जानकारी (posts) · Contact · दुकान पर आइए ·
+**Privacy Policy** · **Terms & Conditions**
 
 तीन नए page owner ने 1 Sep 2026 को Sachin का लिखा content देकर बनवाए —
 `/repairing`, `/after-sales-support`, `/team`.
@@ -302,23 +307,28 @@ Visitor details save करना, customer login।
 - [x] ~~**Installation**~~ — करते ही नहीं, इसलिए दाम का सवाल ही नहीं।
 - [x] ~~**Daikin**~~ — alt text से हट चुका है, अब कहीं नहीं।
 - [x] ~~**Redmi article का दाम**~~ — कोई दाम अब पूरी site पर नहीं है।
-- [ ] **Delivery** — कितनी दूर तक? सिर्फ़ NIT Faridabad या पूरा Faridabad?
-      मुफ़्त है या charge? कोई minimum amount?
+- [x] ~~**Delivery**~~ — owner ने 1 Sep 2026 को बताया: **delivery करते हैं, पर
+      मुफ़्त नहीं।** भाड़ा ग्राहक देता है। Auto-rickshaw वग़ैरह का इंतज़ाम दुकान
+      करवा देती है। *(कितनी दूर तक और कितना भाड़ा — यह अब भी नहीं पूछा गया।)*
 - [ ] **Repair** — कौन सा काम उसी दिन, कौन सा 2–3 दिन? Repair पर कोई
       warranty (जैसे नए screen पर 1 महीना)?
-- [ ] **Exchange** — कौन से brands? कितना पुराना तक? टूटी screen वाला फ़ोन
-      लेते हैं या नहीं? *(तरीक़ा owner ने समझा दिया — पुराने की value लगाकर
-      नए के दाम में से कम — पर ये शर्तें अभी बाक़ी हैं।)*
-- [ ] **EMI की शर्तें** — कौन से banks/cards? कोई finance company
-      (Bajaj वग़ैरह)? "No Cost EMI" सच में है? कितने महीने का tenure?
-      *(Owner ने कहा था "सभी EMI वालों के logo लगाओ" — पर बिना पक्की
-      जानकारी के bank/finance company के logo लगाना ग़लत दावा बन जाता है,
-      इसलिए अभी सिर्फ़ text है: "Credit card, debit card और finance पर EMI"।)*
-- [ ] **ग्राहकों की photos** — `customers-with-the-mobile-world-thank-you-bo`
-      में एक ग्राहक का नाम (Manohar Jha) लिखा है, और दो photos में **बच्चे**
-      पहचान में आते हैं। Instagram पर डालना और website पर डालना अलग बात है
-      (DPDP Act, बच्चों के मामले में और सख़्त)। इन ग्राहकों से एक बार पूछ लीजिए,
-      या चेहरे न दिखने वाली photo लगा दीजिए।
+- [x] ~~**Exchange**~~ — owner ने 1 Sep 2026 को पूरी शर्त बताई: phone चेक करके
+      उसकी **हालत के हिसाब से** value लगती है, और वो नए के दाम में से कम हो जाती
+      है। **Bill या original डिब्बा — दोनों में से एक होना ज़रूरी है। दोनों न हों
+      तो phone नहीं लेंगे।** यह `/terms` पर लिखा है।
+- [x] ~~**EMI किन कंपनियों से**~~ — owner ने 1 Sep 2026 को list दी:
+      **Bajaj, IDFC, TVS, HDB, Home Credit, Axio (Xiaomi Easy Finance), DMI।**
+      `data/finance.ts` में हैं, home page के बीच में चलती हुई पट्टी बनती है।
+- [ ] **Finance companies के असली logo** — owner भेजेंगे। तब तक नाम text में
+      दिख रहे हैं। ⚠️ किसी company का logo internet से उठाकर मत लगाइए —
+      वो उनका trademark है, file owner से ही आनी चाहिए। मिलते ही
+      `data/finance.ts` की हर entry में `logo: "/images/finance/…"` जोड़ दीजिए,
+      component अपने आप नाम की जगह logo दिखाने लगेगा।
+- [ ] **"No Cost EMI" और tenure** — कितने महीने का plan मिलता है, no-cost सच
+      में है या नहीं — यह अब भी confirm नहीं। इसलिए site पर नहीं लिखा।
+- [x] ~~**ग्राहकों की photos**~~ — owner ने 1 Sep 2026 को confirm किया:
+      *"हाँ, ग्राहकों से पूछकर ही डालते हैं photos या नाम वग़ैरह सब।"*
+      यानी consent पहले से लिया जाता है। नई photo लगाते समय भी यही नियम रखिए।
 - [ ] **GST number** site पर दिखाना है या नहीं — owner की मर्ज़ी
 
 ### बाद के लिए

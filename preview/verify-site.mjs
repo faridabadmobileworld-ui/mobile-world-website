@@ -26,9 +26,12 @@ for(const w of [320,390,768,1280]){
       const wide=[...document.querySelectorAll('body *')].filter(e=>{
         if(e.closest('.skip,.drawer')) return false;
         // side-scroll karne wale container ke andar chauda hona sahi hai (category strip, rails)
+        // Jo cheez kisi scroll ya clip hone wale dabbe ke andar hai, wo page ko
+        // chauda nahi karti — jaise category strip (auto) aur finance ki chalti
+        // patti (hidden). Sirf wahi pakadni hai jo sach mein bahar nikal rahi ho.
         for(let n=e.parentElement;n;n=n.parentElement){
           const ox=getComputedStyle(n).overflowX;
-          if(ox==='auto'||ox==='scroll') return false;
+          if(ox==='auto'||ox==='scroll'||ox==='hidden'||ox==='clip') return false;
         }
         const b=e.getBoundingClientRect();
         return b.width>0 && (b.right>innerWidth+1||b.left<-1);

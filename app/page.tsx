@@ -12,6 +12,7 @@ import { FollowUs } from "@/components/FollowUs";
 import { MoreLinks } from "@/components/MoreLinks";
 import { Banner } from "@/components/Banner";
 import { GoogleQR } from "@/components/GoogleQR";
+import { FinanceStrip } from "@/components/FinanceStrip";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { PageFoot } from "@/components/PageFoot";
 import { NextClosure } from "@/components/StoreStatus";
@@ -20,6 +21,7 @@ const toc: TocItem[] = [
   { id: "kya-milta-hai", label: "क्या-क्या मिलता है" },
   { id: "ek-chhat", label: "सब कुछ, एक ही छत के नीचे" },
   { id: "emi-exchange-repair", label: "EMI, Exchange और Repairing" },
+  { id: "finance", label: "EMI किन-किन से मिल जाता है" },
   { id: "dukaan-ke-andar", label: "दुकान के अंदर" },
   { id: "nai-jaankari", label: "नई जानकारी" },
   { id: "dukaan-par-aaiye", label: "दुकान पर आइए" },
@@ -52,7 +54,7 @@ export default function Home() {
               <span className="m">
                 <Image className="ph-img" src="/images/icon-guidance-0e26ba46.webp" alt="" width={200} height={200} sizes="66px" />
               </span>
-              <span><b>{shop.address.city.replace("NIT ", "")} में Delivery</b><s>बड़ा सामान ›</s></span>
+              <span><b>{shop.address.city.replace("NIT ", "")} में Delivery</b><s>भाड़ा ग्राहक का ›</s></span>
             </a>
           )}
           {shop.services.exchange && (
@@ -120,6 +122,21 @@ export default function Home() {
                   sizes="(max-width:900px) 100vw, 33vw" />
               </a>
             ))}
+          </div>
+        </section>
+
+        <section className="sec">
+          <div className="shead"><h2 id="finance">EMI किन-किन से मिल जाता है</h2></div>
+          <p style={{ color: "var(--ink-2)", maxWidth: "62ch", margin: "0 0 14px" }}>
+            Credit card, debit card और नीचे दिखने वाली finance companies — इन सब पर
+            EMI बन जाती है। कौन सा plan मिलेगा और कितना approval होगा, यह आपका bank
+            या finance company तय करती है — दुकान नहीं।
+          </p>
+          <FinanceStrip />
+          <div className="btns" style={{ marginTop: 14 }}>
+            <a className="btn btn-w" href={ask("EMI")} target="_blank" rel="noopener">
+              <IconWhatsApp /> EMI के बारे में पूछिए
+            </a>
           </div>
         </section>
 

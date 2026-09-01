@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { shop } from "@/data/shop";
-import { serviceCards, ask, whatsappGeneral } from "@/data/content";
+import { whatsappGeneral } from "@/data/content";
 import { IconArrow, IconWhatsApp, IconPhone, IconPin } from "@/components/Icons";
 import { FollowUs } from "@/components/FollowUs";
 import { Banner } from "@/components/Banner";
@@ -22,13 +22,11 @@ const toc: TocItem[] = [
   { id: "abhi-baat", label: "अभी बात कीजिए — हम आपके लिए खुले हैं" },
   { id: "pata", label: "हमारी दुकान का exact पता" },
   { id: "pehle-message", label: "आने से पहले एक छोटा सा WhatsApp message" },
-  { id: "service", label: "किस बारे में पूछना है?" },
+  { id: "grievance", label: "शिकायत हो तो सीधे मालिक से" },
   { id: "google", label: "Google पर हमारी listing" },
 ];
 
 export default function Contact() {
-  const services = serviceCards.filter((s) => shop.services[s.key]);
-
   return (
     <div className="wrap">
       <section className="sec">
@@ -65,21 +63,30 @@ export default function Contact() {
             </a>
           </div>
         </div>
+
+        <div className="panel rv in" id="grievance"
+             style={{ maxWidth: "var(--measure)", marginTop: 10 }}>
+          <h2 style={{ fontSize: "1.05rem", margin: "0 0 8px" }}>
+            ⚠️ शिकायत हो तो सीधे मालिक से बात कीजिए
+          </h2>
+          <p style={{ fontSize: 14.5, color: "var(--ink-2)", margin: "0 0 10px" }}>
+            कोई बात counter पर हल न हो, या कोई शिकायत हो — तो {shop.owner} जी से
+            सीधे बात कर लीजिए। बीच में कोई नहीं है।
+          </p>
+          <p style={{ fontSize: 15, margin: 0 }}>
+            <strong>Grievance / Direct Contact ({shop.owner} जी):</strong>{" "}
+            <a href={shop.phone.grievanceTel}
+               style={{ color: "var(--brand)", fontWeight: 800 }}>
+              {shop.phone.grievanceDisplay}
+            </a>
+          </p>
+        </div>
       </section>
 
       <section className="sec">
         <Banner src="/images/mobile-world-storefront-on-gurudwara-road-ja-a182b026.webp"
           w={720} h={340}
           alt={`${shop.name} की दुकान — ${shop.address.road}, ${shop.address.locality}, ${shop.address.city}`} />
-        <div className="shead"><h2 id="service">किस बारे में पूछना है?</h2></div>
-        <div className="ctiles">
-          {services.map((s) => (
-            <a className="ct rv in" key={s.key} href={ask(s.topic)} target="_blank" rel="noopener">
-              <span className="m" style={{ background: `var(--${s.tone})` }} />
-              <span><b>{s.title}</b><s>{s.body}</s></span>
-            </a>
-          ))}
-        </div>
       </section>
 
       <section className="sec">
@@ -100,6 +107,24 @@ export default function Contact() {
               <IconPin /> रास्ता देखिए
             </a>
           </div>
+        </div>
+
+        <div className="panel rv in" id="grievance"
+             style={{ maxWidth: "var(--measure)", marginTop: 10 }}>
+          <h2 style={{ fontSize: "1.05rem", margin: "0 0 8px" }}>
+            ⚠️ शिकायत हो तो सीधे मालिक से बात कीजिए
+          </h2>
+          <p style={{ fontSize: 14.5, color: "var(--ink-2)", margin: "0 0 10px" }}>
+            कोई बात counter पर हल न हो, या कोई शिकायत हो — तो {shop.owner} जी से
+            सीधे बात कर लीजिए। बीच में कोई नहीं है।
+          </p>
+          <p style={{ fontSize: 15, margin: 0 }}>
+            <strong>Grievance / Direct Contact ({shop.owner} जी):</strong>{" "}
+            <a href={shop.phone.grievanceTel}
+               style={{ color: "var(--brand)", fontWeight: 800 }}>
+              {shop.phone.grievanceDisplay}
+            </a>
+          </p>
         </div>
       </section>
 

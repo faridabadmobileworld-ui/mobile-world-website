@@ -115,6 +115,8 @@ export function SiteHeader() {
           <Link className="d" href="/posts" onClick={() => setOpen(false)}><i><IconPost /></i>नई जानकारी</Link>
           <Link className="d" href="/contact" onClick={() => setOpen(false)}><i><IconTool /></i>Contact Us</Link>
           <Link className="d" href="/visit" onClick={() => setOpen(false)}><i><IconPin /></i>दुकान पर आइए</Link>
+          <Link className="d" href="/terms" onClick={() => setOpen(false)}><i><IconGrid /></i>Terms &amp; Conditions</Link>
+          <Link className="d" href="/privacy" onClick={() => setOpen(false)}><i><IconGrid /></i>Privacy Policy</Link>
 
           <div className="btns" style={{ marginTop: 18 }}>
             <a className="btn btn-w" href={whatsappGeneral} target="_blank" rel="noopener">

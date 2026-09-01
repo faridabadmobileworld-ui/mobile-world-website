@@ -74,8 +74,13 @@ export const sitePages: SitePage[] = [
   },
   {
     href: "/privacy",
-    label: "Privacy",
+    label: "Privacy Policy",
     blurb: "आपकी कौन सी जानकारी हम रखते हैं और कौन सी नहीं।",
+  },
+  {
+    href: "/terms",
+    label: "Terms & Conditions",
+    blurb: "दुकान के नियम — bill, warranty, exchange और delivery की शर्तें।",
   },
 ];
 

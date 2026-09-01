@@ -34,6 +34,7 @@ const PAGES = [
   ["/repairing", "repairing/index.html"],
   ["/after-sales-support", "after-sales-support/index.html"],
   ["/privacy", "privacy/index.html"],
+  ["/terms", "terms/index.html"],
 ];
 
 const MIME = {

@@ -215,9 +215,11 @@ for (const w of [320, 390, 768, 1280]) {
       const de = document.documentElement;
       const off = [...document.querySelectorAll('#main *, .hdr *, .ftr *, .mbar *')].filter(e => {
         if (e.closest('.skip,.drawer')) return false;
+        // Scroll ya clip hone wale dabbe ke andar ki cheez page ko chauda nahi
+        // karti — category strip (auto) aur finance ki chalti patti (hidden).
         for (let n = e.parentElement; n; n = n.parentElement) {
           const ox = getComputedStyle(n).overflowX;
-          if (ox === 'auto' || ox === 'scroll') return false;
+          if (ox === 'auto' || ox === 'scroll' || ox === 'hidden' || ox === 'clip') return false;
         }
         const r = e.getBoundingClientRect();
         return r.width > 0 && (r.right > innerWidth + 1 || r.left < -1);
