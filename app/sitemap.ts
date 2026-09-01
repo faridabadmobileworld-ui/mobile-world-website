@@ -22,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${shop.siteUrl}/about`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${shop.siteUrl}/repairing`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${shop.siteUrl}/after-sales-support`, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${shop.siteUrl}/finance`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${shop.siteUrl}/team`, changeFrequency: "monthly", priority: 0.5 },
     { url: `${shop.siteUrl}/posts`, changeFrequency: "weekly", priority: 0.6 },
     { url: `${shop.siteUrl}/privacy`, changeFrequency: "yearly", priority: 0.2 },

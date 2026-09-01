@@ -134,6 +134,9 @@ export default function Home() {
           </p>
           <FinanceStrip />
           <div className="btns" style={{ marginTop: 14 }}>
+            <Link className="btn btn-d" href="/finance">
+              पूरी जानकारी देखिए <IconArrow />
+            </Link>
             <a className="btn btn-w" href={ask("EMI")} target="_blank" rel="noopener">
               <IconWhatsApp /> EMI के बारे में पूछिए
             </a>

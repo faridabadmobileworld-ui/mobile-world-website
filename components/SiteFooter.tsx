@@ -52,6 +52,7 @@ export function SiteFooter() {
             <ul>
               <li><Link href="/repairing">Repairing Services</Link></li>
               <li><Link href="/after-sales-support">After Sales Support</Link></li>
+              <li><Link href="/finance">Finance और EMI</Link></li>
               <li><Link href="/contact">Contact Us</Link></li>
               <li><a href={ask("पुराने phone के Exchange")} target="_blank" rel="noopener">Exchange</a></li>
               <li><a href={ask("EMI")} target="_blank" rel="noopener">EMI</a></li>

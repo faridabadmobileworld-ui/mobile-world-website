@@ -34,6 +34,7 @@ const PAGES = [
   ["/repairing", "repairing/index.html"],
   ["/after-sales-support", "after-sales-support/index.html"],
   ["/privacy", "privacy/index.html"],
+  ["/finance", "finance/index.html"],
   ["/terms", "terms/index.html"],
 ];
 

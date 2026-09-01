@@ -125,8 +125,8 @@ iQOO, Realme, Tecno, Infinix, Lava, Nokia, Philips
 ### Pages — website पर कौन-कौन से page हैं
 
 Home · Products · **Repairing Services** · **After Sales Support** ·
-**हमारी Team** · About · नई जानकारी (posts) · Contact · दुकान पर आइए ·
-**Privacy Policy** · **Terms & Conditions**
+**Finance और EMI** · **हमारी Team** · About · नई जानकारी (posts) · Contact ·
+दुकान पर आइए · **Privacy Policy** · **Terms & Conditions**
 
 तीन नए page owner ने 1 Sep 2026 को Sachin का लिखा content देकर बनवाए —
 `/repairing`, `/after-sales-support`, `/team`.
@@ -319,11 +319,24 @@ Visitor details save करना, customer login।
 - [x] ~~**EMI किन कंपनियों से**~~ — owner ने 1 Sep 2026 को list दी:
       **Bajaj, IDFC, TVS, HDB, Home Credit, Axio (Xiaomi Easy Finance), DMI।**
       `data/finance.ts` में हैं, home page के बीच में चलती हुई पट्टी बनती है।
-- [ ] **Finance companies के असली logo** — owner भेजेंगे। तब तक नाम text में
-      दिख रहे हैं। ⚠️ किसी company का logo internet से उठाकर मत लगाइए —
-      वो उनका trademark है, file owner से ही आनी चाहिए। मिलते ही
-      `data/finance.ts` की हर entry में `logo: "/images/finance/…"` जोड़ दीजिए,
-      component अपने आप नाम की जगह logo दिखाने लगेगा।
+- [ ] **Finance companies के असली logo** — owner ने 1 Sep 2026 को माँगे।
+      ⚠️ इस environment से internet बंद है, इसलिए यहाँ से कोई logo download
+      नहीं हो सकता। और वैसे भी किसी company का logo internet से उठाकर लगाना
+      उनका trademark इस्तेमाल करना है — file finance company के brand kit से
+      या owner से ही आनी चाहिए।
+      पूरा तरीक़ा `public/images/finance/README.md` में लिखा है। File रखते ही
+      `data/finance.ts` में `logo: "/images/finance/…"` जोड़ दीजिए —
+      `FinanceStrip` अपने आप logo दिखाने लगेगी।
+
+### ⚖️ Trademark वाली बात — सिर्फ़ `/finance` पर
+
+Owner ने 1 Sep 2026 को कहा: *"legal policies se bachne ke liye jahan b ye sab
+likha jana chahiye wahan us page pe likh dena. but jahan zaroori ho only wahin,
+sab jagah bina baat ke mat ghusana."*
+
+इसलिए trademark वाला disclaimer **सिर्फ़ `/finance` page पर** है — वही इकलौता
+page है जहाँ दूसरी कंपनियों के नाम और logo आते हैं। बाक़ी किसी page पर मत डालिए।
+Logo लगने के बाद यह disclaimer और भी ज़रूरी हो जाता है — हटाइए मत।
 - [ ] **"No Cost EMI" और tenure** — कितने महीने का plan मिलता है, no-cost सच
       में है या नहीं — यह अब भी confirm नहीं। इसलिए site पर नहीं लिखा।
 - [x] ~~**ग्राहकों की photos**~~ — owner ने 1 Sep 2026 को confirm किया:

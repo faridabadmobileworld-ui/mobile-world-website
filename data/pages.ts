@@ -48,6 +48,11 @@ export const sitePages: SitePage[] = [
     blurb: "सामान लेने के बाद data transfer, settings और guidance।",
   },
   {
+    href: "/finance",
+    label: "Finance और EMI",
+    blurb: "Bajaj, IDFC, TVS, HDB समेत EMI की सुविधा — पूरी शर्तें साफ़-साफ़।",
+  },
+  {
     href: "/team",
     label: "हमारी Team",
     blurb: "वो चेहरे जो counter पर आपको हमेशा मिलेंगे।",

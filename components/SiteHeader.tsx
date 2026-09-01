@@ -112,6 +112,7 @@ export function SiteHeader() {
           <Link className="d" href="/team" onClick={() => setOpen(false)}><i><IconGrid /></i>हमारी Team</Link>
           <Link className="d" href="/repairing" onClick={() => setOpen(false)}><i><IconTool /></i>Repairing Services</Link>
           <Link className="d" href="/after-sales-support" onClick={() => setOpen(false)}><i><IconTool /></i>After Sales Support</Link>
+          <Link className="d" href="/finance" onClick={() => setOpen(false)}><i><IconGrid /></i>Finance और EMI</Link>
           <Link className="d" href="/posts" onClick={() => setOpen(false)}><i><IconPost /></i>नई जानकारी</Link>
           <Link className="d" href="/contact" onClick={() => setOpen(false)}><i><IconTool /></i>Contact Us</Link>
           <Link className="d" href="/visit" onClick={() => setOpen(false)}><i><IconPin /></i>दुकान पर आइए</Link>
