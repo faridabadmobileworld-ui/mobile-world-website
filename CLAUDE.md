@@ -126,10 +126,15 @@ iQOO, Realme, Tecno, Infinix, Lava, Nokia, Philips
 
 Home · Products · **Repairing Services** · **After Sales Support** ·
 **Finance और EMI** · **हमारी Team** · About · नई जानकारी (posts) · Contact ·
-दुकान पर आइए · **Privacy Policy** · **Terms & Conditions**
+दुकान पर आइए · **Privacy Policy** · **Terms & Conditions** ·
+**Return और Exchange**
 
 तीन नए page owner ने 1 Sep 2026 को Sachin का लिखा content देकर बनवाए —
-`/repairing`, `/after-sales-support`, `/team`.
+`/repairing`, `/after-sales-support`, `/team`. उसी दिन शाम को
+`/returns` भी जुड़ा — Return, Refund और Exchange के नियम।
+
+📌 **Exchange और return की बात अब सिर्फ़ `/returns` पर है।** `/terms` पर सिर्फ़
+उसका link है — दो जगह मत लिखिए।
 
 ⚠️ **नया page बनाओ तो पाँच जगह जोड़ना ज़रूरी है:** `data/pages.ts`
 (interlinking), `app/sitemap.ts`, drawer (`SiteHeader.tsx`),
@@ -312,6 +317,13 @@ Visitor details save करना, customer login।
       करवा देती है। *(कितनी दूर तक और कितना भाड़ा — यह अब भी नहीं पूछा गया।)*
 - [ ] **Repair** — कौन सा काम उसी दिन, कौन सा 2–3 दिन? Repair पर कोई
       warranty (जैसे नए screen पर 1 महीना)?
+- [x] ~~**KYC के नियम**~~ — owner ने 1 Sep 2026 को Sachin का लिखा content भेजा:
+      Aadhaar, PAN, bank details के साथ **वही mobile number चालू हालत में** चाहिए
+      जो दोनों से जुड़ा हो (OTP के लिए), और **जिसके documents लग रहे हैं उनका ख़ुद
+      आना ज़रूरी है** (live photo + biometric)। `/finance` पर लिखा है।
+- [ ] **Exchange पर पहचान पत्र** — Sachin के content में लिखा है कि Aadhaar
+      ज़रूरी है। Owner ने ख़ुद यह नहीं कहा था, पर उन्हीं का भेजा content है, इसलिए
+      `/returns` पर "साथ रखिए" के तौर पर लिखा है। Owner से एक बार पक्का कर लीजिए।
 - [x] ~~**Exchange**~~ — owner ने 1 Sep 2026 को पूरी शर्त बताई: phone चेक करके
       उसकी **हालत के हिसाब से** value लगती है, और वो नए के दाम में से कम हो जाती
       है। **Bill या original डिब्बा — दोनों में से एक होना ज़रूरी है। दोनों न हों
@@ -334,6 +346,22 @@ Visitor details save करना, customer login।
       **नाप का नियम:** हर logo 420×132 की सफ़ेद canvas पर बीच में बैठा है और
       website उसे 140×44 पर दिखाती है। CSS में नाप पक्की (`width`/`height`) रखी
       गई है — `max-width` से 2x/3x वाले phone पर logo अपने आप छोटा हो जाता था।
+
+### 📄 Sachin के भेजे content में से जो जान-बूझकर नहीं लिया गया
+
+Owner 1 Sep 2026 को pages का एक और draft लाए। उसमें कुछ बातें ऐसी थीं जो इस
+site के अपने नियमों से टकराती हैं। ये **जान-बूझकर छोड़ी गई हैं** — दोबारा
+"रह गई होंगी" समझकर मत जोड़िए:
+
+- **"सबसे भरोसेमंद", "best mobile shop", "सबसे trusted destination"** — §12।
+- **"1973 से Mobile World"** — Mobile World 2016 से है, §13।
+- **Google Analytics और cookies वाली बात** (Privacy page के draft में थी) —
+  site पर न analytics है, न cookies। झूठ लिखना privacy policy में सबसे
+  ख़तरनाक है। लगाएँ तो पहले page बदलिए, फिर code।
+- **"Zero down payment"** और **"No Cost EMI"** — owner से confirm नहीं।
+- **"हम सभी finance companies के authorized merchant हैं"** — साबित नहीं कर सकते।
+- **"Life-Long Support"** — इतना बड़ा वादा नहीं करना। जो सच में करते हैं वो
+  `/after-sales-support` पर लिखा है।
 
 ### ⚖️ Trademark वाली बात — सिर्फ़ `/finance` पर
 

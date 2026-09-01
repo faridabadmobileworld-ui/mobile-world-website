@@ -27,6 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${shop.siteUrl}/posts`, changeFrequency: "weekly", priority: 0.6 },
     { url: `${shop.siteUrl}/privacy`, changeFrequency: "yearly", priority: 0.2 },
     { url: `${shop.siteUrl}/terms`, changeFrequency: "yearly", priority: 0.2 },
+    { url: `${shop.siteUrl}/returns`, changeFrequency: "yearly", priority: 0.3 },
   ] as const).map((p) => ({ ...p, lastModified: now }));
 
   const articles: MetadataRoute.Sitemap = posts.map((p) => ({

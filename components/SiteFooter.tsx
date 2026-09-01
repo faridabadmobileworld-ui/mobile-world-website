@@ -54,6 +54,7 @@ export function SiteFooter() {
               <li><Link href="/after-sales-support">After Sales Support</Link></li>
               <li><Link href="/finance">Finance और EMI</Link></li>
               <li><Link href="/contact">Contact Us</Link></li>
+              <li><Link href="/returns">Return और Exchange</Link></li>
               <li><a href={ask("पुराने phone के Exchange")} target="_blank" rel="noopener">Exchange</a></li>
               <li><a href={ask("EMI")} target="_blank" rel="noopener">EMI</a></li>
               <li><a href={ask("Delivery")} target="_blank" rel="noopener">Delivery</a></li>
@@ -74,7 +75,7 @@ export function SiteFooter() {
         <div className="fbot">
           <span>© {new Date().getFullYear()} {shop.name} · {shop.registeredName}</span>
           <span>
-            <Link href="/terms">Terms &amp; Conditions</Link> · <Link href="/privacy">Privacy</Link> · सिर्फ़ पूछताछ के लिए — यहाँ से order नहीं होता
+            <Link href="/terms">Terms &amp; Conditions</Link> · <Link href="/returns">Return और Exchange</Link> · <Link href="/privacy">Privacy</Link> · सिर्फ़ पूछताछ के लिए — यहाँ से order नहीं होता
           </span>
         </div>
       </div>

@@ -36,6 +36,7 @@ const PAGES = [
   ["/privacy", "privacy/index.html"],
   ["/finance", "finance/index.html"],
   ["/terms", "terms/index.html"],
+  ["/returns", "returns/index.html"],
 ];
 
 const MIME = {

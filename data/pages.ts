@@ -85,7 +85,12 @@ export const sitePages: SitePage[] = [
   {
     href: "/terms",
     label: "Terms & Conditions",
-    blurb: "दुकान के नियम — bill, warranty, exchange और delivery की शर्तें।",
+    blurb: "दुकान के नियम — bill, brand warranty, delivery और timing की शर्तें।",
+  },
+  {
+    href: "/returns",
+    label: "Return और Exchange",
+    blurb: "वापसी, refund और पुराने phone के exchange के नियम — साफ़-साफ़।",
   },
 ];
 

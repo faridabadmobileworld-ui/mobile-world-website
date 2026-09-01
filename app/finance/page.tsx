@@ -22,6 +22,7 @@ const toc: TocItem[] = [
   { id: "card", label: "Credit Card पर EMI" },
   { id: "rules", label: "Approval और rules — साफ़ बात" },
   { id: "documents", label: "Finance के लिए ज़रूरी documents" },
+  { id: "kyc", label: "KYC का सबसे ज़रूरी नियम" },
   { id: "disclaimer", label: "Logo और trademark के बारे में" },
 ];
 
@@ -85,6 +86,10 @@ export default function Finance() {
             Debit card पर भी कुछ bank यह सुविधा देते हैं।
           </p>
           <p>
+            HDFC, ICICI, SBI, Axis समेत लगभग सारे बड़े bank के credit card दुकान पर
+            चलते हैं।
+          </p>
+          <p>
             आपके card पर EMI बनेगी या नहीं, कितने महीने की बनेगी, और उस पर interest
             या processing fee कितनी लगेगी — <strong>यह पूरी तरह आपके bank के नियमों
             पर तय होता है, दुकान पर नहीं</strong>। Card लेकर आइए, counter पर machine
@@ -121,10 +126,26 @@ export default function Finance() {
               <strong>Bank account की details</strong> — जिस account से किश्त कटेगी
               (passbook, ATM card या cheque book)
             </li>
+            <li>
+              <strong>वही mobile number, चालू हालत में</strong> — जो Aadhaar और bank
+              account दोनों से जुड़ा है। OTP उसी पर आता है, इसलिए वो phone साथ होना
+              ज़रूरी है।
+            </li>
           </ul>
           <p>
-            ये तीनों साथ हों तो काम एक ही चक्कर में हो जाता है। कुछ समझना हो तो पहले
+            ये चारों साथ हों तो काम एक ही चक्कर में हो जाता है। कुछ समझना हो तो पहले
             WhatsApp पर पूछ लीजिए।
+          </p>
+
+          <h2 id="kyc">KYC का सबसे ज़रूरी नियम</h2>
+          <p>
+            <strong>जिसके documents लग रहे हैं, उनका ख़ुद दुकान पर आना ज़रूरी है।</strong>
+          </p>
+          <p>
+            Finance company KYC में live photo और biometric verification करती है — यह
+            उसी इंसान के सामने होने पर ही हो सकता है। इसलिए किसी रिश्तेदार या दोस्त के
+            documents पर, उनके बिना, finance नहीं हो पाता। यह नियम bank का है और आपकी
+            अपनी सुरक्षा के लिए ही है।
           </p>
 
           <div className="btns" style={{ marginTop: 18 }}>

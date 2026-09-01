@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { shop } from "@/data/shop";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { MoreLinks } from "@/components/MoreLinks";
@@ -15,13 +16,15 @@ export const metadata: Metadata = {
 
 const toc: TocItem[] = [
   { id: "website", label: "Website सिर्फ़ जानकारी के लिए है" },
-  { id: "price", label: "दाम और stock" },
+  { id: "price", label: "दाम, offer और stock" },
   { id: "bill", label: "पक्का bill और genuine सामान" },
   { id: "warranty", label: "Brand warranty और service" },
-  { id: "exchange", label: "पुराने phone के Exchange की शर्तें" },
+  { id: "exchange", label: "Return, Refund और Exchange" },
   { id: "delivery", label: "Delivery की शर्तें" },
   { id: "timing", label: "खुलने और बंद होने का समय" },
   { id: "ipr", label: "Content किसका है" },
+  { id: "jaankari", label: "जानकारी में ग़लती या बदलाव" },
+  { id: "kanoon", label: "क़ानूनी अधिकार क्षेत्र" },
   { id: "badlav", label: "इन शर्तों में बदलाव" },
   { id: "contact", label: "हमसे संपर्क कीजिए" },
 ];
@@ -66,7 +69,7 @@ export default function Terms() {
             </li>
           </ul>
 
-          <h2 id="price">2. दाम और stock</h2>
+          <h2 id="price">2. दाम, offer और stock</h2>
           <ul>
             <li>
               Smartphone, laptop और appliances के दाम market के हिसाब से बदलते रहते
@@ -78,6 +81,10 @@ export default function Terms() {
             </li>
             <li>
               किसी भी सामान का दाम और उपलब्धता बिना बताए बदल सकती है।
+            </li>
+            <li>
+              Website या social media पर कभी कोई offer दिखे, तो भी पक्का दाम और
+              उपलब्धता वही होती है जो <strong>उस दिन counter पर</strong> लागू हो।
             </li>
           </ul>
 
@@ -110,31 +117,31 @@ export default function Terms() {
               छोटी-मोटी मदद, guidance और service centre तक पहुँचाने में हमारी team
               हमेशा counter पर मौजूद है।
             </li>
+            <li>
+              <strong>Warranty कब ख़त्म हो जाती है:</strong> सामान गिरने-टूटने
+              (physical damage), पानी लगने, या किसी बाहर वाली जगह से खुलवा लेने पर
+              brand की warranty अपने आप ख़त्म हो जाती है। यह नियम brand का है।
+            </li>
+            <li>
+              EMI और finance की शर्तें अलग हैं — वो{" "}
+              <Link href="/finance" style={{ color: "var(--brand)", fontWeight: 700 }}>
+                Finance और EMI
+              </Link>{" "}
+              वाले page पर लिखी हैं।
+            </li>
           </ul>
 
-          <h2 id="exchange">5. पुराने phone के Exchange की शर्तें</h2>
+          <h2 id="exchange">5. Return, Refund और Exchange</h2>
           <p>
-            नया phone लेते समय पुराना phone exchange में दिया जा सकता है। तरीक़ा यह है:
+            सामान वापस करने, पैसे लौटने, डिब्बा खोलते ही ख़राबी निकलने (DOA) और पुराने
+            phone के exchange — इन सबके पूरे नियम अलग page पर एक जगह लिखे हैं, ताकि
+            ढूँढ़ना न पड़े:
           </p>
-          <ul>
-            <li>
-              <strong>Phone चेक किया जाता है।</strong> उसकी हालत देखकर उसकी value
-              लगाई जाती है।
-            </li>
-            <li>
-              वो value नए phone के दाम में से कम कर दी जाती है — बचे हुए पैसे ही आपको
-              देने होते हैं।
-            </li>
-            <li>
-              <strong>Bill या original डिब्बा — दोनों में से कम से कम एक होना ज़रूरी
-              है।</strong> अगर दोनों में से कुछ भी न हो, तो हम वो phone exchange में
-              नहीं लेंगे।
-            </li>
-            <li>
-              Value phone की हालत पर तय होती है, इसलिए पक्का दाम counter पर आपके
-              सामने ही लगेगा।
-            </li>
-          </ul>
+          <p>
+            <Link href="/returns" style={{ color: "var(--brand)", fontWeight: 700 }}>
+              Return, Refund और Exchange के नियम देखिए →
+            </Link>
+          </p>
 
           <h2 id="delivery">6. Delivery की शर्तें</h2>
           <ul>
@@ -181,7 +188,27 @@ export default function Terms() {
             </li>
           </ul>
 
-          <h2 id="badlav">9. इन शर्तों में बदलाव</h2>
+          <h2 id="jaankari">9. जानकारी में ग़लती या बदलाव</h2>
+          <ul>
+            <li>
+              हम पूरी कोशिश करते हैं कि website पर लिखी हर बात सही हो।
+            </li>
+            <li>
+              फिर भी कहीं लिखने में ग़लती रह जाए, या brand अपनी तरफ़ से कुछ बदल दे, तो
+              हम उस जानकारी को बिना पहले बताए ठीक कर सकते हैं।
+            </li>
+          </ul>
+
+          <h2 id="kanoon">10. क़ानूनी अधिकार क्षेत्र</h2>
+          <ul>
+            <li>
+              हमारे कारोबार से जुड़ा कोई भी विवाद हो, तो उस पर सुनवाई
+              {" "}<strong>{shop.address.city}, {shop.address.state}</strong> के
+              न्यायक्षेत्र में ही होगी।
+            </li>
+          </ul>
+
+          <h2 id="badlav">11. इन शर्तों में बदलाव</h2>
           <ul>
             <li>
               कारोबार की ज़रूरत या क़ानूनी नियमों के हिसाब से हम इन शर्तों को
@@ -190,7 +217,7 @@ export default function Terms() {
             <li>कोई भी बदलाव सबसे पहले इसी page पर दिखेगा।</li>
           </ul>
 
-          <h2 id="contact">10. हमसे संपर्क कीजिए</h2>
+          <h2 id="contact">12. हमसे संपर्क कीजिए</h2>
           <p>
             इन शर्तों को लेकर कोई सवाल हो तो सीधे हमसे जुड़िए:
           </p>

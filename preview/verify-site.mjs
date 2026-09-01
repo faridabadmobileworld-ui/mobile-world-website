@@ -6,7 +6,11 @@ const CATS = (readFileSync('data/shop.ts', 'utf8')
   .match(/export const categories: Category\[\] = \[([\s\S]*?)\];/)[1]
   .match(/slug:/g) || []).length;
 const B='http://127.0.0.1:3111';
-const paths=['/','/products','/about','/contact','/visit','/posts','/posts/ac-tonnage','/posts/new-phones','/posts/monthly-closure','/privacy'];
+// Page ki list data/pages.ts se hi aati hai — naya page banate hi wo apne aap
+// yahan jud jata hai, kisi ko yaad rakhna nahi padta.
+const SITE_PAGES=[...readFileSync('data/pages.ts','utf8')
+  .matchAll(/href:\s*"([^"]+)"/g)].map(m=>m[1]);
+const paths=[...SITE_PAGES,'/posts/ac-tonnage','/posts/new-phones','/posts/monthly-closure'];
 const b=await chromium.launch(); const fail=[],ok=[];
 const T=(c,l,d='')=>(c?ok:fail).push(l+(d?`  [${d}]`:''));
 

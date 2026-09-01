@@ -695,15 +695,15 @@ body.searching .qinfo{display:flex}
 .fin{position:relative;overflow:hidden;background:var(--card);border:1px solid var(--line);
   border-radius:var(--r-lg);padding:14px 0}
 /* Dono kinaron par halka sa dhundhlapan, taaki naam kate hue na lagein */
-.fin::before,.fin::after{content:"";position:absolute;top:0;bottom:0;width:44px;z-index:2;
+.fin::before,.fin::after{content:"";position:absolute;top:0;bottom:0;width:26px;z-index:2;
   pointer-events:none}
 .fin::before{left:0;background:linear-gradient(90deg,var(--card),transparent)}
 .fin::after{right:0;background:linear-gradient(270deg,var(--card),transparent)}
-.fin-t{display:flex;align-items:center;gap:34px;width:max-content;
-  animation:fin-run 34s linear infinite}
+.fin-t{display:flex;align-items:center;gap:18px;width:max-content;
+  animation:fin-run 18s linear infinite}
 .fin:hover .fin-t{animation-play-state:paused}
 @keyframes fin-run{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
-.fin-c{flex:none;display:grid;place-items:center;min-width:132px;height:52px;padding:0 6px}
+.fin-c{flex:none;display:grid;place-items:center;height:52px;padding:0 4px}
 .fin-c img{width:140px;height:44px;object-fit:contain}  /* Naap pakki rakhi hai — nahi to 2x/3x screen par browser logo ko chhota
      kar deta hai. Sabhi logo ek hi 420x132 canvas par hain, isliye contain
      se koi khinchav nahi aata. */
@@ -712,7 +712,8 @@ body.searching .qinfo{display:flex}
 .fin-n s{display:block;text-decoration:none;font-size:10.5px;font-weight:600;
   letter-spacing:.02em;color:var(--ink-3);margin-top:2px}
 @media(min-width:768px){
-  .fin-t{gap:44px} .fin-c{min-width:152px;height:56px} .fin-n{font-size:15.5px}
+  .fin-t{gap:26px} .fin-c{height:56px;padding:0 6px} .fin-n{font-size:15.5px}
+  .fin::before,.fin::after{width:40px}
 }
 /* Jinke phone mein "reduce motion" chalu hai — patti rukti hai, ungli se khiske */
 @media(prefers-reduced-motion:reduce){
