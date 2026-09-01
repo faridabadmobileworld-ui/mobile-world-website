@@ -364,7 +364,8 @@ ul{list-style:none;margin:0;padding:0}
 .afig{margin:22px 0;border-radius:var(--r);overflow:hidden;background:#fff}
 .afig img{width:100%;height:auto;display:block}
 .afig figcaption{font-size:12px;color:var(--ink-3);padding:9px 12px;line-height:1.5;background:#fff}
-.rbody h2{font-size:clamp(1.15rem,2.4vw,1.5rem);font-weight:800;letter-spacing:-.026em;margin:32px 0 10px}
+.rbody h2{font-size:clamp(1.15rem,2.4vw,1.5rem);font-weight:800;letter-spacing:-.026em;margin:32px 0 10px;
+  scroll-margin-top:150px}
 .rbody h3{font-size:1.02rem;font-weight:800;margin:22px 0 8px}
 .rbody ul{margin:0 0 15px;padding-left:20px}
 .rbody li{margin:6px 0;font-size:15px;line-height:1.72;color:var(--ink-2)}
@@ -605,3 +606,50 @@ body.searching .qinfo{display:flex}
 .drawer a.d i.pic{position:relative;width:34px;height:34px;background:#fff;
   border:1px solid var(--line-2);overflow:hidden}
 .drawer a.d i.pic img{width:100%;height:100%;object-fit:contain;padding:8%}
+
+/* ── Table of contents — har page ke upar ──
+   Owner ne 1 Sep 2026 ko kaha: har page par honi chahiye. Server par hi
+   ban jaati hai, isliye Google ko pehli hi baar dikh jaati hai. */
+.toc{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:14px 16px;margin:0 0 20px;max-width:640px}
+.toc-h{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:700;margin:0 0 8px}
+.toc ol{list-style:none;margin:0;padding:0;display:grid;gap:2px;counter-reset:none}
+.toc li a{display:flex;align-items:flex-start;gap:9px;padding:7px 6px;border-radius:8px;
+  font-size:14.5px;line-height:1.5;color:var(--ink);font-weight:500;min-height:38px}
+.toc li a:hover{background:var(--brand-soft);color:var(--brand)}
+.toc-n{flex:none;width:20px;height:20px;margin-top:1px;border-radius:6px;
+  background:var(--brand-soft);color:var(--brand);font-size:11px;font-weight:800;
+  display:grid;place-items:center}
+@media(min-width:768px){ .toc{padding:16px 20px} }
+
+/* ── Lambe text wale pages (About, Team, Support, Repairing) ──
+   Padhne layak chaudai, saaf headings, aur list ke aage tick. */
+.prose{max-width:68ch}
+.prose h2{font-size:clamp(1.15rem,2.6vw,1.4rem);font-weight:800;letter-spacing:-.02em;
+  margin:30px 0 10px;scroll-margin-top:150px}
+.prose h3{font-size:clamp(1rem,2.2vw,1.12rem);font-weight:800;letter-spacing:-.02em;
+  margin:22px 0 6px;color:var(--ink)}
+.prose p{font-size:15px;line-height:1.85;color:var(--ink-2);margin:0 0 12px}
+.prose p strong{color:var(--ink);font-weight:700}
+.prose>p:first-of-type{font-size:16px;color:var(--ink)}
+.prose ul{display:grid;gap:10px;margin:14px 0 4px}
+.prose ul li{position:relative;padding-left:28px;font-size:15px;line-height:1.8;color:var(--ink-2)}
+.prose ul li::before{content:"";position:absolute;left:0;top:7px;width:18px;height:18px;
+  border-radius:6px;background:var(--brand-soft)}
+.prose ul li::after{content:"";position:absolute;left:6px;top:12px;width:5px;height:9px;
+  border:solid var(--brand);border-width:0 2px 2px 0;transform:rotate(43deg)}
+.prose ul li strong{color:var(--ink);font-weight:700}
+
+/* Article ke neeche lekhak ka naam */
+.byline{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-3);
+  margin:0 0 14px}
+.byline b{color:var(--ink-2);font-weight:700}
+.byline i{width:4px;height:4px;border-radius:99px;background:var(--line);flex:none}
+
+/* Page ke aakhir mein dukaan ka pata — sab pages par ek jaisa */
+.pfoot{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:18px 18px 16px;margin:8px 0 0}
+.pfoot h2{font-size:1.05rem;margin:0 0 10px;font-weight:800;letter-spacing:-.02em}
+.pfoot address{font-style:normal;font-size:14.5px;line-height:1.8;color:var(--ink-2);margin:0 0 12px}
+.pfoot address a{color:var(--brand);font-weight:700}

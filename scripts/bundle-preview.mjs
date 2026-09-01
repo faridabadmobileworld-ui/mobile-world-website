@@ -30,6 +30,9 @@ const PAGES = [
   ["/posts/ac-tonnage", "posts/ac-tonnage/index.html"],
   ["/posts/new-phones", "posts/new-phones/index.html"],
   ["/posts/monthly-closure", "posts/monthly-closure/index.html"],
+  ["/team", "team/index.html"],
+  ["/repairing", "repairing/index.html"],
+  ["/after-sales-support", "after-sales-support/index.html"],
   ["/privacy", "privacy/index.html"],
 ];
 

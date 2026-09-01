@@ -4,6 +4,8 @@ import { shop } from "@/data/shop";
 import { whatsappGeneral } from "@/data/content";
 import { IconWhatsApp, IconPin, IconPhone } from "@/components/Icons";
 import { FollowUs } from "@/components/FollowUs";
+import { TableOfContents, type TocItem } from "@/components/TableOfContents";
+import { PageFoot, Byline } from "@/components/PageFoot";
 import { Banner } from "@/components/Banner";
 import { GoogleQR } from "@/components/GoogleQR";
 import { LiveBadge, NextClosure } from "@/components/StoreStatus";
@@ -16,6 +18,13 @@ export const metadata: Metadata = {
     `रोज़ सुबह 10 से रात 10, सातों दिन। हर महीने की आख़िरी तारीख़ को बंद।`,
   alternates: { canonical: "/visit" },
 };
+
+const toc: TocItem[] = [
+  { id: "pata", label: "दुकान का पता और नक़्शा" },
+  { id: "kab-khuli", label: "कब खुली रहती है" },
+  { id: "kab-band", label: "कब बंद रहती है" },
+  { id: "pehchan", label: "पहचान" },
+];
 
 export default function Visit() {
   return (
@@ -30,6 +39,9 @@ export default function Visit() {
           मौजूद है या नहीं — ताकि आपका चक्कर बेकार न जाए।
         </p>
 
+        <Byline />
+        <TableOfContents items={toc} />
+
         <Banner src="/images/visit-mobile-world-store-gurudwara-road-3656c82d.webp"
           alt={`${shop.name} — ${shop.address.road}, ${shop.address.locality}, ${shop.address.city}`} />
 
@@ -37,7 +49,7 @@ export default function Visit() {
           <span className="cico" aria-hidden="true">
             <Image src="/images/icon-shop-2b14210e.webp" alt="" width={200} height={200} sizes="96px" />
           </span>
-          <h2>{shop.name}</h2>
+          <h2 id="pata">{shop.name}</h2>
           <p>
             {shop.address.street}<br />
             {shop.address.landmark}<br />
@@ -72,20 +84,20 @@ export default function Visit() {
       <section className="sec">
         <div className="cols3">
           <div className="panel rv in">
-            <h2 style={{ fontSize: "1.05rem", margin: "0 0 8px" }}>कब खुली रहती है</h2>
+            <h2 id="kab-khuli" style={{ fontSize: "1.05rem", margin: "0 0 8px" }}>कब खुली रहती है</h2>
             <p style={{ fontSize: 14.5, color: "var(--ink-2)", margin: 0 }}>
               सातों दिन, सुबह 10 से रात 10। कोई weekly off नहीं।
             </p>
           </div>
           <div className="panel rv in">
-            <h2 style={{ fontSize: "1.05rem", margin: "0 0 8px" }}>कब बंद रहती है</h2>
+            <h2 id="kab-band" style={{ fontSize: "1.05rem", margin: "0 0 8px" }}>कब बंद रहती है</h2>
             <p style={{ fontSize: 14.5, color: "var(--ink-2)", margin: 0 }}>
               हर महीने की आख़िरी तारीख़ — 28, 29, 30 या 31, जो भी हो। उस दिन
               पूरा बाज़ार बंद रहता है।
             </p>
           </div>
           <div className="panel rv in">
-            <h2 style={{ fontSize: "1.05rem", margin: "0 0 8px" }}>पहचान</h2>
+            <h2 id="pehchan" style={{ fontSize: "1.05rem", margin: "0 0 8px" }}>पहचान</h2>
             <p style={{ fontSize: 14.5, color: "var(--ink-2)", margin: 0 }}>
               {shop.address.landmark}। {shop.address.road} पर, {shop.address.locality} में।
             </p>
@@ -99,6 +111,7 @@ export default function Visit() {
         </p>
       </section>
 
+      <PageFoot />
       <FollowUs />
     </div>
   );

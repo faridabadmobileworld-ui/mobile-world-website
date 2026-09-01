@@ -4,15 +4,24 @@ import { serviceCards, ask, whatsappGeneral } from "@/data/content";
 import { IconArrow, IconWhatsApp, IconPhone, IconPin } from "@/components/Icons";
 import { FollowUs } from "@/components/FollowUs";
 import { Banner } from "@/components/Banner";
-import { LiveBadge } from "@/components/StoreStatus";
+import { LiveBadge, NextClosure } from "@/components/StoreStatus";
+import { TableOfContents, type TocItem } from "@/components/TableOfContents";
+import { PageFoot, Byline } from "@/components/PageFoot";
 
 export const metadata: Metadata = {
-  title: "बात कीजिए",
+  title: "Contact Us — सीधे Call और WhatsApp",
   description:
-    `${shop.name} से सीधे बात कीजिए — ${shop.phone.display}। Repair, EMI, Exchange, ` +
-    `Delivery और Exchange के सवाल WhatsApp पर पूछ लीजिए। कोई form नहीं।`,
+    `${shop.address.city} में mobile, laptop या electronics के लिए सीधे contact ` +
+    `कीजिए। ${shop.address.locality} की shop timing, phone number और WhatsApp यहाँ।`,
   alternates: { canonical: "/contact" },
 };
+
+const toc: TocItem[] = [
+  { id: "abhi-baat", label: "अभी बात कीजिए — हम आपके लिए खुले हैं" },
+  { id: "pata", label: "हमारी दुकान का exact पता" },
+  { id: "pehle-message", label: "आने से पहले एक छोटा सा WhatsApp message" },
+  { id: "service", label: "किस बारे में पूछना है?" },
+];
 
 export default function Contact() {
   const services = serviceCards.filter((s) => shop.services[s.key]);
@@ -21,16 +30,29 @@ export default function Contact() {
     <div className="wrap">
       <section className="sec">
         <h1 style={{ fontSize: "clamp(1.4rem,4vw,2rem)", fontWeight: 800,
-                     letterSpacing: "-.03em", margin: "0 0 6px" }}>बात कीजिए</h1>
-        <p style={{ color: "var(--ink-2)", maxWidth: "62ch", margin: "0 0 18px" }}>
-          कोई form नहीं है। सीधे call कीजिए या WhatsApp पर लिख दीजिए — जवाब उसी
-          counter से मिलेगा जहाँ से सामान जाता है।
-        </p>
+                     letterSpacing: "-.03em", margin: "0 0 10px" }}>
+          Contact Us — सीधे counter से बात कीजिए, बिना किसी form के!
+        </h1>
+        <Byline />
+        <TableOfContents items={toc} />
 
-        <div className="cband rv in">
-          <h2>अभी बात कीजिए</h2>
+        <div className="prose" style={{ marginBottom: 18 }}>
+          <p>हम digital world में भी personal touch पर भरोसा करते हैं।</p>
+          <p>
+            यहाँ कोई complicated contact form नहीं है। सीधे call कीजिए या WhatsApp पर
+            message भेजिए — जवाब उसी counter से मिलेगा जहाँ से सामान आपके हाथों में
+            जाता है।
+          </p>
+        </div>
+
+        <div className="cband rv in" id="abhi-baat">
+          <h2>अभी बात कीजिए — हम आपके लिए खुले हैं</h2>
           <p style={{ marginBottom: 4 }}><LiveBadge /></p>
-          <p>रोज़ सुबह 10 बजे से रात 10 बजे तक, सातों दिन।</p>
+          <p><strong>Timing:</strong> रोज़ सुबह 10:00 बजे से रात 10:00 बजे तक, सातों दिन।</p>
+          <p style={{ marginTop: 2 }}>
+            <strong>Note:</strong> दुकान हर महीने की आख़िरी तारीख़ को बंद रहती है —
+            अगली छुट्टी <NextClosure />।
+          </p>
           <div className="btns" style={{ justifyContent: "center" }}>
             <a className="btn btn-w" href={whatsappGeneral} target="_blank" rel="noopener">
               <IconWhatsApp /> WhatsApp पर पूछिए
@@ -59,14 +81,36 @@ export default function Contact() {
 
       <section className="sec">
         <div className="panel rv in" style={{ maxWidth: 820 }}>
-          <h2 style={{ fontSize: "1.1rem", margin: "0 0 10px" }}>आने से पहले</h2>
+          <h2 id="pata" style={{ fontSize: "1.1rem", margin: "0 0 10px" }}>
+            हमारी दुकान का exact पता
+          </h2>
+          <address style={{ fontStyle: "normal", fontSize: 14.5, lineHeight: 1.85,
+                            color: "var(--ink-2)", margin: 0 }}>
+            <strong style={{ color: "var(--ink)" }}>{shop.name}</strong><br />
+            {shop.address.street},<br />
+            {shop.address.landmark},<br />
+            {shop.address.locality}, {shop.address.city}, {shop.address.state},
+            {" "}India – {shop.address.postalCode}
+          </address>
+          <div className="btns" style={{ marginTop: 14 }}>
+            <a className="btn btn-o" href={shop.social.googleMaps} target="_blank" rel="noopener">
+              <IconPin /> रास्ता देखिए
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="sec">
+        <div className="panel rv in" style={{ maxWidth: 820 }}>
+          <h2 id="pehle-message" style={{ fontSize: "1.1rem", margin: "0 0 10px" }}>
+            आने से पहले एक छोटा सा WhatsApp message कर दीजिए
+          </h2>
           <p style={{ fontSize: 14.5, color: "var(--ink-2)", margin: "0 0 10px" }}>
-            जो चाहिए उसका नाम WhatsApp पर भेज दीजिए। किसी भी product की जानकारी के
-            लिए हमसे सीधे संपर्क कीजिए।
+            बाहर से आ रहे हैं, तो निकलने से पहले WhatsApp पर product का नाम भेज दीजिए।
           </p>
           <p style={{ fontSize: 14.5, color: "var(--ink-2)", margin: 0 }}>
-            बाहर से आ रहे हैं तो निकलने से पहले एक message कर दीजिए। हम बता देंगे कि
-            दुकान खुली है और जो चाहिए वो shelf पर है।
+            हम आपको तुरंत बता देंगे कि item shelf पर available है या नहीं — ताकि आपका
+            क़ीमती समय और चक्कर दोनों बच सकें।
           </p>
           <div className="btns" style={{ marginTop: 14 }}>
             <a className="btn btn-h" href={whatsappGeneral} target="_blank" rel="noopener">
@@ -76,6 +120,7 @@ export default function Contact() {
         </div>
       </section>
 
+      <PageFoot />
       <FollowUs />
     </div>
   );

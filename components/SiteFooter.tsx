@@ -31,6 +31,7 @@ export function SiteFooter() {
             <h2 className="fh">दुकान</h2>
             <ul>
               <li><Link href="/about">हमारे बारे में</Link></li>
+              <li><Link href="/team">हमारी Team</Link></li>
               <li><Link href="/products">क्या-क्या मिलता है</Link></li>
               <li><Link href="/posts">नई जानकारी</Link></li>
               <li><Link href="/visit">दुकान पर आइए</Link></li>
@@ -49,7 +50,9 @@ export function SiteFooter() {
           <div>
             <h2 className="fh">मदद</h2>
             <ul>
-              <li><Link href="/contact">Repairing</Link></li>
+              <li><Link href="/repairing">Repairing Services</Link></li>
+              <li><Link href="/after-sales-support">After Sales Support</Link></li>
+              <li><Link href="/contact">Contact Us</Link></li>
               <li><a href={ask("पुराने phone के Exchange")} target="_blank" rel="noopener">Exchange</a></li>
               <li><a href={ask("EMI")} target="_blank" rel="noopener">EMI</a></li>
               <li><a href={ask("Delivery")} target="_blank" rel="noopener">Delivery</a></li>

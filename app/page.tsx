@@ -11,7 +11,18 @@ import { IconArrow, IconWhatsApp, IconPin, IconPhone } from "@/components/Icons"
 import { FollowUs } from "@/components/FollowUs";
 import { Banner } from "@/components/Banner";
 import { GoogleQR } from "@/components/GoogleQR";
+import { TableOfContents, type TocItem } from "@/components/TableOfContents";
+import { PageFoot } from "@/components/PageFoot";
 import { NextClosure } from "@/components/StoreStatus";
+
+const toc: TocItem[] = [
+  { id: "kya-milta-hai", label: "क्या-क्या मिलता है" },
+  { id: "ek-chhat", label: "सब कुछ, एक ही छत के नीचे" },
+  { id: "emi-exchange-repair", label: "EMI, Exchange और Repairing" },
+  { id: "dukaan-ke-andar", label: "दुकान के अंदर" },
+  { id: "nai-jaankari", label: "नई जानकारी" },
+  { id: "dukaan-par-aaiye", label: "दुकान पर आइए" },
+];
 
 export default function Home() {
   const top = items.slice(0, 8);
@@ -23,6 +34,8 @@ export default function Home() {
 
       <div className="wrap">
         <Hero />
+
+        <TableOfContents items={toc} />
 
         <div className="prow">
           {shop.services.emi && (
@@ -58,7 +71,7 @@ export default function Home() {
 
         <section className="sec">
           <div className="shead">
-            <h2>क्या-क्या मिलता है</h2>
+            <h2 id="kya-milta-hai">क्या-क्या मिलता है</h2>
             <Link href="/products">सब देखिए <IconArrow /></Link>
           </div>
           <div className="pgrid">
@@ -81,7 +94,7 @@ export default function Home() {
         </section>
 
         <section className="sec">
-          <div className="shead"><h2>सब कुछ, एक ही छत के नीचे</h2></div>
+          <div className="shead"><h2 id="ek-chhat">सब कुछ, एक ही छत के नीचे</h2></div>
           <div className="ctiles">
             {navCategories.map((c) => (
               <Link key={c.slug} className="ct rv in" href={`/products#${c.slug}`}>
@@ -97,7 +110,7 @@ export default function Home() {
         </section>
 
         <section className="sec">
-          <div className="shead"><h2>EMI, Exchange और Repairing</h2></div>
+          <div className="shead"><h2 id="emi-exchange-repair">EMI, Exchange और Repairing</h2></div>
           <div className="sbanners">
             {serviceBanners.filter((b) => shop.services[b.key]).map((b) => (
               <a className="sbanner rv in" key={b.key} href={ask(b.topic)}
@@ -111,7 +124,7 @@ export default function Home() {
 
         <section className="sec" id="store-photos">
           <div className="shead">
-            <h2>दुकान के अंदर</h2>
+            <h2 id="dukaan-ke-andar">दुकान के अंदर</h2>
             <a href={shop.social.googleMaps} target="_blank" rel="noopener">रास्ता देखिए <IconArrow /></a>
           </div>
           <div className="shots">
@@ -129,7 +142,7 @@ export default function Home() {
 
         <section className="sec">
           <div className="shead">
-            <h2>नई जानकारी</h2>
+            <h2 id="nai-jaankari">नई जानकारी</h2>
             <Link href="/posts">सब देखिए <IconArrow /></Link>
           </div>
           <div className="posts">
@@ -176,14 +189,15 @@ export default function Home() {
           </div>
         </section>
 
-        <FollowUs />
+        <PageFoot />
+      <FollowUs />
 
         <section className="sec" id="visit">
           <div className="cband rv in">
             <span className="cico" aria-hidden="true">
               <Image src="/images/icon-shop-2b14210e.webp" alt="" width={200} height={200} sizes="96px" />
             </span>
-            <h2>दुकान पर आइए, और हमें सेवा का मौक़ा दीजिए</h2>
+            <h2 id="dukaan-par-aaiye">दुकान पर आइए, और हमें सेवा का मौक़ा दीजिए</h2>
             <GoogleQR />
             <p>{shop.address.street}, {shop.address.landmark}, {shop.address.locality},
               {" "}{shop.address.city}, {shop.address.state} {shop.address.postalCode}.</p>

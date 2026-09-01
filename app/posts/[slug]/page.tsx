@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { shop } from "@/data/shop";
+import { PageFoot, Byline } from "@/components/PageFoot";
+import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { posts } from "@/data/content";
 import { jsonLdScript } from "@/data/schema";
 import { IconWhatsApp, IconPhone } from "@/components/Icons";
@@ -40,6 +42,11 @@ export default async function PostPage({ params }: Params) {
 
   const others = posts.filter((p) => p.slug !== post.slug);
 
+  // Article ke apne <h2 id="..."> se TOC बन जाती है — दोबारा list लिखने की
+  // ज़रूरत नहीं, इसलिए heading बदलने पर TOC अपने आप सही रहती है।
+  const toc: TocItem[] = [...post.body.matchAll(/<h2 id="([^"]+)">(.*?)<\/h2>/g)]
+    .map((m) => ({ id: m[1], label: m[2] }));
+
   const schema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -48,7 +55,7 @@ export default async function PostPage({ params }: Params) {
     datePublished: post.dateISO,
     dateModified: post.dateISO,
     image: `${shop.siteUrl}${post.image}`,
-    author: { "@type": "Organization", name: shop.name, url: `${shop.siteUrl}/` },
+    author: { "@type": "Person", name: shop.authorName },
     publisher: {
       "@type": "Organization", name: shop.name,
       logo: { "@type": "ImageObject", url: `${shop.siteUrl}/logo.png` },
@@ -69,6 +76,7 @@ export default async function PostPage({ params }: Params) {
             <div className="rhead">
               <span className="k">{post.kicker}<em>{post.date}</em></span>
               <h1 className="rtitle">{post.title}</h1>
+              <Byline date={post.date} />
             </div>
 
             <div className="rmedia">
@@ -76,6 +84,8 @@ export default async function PostPage({ params }: Params) {
                 width={post.imageW} height={post.imageH} priority
                 sizes="(max-width:900px) 100vw, 900px" />
             </div>
+
+            <TableOfContents items={toc} />
 
             <div className="rbody" dangerouslySetInnerHTML={{ __html: post.body }} />
 
@@ -106,6 +116,7 @@ export default async function PostPage({ params }: Params) {
                 </Link>
               ))}
             </div>
+            <PageFoot />
           </article>
         </div>
       </div>

@@ -8,15 +8,25 @@ import { Banner } from "@/components/Banner";
 import { GoogleQR } from "@/components/GoogleQR";
 import { IconArrow, IconWhatsApp, IconPin, IconPhone } from "@/components/Icons";
 import { NextClosure } from "@/components/StoreStatus";
+import { TableOfContents, type TocItem } from "@/components/TableOfContents";
+import { PageFoot, Byline } from "@/components/PageFoot";
 
 export const metadata: Metadata = {
-  title: "हमारे बारे में",
+  title: `About Us — ${shop.legacyStartYear} से Faridabad का भरोसा`,
   description:
     `परिवार का business सफ़र ${shop.legacyStartYear} में Aggarwal Kiryana Store से शुरू हुआ, ` +
     `और ${shop.foundingYear} में इसी विरासत को आगे बढ़ाते हुए Mobile World की शुरुआत हुई। ` +
     `${shop.address.road}, ${shop.address.locality}, ${shop.address.city}।`,
   alternates: { canonical: "/about" },
 };
+
+const toc: TocItem[] = [
+  { id: "safar", label: "चार पड़ाव, एक ही सफ़र — हमारी विरासत" },
+  { id: "grahak", label: "हमारे ग्राहक" },
+  { id: "kya-milega", label: "हमारे पास क्या मिलेगा" },
+  { id: "bharosa", label: "आप Mobile World पर भरोसा क्यूँ करें?" },
+  { id: "team", label: "हमारी Team" },
+];
 
 export default function About() {
   return (
@@ -27,12 +37,14 @@ export default function About() {
       <section className="sec">
         <h1 style={{ fontSize: "clamp(1.5rem,4.4vw,2.3rem)", fontWeight: 800,
                      letterSpacing: "-.03em", margin: "0 0 6px", lineHeight: 1.22 }}>
-          {shop.legacyStartYear} से Faridabad के साथ
+          {shop.name} — {shop.legacyStartYear} से Faridabad का अपना परिवार, अपना भरोसा ❤️
         </h1>
         <p style={{ fontSize: "clamp(1rem,2.4vw,1.2rem)", fontWeight: 700,
-                    color: "var(--brand)", margin: "0 0 20px" }}>
-          तीन पड़ाव। एक ही सफ़र। एक ही भरोसा।
+                    color: "var(--brand)", margin: "0 0 12px" }}>
+          चार पड़ाव। एक ही सफ़र। एक ही भरोसा।
         </p>
+        <Byline />
+        <TableOfContents items={toc} />
 
         {/* ── आवाज़ owner की अपनी है (approved brand post, 25 Aug 2026)।
               इसे बदलना हो तो पहले owner से पूछिए — यही पूरी website की
@@ -45,7 +57,16 @@ export default function About() {
           से शुरू हुआ।
         </p>
         <p className="lede">
-          2006 में यह सफ़र Aggarwal Kiryana &amp; Communication के रूप में आगे बढ़ा।
+          स्व. श्री बाबू लाल जी ने {shop.legacyStartYear} में एक छोटी सी Kiryana store
+          और बहुत बड़ी ईमानदारी के साथ इस सफ़र की नींव रखी थी।
+        </p>
+        <p className="lede">
+          साल 1996 में {shop.owner} जी ने अपने आदरणीय पिताजी के साथ इस business को
+          सँभाला और आगे बढ़ाया।
+        </p>
+        <p className="lede">
+          इसके बाद 2006 में ज़रूरतें बदलीं, और यह सफ़र Aggarwal Kiryana &amp;
+          Communication के रूप में आगे बढ़ा।
         </p>
         <p className="lede">
           और {shop.foundingYear} में इसी विरासत को आगे बढ़ाते हुए Mobile World की
@@ -62,7 +83,7 @@ export default function About() {
       </section>
 
       <section className="sec">
-        <div className="shead"><h2>हमारा सफ़र</h2></div>
+        <div className="shead"><h2 id="safar">चार पड़ाव, एक ही सफ़र — हमारी विरासत</h2></div>
         <Banner src="/images/mobile-world-ka-safar-1973-2006-2016-e38c681c.webp"
           alt="एक सफ़र, एक परिवार, एक भरोसा — 1973 Aggarwal Kiryana Store, 2006 Aggarwal Kiryana &amp; Communication, 2016 Mobile World" />
         <ol className="tline">
@@ -92,7 +113,7 @@ export default function About() {
 
       <section className="sec">
         <div className="shead">
-          <h2>हमारे ग्राहक</h2>
+          <h2 id="grahak">हमारे ग्राहक</h2>
           <a href={shop.social.googleMaps} target="_blank" rel="noopener">
             रास्ता देखिए <IconArrow />
           </a>
@@ -112,7 +133,7 @@ export default function About() {
 
       <section className="sec">
         <div className="shead">
-          <h2>हमारे पास क्या मिलेगा</h2>
+          <h2 id="kya-milega">हमारे पास क्या मिलेगा</h2>
           <Link href="/products">सब देखिए <IconArrow /></Link>
         </div>
 
@@ -171,7 +192,46 @@ export default function About() {
       </section>
 
       <section className="sec">
-        <div className="shead"><h2>हमारी टीम</h2></div>
+        <div className="shead"><h2 id="bharosa">आप {shop.name} पर भरोसा क्यूँ करें?</h2></div>
+        <div className="prose">
+          <p>
+            चाहे latest smartphones हों, laptops हों या home appliances —
+            {" "}{shop.address.locality} की हमारी दुकान पर आपको ये चार बातें हमेशा मिलेंगी:
+          </p>
+          <ul>
+            <li>
+              <strong>100% Genuine Products:</strong> हर सामान पक्के GST Bill और पूरी
+              brand warranty के साथ मिलता है।
+            </li>
+            <li>
+              <strong>सही Guidance:</strong> हम सिर्फ़ sales target पूरे नहीं करते,
+              आपकी असल ज़रूरत के हिसाब से सही product चुनने में मदद करते हैं।
+            </li>
+            <li>
+              <strong>एक ही पता, कोई franchise नहीं:</strong> हमारी कोई branch नहीं है।
+              {" "}{shop.address.road} की इसी दुकान के counter पर आपको हमेशा हम ही मिलेंगे।
+            </li>
+            <li>
+              <strong>Life-Long Support:</strong> सामान लेने के बाद data transfer,
+              settings या चाहे किसी भी तरीक़े की support की ज़रूरत हो, सीधे दुकान पर आइए।
+            </li>
+          </ul>
+          <div className="btns" style={{ marginTop: 16 }}>
+            <Link className="btn btn-o" href="/after-sales-support">
+              After Sales Support <IconArrow />
+            </Link>
+            <Link className="btn btn-o" href="/repairing">
+              Repairing Services <IconArrow />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="sec">
+        <div className="shead">
+          <h2 id="team">हमारी Team</h2>
+          <Link href="/team">पूरी team देखिए <IconArrow /></Link>
+        </div>
 
         <Banner src="/images/mobile-world-team-people-behind-our-promise-v2-5f1d17e7.webp"
           alt={`${shop.name} की टीम — ${shop.address.locality} की दुकान के counter पर`} />
@@ -196,6 +256,7 @@ export default function About() {
         </p>
       </section>
 
+      <PageFoot />
       <FollowUs />
 
       <section className="sec">

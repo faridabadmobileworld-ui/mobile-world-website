@@ -3,6 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { shop } from "@/data/shop";
 import { posts } from "@/data/content";
+import { TableOfContents, type TocItem } from "@/components/TableOfContents";
+import { PageFoot, Byline } from "@/components/PageFoot";
+import { FollowUs } from "@/components/FollowUs";
 
 export const metadata: Metadata = {
   title: "नई जानकारी",
@@ -11,6 +14,8 @@ export const metadata: Metadata = {
     `${shop.address.locality}, ${shop.address.city}।`,
   alternates: { canonical: "/posts" },
 };
+
+const toc: TocItem[] = posts.map((p) => ({ id: p.slug, label: p.title }));
 
 export default function Posts() {
   return (
@@ -21,9 +26,11 @@ export default function Posts() {
         <p style={{ color: "var(--ink-2)", maxWidth: "60ch", margin: "0 0 16px" }}>
           ख़रीदने से पहले जो बातें काम आती हैं, और दुकान की नई ख़बरें।
         </p>
+        <Byline />
+        <TableOfContents items={toc} heading="इस page पर ये articles हैं" />
         <div className="posts">
           {posts.map((p) => (
-            <Link className="post rv in" key={p.slug} href={`/posts/${p.slug}`}>
+            <Link className="post rv in" key={p.slug} id={p.slug} href={`/posts/${p.slug}`}>
               <div className="m">
                 <Image src={p.image} alt={p.alt} width={p.imageW} height={p.imageH}
                   sizes="(max-width:700px) 100vw, 33vw" />
@@ -41,6 +48,8 @@ export default function Posts() {
           ))}
         </div>
       </section>
+      <PageFoot />
+      <FollowUs />
     </div>
   );
 }

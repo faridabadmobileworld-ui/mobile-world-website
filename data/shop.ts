@@ -104,6 +104,10 @@ export type Shop = {
   legacyStartYear: number;
   /** Cash, UPI, card, EMI — owner ने 31 Aug 2026 को confirm किया। */
   paymentMethods: readonly string[];
+  /** दुकान की नींव रखने वाले — स्व. श्री बाबू लाल अग्रवाल जी। */
+  founderName: string;
+  /** Website के content का author — हर article के नीचे यही नाम छपता है। */
+  authorName: string;
 };
 
 /**
@@ -253,7 +257,7 @@ export const shop: Shop = {
   social: {
     youtube: "https://youtube.com/@mobileworldfaridabad",
     instagram: "https://www.instagram.com/mobileworldfaridabad",
-    facebook: "https://facebook.com/mobileworldfaridabad",
+    facebook: "https://www.facebook.com/mobileworldfaridabad/",
     googleMaps: "https://maps.app.goo.gl/zivMudFFatYYF3yf7",
   },
 
@@ -267,6 +271,14 @@ export const shop: Shop = {
   // दोनों अलग बातें हैं, मिलाना मत (ऊपर `legacy` का note देखिए)।
   foundingYear: 2016,
   legacyStartYear: 1973,
+
+  /**
+   * दुकान की नींव किसने रखी — स्व. श्री बाबू लाल अग्रवाल जी (owner के पिताजी)।
+   * Owner: Mr. Tarun Gupta S/O Lt. Shri Babu Lal Aggarwal.
+   */
+  founderName: "स्व. श्री बाबू लाल अग्रवाल",
+  /** Website का content कौन लिखता है — हर article के नीचे यही नाम जाता है। */
+  authorName: "Sachin",
 
   services: {
     repair: true,
@@ -341,6 +353,12 @@ export const legacy: Milestone[] = [
     name: "Aggarwal Kiryana Store",
     tag: "शुरुआत एक भरोसे की",
     body: "छोटी सी किराना दुकान, बड़ा सपना, सच्ची मेहनत।",
+  },
+  {
+    year: "1996",
+    name: "अगली पीढ़ी ने कमान सँभाली",
+    tag: "पिताजी के साथ, क़दम से क़दम",
+    body: "Tarun Gupta जी ने अपने आदरणीय पिताजी के साथ इस business को सँभाला और आगे बढ़ाया।",
   },
   {
     year: "2006",

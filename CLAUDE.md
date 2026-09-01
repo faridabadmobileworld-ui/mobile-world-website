@@ -74,9 +74,14 @@ Cash · UPI · Credit Card · Debit Card · EMI
 - **Repairing — हाँ, यह दुकान retail shop भी है और repairing shop भी।**
   Owner: *"कोई पूछता है भाई मेरे phone में ये दिक़्क़त है, आपके यहाँ repairing
   होती है क्या? तो हाँ, हमारे यहाँ वो भी होता है।"*
-  ⚠️ पर नए device का **warranty वाला काम service centre पर ही होता है** —
-  उसका दावा मत करो। और screen / battery / water damage की पूरी list मत गिनाओ,
-  वरना retail दुकान repairing shop का इश्तिहार लगने लगती है।
+  ⚠️ नए device का **warranty वाला काम service centre पर ही होता है** —
+  उसका दावा मत करो।
+
+  📌 **1 Sep 2026 को यह नियम बदला:** पहले लिखा था "पूरी list मत गिनाओ"।
+  Owner ने उस दिन Sachin का लिखा पूरा **Repairing Services page** भेजा जिसमें
+  screen, battery, charging port, speaker/mic, camera, IC-level motherboard
+  और software — सब गिनाए हुए हैं। यानी अब **detail लिखनी है**, वो page
+  `/repairing` पर है। Home page पर फिर भी एक ही line रखिए।
 - **Exchange — पुराने phone की value लगाकर नए के दाम में से कम कर देते हैं।**
   Owner: *"उसके पुराने phone की value लगाते हैं, और उस value को नए phone में
   कम करके बचे हुए पैसे लेते हैं।"* बाक़ी शर्तें (कौन से brand, टूटी screen वाला
@@ -112,6 +117,28 @@ Kitchen Appliances (Air Fryer, Microwave, Mixer), Accessories
 ### Brands
 Apple, Samsung, Xiaomi / Redmi, OnePlus, Vivo, Oppo, Motorola, Nothing,
 iQOO, Realme, Tecno, Infinix, Lava, Nokia, Philips
+
+### Pages — website पर कौन-कौन से page हैं
+
+Home · Products · **Repairing Services** · **After Sales Support** ·
+**हमारी Team** · About · नई जानकारी (posts) · Contact · दुकान पर आइए · Privacy
+
+तीन नए page owner ने 1 Sep 2026 को Sachin का लिखा content देकर बनवाए —
+`/repairing`, `/after-sales-support`, `/team`.
+
+⚠️ **नया page बनाओ तो चार जगह जोड़ना ज़रूरी है:** `app/sitemap.ts`,
+drawer (`SiteHeader.tsx`), footer (`SiteFooter.tsx`) और
+`scripts/bundle-preview.mjs`. एक भी छूटी तो verify script पकड़ लेगी।
+
+### हर page पर ये तीन चीज़ें ज़रूरी हैं (owner, 1 Sep 2026)
+
+1. **Table of contents** — `<TableOfContents>` component. यह server पर ही
+   बन जाती है (JavaScript से headings नहीं ढूँढ़ती), इसलिए Google को पहली
+   बार में दिख जाती है। हर heading पर वही `id` लगाइए जो TOC की list में है।
+2. **Author का नाम — Sachin।** `shop.authorName` से आता है, `<Byline>`
+   component दिखाता है। Article के schema में भी यही author जाता है।
+3. **सारे social buttons + WhatsApp** — `<PageFoot>` और `<FollowUs>`
+   दोनों page के आख़िर में। पता, फ़ोन और चारों links वहीं से आते हैं।
 
 ### Social links
 - YouTube: https://youtube.com/@mobileworldfaridabad

@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import { TableOfContents, type TocItem } from "@/components/TableOfContents";
+import { PageFoot, Byline } from "@/components/PageFoot";
 import { shop } from "@/data/shop";
 import { items, navCategories } from "@/data/content";
 import { ProductCard } from "@/components/ProductCard";
 import { ProductFilter } from "@/components/ProductFilter";
 import { Banner } from "@/components/Banner";
+import { FollowUs } from "@/components/FollowUs";
 
 export const metadata: Metadata = {
   title: "क्या-क्या मिलता है",
@@ -12,6 +15,9 @@ export const metadata: Metadata = {
     `Appliances — ${shop.name}, ${shop.address.locality}, ${shop.address.city}।`,
   alternates: { canonical: "/products" },
 };
+
+/** हर category की heading — TOC इसी list से बनती है। */
+const toc: TocItem[] = navCategories.map((c) => ({ id: c.slug, label: c.label }));
 
 export default function Products() {
   return (
@@ -22,7 +28,9 @@ export default function Products() {
         <p style={{ color: "var(--ink-2)", maxWidth: "60ch", margin: "0 0 16px" }}>
           सब कुछ, एक ही छत के नीचे — {shop.tagline} का सभी सामान।
         </p>
+        <Byline />
         <ProductFilter />
+        <TableOfContents items={toc} heading="Category से चुनिए" />
       </section>
 
       <section className="sec">
@@ -42,6 +50,9 @@ export default function Products() {
           </section>
         );
       })}
+
+      <PageFoot />
+      <FollowUs />
     </div>
   );
 }
