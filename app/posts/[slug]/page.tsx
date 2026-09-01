@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { shop } from "@/data/shop";
-import { PageFoot, Byline } from "@/components/PageFoot";
+import { PageFoot } from "@/components/PageFoot";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { posts } from "@/data/content";
 import { jsonLdScript } from "@/data/schema";
@@ -76,7 +76,6 @@ export default async function PostPage({ params }: Params) {
             <div className="rhead">
               <span className="k">{post.kicker}<em>{post.date}</em></span>
               <h1 className="rtitle">{post.title}</h1>
-              <Byline date={post.date} />
             </div>
 
             <div className="rmedia">
@@ -116,7 +115,7 @@ export default async function PostPage({ params }: Params) {
                 </Link>
               ))}
             </div>
-            <PageFoot />
+            <PageFoot date={post.date} />
           </article>
         </div>
       </div>

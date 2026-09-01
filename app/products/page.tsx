@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
-import { PageFoot, Byline } from "@/components/PageFoot";
+import { PageFoot } from "@/components/PageFoot";
 import { shop } from "@/data/shop";
 import { items, navCategories } from "@/data/content";
 import { ProductCard } from "@/components/ProductCard";
@@ -29,7 +29,6 @@ export default function Products() {
         <p style={{ color: "var(--ink-2)", maxWidth: "60ch", margin: "0 0 16px" }}>
           सब कुछ, एक ही छत के नीचे — {shop.tagline} का सभी सामान।
         </p>
-        <Byline />
         <ProductFilter />
         <TableOfContents items={toc} heading="Category से चुनिए" />
       </section>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { shop } from "@/data/shop";
-import { PageFoot, Byline } from "@/components/PageFoot";
+import { PageFoot } from "@/components/PageFoot";
 import { FollowUs } from "@/components/FollowUs";
 import { MoreLinks } from "@/components/MoreLinks";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
@@ -23,7 +23,6 @@ export default function Privacy() {
       <section className="sec">
         <h1 style={{ fontSize: "clamp(1.4rem,4vw,2rem)", fontWeight: 800,
                      letterSpacing: "-.03em", margin: "0 0 16px" }}>Privacy</h1>
-        <Byline />
         <TableOfContents items={toc} />
         <div className="panel rv in" style={{ maxWidth: 820 }}>
           <h2 id="kya-nahi" style={{ fontSize: "1.05rem", margin: "0 0 8px" }}>

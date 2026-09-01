@@ -4,7 +4,7 @@ import Link from "next/link";
 import { shop } from "@/data/shop";
 import { posts } from "@/data/content";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
-import { PageFoot, Byline } from "@/components/PageFoot";
+import { PageFoot } from "@/components/PageFoot";
 import { FollowUs } from "@/components/FollowUs";
 import { MoreLinks } from "@/components/MoreLinks";
 
@@ -27,7 +27,6 @@ export default function Posts() {
         <p style={{ color: "var(--ink-2)", maxWidth: "60ch", margin: "0 0 16px" }}>
           ख़रीदने से पहले जो बातें काम आती हैं, और दुकान की नई ख़बरें।
         </p>
-        <Byline />
         <TableOfContents items={toc} heading="इस page पर ये articles हैं" />
         <div className="posts">
           {posts.map((p) => (

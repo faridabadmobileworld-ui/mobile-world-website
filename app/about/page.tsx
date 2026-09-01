@@ -7,7 +7,7 @@ import { Banner } from "@/components/Banner";
 import { IconArrow } from "@/components/Icons";
 import { NextClosure } from "@/components/StoreStatus";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
-import { PageFoot, Byline } from "@/components/PageFoot";
+import { PageFoot } from "@/components/PageFoot";
 import { MoreLinks } from "@/components/MoreLinks";
 
 export const metadata: Metadata = {
@@ -41,7 +41,6 @@ export default function About() {
                     color: "var(--brand)", margin: "0 0 12px" }}>
           चार पड़ाव। एक ही सफ़र। एक ही भरोसा।
         </p>
-        <Byline />
         <TableOfContents items={toc} />
 
         {/* ── आवाज़ owner की अपनी है (approved brand post, 25 Aug 2026)।

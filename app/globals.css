@@ -644,6 +644,9 @@ body.searching .qinfo{display:flex}
 /* Article ke neeche lekhak ka naam */
 .byline{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-3);
   margin:0 0 14px}
+/* Page ke sabse aakhir mein — footer ke andar, upar ek halki lakeer ke saath.
+   Owner ne 1 Sep 2026 ko kaha: author ka naam neeche aana chahiye, upar nahi. */
+.byline-end{margin:14px 0 0;padding-top:12px;border-top:1px solid var(--line)}
 .byline b{color:var(--ink-2);font-weight:700}
 .byline i{width:4px;height:4px;border-radius:99px;background:var(--line);flex:none}
 

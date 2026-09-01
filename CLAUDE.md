@@ -150,9 +150,10 @@ But interlinking karni h sabhi ki yahan se wahan direct one click pe."*
 1. **Table of contents** — `<TableOfContents>` component. यह server पर ही
    बन जाती है (JavaScript से headings नहीं ढूँढ़ती), इसलिए Google को पहली
    बार में दिख जाती है। हर heading पर वही `id` लगाइए जो TOC की list में है।
-2. **Author का नाम — `Written by: Sachin`।** `shop.authorName` से आता है,
-   `<Byline>` component दिखाता है। (हिन्दी "लिखा —" नहीं, owner ने 1 Sep 2026
-   को साफ़ कहा।) Article के schema में भी यही author जाता है।
+2. **Author का नाम — `Written by: Sachin`।** `shop.authorName` से आता है।
+   (हिन्दी "लिखा —" नहीं, owner ने 1 Sep 2026 को साफ़ कहा।)
+   ⚠️ यह **page के सबसे आख़िर में** आता है, ऊपर नहीं — `<PageFoot>` ख़ुद लगा
+   देता है। किसी page पर अलग से `<Byline>` मत लिखिए, वरना दो बार दिखेगा। Article के schema में भी यही author जाता है।
 3. **सारे social buttons + WhatsApp** — `<PageFoot>` और `<FollowUs>`
    दोनों page के आख़िर में। पता, फ़ोन और चारों links वहीं से आते हैं।
 

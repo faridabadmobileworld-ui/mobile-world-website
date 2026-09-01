@@ -17,7 +17,7 @@ import {
   IconYouTube, IconInstagram, IconFacebook,
 } from "./Icons";
 
-export function PageFoot() {
+export function PageFoot({ date }: { date?: string } = {}) {
   return (
     <section className="sec">
       <div className="pfoot rv in">
@@ -58,15 +58,19 @@ export function PageFoot() {
         <p style={{ fontSize: 13.5, color: "var(--ink-3)", margin: "14px 0 0" }}>
           🙏 {shop.name} से जुड़े रहने के लिए धन्यवाद! ❤️
         </p>
+
+        {/* Owner ने 1 Sep 2026 को कहा: author का नाम page के सबसे आख़िर में
+            आना चाहिए, ऊपर नहीं। इसीलिए Byline यहाँ, सबसे नीचे है। */}
+        <Byline date={date} />
       </div>
     </section>
   );
 }
 
-/** Article या page के ऊपर — किसने लिखा और कब। */
+/** Page के सबसे आख़िर में — किसने लिखा और कब। `PageFoot` इसे ख़ुद लगाता है। */
 export function Byline({ date }: { date?: string }) {
   return (
-    <p className="byline">
+    <p className="byline byline-end">
       <span>Written by: <b>{shop.authorName}</b></span>
       {date && <><i aria-hidden="true" /><span>{date}</span></>}
     </p>

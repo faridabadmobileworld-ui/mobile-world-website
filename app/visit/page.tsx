@@ -6,7 +6,7 @@ import { IconWhatsApp, IconPin, IconPhone } from "@/components/Icons";
 import { FollowUs } from "@/components/FollowUs";
 import { MoreLinks } from "@/components/MoreLinks";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
-import { PageFoot, Byline } from "@/components/PageFoot";
+import { PageFoot } from "@/components/PageFoot";
 import { Banner } from "@/components/Banner";
 import { GoogleQR } from "@/components/GoogleQR";
 import { LiveBadge, NextClosure } from "@/components/StoreStatus";
@@ -40,7 +40,6 @@ export default function Visit() {
           मौजूद है या नहीं — ताकि आपका चक्कर बेकार न जाए।
         </p>
 
-        <Byline />
         <TableOfContents items={toc} />
 
         <Banner src="/images/visit-mobile-world-store-gurudwara-road-3656c82d.webp"

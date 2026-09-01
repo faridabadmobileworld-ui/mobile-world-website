@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { shop } from "@/data/shop";
 import { Banner } from "@/components/Banner";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
-import { PageFoot, Byline } from "@/components/PageFoot";
+import { PageFoot } from "@/components/PageFoot";
 import { FollowUs } from "@/components/FollowUs";
 import { MoreLinks } from "@/components/MoreLinks";
 
@@ -28,7 +28,6 @@ export default function Team() {
                      letterSpacing: "-.03em", margin: "0 0 10px" }}>
           हमारी Team — वो चेहरे जो {shop.name} की असली ताक़त हैं ❤️
         </h1>
-        <Byline />
         <TableOfContents items={toc} />
 
         <div className="prose">

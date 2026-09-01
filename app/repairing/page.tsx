@@ -3,7 +3,7 @@ import { shop } from "@/data/shop";
 import { ask } from "@/data/content";
 import { Banner } from "@/components/Banner";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
-import { PageFoot, Byline } from "@/components/PageFoot";
+import { PageFoot } from "@/components/PageFoot";
 import { FollowUs } from "@/components/FollowUs";
 import { MoreLinks } from "@/components/MoreLinks";
 import { IconWhatsApp, IconPhone } from "@/components/Icons";
@@ -30,7 +30,6 @@ export default function Repairing() {
                      letterSpacing: "-.03em", margin: "0 0 10px" }}>
           Mobile Repairing Services — भरोसेमंद और expert technical solutions ❤️
         </h1>
-        <Byline />
         <TableOfContents items={toc} />
 
         <div className="prose">

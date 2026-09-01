@@ -8,7 +8,7 @@ import { GoogleQR } from "@/components/GoogleQR";
 import { MoreLinks } from "@/components/MoreLinks";
 import { LiveBadge, NextClosure } from "@/components/StoreStatus";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
-import { PageFoot, Byline } from "@/components/PageFoot";
+import { PageFoot } from "@/components/PageFoot";
 
 export const metadata: Metadata = {
   title: "Contact Us — सीधे Call और WhatsApp",
@@ -36,7 +36,6 @@ export default function Contact() {
                      letterSpacing: "-.03em", margin: "0 0 10px" }}>
           Contact Us — सीधे counter से बात कीजिए, बिना किसी form के!
         </h1>
-        <Byline />
         <TableOfContents items={toc} />
 
         <div className="prose" style={{ marginBottom: 18 }}>
