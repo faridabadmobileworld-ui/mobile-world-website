@@ -5,6 +5,7 @@ import { Banner } from "@/components/Banner";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { PageFoot, Byline } from "@/components/PageFoot";
 import { FollowUs } from "@/components/FollowUs";
+import { MoreLinks } from "@/components/MoreLinks";
 import { IconWhatsApp } from "@/components/Icons";
 
 export const metadata: Metadata = {
@@ -45,8 +46,9 @@ export default function AfterSalesSupport() {
       </section>
 
       <section className="sec">
-        <Banner src="/images/mobile-world-team-people-behind-our-promise-v2-5f1d17e7.webp"
-          alt={`${shop.name} पर customer support और after sales assistance — ${shop.address.road}, ${shop.address.locality}, ${shop.address.city}`} />
+        <Banner src="/images/mobile-world-team-handing-over-a-purchase-to-b3645f82.webp"
+          w={900} h={1125}
+          alt={`${shop.name} के counter पर ग्राहक को सामान समझाते हुए — ${shop.address.locality}, ${shop.address.city}`} />
       </section>
 
       <section className="sec">
@@ -110,6 +112,7 @@ export default function AfterSalesSupport() {
         </div>
       </section>
 
+      <MoreLinks current="/after-sales-support" />
       <PageFoot />
       <FollowUs />
     </div>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { shop } from "@/data/shop";
 import { PageFoot, Byline } from "@/components/PageFoot";
 import { FollowUs } from "@/components/FollowUs";
+import { MoreLinks } from "@/components/MoreLinks";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 
 export const metadata: Metadata = {
@@ -62,6 +63,7 @@ export default function Privacy() {
         </div>
       </section>
 
+      <MoreLinks current="/privacy" />
       <PageFoot />
       <FollowUs />
     </div>

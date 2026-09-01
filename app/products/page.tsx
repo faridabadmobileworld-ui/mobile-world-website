@@ -7,6 +7,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { ProductFilter } from "@/components/ProductFilter";
 import { Banner } from "@/components/Banner";
 import { FollowUs } from "@/components/FollowUs";
+import { MoreLinks } from "@/components/MoreLinks";
 
 export const metadata: Metadata = {
   title: "क्या-क्या मिलता है",
@@ -51,6 +52,7 @@ export default function Products() {
         );
       })}
 
+      <MoreLinks current="/products" />
       <PageFoot />
       <FollowUs />
     </div>

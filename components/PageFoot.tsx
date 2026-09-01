@@ -67,7 +67,7 @@ export function PageFoot() {
 export function Byline({ date }: { date?: string }) {
   return (
     <p className="byline">
-      <span>लिखा — <b>{shop.authorName}</b></span>
+      <span>Written by: <b>{shop.authorName}</b></span>
       {date && <><i aria-hidden="true" /><span>{date}</span></>}
     </p>
   );

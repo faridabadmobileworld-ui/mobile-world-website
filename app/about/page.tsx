@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { shop, brands, legacy, values } from "@/data/shop";
-import { storePhotos, navCategories, whatsappGeneral } from "@/data/content";
+import { navCategories } from "@/data/content";
 import { FollowUs } from "@/components/FollowUs";
 import { Banner } from "@/components/Banner";
-import { GoogleQR } from "@/components/GoogleQR";
-import { IconArrow, IconWhatsApp, IconPin, IconPhone } from "@/components/Icons";
+import { IconArrow } from "@/components/Icons";
 import { NextClosure } from "@/components/StoreStatus";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { PageFoot, Byline } from "@/components/PageFoot";
+import { MoreLinks } from "@/components/MoreLinks";
 
 export const metadata: Metadata = {
   title: `About Us — ${shop.legacyStartYear} से Faridabad का भरोसा`,
@@ -22,10 +21,9 @@ export const metadata: Metadata = {
 
 const toc: TocItem[] = [
   { id: "safar", label: "चार पड़ाव, एक ही सफ़र — हमारी विरासत" },
-  { id: "grahak", label: "हमारे ग्राहक" },
   { id: "kya-milega", label: "हमारे पास क्या मिलेगा" },
   { id: "bharosa", label: "आप Mobile World पर भरोसा क्यूँ करें?" },
-  { id: "team", label: "हमारी Team" },
+  { id: "values", label: "हम किन बातों पर चलते हैं" },
 ];
 
 export default function About() {
@@ -108,26 +106,6 @@ export default function About() {
           <p style={{ marginTop: 14, fontWeight: 700, color: "var(--ink)" }}>
             🙏 आपका स्वागत है।
           </p>
-        </div>
-      </section>
-
-      <section className="sec">
-        <div className="shead">
-          <h2 id="grahak">हमारे ग्राहक</h2>
-          <a href={shop.social.googleMaps} target="_blank" rel="noopener">
-            रास्ता देखिए <IconArrow />
-          </a>
-        </div>
-        <div className="shots">
-          {storePhotos.map((p) => (
-            <figure className="shot rv in" key={p.src} style={{ margin: 0 }}>
-              <Image className="ph-img" src={p.src} alt={p.alt} width={p.w} height={p.h}
-                sizes="(max-width:700px) 100vw, 25vw" />
-              <figcaption>
-                <span className="t">{p.title}</span><span className="d">{p.caption}</span>
-              </figcaption>
-            </figure>
-          ))}
         </div>
       </section>
 
@@ -228,18 +206,7 @@ export default function About() {
       </section>
 
       <section className="sec">
-        <div className="shead">
-          <h2 id="team">हमारी Team</h2>
-          <Link href="/team">पूरी team देखिए <IconArrow /></Link>
-        </div>
-
-        <Banner src="/images/mobile-world-team-people-behind-our-promise-v2-5f1d17e7.webp"
-          alt={`${shop.name} की टीम — ${shop.address.locality} की दुकान के counter पर`} />
-
-        <div className="teamlead rv in">
-          <b>एक टीम। एक परिवार। एक वादा।</b>
-          <p>आपके भरोसे के साथ, हर दिन बेहतर बनाते हुए।</p>
-        </div>
+        <div className="shead"><h2 id="values">हम किन बातों पर चलते हैं</h2></div>
 
         <ul className="vals">
           {values.map((v) => (
@@ -256,35 +223,9 @@ export default function About() {
         </p>
       </section>
 
+      <MoreLinks current="/about" />
       <PageFoot />
       <FollowUs />
-
-      <section className="sec">
-        <div className="cband rv in">
-          <span className="cico" aria-hidden="true">
-            <Image src="/images/icon-shop-2b14210e.webp" alt="" width={200} height={200} sizes="96px" />
-          </span>
-          <h2>दुकान पर आइए, और हमें सेवा का मौक़ा दीजिए</h2>
-          <GoogleQR />
-          <p>
-            {shop.address.street}, {shop.address.landmark}, {shop.address.locality},
-            {" "}{shop.address.city}, {shop.address.state} – {shop.address.postalCode}
-          </p>
-          <p style={{ marginTop: 8 }}>
-            आने से पहले model का नाम WhatsApp कर दीजिए। हम बता देंगे कि वो दुकान पर
-            मौजूद है या नहीं — ताकि आपका चक्कर बेकार न जाए।
-          </p>
-          <div className="btns" style={{ justifyContent: "center" }}>
-            <a className="btn btn-d" href={shop.social.googleMaps} target="_blank" rel="noopener">
-              <IconPin /> रास्ता देखिए
-            </a>
-            <a className="btn btn-o" href={shop.phone.tel}><IconPhone /> {shop.phone.display}</a>
-            <a className="btn btn-w" href={whatsappGeneral} target="_blank" rel="noopener">
-              <IconWhatsApp /> WhatsApp पर पूछिए
-            </a>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

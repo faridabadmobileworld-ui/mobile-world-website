@@ -126,17 +126,33 @@ Home · Products · **Repairing Services** · **After Sales Support** ·
 तीन नए page owner ने 1 Sep 2026 को Sachin का लिखा content देकर बनवाए —
 `/repairing`, `/after-sales-support`, `/team`.
 
-⚠️ **नया page बनाओ तो चार जगह जोड़ना ज़रूरी है:** `app/sitemap.ts`,
-drawer (`SiteHeader.tsx`), footer (`SiteFooter.tsx`) और
-`scripts/bundle-preview.mjs`. एक भी छूटी तो verify script पकड़ लेगी।
+⚠️ **नया page बनाओ तो पाँच जगह जोड़ना ज़रूरी है:** `data/pages.ts`
+(interlinking), `app/sitemap.ts`, drawer (`SiteHeader.tsx`),
+footer (`SiteFooter.tsx`) और `scripts/bundle-preview.mjs`.
+एक भी छूटी तो verify script पकड़ लेगी।
+
+### हर page अपने आप में पूरा हो — 1 Sep 2026
+
+Owner: *"sabhi pages ko separately banao. Ek page me dusra page mix na ho.
+But interlinking karni h sabhi ki yahan se wahan direct one click pe."*
+
+इसलिए दो नियम:
+
+1. **एक page का content दूसरे page पर मत दोहराओ।** Team की बात सिर्फ़
+   `/team` पर, repairing सिर्फ़ `/repairing` पर, पता और Google listing
+   सिर्फ़ `/contact` पर। दूसरे page पर ज़रूरत हो तो **link दो, नक़ल मत करो**।
+   *(Home page अपवाद है — वो पूरी दुकान की झलक है।)*
+2. **हर page पर `<MoreLinks current="/...">`** — `data/pages.ts` से बाक़ी
+   सारे pages के cards अपने आप बन जाते हैं। एक click में कहीं भी।
 
 ### हर page पर ये तीन चीज़ें ज़रूरी हैं (owner, 1 Sep 2026)
 
 1. **Table of contents** — `<TableOfContents>` component. यह server पर ही
    बन जाती है (JavaScript से headings नहीं ढूँढ़ती), इसलिए Google को पहली
    बार में दिख जाती है। हर heading पर वही `id` लगाइए जो TOC की list में है।
-2. **Author का नाम — Sachin।** `shop.authorName` से आता है, `<Byline>`
-   component दिखाता है। Article के schema में भी यही author जाता है।
+2. **Author का नाम — `Written by: Sachin`।** `shop.authorName` से आता है,
+   `<Byline>` component दिखाता है। (हिन्दी "लिखा —" नहीं, owner ने 1 Sep 2026
+   को साफ़ कहा।) Article के schema में भी यही author जाता है।
 3. **सारे social buttons + WhatsApp** — `<PageFoot>` और `<FollowUs>`
    दोनों page के आख़िर में। पता, फ़ोन और चारों links वहीं से आते हैं।
 

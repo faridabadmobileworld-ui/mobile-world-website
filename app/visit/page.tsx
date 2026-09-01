@@ -4,6 +4,7 @@ import { shop } from "@/data/shop";
 import { whatsappGeneral } from "@/data/content";
 import { IconWhatsApp, IconPin, IconPhone } from "@/components/Icons";
 import { FollowUs } from "@/components/FollowUs";
+import { MoreLinks } from "@/components/MoreLinks";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { PageFoot, Byline } from "@/components/PageFoot";
 import { Banner } from "@/components/Banner";
@@ -111,6 +112,7 @@ export default function Visit() {
         </p>
       </section>
 
+      <MoreLinks current="/visit" />
       <PageFoot />
       <FollowUs />
     </div>

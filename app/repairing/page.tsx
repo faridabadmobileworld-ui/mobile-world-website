@@ -5,6 +5,7 @@ import { Banner } from "@/components/Banner";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { PageFoot, Byline } from "@/components/PageFoot";
 import { FollowUs } from "@/components/FollowUs";
+import { MoreLinks } from "@/components/MoreLinks";
 import { IconWhatsApp, IconPhone } from "@/components/Icons";
 
 export const metadata: Metadata = {
@@ -130,6 +131,7 @@ export default function Repairing() {
         </div>
       </section>
 
+      <MoreLinks current="/repairing" />
       <PageFoot />
       <FollowUs />
     </div>

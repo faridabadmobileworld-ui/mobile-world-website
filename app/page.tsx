@@ -9,6 +9,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { Art } from "@/components/ArtSprite";
 import { IconArrow, IconWhatsApp, IconPin, IconPhone } from "@/components/Icons";
 import { FollowUs } from "@/components/FollowUs";
+import { MoreLinks } from "@/components/MoreLinks";
 import { Banner } from "@/components/Banner";
 import { GoogleQR } from "@/components/GoogleQR";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
@@ -189,7 +190,8 @@ export default function Home() {
           </div>
         </section>
 
-        <PageFoot />
+        <MoreLinks current="/" />
+      <PageFoot />
       <FollowUs />
 
         <section className="sec" id="visit">

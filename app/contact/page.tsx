@@ -4,6 +4,8 @@ import { serviceCards, ask, whatsappGeneral } from "@/data/content";
 import { IconArrow, IconWhatsApp, IconPhone, IconPin } from "@/components/Icons";
 import { FollowUs } from "@/components/FollowUs";
 import { Banner } from "@/components/Banner";
+import { GoogleQR } from "@/components/GoogleQR";
+import { MoreLinks } from "@/components/MoreLinks";
 import { LiveBadge, NextClosure } from "@/components/StoreStatus";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { PageFoot, Byline } from "@/components/PageFoot";
@@ -21,6 +23,7 @@ const toc: TocItem[] = [
   { id: "pata", label: "हमारी दुकान का exact पता" },
   { id: "pehle-message", label: "आने से पहले एक छोटा सा WhatsApp message" },
   { id: "service", label: "किस बारे में पूछना है?" },
+  { id: "google", label: "Google पर हमारी listing" },
 ];
 
 export default function Contact() {
@@ -65,10 +68,11 @@ export default function Contact() {
         </div>
       </section>
 
-      <section className="sec" id="service">
-        <Banner src="/images/mobile-world-team-people-behind-our-promise-v2-5f1d17e7.webp"
-          alt={`${shop.name} की टीम — जो लोग आपका काम करते हैं`} />
-        <div className="shead"><h2>किस बारे में पूछना है?</h2></div>
+      <section className="sec">
+        <Banner src="/images/mobile-world-storefront-on-gurudwara-road-ja-a182b026.webp"
+          w={720} h={340}
+          alt={`${shop.name} की दुकान — ${shop.address.road}, ${shop.address.locality}, ${shop.address.city}`} />
+        <div className="shead"><h2 id="service">किस बारे में पूछना है?</h2></div>
         <div className="ctiles">
           {services.map((s) => (
             <a className="ct rv in" key={s.key} href={ask(s.topic)} target="_blank" rel="noopener">
@@ -120,6 +124,72 @@ export default function Contact() {
         </div>
       </section>
 
+      <section className="sec">
+        <div className="shead"><h2 id="google">Google पर हमारी listing</h2></div>
+        <p style={{ color: "var(--ink-2)", maxWidth: "62ch", margin: "0 0 14px" }}>
+          Google Maps पर जो जानकारी दिखती है, वही यहाँ भी है — ताकि आपको दो जगह
+          मिलान न करना पड़े।
+        </p>
+
+        <dl className="gmb">
+          <li>
+            <dt>Business का नाम</dt>
+            <dd>{shop.name}</dd>
+          </li>
+          <li>
+            <dt>क्या-क्या है</dt>
+            <dd>{shop.tagline}</dd>
+          </li>
+          <li>
+            <dt>पूरा पता</dt>
+            <dd>
+              {shop.address.street}, {shop.address.landmark},<br />
+              {shop.address.locality}, {shop.address.city}, {shop.address.state},
+              {" "}India – {shop.address.postalCode}
+            </dd>
+          </li>
+          <li>
+            <dt>Phone और WhatsApp</dt>
+            <dd><a href={shop.phone.tel}>{shop.phone.display}</a></dd>
+          </li>
+          <li>
+            <dt>खुलने का समय</dt>
+            <dd>रोज़ सुबह 10:00 से रात 10:00 बजे तक, सातों दिन।</dd>
+          </li>
+          <li>
+            <dt>छुट्टी</dt>
+            <dd>हर महीने की आख़िरी तारीख़ — अगली <NextClosure />।</dd>
+          </li>
+          <li>
+            <dt>Payment के तरीक़े</dt>
+            <dd>{shop.paymentMethods.join(" · ")}</dd>
+          </li>
+          <li>
+            <dt>Website</dt>
+            <dd><a href={shop.siteUrl}>{shop.siteUrl.replace("https://", "")}</a></dd>
+          </li>
+          <li>
+            <dt>Proprietor</dt>
+            <dd>{shop.owner}</dd>
+          </li>
+          <li>
+            <dt>Registered नाम</dt>
+            <dd>{shop.registeredName}</dd>
+          </li>
+        </dl>
+
+        <div className="btns" style={{ marginTop: 16 }}>
+          <a className="btn btn-d" href={shop.social.googleMaps} target="_blank" rel="noopener">
+            <IconPin /> Google Maps पर खोलिए
+          </a>
+        </div>
+
+        <div style={{ marginTop: 18 }}>
+          <GoogleQR />
+        </div>
+      </section>
+
+      <MoreLinks current="/contact" />
       <PageFoot />
       <FollowUs />
     </div>

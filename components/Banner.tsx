@@ -11,10 +11,12 @@
 
 import Image from "next/image";
 
-export function Banner({ src, alt }: { src: string; alt: string }) {
+export function Banner({
+  src, alt, w = 1400, h = 933,
+}: { src: string; alt: string; w?: number; h?: number }) {
   return (
     <figure className="banner rv in">
-      <Image src={src} alt={alt} width={1400} height={933}
+      <Image src={src} alt={alt} width={w} height={h}
         sizes="(max-width:1000px) 100vw, 1200px" />
     </figure>
   );

@@ -6,6 +6,7 @@ import { posts } from "@/data/content";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { PageFoot, Byline } from "@/components/PageFoot";
 import { FollowUs } from "@/components/FollowUs";
+import { MoreLinks } from "@/components/MoreLinks";
 
 export const metadata: Metadata = {
   title: "नई जानकारी",
@@ -48,6 +49,7 @@ export default function Posts() {
           ))}
         </div>
       </section>
+      <MoreLinks current="/posts" />
       <PageFoot />
       <FollowUs />
     </div>

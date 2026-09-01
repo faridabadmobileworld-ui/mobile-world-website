@@ -4,6 +4,7 @@ import { Banner } from "@/components/Banner";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { PageFoot, Byline } from "@/components/PageFoot";
 import { FollowUs } from "@/components/FollowUs";
+import { MoreLinks } from "@/components/MoreLinks";
 
 export const metadata: Metadata = {
   title: "हमारी Team",
@@ -98,6 +99,7 @@ export default function Team() {
         </div>
       </section>
 
+      <MoreLinks current="/team" />
       <PageFoot />
       <FollowUs />
     </div>
