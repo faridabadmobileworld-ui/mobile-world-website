@@ -10,7 +10,10 @@ const B='http://127.0.0.1:3111';
 // yahan jud jata hai, kisi ko yaad rakhna nahi padta.
 const SITE_PAGES=[...readFileSync('data/pages.ts','utf8')
   .matchAll(/href:\s*"([^"]+)"/g)].map(m=>m[1]);
-const paths=[...SITE_PAGES,'/posts/ac-tonnage','/posts/new-phones','/posts/monthly-closure'];
+// Article ki list bhi data/content.ts se hi — nayi post apne aap jaanch mein aa jati hai.
+const POST_SLUGS=[...readFileSync('data/content.ts','utf8')
+  .matchAll(/^\s{4}slug:\s*"([^"]+)",$/gm)].map(m=>'/posts/'+m[1]);
+const paths=[...SITE_PAGES,...POST_SLUGS];
 const b=await chromium.launch(); const fail=[],ok=[];
 const T=(c,l,d='')=>(c?ok:fail).push(l+(d?`  [${d}]`:''));
 

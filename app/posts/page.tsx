@@ -9,10 +9,10 @@ import { FollowUs } from "@/components/FollowUs";
 import { MoreLinks } from "@/components/MoreLinks";
 
 export const metadata: Metadata = {
-  title: "नई जानकारी",
+  title: "Tech Blog & Guides",
   description:
-    `ख़रीदने से पहले काम आने वाली बातें और दुकान की नई ख़बरें — ${shop.name}, ` +
-    `${shop.address.locality}, ${shop.address.city}।`,
+    `Smartphone, laptop, TV और AC की buying guide, exchange और EMI की बातें, ` +
+    `और दुकान की ख़बरें — ${shop.name}, ${shop.address.locality}, ${shop.address.city}।`,
   alternates: { canonical: "/posts" },
 };
 
@@ -23,10 +23,19 @@ export default function Posts() {
     <div className="wrap">
       <section className="sec">
         <h1 style={{ fontSize: "clamp(1.4rem,4vw,2rem)", fontWeight: 800,
-                     letterSpacing: "-.03em", margin: "0 0 6px" }}>नई जानकारी</h1>
-        <p style={{ color: "var(--ink-2)", maxWidth: "60ch", margin: "0 0 16px" }}>
-          ख़रीदने से पहले जो बातें काम आती हैं, और दुकान की नई ख़बरें।
-        </p>
+                     letterSpacing: "-.03em", margin: "0 0 6px" }}>
+          Tech Blog &amp; Guides 📝
+        </h1>
+        <div className="prose" style={{ margin: "0 0 16px" }}>
+          <p>
+            जो सवाल रोज़ counter पर पूछे जाते हैं — कितने ton का AC लूँ, कौन सा laptop
+            चलेगा, पुराने phone की value कैसे बनती है — उन्हीं के जवाब यहाँ लिखे हैं।
+          </p>
+          <p>
+            कोई दाम नहीं, कोई offer नहीं — सिर्फ़ वो बातें जो ख़रीदने से पहले जान लेनी
+            चाहिए। और साथ में दुकान की अपनी ख़बरें।
+          </p>
+        </div>
         <TableOfContents items={toc} heading="इस page पर ये articles हैं" />
         <div className="posts">
           {posts.map((p) => (

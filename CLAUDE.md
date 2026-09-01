@@ -125,7 +125,7 @@ iQOO, Realme, Tecno, Infinix, Lava, Nokia, Philips
 ### Pages — website पर कौन-कौन से page हैं
 
 Home · Products · **Repairing Services** · **After Sales Support** ·
-**Finance और EMI** · **हमारी Team** · About · नई जानकारी (posts) · Contact ·
+**Finance और EMI** · **हमारी Team** · About · **Tech Blog & Guides** (posts) · Contact ·
 दुकान पर आइए · **Privacy Policy** · **Terms & Conditions** ·
 **Return और Exchange**
 
@@ -354,6 +354,24 @@ Visitor details save करना, customer login।
       **नाप का नियम:** हर logo 420×132 की सफ़ेद canvas पर बीच में बैठा है और
       website उसे 140×44 पर दिखाती है। CSS में नाप पक्की (`width`/`height`) रखी
       गई है — `max-width` से 2x/3x वाले phone पर logo अपने आप छोटा हो जाता था।
+
+### 📝 Tech Blog & Guides — `/posts`
+
+Owner ने 2 Sep 2026 को कहा: *"nai jaankari, iske badalkar ye kardo. Tech Blog
+& Guides."* इसलिए menu, footer, home page और hub — हर जगह अब यही नाम है।
+
+अभी सात article हैं (`data/content.ts` के `posts` में):
+`phone-exchange-guide` · `best-laptops-students` · `smart-tv-guide` ·
+`inverter-vs-non-inverter-ac` · `ac-tonnage` · `new-phones` · `monthly-closure`
+
+नया article जोड़ना हो तो सिर्फ़ दो जगह — `data/content.ts` में एक entry, और
+`scripts/bundle-preview.mjs` में एक line। Sitemap, TOC, "और भी पढ़िए" और
+verify script — सब अपने आप जुड़ जाते हैं (TOC article के `<h2 id="">` से बनती है)।
+
+⚠️ इन articles में जो बातें **जान-बूझकर नहीं लिखीं**: AC/TV लगाना (installation
+दुकान नहीं करती — बल्कि यह साफ़ लिखा है कि नहीं करते), "zero down payment",
+"सबसे best value", और laptop/TV/AC के brand के नाम (owner से confirm नहीं हैं —
+पूछकर जोड़े जा सकते हैं, SEO के लिए अच्छे रहेंगे)।
 
 ### 📄 Sachin के भेजे content में से जो जान-बूझकर नहीं लिया गया
 

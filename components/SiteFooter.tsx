@@ -33,7 +33,7 @@ export function SiteFooter() {
               <li><Link href="/about">हमारे बारे में</Link></li>
               <li><Link href="/team">हमारी Team</Link></li>
               <li><Link href="/products">क्या-क्या मिलता है</Link></li>
-              <li><Link href="/posts">नई जानकारी</Link></li>
+              <li><Link href="/posts">Tech Blog &amp; Guides</Link></li>
               <li><Link href="/visit">दुकान पर आइए</Link></li>
             </ul>
           </div>

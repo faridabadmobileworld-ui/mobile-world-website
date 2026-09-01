@@ -71,7 +71,7 @@ export default async function PostPage({ params }: Params) {
       <div className="readerwrap">
         <div className="wrap">
           <article className="reader">
-            <Link className="btn btn-o btn-s rback" href="/posts">← सारी जानकारी</Link>
+            <Link className="btn btn-o btn-s rback" href="/posts">← Tech Blog &amp; Guides</Link>
 
             <div className="rhead">
               <span className="k">{post.kicker}<em>{post.date}</em></span>

@@ -64,8 +64,8 @@ export const sitePages: SitePage[] = [
   },
   {
     href: "/posts",
-    label: "नई जानकारी",
-    blurb: "ख़रीदने से पहले काम आने वाली बातें और दुकान की ख़बरें।",
+    label: "Tech Blog & Guides",
+    blurb: "ख़रीदने से पहले काम आने वाली guide और दुकान की ख़बरें।",
   },
   {
     href: "/contact",

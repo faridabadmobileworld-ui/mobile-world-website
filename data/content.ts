@@ -398,6 +398,127 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "phone-exchange-guide",
+    kicker: "Buying Guide",
+    date: "1 September 2026",
+    dateISO: "2026-09-01",
+    title: "पुराना phone exchange में देना है? पहले यह पढ़ लीजिए",
+    excerpt:
+      "Value कैसे तय होती है, साथ में क्या लाना ज़रूरी है, और आपके data का क्या होता है — पूरी बात एक जगह।",
+    image: "/images/mobile-exchange-at-mobile-world-e15aba81.webp",
+    imageW: 1400,
+    imageH: 933,
+    alt: "Mobile World के counter पर पुराने phone का exchange",
+    body: `
+<p>नया phone लेते समय पुराना phone दराज़ में पड़ा रहे, इसकी कोई ज़रूरत नहीं। उसकी value लगवाकर नए phone के दाम में से कम करवाई जा सकती है — बचे हुए पैसे ही देने होते हैं।</p>
+<h2 id="value-kaise">Value कैसे तय होती है</h2>
+<p>Phone आपके सामने counter पर ही चेक होता है — screen, battery, चलने की हालत, सब। उसी हालत के हिसाब से value बनती है और वहीं बता दी जाती है।</p>
+<p>इसीलिए हम website पर exchange का कोई दाम नहीं लिखते। हर phone की हालत अलग होती है, और अंदाज़े से बताया गया दाम बाद में बदलना पड़े — यह हमें ठीक नहीं लगता।</p>
+<h2 id="saath-kya">साथ में क्या लाना है</h2>
+<ul>
+<li><strong>Bill या original डिब्बा — दोनों में से एक ज़रूरी है।</strong> दोनों में से कुछ भी न हो तो हम phone नहीं ले पाएँगे।</li>
+<li><strong>अपना Aadhaar</strong> — पुराना सामान लेते समय पहचान पत्र ज़रूरी होता है।</li>
+<li><strong>Original charger और बाक़ी सामान</strong> — साथ हो तो साथ रखिए, पूरा सामान होने पर हालत बेहतर मानी जाती है।</li>
+</ul>
+<h2 id="data">पहले data, फिर format</h2>
+<p>पुराना phone हाथ से जाने से पहले उसका contacts, photos और WhatsApp — सब नए phone में डाल दिया जाता है। उसके बाद ही पुराना phone format होता है। यह काम दुकान पर, आपके सामने होता है।</p>
+<h2 id="online-se-farak">Online exchange से फ़र्क़ क्या है</h2>
+<p>Online पर exchange value पहले दिख जाती है, और सामान लेने आया आदमी phone में कमियाँ निकालकर वो value कम कर देता है या order ही वापस चला जाता है। यहाँ ऐसा नहीं होता — चेक करना, दाम लगाना और सौदा, तीनों एक ही जगह, आपके सामने।</p>
+<h2 id="niyam">पूरे नियम कहाँ लिखे हैं</h2>
+<p>Exchange, return और refund की पूरी शर्तें <a href="/returns">Return और Exchange</a> वाले page पर एक जगह लिखी हैं।</p>
+<p>अपना पुराना phone लेकर आ जाइए। हालत देखकर उसी वक़्त बता देंगे कि कितनी value बनती है।</p>`,
+  },
+  {
+    slug: "best-laptops-students",
+    kicker: "Buying Guide",
+    date: "1 September 2026",
+    dateISO: "2026-09-01",
+    title: "पढ़ाई के लिए laptop — इन चार बातों पर ध्यान दीजिए",
+    excerpt:
+      "Processor, RAM, storage और battery — बच्चे की पढ़ाई के लिए laptop लेते समय असल में यही चार बातें मायने रखती हैं।",
+    image: "/images/laptop-for-study-and-office-a146b020.webp",
+    imageW: 900,
+    imageH: 900,
+    alt: "पढ़ाई और office के काम आने वाला laptop",
+    body: `
+<p>School के project हों या college की पढ़ाई — laptop अब ज़रूरत बन चुका है। पर online पर लिखी लंबी-चौड़ी specifications देखकर ज़्यादातर लोग उलझ जाते हैं।</p>
+<p>असल में देखने वाली बातें सिर्फ़ चार हैं।</p>
+<h2 id="processor">Processor — laptop की जान</h2>
+<p>सिर्फ़ typing, notes, presentation और internet का काम है, तो Core i3 या Ryzen 3 वाला laptop पूरा पड़ जाता है। Coding, editing या भारी software चलाना है, तो i5 या Ryzen 5 से नीचे मत जाइए।</p>
+<h2 id="ram-storage">RAM और storage</h2>
+<p>कम से कम 8GB RAM लीजिए। 4GB वाला laptop आज सस्ता लगता है, पर दो-तीन tab और एक software एक साथ चलते ही अटकने लगता है।</p>
+<p>Storage में SSD देखिए, hard disk नहीं। 512GB SSD आजकल का ठीक-ठाक हिसाब है — laptop चालू होने में सेकंड लगते हैं, मिनट नहीं।</p>
+<h2 id="battery">Battery और वज़न</h2>
+<p>Laptop रोज़ बस्ते में जाएगा, इसलिए वज़न और battery दोनों देखिए। एक-डेढ़ किलो का laptop और अच्छी battery — यही रोज़ काम आती है।</p>
+<h2 id="screen">Screen कैसी हो</h2>
+<p>घंटों पढ़ाई करनी है तो screen ठीक होनी चाहिए। कम से कम Full HD और matte (चमक कम करने वाली) screen आँखों पर हल्की पड़ती है।</p>
+<h2 id="dukaan-par">दुकान पर आकर देखना क्यों बेहतर है</h2>
+<p>Keyboard कैसा लगता है, screen कितनी साफ़ है, laptop कितना गरम होता है — ये तीनों बातें photo में कभी पता नहीं चलतीं। दुकान पर आकर चलाकर देखिए, और अपने बजट और काम के हिसाब से हमसे सलाह ले लीजिए।</p>
+<p>किश्तों में लेना हो तो <a href="/finance">Finance और EMI</a> वाला page पढ़ लीजिए — वहाँ पूरी शर्तें साफ़ लिखी हैं। नया laptop पहली बार चालू करके, basic settings समझाकर ही हम आपको देते हैं।</p>`,
+  },
+  {
+    slug: "smart-tv-guide",
+    kicker: "Buying Guide",
+    date: "1 September 2026",
+    dateISO: "2026-09-01",
+    title: "Smart TV लेने से पहले — size, picture और software",
+    excerpt:
+      "32, 43 या 55 inch? 4K लें या Full HD? और TV का software क्यों मायने रखता है — तीनों बातें आसान भाषा में।",
+    image: "/images/smart-television-on-white-4b38b4f8.webp",
+    imageW: 900,
+    imageH: 900,
+    alt: "Smart television",
+    body: `
+<p>पूरे परिवार के साथ बड़ी screen पर देखने का मज़ा अलग है। पर 4K, QLED, Android, WebOS — इतने शब्द सुनकर उलझन हो जाती है। तीन बातें समझ लीजिए, बाक़ी अपने आप आसान हो जाएगा।</p>
+<h2 id="size">Size — कमरे की दूरी से तय होता है</h2>
+<p>TV का size कमरे के हिसाब से चुना जाता है, शौक़ से नहीं। मोटा-मोटी हिसाब यह है:</p>
+<table class="spectbl">
+<tbody>
+<tr><th>4 से 6 फ़ीट की दूरी</th><td>32 inch</td></tr>
+<tr><th>6 से 8 फ़ीट की दूरी</th><td>43 inch</td></tr>
+<tr><th>8 फ़ीट से ज़्यादा</th><td>50 या 55 inch</td></tr>
+</tbody>
+</table>
+<p>छोटे कमरे में बहुत बड़ा TV लगवाने पर आँखें थकती हैं, और बड़े कमरे में छोटा TV लेने पर बाद में अफ़सोस होता है।</p>
+<h2 id="picture">Picture — 4K कब ज़रूरी है</h2>
+<p>43 inch या उससे बड़ा TV ले रहे हैं तो <strong>4K</strong> ही लीजिए — इतनी बड़ी screen पर कम resolution साफ़ दिखता है। 32 inch में HD Ready या Full HD ठीक काम करता है।</p>
+<h2 id="software">Software — रोज़ का फ़र्क़ यहीं पड़ता है</h2>
+<p>Android या Google TV वाले set में Play Store मिलता है, यानी अपनी पसंद की app डाल सकते हैं। कुछ companies अपना ख़ुद का software देती हैं — उनमें app कम मिलती हैं, पर चलने में हल्के और तेज़ रहते हैं।</p>
+<p>जो app आप रोज़ देखते हैं, वो TV में पहले से है या नहीं — दुकान पर यही एक चीज़ चेक करवा लीजिए।</p>
+<h2 id="dekh-kar">देखकर लीजिए</h2>
+<p>Picture और आवाज़ — दोनों photo में कभी समझ नहीं आते। दुकान पर चलाकर देखिए, अपनी आँखों से मिलाइए, फिर तय कीजिए।</p>
+<p>किश्तों में लेना हो तो शर्तें <a href="/finance">Finance और EMI</a> पर लिखी हैं। TV दुकान से मिल जाएगा; घर तक पहुँचाने का इंतज़ाम भी करवा देते हैं (भाड़ा आपका), पर <strong>दीवार पर लगाने का काम हम नहीं करते</strong> — वो आपको अपनी तरफ़ से करवाना होता है।</p>`,
+  },
+  {
+    slug: "inverter-vs-non-inverter-ac",
+    kicker: "Buying Guide",
+    date: "1 September 2026",
+    dateISO: "2026-09-01",
+    title: "Inverter AC और normal AC में फ़र्क़ क्या है?",
+    excerpt:
+      "नाम से लगता है कि यह घर के inverter पर चलेगा — ऐसा नहीं है। फ़र्क़ compressor का है, और उसी से बिजली का बिल तय होता है।",
+    image: "/images/split-air-conditioner-in-a-room-17b0cbd3.webp",
+    imageW: 900,
+    imageH: 900,
+    alt: "कमरे में लगी split AC की indoor unit",
+    body: `
+<p>पहले एक ग़लतफ़हमी दूर कर लीजिए — <strong>Inverter AC का मतलब यह नहीं कि वो घर के inverter (battery) पर चलेगा।</strong> यह नाम उसके compressor की वजह से है।</p>
+<h2 id="normal-ac">Normal (non-inverter) AC कैसे चलता है</h2>
+<p>इसका compressor दो ही हाल जानता है — या तो पूरी ताक़त से चालू, या बिलकुल बंद। कमरा ठंडा हुआ, बंद; थोड़ी गर्मी बढ़ी, फिर पूरी ताक़त से चालू। बार-बार चालू होने में ही बिजली सबसे ज़्यादा लगती है।</p>
+<h2 id="inverter-ac">Inverter AC में क्या अलग है</h2>
+<p>इसका compressor गाड़ी के accelerator की तरह काम करता है। कमरा ठंडा होने पर बंद नहीं होता, बस धीमा हो जाता है। इसलिए ठंडक एक जैसी बनी रहती है, आवाज़ कम आती है और बिजली भी कम लगती है।</p>
+<h2 id="kaunsa-lein">आपके लिए कौन सा ठीक रहेगा</h2>
+<ul>
+<li>AC दिन में सिर्फ़ दो-तीन घंटे चलता है — normal AC से भी काम चल जाता है, और वो सस्ता पड़ता है।</li>
+<li>AC रात भर या रोज़ पाँच-छह घंटे से ज़्यादा चलता है — inverter ही लीजिए। शुरू में महँगा लगता है, पर बिजली के बिल में वो फ़र्क़ धीरे-धीरे वापस आ जाता है।</li>
+</ul>
+<p>कितनी बचत होगी, यह आपके इस्तेमाल, कमरे और बिजली की दर पर तय होता है — इसलिए कोई पक्का आँकड़ा हम नहीं लिखते।</p>
+<h2 id="tonnage">Tonnage भी उतना ही ज़रूरी है</h2>
+<p>Inverter हो या normal, अगर AC कमरे के हिसाब से छोटा या बड़ा है तो दोनों में दिक़्क़त आएगी। कमरे के हिसाब से सही tonnage निकालने का तरीक़ा <a href="/posts/ac-tonnage">इस guide</a> में लिखा है।</p>
+<h2 id="dukaan-se">दुकान से लेने पर क्या-क्या होता है</h2>
+<p>AC दुकान पर देखकर, समझकर लीजिए। घर तक पहुँचाने का इंतज़ाम हम करवा देते हैं, भाड़ा आपका होता है। <strong>AC लगाने (installation) का काम हम नहीं करते</strong> — वो brand के आदमी या अपने किसी mistri से करवाना होता है। यह बात हम पहले ही साफ़ बता देते हैं, ताकि बाद में इंतज़ार न करना पड़े।</p>`,
+  },
+  {
     slug: "ac-tonnage",
     kicker: "Buying Guide",
     date: "20 August 2026",
@@ -410,14 +531,22 @@ export const posts: Post[] = [
     imageH: 675,
     alt: "दीवार पर लगी split AC की indoor unit",
     body: `
-<p>बड़ा AC अपने आप बेहतर नहीं होता। ज़रूरत से बड़ा AC कमरे को झट से ठंडा करके बंद हो जाता है, फिर थोड़ी देर में दोबारा चालू — इससे bijli ज़्यादा लगती है और कमरे में नमी बनी रहती है। छोटा AC कभी बंद ही नहीं होता।</p>
-<h2 id="hisaab">कमरे के हिसाब से tonnage — मोटा-मोटी नियम</h2>
-<p>मोटा-मोटी हिसाब यह है: लगभग 110 square feet तक का कमरा 1 ton में, 110 से 180 square feet तक 1.5 ton में, और उससे बड़ा आमतौर पर 2 ton में। लेकिन यह हिसाब बदल जाता है अगर कमरा सबसे ऊपर की मंज़िल पर है, दीवार पश्चिम की तरफ़ है, छत ऊँची है, या कमरे में तीन-चार से ज़्यादा लोग एक साथ बैठते हैं।</p>
+<p>बड़ा AC अपने आप बेहतर नहीं होता। ज़रूरत से बड़ा AC कमरे को झट से ठंडा करके बंद हो जाता है, फिर थोड़ी देर में दोबारा चालू — इससे बिजली ज़्यादा लगती है और कमरे में नमी बनी रहती है। छोटा AC कभी बंद ही नहीं होता, और उसका compressor जल्दी थक जाता है।</p>
+<h2 id="ton-ka-matlab">'Ton' का मतलब वज़न नहीं होता</h2>
+<p>AC में ton उसके वज़न का नहीं, उसकी ठंडा करने की ताक़त (cooling capacity) का नाप है। इसलिए tonnage कमरे के हिसाब से चुना जाता है।</p>
+<h2 id="hisaab">कमरे के हिसाब से tonnage</h2>
+<table class="spectbl">
+<tbody>
+<tr><th>120 square feet तक</th><td>1 ton</td></tr>
+<tr><th>121 से 180 square feet</th><td>1.5 ton</td></tr>
+<tr><th>181 से 240 square feet</th><td>2 ton</td></tr>
+</tbody>
+</table>
 <h2 id="aur-baatein">सिर्फ़ size से बात नहीं बनती</h2>
-<p>इसीलिए tonnage सिर्फ़ size से तय नहीं होता — धूप, floor और कमरे की हालत भी देखनी पड़ती है।</p>
+<p>यह हिसाब बदल जाता है अगर कमरा सबसे ऊपर की मंज़िल पर है, दीवार पर सीधी धूप पड़ती है, छत ऊँची है, या कमरे में तीन-चार से ज़्यादा लोग एक साथ बैठते हैं। ऐसे कमरों में एक स्तर ऊपर वाला AC लेना ठीक रहता है।</p>
 <h2 id="kya-lekar-aaiye">दुकान पर क्या नाप कर लाइए</h2>
 <p>कमरे की लंबाई, चौड़ाई और छत की ऊँचाई नाप कर आइए, और यह भी बता दीजिए कि कौन सी मंज़िल है और मुख्य दीवार किस दिशा में है। हम आपके सामने हिसाब लगाकर बताएँगे, अंदाज़े से नहीं।</p>
-<p>दुकान पर आकर बता दीजिए, हम आपके कमरे के हिसाब से सही tonnage निकालने में मदद कर देंगे।</p>`,
+<p>Inverter और normal AC में क्या फ़र्क़ है, यह <a href="/posts/inverter-vs-non-inverter-ac">इस guide</a> में लिखा है।</p>`,
   },
   {
     slug: "new-phones",
@@ -439,8 +568,11 @@ export const posts: Post[] = [
 <p>अगर phone तीन-चार साल चलाने का इरादा है तो processor देखिए, और यह भी कि company कितने साल software update देने का वादा कर रही है। साल तीन में phone अच्छा लगेगा या नहीं — फ़र्क़ बस यही एक बात डालती है।</p>
 <h2 id="gaming">Gaming के लिए</h2>
 <p>Gaming के लिए सिर्फ़ RAM मत देखिए। Processor और cooling भी उतने ही important हैं।</p>
-<h2 id="flagship">Flagship लेना हो तो</h2>
-<p>Flagship phone लेना हो तो दुकान पर आकर हाथ में लेकर देखिए। वज़न, पकड़ और screen की brightness — ये तीनों photo में कभी पूरी तरह समझ नहीं आते।</p>
+<h2 id="haath-mein">हाथ में लेकर देखिए</h2>
+<p>वज़न, पकड़ और screen की brightness — ये तीनों photo में कभी पूरी तरह समझ नहीं आते। दुकान पर आकर phone हाथ में लीजिए, camera चलाकर देखिए, फिर तय कीजिए।</p>
+<h2 id="lene-ke-baad">लेने के बाद क्या-क्या होता है</h2>
+<p>हर phone seal-pack, पक्के GST bill और brand की अपनी warranty के साथ मिलता है। पुराने phone का data — contacts, photos, WhatsApp — नए में डालकर ही आपको दिया जाता है।</p>
+<p>Exchange में पुराना phone देना हो तो <a href="/posts/phone-exchange-guide">यह guide</a> पढ़ लीजिए, और किश्तों की शर्तें <a href="/finance">Finance और EMI</a> पर लिखी हैं।</p>
 <p>Model का नाम WhatsApp कर दीजिए। चलने से पहले हम बता देंगे कि वो आज shelf पर है या नहीं।</p>`,
   },
   {
@@ -461,6 +593,8 @@ export const posts: Post[] = [
 <p>इस website पर ऊपर जो live status दिखता है, वो यह ख़ुद गिन लेता है — इसलिए अगली छुट्टी की तारीख़ हमेशा सही दिखेगी।</p>
 <h2 id="baaki-din">बाक़ी हर दिन</h2>
 <p>साल के बाक़ी हर दिन हम सुबह 10 बजे से रात 10 बजे तक खुले रहते हैं, रविवार को भी।</p>
+<h2 id="band-ke-din">बंद वाले दिन भी WhatsApp चालू रहता है</h2>
+<p>शटर गिरा हो, तब भी message का जवाब मिल जाता है। किसी चीज़ का stock पूछना हो, EMI की बात करनी हो या यह जानना हो कि कल किस समय आना ठीक रहेगा — WhatsApp कर दीजिए, हम बता देंगे।</p>
 <p>अगर आप ${shop.address.locality} से बाहर से आ रहे हैं तो निकलने से पहले एक message कर दीजिए। हम दोनों बातें confirm कर देंगे — दुकान खुली है, और जो चाहिए वो मौजूद है।</p>`,
   },
 ];

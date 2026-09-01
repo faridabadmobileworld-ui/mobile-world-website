@@ -23,7 +23,7 @@ const toc: TocItem[] = [
   { id: "emi-exchange-repair", label: "EMI, Exchange और Repairing" },
   { id: "finance", label: "Paper Finance पर EMI किन-किन bank से मिलती है" },
   { id: "dukaan-ke-andar", label: "दुकान के अंदर" },
-  { id: "nai-jaankari", label: "नई जानकारी" },
+  { id: "nai-jaankari", label: "Tech Blog & Guides" },
   { id: "dukaan-par-aaiye", label: "दुकान पर आइए" },
 ];
 
@@ -166,7 +166,7 @@ export default function Home() {
 
         <section className="sec">
           <div className="shead">
-            <h2 id="nai-jaankari">नई जानकारी</h2>
+            <h2 id="nai-jaankari">Tech Blog &amp; Guides</h2>
             <Link href="/posts">सब देखिए <IconArrow /></Link>
           </div>
           <div className="posts">
