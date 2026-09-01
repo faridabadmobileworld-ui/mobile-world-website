@@ -355,6 +355,50 @@ Visitor details save करना, customer login।
       website उसे 140×44 पर दिखाती है। CSS में नाप पक्की (`width`/`height`) रखी
       गई है — `max-width` से 2x/3x वाले phone पर logo अपने आप छोटा हो जाता था।
 
+### 🎨 दिखावट और animation — 2 Sep 2026
+
+Owner ने कहा: *"har jagah animations add karo... buttons ko thode designs do,
+colours do, subtle sa hover... images me frames... 2 layers ho, ek background
+wali aur ek scrolling wali."*
+
+सब कुछ `app/globals.css` के आख़िरी हिस्से में है ("चमक-दमक वाली परत")।
+**कोई नई library नहीं जोड़ी** — पूरा काम सिर्फ़ CSS से हुआ, इसलिए page भारी
+नहीं हुआ (slow 4G पर home का LCP अब भी 1.8 सेकंड)।
+
+तीन नियम जो इस हिस्से पर हमेशा लागू रहेंगे:
+
+1. **कुछ भी छुपना नहीं चाहिए।** Scroll वाली animation सिर्फ़ उन browsers में
+   चलती है जिनमें `animation-timeline: view()` है (Chrome, Edge, Safari) —
+   इसीलिए वो पूरा हिस्सा `@supports` के अंदर है। Firefox में सब सीधा दिखता है।
+2. **`prefers-reduced-motion` पर सब रुक जाता है।**
+3. **Animation सिर्फ़ `main` के अंदर।** ⚠️ पहले `.panel` बिना `main` के लिखा
+   था और animation का `transform:none` **drawer** पर भी लग गया — menu हर वक़्त
+   खुला दिखने लगा था। नया selector लिखते समय `main` लगाना मत भूलिए।
+
+क्या-क्या है: पीछे एक ठहरी हुई रंगीन परत (`.bgfx`, layout में) जो धीरे-धीरे
+हिलती है · ऊपर पढ़ाई की पट्टी (`.prog`) · header, category strip, footer और
+mobile bar अब अलग-अलग तैरते डिब्बे (काँच जैसा blur) · buttons पर gradient,
+गहराई और hover पर चमक · तस्वीरों पर सफ़ेद frame और hover पर हल्का zoom ·
+scroll पर text और cards का उभरना · heading के नीचे रंगीन धार (जिस heading के
+साथ दाईं तरफ़ link नहीं है, वो बीच में — बाक़ी बाएँ)।
+
+⚠️ **पढ़ने वाला पैराग्राफ़ कभी बीच में मत कीजिए** — heading बीच में ठीक लगती
+है, पूरा पैराग्राफ़ नहीं।
+
+### 📸 Instagram वाली पट्टी — home page पर
+
+`components/InstagramFeed.tsx`, तस्वीरें `data/content.ts` के `instaTiles` में।
+
+⚠️ **यह दुकान की अपनी photos दिखाती है, Instagram की live feed नहीं** — और
+page पर कहीं यह दावा भी नहीं किया गया। असली feed के दो ही रास्ते हैं:
+Meta का embed script (वो ग्राहक को track करता है — और हमारी Privacy Policy
+में साफ़ लिखा है कि इस website पर कोई tracking नहीं है, तो पहले वो page
+बदलना पड़ेगा) या Instagram का API token (owner के account से बनता है, समय-समय
+पर बदलना पड़ता है)। Owner जो कहें, वो लगेगा।
+
+Banner वाली तस्वीरें इसमें जान-बूझकर नहीं लीं — उनके अंदर के दावे और पुराना
+नंबर अब भी ठीक नहीं हुए हैं।
+
 ### 📝 Tech Blog & Guides — `/posts`
 
 Owner ने 2 Sep 2026 को कहा: *"nai jaankari, iske badalkar ye kardo. Tech Blog

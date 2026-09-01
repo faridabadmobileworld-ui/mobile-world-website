@@ -58,6 +58,14 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="hi">
       <body>
         <a className="skip" href="#main">सीधे content पर जाइए</a>
+        {/*
+          पीछे वाली परत — पूरी site के नीचे टिकी रहती है और धीरे-धीरे हिलती है।
+          ऊपर का सारा content इसके ऊपर अपने-अपने डिब्बों में चलता है।
+          (Owner, 2 Sep 2026: "2 layers ho — ek background wali, ek scrolling wali")
+        */}
+        <div className="bgfx" aria-hidden="true" />
+        {/* ऊपर पतली सी पट्टी — page कितना पढ़ लिया, वो दिखाती है। */}
+        <div className="prog" aria-hidden="true" />
         <ArtSprite />
         <SiteHeader />
         <main id="main">{children}</main>

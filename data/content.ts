@@ -381,6 +381,33 @@ export const serviceCards = [
   },
 ];
 
+/**
+ * Instagram वाली पट्टी के लिए तस्वीरें।
+ *
+ * ⚠️ ये दुकान की **अपनी photos** हैं, Instagram से अपने आप आने वाली post नहीं।
+ * असली live feed के लिए या तो Meta का script लगाना पड़ता है (वो ग्राहक को
+ * track करता है — हमारी Privacy Policy में लिखा है कि हम tracking नहीं चलाते),
+ * या Instagram का API token चाहिए। दोनों में से जो owner चाहें, तब लगेगा।
+ * इसलिए यहाँ कहीं यह नहीं लिखा कि "ये हमारी latest post हैं"।
+ *
+ * Banner वाली तस्वीरें यहाँ जान-बूझकर नहीं लीं — उनके अंदर छपे दावे और पुराना
+ * नंबर अब भी ठीक नहीं हुए हैं (CLAUDE.md का तस्वीरों वाला नियम)।
+ */
+export const instaTiles = [
+  { src: "/images/mobile-world-storefront-on-gurudwara-road-ja-a182b026.webp", w: 720, h: 340,
+    alt: `${shop.name} की दुकान — ${shop.address.road}, ${shop.address.locality}` },
+  { src: "/images/inside-the-mobile-world-showroom-bright-4a8926d5.webp", w: 1400, h: 933,
+    alt: `${shop.name} के showroom के अंदर` },
+  { src: "/images/mobile-world-team-handing-over-a-purchase-to-b3645f82.webp", w: 900, h: 1125,
+    alt: `${shop.name} की team ग्राहकों को सामान देते हुए` },
+  { src: "/images/iphone-display-at-the-mobile-world-counter-346d3e71.webp", w: 772, h: 1524,
+    alt: `${shop.name} के counter पर phone का display` },
+  { src: "/images/a-family-collecting-their-purchase-at-mobile-4e86f3cb.webp", w: 900, h: 1125,
+    alt: `${shop.name} से सामान लेता हुआ एक परिवार` },
+  { src: "/images/home-appliances-at-mobile-world-0f587ac6.webp", w: 900, h: 900,
+    alt: `घर का सामान — ${shop.name}` },
+];
+
 /** Blog posts. `body` सीधे HTML है — यही owner बाद में edit करेगा। */
 export type Post = {
   slug: string;

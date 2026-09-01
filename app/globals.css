@@ -751,3 +751,318 @@ body.searching .qinfo{display:flex}
 /* Chhoti likhawat — trademark wali baat jaisi jagah ke liye */
 .fineprint{font-size:13px !important;line-height:1.75 !important;color:var(--ink-3) !important}
 
+
+/* ═══════════════════════════════════════════════════════════════════════
+   चमक-दमक वाली परत — 2 सितंबर 2026
+
+   Owner ने कहा: हर जगह हल्की animation, buttons पर रंग और hover, तस्वीरों
+   पर frame, scroll पर text का उभरना, background में एक हल्की परत, और
+   header–footer–categories–Instagram को अलग-अलग डिब्बों में दिखाना।
+
+   तीन नियम इस पूरे हिस्से पर लागू हैं:
+   1. **कोई नई library नहीं।** सब कुछ सिर्फ़ CSS से — page भारी नहीं होता।
+   2. **जिसके phone में "reduce motion" चालू है, उसके लिए सब रुक जाता है।**
+   3. **Animation से कोई चीज़ छुपती नहीं।** जिस browser में scroll वाली
+      animation नहीं चलती (जैसे Firefox), वहाँ सब कुछ सीधा दिखता है —
+      इसीलिए वो सारा हिस्सा `@supports` के अंदर है।
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root{
+  --brand-3:#9B7BFF;
+  --ig1:#F58529; --ig2:#DD2A7B; --ig3:#8134AF; --ig4:#515BD4;
+  /* परत-दर-परत परछाई — इसी से चीज़ें उठी हुई (3D) लगती हैं */
+  --sh-1:0 1px 2px rgba(20,20,43,.05);
+  --sh-2:0 10px 28px -18px rgba(20,20,43,.45), 0 2px 6px -2px rgba(20,20,43,.06);
+  --sh-3:0 26px 54px -30px rgba(20,20,43,.6), 0 6px 14px -6px rgba(20,20,43,.1);
+  --hi:inset 0 1px 0 rgba(255,255,255,.85);
+  --ring:inset 0 0 0 1px rgba(20,20,43,.05);
+}
+
+/* ── 1. पीछे वाली परत ─────────────────────────────────────────────────
+   पूरी site के नीचे टिकी रहती है, scroll के साथ नहीं चलती, और बहुत
+   धीरे-धीरे साँस लेती है। रंग वही तीन जो site के अपने हैं। */
+.bgfx{position:fixed;inset:-12vmax;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(42rem 32rem at 12% 6%, rgba(123,92,240,.20), transparent 62%),
+    radial-gradient(38rem 30rem at 88% 14%, rgba(37,211,102,.13), transparent 62%),
+    radial-gradient(46rem 34rem at 50% 96%, rgba(232,84,47,.11), transparent 64%);
+  filter:blur(.5px)}
+@media(prefers-reduced-motion:no-preference){
+  .bgfx{animation:bg-saans 48s ease-in-out infinite alternate}
+}
+@keyframes bg-saans{
+  from{transform:translate3d(0,0,0) scale(1)}
+  to{transform:translate3d(-2.5%,1.8%,0) scale(1.06)}
+}
+
+/* ऊपर की पतली पट्टी — page कितना पढ़ा गया। जिस browser में scroll वाली
+   animation नहीं है, वहाँ यह दिखती ही नहीं (scaleX 0 रहती है)। */
+.prog{position:fixed;top:0;left:0;right:0;height:3px;z-index:100;transform:scaleX(0);
+  transform-origin:0 50%;pointer-events:none;
+  background:linear-gradient(90deg,var(--brand),var(--brand-3),#25D366)}
+@supports(animation-timeline:scroll()){
+  @media(prefers-reduced-motion:no-preference){
+    .prog{animation:prog-bhar linear both;animation-timeline:scroll(root)}
+  }
+}
+@keyframes prog-bhar{ to{transform:scaleX(1)} }
+
+/* ── 2. ऊपर वाले डिब्बे — header, strip, footer, mobile bar ────────── */
+.hdr{background:rgba(255,255,255,.93);backdrop-filter:blur(16px) saturate(1.5);
+  -webkit-backdrop-filter:blur(16px) saturate(1.5);
+  border-bottom:1px solid rgba(230,230,238,.9);box-shadow:0 10px 30px -26px rgba(20,20,43,.55)}
+.ann{position:relative;overflow:hidden;
+  background:linear-gradient(90deg,#4B31C4,#7B5CF0,#4B31C4);background-size:220% 100%}
+@media(prefers-reduced-motion:no-preference){
+  .ann{animation:ann-beh 18s linear infinite}
+}
+@keyframes ann-beh{ from{background-position:0 0} to{background-position:220% 0} }
+
+/* Category वाली पट्टी अब अपने अलग डिब्बे में तैरती है — नीचे का content
+   उसके पीछे से धुँधला होकर गुज़रता है। */
+.cstrip{background:linear-gradient(180deg,rgba(243,243,247,.94),rgba(243,243,247,.35));
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:0;padding-bottom:8px}
+.cstrip .wrap{background:var(--card);border:1px solid var(--line);border-radius:999px;
+  margin-top:8px;padding:4px 8px;min-height:46px;
+  box-shadow:var(--sh-2),var(--hi)}
+@media(min-width:768px){ .cstrip .wrap{padding:4px 10px} }
+.cstrip{position:sticky}
+/* दाएँ किनारे पर हल्का सा फीकापन — ताकि कटा हुआ नाम कटा न लगे, बल्कि
+   यह लगे कि पट्टी आगे और चलती है। */
+.cstrip .wrap{
+  -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 42px),transparent);
+  mask-image:linear-gradient(90deg,#000 calc(100% - 42px),transparent)}
+.cstrip a{border-radius:999px;transition:background .22s var(--ease),color .22s var(--ease),
+  transform .22s var(--ease)}
+.cstrip a:hover{transform:translateY(-1px)}
+.cs-pages{border-radius:999px;box-shadow:0 0 0 8px var(--card),0 8px 18px -10px var(--brand);
+  background:linear-gradient(180deg,var(--brand-2),var(--brand));
+  transition:transform .2s var(--ease),box-shadow .25s var(--ease)}
+.cs-pages:hover{transform:translateY(-1px);
+  box-shadow:0 0 0 8px var(--card),0 12px 22px -10px var(--brand);filter:none}
+
+/* Footer भी अपना डिब्बा — ऊपर से गोल, और हल्की सी चमक ऊपरी किनारे पर। */
+.ftr{position:relative;border-top:0;border-radius:22px 22px 0 0;
+  box-shadow:var(--sh-3),var(--hi);overflow:hidden}
+.ftr::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--brand),var(--brand-3),#25D366,var(--brand))}
+.ftr li a{transition:color .2s var(--ease),transform .2s var(--ease);display:inline-block}
+.ftr li a:hover{transform:translateX(3px)}
+
+.mbar{background:rgba(255,255,255,.97);backdrop-filter:blur(14px) saturate(1.4);
+  -webkit-backdrop-filter:blur(14px) saturate(1.4);
+  box-shadow:0 -12px 30px -24px rgba(20,20,43,.6)}
+.mbar a{transition:color .2s var(--ease),transform .2s var(--ease)}
+.mbar a:active{transform:scale(.94)}
+
+/* खुली/बंद वाली बत्ती — धड़कती रहती है, ताकि नज़र पड़े कि यह live है */
+@media(prefers-reduced-motion:no-preference){
+  .live i{animation:dhadkan 2.4s ease-in-out infinite}
+}
+@keyframes dhadkan{
+  0%,100%{box-shadow:0 0 0 0 rgba(61,220,132,.55)}
+  70%{box-shadow:0 0 0 7px rgba(61,220,132,0)}
+}
+.live i.shut{animation:none;box-shadow:0 0 0 3px rgba(255,107,91,.18)}
+
+/* ── 3. Buttons — रंग, गहराई और hover पर एक हल्की चमक ────────────── */
+.btn{position:relative;overflow:hidden;isolation:isolate;
+  box-shadow:var(--sh-1);
+  transition:transform .18s var(--ease),box-shadow .26s var(--ease),
+    background .2s var(--ease),color .2s,border-color .2s,filter .2s}
+.btn::after{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;
+  background:linear-gradient(115deg,transparent 32%,rgba(255,255,255,.42) 48%,transparent 64%);
+  transform:translateX(-130%)}
+@media(prefers-reduced-motion:no-preference){
+  .btn:hover::after{transform:translateX(130%);transition:transform .7s var(--ease)}
+}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0) scale(.985)}
+.btn-d{background:linear-gradient(180deg,#2C2C54,#14142B);
+  box-shadow:0 10px 22px -12px rgba(20,20,43,.85),inset 0 1px 0 rgba(255,255,255,.16)}
+.btn-d:hover{background:linear-gradient(180deg,#3A3A66,#1E1E3C);
+  box-shadow:0 16px 28px -14px rgba(20,20,43,.9),inset 0 1px 0 rgba(255,255,255,.2)}
+.btn-w{background:linear-gradient(180deg,#31E27A,#1FBE5B);color:#04240F;
+  box-shadow:0 10px 22px -12px rgba(31,190,91,.9),inset 0 1px 0 rgba(255,255,255,.5)}
+.btn-w:hover{background:linear-gradient(180deg,#37EE83,#20C963);
+  box-shadow:0 16px 28px -14px rgba(31,190,91,.95),inset 0 1px 0 rgba(255,255,255,.55)}
+.btn-h{background:linear-gradient(180deg,#F0663F,#E8542F);
+  box-shadow:0 10px 22px -12px rgba(232,84,47,.85),inset 0 1px 0 rgba(255,255,255,.35)}
+.btn-h:hover{background:linear-gradient(180deg,#F4744F,#DB4B27)}
+.btn-o{background:linear-gradient(180deg,#fff,#FAFAFD);
+  box-shadow:var(--sh-1),inset 0 1px 0 #fff}
+.btn-o:hover{border-color:var(--brand);color:var(--brand);
+  box-shadow:0 12px 24px -16px rgba(91,63,217,.8),inset 0 1px 0 #fff}
+.btn-yt{background:linear-gradient(180deg,#FF2323,#E00000);
+  box-shadow:0 10px 22px -12px rgba(224,0,0,.8),inset 0 1px 0 rgba(255,255,255,.3)}
+.btn-fb{background:linear-gradient(180deg,#2A88FF,#1462C6);
+  box-shadow:0 10px 22px -12px rgba(24,119,242,.8),inset 0 1px 0 rgba(255,255,255,.3)}
+/* Instagram का अपना असली रंग — चारों रंगों की तिरछी धार, जो धीरे-धीरे चलती है */
+.btn-ig{background:linear-gradient(60deg,var(--ig1),var(--ig2),var(--ig3),var(--ig4),var(--ig1));
+  background-size:280% 280%;color:#fff;
+  box-shadow:0 10px 22px -12px rgba(221,42,123,.85),inset 0 1px 0 rgba(255,255,255,.3)}
+@media(prefers-reduced-motion:no-preference){
+  .btn-ig{animation:ig-rang 9s ease-in-out infinite}
+}
+@keyframes ig-rang{ 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+.btn-ig:hover{filter:brightness(1.06)}
+/* WhatsApp वाला बड़ा button पहली नज़र में दिखे — बहुत हल्की सी धड़कन */
+@media(prefers-reduced-motion:no-preference){
+  .cband .btn-w,.rcta .btn-w{animation:wa-saans 3.4s ease-in-out infinite}
+}
+@keyframes wa-saans{
+  0%,100%{box-shadow:0 10px 22px -12px rgba(31,190,91,.9),inset 0 1px 0 rgba(255,255,255,.5)}
+  50%{box-shadow:0 14px 30px -12px rgba(31,190,91,1),0 0 0 6px rgba(37,211,102,.12),
+      inset 0 1px 0 rgba(255,255,255,.55)}
+}
+.iconbtn{background:linear-gradient(180deg,#fff,#F7F7FB);box-shadow:var(--sh-1),inset 0 1px 0 #fff;
+  transition:transform .18s var(--ease),border-color .2s,color .2s,box-shadow .24s var(--ease)}
+.iconbtn:hover{transform:translateY(-2px);box-shadow:0 12px 22px -14px rgba(91,63,217,.9),inset 0 1px 0 #fff}
+
+/* ── 4. डिब्बे और गहराई (3D) ─────────────────────────────────────── */
+.pc,.post,.ct,main .panel,.toc,.pfoot,.qr-card,.shot,.mlinks a,.fin,.fin-list li,
+.cband,.gmb>div{box-shadow:var(--sh-2),var(--ring)}
+.pc:hover,.post:hover,.ct:hover,.mlinks a:hover{
+  box-shadow:var(--sh-3),var(--ring);transform:translateY(-3px)}
+.post,main .panel,.toc,.qr-card,.cband{
+  transition:box-shadow .26s var(--ease),transform .26s var(--ease)}
+main .panel:hover,.toc:hover{box-shadow:var(--sh-3),var(--ring)}
+.cband{background:linear-gradient(180deg,#fff,#FBFAFF);position:relative;overflow:hidden}
+.cband::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(28rem 18rem at 50% -20%,rgba(123,92,240,.14),transparent 70%)}
+.follow{position:relative;overflow:hidden;box-shadow:var(--sh-3)}
+.follow::before{content:"";position:absolute;inset:-40%;pointer-events:none;
+  background:conic-gradient(from 0deg,transparent 0 70%,rgba(255,255,255,.14) 82%,transparent 92%)}
+@media(prefers-reduced-motion:no-preference){
+  .follow::before{animation:ghoomo 14s linear infinite}
+}
+@keyframes ghoomo{ to{transform:rotate(1turn)} }
+.follow>*{position:relative;z-index:1}
+
+/* ── 5. तस्वीरों के frame ─────────────────────────────────────────
+   Owner: "images me frames add karo, border jo sundar lage."
+   और जिन डिब्बों के पीछे धूसर रंग था, वो अब सफ़ेद है। */
+.pc-m,.post .m,.rmedia{background:#fff}
+.banner,.teamshot,.afig{padding:6px;background:#fff;border:1px solid var(--line);
+  border-radius:var(--r-lg);box-shadow:var(--sh-2),var(--hi)}
+.banner img,.teamshot img,.afig img{border-radius:calc(var(--r-lg) - 6px)}
+.afig figcaption{padding:9px 6px 3px}
+.rmedia,.hs-m,.shot{box-shadow:var(--sh-2),var(--ring)}
+.rmedia{border:1px solid var(--line)}
+.ph-img,.art{transition:transform .5s var(--ease)}
+.banner:hover img,.teamshot:hover img,.shot:hover .ph-img,.rmedia:hover .ph-img{transform:scale(1.04)}
+/* तस्वीर के ऊपर एक हल्की सी चमक, जो hover पर बाएँ से दाएँ गुज़रती है */
+.pc-m::after,.post .m::after,.shot::after{content:"";position:absolute;inset:0;z-index:1;
+  pointer-events:none;
+  background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,.35) 50%,transparent 62%);
+  transform:translateX(-120%)}
+@media(prefers-reduced-motion:no-preference){
+  .pc:hover .pc-m::after,.post:hover .m::after,.shot:hover::after{
+    transform:translateX(120%);transition:transform .85s var(--ease)}
+}
+.shot figcaption{z-index:2}
+
+/* ── 6. Scroll पर उभरना ───────────────────────────────────────────
+   यह पूरा हिस्सा `@supports` के अंदर है। जिस browser में scroll वाली
+   animation नहीं चलती, वहाँ कुछ छुपेगा नहीं — सब सीधा दिखेगा। */
+@supports(animation-timeline:view()){
+  @media(prefers-reduced-motion:no-preference){
+    main .sec>.shead,main .sec>.prose,main .sec>.posts,main .sec>.grid,
+    main .sec>.cols2,main .sec>.cols3,main .sec>.shots,main .sec>.mlinks,
+    main .sec>.btns,main .sec>p,main .sec>h1,
+    main .prose>h2,main .prose>p,main .prose>ul,
+    main .rbody>h2,main .rbody>p,main .rbody>ul,main .rbody>table,
+    main .mlinks li,main .posts>*,main .shots>*,main .gmb>div,main .fin-list li,
+    main .igrid li,main .pfoot,main .follow,main .cband,main .toc,main .panel,
+    main .qr-card,main .igw{
+      animation:fx-ubhro linear both;
+      animation-timeline:view();
+      animation-range:entry 0% entry 240px;
+    }
+    /* नाप px में रखी है, % में नहीं — लंबे हिस्से (जैसे पूरा article)
+       % वाली नाप में आधे रास्ते तक धुँधले पड़े रहते थे। */
+    /* जो चीज़ें कतार में हैं, वो एक-एक करके आएँ — इसीलिए हर अगली को
+       ज़रा सी देर से। */
+    main .mlinks li:nth-child(2n),main .posts>*:nth-child(2n),
+    main .shots>*:nth-child(2n),main .igrid li:nth-child(2n){
+      animation-range:entry 0% entry 300px}
+    main .igrid li:nth-child(3n){animation-range:entry 0% entry 350px}
+  }
+}
+@keyframes fx-ubhro{
+  from{opacity:0;transform:translateY(20px) scale(.986)}
+  to{opacity:1;transform:none}
+}
+/* Article और page के heading के नीचे एक पतली धार, जो scroll के साथ खिंचती है */
+@supports(animation-timeline:view()){
+  @media(prefers-reduced-motion:no-preference){
+    main .rbody h2::after,main .prose h2::after{content:"";display:block;height:3px;width:100%;
+      max-width:120px;margin-top:9px;border-radius:99px;transform-origin:0 50%;
+      background:linear-gradient(90deg,var(--brand),var(--brand-3),transparent);
+      animation:dhaar linear both;animation-timeline:view();
+      animation-range:entry 0% entry 320px}
+  }
+}
+@keyframes dhaar{ from{transform:scaleX(0)} to{transform:scaleX(1)} }
+
+/* ── 7. सीध — क्या बीच में, क्या किनारे ──────────────────────────
+   जिस heading के साथ दाईं तरफ़ कोई link नहीं है, वो बीच में — नीचे एक
+   छोटी सी रंगीन धार के साथ। जिसके साथ link है, वो बाएँ ही रहती है
+   (वरना link दूर चला जाता और नज़र भटकती)। पढ़ने वाला पूरा text हमेशा
+   बाएँ से ही शुरू होता है — बीच में किया हुआ पैराग्राफ़ पढ़ने में
+   थकाता है। */
+.shead:not(:has(a)){flex-direction:column;justify-content:center;text-align:center;gap:4px}
+.shead:not(:has(a)) h2::after{content:"";display:block;width:56px;height:3px;
+  margin:10px auto 0;border-radius:99px;
+  background:linear-gradient(90deg,var(--brand),var(--brand-3))}
+.shead:has(a) h2{position:relative;padding-left:13px}
+.shead:has(a) h2::before{content:"";position:absolute;left:0;top:.18em;bottom:.18em;width:4px;
+  border-radius:99px;background:linear-gradient(180deg,var(--brand),var(--brand-3))}
+.fbot{justify-content:center;text-align:center}
+@media(min-width:760px){ .fbot{justify-content:space-between;text-align:left} }
+.rcta{text-align:center;box-shadow:var(--sh-2),var(--ring)}
+.rcta .btns{justify-content:center}
+.toc-h{text-align:center}
+
+/* ── 8. Instagram वाली पट्टी ──────────────────────────────────────── */
+.igw{position:relative;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r-lg);padding:14px;box-shadow:var(--sh-2),var(--hi);overflow:hidden}
+.igw::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--ig1),var(--ig2),var(--ig3),var(--ig4),var(--ig1));
+  background-size:250% 100%}
+@media(prefers-reduced-motion:no-preference){
+  .igw::before{animation:ig-patti 10s linear infinite}
+}
+@keyframes ig-patti{ from{background-position:0 0} to{background-position:250% 0} }
+.igw-h{display:flex;align-items:center;gap:11px;margin:6px 0 12px}
+.igw-av{width:52px;height:52px;flex:none;border-radius:50%;padding:3px;
+  background:linear-gradient(45deg,var(--ig1),var(--ig2),var(--ig3),var(--ig4))}
+.igw-av img{width:100%;height:100%;border-radius:50%;background:#fff;object-fit:contain}
+.igw-n{min-width:0}
+.igw-n b{display:block;font-size:15px;font-weight:800;letter-spacing:-.02em}
+.igw-n s{display:block;text-decoration:none;font-size:12.5px;color:var(--ink-3);font-weight:600}
+.igw-cta{margin-left:auto;flex:none}
+.igrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:0;padding:0;list-style:none}
+@media(min-width:760px){ .igrid{grid-template-columns:repeat(6,1fr);gap:8px} }
+.igrid a{position:relative;display:block;aspect-ratio:1;border-radius:10px;overflow:hidden;
+  background:#fff;box-shadow:var(--ring);isolation:isolate}
+.igrid img{width:100%;height:100%;object-fit:cover;transition:transform .55s var(--ease)}
+.igrid a:hover img{transform:scale(1.09)}
+.igrid-i{position:absolute;inset:0;display:grid;place-items:center;color:#fff;opacity:0;
+  background:linear-gradient(140deg,rgba(221,42,123,.72),rgba(81,91,212,.72));
+  transition:opacity .28s var(--ease)}
+.igrid a:hover .igrid-i,.igrid a:focus-visible .igrid-i{opacity:1}
+.igrid-i svg{width:26px;height:26px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.35))}
+.igw-f{margin:12px 0 2px;font-size:13px;line-height:1.7;color:var(--ink-2);text-align:center}
+.igw-f a{display:inline-flex;align-items:center;gap:5px;margin-left:6px;
+  color:var(--ig2);font-weight:800}
+.igw-f a:hover{text-decoration:underline}
+
+/* ── 9. जिन्हें हिलना-डुलना पसंद नहीं ────────────────────────────── */
+@media(prefers-reduced-motion:reduce){
+  .bgfx,.ann,.btn-ig,.live i,.follow::before,.igw::before{animation:none!important}
+  .btn:hover,.iconbtn:hover,.pc:hover,.post:hover,.ct:hover,.mlinks a:hover,
+  .cstrip a:hover,.cs-pages:hover{transform:none!important}
+  .ph-img,.art,.igrid img{transition:none!important}
+  .prog{display:none}
+}

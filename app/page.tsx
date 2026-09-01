@@ -13,6 +13,7 @@ import { MoreLinks } from "@/components/MoreLinks";
 import { Banner } from "@/components/Banner";
 import { GoogleQR } from "@/components/GoogleQR";
 import { FinanceStrip } from "@/components/FinanceStrip";
+import { InstagramFeed } from "@/components/InstagramFeed";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { PageFoot } from "@/components/PageFoot";
 import { NextClosure } from "@/components/StoreStatus";
@@ -24,6 +25,7 @@ const toc: TocItem[] = [
   { id: "finance", label: "Paper Finance पर EMI किन-किन bank से मिलती है" },
   { id: "dukaan-ke-andar", label: "दुकान के अंदर" },
   { id: "nai-jaankari", label: "Tech Blog & Guides" },
+  { id: "insta", label: "Instagram पर हम" },
   { id: "dukaan-par-aaiye", label: "दुकान पर आइए" },
 ];
 
@@ -213,9 +215,7 @@ export default function Home() {
           </div>
         </section>
 
-        <MoreLinks current="/" />
-      <PageFoot />
-      <FollowUs />
+        <InstagramFeed />
 
         <section className="sec" id="visit">
           <div className="cband rv in">
@@ -241,6 +241,10 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <MoreLinks current="/" />
+        <PageFoot />
+        <FollowUs />
       </div>
     </>
   );
