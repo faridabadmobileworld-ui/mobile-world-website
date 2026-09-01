@@ -154,6 +154,14 @@ But interlinking karni h sabhi ki yahan se wahan direct one click pe."*
    *(Home page अपवाद है — वो पूरी दुकान की झलक है।)*
 2. **हर page पर `<MoreLinks current="/...">`** — `data/pages.ts` से बाक़ी
    सारे pages के cards अपने आप बन जाते हैं। एक click में कहीं भी।
+   Phone पर ये cards **दो-दो की grid** में हैं (सिर्फ़ नाम), बड़ी screen पर
+   तीन/चार की grid और नाम के नीचे एक line का परिचय — owner ने 2 Sep 2026 को
+   कहा था कि list में ये बहुत बड़े लग रहे हैं।
+
+📌 **ऊपर वाली strip का पहला button — "सारे Page"** (`.cs-pages`)। वही menu
+खोलता है जिसमें सारे page हैं। Owner ने 2 Sep 2026 को कहा: home page पर कहीं
+दिखता ही नहीं था कि और page भी हैं। यह button strip खिसकाने पर भी बाएँ चिपका
+रहता है।
 
 ### हर page पर ये तीन चीज़ें ज़रूरी हैं (owner, 1 Sep 2026)
 

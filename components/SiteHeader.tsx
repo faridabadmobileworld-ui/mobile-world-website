@@ -78,8 +78,19 @@ export function SiteHeader() {
         </div>
       </header>
 
+      {/*
+        Strip का सबसे पहला button — "सारे Page"।
+        Owner ने 2 Sep 2026 को कहा: home page पर कहीं दिखता ही नहीं था कि और
+        page भी हैं। यह button वही menu खोलता है जिसमें सारे page हैं, और
+        strip को उँगली से खिसकाने पर भी बाएँ चिपका रहता है (sticky)।
+      */}
       <nav className="cstrip" aria-label="Categories">
         <div className="wrap">
+          <button
+            className="cs-pages" type="button"
+            aria-label="सारे page देखिए" aria-expanded={open} aria-controls="drawer"
+            onClick={() => setOpen(true)}
+          ><IconGrid /> सारे Page</button>
           {navCategories.map((c) => (
             <Link key={c.slug} href={`/products#${c.slug}`}>{c.label}</Link>
           ))}
