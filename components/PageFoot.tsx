@@ -17,7 +17,7 @@ import {
   IconYouTube, IconInstagram, IconFacebook,
 } from "./Icons";
 
-export function PageFoot({ date }: { date?: string } = {}) {
+export function PageFoot() {
   return (
     <section className="sec">
       <div className="pfoot rv in">
@@ -59,15 +59,22 @@ export function PageFoot({ date }: { date?: string } = {}) {
           🙏 {shop.name} से जुड़े रहने के लिए धन्यवाद! ❤️
         </p>
 
-        {/* Owner ने 1 Sep 2026 को कहा: author का नाम page के सबसे आख़िर में
-            आना चाहिए, ऊपर नहीं। इसीलिए Byline यहाँ, सबसे नीचे है। */}
-        <Byline date={date} />
       </div>
     </section>
   );
 }
 
-/** Page के सबसे आख़िर में — किसने लिखा और कब। `PageFoot` इसे ख़ुद लगाता है। */
+/**
+ * "Written by: Sachin" — page का अपना content जहाँ ख़त्म होता है, ठीक वहीं।
+ *
+ * Owner ने 2 Sep 2026 को article पढ़ते हुए कहा: *"post yahan khatam ho gyi h,
+ * to yahan aana chahiye tha written by wala mera naam... har jagah aise hi
+ * karna hoga."* इसलिए यह अब `PageFoot` के अंदर नहीं है — हर page अपने content
+ * के आख़िर में ख़ुद `<Byline />` लगाता है, और उसके बाद ही "आगे क्या देखना है",
+ * पता और social buttons आते हैं।
+ *
+ * ⚠️ एक page पर एक ही बार। verify script दो होने पर पकड़ लेती है।
+ */
 export function Byline({ date }: { date?: string }) {
   return (
     <p className="byline byline-end">

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { shop } from "@/data/shop";
 import { Banner } from "@/components/Banner";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
-import { PageFoot } from "@/components/PageFoot";
+import { PageFoot, Byline } from "@/components/PageFoot";
 import { FollowUs } from "@/components/FollowUs";
 import { MoreLinks } from "@/components/MoreLinks";
 
@@ -97,6 +97,8 @@ export default function Team() {
           </p>
         </div>
       </section>
+
+      <Byline />
 
       <MoreLinks current="/team" />
       <PageFoot />

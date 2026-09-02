@@ -7,7 +7,7 @@ import { Banner } from "@/components/Banner";
 import { IconArrow } from "@/components/Icons";
 import { NextClosure } from "@/components/StoreStatus";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
-import { PageFoot } from "@/components/PageFoot";
+import { PageFoot, Byline } from "@/components/PageFoot";
 import { MoreLinks } from "@/components/MoreLinks";
 
 export const metadata: Metadata = {
@@ -221,6 +221,8 @@ export default function About() {
           धन्यवाद कि आपने {shop.name} को अपने परिवार का हिस्सा बनाया।
         </p>
       </section>
+
+      <Byline />
 
       <MoreLinks current="/about" />
       <PageFoot />

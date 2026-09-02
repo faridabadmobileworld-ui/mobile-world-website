@@ -158,10 +158,27 @@ But interlinking karni h sabhi ki yahan se wahan direct one click pe."*
    तीन/चार की grid और नाम के नीचे एक line का परिचय — owner ने 2 Sep 2026 को
    कहा था कि list में ये बहुत बड़े लग रहे हैं।
 
-📌 **ऊपर वाली strip का पहला button — "सारे Page"** (`.cs-pages`)। वही menu
-खोलता है जिसमें सारे page हैं। Owner ने 2 Sep 2026 को कहा: home page पर कहीं
-दिखता ही नहीं था कि और page भी हैं। यह button strip खिसकाने पर भी बाएँ चिपका
-रहता है।
+### 🧭 Menu का ढाँचा — 2 Sep 2026
+
+Owner: *"menu baar me change karo. Wahan show karo sabhi pages. categories
+banao. menu, sub bar, sub sub bar... but main baar me pages hi show karo."*
+
+- **ऊपर वाली पट्टी (`.cstrip`)** में अब **category नहीं, सारे page** दिखते हैं —
+  हर एक अपने रंग और निशान के साथ। जिस page पर ग्राहक है, वो अलग दिखता है
+  (`aria-current`)। सबसे पहले चिपका हुआ **Menu** button पूरा menu खोलता है।
+- **Menu (drawer) में तीन सीढ़ियाँ:**
+  1. सारे page (`data/pages.ts` से)
+  2. सामान के तीन हिस्से — Mobile और Computer · TV और मनोरंजन · घर का सामान
+  3. उन्हीं के अंदर असली categories (AC, TV, Laptop…) → `/products#slug`
+  ढाँचा `data/menu.ts` में है और `<details>` से बना है — **बिना JavaScript के
+  भी खुलता-बंद होता है**, और Google को अंदर के सारे link पहले ही दिख जाते हैं।
+- **Category के नाम कहीं दोबारा मत लिखिए** — `data/menu.ts` सिर्फ़ slug रखती है,
+  नाम `data/shop.ts` से उठता है।
+
+📌 **हर page का अपना रंग और निशान** `data/pages.ts` में है (`tone`, `emoji`,
+`short`)। पट्टी, menu और नीचे वाले cards — तीनों वहीं से रंग लेते हैं।
+Owner ने कहा था कि ये cards boring लग रहे थे, इसलिए अब हर card पर उसी रंग की
+धार, रंगीन icon और hover पर उसी रंग की परछाई आती है।
 
 ### हर page पर ये तीन चीज़ें ज़रूरी हैं (owner, 1 Sep 2026)
 
@@ -170,8 +187,14 @@ But interlinking karni h sabhi ki yahan se wahan direct one click pe."*
    बार में दिख जाती है। हर heading पर वही `id` लगाइए जो TOC की list में है।
 2. **Author का नाम — `Written by: Sachin`।** `shop.authorName` से आता है।
    (हिन्दी "लिखा —" नहीं, owner ने 1 Sep 2026 को साफ़ कहा।)
-   ⚠️ यह **page के सबसे आख़िर में** आता है, ऊपर नहीं — `<PageFoot>` ख़ुद लगा
-   देता है। किसी page पर अलग से `<Byline>` मत लिखिए, वरना दो बार दिखेगा। Article के schema में भी यही author जाता है।
+   ⚠️ **2 Sep 2026 को जगह बदली:** यह **page का अपना content जहाँ ख़त्म होता है,
+   ठीक वहीं** आता है — यानी "आगे क्या देखना है?" वाले cards, पता और social
+   buttons से **पहले**। Article पर यह CTA के बाद और "और भी पढ़िए" से पहले है।
+   Owner के शब्दों में: *"post yahan khatam ho gyi h, to yahan aana chahiye tha
+   written by wala mera naam... har jagah aise hi karna hoga."*
+   हर page ख़ुद `<Byline />` लगाता है (`PageFoot` अब नहीं लगाता)। एक page पर
+   **एक ही बार** — verify script दो होने पर या ग़लत जगह होने पर पकड़ लेती है।
+   Article के schema में भी यही author जाता है।
 3. **सारे social buttons + WhatsApp** — `<PageFoot>` और `<FollowUs>`
    दोनों page के आख़िर में। पता, फ़ोन और चारों links वहीं से आते हैं।
 

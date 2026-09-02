@@ -3,7 +3,7 @@ import { shop } from "@/data/shop";
 import { ask } from "@/data/content";
 import { Banner } from "@/components/Banner";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
-import { PageFoot } from "@/components/PageFoot";
+import { PageFoot, Byline } from "@/components/PageFoot";
 import { FollowUs } from "@/components/FollowUs";
 import { MoreLinks } from "@/components/MoreLinks";
 import { IconWhatsApp, IconPhone } from "@/components/Icons";
@@ -129,6 +129,8 @@ export default function Repairing() {
           </div>
         </div>
       </section>
+
+      <Byline />
 
       <MoreLinks current="/repairing" />
       <PageFoot />

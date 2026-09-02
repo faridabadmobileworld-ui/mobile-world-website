@@ -8,7 +8,7 @@ import { GoogleQR } from "@/components/GoogleQR";
 import { MoreLinks } from "@/components/MoreLinks";
 import { LiveBadge, NextClosure } from "@/components/StoreStatus";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
-import { PageFoot } from "@/components/PageFoot";
+import { PageFoot, Byline } from "@/components/PageFoot";
 
 export const metadata: Metadata = {
   title: "Contact Us — सीधे Call और WhatsApp",
@@ -212,6 +212,8 @@ export default function Contact() {
           <GoogleQR />
         </div>
       </section>
+
+      <Byline />
 
       <MoreLinks current="/contact" />
       <PageFoot />

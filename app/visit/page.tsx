@@ -6,7 +6,7 @@ import { IconWhatsApp, IconPin, IconPhone } from "@/components/Icons";
 import { FollowUs } from "@/components/FollowUs";
 import { MoreLinks } from "@/components/MoreLinks";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
-import { PageFoot } from "@/components/PageFoot";
+import { PageFoot, Byline } from "@/components/PageFoot";
 import { Banner } from "@/components/Banner";
 import { GoogleQR } from "@/components/GoogleQR";
 import { LiveBadge, NextClosure } from "@/components/StoreStatus";
@@ -110,6 +110,8 @@ export default function Visit() {
           ❤️ आपकी संतुष्टि, हमारा संकल्प।
         </p>
       </section>
+
+      <Byline />
 
       <MoreLinks current="/visit" />
       <PageFoot />

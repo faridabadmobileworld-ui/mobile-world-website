@@ -5,7 +5,7 @@ import { financePartners } from "@/data/finance";
 import { FinanceStrip } from "@/components/FinanceStrip";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { MoreLinks } from "@/components/MoreLinks";
-import { PageFoot } from "@/components/PageFoot";
+import { PageFoot, Byline } from "@/components/PageFoot";
 import { FollowUs } from "@/components/FollowUs";
 import { IconWhatsApp, IconPhone } from "@/components/Icons";
 
@@ -184,6 +184,8 @@ export default function Finance() {
           </p>
         </div>
       </section>
+
+      <Byline />
 
       <MoreLinks current="/finance" />
       <PageFoot />

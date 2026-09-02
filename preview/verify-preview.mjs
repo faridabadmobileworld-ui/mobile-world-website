@@ -6,6 +6,9 @@
  */
 import { chromium } from '/opt/node22/lib/node_modules/playwright/index.mjs';
 import { readFileSync } from 'node:fs';
+// Page ki list data/pages.ts se — naya page banate hi jaanch mein aa jata hai
+const PAGES = [...readFileSync('data/pages.ts', 'utf8')
+  .matchAll(/href:\s*"([^"]+)"/g)].map(m => m[1]);
 const CATS = (readFileSync('data/shop.ts', 'utf8')
   .match(/export const categories: Category\[\] = \[([\s\S]*?)\];/)[1]
   .match(/slug:/g) || []).length;
@@ -140,16 +143,19 @@ T(await slide() !== beforePause, 'slider: play se apne aap badalta hai');
 // ── menu drawer ─────────────────────────────────────────────────────
 await p.click('[aria-label="Menu kholiye"]');
 await p.waitForTimeout(420);
+// Menu ki teen seedhi: pehle saare page, phir saamaan ke hisse, phir categories
 const d1 = await p.evaluate(() => {
   const panel = document.querySelector('.drawer .panel');
-  const heads = [...panel.querySelectorAll('h2')];
-  let n = 0, el = heads[0]?.nextElementSibling;
-  while (el && el.tagName !== 'H2') { if (el.tagName === 'A') n++; el = el.nextElementSibling; }
   return { open: document.querySelector('.drawer').classList.contains('open'),
-           onScreen: panel.getBoundingClientRect().x >= 0, catLinks: n,
+           onScreen: panel.getBoundingClientRect().x >= 0,
+           pages: panel.querySelectorAll('a.d:not(.d3)').length,
+           groups: panel.querySelectorAll('.dsub').length,
+           catLinks: panel.querySelectorAll('a.d3').length,
            expanded: document.querySelector('[aria-label="Menu kholiye"]').getAttribute('aria-expanded') };
 });
 T(d1.open && d1.onScreen, 'menu khulta hai');
+T(d1.pages === PAGES.length, `menu mein ${PAGES.length} page`, String(d1.pages));
+T(d1.groups >= 3, 'menu mein saamaan ke hisse', String(d1.groups));
 T(d1.catLinks === CATS, `menu mein ${CATS} category links`, String(d1.catLinks));
 T(d1.expanded === 'true', 'menu button ka aria-expanded sahi');
 

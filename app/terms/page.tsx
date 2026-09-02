@@ -3,7 +3,7 @@ import Link from "next/link";
 import { shop } from "@/data/shop";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { MoreLinks } from "@/components/MoreLinks";
-import { PageFoot } from "@/components/PageFoot";
+import { PageFoot, Byline } from "@/components/PageFoot";
 import { FollowUs } from "@/components/FollowUs";
 
 export const metadata: Metadata = {
@@ -233,6 +233,8 @@ export default function Terms() {
           </p>
         </div>
       </section>
+
+      <Byline />
 
       <MoreLinks current="/terms" />
       <PageFoot />

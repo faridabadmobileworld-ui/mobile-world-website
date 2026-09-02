@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { shop } from "@/data/shop";
-import { PageFoot } from "@/components/PageFoot";
+import { PageFoot, Byline } from "@/components/PageFoot";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { posts } from "@/data/content";
 import { jsonLdScript } from "@/data/schema";
@@ -100,6 +100,10 @@ export default async function PostPage({ params }: Params) {
               </div>
             </div>
 
+            {/* Post यहीं ख़त्म हुई — इसलिए लेखक का नाम यहीं आता है, नीचे
+                "और भी पढ़िए" वाली list से पहले। */}
+            <Byline date={post.date} />
+
             <div className="shead" style={{ marginTop: 26 }}><h2>और भी पढ़िए</h2></div>
             <div className="posts">
               {others.map((p) => (
@@ -115,7 +119,7 @@ export default async function PostPage({ params }: Params) {
                 </Link>
               ))}
             </div>
-            <PageFoot date={post.date} />
+            <PageFoot />
           </article>
         </div>
       </div>

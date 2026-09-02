@@ -15,7 +15,7 @@ import { GoogleQR } from "@/components/GoogleQR";
 import { FinanceStrip } from "@/components/FinanceStrip";
 import { InstagramFeed } from "@/components/InstagramFeed";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
-import { PageFoot } from "@/components/PageFoot";
+import { PageFoot, Byline } from "@/components/PageFoot";
 import { NextClosure } from "@/components/StoreStatus";
 
 const toc: TocItem[] = [
@@ -241,6 +241,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <Byline />
 
         <MoreLinks current="/" />
         <PageFoot />

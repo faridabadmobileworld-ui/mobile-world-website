@@ -4,7 +4,7 @@ import Link from "next/link";
 import { shop } from "@/data/shop";
 import { posts } from "@/data/content";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
-import { PageFoot } from "@/components/PageFoot";
+import { PageFoot, Byline } from "@/components/PageFoot";
 import { FollowUs } from "@/components/FollowUs";
 import { MoreLinks } from "@/components/MoreLinks";
 
@@ -57,6 +57,7 @@ export default function Posts() {
           ))}
         </div>
       </section>
+      <Byline />
       <MoreLinks current="/posts" />
       <PageFoot />
       <FollowUs />

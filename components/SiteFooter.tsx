@@ -2,9 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { shop } from "@/data/shop";
 import { ask, navCategories } from "@/data/content";
+import { sitePages } from "@/data/pages";
 import { LiveBadge, NextClosure } from "./StoreStatus";
 import { IconYouTube, IconInstagram, IconFacebook, IconHome, IconGrid, IconWhatsApp, IconPin } from "./Icons";
 import { whatsappGeneral } from "@/data/content";
+
+/** नीचे वाले दो खाने — कौन सा page किस खाने में। बाक़ी सब menu में है। */
+const DUKAAN = ["/about", "/team", "/products", "/posts", "/visit"];
+const MADAD = ["/repairing", "/after-sales-support", "/finance", "/returns", "/contact"];
 
 export function SiteFooter() {
   return (
@@ -27,14 +32,13 @@ export function SiteFooter() {
             </div>
           </div>
 
+          {/* Page की list `data/pages.ts` से — क्रम और नाम वहीं एक जगह बदलते हैं। */}
           <div>
             <h2 className="fh">दुकान</h2>
             <ul>
-              <li><Link href="/about">हमारे बारे में</Link></li>
-              <li><Link href="/team">हमारी Team</Link></li>
-              <li><Link href="/products">क्या-क्या मिलता है</Link></li>
-              <li><Link href="/posts">Tech Blog &amp; Guides</Link></li>
-              <li><Link href="/visit">दुकान पर आइए</Link></li>
+              {sitePages.filter((p) => DUKAAN.includes(p.href)).map((p) => (
+                <li key={p.href}><Link href={p.href}>{p.label}</Link></li>
+              ))}
             </ul>
           </div>
 
@@ -50,11 +54,9 @@ export function SiteFooter() {
           <div>
             <h2 className="fh">मदद</h2>
             <ul>
-              <li><Link href="/repairing">Repairing Services</Link></li>
-              <li><Link href="/after-sales-support">After Sales Support</Link></li>
-              <li><Link href="/finance">Finance और EMI</Link></li>
-              <li><Link href="/contact">Contact Us</Link></li>
-              <li><Link href="/returns">Return और Exchange</Link></li>
+              {sitePages.filter((p) => MADAD.includes(p.href)).map((p) => (
+                <li key={p.href}><Link href={p.href}>{p.label}</Link></li>
+              ))}
               <li><a href={ask("पुराने phone के Exchange")} target="_blank" rel="noopener">Exchange</a></li>
               <li><a href={ask("EMI")} target="_blank" rel="noopener">EMI</a></li>
               <li><a href={ask("Delivery")} target="_blank" rel="noopener">Delivery</a></li>

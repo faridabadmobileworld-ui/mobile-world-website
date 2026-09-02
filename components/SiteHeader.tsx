@@ -2,19 +2,20 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { shop } from "@/data/shop";
-import { navCategories, artForCategory, whatsappGeneral } from "@/data/content";
+import { artForCategory, whatsappGeneral } from "@/data/content";
+import { sitePages } from "@/data/pages";
+import { productMenu } from "@/data/menu";
 import { Art } from "./ArtSprite";
 import { LiveBadge } from "./StoreStatus";
-import {
-  IconMenu, IconSearch, IconPhone, IconWhatsApp,
-  IconGrid, IconPost, IconTool, IconPin,
-} from "./Icons";
+import { IconMenu, IconSearch, IconPhone, IconWhatsApp, IconGrid } from "./Icons";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  // जिस page पर ग्राहक अभी है, पट्टी में वो अलग दिखे।
+  const path = usePathname();
   const headerRef = useRef<HTMLElement>(null);
 
   // Category strip header के नीचे चिपकती है। Header की असली ऊँचाई नापो —
@@ -84,15 +85,18 @@ export function SiteHeader() {
         page भी हैं। यह button वही menu खोलता है जिसमें सारे page हैं, और
         strip को उँगली से खिसकाने पर भी बाएँ चिपका रहता है (sticky)।
       */}
-      <nav className="cstrip" aria-label="Categories">
+      <nav className="cstrip" aria-label="Website ke page">
         <div className="wrap">
           <button
             className="cs-pages" type="button"
-            aria-label="सारे page देखिए" aria-expanded={open} aria-controls="drawer"
+            aria-label="पूरा menu खोलिए" aria-expanded={open} aria-controls="drawer"
             onClick={() => setOpen(true)}
-          ><IconGrid /> सारे Page</button>
-          {navCategories.map((c) => (
-            <Link key={c.slug} href={`/products#${c.slug}`}>{c.label}</Link>
+          ><IconGrid /> Menu</button>
+          {sitePages.map((p) => (
+            <Link key={p.href} href={p.href} aria-current={path === p.href ? "page" : undefined}
+                  style={{ "--t": p.tone } as React.CSSProperties}>
+              <em aria-hidden="true">{p.emoji}</em>{p.short}
+            </Link>
           ))}
         </div>
       </nav>
@@ -106,30 +110,41 @@ export function SiteHeader() {
 
           <SearchBox id="q-drawer" onDone={() => setOpen(false)} />
 
-          <h2 className="dh">Category से चुनिए</h2>
-          {navCategories.map((c) => (
-            <Link key={c.slug} className="d" href={`/products#${c.slug}`} onClick={() => setOpen(false)}>
-              <i className="pic">
-                {c.image
-                  ? <Image src={c.image} alt="" width={200} height={200} sizes="34px" />
-                  : <Art id={artForCategory(c.slug)} />}
-              </i>
-              {c.label}
+          {/* पहली सीढ़ी — सारे page */}
+          <h2 className="dh">सारे Page</h2>
+          {sitePages.map((p) => (
+            <Link key={p.href} className="d" href={p.href} onClick={() => setOpen(false)}
+                  style={{ "--t": p.tone } as React.CSSProperties}>
+              <i className="tone" aria-hidden="true">{p.emoji}</i>
+              {p.label}
             </Link>
           ))}
 
-          <h2 className="dh">दुकान</h2>
-          <Link className="d" href="/about" onClick={() => setOpen(false)}><i><IconGrid /></i>हमारे बारे में</Link>
-          <Link className="d" href="/team" onClick={() => setOpen(false)}><i><IconGrid /></i>हमारी Team</Link>
-          <Link className="d" href="/repairing" onClick={() => setOpen(false)}><i><IconTool /></i>Repairing Services</Link>
-          <Link className="d" href="/after-sales-support" onClick={() => setOpen(false)}><i><IconTool /></i>After Sales Support</Link>
-          <Link className="d" href="/finance" onClick={() => setOpen(false)}><i><IconGrid /></i>Finance और EMI</Link>
-          <Link className="d" href="/posts" onClick={() => setOpen(false)}><i><IconPost /></i>Tech Blog &amp; Guides</Link>
-          <Link className="d" href="/contact" onClick={() => setOpen(false)}><i><IconTool /></i>Contact Us</Link>
-          <Link className="d" href="/visit" onClick={() => setOpen(false)}><i><IconPin /></i>दुकान पर आइए</Link>
-          <Link className="d" href="/returns" onClick={() => setOpen(false)}><i><IconGrid /></i>Return और Exchange</Link>
-          <Link className="d" href="/terms" onClick={() => setOpen(false)}><i><IconGrid /></i>Terms &amp; Conditions</Link>
-          <Link className="d" href="/privacy" onClick={() => setOpen(false)}><i><IconGrid /></i>Privacy Policy</Link>
+          {/*
+            दूसरी और तीसरी सीढ़ी — सामान।
+            `<details>` से बनी है, इसलिए बिना JavaScript के भी खुलती-बंद होती
+            है और Google को अंदर के सारे link पहले ही दिख जाते हैं।
+          */}
+          <h2 className="dh">सामान — category से चुनिए</h2>
+          {productMenu.map((g) => (
+            <details className="dsub" key={g.label}>
+              <summary>
+                <i className="tone" aria-hidden="true">{g.emoji}</i>
+                {g.label}
+                <b aria-hidden="true" />
+              </summary>
+              <div className="dsub-in">
+                {g.items.map((c) => (
+                  <Link key={c.slug} className="d d3" href={c.href} onClick={() => setOpen(false)}>
+                    <i className="pic">
+                      <Art id={artForCategory(c.slug)} />
+                    </i>
+                    {c.label}
+                  </Link>
+                ))}
+              </div>
+            </details>
+          ))}
 
           <div className="btns" style={{ marginTop: 18 }}>
             <a className="btn btn-w" href={whatsappGeneral} target="_blank" rel="noopener">

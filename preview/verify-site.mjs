@@ -28,6 +28,12 @@ for(const w of [320,390,768,1280]){
     const res=await p.goto(B+path,{waitUntil:'load'});
     await p.evaluate(()=>document.fonts.ready); await p.waitForTimeout(350);
     const r=await p.evaluate(()=>{
+      // "Written by: Sachin" — har page par theek ek baar, aur page ka apna
+      // content khatam hote hi (yaani "aage kya dekhna hai" waale cards se pehle)।
+      const by=[...document.querySelectorAll('.byline-end')];
+      const ml=document.querySelector('.mlinks');
+      window.__by={n:by.length,
+        pehle: by.length&&ml ? by[0].getBoundingClientRect().top<ml.getBoundingClientRect().top : true};
       const de=document.documentElement;
       // .skip aur band drawer jaanbujh kar screen ke bahar hote hain — wo bug nahi.
       const wide=[...document.querySelectorAll('body *')].filter(e=>{
@@ -43,9 +49,12 @@ for(const w of [320,390,768,1280]){
         const b=e.getBoundingClientRect();
         return b.width>0 && (b.right>innerWidth+1||b.left<-1);
       }).slice(0,3).map(e=>(e.className||e.tagName).toString().slice(0,26));
-      return {overflow:de.scrollWidth>de.clientWidth, wide,
+      return {by:window.__by, overflow:de.scrollWidth>de.clientWidth, wide,
         broken:[...document.querySelectorAll('img')].filter(i=>i.complete&&i.naturalWidth===0).length};
     });
+    // Byline sirf ek baar, aur page ka apna content khatam hote hi
+    if(w===390) T(r.by.n===1 && r.by.pehle, `byline once, at end of content — ${path}`,
+      r.by.n!==1?`${r.by.n} bylines`:'byline cards ke baad hai');
     T(res.status()===200 && errs.length===0 && !r.overflow && r.wide.length===0 && r.broken===0,
       `${w}px ${path}`, [res.status()!==200&&`HTTP ${res.status()}`, errs[0], r.overflow&&'page overflow',
         r.wide.length&&('offscreen: '+r.wide.join(',')), r.broken&&`${r.broken} broken img`].filter(Boolean).join(' | '));
@@ -79,18 +88,32 @@ for(const w of [320,360,390,414,768,1280]){
 }
 
 // drawer works
+// Menu — teen seedhi: pehle saare page, phir saamaan ke hisse, phir categories
 {
   const ctx=await b.newContext({viewport:{width:390,height:844}});
   const p=await ctx.newPage(); await p.goto(B+'/',{waitUntil:'load'}); await p.waitForTimeout(500);
   await p.click('[aria-label="Menu kholiye"]'); await p.waitForTimeout(500);
   const d=await p.evaluate(()=>{
     const panel=document.querySelector('.drawer .panel');
-    const first=[...panel.querySelectorAll('h2')][0];
-    let n=0,el=first.nextElementSibling;
-    while(el&&el.tagName!=='H2'){if(el.tagName==='A')n++;el=el.nextElementSibling;}
-    return {links:n, visible:panel.getBoundingClientRect().x>=0};
+    return {
+      pages:panel.querySelectorAll('a.d:not(.d3)').length,
+      groups:panel.querySelectorAll('.dsub').length,
+      cats:panel.querySelectorAll('a.d3').length,
+      visible:panel.getBoundingClientRect().x>=0,
+    };
   });
-  T(d.links===CATS && d.visible,`drawer has ${CATS} category links`,`${d.links} links`);
+  T(d.visible && d.pages===SITE_PAGES.length, `menu: ${SITE_PAGES.length} page`, `${d.pages} mile`);
+  T(d.groups>=3, 'menu: saamaan ke hisse (doosri seedhi)', `${d.groups} mile`);
+  T(d.cats===CATS, `menu: ${CATS} category (teesri seedhi)`, `${d.cats} mile`);
+  await ctx.close();
+}
+
+// Upar wali patti mein saare page hone chahiye
+{
+  const ctx=await b.newContext({viewport:{width:390,height:844}});
+  const p=await ctx.newPage(); await p.goto(B+'/',{waitUntil:'load'}); await p.waitForTimeout(400);
+  const n=await p.$$eval('.cstrip a',a=>a.length);
+  T(n===SITE_PAGES.length, `strip mein ${SITE_PAGES.length} page`, `${n} mile`);
   await ctx.close();
 }
 await b.close();

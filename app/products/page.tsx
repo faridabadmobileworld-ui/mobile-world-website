@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
-import { PageFoot } from "@/components/PageFoot";
+import { PageFoot, Byline } from "@/components/PageFoot";
 import { shop } from "@/data/shop";
 import { items, navCategories } from "@/data/content";
 import { ProductCard } from "@/components/ProductCard";
@@ -50,6 +50,8 @@ export default function Products() {
           </section>
         );
       })}
+
+      <Byline />
 
       <MoreLinks current="/products" />
       <PageFoot />

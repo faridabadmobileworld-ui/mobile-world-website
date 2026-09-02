@@ -675,26 +675,43 @@ body.searching .qinfo{display:flex}
 
 /* ── "Aage kya dekhna hai?" — har page se har doosre page tak ek click ──
    Owner ne 1 Sep 2026 ko kaha tha. data/pages.ts se apne aap banti hai. */
-/* Page se page jaane wale link — phone par do-do ki grid, warna list bahut
-   lambi aur bhaari lagti hai. Chhoti screen par sirf naam, badi par naam ke
-   neeche ek line ka parichay bhi. */
-.mlinks{display:grid;gap:7px;grid-template-columns:repeat(2,1fr);margin:0;padding:0;list-style:none}
-@media(min-width:640px){ .mlinks{gap:8px;grid-template-columns:repeat(3,1fr)} }
+/* ── हर page के रंगीन cards — "आगे क्या देखना है?" ──────────────────
+   Owner ने 2 Sep 2026 को कहा कि ये boring लग रहे थे, social media वाले
+   buttons जैसे रंगीन होने चाहिए। हर page का अपना रंग `data/pages.ts` में
+   लिखा है और यहाँ `--t` बनकर आता है। */
+.mlinks{display:grid;gap:8px;grid-template-columns:repeat(2,1fr);margin:0;padding:0;list-style:none}
+@media(min-width:640px){ .mlinks{grid-template-columns:repeat(3,1fr)} }
 @media(min-width:1000px){ .mlinks{grid-template-columns:repeat(4,1fr)} }
-.mlinks a{display:block;height:100%;background:var(--card);border:1px solid var(--line);
-  border-radius:var(--r);padding:11px 12px;
-  transition:border-color .2s var(--ease),box-shadow .22s var(--ease),transform .22s var(--ease)}
-.mlinks a:hover{border-color:var(--brand);box-shadow:0 8px 22px -14px rgba(20,20,43,.32);
-  transform:translateY(-2px)}
-.mlinks b{display:flex;align-items:center;gap:5px;font-size:13.5px;font-weight:700;
-  letter-spacing:-.02em;line-height:1.35;color:var(--ink);margin:0}
-.mlinks b svg{flex:none;width:14px;height:14px;color:var(--brand)}
-.mlinks a:hover b{color:var(--brand)}
+.mlinks a{position:relative;display:block;height:100%;overflow:hidden;
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:12px 12px 30px 13px;
+  transition:border-color .22s var(--ease),box-shadow .26s var(--ease),
+    transform .24s var(--ease),background .26s var(--ease)}
+/* बाईं तरफ़ उसी page के रंग की एक धार */
+.mlinks a::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;
+  background:linear-gradient(180deg,var(--t,var(--brand)),transparent 90%)}
+.mlinks a:hover{transform:translateY(-3px);border-color:var(--t,var(--brand));
+  background:linear-gradient(180deg,#fff,color-mix(in srgb,var(--t,var(--brand)) 7%,#fff));
+  box-shadow:0 16px 30px -20px var(--t,var(--brand)),var(--ring)}
+.ml-i{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;
+  font-size:17px;line-height:1;margin-bottom:8px;
+  background:color-mix(in srgb,var(--t,var(--brand)) 14%,#fff);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--t,var(--brand)) 22%,transparent);
+  transition:transform .26s var(--ease)}
+.mlinks a:hover .ml-i{transform:scale(1.08) rotate(-4deg)}
+.mlinks b{display:block;font-size:13.5px;font-weight:800;letter-spacing:-.02em;
+  line-height:1.35;color:var(--ink)}
+.mlinks a:hover b{color:var(--t,var(--brand))}
 .mlinks s{display:none}
+.ml-go{position:absolute;right:10px;bottom:10px;color:var(--t,var(--brand));opacity:.5;
+  transition:transform .24s var(--ease),opacity .24s var(--ease)}
+.ml-go svg{width:15px;height:15px}
+.mlinks a:hover .ml-go{opacity:1;transform:translateX(3px)}
 @media(min-width:640px){
-  .mlinks a{padding:13px 14px;border-radius:var(--r-lg)}
-  .mlinks b{font-size:14.5px;font-weight:800;margin:0 0 4px}
-  .mlinks s{display:block;text-decoration:none;font-size:12.5px;line-height:1.55;color:var(--ink-2)}
+  .mlinks a{padding:14px 14px 30px 16px}
+  .mlinks b{font-size:14.5px;margin-bottom:5px}
+  .mlinks s{display:block;text-decoration:none;font-size:12.5px;line-height:1.55;
+    color:var(--ink-2)}
 }
 
 /* ── Google par hamari listing (GMB) — sirf Contact page par ── */
@@ -1101,3 +1118,53 @@ main .panel:hover,.toc:hover{box-shadow:var(--sh-3),var(--ring)}
   .ph-img,.art,.igrid img{transition:none!important}
   .prog{display:none}
 }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   Menu — तीन सीढ़ियाँ, और ऊपर वाली पट्टी में सारे page (2 Sep 2026)
+
+   Owner: *"menu baar me change karo. Wahan show karo sabhi pages...
+   main baar me pages hi show karo. ac tv laptop inko menu submenu sub sub
+   menu... waise set karo."*
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ऊपर वाली पट्टी — अब category नहीं, page दिखते हैं। हर page अपने रंग के
+   साथ (रंग `data/pages.ts` से `--t` बनकर आता है)। */
+.cstrip a{gap:6px;padding:9px 12px;font-size:11.5px;color:var(--ink-2)}
+.cstrip a em{font-style:normal;font-size:13px;line-height:1;filter:saturate(1.1)}
+.cstrip a:hover{background:color-mix(in srgb,var(--t,var(--brand)) 12%,#fff);
+  color:var(--t,var(--brand))}
+/* जिस page पर आप अभी हैं, उसकी पहचान */
+.cstrip a[aria-current="page"]{background:color-mix(in srgb,var(--t,var(--brand)) 14%,#fff);
+  color:var(--t,var(--brand));font-weight:800}
+
+/* Menu (drawer) की पहली सीढ़ी — हर page का अपना रंगीन खाना */
+.drawer a.d i.tone{width:30px;height:30px;border-radius:9px;flex:none;display:grid;
+  place-items:center;font-size:15px;line-height:1;background:transparent;
+  background:color-mix(in srgb,var(--t,var(--brand)) 14%,#fff);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--t,var(--brand)) 22%,transparent);
+  transition:transform .22s var(--ease)}
+.drawer a.d:hover{background:color-mix(in srgb,var(--t,var(--brand)) 8%,#fff);
+  color:var(--t,var(--brand))}
+.drawer a.d:hover i.tone{transform:scale(1.08) rotate(-4deg)}
+
+/* दूसरी सीढ़ी — सामान के हिस्से। `<details>` से बनी है, JavaScript नहीं लगती। */
+.dsub{border-radius:10px;margin:2px 0}
+.dsub>summary{display:flex;align-items:center;gap:10px;padding:11px 10px;border-radius:9px;
+  font-size:14.5px;font-weight:600;cursor:pointer;list-style:none;
+  --t:var(--brand);transition:background .2s var(--ease)}
+.dsub>summary::-webkit-details-marker{display:none}
+.dsub>summary:hover{background:var(--bg)}
+/* दाईं तरफ़ का तीर — खुलने पर घूम जाता है */
+.dsub>summary>b{margin-left:auto;width:9px;height:9px;flex:none;
+  border-right:2.2px solid var(--ink-3);border-bottom:2.2px solid var(--ink-3);
+  transform:rotate(45deg) translate(-2px,-2px);transition:transform .25s var(--ease)}
+.dsub[open]>summary>b{transform:rotate(-135deg) translate(-2px,-2px)}
+.dsub[open]>summary{color:var(--brand)}
+/* तीसरी सीढ़ी — असली categories, थोड़ा अंदर की तरफ़ */
+.dsub-in{padding:2px 0 6px 14px;margin-left:14px;border-left:2px solid var(--line)}
+.drawer a.d3{font-size:13.5px;padding:9px 8px}
+.drawer a.d3 i.pic{width:26px;height:26px}
+@media(prefers-reduced-motion:no-preference){
+  .dsub[open]>.dsub-in{animation:dsub-khulo .26s var(--ease) both}
+}
+@keyframes dsub-khulo{ from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:none} }
