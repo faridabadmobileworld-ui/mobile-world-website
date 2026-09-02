@@ -378,6 +378,31 @@ Visitor details save करना, customer login।
       website उसे 140×44 पर दिखाती है। CSS में नाप पक्की (`width`/`height`) रखी
       गई है — `max-width` से 2x/3x वाले phone पर logo अपने आप छोटा हो जाता था।
 
+### 🌃 `/showcase` — scroll वाला cinematic page (2 Sep 2026)
+
+Owner ने skill चलाकर कहा: बना दो और अभी live करो। Higgsfield में credits 0 थे,
+इसलिए उन्होंने कहा कि prompts दे दूँ, video वो ख़ुद बनवाकर देंगे।
+
+**जो बना:** `public/showcase/` में सादा HTML/CSS/JS का एक page, skill के
+engineering standard पर। पता: `/showcase` (rewrite `next.config.ts` में)।
+
+- Video की जगह अभी **दुकान की असली तस्वीरों की चार परतें** scroll के साथ
+  एक-दूसरे में घुलती हैं — बाहर रात → अंदर → counter → लोग।
+- **Video आते ही** वही सफ़र video पर चलने लगेगा: `assets/hero-scrub.mp4`
+  रखिए और `window.HAS_HERO_VIDEO` को `true` कर दीजिए। पूरा तरीक़ा
+  `public/showcase/README.md` में है।
+- Art direction: "रात की दुकान" — रात के नीले-काले रंग, और दुकान की अपनी
+  गर्म पीली रोशनी इकलौता accent। रंग असली photo से लिए गए।
+- अपना निशान (signature): वो लकीर जो scroll के साथ ख़ुद खिंचती है, और
+  **शटर वाला हिस्सा** जहाँ visitor दबाकर दुकान खोलता है।
+
+⚠️ **assets के पते जड़ से लिखे हैं** (`/showcase/assets/...`)। Relative पते
+एक बार सब 404 कर चुके हैं, क्योंकि पता बिना slash के चलता है। कहीं और ले
+जाना हो तो README पढ़िए।
+
+⚠️ **यह main site की जगह नहीं है।** 20 pages वाली site वैसी ही है। यह उसके
+साथ एक अलग cinematic page है, जिसका link owner campaign में दे सकते हैं।
+
 ### 🎬 "10k-websites" skill — क्या है, और इस project से रिश्ता (2 Sep 2026)
 
 Owner ने यह skill जोड़ी। यह **एक अलग तरह की website** बनाने का पूरा तरीक़ा है:
