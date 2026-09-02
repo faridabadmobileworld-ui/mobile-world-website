@@ -448,6 +448,28 @@ scroll पर text और cards का उभरना · heading के नी�
 ⚠️ **पढ़ने वाला पैराग्राफ़ कभी बीच में मत कीजिए** — heading बीच में ठीक लगती
 है, पूरा पैराग्राफ़ नहीं।
 
+### ▶️ दुकान के video — home page पर
+
+`data/videos.ts` (list), `components/VideoRow.tsx` (पट्टी),
+`components/LiteYouTube.tsx` (एक video)।
+
+**जोड़ना बस एक line है** — `data/videos.ts` में:
+```ts
+{ url: "https://www.youtube.com/watch?v=XXXXXXXXXXX", title: "video का नाम" },
+{ url: "https://youtube.com/shorts/XXXXXXXXXXX", title: "...", short: true },
+```
+watch, youtu.be और shorts — तीनों तरह के link चलते हैं, id अपने आप निकल जाती है।
+ग़लत link चुपचाप छूट जाता है, और **list ख़ाली हो तो पूरा हिस्सा site पर दिखता ही
+नहीं** — इसलिए link आने से पहले भी page पूरा दिखता है।
+
+⚠️ **YouTube का player पहले load नहीं होता।** पहले सिर्फ़ thumbnail और play का
+बटन दिखता है; दबाने पर ही `youtube-nocookie.com` वाला player खुलता है। इससे
+page हल्का रहता है और play दबाने तक कोई cookie नहीं बनती। **यह बात Privacy
+page पर लिखी हुई है** — वहाँ से हटाइए मत।
+
+📌 सारे card एक ही नाप (4:5) के हैं — चौड़े video हों या Shorts। नाप मत बदलिए,
+वरना कतार टेढ़ी दिखेगी।
+
 ### 📸 Instagram वाली पट्टी — home page पर
 
 `components/InstagramFeed.tsx` (slides), `components/InstaArrows.tsx` (तीर),

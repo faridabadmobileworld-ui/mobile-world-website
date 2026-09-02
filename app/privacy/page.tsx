@@ -129,6 +129,13 @@ export default function Privacy() {
             privacy policy लागू होती है — हमारी नहीं।
           </p>
           <p>
+            <strong>YouTube वाले video:</strong> home page पर video की पट्टी में
+            पहले सिर्फ़ एक तस्वीर दिखती है। <strong>जब तक आप play नहीं दबाते, YouTube
+            का player चलता ही नहीं</strong> — यानी तब तक कोई cookie नहीं बनती।
+            Play दबाने पर video YouTube के <em>no-cookie</em> वाले पते से चलता है।
+            तस्वीर ज़रूर YouTube के server से आती है।
+          </p>
+          <p>
             <strong>एक बात साफ़-साफ़:</strong> home page पर हमारी Instagram वाली पट्टी
             में जो तस्वीरें दिखती हैं, वो सीधे <strong>Instagram के server से</strong>
             {" "}आती हैं। यानी उतनी देर के लिए Instagram को इतना पता चल जाता है कि

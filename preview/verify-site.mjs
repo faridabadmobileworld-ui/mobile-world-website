@@ -50,7 +50,13 @@ for(const w of [320,390,768,1280]){
         return b.width>0 && (b.right>innerWidth+1||b.left<-1);
       }).slice(0,3).map(e=>(e.className||e.tagName).toString().slice(0,26));
       return {by:window.__by, overflow:de.scrollWidth>de.clientWidth, wide,
-        broken:[...document.querySelectorAll('img')].filter(i=>i.complete&&i.naturalWidth===0).length};
+        // Sirf apni website ki tasveerein — YouTube/Instagram ke CDN yahan
+        // (bina internet ke) load nahi hote, wo "tooti hui" nahi hain.
+        broken:[...document.querySelectorAll('img')].filter(i=>{
+          if(!i.complete||i.naturalWidth!==0) return false;
+          try{ return new URL(i.currentSrc||i.src,location.href).origin===location.origin }
+          catch{ return true }
+        }).length};
     });
     // Byline sirf ek baar, aur page ka apna content khatam hote hi
     if(w===390) T(r.by.n===1 && r.by.pehle, `byline once, at end of content — ${path}`,

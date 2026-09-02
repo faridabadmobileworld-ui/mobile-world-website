@@ -14,6 +14,7 @@ import { Banner } from "@/components/Banner";
 import { GoogleQR } from "@/components/GoogleQR";
 import { FinanceStrip } from "@/components/FinanceStrip";
 import { InstagramFeed } from "@/components/InstagramFeed";
+import { VideoRow } from "@/components/VideoRow";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { PageFoot, Byline } from "@/components/PageFoot";
 import { NextClosure } from "@/components/StoreStatus";
@@ -214,6 +215,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Video की list ख़ाली हो तो यह हिस्सा अपने आप छुप जाता है। */}
+        <VideoRow />
 
         <InstagramFeed />
 
