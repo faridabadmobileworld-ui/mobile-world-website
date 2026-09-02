@@ -378,6 +378,34 @@ Visitor details save करना, customer login।
       website उसे 140×44 पर दिखाती है। CSS में नाप पक्की (`width`/`height`) रखी
       गई है — `max-width` से 2x/3x वाले phone पर logo अपने आप छोटा हो जाता था।
 
+### 🎬 "10k-websites" skill — क्या है, और इस project से रिश्ता (2 Sep 2026)
+
+Owner ने यह skill जोड़ी। यह **एक अलग तरह की website** बनाने का पूरा तरीक़ा है:
+एक ही page, जिस पर AI से बना video scroll के साथ आगे-पीछे चलता है। सादा
+HTML/CSS/JS, कोई framework नहीं, और **Hostinger** पर deploy।
+
+**⚠️ यह हमारी site को आगे नहीं बढ़ाती — यह एक दूसरी site बनाती है।** हमारी
+site Next.js की 20-page site है, Vercel पर, schema और SEO के साथ। दोनों को
+मिलाना नहीं है। सही इस्तेमाल: कोई **campaign/launch वाला microsite** (जैसे
+त्योहार का offer page) — main site वैसी ही रहे। यही सलाह owner के अपने
+blueprint दस्तावेज़ के भाग 5 में भी लिखी है।
+
+**Skill चलाने के लिए क्या-क्या चाहिए (2 Sep 2026 की जाँच):**
+- ✅ Node v22 — है
+- ✅ ffmpeg — इसी दिन install किया (`apt-get install ffmpeg`, 6.1.1)
+- ⚠️ Higgsfield connector — जुड़ा है, पर **credits 0, free plan**।
+  एक hero image ≈ 2 credits, video ≈ 10–55। बिना credits कुछ नहीं बनेगा।
+- ❌ Hostinger — जुड़ा नहीं (skill के हिसाब से यह Phase 10 पर ही चाहिए)
+
+**Skill में से जो सीख हमारी site पर पहले से लागू है:** scroll वाली animation
+में कुछ भी छुपना नहीं चाहिए, `prefers-reduced-motion` पूरा माने, text पर
+हमेशा पढ़ने लायक़ contrast, video/तस्वीर न आए तो भी page पूरा दिखे, और
+हर नाप असली measurement से साबित हो। यही नियम हमारे यहाँ भी चल रहे हैं।
+
+⚠️ **Skill का पूरा pipeline (Higgsfield + Hostinger) तभी चलाइए जब owner साफ़
+कहें कि microsite बनाना है।** हमारी main site पर उसके HTML/deploy वाले
+हिस्से लागू नहीं होते।
+
 ### 🧪 "Blueprint" वाला दस्तावेज़ — क्या लिया, क्या नहीं (2 Sep 2026)
 
 Owner ने "Fable 5.1 capabilities + website blueprint" वाला document देकर कहा:
