@@ -44,6 +44,13 @@ Instagram app → आपकी profile → ☰ → **Settings and privacy** →
 3. जो अनुमति माँगे, दे दीजिए
 4. एक लंबी सी लाइन मिलेगी — वही चाबी है। **Copy** कर लीजिए।
 
+### अगर आपका Instagram, Facebook Page से जुड़ा है
+
+तो Business Manager वाला रास्ता भी चलता है (उसकी चाबी ख़त्म नहीं होती)। उस
+हालत में **दो** चीज़ें भरनी होंगी — `IG_TOKEN` के साथ `IG_USER_ID` भी
+(वो 17 अंकों की एक संख्या होती है, dashboard में "Instagram account ID" के
+नाम से मिलती है)। Website दोनों तरह की चाबी अपने आप पहचान लेती है।
+
 ## Step 4 — Vercel में भर दीजिए
 
 1. **vercel.com** → project **mobile-world-website** → ऊपर **Settings**

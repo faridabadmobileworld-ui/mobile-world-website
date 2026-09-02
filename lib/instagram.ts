@@ -45,7 +45,17 @@ export type IgFeed = {
   items: IgItem[];
 };
 
-const API = "https://graph.instagram.com/v23.0";
+/**
+ * Instagram की चाबी दो रास्तों से मिल सकती है, और दोनों का पता अलग है:
+ *
+ *   1. "Instagram login" वाली चाबी  → graph.instagram.com  (आसान रास्ता)
+ *   2. Facebook Page वाली चाबी      → graph.facebook.com   (Business Manager)
+ *
+ * Owner जो भी बनाकर लाएँ, वो चल जाए — इसलिए पहले पहला पता आज़माया जाता है,
+ * न चले तो दूसरा। दूसरे के लिए `IG_USER_ID` भरना ज़रूरी है।
+ */
+const API_IG = "https://graph.instagram.com/v23.0";
+const API_FB = "https://graph.facebook.com/v23.0";
 /** Instagram से आया समय → "3 दिन पहले" वाली हिन्दी। */
 function kabKi(iso: string): string {
   const din = Math.floor((Date.now() - new Date(iso).getTime()) / 86400000);
@@ -91,19 +101,27 @@ export async function getInstagramFeed(): Promise<IgFeed> {
   const token = process.env.IG_TOKEN;
   if (!token) return apniPhotos();
 
-  const user = process.env.IG_USER_ID || "me";
+  const id = process.env.IG_USER_ID;
   const fields = "id,caption,media_type,media_url,thumbnail_url,permalink,timestamp";
   const next = { revalidate: 3600 } as const;
 
+  // पहले Instagram वाला पता, फिर (id भरी हो तो) Facebook वाला।
+  const bases = [`${API_IG}/${id || "me"}`, ...(id ? [`${API_FB}/${id}`] : [])];
+
   try {
-    const [mediaRes, meRes] = await Promise.all([
-      fetch(`${API}/${user}/media?fields=${fields}&limit=12&access_token=${token}`, { next }),
-      fetch(`${API}/${user}?fields=username,profile_picture_url&access_token=${token}`, { next }),
-    ]);
-    if (!mediaRes.ok) {
-      console.warn("[instagram] media", mediaRes.status, await mediaRes.text().catch(() => ""));
-      return apniPhotos();
+    let base = "";
+    let mediaRes: Response | null = null;
+
+    for (const b of bases) {
+      const r = await fetch(`${b}/media?fields=${fields}&limit=12&access_token=${token}`, { next });
+      if (r.ok) { base = b; mediaRes = r; break; }
+      // क्या ग़लत हुआ, यह Vercel की logs में साफ़ दिखे — token कभी log मत कीजिए।
+      console.warn("[instagram]", b.replace(token, ""), r.status,
+        (await r.text().catch(() => "")).slice(0, 200));
     }
+    if (!mediaRes) return apniPhotos();
+
+    const meRes = await fetch(`${base}?fields=username,profile_picture_url&access_token=${token}`, { next });
     const media = (await mediaRes.json()) as { data?: ApiMedia[] };
     const list = (media.data ?? []).filter((m) => m.media_url || m.thumbnail_url);
     if (!list.length) return apniPhotos();
