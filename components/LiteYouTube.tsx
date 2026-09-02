@@ -21,7 +21,7 @@ export function LiteYouTube({
   const [chala, setChala] = useState(false);
 
   return (
-    <span className={`yt-m${short ? " tall" : ""}`}>
+    <span className="yt-m">
       {chala ? (
         <iframe
           src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`}
@@ -35,6 +35,7 @@ export function LiteYouTube({
           <img src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt=""
                loading="lazy" decoding="async" width={480} height={360}
                referrerPolicy="no-referrer" />
+          {short && <span className="yt-badge" aria-hidden="true">Short</span>}
           <span className="yt-play" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
               <path d="M8 5.14v13.72L19 12z" />

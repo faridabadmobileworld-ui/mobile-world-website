@@ -27,7 +27,11 @@ export type ShopVideo = {
 };
 
 export const videos: ShopVideo[] = [
-  // Owner के भेजे link यहाँ आएँगे। ख़ाली रहने पर यह हिस्सा site पर दिखता ही नहीं।
+  { url: "https://youtube.com/shorts/jyk5TQNneCo", title: "दुकान से — short video 1", short: true },
+  { url: "https://youtube.com/shorts/qSntVTxB2lw", title: "दुकान से — short video 2", short: true },
+  { url: "https://youtube.com/shorts/HageFrXY_JM", title: "दुकान से — short video 3", short: true },
+  { url: "https://youtu.be/tOP4orvF8hU", title: "दुकान का video — Mobile World, NIT Faridabad" },
+  { url: "https://youtu.be/n0bP3TmzV9k", title: "दुकान का video — Mobile World, Jawahar Colony" },
 ];
 
 /** Link में से video की id निकालता है — तीनों तरह के पते समझता है। */
