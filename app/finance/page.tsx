@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { shop } from "@/data/shop";
+import { faqSchema, jsonLdScript } from "@/data/schema";
 import { ask } from "@/data/content";
 import { financePartners } from "@/data/finance";
 import { FinanceStrip } from "@/components/FinanceStrip";
+import { EmiCalc } from "@/components/EmiCalc";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { MoreLinks } from "@/components/MoreLinks";
 import { PageFoot, Byline } from "@/components/PageFoot";
@@ -19,6 +21,7 @@ export const metadata: Metadata = {
 
 const toc: TocItem[] = [
   { id: "partners", label: "Paper Finance पर EMI किन-किन bank से मिलती है" },
+  { id: "hisaab", label: "किश्त का अंदाज़ा लगाइए" },
   { id: "card", label: "Credit Card पर EMI" },
   { id: "rules", label: "Approval और rules — साफ़ बात" },
   { id: "documents", label: "Finance के लिए ज़रूरी documents" },
@@ -26,9 +29,42 @@ const toc: TocItem[] = [
   { id: "disclaimer", label: "Logo और trademark के बारे में" },
 ];
 
+/**
+ * Google के लिए सवाल-जवाब।
+ * ⚠️ हर जवाब वही है जो नीचे page पर लिखा हुआ है — बिना page पर लिखे यहाँ
+ * कुछ मत जोड़िए, Google उसे गड़बड़ मानता है।
+ */
+const faq = [
+  {
+    q: "Paper finance पर EMI किन-किन bank से मिलती है?",
+    a: "Bajaj Finserv, IDFC FIRST Bank, TVS Credit, HDB Financial Services, " +
+       "Home Credit, Axio (Xiaomi Easy Finance) और DMI Finance — इन सबकी सुविधा " +
+       "दुकान पर उपलब्ध है।",
+  },
+  {
+    q: "Finance के लिए कौन से documents चाहिए?",
+    a: "Original Aadhaar Card, original PAN Card, जिस account से किश्त कटेगी उसकी " +
+       "bank details (passbook, ATM card या cheque book), और वही mobile number " +
+       "चालू हालत में जो Aadhaar और bank दोनों से जुड़ा हो — OTP उसी पर आता है।",
+  },
+  {
+    q: "क्या किसी और के documents पर finance हो सकता है?",
+    a: "नहीं। जिसके documents लग रहे हैं, उनका ख़ुद दुकान पर आना ज़रूरी है, " +
+       "क्योंकि finance company live photo और biometric verification करती है।",
+  },
+  {
+    q: "Credit card पर EMI बनती है या नहीं?",
+    a: "हाँ। HDFC, ICICI, SBI, Axis समेत लगभग सारे बड़े bank के credit card दुकान " +
+       "पर चलते हैं। कितने महीने की EMI बनेगी और उस पर कितना interest लगेगा, यह " +
+       "आपका bank तय करता है, दुकान नहीं।",
+  },
+];
+
 export default function Finance() {
   return (
     <div className="wrap">
+      <script type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdScript(faqSchema(faq)) }} />
       <section className="sec">
         <h1 style={{ fontSize: "clamp(1.4rem,4vw,2rem)", fontWeight: 800,
                      letterSpacing: "-.03em", margin: "0 0 10px" }}>
@@ -76,6 +112,17 @@ export default function Finance() {
             Credit card वाली EMI इनसे अलग होती है — उसकी बात नीचे लिखी है।
           </p>
         </div>
+      </section>
+
+      <section className="sec">
+        <div className="shead"><h2 id="hisaab">किश्त का अंदाज़ा लगाइए</h2></div>
+        <div className="prose" style={{ marginBottom: 12 }}>
+          <p>
+            सामान की क़ीमत, कितने महीने और (पता हो तो) interest की दर डालिए — हर
+            महीने कितना बनेगा, इसका मोटा अंदाज़ा यहीं मिल जाएगा।
+          </p>
+        </div>
+        <EmiCalc />
       </section>
 
       <section className="sec">

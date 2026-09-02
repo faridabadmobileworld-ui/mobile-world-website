@@ -1,0 +1,43 @@
+# Mobile World — Faridabad
+
+> Mobile • Laptop • Electronics • Home Appliances. NIT Faridabad (Jawahar Colony)
+> की एक ही दुकान। यह website सिर्फ़ जानकारी के लिए है — यहाँ कोई online order,
+> cart या payment नहीं है। हर सौदा दुकान के counter पर या WhatsApp/Call पर होता है।
+
+- Shop: Mobile World (registered: Aggarwal Kiryana And Communication)
+- Proprietor: Tarun Gupta
+- Address: Shop No. 3896/661/29, Gurudwara Road, Block F, Near Bada Gurudwara and
+  Disposal Chowk, Jawahar Colony, NIT Faridabad, Haryana 121005, India
+- Phone / WhatsApp: +91 93152 12131
+- Hours: 10:00–22:00, सातों दिन। हर महीने की आख़िरी तारीख़ को बंद।
+- Started: परिवार का कारोबार 1973 से; Mobile World 2016 से।
+
+## क्या करते हैं
+Smartphones, laptops & tablets, televisions, air conditioners, washing machines,
+refrigerators, inverters & batteries, audio & wearables, kitchen appliances,
+accessories — सब पक्के GST bill के साथ। Mobile repairing, पुराने phone का
+exchange, EMI (paper finance और card दोनों), Faridabad में delivery (भाड़ा
+ग्राहक का), और सामान लेने के बाद की मदद (data transfer, settings, guidance)।
+
+## क्या नहीं करते
+- Installation नहीं करते — AC/TV लगाने का काम दुकान नहीं करती।
+- Warranty दुकान से नहीं, brand के authorized service centre से मिलती है।
+- Camera और lens नहीं बेचते।
+- Website पर कोई दाम नहीं लिखा जाता — दाम रोज़ बदलते हैं, counter पर तय होते हैं।
+
+## Pages
+- /: दुकान की झलक
+- /products: क्या-क्या मिलता है
+- /repairing: Repairing services
+- /after-sales-support: सामान लेने के बाद की मदद
+- /finance: Finance और EMI, ज़रूरी documents, KYC के नियम
+- /returns: Return, refund और exchange के नियम
+- /posts: Tech Blog & Guides (buying guides)
+- /about: दुकान का सफ़र
+- /team: दुकान की team
+- /contact: फ़ोन, WhatsApp, पता, Google listing
+- /visit: रास्ता और timing
+- /terms, /privacy: नियम और privacy
+
+## नोट
+इस website पर कोई tracking, cookie या analytics नहीं चलता।

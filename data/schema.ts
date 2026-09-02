@@ -131,3 +131,45 @@ export function jsonLdScript(data: unknown): string {
 
 /** Address एक लाइन में — schema के बाहर भी काम आता है। */
 export { fullAddress };
+
+/**
+ * Breadcrumb — "Home › इस page का नाम"।
+ *
+ * Google search में page के पते की जगह यही सीढ़ी दिखती है, जो साफ़ लगती है और
+ * click बढ़ाती है। हर page पर `<MoreLinks>` इसे अपने आप लगा देता है, इसलिए
+ * किसी page में अलग से कुछ नहीं लिखना पड़ता।
+ */
+export function breadcrumbSchema(href: string, label: string) {
+  const items = [{ name: "Home", url: `${shop.siteUrl}/` }];
+  if (href !== "/") items.push({ name: label, url: `${shop.siteUrl}${href}` });
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((it, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: it.name,
+      item: it.url,
+    })),
+  };
+}
+
+/**
+ * FAQ — सवाल-जवाब वाला schema।
+ *
+ * ⚠️ Google का नियम: जो जवाब यहाँ लिखा है, वो **page पर भी दिखना चाहिए**।
+ * इसलिए इसे सिर्फ़ वहीं इस्तेमाल कीजिए जहाँ वही बात page पर लिखी हुई है।
+ * बिना page पर लिखे यहाँ जवाब डालना Google की नज़र में गड़बड़ है।
+ */
+export function faqSchema(qa: readonly { q: string; a: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: qa.map(({ q, a }) => ({
+      "@type": "Question",
+      name: q,
+      acceptedAnswer: { "@type": "Answer", text: a },
+    })),
+  };
+}

@@ -1168,3 +1168,112 @@ main .panel:hover,.toc:hover{box-shadow:var(--sh-3),var(--ring)}
   .dsub[open]>.dsub-in{animation:dsub-khulo .26s var(--ease) both}
 }
 @keyframes dsub-khulo{ from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:none} }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   Blueprint वाली परत — 2 September 2026
+
+   Owner ने "Fable 5.1 capabilities + website blueprint" वाला document देकर
+   कहा: जो-जो इसमें है, वो site पर लगाओ।
+
+   उस document के भाग 5 में ख़ुद लिखा है कि इस दुकान के लिए पूरा Awwwards-tier
+   WebGL cinematic **overkill और नुक़सानदेह** है — ग्राहक Faridabad में mid-range
+   Android और 4G पर है। इसलिए यहाँ वही लगाया गया है जो उस tier में आता है:
+   बेहतर typography, OKLCH रंग, हल्की सी grain, page बदलने पर सफ़ाई से बदलाव,
+   और नीचे वाले हिस्सों का rendering तब तक टालना जब तक वो दिखें नहीं।
+
+   जो जान-बूझकर नहीं लिया: Lenis, GSAP, Three.js/R3F, shaders, 3D hero।
+   कारण — तीनों नई library हैं (CLAUDE.md §4: बिना पूछे dependency नहीं), और
+   page भारी कर देतीं। यही document भी यही कहता है।
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── 1. रंग — OKLCH में ─────────────────────────────────────────────
+   OKLCH में lightness आँख के हिसाब से एक जैसी बढ़ती है, इसलिए एक ही रंग के
+   हल्के-गहरे शेड गणित से निकाले जा सकते हैं और कोई शेड "मरी हुई" नहीं दिखती।
+   रंग वही हैं जो पहले थे — बस अब नाप-तौल वाली भाषा में लिखे हैं। */
+@supports (color: oklch(50% 0.1 250)){
+  :root{
+    --brand:oklch(48.5% 0.212 285);      /* वही बैंगनी, अब OKLCH में */
+    --brand-2:oklch(58% 0.196 288);
+    --brand-3:oklch(70% 0.156 288);
+    --brand-soft:oklch(94.5% 0.028 288);
+    --hot:oklch(62% 0.168 38);
+    --ok:oklch(53% 0.126 158);
+  }
+  /* जिन phone की screen ज़्यादा रंग दिखा सकती है (P3), वहाँ accent ज़रा और
+     गहरा — बाक़ी सब वैसा ही। */
+  @media (color-gamut:p3){
+    :root{ --brand:oklch(48.5% 0.236 285); --hot:oklch(62% 0.19 38) }
+  }
+}
+
+/* ── 2. Typography — यहीं आधा "premium" बनता है ────────────────────
+   नाप clamp() से — हर screen पर अपने आप बढ़ती-घटती है, media query नहीं। */
+:root{
+  --step--1:clamp(.8125rem,.79rem + .12vw,.875rem);
+  --step-0:clamp(.9375rem,.91rem + .16vw,1.0625rem);
+  --step-1:clamp(1.0625rem,1rem + .3vw,1.25rem);
+  --step-2:clamp(1.2rem,1.06rem + .7vw,1.6rem);
+  --step-3:clamp(1.45rem,1.15rem + 1.5vw,2.35rem);
+  --step-4:clamp(1.75rem,1.2rem + 2.6vw,3.25rem);
+}
+body{font-optical-sizing:auto;text-rendering:optimizeLegibility}
+/* Heading का आख़िरी शब्द अकेली लाइन में न लटके */
+h1,h2,h3,.rtitle,.shead h2,.cband h2,.igw-n b{text-wrap:balance}
+/* पैराग्राफ़ की आख़िरी लाइन में अकेला शब्द न बचे */
+p,li,.prose p,.rbody p,figcaption{text-wrap:pretty}
+/* बड़े अक्षरों में हल्की सी कसावट, छोटे में नहीं — पढ़ने में यही सही लगता है */
+h1,.rtitle{letter-spacing:-.032em;line-height:1.12}
+h2{letter-spacing:-.024em;line-height:1.25}
+.prose p,.rbody p{max-width:68ch}
+
+/* ── 3. हल्की सी grain — रंग "फ़िल्मी" लगते हैं, सपाट नहीं ──────────
+   एक ही SVG, 2.5% गाढ़ी। कोई file download नहीं होती। */
+.bgfx::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'>\
+<filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/>\
+<feColorMatrix type='saturate' values='0'/></filter>\
+<rect width='160' height='160' filter='url(%23n)' opacity='.55'/></svg>");
+  background-size:160px 160px}
+
+/* ── 4. Page बदलते वक़्त सफ़ाई से बदलाव ─────────────────────────────
+   Browser ख़ुद पुराने और नए page के बीच fade कर देता है। एक line, कोई
+   library नहीं। जिस browser में यह नहीं है, वहाँ पहले जैसा ही चलता है। */
+@view-transition{ navigation:auto }
+@media(prefers-reduced-motion:no-preference){
+  ::view-transition-old(root){animation:vt-out .18s var(--ease) both}
+  ::view-transition-new(root){animation:vt-in .32s var(--ease) both}
+}
+@keyframes vt-out{ to{opacity:0} }
+@keyframes vt-in{ from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+/* Header और नीचे वाली पट्टी page बदलने पर हिलें नहीं — वो एक ही जगह टिकी रहें */
+.hdr{view-transition-name:hdr}
+.mbar{view-transition-name:mbar}
+
+/* ── 5. जो हिस्सा अभी दिख नहीं रहा, उसे बनाने में वक़्त क्यों लगाएँ ──
+   नीचे वाले sections का rendering तब तक टल जाता है जब तक वो पास न आएँ।
+   `contain-intrinsic-size` इसलिए ताकि scrollbar उछले नहीं। */
+main .sec{content-visibility:auto;contain-intrinsic-size:auto 420px}
+/* पहला हिस्सा और पट्टियाँ कभी नहीं टलतीं — वरना पहली नज़र ख़ाली दिखेगी */
+main .sec:first-of-type,.hero,.cstrip,.hdr,.ftr,.mbar{content-visibility:visible}
+
+/* ── EMI का अंदाज़ा लगाने वाला डिब्बा (सिर्फ़ /finance पर) ───────────── */
+.emi{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:14px;box-shadow:var(--sh-2),var(--ring);max-width:var(--measure)}
+.emi-in{display:grid;gap:10px;grid-template-columns:1fr}
+@media(min-width:560px){ .emi-in{grid-template-columns:1.2fr 1fr 1fr} }
+.emi label{display:block}
+.emi label span{display:block;font-size:11.5px;font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:5px}
+.emi input,.emi select{width:100%;height:46px;border:1px solid var(--line);border-radius:10px;
+  padding:0 12px;font-size:15.5px;font-weight:700;color:var(--ink);background:var(--bg);
+  font-family:inherit}
+.emi input:focus-visible,.emi select:focus-visible{outline:2.5px solid var(--brand);
+  outline-offset:1px;background:#fff}
+.emi-out{display:block;margin-top:14px;padding:14px 16px;border-radius:var(--r);
+  background:linear-gradient(135deg,var(--brand-soft),color-mix(in srgb,var(--brand) 8%,#fff));
+  text-align:center}
+.emi-out b{display:block;font-size:clamp(1.6rem,6vw,2.2rem);font-weight:800;
+  letter-spacing:-.03em;color:var(--brand);line-height:1.1}
+.emi-out span{display:block;font-size:13.5px;font-weight:700;color:var(--ink);margin-top:4px}
+.emi-out em{display:block;font-style:normal;font-size:12.5px;color:var(--ink-2);margin-top:6px}

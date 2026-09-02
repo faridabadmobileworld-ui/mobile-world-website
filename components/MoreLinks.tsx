@@ -10,7 +10,8 @@
  */
 
 import Link from "next/link";
-import { otherPages } from "@/data/pages";
+import { otherPages, sitePages } from "@/data/pages";
+import { breadcrumbSchema, jsonLdScript } from "@/data/schema";
 import { IconArrow } from "./Icons";
 
 export function MoreLinks({
@@ -22,9 +23,19 @@ export function MoreLinks({
   heading?: string;
 }) {
   const rest = otherPages(current);
+  const me = sitePages.find((p) => p.href === current);
 
   return (
     <section className="sec">
+      {/*
+        Breadcrumb — "Home › इस page का नाम"। यह block हर page पर लगता है और
+        उसे अपना पता पहले से पता है, इसलिए schema यहीं से निकल जाता है —
+        किसी page में अलग से कुछ नहीं लिखना पड़ता।
+      */}
+      {me && (
+        <script type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: jsonLdScript(breadcrumbSchema(me.href, me.label)) }} />
+      )}
       <div className="shead"><h2>{heading}</h2></div>
       <ul className="mlinks">
         {rest.map((p) => (

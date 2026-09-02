@@ -378,6 +378,46 @@ Visitor details save करना, customer login।
       website उसे 140×44 पर दिखाती है। CSS में नाप पक्की (`width`/`height`) रखी
       गई है — `max-width` से 2x/3x वाले phone पर logo अपने आप छोटा हो जाता था।
 
+### 🧪 "Blueprint" वाला दस्तावेज़ — क्या लिया, क्या नहीं (2 Sep 2026)
+
+Owner ने "Fable 5.1 capabilities + website blueprint" वाला document देकर कहा:
+सब कुछ site पर लगाओ। उसी document के **भाग 5** में साफ़ लिखा है कि इस दुकान के
+लिए पूरा Awwwards-tier WebGL cinematic **overkill और नुक़सानदेह** है — ग्राहक
+Faridabad में mid-range Android और 4G पर है। इसलिए उसी tier पर काम हुआ:
+
+**लगाया:**
+- **OKLCH रंग** (`@supports` के अंदर) + P3 screen पर ज़रा गहरा accent
+- **Fluid type scale** (`--step-*`), `text-wrap: balance/pretty`,
+  display पर कसावट, पैराग्राफ़ की चौड़ाई 68ch
+- **हल्की grain** — एक SVG, 5% गाढ़ी (`.bgfx::after`)
+- **View Transitions** — `@view-transition{navigation:auto}`; page बदलने पर
+  browser ख़ुद fade करता है, header और नीचे वाली पट्टी टिकी रहती हैं
+- **`content-visibility:auto`** नीचे वाले sections पर → home का LCP slow 4G पर
+  1.79s से **1.38s**
+- **BreadcrumbList** हर page पर (`MoreLinks` से अपने आप) और **FAQPage**
+  `/finance` पर (जवाब वही जो page पर लिखे हैं — Google का नियम यही है)
+- **`public/llms.txt`** — AI search engines के लिए दुकान का साफ़ परिचय
+- **EMI का अंदाज़ा लगाने वाला calculator** `/finance` पर — कोई दर पहले से भरी
+  हुई नहीं, और नीचे साफ़ लिखा है कि पक्की scheme finance company तय करती है
+
+**जान-बूझकर नहीं लिया (और क्यों):**
+- **Lenis, GSAP ScrollTrigger, Motion, Three.js/R3F, shaders, 3D hero** — पाँचों
+  नई dependency हैं (§4: बिना पूछे नहीं), page भारी करतीं, और document ख़ुद इन्हें
+  इस दुकान के लिए overkill कहता है। 3D के लिए owner को glTF asset भी देना पड़ेगा।
+- **YouTube reviews embed** — document इसे सबसे बड़ा differentiator कहता है, पर
+  YouTube का player ग्राहक को track करता है और हमारी Privacy Policy कहती है कि
+  कोई tracking नहीं है। Owner video के link दें तो बिना script वाला तरीक़ा बन
+  सकता है — पहले पूछना है।
+- **hreflang hi-IN/en-IN** — site एक ही भाषा में है, दो versions हैं ही नहीं।
+- **`@vercel/og`** से dynamic OG image — नई dependency + dynamic route, और
+  export वाली preview build टूट जाती। अभी वाली `og-image.jpg` काम कर रही है।
+- **Live stock badge, price comparison table** — दाम और stock website पर नहीं
+  लिखे जाते (§8, §13)। झूठा badge दिखाने से बेहतर कुछ न दिखाना है।
+
+📌 **Art direction जो चुनी गई है: "Neo-skeuomorphic / spatial"** — काँच जैसे
+तैरते डिब्बे, असली परछाइयाँ, हल्की गहराई। नया कुछ बनाते वक़्त इसी में रहिए,
+हर section में नया अंदाज़ मत लाइए।
+
 ### 🎨 दिखावट और animation — 2 Sep 2026
 
 Owner ने कहा: *"har jagah animations add karo... buttons ko thode designs do,
