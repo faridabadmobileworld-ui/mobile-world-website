@@ -378,63 +378,64 @@ Visitor details save करना, customer login।
       website उसे 140×44 पर दिखाती है। CSS में नाप पक्की (`width`/`height`) रखी
       गई है — `max-width` से 2x/3x वाले phone पर logo अपने आप छोटा हो जाता था।
 
-### 🌃 `/showcase` — scroll वाला cinematic page (2 Sep 2026)
+### 🌃 `/showcase` — वही home page, cinematic (3 Sep 2026)
 
-Owner ने skill चलाकर कहा: बना दो और अभी live करो। Higgsfield में credits 0 थे,
-इसलिए उन्होंने कहा कि prompts दे दूँ, video वो ख़ुद बनवाकर देंगे।
+Owner ने 3 Sep को कहा: *"Ye showcase hamari existing home page par jo b kuch h
+usi ko copy karke, fir usi ko aisa 3d Scroll wala feel do na... hamare purane
+wale pe sab kuch show hota h, but yahan is showcase me kuch b nhi h."*
 
-**जो बना:** `public/showcase/` में सादा HTML/CSS/JS का एक page, skill के
-engineering standard पर। पता: `/showcase` (rewrite `next.config.ts` में)।
+इसलिए `/showcase` अब सादा HTML वाला अलग landing page **नहीं** रहा। वो अब एक
+असली Next.js route है जिस पर **हूबहू वही home page** दिखता है — बस ऊपर scroll
+वाला video hero, और पूरे page पर गहराई वाली 3D चाल।
 
-- **Video लग चुकी है (3 Sep 2026)** — owner की भेजी तीन 6-सेकंड की clips को
-  एक ही encode में जोड़कर बनी **17 सेकंड, 720p, 8 MB** की `hero-scrub.mp4`।
-  सफ़र: रात में दुकान के सामने → दरवाज़े से अंदर, TV और counter → repair की
-  मेज़ और counter पर सामान → fridge/washing machine → बाहर रात की दुकान,
-  जहाँ सब ठहर जाता है। हर जोड़ पर आधे सेकंड का crossfade।
-- ⚠️ तीनों clips के नीचे दाईं तरफ़ **AI बनाने वाले की ✦ मुहर** छपी थी
-  (x 1136–1188, y 573–623)। `delogo` से सिर्फ़ उतना हिस्सा भर दिया गया —
-  frame पूरा 16:9 ही रहा। नई video आए तो पहले उसे भी इसी तरह जाँचिए।
-- **Phone पर video माँगी ही नहीं जाती** — वहाँ वही पुराना सफ़र दुकान की असली
-  तस्वीरों की चार परतों से चलता है, यानी 8 MB कभी download नहीं होते।
-  Video न आ पाने पर बड़ी screen पर भी page पूरा दिखता है।
-- Video बदलनी हो तो साथ में तीन चीज़ें बदलनी पड़ती हैं — `.hero{height}`,
-  चारों `data-band` और `VIDEO_BYTES`। पूरा हिसाब `public/showcase/README.md` में।
-- Art direction: "रात की दुकान" — रात के नीले-काले रंग, और दुकान की अपनी
-  गर्म पीली रोशनी इकलौता accent। रंग असली photo से लिए गए।
-- अपना निशान (signature): वो लकीर जो scroll के साथ ख़ुद खिंचती है, और
-  **शटर वाला हिस्सा** जहाँ visitor दबाकर दुकान खोलता है।
+📌 **Content कभी दो जगह मत लिखिए।** Home page का पूरा body अब
+`components/HomeBody.tsx` में है और `/` तथा `/showcase` दोनों वही दिखाते हैं।
+Home page पर कोई नई section जोड़िए — showcase पर अपने आप आ जाएगी।
 
-⚠️ **तीन चीज़ें जो video लगाते वक़्त पकड़ी गईं — दोबारा मत तोड़िएगा:**
-1. **देवनागरी को अक्षर-अक्षर मत तोड़िए।** Caption की animation पहले हर
-   character को अलग `<span>` में डालती थी, जिससे मात्राएँ टूट जाती थीं और
-   "बजे" की जगह "बज◌े" छपता था। अब तोड़ **शब्द** पर होती है।
-2. **caption के पीछे वाली काली प्लेट का z-index।** `.band` की opacity जब
-   ठीक `1` हो जाती थी तब उसका stacking context ख़त्म हो जाता था और प्लेट
-   सीधे video के पीछे चली जाती थी — यानी जिस पल text पूरा दिखता, उसी पल
-   उसका सहारा ग़ायब। इसलिए `.band` पर `z-index` और `isolation` लगे हैं।
-3. **Blob पर MIME लिखना ज़रूरी है।** Video streams होकर Blob बनती है;
-   बिना `type` के browser उसे पहचानता ही नहीं (media error 4), और
-   `preload` भी `auto` करना पड़ता है वरना एक byte भी buffer नहीं होता।
+| चीज़ | file |
+|---|---|
+| Route और metadata | `app/showcase/page.tsx` |
+| Video वाला hero | `components/CineHero.tsx` |
+| Home page का content | `components/HomeBody.tsx` |
+| दिखावट और 3D चाल | `app/globals.css` का `.cine` वाला आख़िरी हिस्सा |
+| Video और तस्वीरें | `public/showcase/assets/` |
 
-📌 **नाप की जाँच (3 Sep 2026):** हर caption का सबसे बुरा frame भी **4.8:1
-से ऊपर** है (नियम 3.5:1), हर caption 12+ flick तक पूरा दिखता है, और सभी
-13 self-test checks पास हैं।
+- **Video (3 Sep 2026)** — owner की भेजी तीन 6-सेकंड की clips एक ही encode में
+  जुड़कर **17 सेकंड, 720p, 8 MB** की `hero-scrub.mp4`। सफ़र: रात में दुकान के
+  सामने → दरवाज़े से अंदर → repair की मेज़ और counter → fridge/washing machine
+  → बाहर रात की दुकान। हर जोड़ पर आधे सेकंड का crossfade।
+- ⚠️ तीनों clips पर AI बनाने वाले की **✦ मुहर** थी (x 1136–1188, y 573–623)।
+  `delogo` से सिर्फ़ उतना हिस्सा भर दिया गया। नई video आए तो पहले जाँचिए।
+- **Phone पर video माँगी ही नहीं जाती** — पाँचों हालतों में hero एक ठहरी हुई
+  तस्वीर बन जाता है, 8 MB कभी download नहीं होते।
+- Hero की चारों caption **English** में हैं (owner, 3 Sep), नीचे का page हिन्दी
+  में — क्योंकि वो home page ही है।
+- **`robots: noindex`** — यह home page का ही दूसरा रूप है। दोनों को index
+  करवाना duplicate content बन जाता और असली home page की local ranking गिराता।
+  Canonical `/` पर है। इसीलिए यह `data/pages.ts`, sitemap, drawer और footer में
+  जान-बूझकर **नहीं** है — "नया page बनाओ तो पाँच जगह जोड़ो" वाला नियम इस पर
+  लागू नहीं होता।
 
-⚠️ **assets के पते जड़ से लिखे हैं** (`/showcase/assets/...`)। Relative पते
-एक बार सब 404 कर चुके हैं, क्योंकि पता बिना slash के चलता है। कहीं और ले
-जाना हो तो README पढ़िए।
+⚠️ **चार चीज़ें जो बनाते वक़्त टूटी थीं — दोबारा मत तोड़िएगा:**
+1. **Class के नाम टकरा गए थे।** Hero की classes पहले `.cband`, `.ch1` वग़ैरह
+   थीं, और site की अपनी `.cband` (दुकान पर आइए वाला सफ़ेद card) उन पर चढ़ गई —
+   caption की जगह सादा भूरा डिब्बा दिखने लगा। अब सारे नाम `.sc-` से शुरू होते
+   हैं। नया नाम रखने से पहले `globals.css` में ढूँढ़ लीजिए।
+2. **3D की नाप px में, % में नहीं।** `animation-range` % में हो तो लंबे section
+   के साथ बढ़ जाता है और आधा page बीच viewport में भी मद्धम पड़ा रहता है।
+3. **Page के आख़िर वाले sections को पूरी `entry` दूरी मिलती ही नहीं** — नीचे
+   scroll बचता नहीं। इसीलिए नाप 200px है, और जाँच page के बिलकुल नीचे जाकर
+   होती है।
+4. **`perspective-origin` बीच में रखिए।** ऊपर रखने पर पीछे धकेला हुआ section
+   vanishing point की ओर खिंचकर ऊपर वाले पर चढ़ जाता था।
 
-🇬🇧 **यह page पूरा English में है (3 Sep 2026)।** Owner ने कहा:
-*"is showcase me hindi me mat likho kuch b. professional english me likho
-jaise kisi b brands use karte h apni websites pe."* इसलिए title, meta,
-caption, section, FAQ, button, alt text और aria-label — सब English, और
-`<html lang="en">`। **यहाँ कुछ भी हिन्दी में मत जोड़िए।**
-⚠️ यह नियम **सिर्फ़ `/showcase` का** है — बाक़ी 20 pages हिन्दी में ही रहेंगे,
-उनका standard `docs/BRAND-VOICE.md` वैसा ही है। सच्चाई के नियम (§12, §13)
-English में भी वही लागू होते हैं।
+📌 **जाँच (3 Sep 2026):** showcase के 14/14 checks पास — video scroll के साथ
+चलती है, हर caption 10+ flick तक पूरा दिखता है, कोई section कहीं मद्धम नहीं
+रहता (page के आख़िर में भी नहीं), phone पर video माँगी नहीं जाती, और
+reduce-motion पर सब कुछ सीधा और पूरा दिखता है। पूरी site 111/111.
 
-⚠️ **यह main site की जगह नहीं है।** 20 pages वाली site वैसी ही है। यह उसके
-साथ एक अलग cinematic page है, जिसका link owner campaign में दे सकते हैं।
+⚠️ **यह main site की जगह नहीं है।** 20 pages वाली site वैसी ही है। यह उसी
+home page का cinematic रूप है, जिसका link owner campaign में दे सकते हैं।
 
 ### 🎬 "10k-websites" skill — क्या है, और इस project से रिश्ता (2 Sep 2026)
 

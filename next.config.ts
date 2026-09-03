@@ -23,19 +23,12 @@ const nextConfig: NextConfig = {
     ],
   },
   /**
-   * `/showcase` — scroll वाला cinematic page। वो सादा HTML है और
-   * `public/showcase/` में रहता है, इसलिए उसे उसकी अपनी file तक पहुँचाना पड़ता है।
+   * `/showcase` अब एक असली Next.js route है (`app/showcase/page.tsx`) —
+   * वही home page, बस ऊपर scroll वाला video hero और पूरे page पर 3D चाल।
+   * पहले वो `public/showcase/index.html` की सादी HTML file थी और यहाँ एक
+   * rewrite से चलती थी; अब उसकी ज़रूरत नहीं। Video और तस्वीरें अब भी
+   * `public/showcase/assets/` में ही हैं, इसलिए उनके पते नहीं बदले।
    */
-  /**
-   * `/showcase` — scroll वाला cinematic page, सादा HTML, `public/showcase/` में।
-   * ⚠️ उसके अंदर assets के पते **जड़ से** लिखे हैं (`/showcase/assets/...`),
-   * relative नहीं — क्योंकि यह पता बिना slash के चलता है और relative पते
-   * तब site की जड़ से ढूँढ़े जाते हैं (एक बार सब 404 हो चुका है)।
-   * उसी folder के README में लिखा है कि कहीं और deploy करते वक़्त क्या बदलना है।
-   */
-  async rewrites() {
-    return [{ source: "/showcase", destination: "/showcase/index.html" }];
-  },
   ...(preview
     ? { output: "export" as const, images: { unoptimized: true }, trailingSlash: true }
     : {}),

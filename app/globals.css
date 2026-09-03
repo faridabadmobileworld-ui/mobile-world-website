@@ -1317,3 +1317,179 @@ main .sec:first-of-type,.hero,.cstrip,.hdr,.ftr,.mbar{content-visibility:visible
 .yt-badge{position:absolute;top:8px;left:8px;z-index:2;padding:3px 8px;border-radius:999px;
   font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
   color:#fff;background:rgba(20,20,43,.72);backdrop-filter:blur(4px)}
+
+/* ═══════════════════════════════════════════════════════════════════
+   /showcase — वही home page, बस cinematic
+   ═══════════════════════════════════════════════════════════════════
+   Content एक ही जगह से आता है (`components/HomeBody.tsx`), इसलिए यहाँ
+   सिर्फ़ दिखावट है: ऊपर scroll वाला video hero, और नीचे उन्हीं sections
+   पर गहराई वाली 3D चाल।
+
+   तीन नियम जो पूरे हिस्से पर लागू हैं:
+   1. सब कुछ `.cine` के अंदर scoped है — आम home page को कुछ नहीं छूता।
+   2. 3D चाल सिर्फ़ उन browsers में जिनमें `animation-timeline: view()` है,
+      और सिर्फ़ तब जब user ने motion कम न माँगी हो। बाक़ी जगह page सीधा
+      दिखता है — कुछ भी छुपता नहीं।
+   3. Video सिर्फ़ बड़ी screen पर उतरती है। पाँचों हालतों में hero एक
+      ठहरी हुई तस्वीर बन जाता है (नाप CineHero.tsx की GATES से हूबहू)।
+   ─────────────────────────────────────────────────────────────────── */
+
+.cine{
+  --cink:#EEF1FA; --cink2:#D9DFEE; --cink3:#8B93AB;
+  --caccent:#F2A33C;
+  --cnight:#05070D;
+  --cmono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --ce:cubic-bezier(.22,1,.36,1);
+  --ctshadow:0 1px 2px rgba(4,6,12,.95),0 3px 12px rgba(4,6,12,.78),0 10px 44px rgba(4,6,12,.8);
+}
+
+/* ── hero: 17 सेकंड का सफ़र, scroll की दूरी में ── */
+.sc-hero{position:relative;height:1000vh;margin-bottom:clamp(18px,4vw,44px)}
+.sc-stage{position:sticky;top:0;height:100svh;overflow:hidden;background:var(--cnight);
+  color:var(--cink)}
+.sc-stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;
+  transition:opacity .6s var(--ce)}
+.sc-stage.video-ready video{opacity:1}
+.sc-stage.video-ready .sc-layer{opacity:0 !important}
+.sc-layer{position:absolute;inset:-4%;background-size:cover;background-position:center;
+  will-change:transform,opacity;opacity:0;transform:translate3d(0,0,0) scale(1.06)}
+.sc-layer.sc-l0{background-image:url("/showcase/assets/night-shop.webp")}
+.sc-layer.sc-l1{background-image:url("/showcase/assets/inside.webp")}
+.sc-layer.sc-l2{background-image:url("/showcase/assets/counter.webp");background-position:center 30%}
+.sc-layer.sc-l3{background-image:url("/showcase/assets/team.webp")}
+/* हर frame पर हल्का अँधेरा, ताकि कोई शब्द कभी कच्चा न पड़े */
+.sc-scrim{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 120% 92% at 50% 46%,rgba(5,7,13,0) 34%,rgba(5,7,13,.66) 100%)}
+.sc-vig{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(5,7,13,.8) 0%,rgba(5,7,13,0) 28%,
+    rgba(5,7,13,0) 60%,rgba(5,7,13,.88) 100%)}
+
+.sc-bands{position:absolute;inset:0;display:grid;place-items:center;padding:0 22px}
+/* ⚠️ z-index/isolation ज़रूरी है। .sc-band की opacity जब ठीक 1 हो जाती है तब
+   वो अपना stacking context खो देता है, और नीचे वाली ::before की काली प्लेट
+   सीधे video के पीछे चली जाती है — यानी जिस पल caption पूरा दिखता, उसी पल
+   उसका सहारा ग़ायब। */
+.sc-band{position:absolute;width:min(760px,100%);text-align:center;opacity:0;
+  z-index:2;isolation:isolate;text-shadow:var(--ctshadow)}
+.sc-band::before{content:"";position:absolute;inset:-46% -18%;pointer-events:none;z-index:-1;
+  background:radial-gradient(ellipse 84% 78% at 50% 48%,rgba(4,6,12,.88) 0%,rgba(4,6,12,.72) 42%,
+    rgba(4,6,12,.34) 68%,rgba(4,6,12,0) 88%)}
+.sc-kick{display:inline-block;font-family:var(--cmono);font-size:11px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--caccent);margin:0 0 14px;
+  padding:5px 12px;border:1px solid rgba(242,163,60,.3);border-radius:999px;
+  background:rgba(5,7,13,.78);backdrop-filter:blur(8px);text-shadow:none}
+.sc-band .sc-h{margin:0;font-weight:800;letter-spacing:-.02em;line-height:1.12;
+  font-size:clamp(2rem,1.1rem + 3.9vw,4.1rem);text-wrap:balance;color:var(--cink)}
+.sc-band .sc-sub{margin:14px auto 0;max-width:34ch;color:var(--cink2);text-wrap:balance;
+  font-size:clamp(.98rem,.9rem + .4vw,1.2rem);
+  --ks:clamp(0,(var(--k,0) - .5)*3,1);opacity:var(--ks);
+  transform:translateY(calc((1 - var(--ks))*14px))}
+/* शब्द-दर-शब्द आना। ⚠️ अक्षर पर मत तोड़िए — देवनागरी की मात्रा टूट जाती है। */
+.sc-w{display:inline-block;white-space:nowrap;
+  --kc:clamp(0,(var(--k,0) - var(--th,0))*2.6,1);opacity:var(--kc);
+  transform:translate(calc((1 - var(--kc))*var(--jx,0px)),calc((1 - var(--kc))*var(--jy,0px)))
+            rotate(calc((1 - var(--kc))*var(--jr,0deg)))}
+.sc-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.sc-cue{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:3;
+  display:flex;flex-direction:column;align-items:center;gap:7px;
+  font-family:var(--cmono);font-size:10px;letter-spacing:.2em;color:var(--cink3);
+  text-transform:uppercase}
+.sc-cue i{width:1px;height:34px;background:linear-gradient(180deg,transparent,var(--caccent));
+  animation:sc-cue-line 2.6s var(--ce) infinite}
+@keyframes sc-cue-line{0%{transform:scaleY(.2);transform-origin:top;opacity:0}
+  40%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);transform-origin:bottom;opacity:0}}
+.sc-ring{position:absolute;right:22px;bottom:22px;width:34px;height:34px;color:var(--caccent);
+  z-index:3;opacity:0;transition:opacity .3s}
+.sc-ring.on{opacity:1}
+.sc-ring circle{transform:rotate(-90deg);transform-origin:50% 50%;
+  transition:stroke-dashoffset .2s linear}
+
+/* ── पाँच हालतें जिनमें सफ़र नहीं चलता: एक ठहरी हुई तस्वीर ──
+   ⚠️ ये नाप CineHero.tsx की GATES से हूबहू मिलनी चाहिए। एक बदले तो दूसरी भी। */
+@media (max-width:720px),
+       (orientation:portrait) and (max-width:1024px),
+       (orientation:portrait) and (pointer:coarse),
+       (orientation:landscape) and (pointer:coarse) and (max-height:560px),
+       (prefers-reduced-motion:reduce){
+  .sc-hero{height:auto}
+  .sc-stage{position:relative;height:auto;min-height:78svh;display:grid;place-items:center}
+  .sc-layer{opacity:0}
+  .sc-layer.sc-l0{opacity:1;position:absolute;transform:none}
+  .sc-bands{position:relative;inset:auto;padding:64px 22px 54px}
+  .sc-band{position:relative;opacity:1 !important;width:100%}
+  .sc-band:not(.sc-settle){display:none}
+  .sc-band .sc-w{opacity:1;transform:none}
+  .sc-band .sc-sub{opacity:1;transform:none}
+  .sc-cue,.sc-ring{display:none}
+}
+@media(max-height:560px){.sc-cue{display:none}}
+
+/* ── नीचे वाला page: वही sections, बस गहराई के साथ ──
+   सब कुछ `@supports` और `no-preference` के अंदर है, इसलिए जिस browser में
+   scroll वाली timeline नहीं है वहाँ page बिलकुल सीधा और पूरा दिखता है। */
+@supports(animation-timeline:view()){
+  @media(prefers-reduced-motion:no-preference){
+    /* ⚠️ perspective-origin बीच में रखिए। ऊपर की तरफ़ रखने पर पीछे धकेला
+       हुआ section vanishing point की ओर खिंचकर ऊपर वाले पर चढ़ जाता है। */
+    .cine .wrap{perspective:1500px;perspective-origin:50% 50%}
+
+    .cine .wrap > .sec,
+    .cine .wrap > .prow{
+      transform-style:preserve-3d;
+      animation:cine-rise linear both;
+      animation-timeline:view();
+      /* ⚠️ नाप px में, % में नहीं। % लंबे section के साथ बढ़ जाता है और
+         बड़ा हिस्सा viewport के बीच में भी मद्धम पड़ा रह जाता है। */
+      animation-range:entry 0px entry 200px;
+    }
+    @keyframes cine-rise{
+      from{opacity:0;transform:translate3d(0,34px,-130px) rotateX(5deg)}
+      to  {opacity:1;transform:none}
+    }
+
+    /* एक-एक card अपनी बारी से, ज़रा सी गहराई के साथ */
+    .cine .ct,.cine .pmini,.cine .post,.cine .shot,.cine .sbanner,.cine .panel,
+    .cine .mlinks li{
+      animation:cine-pop linear both;
+      animation-timeline:view();
+      animation-range:entry 0px entry 170px;
+    }
+    @keyframes cine-pop{
+      from{opacity:0;transform:translate3d(0,26px,-70px) scale(.972)}
+      to  {opacity:1;transform:none}
+    }
+
+    /* तस्वीरें अपने frame के अंदर धीरे-धीरे खिसकती हैं */
+    .cine .shot img,.cine .post .m img,.cine .sbanner img{
+      animation:cine-par linear both;
+      animation-timeline:view();
+      animation-range:cover 0% cover 100%;
+    }
+    @keyframes cine-par{
+      from{transform:scale(1.14) translateY(-3.2%)}
+      to  {transform:scale(1.14) translateY(3.2%)}
+    }
+
+    /* heading ज़रा सा मुड़कर सीधी होती है */
+    .cine .shead h2,.cine .sc-band{will-change:transform}
+    .cine .shead{animation:cine-head linear both;animation-timeline:view();
+      animation-range:entry 0px entry 150px}
+    @keyframes cine-head{
+      from{opacity:0;transform:translate3d(0,14px,-40px) rotateY(-5deg)}
+      to  {opacity:1;transform:none}
+    }
+  }
+}
+
+/* ⚠️ Page के आख़िर वाले sections कभी पूरी `entry` दूरी नहीं पाते — नीचे और
+   scroll बचता ही नहीं। इसलिए नाप छोटी (200px) रखी गई है और verify script
+   page के बिलकुल नीचे जाकर जाँचती है कि हर section पूरा दिख रहा है। */
+
+/* Motion कम माँगी हो तो कुछ भी नहीं हिलता, और सब कुछ पूरा दिखता है। */
+@media(prefers-reduced-motion:reduce){
+  .cine *,.cine *::before,.cine *::after{animation:none !important;transition:none !important}
+  .cine .wrap > .sec,.cine .wrap > .prow,.cine .ct,.cine .pmini,.cine .post,
+  .cine .shot,.cine .sbanner,.cine .panel,.cine .mlinks li,.cine .shead{
+    opacity:1 !important;transform:none !important}
+}
