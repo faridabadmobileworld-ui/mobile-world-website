@@ -1604,11 +1604,30 @@ main .sec.jrn{content-visibility:visible;contain-intrinsic-size:auto}
 
 /* ── पाँच हालतें: ठहरी हुई तस्वीरों वाला सफ़र ──
    ⚠️ ये नाप JourneyScroll.tsx की GATES से हूबहू मिलनी चाहिए। */
-@media (max-width:860px),
-       (orientation:portrait) and (max-width:1024px),
-       (orientation:portrait) and (pointer:coarse),
-       (orientation:landscape) and (pointer:coarse) and (max-height:560px),
-       (prefers-reduced-motion:reduce){
+/* ── phone पर भी वही सफ़र, बस छोटी नाप में ──
+   Stage थोड़ा छोटा, अक्षर छोटे, पट्टी पतली — बाक़ी सब वैसा ही चलता है। */
+@media (max-width:860px){
+  .jrn-scroll{height:420vh}
+  .jrn-hero .jrn-scroll{height:460vh}
+  .jrn-stage{height:min(68svh,540px);top:calc(var(--hdr,56px) + 6px)}
+  .jrn-hero .jrn-stage{height:100svh;top:0}
+  .jrn-beats{padding:16px}
+  .jrn-beat{width:100%}
+  .jrn-beat h3,.jrn-hero .jrn-beat h3{font-size:clamp(1.3rem,.9rem + 2.6vw,1.9rem)}
+  .jrn-year,.jrn-hero .jrn-year{font-size:10.5px;letter-spacing:.26em;margin-bottom:10px}
+  .jrn-tag{font-size:1rem;margin-top:9px}
+  .jrn-body{font-size:.92rem;margin-top:8px;max-width:34ch}
+  .jrn-beat::before{inset:-42% -22%}
+  .jrn-rail{padding:0 10px 12px}
+  .jrn-rail li{font-size:9.5px;letter-spacing:.1em;gap:5px}
+}
+/* नीचे वाली पट्टी phone के WhatsApp/Call bar के पीछे छुप जाती थी */
+@media(max-width:720px){.jrn-rail,.jrn-hero .jrn-rail{padding-bottom:82px}}
+
+/* ── दो हालतें जिनमें सफ़र ठहरी हुई तस्वीरों में बदल जाता है ──
+   ⚠️ ये नाप JourneyScroll.tsx की GATES से हूबहू मिलनी चाहिए। */
+@media (prefers-reduced-motion:reduce),
+       (orientation:landscape) and (pointer:coarse) and (max-height:460px){
   .jrn-scroll,.jrn-hero .jrn-scroll{height:auto}
   .jrn-hero .jrn-stage{margin-inline:0;width:auto}
   .jrn-hero .jrn-stage::after{display:none}

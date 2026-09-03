@@ -10,8 +10,14 @@ Home page (और `/showcase`) पर "हमारा सफ़र" वाल�
 | `era-2006.mp4` | 2006 | Aggarwal Kiryana & Communication — किराने के साथ recharge |
 | `era-2016.mp4` | 2016 | Mobile World — आज का showroom, ग्राहकों से भरा |
 
-तीनों **1120×630, 6 सेकंड, बिना आवाज़**। साथ में उसी नाम की `.jpg` — वो
-phone पर और video आने से पहले दिखती है।
+तीनों **1120×630, 6 सेकंड, बिना आवाज़**। हर एक की एक **हल्की जुड़वाँ file**
+भी है — `era-XXXX-sm.mp4`, 640×360 — वो छोटी screen पर आती है (कुल 1.6 MB,
+बड़ी screen पर 5.3 MB)। साथ में उसी नाम की `.jpg`, जो video आने से पहले दिखती है।
+
+```
+ffmpeg -i era-XXXX.mp4 -vf scale=640:-2 -c:v libx264 -crf 30 -preset slow \
+  -g 8 -keyint_min 8 -pix_fmt yuv420p -movflags +faststart -an era-XXXX-sm.mp4
+```
 
 ## Owner की भेजी videos से ये कैसे बनीं
 
@@ -41,8 +47,14 @@ ffmpeg -ss 2.4 -i era-XXXX.mp4 -frames:v 1 -vf scale=1120:-2 -q:v 4 era-XXXX.jpg
 2. **जहाँ video पहले से खड़ी है वहीं seek मत भेजिए।** Browser तब कोई
    `seeked` नहीं भेजता और seek का दरवाज़ा हमेशा के लिए बंद रह जाता है।
    इसीलिए `Math.abs(currentTime - t) < 1/48` वाली जाँच लगी है।
-3. **Phone पर video माँगी ही नहीं जाती।** पाँचों हालतों में यह हिस्सा तीन
-   ठहरी हुई तस्वीरों और चार cards में बदल जाता है। ⚠️ ये नाप दो जगह लिखी
-   हैं — `JourneyScroll.tsx` की `GATES` और `globals.css` का media query।
-4. **इस हिस्से पर `content-visibility` मत लगाइए।** यह 540vh लंबा है; टलने पर
+3. **पहली video आते ही तस्वीर हटा दीजिए, तीनों का इंतज़ार मत कीजिए।**
+   पहली परत ही पूरा frame ढकती है। पहले तीनों का इंतज़ार होता था और 5 MB
+   उतरने तक ग्राहक को ठहरी हुई तस्वीर दिखती रहती थी।
+4. **iPhone पर decoder जगाना पड़ता है।** जो video कभी चली ही नहीं, उसे seek
+   करने पर कई बार ख़ाली frame आता है — इसलिए load होते ही एक बार चुपचाप
+   चलाकर तुरंत रोक दिया जाता है।
+5. **ठहरी हुई तस्वीरों वाला रूप सिर्फ़ दो हालतों में** — reduce-motion और
+   बहुत छोटी लेटी हुई screen। ⚠️ ये नाप दो जगह लिखी हैं —
+   `JourneyScroll.tsx` की `GATES` और `globals.css` का media query।
+6. **इस हिस्से पर `content-visibility` मत लगाइए।** यह 540vh लंबा है; टलने पर
    page इसे 420px का समझता है और पास आते ही scrollbar हज़ारों pixel उछलता है।

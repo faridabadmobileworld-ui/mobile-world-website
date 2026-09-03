@@ -402,8 +402,15 @@ Generations of Service" और "Quality Products, Trusted Brands" छपा ह�
 - पुराना cinematic hero (`components/CineHero.tsx` +
   `public/showcase/assets/hero-scrub.mp4`) repo में जस का तस पड़ा है। Owner
   कहें तो `app/showcase/page.tsx` में एक line बदलकर वापस लग जाएगा।
-- **Phone पर video माँगी ही नहीं जाती** — वहाँ यह तीन तस्वीरों और चार cards
-  में बदल जाता है। कुल 5.3 MB सिर्फ़ बड़ी screen पर, और तभी जब यह हिस्सा पास आए।
+- **Phone पर भी वही सफ़र चलता है** (owner, 3 Sep: *"Desktop pe ho ya Mobile pe
+  ho, dono pe hi aana chahiye ye effect"*)। छोटी screen पर वही तीन videos
+  हल्की नाप में आती हैं — `era-*-sm.mp4`, कुल **1.6 MB** (बड़ी screen पर 5.3 MB),
+  और तभी जब यह हिस्सा पास आए।
+- **पहली video आते ही तस्वीर हट जाती है।** पहले तीनों का इंतज़ार होता था,
+  इसलिए 5 MB उतरने तक ग्राहक को ठहरी हुई तस्वीर ही दिखती रहती थी — owner ने
+  यही पकड़ा था। अब 411 KB में ही सफ़र चलने लगता है।
+- ठहरी हुई तस्वीरों वाला रूप अब सिर्फ़ **दो हालतों** में बचा है: reduce-motion,
+  और बहुत छोटी लेटी हुई screen।
 
 ⚠️ **तीन असली ख़राबियाँ जो यह बनाते वक़्त पकड़ी गईं — दोबारा मत लाइएगा:**
 1. **जहाँ video पहले से खड़ी है वहीं seek भेजने पर browser कोई `seeked` नहीं

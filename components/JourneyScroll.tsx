@@ -12,27 +12,34 @@ import { legacy } from "@/data/shop";
    Phone पर, और motion कम माँगी हो तो, यही सफ़र तीन ठहरी हुई तस्वीरों से
    चलता है — एक byte भी video का download नहीं होता। */
 
-type Era = { year: string; src: string; poster: string; a: number; b: number };
+type Era = { year: string; src: string; srcSm: string; poster: string; a: number; b: number };
 
 /* video कहाँ से कहाँ तक चलती है (scroll की दूरी में, 0 से 1) */
 const ERAS: Era[] = [
-  { year: "1973", src: "/journey/era-1973.mp4", poster: "/journey/era-1973.jpg", a: 0,    b: 0.5  },
-  { year: "2006", src: "/journey/era-2006.mp4", poster: "/journey/era-2006.jpg", a: 0.5,  b: 0.75 },
-  { year: "2016", src: "/journey/era-2016.mp4", poster: "/journey/era-2016.jpg", a: 0.75, b: 1    },
+  { year: "1973", src: "/journey/era-1973.mp4", srcSm: "/journey/era-1973-sm.mp4",
+    poster: "/journey/era-1973.jpg", a: 0,    b: 0.5  },
+  { year: "2006", src: "/journey/era-2006.mp4", srcSm: "/journey/era-2006-sm.mp4",
+    poster: "/journey/era-2006.jpg", a: 0.5,  b: 0.75 },
+  { year: "2016", src: "/journey/era-2016.mp4", srcSm: "/journey/era-2016-sm.mp4",
+    poster: "/journey/era-2016.jpg", a: 0.75, b: 1    },
 ];
 
 /* चारों पड़ाव — कौन सा कब दिखे। 1973 और 1996 दोनों पहली video पर। */
 const BEATS: Array<[number, number]> = [[0, 0.25], [0.25, 0.5], [0.5, 0.75], [0.75, 1]];
 
-/* वही पाँच हालतें जिनमें scroll वाला सफ़र नहीं चलता।
+/* सफ़र phone पर भी उतना ही चलता है जितना बड़ी screen पर — owner ने 3 Sep 2026
+   को साफ़ कहा: "Desktop pe ho ya Mobile pe ho, dono pe hi aana chahiye ye
+   effect". इसलिए phone के लिए वही तीन videos छोटी नाप में रखी हैं
+   (`-sm.mp4`, कुल 1.6 MB), और नीचे सिर्फ़ दो हालतें बची हैं जिनमें सफ़र
+   ठहरी हुई तस्वीरों में बदलता है।
    ⚠️ ये नाप CSS में भी हूबहू लिखी हैं — एक बदले तो दूसरी भी। */
 const GATES = [
-  "(max-width: 860px)",
-  "(orientation: portrait) and (max-width: 1024px)",
-  "(orientation: portrait) and (pointer: coarse)",
-  "(orientation: landscape) and (pointer: coarse) and (max-height: 560px)",
   "(prefers-reduced-motion: reduce)",
+  "(orientation: landscape) and (pointer: coarse) and (max-height: 460px)",
 ];
+
+/* छोटी screen पर हल्की वाली file — 411 KB से शुरू, पूरी 1.6 MB */
+const SMALL = "(max-width: 860px)";
 
 export function JourneyScroll({ hero = false }: { hero?: boolean }) {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -141,9 +148,9 @@ export function JourneyScroll({ hero = false }: { hero?: boolean }) {
          चलाने पर हर seek एक अलग range request बन जाती है — 4G पर वो अटकती
          है, और कुछ जगह video seekable होती ही नहीं। Blob एक बार आता है,
          फिर scrub बिजली की तरह चलता है। */
-      let ready = 0;
-      videos.forEach((v) => {
-        const url = v.dataset.src;
+      const small = matchMedia(SMALL).matches;
+      videos.forEach((v, i) => {
+        const url = small ? v.dataset.srcSm : v.dataset.src;
         if (!url) return;
         fetch(url)
           .then((r) => (r.ok ? r.blob() : Promise.reject(new Error("no video"))))
@@ -152,10 +159,19 @@ export function JourneyScroll({ hero = false }: { hero?: boolean }) {
             v.src = URL.createObjectURL(
               blob.type ? blob : new Blob([blob], { type: "video/mp4" }));
             v.load();
+            // iPhone पर जो video कभी चली ही नहीं, उसे seek करने पर कई बार
+            // ख़ाली frame दिखता है। एक बार चुपचाप चलाकर तुरंत रोक देने से
+            // decoder जाग जाता है और हर seek पर तस्वीर आती है।
+            const prime = v.play();
+            if (prime && typeof prime.then === "function") {
+              prime.then(() => v.pause()).catch(() => { /* चलने न दे तो भी ठीक */ });
+            }
             v.addEventListener("loadeddata", () => {
-              // तीनों आ जाएँ, तभी तस्वीरों से video पर जाइए — वरना बीच में
-              // एक परत ख़ाली दिखती है।
-              if (++ready === videos.length) root.classList.add("jrn-live");
+              // ⚠️ तीनों का इंतज़ार मत कीजिए। पहली video सबसे नीचे की परत है
+              // और वही पूरा frame ढकती है — वो आते ही तस्वीर हटा दीजिए।
+              // पहले तीनों का इंतज़ार होता था, इसलिए 5 MB उतरने तक ग्राहक को
+              // ठहरी हुई तस्वीर ही दिखती रहती थी।
+              if (i === 0) root.classList.add("jrn-live");
               onScroll();
             }, { once: true });
           })
@@ -209,7 +225,8 @@ export function JourneyScroll({ hero = false }: { hero?: boolean }) {
       <div className="jrn-scroll" ref={rootRef}>
         <div className="jrn-stage">
           {ERAS.map((e) => (
-            <video key={e.year} className={`jrn-v jrn-v-${e.year}`} data-src={e.src}
+            <video key={e.year} className={`jrn-v jrn-v-${e.year}`}
+                   data-src={e.src} data-src-sm={e.srcSm}
                    poster={e.poster} muted playsInline preload="none"
                    aria-hidden="true" tabIndex={-1} />
           ))}
