@@ -55,6 +55,22 @@ ffmpeg -sseof -0.1 -i assets/hero-scrub.mp4 -update 1 -frames:v 1 -q:v 3 assets/
 tablet, छूने वाली उँगली, लेटा हुआ phone, reduce-motion) में hero ठहरी हुई
 तस्वीर बनकर रह जाता है और 8 MB कभी download नहीं होते।
 
+## भाषा — यह page पूरा English में है
+
+Owner ने 3 Sep 2026 को कहा: *"is showcase me hindi me mat likho kuch b.
+professional english me likho jaise kisi b brands use karte h apni websites pe."*
+
+इसलिए `/showcase` का **हर दिखने वाला शब्द English में है** — title, meta,
+caption, section, FAQ, buttons, alt text और aria-label तक। `<html lang="en">`.
+यहाँ कुछ भी हिन्दी में मत जोड़िए।
+
+⚠️ **यह नियम सिर्फ़ इस page का है।** बाक़ी पूरी site (20 pages) हिन्दी में ही
+रहेगी — उसका standard `docs/BRAND-VOICE.md` है, वो नहीं बदला।
+
+📌 Copy लिखते वक़्त वही सच्चाई के नियम लागू हैं जो पूरी site पर हैं: कोई
+"best/trusted/No.1" नहीं, installation का वादा नहीं, warranty हमेशा brand की,
+और दाम page पर नहीं।
+
 ## ⚠️ Assets के पते
 
 इस page के अंदर सारे पते **जड़ से** लिखे हैं (`/showcase/assets/...`), क्योंकि

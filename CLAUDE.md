@@ -424,6 +424,15 @@ engineering standard पर। पता: `/showcase` (rewrite `next.config.ts` 
 एक बार सब 404 कर चुके हैं, क्योंकि पता बिना slash के चलता है। कहीं और ले
 जाना हो तो README पढ़िए।
 
+🇬🇧 **यह page पूरा English में है (3 Sep 2026)।** Owner ने कहा:
+*"is showcase me hindi me mat likho kuch b. professional english me likho
+jaise kisi b brands use karte h apni websites pe."* इसलिए title, meta,
+caption, section, FAQ, button, alt text और aria-label — सब English, और
+`<html lang="en">`। **यहाँ कुछ भी हिन्दी में मत जोड़िए।**
+⚠️ यह नियम **सिर्फ़ `/showcase` का** है — बाक़ी 20 pages हिन्दी में ही रहेंगे,
+उनका standard `docs/BRAND-VOICE.md` वैसा ही है। सच्चाई के नियम (§12, §13)
+English में भी वही लागू होते हैं।
+
 ⚠️ **यह main site की जगह नहीं है।** 20 pages वाली site वैसी ही है। यह उसके
 साथ एक अलग cinematic page है, जिसका link owner campaign में दे सकते हैं।
 

@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mobile World, NIT Faridabad. रात 10 बजे तक खुली दुकान</title>
-<meta name="description" content="Gurudwara Road, Jawahar Colony की दुकान। Mobile, laptop, TV, AC और घर का सामान, पक्के GST bill के साथ। रोज़ 10 से 10, सातों दिन।">
+<title>Mobile World, NIT Faridabad | Open till 10 PM, every day</title>
+<meta name="description" content="Phones, laptops, televisions, air conditioners and home appliances on Gurudwara Road, Jawahar Colony. Every purchase with a proper GST bill. Open 10 AM to 10 PM, seven days a week.">
 <meta name="theme-color" content="#0B0E17">
 <link rel="canonical" href="https://www.mobileworldfaridabad.com/showcase/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Mobile World, NIT Faridabad">
-<meta property="og:description" content="Gurudwara Road, Jawahar Colony की दुकान। एक ही counter पर हर बड़ा brand।">
+<meta property="og:description" content="A shop on Gurudwara Road, Jawahar Colony. Every major brand at one counter.">
 <meta property="og:url" content="https://www.mobileworldfaridabad.com/showcase/">
 <meta property="og:image" content="https://www.mobileworldfaridabad.com/og-image.jpg">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230B0E17'/><path d='M7 23V9h3.6l5.4 8 5.4-8H25v14h-3.4v-8.2L16.6 21h-1.2L10.4 14.8V23z' fill='%23F2A33C'/></svg>">
@@ -79,7 +79,8 @@ p{text-wrap:pretty}
 .top{position:fixed;inset:0 0 auto;z-index:40;display:flex;align-items:center;gap:12px;
   padding:12px 20px;background:linear-gradient(180deg,rgba(11,14,23,.86),rgba(11,14,23,0));
   backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-.top .mark{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:-.02em}
+.top .mark{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:-.02em;
+  white-space:nowrap}
 .top .mark img{width:32px;height:32px;object-fit:contain}
 .top .mark s{display:block;text-decoration:none;font-size:9.5px;letter-spacing:.16em;
   color:var(--ink-3);font-weight:600;font-family:var(--mono)}
@@ -87,7 +88,7 @@ p{text-wrap:pretty}
 
 /* ── बटन ── */
 .btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  min-height:46px;padding:0 20px;border:0;border-radius:999px;cursor:pointer;
+  min-height:46px;padding:0 20px;border:0;border-radius:999px;cursor:pointer;white-space:nowrap;
   font:inherit;font-size:14px;font-weight:700;letter-spacing:.01em;overflow:hidden;
   transition:transform .2s var(--e),box-shadow .28s var(--e),background .25s var(--e)}
 .btn:hover{transform:translateY(-2px)}
@@ -99,6 +100,12 @@ p{text-wrap:pretty}
   backdrop-filter:blur(8px)}
 .btn-o:hover{border-color:var(--accent);color:var(--accent-2)}
 .btn-s{min-height:44px;padding:0 15px;font-size:13px}
+/* 390px par teen cheezein ek line mein aani hain, isliye chhoti screen par
+   button ka label chhota ho jaata hai: "Full website" -> "Website" */
+.top .away .sm{display:none}
+@media(max-width:420px){.top{padding:10px 14px;gap:8px}
+  .top .away{gap:6px}.top .btn-s{padding:0 12px;font-size:12.5px}
+  .top .away .lg{display:none}.top .away .sm{display:inline}}
 .btn::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
   background:linear-gradient(115deg,transparent 32%,rgba(255,255,255,.34) 48%,transparent 64%);
   transform:translateX(-130%)}
@@ -142,9 +149,9 @@ p{text-wrap:pretty}
   text-transform:uppercase;color:var(--accent);margin-bottom:14px;
   padding:5px 12px;border:1px solid rgba(242,163,60,.3);border-radius:999px;
   background:rgba(5,7,13,.78);backdrop-filter:blur(8px);text-shadow:none}
-.band h2,.band h1{font-size:var(--step-3)}
+.band h2,.band h1{font-size:var(--step-3);text-wrap:balance}
 /* hero की video के ऊपर --ink-2 बहुत मद्धम पड़ जाता है, इसलिए यहाँ ज़रा तेज़ */
-.band p{margin:14px auto 0;max-width:34ch;color:#D9DFEE;font-size:var(--step-1)}
+.band p{margin:14px auto 0;max-width:34ch;color:#D9DFEE;font-size:var(--step-1);text-wrap:balance}
 .band .btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:26px}
 /* अक्षर-दर-अक्षर आना */
 .w{display:inline-block;white-space:nowrap}
@@ -304,7 +311,7 @@ footer a:hover{color:var(--accent-2)}
 </style>
 </head>
 <body>
-<a class="skip" href="#main">सीधे content पर जाइए</a>
+<a class="skip" href="#main">Skip to content</a>
 <div class="env" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
 
@@ -314,12 +321,12 @@ footer a:hover{color:var(--accent-2)}
     <span>Mobile World<s>NIT FARIDABAD</s></span>
   </a>
   <span class="away">
-    <a class="btn btn-o btn-s" href="https://www.mobileworldfaridabad.com/">पूरी website</a>
-    <a class="btn btn-a btn-s" href="https://wa.me/919315212131?text=Namaste%20Mobile%20World!">WhatsApp</a>
+    <a class="btn btn-o btn-s" href="https://www.mobileworldfaridabad.com/"><span class="lg">Full website</span><span class="sm">Website</span></a>
+    <a class="btn btn-a btn-s" href="https://wa.me/919315212131?text=Hello%20Mobile%20World!">WhatsApp</a>
   </span>
 </header>
 
-<section class="hero" id="hero" aria-label="दुकान का सफ़र">
+<section class="hero" id="hero" aria-label="The shop, in one scroll">
   <div class="stage" id="stage">
     <video id="hero-video" preload="none" muted playsinline aria-hidden="true" tabindex="-1"></video>
     <div class="layer l0" aria-hidden="true"></div>
@@ -332,28 +339,28 @@ footer a:hover{color:var(--accent-2)}
     <div class="bands">
       <div class="band" data-band="0,0.27">
         <span class="kick">Gurudwara Road, Jawahar Colony</span>
-        <h1 data-split>रात दस बजे तक, रोज़</h1>
-        <p class="sub">बाज़ार बंद होने लगता है, हमारी दुकान तब भी खुली रहती है।</p>
+        <h1 data-split>Open till 10 PM, every day</h1>
+        <p class="sub">The rest of the market winds down. Our lights stay on.</p>
       </div>
 
       <div class="band" data-band="0.30,0.575" data-ramp="0.03">
-        <span class="kick">एक ही छत</span>
-        <h2 data-split>हर बड़ा brand, एक ही counter</h2>
-        <p class="sub">Mobile, laptop, TV, AC, fridge, washing machine। सब एक जगह।</p>
+        <span class="kick">One counter</span>
+        <h2 data-split>Every major brand, one counter</h2>
+        <p class="sub">Phones, laptops, televisions, air conditioners, refrigerators, washing machines.</p>
       </div>
 
       <div class="band" data-band="0.60,0.81">
-        <span class="kick">पक्का काम</span>
-        <h2 data-split>हर सामान, पक्के GST bill के साथ</h2>
-        <p class="sub">Warranty brand की अपनी। हम वो दिलवाने में साथ खड़े रहते हैं।</p>
+        <span class="kick">On the record</span>
+        <h2 data-split>Everything billed, GST and all</h2>
+        <p class="sub">The warranty is the manufacturer&rsquo;s. We stand with you while you claim it.</p>
       </div>
 
       <div class="band settle" data-band="0.835,1">
-        <span class="kick">आइए, मिलते हैं</span>
-        <h2 data-split>दुकान पर आपका इंतज़ार है</h2>
-        <p class="sub">Shop No. 3896/661/29, Gurudwara Road, Block F, Jawahar Colony, NIT Faridabad।</p>
+        <span class="kick">Come and see</span>
+        <h2 data-split>We&rsquo;ll be at the counter</h2>
+        <p class="sub">Shop No. 3896/661/29, Gurudwara Road, Block F, Jawahar Colony, NIT Faridabad.</p>
         <div class="btns cta-row">
-          <a class="btn btn-a" href="https://wa.me/919315212131?text=Namaste%20Mobile%20World!%20मुझे%20जानकारी%20चाहिए।">WhatsApp पर पूछिए</a>
+          <a class="btn btn-a" href="https://wa.me/919315212131?text=Hello%20Mobile%20World!%20I%27d%20like%20some%20information.">Ask on WhatsApp</a>
           <a class="btn btn-o" href="tel:+919315212131">+91 93152 12131</a>
         </div>
       </div>
@@ -371,21 +378,23 @@ footer a:hover{color:var(--accent-2)}
   <div class="sec sec-rel">
     <div class="thread" aria-hidden="true"><i></i></div>
     <div class="wrap">
-      <p class="eyebrow rv">दुकान के अंदर</p>
-      <h2 class="rv">सामान हाथ में लेकर देखिए, फिर लीजिए</h2>
-      <p class="lede rv">Screen की रोशनी, phone का वज़न, fridge की जगह। ये तीनों photo में कभी
-        पूरी तरह समझ नहीं आते। counter पर आइए, चलाकर देखिए, फिर तय कीजिए।</p>
+      <p class="eyebrow rv">Inside the shop</p>
+      <h2 class="rv">Hold it in your hands before you decide</h2>
+      <p class="lede rv">How bright the screen really is, how a phone sits in your hand, how much
+        room a refrigerator needs. A photograph never quite settles those. Come to the counter,
+        switch it on, then decide.</p>
 
       <div class="grid3">
         <div class="card rv st" style="--i:0"><span class="n">01</span>
-          <b>पक्का GST bill</b>
-          <p>हर सामान bill के साथ। Warranty और service, दोनों में वही काम आता है।</p></div>
+          <b>A proper GST bill</b>
+          <p>Every purchase is billed. That bill is what warranty and service run on.</p></div>
         <div class="card rv st" style="--i:1"><span class="n">02</span>
-          <b>यहीं पर repairing</b>
-          <p>Screen, battery, charging port, software। दुकान retail भी है और repairing भी।</p></div>
+          <b>Repairs, in-house</b>
+          <p>Screens, batteries, charging ports, software. We sell here and we repair here.</p></div>
         <div class="card rv st" style="--i:2"><span class="n">03</span>
-          <b>लेने के बाद भी साथ</b>
-          <p>Data transfer, settings, service centre तक बात पहुँचाना। सामने बैठकर, आमने-सामने।</p></div>
+          <b>Still here afterwards</b>
+          <p>Data transfer, settings, or getting your case through to the service centre.
+            Across the counter, face to face.</p></div>
       </div>
     </div>
   </div>
@@ -393,19 +402,20 @@ footer a:hover{color:var(--accent-2)}
   <div class="sec">
     <div class="wrap split">
       <div>
-        <p class="eyebrow rv">EMI और Exchange</p>
-        <h2 class="rv">पुराना phone साथ लाइए</h2>
-        <p class="lede rv">उसकी हालत देखकर, आपके सामने value लगती है, और वो नए के दाम में से
-          कम हो जाती है। किश्तों पर लेना हो तो paper finance और card, दोनों चलते हैं।</p>
-        <p class="lede rv" style="margin-top:14px">कौन सी scheme बनेगी, यह finance company तय
-          करती है। हम system में check करके साफ़ बता देते हैं।</p>
+        <p class="eyebrow rv">EMI and exchange</p>
+        <h2 class="rv">Bring your old phone along</h2>
+        <p class="lede rv">We check its condition in front of you, put a value on it, and take
+          that straight off the price of the new one. For instalments, both paper finance and
+          cards work here.</p>
+        <p class="lede rv" style="margin-top:14px">Which scheme you qualify for is the finance
+          company&rsquo;s call, not ours. We check it on the system and tell you plainly.</p>
         <div class="btns rv" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:24px">
-          <a class="btn btn-a" href="https://www.mobileworldfaridabad.com/finance">EMI की पूरी शर्तें</a>
-          <a class="btn btn-o" href="https://www.mobileworldfaridabad.com/returns">Exchange के नियम</a>
+          <a class="btn btn-a" href="https://www.mobileworldfaridabad.com/finance">EMI terms in full</a>
+          <a class="btn btn-o" href="https://www.mobileworldfaridabad.com/returns">Exchange rules</a>
         </div>
       </div>
       <figure class="shot rv" style="margin:0">
-        <img src="/showcase/assets/counter.webp" alt="Mobile World के counter पर phone का display"
+        <img src="/showcase/assets/counter.webp" alt="Phones on display at the Mobile World counter"
              width="772" height="1524" loading="lazy" decoding="async">
         <figcaption class="tag">counter</figcaption>
       </figure>
@@ -414,27 +424,27 @@ footer a:hover{color:var(--accent-2)}
 
   <div class="sec">
     <div class="wrap">
-      <p class="eyebrow rv">दुकान खोलिए</p>
-      <h2 class="rv">शटर उठाइए</h2>
-      <p class="lede rv" style="margin-bottom:24px">बटन दबाकर रखिए। जैसे सुबह दस बजे शटर उठता
-        है, वैसे ही।</p>
+      <p class="eyebrow rv">Open the shop</p>
+      <h2 class="rv">Lift the shutter</h2>
+      <p class="lede rv" style="margin-bottom:24px">Press and hold. The way it goes up at ten
+        every morning.</p>
       <div class="hold rv" id="hold">
         <div class="in" aria-hidden="true"></div>
         <div class="sh" aria-hidden="true"></div>
         <div class="mid">
           <div class="before">
-            <h3>दुकान अभी बंद है</h3>
-            <p>नीचे वाला बटन दबाकर रखिए।</p>
+            <h3>The shop is closed</h3>
+            <p>Press and hold the button below.</p>
             <button class="btn btn-a" id="holdBtn" type="button" aria-describedby="holdHelp">
-              दबाकर रखिए
+              Press and hold
             </button>
-            <p id="holdHelp" class="sr">बटन दबाकर रखने पर दुकान का शटर उठता है।</p>
+            <p id="holdHelp" class="sr">Press and hold the button to raise the shop&rsquo;s shutter.</p>
             <div class="prog" style="margin-top:18px" aria-hidden="true"><i></i></div>
           </div>
           <div class="after">
-            <h3>दुकान खुल गई</h3>
-            <p>रोज़ सुबह 10 से रात 10, सातों दिन। सिर्फ़ महीने की आख़िरी तारीख़ को बंद।</p>
-            <a class="btn btn-a" href="https://maps.app.goo.gl/zivMudFFatYYF3yf7" target="_blank" rel="noopener">रास्ता देखिए</a>
+            <h3>The shop is open</h3>
+            <p>10 AM to 10 PM, seven days a week. Closed only on the last day of each month.</p>
+            <a class="btn btn-a" href="https://maps.app.goo.gl/zivMudFFatYYF3yf7" target="_blank" rel="noopener">Get directions</a>
           </div>
         </div>
       </div>
@@ -443,21 +453,22 @@ footer a:hover{color:var(--accent-2)}
 
   <div class="sec">
     <div class="wrap">
-      <p class="eyebrow rv">जो लोग अक्सर पूछते हैं</p>
-      <h2 class="rv">सीधे जवाब</h2>
+      <p class="eyebrow rv">Asked often</p>
+      <h2 class="rv">Straight answers</h2>
       <div class="faq">
-        <details class="rv"><summary>दाम website पर क्यों नहीं लिखे?<b aria-hidden="true"></b></summary>
-          <p>दाम रोज़ बदलते हैं। आज लिखा हुआ दाम कल ग़लत हो जाएगा, और ग़लत दाम पढ़कर आना
-            किसी के काम का नहीं। WhatsApp पर model का नाम भेज दीजिए, आज का सही हाल बता देंगे।</p></details>
-        <details class="rv"><summary>Online से सस्ता मिलता है, फिर दुकान क्यों?<b aria-hidden="true"></b></summary>
-          <p>यहाँ सामान हाथ में लेकर देख सकते हैं, पुराना phone उसी वक़्त exchange हो जाता है,
-            और कुछ गड़बड़ हुई तो आप किसी app से नहीं, इंसान से बात करते हैं।</p></details>
-        <details class="rv"><summary>क्या दुकान AC या TV लगाकर देती है?<b aria-hidden="true"></b></summary>
-          <p>नहीं। दुकान सामान देती है, लगाने का काम नहीं करती। घर तक पहुँचाने का इंतज़ाम
-            करवा देते हैं, भाड़ा आपका होता है। यह हम पहले ही बता देते हैं।</p></details>
-        <details class="rv"><summary>Warranty किसकी होती है?<b aria-hidden="true"></b></summary>
-          <p>बनाने वाली company की। खराबी आने पर उसका official हल brand के authorized service
-            centre से ही मिलता है। हम बात पहुँचाने और आगे बढ़ाने में पूरी मदद करते हैं।</p></details>
+        <details class="rv"><summary>Why aren&rsquo;t prices listed on the site?<b aria-hidden="true"></b></summary>
+          <p>Prices move week to week. A number written today is wrong by next month, and making
+            the trip on a wrong number helps nobody. Send us the model on WhatsApp and we&rsquo;ll
+            tell you what&rsquo;s in stock and which one suits you.</p></details>
+        <details class="rv"><summary>Online is cheaper. Why come to a shop?<b aria-hidden="true"></b></summary>
+          <p>Here you can hold the product before you buy it, your old phone is exchanged on the
+            spot, and if something goes wrong you talk to a person rather than an app.</p></details>
+        <details class="rv"><summary>Do you install air conditioners and televisions?<b aria-hidden="true"></b></summary>
+          <p>No. We sell the product; we do not do installation. We can arrange delivery to your
+            home and the transport charge is yours. We say so before you buy, not after.</p></details>
+        <details class="rv"><summary>Whose warranty is it?<b aria-hidden="true"></b></summary>
+          <p>The manufacturer&rsquo;s. Anything official is settled at the brand&rsquo;s authorised
+            service centre. We help you raise the case and follow it up.</p></details>
       </div>
     </div>
   </div>
@@ -465,18 +476,18 @@ footer a:hover{color:var(--accent-2)}
   <div class="sec">
     <div class="wrap">
       <div class="cta rv">
-        <h2>एक message कीजिए, बाक़ी हम देख लेंगे</h2>
-        <p>क्या चाहिए, बस इतना लिख दीजिए। दुकान पर मौजूद है या नहीं, यह पहले ही बता देंगे,
-          ताकि आपका चक्कर बेकार न जाए।</p>
+        <h2>Send one message. We&rsquo;ll take it from there.</h2>
+        <p>Just tell us what you are looking for. We&rsquo;ll confirm whether it is on the shelf
+          before you make the trip.</p>
         <div class="btns">
-          <a class="btn btn-a" href="https://wa.me/919315212131?text=Namaste%20Mobile%20World!%20मुझे%20जानकारी%20चाहिए।">WhatsApp पर पूछिए</a>
+          <a class="btn btn-a" href="https://wa.me/919315212131?text=Hello%20Mobile%20World!%20I%27d%20like%20some%20information.">Ask on WhatsApp</a>
           <a class="btn btn-o" href="tel:+919315212131">+91 93152 12131</a>
-          <a class="btn btn-o" href="https://maps.app.goo.gl/zivMudFFatYYF3yf7" target="_blank" rel="noopener">रास्ता</a>
+          <a class="btn btn-o" href="https://maps.app.goo.gl/zivMudFFatYYF3yf7" target="_blank" rel="noopener">Directions</a>
         </div>
         <p class="addr">Shop No. 3896/661/29, Gurudwara Road, Block F,<br>
           Near Bada Gurudwara and Disposal Chowk, Jawahar Colony,<br>
           NIT Faridabad, Haryana 121005<br>
-          रोज़ 10:00 से 22:00, सातों दिन। महीने की आख़िरी तारीख़ को बंद।</p>
+          Open 10:00&ndash;22:00, seven days a week. Closed on the last day of each month.</p>
       </div>
     </div>
   </div>
@@ -487,7 +498,7 @@ footer a:hover{color:var(--accent-2)}
     <div class="frow">
       <span>© <span id="yr">2026</span> Mobile World · Aggarwal Kiryana And Communication</span>
       <span>
-        <a href="https://www.mobileworldfaridabad.com/">पूरी website</a> ·
+        <a href="https://www.mobileworldfaridabad.com/">Full website</a> &middot;
         <a href="https://www.instagram.com/mobileworldfaridabad" target="_blank" rel="noopener">Instagram</a> ·
         <a href="https://youtube.com/@mobileworldfaridabad" target="_blank" rel="noopener">YouTube</a> ·
         <a href="https://www.mobileworldfaridabad.com/privacy">Privacy</a>
@@ -497,10 +508,10 @@ footer a:hover{color:var(--accent-2)}
   </div>
 </footer>
 
-<nav class="bar" aria-label="जल्दी पहुँचिए">
-  <a class="btn btn-a" href="https://wa.me/919315212131?text=Namaste%20Mobile%20World!">WhatsApp</a>
+<nav class="bar" aria-label="Quick actions">
+  <a class="btn btn-a" href="https://wa.me/919315212131?text=Hello%20Mobile%20World!">WhatsApp</a>
   <a class="btn btn-o" href="tel:+919315212131">Call</a>
-  <a class="btn btn-o" href="https://maps.app.goo.gl/zivMudFFatYYF3yf7" target="_blank" rel="noopener">रास्ता</a>
+  <a class="btn btn-o" href="https://maps.app.goo.gl/zivMudFFatYYF3yf7" target="_blank" rel="noopener">Directions</a>
 </nav>
 <!-- Video लग चुकी है: assets/hero-scrub.mp4 (17 सेकंड, तीन हिस्से जोड़कर)।
      तस्वीरों वाली परतें अब भी नीचे मौजूद हैं — phone पर और video न आ पाने पर
