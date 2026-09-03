@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs';
 const CATS = (readFileSync('data/shop.ts', 'utf8')
   .match(/export const categories: Category\[\] = \[([\s\S]*?)\];/)[1]
   .match(/slug:/g) || []).length;
-const B='http://127.0.0.1:3111';
+const B='http://localhost:3111';
 // Page ki list data/pages.ts se hi aati hai — naya page banate hi wo apne aap
 // yahan jud jata hai, kisi ko yaad rakhna nahi padta.
 const SITE_PAGES=[...readFileSync('data/pages.ts','utf8')

@@ -1,13 +1,13 @@
 /* Mobile World — scroll वाला सफ़र।
    पूरा इंजन skill के standard पर: seek gating, वो rAF loop जो काम ख़त्म होते ही
    सो जाता है, DOM पर लिखना सिर्फ़ बदलाव पर, caption की नाप scroll की दूरी में,
-   और पाँचों हालतों में ठहरी हुई तस्वीर। Video अभी नहीं आई है, इसलिए वही सफ़र
-   दुकान की असली तस्वीरों की परतों से चलता है। Video आते ही यही इंजन उसे चलाएगा। */
+   और पाँचों हालतों में ठहरी हुई तस्वीर। बड़ी screen पर सफ़र video से चलता है;
+   phone पर और video न आ पाने पर वही सफ़र तस्वीरों की परतों से चलता है। */
 (function () {
   'use strict';
 
   var VIDEO_URL = '/showcase/assets/hero-scrub.mp4';
-  var VIDEO_BYTES = 6000000;
+  var VIDEO_BYTES = 8026975;
 
   var hero = document.getElementById('hero');
   var stage = document.getElementById('stage');
@@ -28,6 +28,10 @@
   function rng(seed) { var s = seed >>> 0;
     return function () { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
 
+  /* ⚠️ देवनागरी को अक्षर-अक्षर मत तोड़िए। मात्रा और संयुक्ताक्षर अपने
+     व्यंजन से जुड़े रहते हैं; एक-एक character को अलग span में डालते ही
+     shaping टूट जाती है और "बजे" की जगह "बज◌े" छपने लगता है। इसलिए
+     तोड़ शब्द पर होती है — animation वही रहती है, अक्षर सही रहते हैं। */
   [].slice.call(document.querySelectorAll('[data-split]')).forEach(function (el, bi) {
     var text = el.textContent.trim();
     var rand = rng(1234 + bi * 77);
@@ -36,20 +40,14 @@
     var vis = document.createElement('span');
     vis.setAttribute('aria-hidden', 'true');
     var words = text.split(' ');
-    var ci = 0, total = text.replace(/\s/g, '').length;
     words.forEach(function (w, wi) {
       var ws = document.createElement('span');
-      ws.className = 'w';
-      w.split('').forEach(function (ch) {
-        var cs = document.createElement('span');
-        cs.className = 'c';
-        cs.textContent = ch;
-        cs.style.setProperty('--th', (ci / total * 0.5 + rand() * 0.06).toFixed(3));
-        cs.style.setProperty('--jx', Math.round((rand() - 0.5) * 44) + 'px');
-        cs.style.setProperty('--jy', Math.round((rand() - 0.5) * 30 + 16) + 'px');
-        cs.style.setProperty('--jr', Math.round((rand() - 0.5) * 14) + 'deg');
-        ws.appendChild(cs); ci++;
-      });
+      ws.className = 'w c';
+      ws.textContent = w;
+      ws.style.setProperty('--th', (wi / Math.max(1, words.length) * 0.5 + rand() * 0.06).toFixed(3));
+      ws.style.setProperty('--jx', Math.round((rand() - 0.5) * 44) + 'px');
+      ws.style.setProperty('--jy', Math.round((rand() - 0.5) * 30 + 16) + 'px');
+      ws.style.setProperty('--jr', Math.round((rand() - 0.5) * 10) + 'deg');
       vis.appendChild(ws);
       if (wi < words.length - 1) vis.appendChild(document.createTextNode(' '));
     });
@@ -166,6 +164,7 @@
     return fetch(VIDEO_URL, { signal: ctrl.signal }).then(function (res) {
       if (!res.ok || !res.body) throw new Error('no video');
       var total = Number(res.headers.get('Content-Length')) || VIDEO_BYTES;
+      var mime = (res.headers.get('Content-Type') || 'video/mp4').split(';')[0];
       var reader = res.body.getReader(), chunks = [], got = 0, lastRing = 0;
       function pump() {
         return reader.read().then(function (r) {
@@ -184,7 +183,12 @@
       return pump().then(function () {
         clearTimeout(watchdog);
         if (ring) { ring.style.setProperty('--ld', 0); ring.classList.remove('on'); }
-        video.src = URL.createObjectURL(new Blob(chunks));
+        // Blob par MIME लिखना ज़रूरी है — बिना type के browser blob: वाली
+        // video को पहचानता ही नहीं (error 4)। preload भी यहीं खोलना पड़ता है,
+        // वरना 'none' रहते हुए वो एक byte भी buffer नहीं करता और canplay
+        // कभी नहीं आता।
+        video.preload = 'auto';
+        video.src = URL.createObjectURL(new Blob(chunks, { type: mime }));
         video.load();
         video.addEventListener('canplay', function () {
           requestSeek(heroProgress() * video.duration);

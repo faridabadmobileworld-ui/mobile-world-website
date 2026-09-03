@@ -107,7 +107,7 @@ p{text-wrap:pretty}
 }
 
 /* ── HERO: scroll वाला सफ़र ── */
-.hero{position:relative;height:520vh}
+.hero{position:relative;height:1000vh}
 .stage{position:sticky;top:0;height:100svh;overflow:hidden;background:#05070D}
 .layer{position:absolute;inset:-4%;background-size:cover;background-position:center;
   will-change:transform,opacity;opacity:0;transform:translate3d(0,0,0) scale(1.06)}
@@ -126,17 +126,25 @@ p{text-wrap:pretty}
   background:linear-gradient(180deg,rgba(5,7,13,.72) 0%,rgba(5,7,13,0) 26%,rgba(5,7,13,0) 62%,rgba(5,7,13,.86) 100%)}
 
 .bands{position:absolute;inset:0;display:grid;place-items:center;padding:0 22px}
+/* ⚠️ z-index/isolation ज़रूरी है। .band की opacity जब ठीक 1 हो जाती है तब
+   वो अपना stacking context खो देता है, और नीचे वाली ::before की काली प्लेट
+   सीधे video के पीछे चली जाती है — यानी जिस पल caption पूरा दिखता है, ठीक
+   उसी पल उसका सहारा ग़ायब हो जाता था। */
 .band{position:absolute;width:min(760px,100%);text-align:center;opacity:0;
-  text-shadow:var(--tshadow)}
-.band::before{content:"";position:absolute;inset:-40% -14%;pointer-events:none;z-index:-1;
-  opacity:calc(.28 + .72*var(--k,1));
-  background:radial-gradient(ellipse 74% 64% at 50% 50%,rgba(4,6,12,.7) 0%,rgba(4,6,12,.46) 46%,rgba(4,6,12,0) 76%)}
+  z-index:2;isolation:isolate;text-shadow:var(--tshadow)}
+/* caption के पीछे की प्लेट। इसकी अपनी opacity नहीं घटाई जाती — band की
+   opacity पूरे subtree पर लगती है, इसलिए ramp के बीच में भी text उतना ही
+   सुरक्षित रहता है जितना पूरे दिखने पर। */
+.band::before{content:"";position:absolute;inset:-46% -18%;pointer-events:none;z-index:-1;
+  background:radial-gradient(ellipse 84% 78% at 50% 48%,rgba(4,6,12,.88) 0%,rgba(4,6,12,.72) 42%,
+    rgba(4,6,12,.34) 68%,rgba(4,6,12,0) 88%)}
 .band .kick{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.22em;
   text-transform:uppercase;color:var(--accent);margin-bottom:14px;
   padding:5px 12px;border:1px solid rgba(242,163,60,.3);border-radius:999px;
-  background:rgba(8,10,18,.5);backdrop-filter:blur(8px);text-shadow:none}
+  background:rgba(5,7,13,.78);backdrop-filter:blur(8px);text-shadow:none}
 .band h2,.band h1{font-size:var(--step-3)}
-.band p{margin:14px auto 0;max-width:34ch;color:var(--ink-2);font-size:var(--step-1)}
+/* hero की video के ऊपर --ink-2 बहुत मद्धम पड़ जाता है, इसलिए यहाँ ज़रा तेज़ */
+.band p{margin:14px auto 0;max-width:34ch;color:#D9DFEE;font-size:var(--step-1)}
 .band .btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:26px}
 /* अक्षर-दर-अक्षर आना */
 .w{display:inline-block;white-space:nowrap}
@@ -322,25 +330,25 @@ footer a:hover{color:var(--accent-2)}
     <div class="vig" aria-hidden="true"></div>
 
     <div class="bands">
-      <div class="band" data-band="0,0.22">
+      <div class="band" data-band="0,0.27">
         <span class="kick">Gurudwara Road, Jawahar Colony</span>
         <h1 data-split>रात दस बजे तक, रोज़</h1>
         <p class="sub">बाज़ार बंद होने लगता है, हमारी दुकान तब भी खुली रहती है।</p>
       </div>
 
-      <div class="band" data-band="0.24,0.46" data-ramp="0.03">
+      <div class="band" data-band="0.30,0.575" data-ramp="0.03">
         <span class="kick">एक ही छत</span>
         <h2 data-split>हर बड़ा brand, एक ही counter</h2>
         <p class="sub">Mobile, laptop, TV, AC, fridge, washing machine। सब एक जगह।</p>
       </div>
 
-      <div class="band" data-band="0.48,0.70">
+      <div class="band" data-band="0.60,0.81">
         <span class="kick">पक्का काम</span>
         <h2 data-split>हर सामान, पक्के GST bill के साथ</h2>
         <p class="sub">Warranty brand की अपनी। हम वो दिलवाने में साथ खड़े रहते हैं।</p>
       </div>
 
-      <div class="band settle" data-band="0.74,1">
+      <div class="band settle" data-band="0.835,1">
         <span class="kick">आइए, मिलते हैं</span>
         <h2 data-split>दुकान पर आपका इंतज़ार है</h2>
         <p class="sub">Shop No. 3896/661/29, Gurudwara Road, Block F, Jawahar Colony, NIT Faridabad।</p>
@@ -494,9 +502,10 @@ footer a:hover{color:var(--accent-2)}
   <a class="btn btn-o" href="tel:+919315212131">Call</a>
   <a class="btn btn-o" href="https://maps.app.goo.gl/zivMudFFatYYF3yf7" target="_blank" rel="noopener">रास्ता</a>
 </nav>
-<!-- Video अभी नहीं आई है। जिस दिन assets/hero-scrub.mp4 रखी जाए, इसे true
-     कर दीजिए. तब वही सफ़र video से चलेगा, बाक़ी कुछ नहीं बदलना। -->
-<script>window.HAS_HERO_VIDEO = false;</script>
+<!-- Video लग चुकी है: assets/hero-scrub.mp4 (17 सेकंड, तीन हिस्से जोड़कर)।
+     तस्वीरों वाली परतें अब भी नीचे मौजूद हैं — phone पर और video न आ पाने पर
+     वही सफ़र चलता है. -->
+<script>window.HAS_HERO_VIDEO = true;</script>
 <script src="/showcase/assets/app.js" defer></script>
 </body>
 </html>
