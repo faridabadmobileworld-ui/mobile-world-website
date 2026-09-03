@@ -34,7 +34,7 @@ const GATES = [
   "(prefers-reduced-motion: reduce)",
 ];
 
-export function JourneyScroll() {
+export function JourneyScroll({ hero = false }: { hero?: boolean }) {
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -201,8 +201,10 @@ export function JourneyScroll() {
   }, []);
 
   return (
-    <section className="sec jrn">
-      <div className="shead"><h2 id="hamara-safar">हमारा सफ़र</h2></div>
+    <section className={hero ? "sec jrn jrn-hero" : "sec jrn"}>
+      {hero
+        ? <h2 className="sr" id="hamara-safar">हमारा सफ़र — 1973 से आज तक</h2>
+        : <div className="shead"><h2 id="hamara-safar">हमारा सफ़र</h2></div>}
 
       <div className="jrn-scroll" ref={rootRef}>
         <div className="jrn-stage">

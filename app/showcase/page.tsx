@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CineHero } from "@/components/CineHero";
+import { JourneyScroll } from "@/components/JourneyScroll";
 import { HomeBody } from "@/components/HomeBody";
 import { shop } from "@/data/shop";
 
@@ -9,10 +9,10 @@ import { shop } from "@/data/shop";
    video hero lagta hai aur poore page par `.cine` ki gehri, 3D wali chaal. */
 
 export const metadata: Metadata = {
-  title: "Mobile World, NIT Faridabad | scroll karke poori dukaan dekhiye",
+  title: "हमारा सफ़र — Mobile World, NIT Faridabad",
   description:
-    "Mobile World, Jawahar Colony ka cinematic version — wahi dukaan, wahi saamaan, "
-    + "scroll ke saath chalti hui. Roz 10 se 10, saaton din.",
+    "1973 की किराना दुकान से आज के showroom तक — scroll के साथ चलती हुई दुकान की "
+    + "कहानी, और पूरी दुकान एक ही page पर। रोज़ 10 से 10, सातों दिन।",
   alternates: { canonical: `${shop.siteUrl}/` },
   // Yeh page home page ka hi doosra roop hai. Dono ko index karvaana
   // duplicate content ban jaata aur asli home page ki local ranking girata.
@@ -22,9 +22,14 @@ export const metadata: Metadata = {
 export default function Showcase() {
   return (
     <div className="cine">
-      <CineHero />
+      {/* ऊपर सफ़र ही hero है — owner की भेजी तीन videos (1973 · 2006 · 2016)।
+          इसीलिए नीचे HomeBody को दोबारा वही हिस्सा नहीं दिखाना है।
+          पुराना cinematic hero (`components/CineHero.tsx` +
+          `public/showcase/assets/hero-scrub.mp4`) repo में जस का तस पड़ा है —
+          owner कहें तो एक line में वापस लग जाएगा। */}
       <div className="wrap">
-        <HomeBody current="/showcase" />
+        <JourneyScroll hero />
+        <HomeBody current="/showcase" journey={false} />
       </div>
     </div>
   );

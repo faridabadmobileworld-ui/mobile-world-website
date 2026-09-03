@@ -34,7 +34,9 @@ const toc: TocItem[] = [
   { id: "dukaan-par-aaiye", label: "दुकान पर आइए" },
 ];
 
-export function HomeBody({ current = "/" }: { current?: string }) {
+export function HomeBody({ current = "/", journey = true }:
+  { current?: string; /** `/showcase` par सफ़र ऊपर hero बन जाता है, इसलिए false */
+    journey?: boolean }) {
   const top = items.slice(0, 8);
 
   return (
@@ -73,7 +75,7 @@ export function HomeBody({ current = "/" }: { current?: string }) {
           दावे छपे हुए थे — तस्वीर के अंदर, इसलिए किसी scan में पकड़ में भी नहीं
           आते थे। अब वही कहानी owner की भेजी तीन videos से चलती है, और हर शब्द
           असली HTML text में है (`legacy` से, दोबारा कहीं नहीं लिखा)। */}
-      <JourneyScroll />
+      {journey && <JourneyScroll />}
 
       <section className="sec">
         <div className="shead">

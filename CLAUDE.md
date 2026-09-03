@@ -394,8 +394,14 @@ Generations of Service" और "Quality Products, Trusted Brands" छपा ह�
 - Videos और तस्वीरें: `public/journey/` (पूरा तरीक़ा वहीं README में)
 - **तीन video, चार पड़ाव** — 1996 वाला पड़ाव जान-बूझकर किराना दुकान वाली
   video पर बैठता है, क्योंकि उस वक़्त दुकान वही थी।
-- यह `/` और `/showcase` **दोनों** पर है (HomeBody से), इसलिए कहानी एक ही जगह
-  लिखी है।
+- **`/showcase` पर यही सफ़र ऊपर hero है** (पूरी screen, `<JourneyScroll hero />`),
+  और `/` पर बीच में एक section। Owner ने 3 Sep को कहा था: *"Inhe pahle waliyo
+  se change karke do na ab. Scroll karne pe ye dikhni chahiye."*
+  इसलिए showcase पर HomeBody को `journey={false}` मिलता है — वरना वही हिस्सा
+  दो बार दिखता।
+- पुराना cinematic hero (`components/CineHero.tsx` +
+  `public/showcase/assets/hero-scrub.mp4`) repo में जस का तस पड़ा है। Owner
+  कहें तो `app/showcase/page.tsx` में एक line बदलकर वापस लग जाएगा।
 - **Phone पर video माँगी ही नहीं जाती** — वहाँ यह तीन तस्वीरों और चार cards
   में बदल जाता है। कुल 5.3 MB सिर्फ़ बड़ी screen पर, और तभी जब यह हिस्सा पास आए।
 

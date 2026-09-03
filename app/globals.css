@@ -1524,6 +1524,26 @@ main .sec.jrn{content-visibility:visible;contain-intrinsic-size:auto}
 .jrn{--jn:#0C0E16;--jink:#F4F2FA;--jink2:#C9C4DC;--jgold:#E0A44A}
 /* नाप scroll की दूरी में: चार पड़ाव, हर एक को 6+ flick तक पूरा दिखना है */
 .jrn-scroll{position:relative;height:540vh}
+
+/* ── सफ़र जब /showcase का hero बनता है — पूरी screen, बड़ा अक्षर ── */
+.jrn-hero{padding-top:0;margin-top:calc(var(--sec-gap,26px) * -1)}
+.jrn-hero .jrn-scroll{height:640vh}
+.jrn-hero .jrn-stage{top:0;height:100svh;border-radius:0;
+  margin-inline:calc(50% - 50vw);width:100vw;box-shadow:none}
+.jrn-hero .jrn-beat{width:min(760px,100%)}
+.jrn-hero .jrn-beat h3{font-size:clamp(1.7rem,1rem + 3.4vw,3.4rem)}
+.jrn-hero .jrn-year{font-size:clamp(12px,1.8vw,14px);margin-bottom:18px}
+.jrn-hero .jrn-body{max-width:48ch}
+.jrn-hero .jrn-rail{padding-bottom:clamp(18px,3vw,30px)}
+/* नीचे का इशारा — page के सबसे ऊपर, जब तक visitor scroll न करे */
+.jrn-hero .jrn-stage::after{content:"";position:absolute;left:50%;bottom:52px;z-index:4;
+  width:1px;height:34px;transform:translateX(-50%);
+  background:linear-gradient(180deg,transparent,var(--jgold));
+  animation:jrn-cue 2.6s var(--ease) infinite}
+@keyframes jrn-cue{0%{transform:translateX(-50%) scaleY(.2);transform-origin:top;opacity:0}
+  40%{transform:translateX(-50%) scaleY(1);opacity:1}
+  100%{transform:translateX(-50%) scaleY(1);transform-origin:bottom;opacity:0}}
+@media(prefers-reduced-motion:reduce){.jrn-hero .jrn-stage::after{display:none}}
 .jrn-stage{position:sticky;top:calc(var(--hdr,56px) + 8px);
   height:min(76vh,620px);border-radius:var(--r-lg,18px);overflow:hidden;
   background:var(--jn);isolation:isolate;box-shadow:var(--sh-2)}
@@ -1589,7 +1609,10 @@ main .sec.jrn{content-visibility:visible;contain-intrinsic-size:auto}
        (orientation:portrait) and (pointer:coarse),
        (orientation:landscape) and (pointer:coarse) and (max-height:560px),
        (prefers-reduced-motion:reduce){
-  .jrn-scroll{height:auto}
+  .jrn-scroll,.jrn-hero .jrn-scroll{height:auto}
+  .jrn-hero .jrn-stage{margin-inline:0;width:auto}
+  .jrn-hero .jrn-stage::after{display:none}
+  .jrn-hero{margin-top:0}
   .jrn-stage{position:relative;top:auto;height:auto;display:grid;gap:14px;
     background:none;box-shadow:none;overflow:visible;border-radius:0}
   .jrn-v,.jrn-grade,.jrn-rail{display:none}
