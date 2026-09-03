@@ -126,6 +126,10 @@ export function CineHero() {
     let seekBusy = false, pendingTime: number | null = null;
     function requestSeek(t: number) {
       if (!video.duration) return;
+      // ⚠️ जहाँ video पहले से है वहीं भेजने पर browser कोई `seeked` नहीं भेजता,
+      // और यह दरवाज़ा हमेशा के लिए बंद रह जाता है। Page के बिलकुल ऊपर से
+      // शुरू करने वाले हर visitor के साथ यही होता था।
+      if (Math.abs(video.currentTime - t) < 1 / 48) return;
       if (seekBusy) { pendingTime = t; return; }
       seekBusy = true; video.currentTime = t;
     }

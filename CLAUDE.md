@@ -378,6 +378,44 @@ Visitor details save करना, customer login।
       website उसे 140×44 पर दिखाती है। CSS में नाप पक्की (`width`/`height`) रखी
       गई है — `max-width` से 2x/3x वाले phone पर logo अपने आप छोटा हो जाता था।
 
+### 🕰️ हमारा सफ़र — home page पर चलती हुई कहानी (3 Sep 2026)
+
+Owner ने 3 Sep को तीन videos भेजीं — **1973 की किराना दुकान · 2006 की
+recharge वाली दुकान · आज का showroom**। तीनों एक ही सफ़र के तीन पड़ाव हैं।
+
+इनसे home page पर **"हमारा सफ़र"** वाला हिस्सा बना। यह उसी जगह लगा है जहाँ
+पहले **"TRUST SINCE 1973" वाला banner** था — उस banner के **अंदर** "Three
+Generations of Service" और "Quality Products, Trusted Brands" छपा हुआ था,
+यानी वो दावे तस्वीर के अंदर होने की वजह से किसी जाँच में पकड़ में ही नहीं आते
+थे। अब वही कहानी videos से चलती है और **हर शब्द असली HTML text में** है —
+सीधे `shop.ts` की `legacy` list से, दोबारा कहीं नहीं लिखा।
+
+- Component: `components/JourneyScroll.tsx` · दिखावट: `globals.css` का `.jrn-`
+- Videos और तस्वीरें: `public/journey/` (पूरा तरीक़ा वहीं README में)
+- **तीन video, चार पड़ाव** — 1996 वाला पड़ाव जान-बूझकर किराना दुकान वाली
+  video पर बैठता है, क्योंकि उस वक़्त दुकान वही थी।
+- यह `/` और `/showcase` **दोनों** पर है (HomeBody से), इसलिए कहानी एक ही जगह
+  लिखी है।
+- **Phone पर video माँगी ही नहीं जाती** — वहाँ यह तीन तस्वीरों और चार cards
+  में बदल जाता है। कुल 5.3 MB सिर्फ़ बड़ी screen पर, और तभी जब यह हिस्सा पास आए।
+
+⚠️ **तीन असली ख़राबियाँ जो यह बनाते वक़्त पकड़ी गईं — दोबारा मत लाइएगा:**
+1. **जहाँ video पहले से खड़ी है वहीं seek भेजने पर browser कोई `seeked` नहीं
+   भेजता**, और seek का दरवाज़ा हमेशा के लिए बंद रह जाता है। Page के बिलकुल
+   ऊपर से शुरू करने वाले हर visitor के साथ यही होता — **`/showcase` का hero
+   भी इसी बीमारी से बीमार था**, दोनों जगह ठीक किया।
+2. **Video को blob बनाकर चलाइए, सीधे पते से नहीं।** सीधे पते से हर seek एक
+   अलग range request बन जाती है; कई जगह video seekable ही नहीं होती।
+3. **`perspective` के नीचे `translateZ` वाली scroll animation मत लिखिए।**
+   Chromium गिनती element की *दिखने वाली* जगह से करता है, इसलिए animation
+   अपने ही नतीजे पर जा टिकती है — `/showcase` के आख़िरी चार हिस्से हमेशा के
+   लिए मद्धम पड़े रह जाते थे (0.56 · 0.19 · 0.04 · 0)। गहराई अब `scale` और
+   ऊपर उठने से आती है। साथ ही **`content-visibility:auto` और scroll वाली
+   animation एक साथ नहीं चलतीं** — टला हुआ हिस्सा अपनी animation भी रोक देता है।
+
+📌 बाक़ी तस्वीरों और videos के prompts owner को अलग page पर दे दिए गए हैं
+(shoot brief) — क्रम से, एक-एक करके।
+
 ### 🌃 `/showcase` — वही home page, cinematic (3 Sep 2026)
 
 Owner ने 3 Sep को कहा: *"Ye showcase hamari existing home page par jo b kuch h

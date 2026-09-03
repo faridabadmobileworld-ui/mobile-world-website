@@ -1256,6 +1256,10 @@ h2{letter-spacing:-.024em;line-height:1.25}
 main .sec{content-visibility:auto;contain-intrinsic-size:auto 420px}
 /* पहला हिस्सा और पट्टियाँ कभी नहीं टलतीं — वरना पहली नज़र ख़ाली दिखेगी */
 main .sec:first-of-type,.hero,.cstrip,.hdr,.ftr,.mbar{content-visibility:visible}
+/* ⚠️ सफ़र वाला हिस्सा कभी मत टालिए। वो 540vh लंबा है, और टलने पर page उसे
+   सिर्फ़ 420px का समझता है — पास पहुँचते ही scrollbar कई हज़ार pixel उछल
+   जाता। उसके अंदर sticky stage भी है, जिसे सही नाप चाहिए ही चाहिए। */
+main .sec.jrn{content-visibility:visible;contain-intrinsic-size:auto}
 
 /* ── EMI का अंदाज़ा लगाने वाला डिब्बा (सिर्फ़ /finance पर) ───────────── */
 .emi{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);
@@ -1430,13 +1434,22 @@ main .sec:first-of-type,.hero,.cstrip,.hdr,.ftr,.mbar{content-visibility:visible
    scroll वाली timeline नहीं है वहाँ page बिलकुल सीधा और पूरा दिखता है। */
 @supports(animation-timeline:view()){
   @media(prefers-reduced-motion:no-preference){
-    /* ⚠️ perspective-origin बीच में रखिए। ऊपर की तरफ़ रखने पर पीछे धकेला
-       हुआ section vanishing point की ओर खिंचकर ऊपर वाले पर चढ़ जाता है। */
-    .cine .wrap{perspective:1500px;perspective-origin:50% 50%}
+    /* ⚠️ यहाँ `perspective` और `translateZ` जान-बूझकर नहीं हैं।
+       Chromium scroll वाली animation की गिनती element की **दिखने वाली** जगह
+       से करता है। Perspective के नीचे translateZ उसी जगह को हिला देता है,
+       और गिनती अपने ही नतीजे पर जा टिकती है — page के आख़िरी चार हिस्से
+       इसी वजह से हमेशा के लिए मद्धम पड़े रह जाते थे (0.56 · 0.19 · 0.04 · 0)।
+       गहराई अब scale और ऊपर उठने से आती है, और वो पूरी तरह भरोसेमंद है। */
+
+    /* ⚠️ `content-visibility:auto` और scroll वाली animation साथ नहीं चलतीं —
+       टला हुआ section अपनी animation भी रोक देता है और फिर कभी पूरी नहीं
+       करता। नीचे के आख़िरी चार हिस्से इसी वजह से मद्धम पड़े रह जाते थे।
+       Showcase पर rendering टालने की ज़रूरत भी नहीं — वो campaign वाला page
+       है, असली home page पर यह बचत जस की तस बनी हुई है। */
+    .cine .wrap > .sec{content-visibility:visible}
 
     .cine .wrap > .sec,
     .cine .wrap > .prow{
-      transform-style:preserve-3d;
       animation:cine-rise linear both;
       animation-timeline:view();
       /* ⚠️ नाप px में, % में नहीं। % लंबे section के साथ बढ़ जाता है और
@@ -1444,9 +1457,13 @@ main .sec:first-of-type,.hero,.cstrip,.hdr,.ftr,.mbar{content-visibility:visible
       animation-range:entry 0px entry 200px;
     }
     @keyframes cine-rise{
-      from{opacity:0;transform:translate3d(0,34px,-130px) rotateX(5deg)}
+      from{opacity:0;transform:translateY(34px) scale(.975)}
       to  {opacity:1;transform:none}
     }
+    /* ⚠️ सफ़र वाले हिस्से पर यह चाल मत लगाइए। उसके अंदर sticky stage है, और
+       ऊपर transform लगते ही sticky का व्यवहार बिगड़ जाता है। उसकी अपनी चाल
+       पहले से है — वही काफ़ी है। */
+    .cine .wrap > .sec.jrn{animation:none;transform:none;opacity:1}
 
     /* एक-एक card अपनी बारी से, ज़रा सी गहराई के साथ */
     .cine .ct,.cine .pmini,.cine .post,.cine .shot,.cine .sbanner,.cine .panel,
@@ -1456,7 +1473,7 @@ main .sec:first-of-type,.hero,.cstrip,.hdr,.ftr,.mbar{content-visibility:visible
       animation-range:entry 0px entry 170px;
     }
     @keyframes cine-pop{
-      from{opacity:0;transform:translate3d(0,26px,-70px) scale(.972)}
+      from{opacity:0;transform:translateY(26px) scale(.965)}
       to  {opacity:1;transform:none}
     }
 
@@ -1476,7 +1493,7 @@ main .sec:first-of-type,.hero,.cstrip,.hdr,.ftr,.mbar{content-visibility:visible
     .cine .shead{animation:cine-head linear both;animation-timeline:view();
       animation-range:entry 0px entry 150px}
     @keyframes cine-head{
-      from{opacity:0;transform:translate3d(0,14px,-40px) rotateY(-5deg)}
+      from{opacity:0;transform:translateY(14px) scale(.985)}
       to  {opacity:1;transform:none}
     }
   }
@@ -1492,4 +1509,110 @@ main .sec:first-of-type,.hero,.cstrip,.hdr,.ftr,.mbar{content-visibility:visible
   .cine .wrap > .sec,.cine .wrap > .prow,.cine .ct,.cine .pmini,.cine .post,
   .cine .shot,.cine .sbanner,.cine .panel,.cine .mlinks li,.cine .shead{
     opacity:1 !important;transform:none !important}
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   हमारा सफ़र — scroll के साथ बहती हुई दुकान की कहानी
+   ═══════════════════════════════════════════════════════════════════
+   तीन video (1973 · 2006 · 2016), चार पड़ाव। सारा text असली HTML है,
+   video सिर्फ़ पीछे चलती है — इसलिए Google को पूरी कहानी पढ़ने को मिलती है।
+
+   ⚠️ Video सिर्फ़ बड़ी screen पर, और तभी जब यह हिस्सा पास आ जाए।
+   Phone पर वही सफ़र तीन ठहरी हुई तस्वीरों से चलता है।
+   ─────────────────────────────────────────────────────────────────── */
+
+.jrn{--jn:#0C0E16;--jink:#F4F2FA;--jink2:#C9C4DC;--jgold:#E0A44A}
+/* नाप scroll की दूरी में: चार पड़ाव, हर एक को 6+ flick तक पूरा दिखना है */
+.jrn-scroll{position:relative;height:540vh}
+.jrn-stage{position:sticky;top:calc(var(--hdr,56px) + 8px);
+  height:min(76vh,620px);border-radius:var(--r-lg,18px);overflow:hidden;
+  background:var(--jn);isolation:isolate;box-shadow:var(--sh-2)}
+.jrn-v,.jrn-stills img{position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;display:block}
+.jrn-v{opacity:0;z-index:1}
+/* तस्वीरें तब तक दिखती हैं जब तक video आकर चलने न लगे */
+.jrn-stills{position:absolute;inset:0;z-index:0}
+.jrn-stills img{opacity:0}
+.jrn-stills img:first-child{opacity:1}
+.jrn-live .jrn-stills{opacity:0}
+.jrn-grade{position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(180deg,rgba(12,14,22,.78) 0%,rgba(12,14,22,.24) 34%,
+    rgba(12,14,22,.42) 62%,rgba(12,14,22,.9) 100%)}
+
+.jrn-beats{position:absolute;inset:0;z-index:3;display:grid;place-items:center;
+  padding:clamp(20px,4vw,44px)}
+.jrn-beat{position:absolute;width:min(620px,100%);text-align:center;color:var(--jink);
+  opacity:0;text-shadow:0 1px 2px rgba(6,8,14,.9),0 6px 26px rgba(6,8,14,.75)}
+.jrn-beat:first-child{opacity:1}
+/* पहले पड़ाव के पीछे की परत — इसकी अपनी opacity नहीं घटती, beat की opacity
+   पूरे subtree पर लगती है, इसलिए बदलते वक़्त भी text उतना ही सुरक्षित रहता है */
+.jrn-beat::before{content:"";position:absolute;inset:-38% -14%;z-index:-1;
+  pointer-events:none;
+  background:radial-gradient(ellipse 80% 74% at 50% 50%,rgba(8,10,18,.82) 0%,
+    rgba(8,10,18,.58) 46%,rgba(8,10,18,0) 84%)}
+.jrn-year{display:block;font-family:var(--mono,ui-monospace,monospace);
+  font-size:clamp(11px,1.6vw,13px);letter-spacing:.34em;color:var(--jgold);
+  margin-bottom:14px;text-shadow:none;
+  --ky:clamp(0,var(--k,1)*1.6,1);opacity:var(--ky)}
+.jrn-beat h3{margin:0;font-size:clamp(1.45rem,1rem + 2.4vw,2.7rem);font-weight:800;
+  letter-spacing:-.02em;line-height:1.16;text-wrap:balance;color:var(--jink);
+  --kh:clamp(0,(var(--k,1) - .05)*1.5,1);opacity:var(--kh);
+  transform:translateY(calc((1 - var(--kh))*16px))}
+.jrn-tag{margin:12px 0 0;font-size:clamp(1rem,.94rem + .4vw,1.2rem);color:var(--jgold);
+  font-weight:700;text-wrap:balance;
+  --kt:clamp(0,(var(--k,1) - .25)*1.6,1);opacity:var(--kt);
+  transform:translateY(calc((1 - var(--kt))*14px))}
+.jrn-body{margin:10px auto 0;max-width:44ch;color:var(--jink2);
+  font-size:clamp(.94rem,.9rem + .3vw,1.06rem);line-height:1.66;text-wrap:pretty;
+  --kb:clamp(0,(var(--k,1) - .42)*1.7,1);opacity:var(--kb);
+  transform:translateY(calc((1 - var(--kb))*12px))}
+
+.jrn-rail{position:absolute;left:0;right:0;bottom:0;z-index:4;margin:0;
+  padding:0 clamp(14px,3vw,30px) clamp(14px,2.6vw,22px);
+  list-style:none;display:flex;gap:0;justify-content:space-between;align-items:center}
+.jrn-rail li{position:relative;flex:1;display:flex;flex-direction:column;
+  align-items:center;gap:7px;font-family:var(--mono,ui-monospace,monospace);
+  font-size:11px;letter-spacing:.16em;color:rgba(244,242,250,.42);
+  transition:color .45s var(--ease)}
+.jrn-rail li i{display:block;width:100%;height:2px;border-radius:2px;
+  background:rgba(244,242,250,.18);position:relative;overflow:hidden}
+.jrn-rail li i::after{content:"";position:absolute;inset:0;border-radius:2px;
+  background:var(--jgold);transform:scaleX(0);transform-origin:left;
+  transition:transform .55s var(--ease)}
+.jrn-rail li.on{color:var(--jink)}
+.jrn-rail li.on i::after{transform:scaleX(1)}
+
+/* ── पाँच हालतें: ठहरी हुई तस्वीरों वाला सफ़र ──
+   ⚠️ ये नाप JourneyScroll.tsx की GATES से हूबहू मिलनी चाहिए। */
+@media (max-width:860px),
+       (orientation:portrait) and (max-width:1024px),
+       (orientation:portrait) and (pointer:coarse),
+       (orientation:landscape) and (pointer:coarse) and (max-height:560px),
+       (prefers-reduced-motion:reduce){
+  .jrn-scroll{height:auto}
+  .jrn-stage{position:relative;top:auto;height:auto;display:grid;gap:14px;
+    background:none;box-shadow:none;overflow:visible;border-radius:0}
+  .jrn-v,.jrn-grade,.jrn-rail{display:none}
+  /* हर पड़ाव अपनी तस्वीर के साथ, एक के नीचे एक */
+  .jrn-stills{position:static;display:contents}
+  .jrn-stills img{position:relative;opacity:1;height:auto;aspect-ratio:16/9;
+    border-radius:var(--r,12px);order:0}
+  .jrn-beats{position:static;display:contents}
+  .jrn-beat{position:relative;opacity:1 !important;width:auto;text-align:left;
+    color:var(--ink);text-shadow:none;
+    background:var(--card);border:1px solid var(--line);border-radius:var(--r,12px);
+    padding:16px 18px 18px}
+  .jrn-beat::before{display:none}
+  .jrn-beat h3{color:var(--ink);opacity:1;transform:none;font-size:1.12rem}
+  .jrn-year{color:var(--brand);opacity:1;margin-bottom:8px}
+  .jrn-tag{color:var(--brand);opacity:1;transform:none;font-size:.98rem}
+  .jrn-body{color:var(--ink-2);opacity:1;transform:none;margin-left:0}
+  /* तस्वीर और पड़ाव की जोड़ी: 1973 और 1996 दोनों किराना दुकान वाली तस्वीर पर */
+  .jrn-stills img:nth-child(1){order:1}
+  .jrn-beat:nth-child(1){order:2}
+  .jrn-beat:nth-child(2){order:3}
+  .jrn-stills img:nth-child(2){order:4}
+  .jrn-beat:nth-child(3){order:5}
+  .jrn-stills img:nth-child(3){order:6}
+  .jrn-beat:nth-child(4){order:7}
 }

@@ -8,8 +8,8 @@ import { Art } from "@/components/ArtSprite";
 import { IconArrow, IconWhatsApp, IconPin, IconPhone } from "@/components/Icons";
 import { FollowUs } from "@/components/FollowUs";
 import { MoreLinks } from "@/components/MoreLinks";
-import { Banner } from "@/components/Banner";
 import { GoogleQR } from "@/components/GoogleQR";
+import { JourneyScroll } from "@/components/JourneyScroll";
 import { FinanceStrip } from "@/components/FinanceStrip";
 import { InstagramFeed } from "@/components/InstagramFeed";
 import { VideoRow } from "@/components/VideoRow";
@@ -23,6 +23,7 @@ import { NextClosure } from "@/components/StoreStatus";
    jayegi. */
 
 const toc: TocItem[] = [
+  { id: "hamara-safar", label: "हमारा सफ़र" },
   { id: "kya-milta-hai", label: "क्या-क्या मिलता है" },
   { id: "ek-chhat", label: "सब कुछ, एक ही छत के नीचे" },
   { id: "emi-exchange-repair", label: "EMI, Exchange और Repairing" },
@@ -67,10 +68,12 @@ export function HomeBody({ current = "/" }: { current?: string }) {
         )}
       </div>
 
-      <section className="sec">
-        <Banner src="/images/mobile-world-trust-since-1973-505ed6ee.webp"
-          alt={`${shop.legacyStartYear} से चला आ रहा परिवार का business, और ${shop.foundingYear} से ${shop.name}`} />
-      </section>
+      {/* पहले यहाँ "TRUST SINCE 1973" वाला banner था। उसके अंदर "Three
+          Generations of Service" और "Quality Products, Trusted Brands" जैसे
+          दावे छपे हुए थे — तस्वीर के अंदर, इसलिए किसी scan में पकड़ में भी नहीं
+          आते थे। अब वही कहानी owner की भेजी तीन videos से चलती है, और हर शब्द
+          असली HTML text में है (`legacy` से, दोबारा कहीं नहीं लिखा)। */}
+      <JourneyScroll />
 
       <section className="sec">
         <div className="shead">
