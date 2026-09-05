@@ -17,7 +17,7 @@ export function SiteFooter() {
       <div className="wrap">
         <div className="fgrid">
           <div>
-            <Link className="logo" href="/"><i><Image src="/images/mobile-world-logo-87f0b7f5.webp" alt="" width={240} height={240} sizes="40px" /></i><span>{shop.name}<s>{shop.tagline}</s></span></Link>
+            <Link className="logo" href="/"><i><Image src="/images/mobile-world-logo-79e75645.webp" alt="" width={240} height={240} sizes="40px" /></i><span>{shop.name}<s>{shop.tagline}</s></span></Link>
             <address style={{ marginTop: 12 }}>
               {shop.address.street}<br />
               {shop.address.landmark}<br />

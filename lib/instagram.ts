@@ -73,7 +73,7 @@ function apniPhotos(): IgFeed {
   return {
     live: false,
     username: "mobileworldfaridabad",
-    avatar: "/images/mobile-world-logo-87f0b7f5.webp",
+    avatar: "/images/mobile-world-logo-79e75645.webp",
     items: instaTiles.map((t, i) => ({
       id: `own-${i}`,
       permalink: shop.social.instagram,
@@ -133,7 +133,7 @@ export async function getInstagramFeed(): Promise<IgFeed> {
     return {
       live: true,
       username: me.username || "mobileworldfaridabad",
-      avatar: me.profile_picture_url || "/images/mobile-world-logo-87f0b7f5.webp",
+      avatar: me.profile_picture_url || "/images/mobile-world-logo-79e75645.webp",
       items: list.map((m) => ({
         id: m.id,
         permalink: m.permalink,

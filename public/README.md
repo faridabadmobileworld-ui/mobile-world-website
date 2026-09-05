@@ -6,21 +6,30 @@ Schema और meta tags इन्हीं URLs को point करते है
 
 | File | क्या है | कहाँ इस्तेमाल होती है |
 |---|---|---|
-| `logo.png` | 600×400 — owner का MW mark | `LocalBusiness` schema का `logo` |
+| `logo.png` | 512×512 — owner का असली mark, पारदर्शी | `LocalBusiness` schema का `logo` |
 | `favicon-64.png` · `favicon-32.png` | 64px / 32px square icon | Browser tab |
 | `apple-touch-icon.png` | 180×180 | iPhone में "Add to Home Screen" |
 | `og-image.jpg` | 1200×630 — दुकान की रात वाली photo | WhatsApp / Facebook / Instagram पर link की preview, `og:image` |
-| `logo-source.png` | 1536×1024 original logo | Source file — इसी से बाक़ी सब बनीं |
+| `logo-source.png` | 1254×1254 — owner की भेजी असली file (काले background पर) | Source file — इसी से बाक़ी सब बनीं |
 | `shop-exterior.webp` | owner की भेजी photo (720×340) | `og-image.jpg` इसी से बनी; preview के gallery में भी है |
 | `brand-profile-original.png` | owner का circular brand graphic | Source file. Website पर **नहीं** — नीचे देखिए |
 
 ## तीन बातें ध्यान देने की
 
-**1. `logo.png` square नहीं है, और यह ठीक है.**
-Original logo 3:2 का है। Schema.org का `logo` square माँगता नहीं। Square
-में बदलने के लिए ऊपर-नीचे काली पट्टी जोड़नी पड़ती, जिससे किनारे पर एक हल्की
-लकीर दिखती थी। Icons (favicon, apple-touch) square हैं — वहाँ छोटे size पर
-वो लकीर दिखती ही नहीं।
+**1. Logo का background काटकर पारदर्शी किया गया है.**
+Owner ने 3 Sep 2026 को असली logo वापस भेजा — लाल phone और globe वाला mark,
+**काले background पर**। Website का header सफ़ेद है, इसलिए काला चौकोर वहाँ
+नहीं चल सकता।
+
+काटने का तरीक़ा: alpha चमक से बनाई गई (`alpha = चमक / 46`, ऊपर 1 पर रुकी),
+और किनारे के pixel का रंग वापस खोला गया (`रंग ÷ alpha`) — वरना हर किनारे पर
+काली झालर रह जाती। नतीजा सफ़ेद, हल्के धूसर और गहरे — तीनों background पर
+जाँचा गया, कहीं झालर नहीं।
+
+📌 **छोटे icon (favicon, iOS) काले गोल-किनारे वाले tile पर हैं।** 16px पर
+पारदर्शी लाल mark browser की tab पट्टी में घुल जाता है; काले tile पर वो साफ़
+दिखता है — और owner का अपना logo भी इसी रूप में है। iOS पारदर्शी icon को
+वैसे भी काला कर देता है, इसलिए वहाँ यही सही है.
 
 **2. `og-image.jpg` की quality सीमित है.**
 Owner की भेजी दुकान की photo 720×340 की है। og:image के लिए 1200×630 चाहिए,
@@ -38,3 +47,7 @@ circle में है — दोनों ही schema logo और favicon �
 Business, Instagram, Facebook DP) — बस website के logo के तौर पर नहीं।
 Website अब owner की भेजी साफ़ logo file (`logo-source.png`) इस्तेमाल करती है,
 जिसमें कोई tagline नहीं है।
+
+⚠️ 3 Sep 2026 को owner ने नया brand graphic भेजा — उसमें भी **"TRUSTED
+BRAND", "BEST PRICE", "BETTER SERVICE"** लिखा है, और owner की photo भी है।
+इसलिए वही नियम अब भी लागू है: file यहाँ रखी है, website पर नहीं लगती।

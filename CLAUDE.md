@@ -310,8 +310,15 @@ Visitor details save करना, customer login।
 - [x] ~~Map के geo coordinates~~ — 28.36249, 77.28786 (24 Aug 2026)
 - [x] ~~`og-image.jpg`~~ — बन गई, पर source photo 720×340 की थी।
       अगर दुकान की **1200px या चौड़ी** photo मिले तो बदल दीजिए।
-- [x] ~~Logo file~~ — owner ने साफ़ logo भेज दी (24 Aug 2026)।
-      `public/logo.png`, favicon और apple-touch-icon सब इसी से बने।
+- [x] ~~Logo file~~ — **3 Sep 2026 को owner ने अपना असली, पुराना वाला logo
+      वापस भेजा** (लाल phone + globe, काले background पर) और कहा: *"Jo hamesha
+      se chalta aa raha tha hamara Original wala logo h ye. Wapas ise ko set
+      kardo poori website pe har jagah."* Website की हर जगह वही लगा है —
+      header, footer, Instagram पट्टी का avatar, schema का `logo`, browser tab,
+      iOS icon और favicon.ico। Master: `public/logo-source.png`,
+      काटने का पूरा तरीक़ा `public/README.md` में।
+      ⚠️ Header सफ़ेद है, इसलिए वहाँ **पारदर्शी** version लगता है; छोटे icon
+      **काले tile** पर हैं (16px पर लाल mark tab पट्टी में घुल जाता है)।
 
 ### Site live करने से पहले — ये चारों ज़रूरी हैं
 
@@ -686,7 +693,6 @@ Logo लगने के बाद यह disclaimer और भी ज़रू�
       1.85× बड़ी करनी पड़ी।
 - [ ] अपनी product photos — Redmi article से Xiaomi की slides हटाई गईं,
       वहाँ अभी code वाली drawing है
-- [ ] Logo का transparent background वाला version (सफ़ेद header के लिए)
 - [ ] हर category में क्या-क्या रखते हैं (दाम नहीं — बस सूची)
 - [ ] दुकान की कहानी — 1973 से आज तक, दो-तीन सच्ची बातें
 
