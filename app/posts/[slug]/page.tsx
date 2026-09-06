@@ -5,20 +5,27 @@ import { notFound } from "next/navigation";
 import { shop } from "@/data/shop";
 import { PageFoot, Byline } from "@/components/PageFoot";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
-import { posts } from "@/data/content";
+import { livePosts } from "@/data/content";
 import { jsonLdScript } from "@/data/schema";
 import { IconWhatsApp, IconPhone } from "@/components/Icons";
 
 type Params = { params: Promise<{ slug: string }> };
 
+/**
+ * जिस post का वक़्त नहीं आया, उसका URL बनता ही नहीं — और `dynamicParams`
+ * बंद है, इसलिए Vercel उसे माँगने पर भी नहीं बनाता। यानी 10 बजे से पहले
+ * किसी को (Google को भी) वो post किसी तरह नहीं मिल सकती।
+ */
+export const dynamicParams = false;
+
 /** हर post अपने URL पर बनती है — इसीलिए Google इन्हें अलग page मान सकता है। */
 export function generateStaticParams() {
-  return posts.map((p) => ({ slug: p.slug }));
+  return livePosts().map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
-  const post = posts.find((p) => p.slug === slug);
+  const post = livePosts().find((p) => p.slug === slug);
   if (!post) return {};
   return {
     title: post.title,
@@ -37,10 +44,11 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
 export default async function PostPage({ params }: Params) {
   const { slug } = await params;
-  const post = posts.find((p) => p.slug === slug);
+  const all = livePosts();
+  const post = all.find((p) => p.slug === slug);
   if (!post) notFound();
 
-  const others = posts.filter((p) => p.slug !== post.slug);
+  const others = all.filter((p) => p.slug !== post.slug);
 
   // Article ke apne <h2 id="..."> se TOC बन जाती है — दोबारा list लिखने की
   // ज़रूरत नहीं, इसलिए heading बदलने पर TOC अपने आप सही रहती है।

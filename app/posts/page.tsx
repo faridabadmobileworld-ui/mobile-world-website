@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { shop } from "@/data/shop";
-import { posts } from "@/data/content";
+import { livePosts } from "@/data/content";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { PageFoot, Byline } from "@/components/PageFoot";
 import { FollowUs } from "@/components/FollowUs";
@@ -16,7 +16,11 @@ export const metadata: Metadata = {
   alternates: { canonical: "/posts" },
 };
 
-const toc: TocItem[] = posts.map((p) => ({ id: p.slug, label: p.title }));
+/**
+ * TOC और list दोनों `livePosts()` से बनती हैं — जिस post का वक़्त नहीं
+ * आया, वो यहाँ भी नहीं दिखती।
+ */
+const toc: TocItem[] = livePosts().map((p) => ({ id: p.slug, label: p.title }));
 
 export default function Posts() {
   return (
@@ -38,7 +42,7 @@ export default function Posts() {
         </div>
         <TableOfContents items={toc} heading="इस page पर ये articles हैं" />
         <div className="posts">
-          {posts.map((p) => (
+          {livePosts().map((p) => (
             <Link className="post rv in" key={p.slug} id={p.slug} href={`/posts/${p.slug}`}>
               <div className="m">
                 <Image src={p.image} alt={p.alt} width={p.imageW} height={p.imageH}

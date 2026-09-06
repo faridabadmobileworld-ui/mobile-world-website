@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { shop } from "@/data/shop";
-import { posts } from "@/data/content";
+import { livePosts } from "@/data/content";
 
 /**
  * `/sitemap.xml` अपने आप बन जाती है।
@@ -30,7 +30,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${shop.siteUrl}/returns`, changeFrequency: "yearly", priority: 0.3 },
   ] as const).map((p) => ({ ...p, lastModified: now }));
 
-  const articles: MetadataRoute.Sitemap = posts.map((p) => ({
+  // जिस post का वक़्त नहीं आया वो sitemap में भी नहीं जाती — वरना Google
+  // ऐसा पता माँगने आता जो अभी बना ही नहीं है।
+  const articles: MetadataRoute.Sitemap = livePosts().map((p) => ({
     url: `${shop.siteUrl}/posts/${p.slug}`,
     lastModified: new Date(p.dateISO),
     changeFrequency: "yearly",

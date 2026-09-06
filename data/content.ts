@@ -414,6 +414,18 @@ export type Post = {
   kicker: string;
   date: string;
   dateISO: string;
+  /**
+   * Post कब से दिखनी चाहिए (ISO, +05:30 के साथ)।
+   *
+   * न लिखो तो post पहले से live है — पुरानी सारी posts ऐसी ही हैं।
+   * लिखा हो तो `livePosts()` उसे तभी दिखाती है जब वो वक़्त निकल चुका हो।
+   *
+   * ⚠️ यह जाँच **build के वक़्त** होती है, page खुलने के वक़्त नहीं — site
+   * static है (Next.js का ISR यहाँ चलता ही नहीं, `output: export` उसे
+   * मना करता है)। इसलिए तय समय पर site का एक **rebuild** होना ज़रूरी है,
+   * वरना post अपने आप live नहीं होगी।
+   */
+  publishAt?: string;
   title: string;
   excerpt: string;
   image: string;
@@ -423,7 +435,74 @@ export type Post = {
   body: string;
 };
 
+/**
+ * जो posts अभी दिखनी चाहिए।
+ *
+ * `publishAt` वाली post तय वक़्त से पहले हर जगह से ग़ायब रहती है —
+ * hub, home page, sitemap, "और भी पढ़िए", और उसका अपना URL भी।
+ * इसीलिए Google को अधूरी post कभी नहीं मिलती।
+ *
+ * **सारी जगहें `livePosts()` ही इस्तेमाल करें, सीधे `posts` नहीं।**
+ */
+export function livePosts(now: Date = new Date()): Post[] {
+  return posts.filter((p) => !p.publishAt || new Date(p.publishAt) <= now);
+}
+
 export const posts: Post[] = [
+  {
+    slug: "redmi-17-5g-price-specs-pre-booking-faridabad",
+    kicker: "Tech Update",
+    date: "7 September 2026",
+    dateISO: "2026-09-07",
+    // 7 Sep 2026, सुबह 10 बजे से दिखेगी। उससे पहले पूरी site पर कहीं नहीं।
+    publishAt: "2026-09-07T10:00:00+05:30",
+    title: "Redmi 17 5G: 7,900mAh battery और Snapdragon 4 Gen 5 — Faridabad में pre-booking खुल गई",
+    excerpt:
+      "7,900mAh battery, Snapdragon 4 Gen 5 और 50MP camera — Redmi 17 5G की sale 10 September से। " +
+      "Jawahar Colony, NIT Faridabad की दुकान पर pre-booking खुली है।",
+    image: "/images/mid-range-5g-phones-five-colours-v2-7c07be19.webp",
+    imageW: 900,
+    imageH: 900,
+    alt: "Mobile World, Jawahar Colony में मिलने वाले mid-range 5G smartphones",
+    body: `
+<p>अगर आप ऐसे 5G phone का इंतज़ार कर रहे थे जिसकी battery दिन में बार-बार charger न माँगे, तो Xiaomi ने भारत में <strong>Redmi 17 5G</strong> उतार दिया है। Sale <strong>10 September</strong> से शुरू हो रही है, और Mobile World पर इसकी pre-booking खुल चुकी है।</p>
+<p>नीचे वही बातें लिखी हैं जो Xiaomi ने ख़ुद बताई हैं — ताकि दुकान आने से पहले आपको पता हो कि आप क्या ले रहे हैं।</p>
+
+<h2 id="battery">Battery और charging — 7,900mAh</h2>
+<p>इस phone की सबसे बड़ी बात इसकी <strong>7,900mAh (typ) battery</strong> है। Xiaomi का कहना है कि यह ढाई दिन तक चल जाती है।</p>
+<ul>
+<li><strong>146 घंटे तक music</strong> और <strong>20+ घंटे video</strong> playback।</li>
+<li>डिब्बे में <strong>45W Turbo charging</strong> का adapter मिलता है — क़रीब <strong>96 मिनट</strong> में पूरा charge।</li>
+<li><strong>22.5W reverse charging</strong> — अपने earbuds या smartwatch को इसी phone से charge कर लीजिए।</li>
+</ul>
+
+<h2 id="display">Display और design</h2>
+<p>Screen 17.53cm (6.9 इंच) की है, HD clarity के साथ।</p>
+<ul>
+<li><strong>120Hz तक AdaptiveSync</strong> refresh rate — scroll करने पर सब चिकना चलता है।</li>
+<li>Screen पर <strong>Corning Gorilla Glass 7i</strong> का protection।</li>
+<li>तीन रंग — <strong>Absolute Black</strong>, <strong>Endless Blue</strong> और <strong>Eternal Orange</strong>।</li>
+</ul>
+
+<h2 id="performance">Performance और camera</h2>
+<ul>
+<li><strong>Snapdragon 4 Gen 5 5G</strong> processor (4nm) — एक साथ कई app चलाने पर भी अटकता नहीं।</li>
+<li>पीछे <strong>50MP AI dual camera</strong>।</li>
+<li><strong>Dynamic RGB Light</strong> — 8 रंगों में जलने वाली पट्टी, notification और gaming के लिए।</li>
+<li><strong>300% Volume Boost</strong>, और <strong>IP64</strong> — छींटे, धूल और हल्के पानी से बचाव।</li>
+<li>Memory extension के साथ RAM <strong>16GB तक</strong> बढ़ जाती है।</li>
+</ul>
+
+<h2 id="keemat">क़ीमत और pre-booking</h2>
+<p>Xiaomi ने शुरुआती क़ीमत <strong>₹23,999</strong> बताई है। कौन सा variant कितने का पड़ेगा, यह RAM और storage के हिसाब से बदलता है — पूरा हिसाब counter पर सामने रख दिया जाएगा।</p>
+<p>Sale 10 September से है और शुरुआत में stock सीमित रहता है। इसलिए जिस रंग और variant पर मन बना हो, उसकी pre-booking करवा लेना ठीक रहता है। नीचे WhatsApp वाले बटन से message कर दीजिए, या सीधे दुकान पर आ जाइए।</p>
+<p>किश्तों पर लेना हो तो <a href="/finance">Finance और EMI</a> वाले page पर पूरी शर्तें लिखी हैं। पुराना phone देना हो तो <a href="/posts/phone-exchange-guide">exchange वाली guide</a> पहले पढ़ लीजिए — साथ में क्या लाना है, वो वहाँ लिखा है।</p>
+
+<h2 id="dukaan-se">दुकान से लेने पर क्या फ़र्क़ पड़ता है</h2>
+<p>Phone हाथ में लेकर देखिए — नाप, वज़न, रंग। डिब्बा आपके सामने खुलता है, GST bill वहीं मिलता है, और नया phone चालू करके, data डालकर ही आप घर जाते हैं।</p>
+<p>बाद में कुछ समझना हो या कोई दिक़्क़त आए, तो आमने-सामने बात हो सकती है — यह <a href="/after-sales-support">After Sales Support</a> वाले page पर लिखा है। नए phone की warranty का काम company के service centre पर ही होता है, यह हम पहले ही साफ़ बता देते हैं।</p>
+<p>Mobile World 2016 से Jawahar Colony में है, और परिवार का यह काम 1973 से चला आ रहा है। दुकान तक पहुँचने का रास्ता <a href="/visit">दुकान पर आइए</a> वाले page पर है।</p>`,
+  },
   {
     slug: "phone-exchange-guide",
     kicker: "Buying Guide",

@@ -14,11 +14,28 @@
  * Chalane ka tareeka:  npm run preview
  */
 
-import { readFileSync, writeFileSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
 import { join, extname } from "node:path";
 
 const OUT = "out";
 const DEST = "preview/index.html";
+
+/**
+ * Articles यहाँ हाथ से नहीं लिखे जाते।
+ *
+ * `out/posts/` में जो बन गया, वही उठा लिया जाता है। इसका फ़ायदा: कोई post
+ * आगे की तारीख़ पर set हो (`publishAt`), तो वो अपने वक़्त से पहले न preview
+ * में आती है और न कोई line जोड़नी-हटानी पड़ती है।
+ */
+function postPages() {
+  const dir = join(OUT, "posts");
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir, { withFileTypes: true })
+    .filter((e) => e.isDirectory() && existsSync(join(dir, e.name, "index.html")))
+    .map((e) => e.name)
+    .sort()
+    .map((slug) => [`/posts/${slug}`, `posts/${slug}/index.html`]);
+}
 
 const PAGES = [
   ["/", "index.html"],
@@ -27,13 +44,7 @@ const PAGES = [
   ["/contact", "contact/index.html"],
   ["/visit", "visit/index.html"],
   ["/posts", "posts/index.html"],
-  ["/posts/ac-tonnage", "posts/ac-tonnage/index.html"],
-  ["/posts/new-phones", "posts/new-phones/index.html"],
-  ["/posts/monthly-closure", "posts/monthly-closure/index.html"],
-  ["/posts/phone-exchange-guide", "posts/phone-exchange-guide/index.html"],
-  ["/posts/best-laptops-students", "posts/best-laptops-students/index.html"],
-  ["/posts/smart-tv-guide", "posts/smart-tv-guide/index.html"],
-  ["/posts/inverter-vs-non-inverter-ac", "posts/inverter-vs-non-inverter-ac/index.html"],
+  ...postPages(),
   ["/team", "team/index.html"],
   ["/repairing", "repairing/index.html"],
   ["/after-sales-support", "after-sales-support/index.html"],

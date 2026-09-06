@@ -11,8 +11,20 @@ const B='http://localhost:3111';
 const SITE_PAGES=[...readFileSync('data/pages.ts','utf8')
   .matchAll(/href:\s*"([^"]+)"/g)].map(m=>m[1]);
 // Article ki list bhi data/content.ts se hi — nayi post apne aap jaanch mein aa jati hai.
-const POST_SLUGS=[...readFileSync('data/content.ts','utf8')
-  .matchAll(/^\s{4}slug:\s*"([^"]+)",$/gm)].map(m=>'/posts/'+m[1]);
+// Jis post par `publishAt` aage ki tareekh ka hai wo abhi bani hi nahi hoti
+// (generateStaticParams use chhod deta hai), isliye use jaanch se bahar rakho —
+// warna 404 par jhootha fail aayega.
+const CONTENT_TS=readFileSync('data/content.ts','utf8');
+const POST_SLUGS=(()=>{
+  const now=Date.now(), out=[];
+  const parts=CONTENT_TS.split(/^\s{4}slug:\s*"/m);
+  for(let i=1;i<parts.length;i++){
+    const slug=parts[i].slice(0,parts[i].indexOf('"'));
+    const pa=parts[i].match(/publishAt:\s*"([^"]+)"/);
+    if(!pa||Date.parse(pa[1])<=now) out.push('/posts/'+slug);
+  }
+  return out;
+})();
 const paths=[...SITE_PAGES,...POST_SLUGS];
 const b=await chromium.launch(); const fail=[],ok=[];
 const T=(c,l,d='')=>(c?ok:fail).push(l+(d?`  [${d}]`:''));

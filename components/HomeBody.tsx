@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { shop } from "@/data/shop";
-import { items, storePhotos, serviceBanners, posts, helpPoints, serviceList,
+import { items, storePhotos, serviceBanners, livePosts, helpPoints, serviceList,
          artForCategory, ask, whatsappGeneral, navCategories } from "@/data/content";
 import { ProductCard } from "@/components/ProductCard";
 import { Art } from "@/components/ArtSprite";
@@ -175,7 +175,7 @@ export function HomeBody({ current = "/", journey = true }:
           <Link href="/posts">सब देखिए <IconArrow /></Link>
         </div>
         <div className="posts">
-          {posts.map((p) => (
+          {livePosts().map((p) => (
             <Link className="post rv in" key={p.slug} href={`/posts/${p.slug}`}>
               <div className="m">
                 <Image src={p.image} alt={p.alt} width={p.imageW} height={p.imageH}
