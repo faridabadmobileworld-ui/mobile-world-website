@@ -634,10 +634,10 @@ export const posts: Post[] = [
     title: "पढ़ाई के लिए laptop — इन चार बातों पर ध्यान दीजिए",
     excerpt:
       "Processor, RAM, storage और battery — बच्चे की पढ़ाई के लिए laptop लेते समय असल में यही चार बातें मायने रखती हैं।",
-    image: "/images/padhai-ki-mez-par-laptop.webp",
-    imageW: 1200,
-    imageH: 800,
-    alt: "पढ़ाई की मेज़ पर खुला laptop, साथ में copy, pen और पानी का गिलास",
+    image: "/images/laptop-for-study-and-office-a146b020.webp",
+    imageW: 900,
+    imageH: 900,
+    alt: "पढ़ाई और office के काम आने वाला laptop",
     body: `
 <p>School के project हों या college की पढ़ाई — laptop अब ज़रूरत बन चुका है। पर online पर लिखी लंबी-चौड़ी specifications देखकर ज़्यादातर लोग उलझ जाते हैं।</p>
 <p>असल में देखने वाली बातें सिर्फ़ चार हैं।</p>
@@ -662,10 +662,10 @@ export const posts: Post[] = [
     title: "Smart TV लेने से पहले — size, picture और software",
     excerpt:
       "32, 43 या 55 inch? 4K लें या Full HD? और TV का software क्यों मायने रखता है — तीनों बातें आसान भाषा में।",
-    image: "/images/deewar-par-smart-tv.webp",
-    imageW: 1200,
-    imageH: 800,
-    alt: "बैठक की दीवार पर लगा smart TV, नीचे लकड़ी का console",
+    image: "/images/smart-television-on-white-4b38b4f8.webp",
+    imageW: 900,
+    imageH: 900,
+    alt: "Smart television",
     body: `
 <p>पूरे परिवार के साथ बड़ी screen पर देखने का मज़ा अलग है। पर 4K, QLED, Android, WebOS — इतने शब्द सुनकर उलझन हो जाती है। तीन बातें समझ लीजिए, बाक़ी अपने आप आसान हो जाएगा।</p>
 <h2 id="size">Size — कमरे की दूरी से तय होता है</h2>
@@ -695,10 +695,10 @@ export const posts: Post[] = [
     title: "Inverter AC और normal AC में फ़र्क़ क्या है?",
     excerpt:
       "नाम से लगता है कि यह घर के inverter पर चलेगा — ऐसा नहीं है। फ़र्क़ compressor का है, और उसी से बिजली का बिल तय होता है।",
-    image: "/images/raat-mein-bedroom-ka-split-ac.webp",
-    imageW: 1200,
-    imageH: 800,
-    alt: "रात में बेडरूम की दीवार पर लगी split AC की indoor unit",
+    image: "/images/split-air-conditioner-in-a-room-17b0cbd3.webp",
+    imageW: 900,
+    imageH: 900,
+    alt: "कमरे में लगी split AC की indoor unit",
     body: `
 <p>पहले एक ग़लतफ़हमी दूर कर लीजिए — <strong>Inverter AC का मतलब यह नहीं कि वो घर के inverter (battery) पर चलेगा।</strong> यह नाम उसके compressor की वजह से है।</p>
 <h2 id="normal-ac">Normal (non-inverter) AC कैसे चलता है</h2>
@@ -724,10 +724,10 @@ export const posts: Post[] = [
     title: "अपने कमरे के लिए सही AC tonnage कैसे चुनें",
     excerpt:
       "बड़ा AC अपने आप बेहतर नहीं होता। हम counter पर कमरे का हिसाब कैसे लगाते हैं, वही यहाँ लिखा है।",
-    image: "/images/bade-kamre-mein-chhota-split-ac.webp",
+    image: "/images/split-ac-indoor-unit-wide-8c7ac6ae.webp",
     imageW: 1200,
-    imageH: 800,
-    alt: "बड़े कमरे की दूर वाली दीवार पर लगी छोटी split AC की indoor unit",
+    imageH: 675,
+    alt: "दीवार पर लगी split AC की indoor unit",
     body: `
 <p>बड़ा AC अपने आप बेहतर नहीं होता। ज़रूरत से बड़ा AC कमरे को झट से ठंडा करके बंद हो जाता है, फिर थोड़ी देर में दोबारा चालू — इससे बिजली ज़्यादा लगती है और कमरे में नमी बनी रहती है। छोटा AC कभी बंद ही नहीं होता, और उसका compressor जल्दी थक जाता है।</p>
 <h2 id="ton-ka-matlab">'Ton' का मतलब वज़न नहीं होता</h2>
