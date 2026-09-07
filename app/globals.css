@@ -3060,3 +3060,44 @@ main .shead h2,main .sec>.shead{text-align:left !important}
   .phv h1{font-size:22px;margin-bottom:3px}
   .phv-sub{font-size:13px;margin-bottom:8px}
 }
+
+/* ── 14. आख़िरी बचे हुए बैंगनी हिस्से ─────────────────────────────────
+   ये ऊपर कहीं गहरे बैंगनी gradient से बने थे। Apple पर ऐसा एक भी नहीं
+   है — वहाँ यही काम सादे भूरे हिस्से, बड़ी heading और एक नीले pill से
+   होता है।                                                            */
+.strip,.follow{background:#f5f5f7;color:var(--ink);border-radius:18px;
+  padding:44px 30px;box-shadow:none}
+.strip *,.follow *{color:inherit}
+.strip b,.strip h2,.follow b,.follow h2{font-size:28px;line-height:1.14286;
+  letter-spacing:.007em;font-weight:600;color:var(--ink)}
+@media(min-width:735px){ .strip b,.strip h2,.follow b,.follow h2{font-size:32px} }
+.strip s,.strip p,.follow p,.follow s{font-size:17px;line-height:1.47059;
+  letter-spacing:-.022em;color:var(--ink-2)}
+.strip .btn,.follow .btn{background:var(--blue-btn);color:#fff}
+.strip .btn:hover,.follow .btn:hover{background:var(--blue-btn-h)}
+.strip a:not(.btn),.follow a:not(.btn){color:var(--blue)}
+
+/* Heading के नीचे की रंगीन धार और सुनहरी लहर — Apple पर दोनों नहीं हैं */
+main .shead h2::after,main .rbody h2::after,main .prose h2::after{display:none !important}
+main .shead h2,main .rbody h2{background-image:none !important;
+  -webkit-text-fill-color:currentColor;color:var(--ink) !important}
+
+/* "इस page पर" वाला dashboard पूरी चौड़ाई ले — यह पढ़ने वाला text नहीं है */
+.toc{max-width:none}
+
+/* Article/भारी text वाले page — Apple की पढ़ने की चौड़ाई 734px है */
+.prose,.rbody{max-width:var(--measure)}
+
+/* Heading के बाईं तरफ़ रंगीन धार — Apple पर heading सादी होती है */
+main .shead:has(a) h2::before{display:none !important}
+
+/* "दुकान के अंदर" वाली तस्वीरें — Apple के card जैसी: 18px गोल, बिना
+   border, और caption तस्वीर के ऊपर काँच जैसी पट्टी में */
+.shot{border:0;border-radius:18px;background:#f5f5f7;min-height:200px}
+.shot img,.shot .art{border-radius:18px}
+.shot figcaption{background:rgba(255,255,255,.86);
+  -webkit-backdrop-filter:saturate(180%) blur(12px);
+  backdrop-filter:saturate(180%) blur(12px);border-radius:12px}
+.shot .t{font-size:11px;font-weight:600;letter-spacing:-.01em;text-transform:uppercase;
+  color:var(--ink-2)}
+.shot::after{display:none !important}
