@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { ScrollCue } from "./ScrollCue";
 import { useEffect, useRef } from "react";
 import { legacy } from "@/data/shop";
 
@@ -102,6 +103,9 @@ export function JourneyScroll({ hero = false }: { hero?: boolean }) {
           seek(i, clamp((p - e.a) / (e.b - e.a), 0, 1) * videos[i].duration);
         }
       }
+      // सफ़र कितना कट चुका — इसी से नीचे वाला इशारा आख़िर में मद्धम होता है।
+      root.style.setProperty("--jp", p.toFixed(3));
+
       let active = 0;
       for (let i = 0; i < BEATS.length; i++) {
         const [a, b] = BEATS[i];  // b का इस्तेमाल सिर्फ़ ऊपर fade में
@@ -223,6 +227,12 @@ export function JourneyScroll({ hero = false }: { hero?: boolean }) {
         : <div className="shead"><h2 id="hamara-safar">हमारा सफ़र</h2></div>}
 
       <div className="jrn-scroll" ref={rootRef}>
+        {/* ⚠️ यह `jrn-pin` वाली परत 7 Sep 2026 को जोड़ी गई। पहले `jrn-stage`
+            ख़ुद sticky था और उसकी ऊँचाई 540px पर बँधी थी — लंबे phone पर
+            उसके नीचे आधी screen ख़ाली रह जाती थी और लोग scroll करना ही छोड़
+            देते थे। अब यह परत पूरी screen घेरती है: ऊपर video, नीचे इशारा।
+            कोई ख़ाली जगह नहीं बचती। */}
+        <div className="jrn-pin">
         <div className="jrn-stage">
           {ERAS.map((e) => (
             <video key={e.year} className={`jrn-v jrn-v-${e.year}`}
@@ -255,6 +265,9 @@ export function JourneyScroll({ hero = false }: { hero?: boolean }) {
               <li key={m.year} className={i === 0 ? "on" : ""}><i />{m.year}</li>
             ))}
           </ol>
+        </div>
+
+        <ScrollCue />
         </div>
       </div>
     </section>

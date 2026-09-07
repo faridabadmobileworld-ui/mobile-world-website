@@ -1528,7 +1528,8 @@ main .sec.jrn{content-visibility:visible;contain-intrinsic-size:auto}
 /* ── सफ़र जब /showcase का hero बनता है — पूरी screen, बड़ा अक्षर ── */
 .jrn-hero{padding-top:0;margin-top:calc(var(--sec-gap,26px) * -1)}
 .jrn-hero .jrn-scroll{height:640vh}
-.jrn-hero .jrn-stage{top:0;height:100svh;border-radius:0;
+.jrn-hero .jrn-pin{top:0;height:100svh;gap:0}
+.jrn-hero .jrn-stage{border-radius:0;
   margin-inline:calc(50% - 50vw);width:100vw;box-shadow:none}
 .jrn-hero .jrn-beat{width:min(760px,100%)}
 .jrn-hero .jrn-beat h3{font-size:clamp(1.7rem,1rem + 3.4vw,3.4rem)}
@@ -1544,8 +1545,17 @@ main .sec.jrn{content-visibility:visible;contain-intrinsic-size:auto}
   40%{transform:translateX(-50%) scaleY(1);opacity:1}
   100%{transform:translateX(-50%) scaleY(1);transform-origin:bottom;opacity:0}}
 @media(prefers-reduced-motion:reduce){.jrn-hero .jrn-stage::after{display:none}}
-.jrn-stage{position:sticky;top:calc(var(--hdr,56px) + 8px);
-  height:min(76vh,620px);border-radius:var(--r-lg,18px);overflow:hidden;
+/* ⚠️ 7 Sep 2026 — यह परत जोड़ी गई और `sticky` यहाँ आ गया।
+   पहले `.jrn-stage` ख़ुद sticky था और उसकी ऊँचाई `min(76vh,620px)` पर बँधी
+   थी। लंबे phone पर video के नीचे आधी screen ख़ाली रह जाती थी, बिना किसी
+   इशारे के — owner ने पकड़ा कि लोग वहीं रुक जाते हैं या ऊपर लौट जाते हैं।
+   अब `jrn-pin` पूरी screen घेरता है: ऊपर video (जितनी जगह बचे उतनी), नीचे
+   "scroll करते जाइए" वाला इशारा। कोई ख़ाली जगह नहीं बचती। */
+.jrn-pin{position:sticky;top:calc(var(--hdr,56px) + 8px);
+  height:calc(100svh - var(--hdr,56px) - 18px);
+  display:flex;flex-direction:column;gap:10px;min-height:0}
+.jrn-stage{position:relative;flex:1 1 auto;min-height:0;
+  border-radius:var(--r-lg,18px);overflow:hidden;
   background:var(--jn);isolation:isolate;box-shadow:var(--sh-2)}
 .jrn-v,.jrn-stills img{position:absolute;inset:0;width:100%;height:100%;
   object-fit:cover;display:block}
@@ -1609,8 +1619,9 @@ main .sec.jrn{content-visibility:visible;contain-intrinsic-size:auto}
 @media (max-width:860px){
   .jrn-scroll{height:420vh}
   .jrn-hero .jrn-scroll{height:460vh}
-  .jrn-stage{height:min(68svh,540px);top:calc(var(--hdr,56px) + 6px)}
-  .jrn-hero .jrn-stage{height:100svh;top:0}
+  .jrn-pin{top:calc(var(--hdr,56px) + 6px);
+    height:calc(100svh - var(--hdr,56px) - 14px);gap:8px}
+  .jrn-hero .jrn-pin{height:100svh;top:0}
   .jrn-beats{padding:16px}
   .jrn-beat{width:100%}
   .jrn-beat h3,.jrn-hero .jrn-beat h3{font-size:clamp(1.3rem,.9rem + 2.6vw,1.9rem)}
@@ -1621,8 +1632,14 @@ main .sec.jrn{content-visibility:visible;contain-intrinsic-size:auto}
   .jrn-rail{padding:0 10px 12px}
   .jrn-rail li{font-size:9.5px;letter-spacing:.1em;gap:5px}
 }
-/* नीचे वाली पट्टी phone के WhatsApp/Call bar के पीछे छुप जाती थी */
-@media(max-width:720px){.jrn-rail,.jrn-hero .jrn-rail{padding-bottom:82px}}
+/* नीचे वाली पट्टी phone के WhatsApp/Call bar के पीछे छुप जाती थी।
+   Home page पर अब उसके नीचे "scroll करते जाइए" वाली पट्टी है, इसलिए वहाँ
+   इतनी जगह की ज़रूरत नहीं रही — पर /showcase के hero पर cue नहीं है, वहाँ
+   पुरानी दूरी वैसी ही चाहिए। */
+@media(max-width:720px){
+  .jrn-rail{padding-bottom:14px}
+  .jrn-hero .jrn-rail{padding-bottom:82px}
+}
 
 /* ── दो हालतें जिनमें सफ़र ठहरी हुई तस्वीरों में बदल जाता है ──
    ⚠️ ये नाप JourneyScroll.tsx की GATES से हूबहू मिलनी चाहिए। */
@@ -1994,3 +2011,112 @@ main .rbody .hn{flex:none;display:grid;place-items:center;min-width:30px;height:
   font-weight:800;color:var(--brand);letter-spacing:-.035em;line-height:1;
   font-variant-numeric:tabular-nums}
 @media(min-width:560px){ .rbody .tiers{grid-template-columns:repeat(2,1fr)} }
+
+
+/* ── "रुकिए मत — scroll करते जाइए" ────────────────────────────────────
+   सफ़र वाली video के ठीक नीचे। पहले यहाँ आधी screen ख़ाली पड़ी रहती थी।
+
+   `--jp` सफ़र की चाल है (0 से 1), जो JourneyScroll हर frame पर भरता है।
+   सफ़र ख़त्म होते-होते यह पट्टी अपने आप मद्धम होकर हट जाती है — वरना आख़िरी
+   पड़ाव पर भी "और scroll कीजिए" कहती रहती, जो झूठा इशारा होता।           */
+.jrn-cue{flex:none;display:flex;align-items:center;gap:12px;
+  padding:11px 14px;border-radius:var(--r-lg,18px);
+  background:linear-gradient(180deg,#fff,#FAFAFE);
+  box-shadow:0 1px 2px rgba(17,17,26,.05),0 10px 26px -14px rgba(17,17,26,.2),
+             inset 0 0 0 1px rgba(17,17,26,.06);
+  opacity:clamp(0,calc((0.9 - var(--jp,0)) * 7),1)}
+.jrn-hero .jrn-cue{display:none}
+
+.jrn-mas{flex:none;display:grid;place-items:center;line-height:0}
+.jrn-cue-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.jrn-cue-t b{font-size:13.5px;font-weight:800;color:var(--ink);letter-spacing:-.015em}
+.jrn-cue-t em{font-style:normal;font-size:11.5px;color:var(--ink-3);line-height:1.4}
+
+.jrn-chev{flex:none;display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding-right:2px}
+.jrn-chev i{display:block;width:11px;height:11px;border-right:2.2px solid var(--brand);
+  border-bottom:2.2px solid var(--brand);transform:rotate(45deg);opacity:.25;
+  border-radius:1px}
+
+@media(prefers-reduced-motion:no-preference){
+  @keyframes jrn-chev{0%,100%{opacity:.18}45%{opacity:1}}
+  @keyframes jrn-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(3px)}}
+  @keyframes jrn-arm{0%,100%{transform:translateY(0)}50%{transform:translateY(2.5px)}}
+  @keyframes jrn-sh{0%,100%{transform:scaleX(1);opacity:.22}50%{transform:scaleX(.86);opacity:.14}}
+  main .jrn-chev i{animation:jrn-chev 1.5s var(--ease) infinite}
+  main .jrn-chev i:nth-child(2){animation-delay:.18s}
+  main .jrn-chev i:nth-child(3){animation-delay:.36s}
+  main .jrn-mas .mas-b{animation:jrn-bob 2.4s var(--ease) infinite;
+    transform-origin:32px 40px}
+  main .jrn-mas .mas-arm{animation:jrn-arm 1.5s var(--ease) infinite}
+  main .jrn-mas .mas-sh{animation:jrn-sh 2.4s var(--ease) infinite;
+    transform-origin:32px 67px}
+}
+
+@media(max-width:480px){
+  .jrn-cue{padding:9px 12px;gap:10px}
+  .jrn-cue-t b{font-size:12.5px}
+  .jrn-cue-t em{font-size:10.5px}
+  .jrn-mas svg{width:38px;height:43px}
+}
+
+/* ── Home page par sabse nayi post ka highlight ───────────────────────
+   Owner: "Home page par ye highlight ho alag se hi upar. Qki ye wahan
+   main page home page pe dikh b nhi rhi h."
+
+   Safar wali video ke theek baad. Phone par tasveer upar, likhavat neeche;
+   badi screen par dono saath-saath.                                    */
+.lnew{display:block;border-radius:var(--r-lg);overflow:hidden;
+  text-decoration:none;color:inherit;
+  background:linear-gradient(180deg,#fff,#FBFAFF);
+  box-shadow:0 1px 2px rgba(17,17,26,.05),0 14px 34px -16px rgba(17,17,26,.22),
+             inset 0 0 0 1px rgba(91,63,217,.14);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.lnew:hover{transform:translateY(-3px);
+  box-shadow:0 1px 2px rgba(17,17,26,.05),0 22px 46px -18px rgba(91,63,217,.34),
+             inset 0 0 0 1px rgba(91,63,217,.26)}
+.lnew:focus-visible{outline:2px solid var(--brand);outline-offset:3px}
+
+.lnew-m{position:relative;display:block;aspect-ratio:16/9;overflow:hidden;
+  background:#EDEDF4}
+.lnew-m .ph-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  transition:transform .5s var(--ease)}
+.lnew:hover .lnew-m .ph-img{transform:scale(1.035)}
+
+/* "नया" ka nishaan — tasveer ke upar, apne rang mein */
+.lnew-tag{position:absolute;top:10px;left:10px;z-index:2;
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 11px 5px 9px;border-radius:99px;
+  font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  color:#fff;background:linear-gradient(145deg,var(--hot),#C33E1D);
+  box-shadow:0 4px 12px -4px rgba(232,84,47,.75)}
+.lnew-tag::before{content:"";width:6px;height:6px;border-radius:99px;background:#fff}
+
+.lnew-b{display:block;padding:15px 16px 16px}
+.lnew-k{display:inline-flex;align-items:center;padding:4px 10px;border-radius:99px;
+  background:var(--brand-soft);color:var(--brand);font-size:10px;font-weight:800;
+  letter-spacing:.1em;text-transform:uppercase}
+.lnew-h{margin:10px 0 0;font-size:clamp(1.05rem,.94rem + 1.1vw,1.4rem);font-weight:800;
+  letter-spacing:-.03em;line-height:1.28;color:var(--ink);text-wrap:balance}
+.lnew-x{display:block;margin:8px 0 0;font-size:13.5px;line-height:1.65;
+  color:var(--ink-2);max-width:60ch}
+.lnew-meta{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:11px 0 0;
+  font-size:11.5px;font-weight:600;color:var(--ink-3)}
+.lnew-meta span{display:inline-flex;align-items:center;gap:5px}
+.lnew-meta svg{opacity:.7}
+.lnew-meta time{font-variant-numeric:tabular-nums}
+.lnew-meta i{width:3px;height:3px;border-radius:99px;background:var(--line);flex:none}
+.lnew-go{display:inline-flex;align-items:center;gap:7px;margin:13px 0 0;
+  padding:9px 15px;border-radius:99px;font-size:13px;font-weight:800;
+  color:#fff;background:linear-gradient(145deg,var(--brand-2),var(--brand));
+  box-shadow:0 6px 16px -6px rgba(91,63,217,.6);
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.lnew:hover .lnew-go{transform:translateX(3px);
+  box-shadow:0 10px 22px -8px rgba(91,63,217,.75)}
+
+@media(min-width:780px){
+  .lnew{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);
+    align-items:stretch}
+  .lnew-m{aspect-ratio:auto;height:100%;min-height:230px}
+  .lnew-b{padding:22px 24px;align-self:center}
+}

@@ -10,6 +10,7 @@ import { FollowUs } from "@/components/FollowUs";
 import { MoreLinks } from "@/components/MoreLinks";
 import { GoogleQR } from "@/components/GoogleQR";
 import { JourneyScroll } from "@/components/JourneyScroll";
+import { LatestPost } from "@/components/LatestPost";
 import { FinanceStrip } from "@/components/FinanceStrip";
 import { InstagramFeed } from "@/components/InstagramFeed";
 import { VideoRow } from "@/components/VideoRow";
@@ -76,6 +77,9 @@ export function HomeBody({ current = "/", journey = true }:
           आते थे। अब वही कहानी owner की भेजी तीन videos से चलती है, और हर शब्द
           असली HTML text में है (`legacy` से, दोबारा कहीं नहीं लिखा)। */}
       {journey && <JourneyScroll />}
+
+      {/* सफ़र के ठीक बाद — सबसे नई post, ताकि home पर आते ही दिख जाए। */}
+      <LatestPost />
 
       <section className="sec">
         <div className="shead">
