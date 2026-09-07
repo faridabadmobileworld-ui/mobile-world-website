@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { shop } from "@/data/shop";
+import { AskWhatsApp } from "./AskWhatsApp";
 import { ask, navCategories } from "@/data/content";
 import { sitePages } from "@/data/pages";
 import { LiveBadge, NextClosure } from "./StoreStatus";
-import { IconYouTube, IconInstagram, IconFacebook, IconHome, IconGrid, IconWhatsApp, IconPin } from "./Icons";
-import { whatsappGeneral } from "@/data/content";
+import { IconYouTube, IconInstagram, IconFacebook, IconHome, IconGrid, IconPin } from "./Icons";
 
 /** नीचे वाले दो खाने — कौन सा page किस खाने में। बाक़ी सब menu में है। */
 const DUKAAN = ["/about", "/team", "/products", "/posts", "/visit"];
@@ -91,7 +91,7 @@ export function MobileBar() {
     <nav className="mbar" aria-label="Quick actions">
       <Link href="/"><IconHome />Home</Link>
       <Link href="/products"><IconGrid />सामान</Link>
-      <a className="w" href={whatsappGeneral} target="_blank" rel="noopener"><IconWhatsApp />WhatsApp</a>
+      <AskWhatsApp />
       <a href={shop.social.googleMaps} target="_blank" rel="noopener"><IconPin />रास्ता</a>
     </nav>
   );

@@ -11,7 +11,7 @@
  */
 
 import { shop } from "@/data/shop";
-import { whatsappGeneral } from "@/data/content";
+import { AskWhatsApp } from "./AskWhatsApp";
 import Link from "next/link";
 import {
   IconPhone, IconWhatsApp, IconPin,
@@ -34,9 +34,9 @@ export function PageFoot() {
         </address>
 
         <div className="btns">
-          <a className="btn btn-w" href={whatsappGeneral} target="_blank" rel="noopener">
+          <AskWhatsApp className="btn btn-w">
             <IconWhatsApp /> WhatsApp
-          </a>
+          </AskWhatsApp>
           <a className="btn btn-d" href={shop.phone.tel}>
             <IconPhone /> Call कीजिए
           </a>
