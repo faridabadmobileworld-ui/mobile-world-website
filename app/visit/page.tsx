@@ -5,6 +5,7 @@ import { whatsappGeneral } from "@/data/content";
 import { IconWhatsApp, IconPin, IconPhone } from "@/components/Icons";
 import { FollowUs } from "@/components/FollowUs";
 import { MoreLinks } from "@/components/MoreLinks";
+import { Faq, type QA } from "@/components/Faq";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { PageFoot, Byline } from "@/components/PageFoot";
 import { Banner } from "@/components/Banner";
@@ -25,6 +26,33 @@ const toc: TocItem[] = [
   { id: "kab-khuli", label: "कब खुली रहती है" },
   { id: "kab-band", label: "कब बंद रहती है" },
   { id: "pehchan", label: "पहचान" },
+];
+
+/**
+ * दुकान पर आने वाले ग्राहक के असली सवाल।
+ * ⚠️ हर जवाब वही है जो इसी page पर लिखा है — Google का नियम यही है।
+ */
+const faq: QA[] = [
+  {
+    q: "Mobile World कितने बजे से कितने बजे तक खुली रहती है?",
+    a: "रोज़ सुबह 10 बजे से रात 10 बजे तक, सातों दिन। कोई weekly off नहीं है। " +
+       "सिर्फ़ हर महीने की आख़िरी तारीख़ को दुकान बंद रहती है — 28, 29, 30 या 31, " +
+       "जो भी उस महीने की आख़िरी तारीख़ हो।",
+  },
+  {
+    q: "दुकान का पता क्या है?",
+    a: "Shop No. 3896/661/29, गुरुद्वारा रोड, Block F, बड़े गुरुद्वारे और Disposal " +
+       "Chowk के पास, जवाहर कॉलोनी, NIT फ़रीदाबाद, हरियाणा – 121005।",
+  },
+  {
+    q: "Payment के कौन-कौन से तरीक़े चलते हैं?",
+    a: "पाँचों — Cash, UPI, Credit Card, Debit Card और EMI।",
+  },
+  {
+    q: "क्या फ़रीदाबाद में home delivery हो जाती है?",
+    a: "जी हाँ, फ़रीदाबाद में delivery हो जाती है। भाड़ा ग्राहक का होता है — " +
+       "delivery मुफ़्त नहीं है। Auto वग़ैरह का इंतज़ाम दुकान करवा देती है।",
+  },
 ];
 
 export default function Visit() {
@@ -110,6 +138,8 @@ export default function Visit() {
           ❤️ आपकी संतुष्टि, हमारा संकल्प।
         </p>
       </section>
+
+      <Faq items={faq} />
 
       <Byline />
 

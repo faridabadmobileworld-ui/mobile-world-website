@@ -4,6 +4,7 @@ import { shop } from "@/data/shop";
 import { ask } from "@/data/content";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { MoreLinks } from "@/components/MoreLinks";
+import { Faq, type QA } from "@/components/Faq";
 import { PageFoot, Byline } from "@/components/PageFoot";
 import { FollowUs } from "@/components/FollowUs";
 import { IconWhatsApp, IconPhone } from "@/components/Icons";
@@ -22,6 +23,29 @@ const toc: TocItem[] = [
   { id: "exchange", label: "पुराने phone के Exchange की शर्तें" },
   { id: "accessories", label: "Accessories और छोटा सामान" },
   { id: "counter", label: "सामान counter पर ही चेक करवा लीजिए" },
+];
+
+/**
+ * Exchange और return के असली सवाल।
+ * ⚠️ हर शर्त वही है जो owner ने 1 Sep 2026 को confirm की।
+ */
+const faq: QA[] = [
+  {
+    q: "पुराने phone की exchange value कैसे तय होती है?",
+    a: "Phone आपके सामने counter पर ही चेक होता है — screen, battery और चलने की " +
+       "हालत। उसी हालत के हिसाब से value बनती है और वहीं बता दी जाती है। यही " +
+       "value नए phone के दाम में से कम हो जाती है।",
+  },
+  {
+    q: "Exchange के लिए साथ में क्या लाना ज़रूरी है?",
+    a: "Bill या original डिब्बा — दोनों में से एक होना ज़रूरी है। दोनों में से " +
+       "कुछ भी न हो तो phone नहीं लिया जा सकेगा। साथ में अपना Aadhaar भी रखिए।",
+  },
+  {
+    q: "क्या website पर exchange का दाम लिखा रहता है?",
+    a: "नहीं। हर phone की हालत अलग होती है, इसलिए अंदाज़े से दाम लिखना ठीक नहीं " +
+       "लगता। value दुकान पर phone देखकर ही बताई जाती है।",
+  },
 ];
 
 export default function Returns() {
@@ -142,6 +166,8 @@ export default function Returns() {
           </p>
         </div>
       </section>
+
+      <Faq items={faq} />
 
       <Byline />
 

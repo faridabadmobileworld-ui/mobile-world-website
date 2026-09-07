@@ -6,6 +6,7 @@ import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { PageFoot, Byline } from "@/components/PageFoot";
 import { FollowUs } from "@/components/FollowUs";
 import { MoreLinks } from "@/components/MoreLinks";
+import { Faq, type QA } from "@/components/Faq";
 import { IconWhatsApp, IconPhone } from "@/components/Icons";
 
 export const metadata: Metadata = {
@@ -20,6 +21,29 @@ const toc: TocItem[] = [
   { id: "list", label: "हमारी Repairing Services की पूरी list" },
   { id: "approach", label: "हमारा Repairing Approach — 100% Transparency" },
   { id: "aaiye", label: "अपने phone को लेकर सीधे दुकान पर आइए" },
+];
+
+/**
+ * Repair के बारे में जो सबसे ज़्यादा पूछा जाता है।
+ * ⚠️ कितने दिन लगेंगे — यह owner से confirm नहीं है, इसलिए यहाँ नहीं लिखा।
+ */
+const faq: QA[] = [
+  {
+    q: "Mobile World पर कौन-कौन सी repairing होती है?",
+    a: "Screen, battery, charging port, speaker और mic, camera, IC-level " +
+       "motherboard का काम, और software से जुड़ी दिक़्क़तें — ये सब दुकान पर ही " +
+       "होती हैं। यह retail shop भी है और repairing shop भी।",
+  },
+  {
+    q: "नए phone की warranty वाली repair यहाँ हो जाएगी?",
+    a: "नहीं। जो काम warranty में आता है, वो brand के authorized service centre " +
+       "पर ही होता है — हम वो नहीं कर सकते। हम बता देंगे कि किससे संपर्क करना है।",
+  },
+  {
+    q: "Repair करवाने के लिए appointment लेनी पड़ती है?",
+    a: "नहीं। दुकान के खुले समय में — रोज़ सुबह 10 से रात 10 बजे तक — कभी भी " +
+       "phone लेकर आ सकते हैं। दिक़्क़त देखकर वहीं बता दिया जाता है।",
+  },
 ];
 
 export default function Repairing() {
@@ -129,6 +153,8 @@ export default function Repairing() {
           </div>
         </div>
       </section>
+
+      <Faq items={faq} />
 
       <Byline />
 
