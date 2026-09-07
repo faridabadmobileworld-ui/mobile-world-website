@@ -628,6 +628,16 @@ owner के अपने blueprint का भाग 5 भी यही कह�
   ⚠️ **छूने वाले phone पर यह चलती ही नहीं** (`pointer: fine` की जाँच) —
   Faridabad का ग्राहक phone पर है, उसके यहाँ एक भी हिसाब नहीं लगता।
   पूरे page पर एक ही listener, rAF से थमा हुआ, सिर्फ़ दो CSS variable।
+- **हर card का झुकाव** — cursor जिस तरफ़ है, डिब्बा उसी तरफ़ ज़रा सा झुक
+  जाता है (4.5° तक), जैसे मेज़ पर रखा असली कार्ड। कोण उसी एक नाप से निकलते
+  हैं जो रोशनी के लिए पहले से हो रही थी (`--tx`, `--ty`), इसलिए इसकी अपनी
+  कोई क़ीमत नहीं। `perspective` किसी parent पर **नहीं** लगाई — वो containing
+  block बना देती और `/showcase` वाली पुरानी ख़राबी लौट आती; गहराई `transform`
+  के अपने `perspective()` से आती है।
+  ⚠️ झुकाव सिर्फ़ उन cards पर है जिन पर scroll वाली animation नहीं है
+  (`.pc`, `.ct`, `.lnew`, `.pmini`, `.lrow`, `.mlinks a`)। `.post`, `.shot`,
+  `.toc`, `.panel` का `transform` `fx-ubhro` के हाथ में है और CSS में
+  animation हमेशा जीतती है — वहाँ लिखने का कोई फ़ायदा नहीं।
 - बटनों पर गुज़रती चमक · heading पर सुनहरी लहर · scroll पर header का सिमटना
   · दबाने पर card का दबना (यह phone पर भी चलता है) · चुने हुए text, focus
   की अँगूठी और पतली scrollbar।

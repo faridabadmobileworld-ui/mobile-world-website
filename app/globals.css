@@ -2451,3 +2451,49 @@ main .rbody .hn{flex:none;display:grid;place-items:center;min-width:30px;height:
   .phero{height:150vh}
   .phero-hint{display:none}
 }
+
+/* ── 8. डिब्बों का झुकाव — उँगली जिस तरफ़, card उसी तरफ़ ──────────────
+   Owner (7 Sep 2026): "3d webgl animations sab lagao... poori website ka
+   UI completely unbelievable lge." Home के सबसे ऊपर असली 3D phone लग
+   चुका है; यह उसी सोच की हल्की परत बाक़ी site पर — हर card cursor की तरफ़
+   ज़रा सा झुक जाता है, जैसे मेज़ पर रखा असली कार्ड।
+
+   झुकाव के दोनों कोण `Aura.tsx` से आते हैं (`--tx`, `--ty`) — वही एक
+   listener, वही एक rAF, वही एक नाप जो रोशनी के लिए पहले से हो रही थी।
+   यानी इस असर की अपनी कोई क़ीमत नहीं है।
+
+   ⚠️ चार बातें जान-बूझकर ऐसी हैं:
+
+   1. **छूने वाले phone पर यह है ही नहीं।** पूरा हिस्सा `html.aura` के
+      अंदर है, और वो class सिर्फ़ `pointer: fine` पर लगती है। Faridabad का
+      ग्राहक phone पर है — उसके यहाँ एक भी हिसाब नहीं लगता।
+
+   2. **`perspective` किसी parent पर नहीं लगाई** — वो containing block और
+      stacking context बना देती है, और CLAUDE.md में लिखी `/showcase` वाली
+      ख़राबी (perspective के नीचे scroll animation) दोबारा आ सकती थी।
+      इसीलिए गहराई `transform` के अपने `perspective()` से आती है, जिसका
+      बाहर किसी चीज़ पर कोई असर नहीं।
+
+   3. **सिर्फ़ उन cards पर जिन पर scroll वाली animation नहीं है।**
+      `.post`, `.shot`, `.toc`, `.panel` वग़ैरह का `transform` scroll
+      animation के हाथ में है (ऊपर वाला `fx-ubhro`), और CSS में animation
+      हमेशा जीतती है — वहाँ झुकाव लगता ही नहीं, इसलिए लिखा भी नहीं।
+
+   4. **कोई `filter` नहीं।** सिर्फ़ `transform` — वजह ऊपर हिस्सा 5 में
+      नापकर लिखी है (LCP 652ms → 1416ms)।                                */
+@media(prefers-reduced-motion:no-preference){
+  html.aura main .pc.aura-on,html.aura main .ct.aura-on,
+  html.aura main .lnew.aura-on,html.aura main .pmini.aura-on,
+  html.aura main .lrow.aura-on,html.aura main .mlinks a.aura-on{
+    transform:perspective(900px)
+      rotateX(var(--tx,0deg)) rotateY(var(--ty,0deg)) translateY(-3px);
+    transition:transform .11s linear,box-shadow .32s var(--ease),
+      border-color .32s var(--ease)}
+  /* दबाने पर झुकाव के साथ-साथ वही "दबने" वाला जवाब भी बना रहे */
+  html.aura main .pc.aura-on:active,html.aura main .ct.aura-on:active,
+  html.aura main .lnew.aura-on:active,html.aura main .pmini.aura-on:active,
+  html.aura main .lrow.aura-on:active,html.aura main .mlinks a.aura-on:active{
+    transform:perspective(900px)
+      rotateX(var(--tx,0deg)) rotateY(var(--ty,0deg)) scale(.985);
+    transition-duration:.09s}
+}

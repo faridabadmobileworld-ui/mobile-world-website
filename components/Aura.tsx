@@ -26,9 +26,15 @@ import { useEffect } from "react";
  *    ही बार चलता है, इसलिए screen जितनी बार बनती है उससे ज़्यादा काम कभी
  *    नहीं होता।
  *
- * 4. **कोई layout दोबारा नहीं नापा जाता।** सिर्फ़ दो CSS variable बदलते हैं
- *    (`--mx`, `--my`), और उन्हें सिर्फ़ background की जगह बदलने में इस्तेमाल
- *    किया जाता है। इससे browser को दोबारा नाप-जोख नहीं करनी पड़ती।
+ * 4. **कोई layout दोबारा नहीं नापा जाता।** सिर्फ़ चार CSS variable बदलते हैं —
+ *    `--mx`/`--my` (रोशनी की जगह) और `--tx`/`--ty` (डिब्बे का झुकाव)। चारों
+ *    एक ही नाप से निकलते हैं, और सिर्फ़ `background-position` तथा `transform`
+ *    में जाते हैं। दोनों compositor पर चलते हैं — browser को दोबारा नाप-जोख
+ *    नहीं करनी पड़ती।
+ *
+ *    ⚠️ **`filter` यहाँ कभी मत जोड़िए।** एक `filter:saturate()` ने home का
+ *    LCP 652ms से 1416ms कर दिया था (CLAUDE.md में पूरी नाप लिखी है)।
+ *    सिर्फ़ `transform` — वो रँगने के काम को छूता ही नहीं।
  *
  * 5. **कुछ भी छुपता नहीं।** यह सिर्फ़ रोशनी जोड़ती है। JavaScript न चले, तो
  *    हर डिब्बा वैसा ही दिखता है जैसा आज दिखता है।
@@ -40,6 +46,12 @@ const AURA = [
   ".rbody .spec", ".rbody .tier", ".rbody .sw",
   ".mlinks a", ".qr-card", ".shot", ".panel", ".toc", ".byl", ".shr", ".pfoot",
 ].join(",");
+
+/**
+ * डिब्बा कितना झुकेगा (डिग्री में)। 5 से ज़्यादा मत कीजिए — उससे ऊपर
+ * card टेढ़ा दिखने लगता है और पढ़ने में दिक़्क़त होती है।
+ */
+const TILT = 4.5;
 
 export function Aura() {
   useEffect(() => {
@@ -60,6 +72,10 @@ export function Aura() {
       if (last && last !== el) last.classList.remove("aura-on");
       el.style.setProperty("--mx", `${x.toFixed(1)}%`);
       el.style.setProperty("--my", `${y.toFixed(1)}%`);
+      // उसी दो हिसाबों से डिब्बे का झुकाव भी — cursor जिस तरफ़ है, card
+      // उसी तरफ़ ज़रा सा झुक जाता है। कोई नई नाप-जोख नहीं, वही x/y।
+      el.style.setProperty("--tx", `${(((50 - y) / 50) * TILT).toFixed(2)}deg`);
+      el.style.setProperty("--ty", `${(((x - 50) / 50) * TILT).toFixed(2)}deg`);
       el.classList.add("aura-on");
       last = el;
     }
@@ -84,6 +100,7 @@ export function Aura() {
       if (last) { last.classList.remove("aura-on"); last = null; }
       pending = null;
     }
+
 
     document.addEventListener("pointermove", onMove, { passive: true });
     document.addEventListener("pointerleave", onLeave, { passive: true });
