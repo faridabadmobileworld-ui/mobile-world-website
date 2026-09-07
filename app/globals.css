@@ -2268,3 +2268,59 @@ main .rbody .hn{flex:none;display:grid;place-items:center;min-width:30px;height:
   ::-webkit-scrollbar-thumb:hover{background:#D3D3E0}
   ::-webkit-scrollbar-track{background:transparent}
 }
+
+/* ══════════════════════════════════════════════════════════════════════
+   CATEGORY के निशान और पीछे की दूसरी परत — 7 Sep 2026
+
+   Owner ने कहा था: category के icon, और background में हल्की परतें।
+   दोनों **code से** बने हैं, तस्वीर से नहीं — इसलिए एक भी byte download
+   नहीं होता और हर screen पर उतने ही साफ़ रहते हैं (§7)।
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* ── 1. Category का निशान — Products page पर ───────────────────────────
+   ⚠️ यहाँ नया icon set **जान-बूझकर नहीं** बनाया गया। दुकान की सारी
+   drawings पहले से `ArtSprite` में हैं और menu में 26px की तख़्ती पर
+   ऐसे ही दिखती हैं। Products page पर वही drawing, उसी अंदाज़ में — वरना
+   एक ही category के दो अलग निशान हो जाते।                              */
+.cpic{position:relative;flex:none;width:42px;height:42px;border-radius:12px;
+  overflow:hidden;background:#fff;
+  box-shadow:var(--hi),var(--ring),0 6px 16px -12px rgba(20,20,43,.7);
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.cpic svg{width:100%;height:100%;display:block}
+
+/* बीच में रखी heading के साथ tile भी बीच में आ जाती है — `.shead` का
+   `:not(:has(a))` वाला नियम पहले से यही करता है। */
+
+@media(pointer:fine){
+  .shead:hover .cpic{transform:translateY(-2px) scale(1.05);
+    box-shadow:var(--hi),var(--ring),0 12px 24px -14px rgba(20,20,43,.85)}
+}
+
+/* ── 2. पीछे की दूसरी परत ──────────────────────────────────────────────
+   `.bgfx` पहले से है — तीन रंगीन धब्बे और महीन grain। यह उसके ऊपर एक
+   दूसरी, और भी हल्की परत है: बहुत बड़े नाप का तिरछा जाल, जो पहली परत से
+   **उलटी दिशा में और आधी रफ़्तार से** चलता है। दो परतें अलग-अलग चलें तो
+   गहराई अपने आप बन जाती है — कोई library नहीं, कोई file नहीं।
+
+   ⚠️ `opacity` जान-बूझकर .5 है। इससे ऊपर जाते ही यह text के पीछे दिखने
+   लगती है और पढ़ना मुश्किल हो जाता है।                                  */
+.bgfx2{position:fixed;inset:-18vmax;z-index:-1;pointer-events:none;opacity:.5;
+  background:
+    repeating-linear-gradient(118deg,
+      rgba(123,92,240,.055) 0 1px, transparent 1px 92px),
+    repeating-linear-gradient(-118deg,
+      rgba(14,165,165,.045) 0 1px, transparent 1px 116px),
+    radial-gradient(60rem 44rem at 78% 78%, rgba(232,84,47,.07), transparent 66%)}
+@media(prefers-reduced-motion:no-preference){
+  .bgfx2{animation:bg-jaal 96s linear infinite}
+}
+@keyframes bg-jaal{
+  from{transform:translate3d(0,0,0)}
+  to{transform:translate3d(-92px,116px,0)}
+}
+/* छोटी screen पर जाल की लकीरें पास-पास आकर भद्दी लगती हैं — वहाँ सिर्फ़
+   रंग वाला धब्बा रहने दीजिए। */
+@media(max-width:560px){
+  .bgfx2{background:radial-gradient(46rem 34rem at 80% 82%,
+    rgba(232,84,47,.07),transparent 66%);animation:none}
+}

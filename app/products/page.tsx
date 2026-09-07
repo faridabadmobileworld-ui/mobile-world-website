@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { PageFoot, Byline } from "@/components/PageFoot";
 import { shop } from "@/data/shop";
-import { items, navCategories } from "@/data/content";
+import { items, navCategories, artForCategory } from "@/data/content";
 import { ProductCard } from "@/components/ProductCard";
+import { Art } from "@/components/ArtSprite";
 import { ProductFilter } from "@/components/ProductFilter";
 import { Banner } from "@/components/Banner";
 import { FollowUs } from "@/components/FollowUs";
@@ -43,7 +44,10 @@ export default function Products() {
         if (!list.length) return null;
         return (
           <section className="sec" id={c.slug} key={c.slug}>
-            <div className="shead"><h2>{c.label}</h2></div>
+            <div className="shead">
+              <i className="cpic" aria-hidden="true"><Art id={artForCategory(c.slug)} /></i>
+              <h2>{c.label}</h2>
+            </div>
             <div className="pgrid">
               {list.map((it) => <ProductCard key={it.title} item={it} />)}
             </div>

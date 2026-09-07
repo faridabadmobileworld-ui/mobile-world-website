@@ -603,10 +603,10 @@ export const posts: Post[] = [
     title: "पुराना phone exchange में देना है? पहले यह पढ़ लीजिए",
     excerpt:
       "Value कैसे तय होती है, साथ में क्या लाना ज़रूरी है, और आपके data का क्या होता है — पूरी बात एक जगह।",
-    image: "/images/mobile-exchange-at-mobile-world-e15aba81.webp",
-    imageW: 1400,
-    imageH: 933,
-    alt: "Mobile World के counter पर पुराने phone का exchange",
+    image: "/images/purana-aur-naya-phone-counter-par.webp",
+    imageW: 1200,
+    imageH: 800,
+    alt: "दुकान के counter पर पुराना phone और उसके बग़ल में नया phone",
     body: `
 <p>नया phone लेते समय पुराना phone दराज़ में पड़ा रहे, इसकी कोई ज़रूरत नहीं। उसकी value लगवाकर नए phone के दाम में से कम करवाई जा सकती है — बचे हुए पैसे ही देने होते हैं।</p>
 <h2 id="value-kaise">Value कैसे तय होती है</h2>
@@ -885,8 +885,8 @@ export const serviceBanners = [
   },
   {
     key: "exchange" as const,
-    src: "/images/mobile-exchange-at-mobile-world-e15aba81.webp",
-    alt: "पुराना phone Exchange करके नया लीजिए",
+    src: "/images/purana-aur-naya-phone-counter-par.webp",
+    alt: "पुराना phone और नया phone — counter पर साथ रखे हुए",
     topic: "पुराने phone के Exchange",
   },
   {

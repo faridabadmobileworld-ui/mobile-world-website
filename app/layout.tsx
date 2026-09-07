@@ -65,6 +65,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           (Owner, 2 Sep 2026: "2 layers ho — ek background wali, ek scrolling wali")
         */}
         <div className="bgfx" aria-hidden="true" />
+        <div className="bgfx2" aria-hidden="true" />
         {/* ऊपर पतली सी पट्टी — page कितना पढ़ लिया, वो दिखाती है। */}
         <div className="prog" aria-hidden="true" />
         <Aura />
