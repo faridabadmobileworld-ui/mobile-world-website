@@ -2380,39 +2380,74 @@ main .rbody .hn{flex:none;display:grid;place-items:center;min-width:30px;height:
 }
 @keyframes faq-in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 
-/* ── असली 3D का हिस्सा (WebGL) — 7 Sep 2026 ───────────────────────────
-   `components/GLBackdrop.tsx` इसमें हर frame GPU पर बनाता है।
+/* ══════════════════════════════════════════════════════════════════════
+   HEADER का 3D PHONE — 7 Sep 2026
 
-   ⚠️ पहले यह `position:fixed` वाली background परत थी — **वो बेकार था।**
-   Site का content edge-to-edge है, इसलिए 3D कभी दिखता ही नहीं था: GPU
-   काम करता रहता और ग्राहक को एक pixel नज़र नहीं आता। अब इसका अपना
-   हिस्सा है, जहाँ यही मुख्य चीज़ है।                                     */
-.glstage{position:relative;isolation:isolate;overflow:hidden;
-  border-radius:var(--r-lg);margin:24px 0;
-  min-height:clamp(320px,44vh,460px);
-  display:grid;place-items:center;
-  background:linear-gradient(160deg,#14142B,#221F45 55%,#2C1B3D);
+   Owner ने अपनी भेजी video का वही क्रम माँगा: जुड़ा हुआ phone, scroll के
+   साथ खुलता हुआ, अंदर के हिस्से दिखते हुए, फिर वापस पूरा जुड़ जाना।
+
+   ढाँचा: एक लंबा हिस्सा (`.phero`) जिसके अंदर screen भर की एक चिपकी हुई
+   परत (`.phero-pin`) है। जितना लंबा हिस्सा, उतनी scroll की जगह — और उसी
+   जगह में खुलने-जुड़ने का पूरा सफ़र बैठता है।
+   ══════════════════════════════════════════════════════════════════════ */
+.phero{position:relative;height:230vh;margin:0 0 8px}
+@media(max-width:700px){ .phero{height:200vh} }
+
+.phero-pin{position:sticky;top:calc(var(--hdr) + 6px);
+  height:calc(100svh - var(--hdr) - 74px);
+  display:grid;place-items:center;overflow:hidden;
+  border-radius:var(--r-lg);isolation:isolate;
+  background:
+    radial-gradient(90% 70% at 50% 8%, #241A2E 0%, #140F1C 55%, #0B0810 100%);
   box-shadow:var(--sh-3),var(--ring)}
-.glbg{position:absolute;inset:0;width:100%;height:100%;
-  pointer-events:none;opacity:0;transition:opacity 1.2s var(--ease)}
-/* WebGL चल पड़ा — तभी दिखाइए, वरना एक पल को ख़ाली डिब्बा दिखता है */
-.gl-on .glbg{opacity:1}
 
-.glstage-c{position:relative;z-index:1;text-align:center;padding:34px 22px;
-  max-width:34ch}
-/* ⚠️ Text के पीछे एक नरम अँधेरा — 3D का गोला जब text के पीछे से गुज़रे तो
-   पढ़ना मुश्किल न हो। यह `filter` नहीं है, सिर्फ़ एक gradient — इसीलिए
-   मुफ़्त है (filter LCP दोगुना कर देता है, §Aura वाली सीख)।              */
-.glstage-c::before{content:"";position:absolute;inset:-24px -34px;z-index:-1;
-  background:radial-gradient(70% 62% at 50% 50%,
-    rgba(12,10,28,.72), rgba(12,10,28,.42) 55%, transparent 78%)}
-.glstage-k{display:inline-block;font-size:11.5px;font-weight:800;
-  letter-spacing:.16em;text-transform:uppercase;color:#C9BEFF;margin-bottom:10px}
-.glstage-h{font-size:clamp(1.5rem,4.4vw,2.35rem);font-weight:800;
-  letter-spacing:-.03em;line-height:1.18;margin:0 0 10px;color:#fff;
-  text-wrap:balance;text-shadow:0 2px 18px rgba(0,0,0,.45)}
-.glstage-p{margin:0;color:#D9D4F0;font-size:14.5px;line-height:1.62;
-  text-wrap:pretty;text-shadow:0 1px 10px rgba(0,0,0,.4)}
+/* ⚠️ `touch-action: pan-y` सबसे ज़रूरी line है। इसके बिना छूने वाले phone
+   पर सीधा-नीचे वाला drag canvas खा जाता और ग्राहक यहीं फँस जाता — उँगली
+   चलाता रहता और page आगे बढ़ता ही नहीं। अब नीचे वाला drag scroll करता है,
+   बग़ल वाला phone घुमाता है। */
+.phero-gl{position:absolute;inset:0;width:100%;height:100%;
+  touch-action:pan-y;cursor:grab;opacity:0;transition:opacity 1s var(--ease)}
+.phero-gl:active{cursor:grabbing}
+.gl-on .phero-gl{opacity:1}
 
-/* जिसे कम animation चाहिए — canvas बनता ही नहीं, सिर्फ़ ठहरा हुआ रंग रहता है */
-@media(prefers-reduced-motion:reduce){ .glbg{display:none} }
+/* Text उँगली के रास्ते में न आए — सिर्फ़ button पकड़ में आएँ */
+/* Phone ऊपर है, लिखाई नीचे — दोनों कभी एक-दूसरे पर नहीं चढ़ते। */
+.phero-c{position:relative;z-index:1;pointer-events:none;
+  text-align:center;padding:16px 20px 0;max-width:34ch;
+  align-self:end;margin-bottom:clamp(16px,4.5vh,44px)}
+.phero-c .btn{pointer-events:auto}
+/* लिखाई के पीछे नरम अँधेरा — phone का कोई हिस्सा पीछे से गुज़रे तो भी पढ़ा
+   जाए। ⚠️ यह `filter` नहीं, सिर्फ़ gradient है — filter LCP दोगुना करता है। */
+.phero-c::before{content:"";position:absolute;inset:-18px -30px -24px;z-index:-1;
+  background:radial-gradient(76% 66% at 50% 58%,
+    rgba(8,6,14,.86), rgba(8,6,14,.58) 58%, transparent 80%)}
+
+.phero-soon{display:inline-block;font-size:11px;font-weight:800;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:#F6D9A6;background:rgba(246,217,166,.10);
+  border:1px solid rgba(246,217,166,.32);border-radius:99px;
+  padding:5px 13px;margin-bottom:12px}
+
+.phero-h{font-size:clamp(1.35rem,4.6vw,2.4rem);font-weight:800;
+  letter-spacing:-.032em;line-height:1.2;margin:0 0 8px;color:#fff;
+  text-wrap:balance;text-shadow:0 2px 22px rgba(0,0,0,.6)}
+.phero-h span{color:#F0C98A}
+
+.phero-p{margin:0 0 6px;color:#CFC4DE;font-size:13.5px;line-height:1.6;
+  text-wrap:pretty;text-shadow:0 1px 12px rgba(0,0,0,.55)}
+
+.phero-hint{margin:0 0 16px;font-size:11.5px;font-weight:700;
+  letter-spacing:.03em;color:#A99BC6}
+@media(prefers-reduced-motion:no-preference){
+  .phero-hint{animation:hint-saans 2.8s ease-in-out infinite}
+}
+@keyframes hint-saans{0%,100%{opacity:.5}50%{opacity:1}}
+
+.phero-cta{display:flex;flex-wrap:wrap;gap:9px;justify-content:center}
+
+/* बहुत छोटी लेटी हुई screen पर लिखाई और phone आपस में टकराते हैं —
+   वहाँ हिस्सा छोटा कर दीजिए। */
+@media(max-height:520px){
+  .phero{height:150vh}
+  .phero-hint{display:none}
+}
