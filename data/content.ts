@@ -456,56 +456,91 @@ export const posts: Post[] = [
     dateISO: "2026-09-07",
     // 7 Sep 2026, सुबह 10 बजे से दिखेगी। उससे पहले पूरी site पर कहीं नहीं।
     publishAt: "2026-09-07T10:00:00+05:30",
-    title: "Redmi 17 5G: 7,900mAh battery और Snapdragon 4 Gen 5 — Faridabad में pre-booking खुल गई",
+    title: "Redmi 17 5G Pre-Booking: Colors, Storage, Price & Specs in Faridabad",
     excerpt:
-      "7,900mAh battery, Snapdragon 4 Gen 5 और 50MP camera — Redmi 17 5G की sale 10 September से। " +
-      "Jawahar Colony, NIT Faridabad की दुकान पर pre-booking खुली है।",
-    image: "/images/redmi-17-5g-at-mobile-world-faridabad.webp",
+      "Redmi 17 5G के सारे colors, storage variants और दाम एक जगह। 7,900mAh battery, " +
+      "Snapdragon 4 Gen 5, 50MP camera — और Jawahar Colony, NIT Faridabad पर pre-booking खुली है।",
+    image: "/images/redmi-17-5g-colours-mobile-world-faridabad.webp",
     imageW: 1400,
     imageH: 788,
-    alt: "Redmi 17 5G, Eternal Orange — Mobile World, Jawahar Colony के counter पर",
+    alt: "Redmi 17 5G के तीनों रंग — Eternal Orange, Endless Blue और Absolute Black",
     body: `
-<p>अगर आप ऐसे 5G phone का इंतज़ार कर रहे थे जिसकी battery दिन में बार-बार charger न माँगे, तो Xiaomi ने भारत में <strong>Redmi 17 5G</strong> उतार दिया है। Sale <strong>10 September</strong> से शुरू हो रही है, और Mobile World पर इसकी pre-booking खुल चुकी है।</p>
-<p>नीचे वही बातें लिखी हैं जो Xiaomi ने ख़ुद बताई हैं — ताकि दुकान आने से पहले आपको पता हो कि आप क्या ले रहे हैं।</p>
+<p>अगर आप ऐसे 5G phone के इंतज़ार में थे जिसकी battery बार-बार charge करने का झंझट ही ख़त्म कर दे, तो भाई… अब और बोरिंग इंतज़ार नहीं करना पड़ेगा!</p>
+<p>Xiaomi ने India में अपना बिलकुल नया <strong>Redmi 17 5G</strong> उतार दिया है। इसकी official sale <strong>10 September</strong> से शुरू हो रही है — और Mobile World (Jawahar Colony) पर इसकी pre-booking अभी से खुल चुकी है।</p>
+<p>आइए बिना किसी बोरिंग ज्ञान के, बिलकुल आसान भाषा में इसके एक-एक feature, colour और storage की चीर-फाड़ करते हैं!</p>
+
+<figure class="rvid">
+<video src="/posts/redmi-17-5g/counter-display.mp4" poster="/posts/redmi-17-5g/counter-display.webp" width="1280" height="720" autoplay loop muted playsinline preload="none" aria-label="Redmi 17 5G का display और 10 September से sale शुरू होने की सूचना, Mobile World Faridabad"></video>
+<figcaption>Sale 10 September से। Pre-booking का काउंटर अभी से चालू है।</figcaption>
+</figure>
+
+<h2 id="battery">1. Battery और Charging 🔋</h2>
+<ul>
+<li><strong>7,900mAh का असली monster:</strong> भाई साहब, इस phone का सबसे बड़ा USP इसकी massive <strong>7,900mAh (typ)</strong> battery है। normal इस्तेमाल पर यह आराम से ढाई दिन तक बिना हिले-डुले चलती है।</li>
+<li><strong>Non-stop entertainment:</strong> एक बार full charge कीजिए, और <strong>146 घंटे</strong> तक लगातार music बजाइए या <strong>20+ घंटे</strong> तक video binge-watch करते रहिए।</li>
+<li><strong>45W Turbo Charging:</strong> डिब्बे के अंदर ही 45W का fast charger मिलेगा, जो इस बड़े पेट वाले phone को मात्र <strong>96 मिनट</strong> में 100% कर देगा।</li>
+<li><strong>Powerbank जैसी ताक़त:</strong> इसमें <strong>22.5W wired reverse-charging</strong> का मज़ा भी है। यानी ज़रूरत पड़ने पर आप इससे अपने earbuds या दोस्त का दूसरा phone भी charge कर सकते हैं!</li>
+</ul>
+
+<h2 id="display">2. Display और Screen Quality 📱</h2>
+<ul>
+<li><strong>6.9 इंच की cinema screen:</strong> movies देखने या gaming का कीड़ा है, तो इसकी <strong>17.53cm (6.9 इंच)</strong> की बड़ी HD clarity display आपका दिल जीत लेगी।</li>
+<li><strong>120Hz की चिकनाई:</strong> इसमें <strong>120Hz तक AdaptiveSync</strong> refresh rate है — scroll करते वक़्त मक्खन जैसा मज़ा आएगा।</li>
+<li><strong>मज़बूत शीशा:</strong> screen की सुरक्षा के लिए <strong>Corning Gorilla Glass 7i</strong> लगा है, ताकि ग़लती से हाथ से गिरे तो दिल की धड़कन बोरिंग तरीक़े से तेज़ न हो!</li>
+</ul>
+
+<h2 id="performance">3. Performance और Processor 🚀</h2>
+<ul>
+<li><strong>Snapdragon की ताक़त:</strong> इस phone के अंदर latest <strong>Snapdragon 4 Gen 5 5G</strong> processor (4nm) दौड़ रहा है।</li>
+<li><strong>Lag-free life:</strong> background में 10 app खुली हों या heavy gaming चल रही हो — यह बिना अटके भागता रहेगा।</li>
+<li><strong>RAM और Storage:</strong> यह <strong>6GB और 8GB RAM</strong> में मिलता है। साथ में <strong>Memory Extension</strong> का support है, जिसके ज़रिए इसे <strong>16GB RAM तक</strong> खींचा जा सकता है!</li>
+</ul>
+
+<h2 id="camera">4. Camera और Style 📸</h2>
+<ul>
+<li><strong>50MP AI Dual Camera:</strong> पीछे तगड़ा 50MP main camera है, जो दिन हो या रात (Night Mode के साथ) — crisp और vibrant photos खींचता है। Selfie के लिए <strong>8MP</strong> का front camera है।</li>
+<li><strong>Dynamic RGB Light</strong> (सबकी नज़रें इसी पर!): इसकी सबसे cool चीज़ है इसका नया <strong>RGB ring-light camera module</strong>। यह <strong>8 अलग-अलग रंगों</strong> में चमकता है — notification और gaming के वक़्त अलग ही vibe देता है।</li>
+</ul>
+
+<h2 id="sound">5. Durability और Sound 🔊</h2>
+<ul>
+<li><strong>300% Volume Boost:</strong> सड़क पर कितना भी शोर हो, इसके dual stereo speakers की आवाज़ इतनी तेज़ और साफ़ है कि call कभी miss नहीं होगी।</li>
+<li><strong>IP64 rating:</strong> अचानक हल्की बारिश आ जाए या पानी के छींटे पड़ जाएँ — डरने की ज़रूरत नहीं। यह dust और water splash proof है।</li>
+</ul>
 
 <figure class="rvid">
 <video src="/posts/redmi-17-5g/hands-on.mp4" poster="/posts/redmi-17-5g/hands-on.webp" width="1280" height="722" autoplay loop muted playsinline preload="none" aria-label="Redmi 17 5G, Eternal Orange — Mobile World, Jawahar Colony में हाथ में"></video>
 <figcaption>Eternal Orange — पीछे vegan leather वाली finish। हाथ में लेकर देखिए, तभी पता चलता है कि पकड़ कैसी बैठती है।</figcaption>
 </figure>
 
-<h2 id="battery">Battery और charging — 7,900mAh</h2>
-<p>इस phone की सबसे बड़ी बात इसकी <strong>7,900mAh (typ) battery</strong> है। Xiaomi का कहना है कि यह ढाई दिन तक चल जाती है।</p>
-<ul>
-<li><strong>146 घंटे तक music</strong> और <strong>20+ घंटे video</strong> playback।</li>
-<li>डिब्बे में <strong>45W Turbo charging</strong> का adapter मिलता है — क़रीब <strong>96 मिनट</strong> में पूरा charge।</li>
-<li><strong>22.5W reverse charging</strong> — अपने earbuds या smartwatch को इसी phone से charge कर लीजिए।</li>
-</ul>
-
-<h2 id="display">Display और design</h2>
-<p>Screen 17.53cm (6.9 इंच) की है, HD clarity के साथ।</p>
-<ul>
-<li><strong>120Hz तक AdaptiveSync</strong> refresh rate — scroll करने पर सब चिकना चलता है।</li>
-<li>Screen पर <strong>Corning Gorilla Glass 7i</strong> का protection।</li>
-<li>तीन रंग — <strong>Absolute Black</strong>, <strong>Endless Blue</strong> और <strong>Eternal Orange</strong>।</li>
-</ul>
-
-<h2 id="performance">Performance और camera</h2>
-<ul>
-<li><strong>Snapdragon 4 Gen 5 5G</strong> processor (4nm) — एक साथ कई app चलाने पर भी अटकता नहीं।</li>
-<li>पीछे <strong>50MP AI dual camera</strong>।</li>
-<li><strong>Dynamic RGB Light</strong> — 8 रंगों में जलने वाली पट्टी, notification और gaming के लिए।</li>
-<li><strong>300% Volume Boost</strong>, और <strong>IP64</strong> — छींटे, धूल और हल्के पानी से बचाव।</li>
-<li>Memory extension के साथ RAM <strong>16GB तक</strong> बढ़ जाती है।</li>
-</ul>
+<h2 id="colours">🎨 Colours, Storage Variants और दाम 🏷️</h2>
+<p>भाई, phone लेने से पहले रंग और storage का हिसाब एकदम साफ़ होना चाहिए। Xiaomi ने इसे इन options में उतारा है:</p>
 
 <figure class="rvid">
-<video src="/posts/redmi-17-5g/counter-display.mp4" poster="/posts/redmi-17-5g/counter-display.webp" width="1280" height="720" autoplay loop muted playsinline preload="none" aria-label="Redmi 17 5G का display और 10 September से sale शुरू होने की सूचना, Mobile World Faridabad"></video>
-<figcaption>Sale 10 September से। Pre-booking अभी से चल रही है।</figcaption>
+<img src="/posts/redmi-17-5g/colours.webp" alt="Redmi 17 5G के तीनों रंग — Eternal Orange, Endless Blue और Absolute Black" width="1400" height="788" loading="lazy" decoding="async" />
+<figcaption>तीनों रंग एक साथ। दुकान पर तीनों सामने रखकर देख लीजिए — तस्वीर में रंग हमेशा अलग लगता है।</figcaption>
 </figure>
 
-<h2 id="keemat">क़ीमत और pre-booking</h2>
-<p>Xiaomi ने शुरुआती क़ीमत <strong>₹23,999</strong> बताई है। कौन सा variant कितने का पड़ेगा, यह RAM और storage के हिसाब से बदलता है — पूरा हिसाब counter पर सामने रख दिया जाएगा।</p>
-<p>Sale 10 September से है और शुरुआत में stock सीमित रहता है। इसलिए जिस रंग और variant पर मन बना हो, उसकी pre-booking करवा लेना ठीक रहता है। नीचे WhatsApp वाले बटन से message कर दीजिए, या सीधे दुकान पर आ जाइए।</p>
+<h3>तीन रंग</h3>
+<ul>
+<li><strong>Eternal Orange</strong></li>
+<li><strong>Endless Blue</strong></li>
+<li><strong>Absolute Black</strong></li>
+</ul>
+
+<h3>Storage और Xiaomi की बताई क़ीमत</h3>
+<table>
+<thead><tr><th>Variant</th><th>क़ीमत</th></tr></thead>
+<tbody>
+<tr><td>6 GB RAM + 128 GB Storage</td><td><strong>₹23,999</strong></td></tr>
+<tr><td>8 GB RAM + 128 GB Storage</td><td><strong>₹26,999</strong></td></tr>
+</tbody>
+</table>
+<p>ये Xiaomi की बताई हुई क़ीमतें हैं। कौन सा variant आपके लिए ठीक रहेगा, यह counter पर बैठकर तय कर लीजिए।</p>
+
+<h2 id="pre-booking">Pre-booking करवाना क्यों ज़रूरी है?</h2>
+<p>भाई, 10 September को जब sale खुलेगी तो शुरू में stock सीमित ही आता है। बाद में पसंद का रंग (ख़ासकर Orange वाला) मिलना मुश्किल हो जाता है।</p>
+<p>Online के चक्करों और बोरिंग confusion से बचना है, तो सीधा दुकान पर आ जाइए। नीचे WhatsApp वाले बटन से message भी कर सकते हैं — जवाब सीधे counter से आएगा।</p>
 <p>किश्तों पर लेना हो तो <a href="/finance">Finance और EMI</a> वाले page पर पूरी शर्तें लिखी हैं। पुराना phone देना हो तो <a href="/posts/phone-exchange-guide">exchange वाली guide</a> पहले पढ़ लीजिए — साथ में क्या लाना है, वो वहाँ लिखा है।</p>
 
 <h2 id="dukaan-se">दुकान से लेने पर क्या फ़र्क़ पड़ता है</h2>
