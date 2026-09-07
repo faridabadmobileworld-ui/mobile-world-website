@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter, MobileBar } from "@/components/SiteFooter";
 import { ArtSprite } from "@/components/ArtSprite";
 import "./globals.css";
+import { Aura } from "@/components/Aura";
 
 /**
  * पूरी site की default metadata।
@@ -66,6 +67,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <div className="bgfx" aria-hidden="true" />
         {/* ऊपर पतली सी पट्टी — page कितना पढ़ लिया, वो दिखाती है। */}
         <div className="prog" aria-hidden="true" />
+        <Aura />
         <ArtSprite />
         <SiteHeader />
         <main id="main">{children}</main>

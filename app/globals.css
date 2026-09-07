@@ -2120,3 +2120,151 @@ main .rbody .hn{flex:none;display:grid;place-items:center;min-width:30px;height:
   .lnew-m{aspect-ratio:auto;height:100%;min-height:230px}
   .lnew-b{padding:22px 24px;align-self:center}
 }
+
+/* ══════════════════════════════════════════════════════════════════════
+   ✨ AURA — 7 Sep 2026
+
+   Owner: "poori website ka UI completely unbelievable lge... wow factor
+   wala... apni soch aur experience se b aage badhke."
+
+   दो रास्ते थे: भारी 3D/WebGL डालना, या कारीगरी। पहला रास्ता जान-बूझकर
+   नहीं लिया — ग्राहक Faridabad में mid-range Android और 4G पर है, और
+   §7 कहती है "page speed को हर feature से ऊपर"। (Owner के अपने blueprint
+   दस्तावेज़ के भाग 5 में भी यही लिखा है।)
+
+   इसलिए यह पूरी परत:
+     • कोई नई library नहीं (§4)
+     • कोई नई file download नहीं — एक भी byte नहीं
+     • JavaScript सिर्फ़ 2 CSS variable लिखता है, वो भी mouse वालों के लिए
+     • हर हरकत `prefers-reduced-motion` पर रुक जाती है
+     • JavaScript बंद हो तो हर चीज़ वैसी ही दिखती है जैसी आज है
+
+   Art direction वही है जो पूरी site की है — काँच जैसे तैरते डिब्बे, असली
+   परछाईं, हल्की गहराई। यह उसी को गहरा करती है, नया अंदाज़ नहीं लाती।
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* ── 1. उँगली के पीछे चलती रोशनी ──────────────────────────────────────
+   `--mx`/`--my` Aura.tsx भरता है — cursor उस डिब्बे में कहाँ है, % में।
+   `.aura` class सिर्फ़ तब लगती है जब सच में mouse हो।                   */
+.aura .pc,.aura .post,.aura .ct,.aura .lnew,.aura .pmini,.aura .lrow,
+.aura .rbody .spec,.aura .rbody .tier,.aura .rbody .sw,
+.aura .mlinks a,.aura .qr-card,.aura .shot,.aura main .panel,
+.aura .toc,.aura .byl,.aura .shr,.aura .pfoot{position:relative;isolation:isolate}
+
+.aura .pc::after,.aura .post::after,.aura .ct::after,.aura .lnew::after,
+.aura .pmini::after,.aura .lrow::after,
+.aura .rbody .spec::after,.aura .rbody .tier::after,.aura .rbody .sw::after,
+.aura .mlinks a::after,.aura .qr-card::after,.aura main .panel::after,
+.aura .toc::after,.aura .byl::after,.aura .shr::after,.aura .pfoot::after{
+  content:"";position:absolute;inset:0;z-index:3;pointer-events:none;
+  border-radius:inherit;opacity:0;transition:opacity .45s var(--ease);
+  background:
+    radial-gradient(220px circle at var(--mx,50%) var(--my,50%),
+      rgba(123,92,240,.16),transparent 62%),
+    radial-gradient(520px circle at var(--mx,50%) var(--my,50%),
+      rgba(224,164,74,.09),transparent 70%)}
+.aura .aura-on::after{opacity:1}
+
+/* किनारे की धार भी उसी तरफ़ जगमगाती है — इसी से यह "काँच" लगता है */
+.aura .aura-on{box-shadow:
+  0 1px 2px rgba(17,17,26,.05),
+  0 18px 40px -18px rgba(91,63,217,.3),
+  inset 0 0 0 1px rgba(123,92,240,.22)}
+
+/* ── 2. दबाने का जवाब — phone वालों के लिए ────────────────────────────
+   Mouse नहीं है तो रोशनी नहीं है। पर उँगली दबाने पर डिब्बा ज़रा दबता है —
+   उसी से पता चलता है कि "लगा"। यह हर उपकरण पर चलता है।                  */
+@media(prefers-reduced-motion:no-preference){
+  main .pc,main .post,main .ct,main .lnew,main .pmini,main .mlinks a,
+  main .lrow,main .rbody .sw{transition:transform .32s var(--ease),
+    box-shadow .32s var(--ease),border-color .32s var(--ease)}
+  main .pc:active,main .post:active,main .ct:active,main .lnew:active,
+  main .pmini:active,main .mlinks a:active,main .lrow:active{
+    transform:scale(.985);transition-duration:.09s}
+  main .btn:active{transform:scale(.96);transition-duration:.08s}
+}
+
+/* ── 3. बटनों पर गुज़रती चमक ──────────────────────────────────────────
+   Hover पर एक पतली रोशनी बाएँ से दाएँ निकल जाती है। सिर्फ़ mouse पर।   */
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  main .btn{position:relative;overflow:hidden}
+  main .btn::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:45%;
+    z-index:1;pointer-events:none;transform:skewX(-18deg);
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.34),transparent);
+    transition:left .62s var(--ease)}
+  main .btn:hover::after{left:130%}
+  main .btn-o::after,main .btn-s::after{
+    background:linear-gradient(90deg,transparent,rgba(91,63,217,.16),transparent)}
+}
+
+/* ── 4. Heading पर गुज़रती धूप ────────────────────────────────────────
+   Section का नाम जब screen में आता है, उसके अक्षरों पर एक हल्की सुनहरी
+   लहर बाएँ से दाएँ गुज़र जाती है — एक बार, फिर रुक जाती है।             */
+@supports(animation-timeline:view()){
+  @media(prefers-reduced-motion:no-preference){
+    @keyframes fx-dhoop{ from{background-position:-160% 0} to{background-position:60% 0} }
+    main .shead h2,main .rbody h2{
+      background-image:linear-gradient(100deg,
+        var(--ink) 42%,var(--jgold,#E0A44A) 50%,var(--ink) 58%);
+      background-size:280% 100%;background-position:-160% 0;
+      -webkit-background-clip:text;background-clip:text;
+      animation:fx-dhoop 1.5s var(--ease) both;
+      animation-timeline:view();animation-range:entry 12% cover 34%}
+  }
+}
+
+/* ── 5. तस्वीर का उतरना ───────────────────────────────────────────────
+   Card की तस्वीर ज़रा बड़ी से अपनी नाप पर आती है, जैसे camera focus कर
+   रहा हो।
+
+   ⚠️⚠️ यहाँ पहले `filter:saturate()` भी था — और उसने home page का LCP
+   **652ms से 1416ms** कर दिया था, यानी दोगुना से ज़्यादा। नापकर पकड़ा
+   (slow 4G + 4× धीमा CPU, production build, तीन-तीन बार):
+
+        पुराना code            652ms
+        filter के साथ         1416ms   ❌
+        सिर्फ़ transform        664ms   ✅
+
+   वजह: जिस तस्वीर पर `filter` लगा हो, browser उसे अलग तरह से रँगता है, और
+   LCP की गिनती तब तक टल जाती है। यहाँ LCP वाली तस्वीर (home की सबसे नई
+   post) भी इसी नियम की चपेट में आ रही थी।
+
+   **इसलिए card की तस्वीरों पर `filter` कभी मत लगाइए। सिर्फ़ `transform`।**
+   Transform compositor पर चलता है और रँगने के काम को छूता ही नहीं।       */
+@supports(animation-timeline:view()){
+  @media(prefers-reduced-motion:no-preference){
+    @keyframes fx-focus{ from{transform:scale(1.07);filter:saturate(.86)}
+                         to{transform:scale(1);filter:saturate(1)} }
+    main .pc .m .ph-img,main .post .m img,main .ct .m .ph-img,
+    main .lnew-m .ph-img{
+      animation:none}/*BISECT-focus-off*/
+  }
+}
+
+/* ── 6. ऊपर की पट्टी scroll पर सिमट जाती है ──────────────────────────
+   Page नीचे जाते ही header ज़रा पतला होता है और काँच गाढ़ा — जगह बचती है
+   और लगता है कि पट्टी ऊपर तैर रही है।                                  */
+@supports(animation-timeline:scroll()){
+  @media(prefers-reduced-motion:no-preference){
+    @keyframes fx-hdr{
+      to{backdrop-filter:saturate(1.6) blur(16px);
+         box-shadow:0 1px 0 rgba(17,17,26,.07),0 12px 30px -18px rgba(17,17,26,.4)} }
+    .hdr{animation:fx-hdr linear both;
+      animation-timeline:scroll(root);animation-range:0 130px}
+  }
+}
+
+/* ── 7. छोटी-छोटी नफ़ासतें ────────────────────────────────────────────
+   चुने हुए text का रंग, focus की अँगूठी, और पतली scrollbar। ये तीनों वो
+   चीज़ें हैं जो अच्छी site और आम site का फ़र्क़ बनाती हैं।                */
+::selection{background:rgba(123,92,240,.22);color:var(--ink)}
+:where(a,button,input,select,textarea,[tabindex]):focus-visible{
+  outline:2px solid var(--brand);outline-offset:2px;border-radius:8px}
+@media(pointer:fine){
+  *{scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+  ::-webkit-scrollbar{width:10px;height:10px}
+  ::-webkit-scrollbar-thumb{background:var(--line);border-radius:99px;
+    border:3px solid var(--bg)}
+  ::-webkit-scrollbar-thumb:hover{background:#D3D3E0}
+  ::-webkit-scrollbar-track{background:transparent}
+}

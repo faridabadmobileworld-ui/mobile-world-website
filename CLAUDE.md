@@ -563,6 +563,37 @@ Faridabad में mid-range Android और 4G पर है। इसलिए
 तैरते डिब्बे, असली परछाइयाँ, हल्की गहराई। नया कुछ बनाते वक़्त इसी में रहिए,
 हर section में नया अंदाज़ मत लाइए।
 
+### ✨ Aura — पूरी site की चमक वाली परत (7 Sep 2026)
+
+Owner ने कहा: *"poori website ka UI completely unbelievable lge, wow factor
+wala."* भारी 3D/WebGL जान-बूझकर नहीं लिया (§7 — page speed सबसे ऊपर; और
+owner के अपने blueprint का भाग 5 भी यही कहता है)। इसकी जगह **कारीगरी**:
+
+- **उँगली के पीछे चलती रोशनी** — `components/Aura.tsx`. हर card की सतह पर
+  नरम उजाला, ठीक cursor की जगह पर, और किनारे की धार भी उसी तरफ़ जगमगाती है।
+  ⚠️ **छूने वाले phone पर यह चलती ही नहीं** (`pointer: fine` की जाँच) —
+  Faridabad का ग्राहक phone पर है, उसके यहाँ एक भी हिसाब नहीं लगता।
+  पूरे page पर एक ही listener, rAF से थमा हुआ, सिर्फ़ दो CSS variable।
+- बटनों पर गुज़रती चमक · heading पर सुनहरी लहर · scroll पर header का सिमटना
+  · दबाने पर card का दबना (यह phone पर भी चलता है) · चुने हुए text, focus
+  की अँगूठी और पतली scrollbar।
+- **कोई नई library नहीं, कोई नई file download नहीं।**
+
+⚠️⚠️ **सबसे बड़ी सीख — card की तस्वीर पर `filter` कभी मत लगाइए।**
+एक `filter:saturate()` ने home का LCP **652ms से 1416ms** कर दिया था।
+नापकर पकड़ा गया (slow 4G + 4× धीमा CPU, production build, तीन-तीन बार):
+
+| | LCP |
+|---|---|
+| पुराना code | 652ms |
+| `filter` के साथ | **1416ms** ❌ |
+| सिर्फ़ `transform` | 664ms ✅ |
+
+जिस तस्वीर पर `filter` हो, browser उसे अलग तरह से रँगता है और LCP की गिनती
+टल जाती है। **सिर्फ़ `transform` इस्तेमाल कीजिए** — वो compositor पर चलता है
+और रँगने के काम को छूता ही नहीं। नई animation लिखने से पहले यह नाप दोबारा
+कर लीजिए (`preview/` वाले तरीक़े से)।
+
 ### 🎨 दिखावट और animation — 2 Sep 2026
 
 Owner ने कहा: *"har jagah animations add karo... buttons ko thode designs do,
