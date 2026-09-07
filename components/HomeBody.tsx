@@ -10,6 +10,7 @@ import { FollowUs } from "@/components/FollowUs";
 import { MoreLinks } from "@/components/MoreLinks";
 import { GoogleQR } from "@/components/GoogleQR";
 import { JourneyScroll } from "@/components/JourneyScroll";
+import { GLBackdrop } from "@/components/GLBackdrop";
 import { LatestPost } from "@/components/LatestPost";
 import { FinanceStrip } from "@/components/FinanceStrip";
 import { InstagramFeed } from "@/components/InstagramFeed";
@@ -78,7 +79,16 @@ export function HomeBody({ current = "/", journey = true }:
           असली HTML text में है (`legacy` से, दोबारा कहीं नहीं लिखा)। */}
       {journey && <JourneyScroll />}
 
-      {/* सफ़र के ठीक बाद — सबसे नई post, ताकि home पर आते ही दिख जाए। */}
+      {/* सफ़र के बाद एक साँस — असली 3D का हिस्सा। यहाँ हर frame उसी वक़्त
+          GPU पर बनता है, कोई तस्वीर या video नहीं। ⚠️ यह screen पर आने पर
+          ही चलता है, बाक़ी वक़्त GPU का काम शून्य। */}
+      <GLBackdrop
+        kicker="1973 से आज तक"
+        heading="भरोसा वही, ज़माना नया"
+        body="किराना की दुकान से आज के showroom तक — काम करने का तरीक़ा वही रहा, सामान बदलता गया।"
+      />
+
+      {/* उसके बाद — सबसे नई post, ताकि home पर आते ही दिख जाए। */}
       <LatestPost />
 
       <section className="sec">
