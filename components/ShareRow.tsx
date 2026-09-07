@@ -18,6 +18,10 @@
  *
  * कोई tracking नहीं, कोई बाहरी script नहीं — सिर्फ़ सादे link और browser
  * का अपना share। Privacy page पर जो लिखा है, यह उससे टकराता नहीं।
+ *
+ * 📌 यह सफ़ाई page पर **नहीं** छपती। Owner ने 7 Sep 2026 को कहा: हर जगह
+ * नखरे और शर्तें लिखेंगे तो ग्राहक दुकान तक आएगा ही नहीं। बटन चुपचाप सही
+ * काम करता है — वजह यहाँ code में लिखी है, ग्राहक के सामने नहीं।
  */
 
 import { useState } from "react";
@@ -73,10 +77,6 @@ export function ShareRow({ title, url }: { title: string; url: string }) {
           {copied ? <IconCheck /> : <IconLink />} {copied ? "Link copy हो गया" : "Link copy"}
         </button>
       </div>
-      <p className="shr-n">
-        Instagram किसी website का link सीधे भेजने नहीं देता — इसलिए वो बटन phone की
-        अपनी list खोल देता है, या link copy कर देता है।
-      </p>
     </div>
   );
 }

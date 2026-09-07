@@ -527,7 +527,7 @@ export const posts: Post[] = [
 
 <figure class="rvid rvid-zoom">
 <span class="zw"><img src="/posts/redmi-17-5g/colours.webp" alt="Redmi 17 5G के तीनों रंग — Eternal Orange, Endless Blue और Absolute Black" width="1400" height="788" loading="lazy" decoding="async" /></span>
-<figcaption>तीनों रंग एक साथ। दुकान पर तीनों सामने रखकर देख लीजिए — तस्वीर में रंग हमेशा अलग लगता है।</figcaption>
+<figcaption>तीनों रंग एक साथ — Eternal Orange, Endless Blue और Absolute Black। दुकान पर तीनों सामने रखकर देखिए, असली रोशनी में और भी अच्छे लगते हैं।</figcaption>
 </figure>
 
 <h3>तीन रंग</h3>
@@ -545,16 +545,21 @@ export const posts: Post[] = [
 <tr><td>8 GB RAM + 128 GB Storage</td><td><strong>₹26,999</strong></td></tr>
 </tbody>
 </table>
-<p>ये Xiaomi की बताई हुई क़ीमतें हैं। कौन सा variant आपके लिए ठीक रहेगा, यह counter पर बैठकर तय कर लीजिए।</p>
+<p>कौन सा variant आपके लिए सही रहेगा — 6 GB या 8 GB — यह दुकान पर बैठकर आराम से तय कर लीजिए।</p>
 
 <h2 id="pre-booking">Pre-booking करवाना क्यों ज़रूरी है?</h2>
 <p>भाई, 10 September को जब sale खुलेगी तो शुरू में stock सीमित ही आता है। बाद में पसंद का रंग (ख़ासकर Orange वाला) मिलना मुश्किल हो जाता है।</p>
 <p>Online के चक्करों और बोरिंग confusion से बचना है, तो सीधा दुकान पर आ जाइए। नीचे WhatsApp वाले बटन से message भी कर सकते हैं — जवाब सीधे counter से आएगा।</p>
-<p>किश्तों पर लेना हो तो <a href="/finance">Finance और EMI</a> वाले page पर पूरी शर्तें लिखी हैं। पुराना phone देना हो तो <a href="/posts/phone-exchange-guide">exchange वाली guide</a> पहले पढ़ लीजिए — साथ में क्या लाना है, वो वहाँ लिखा है।</p>
+<p>किश्तों पर लेना हो तो <a href="/finance">Finance</a> भी available है। पुराना phone देना हो तो हम <a href="/posts/phone-exchange-guide">exchange</a> भी लेते हैं — साथ में बस इतना ले आइए:</p>
+<ul>
+<li><strong>पुराना phone</strong> — उसका charger और डिब्बे का बाक़ी सामान साथ हो तो और अच्छा।</li>
+<li><strong>Bill या original डिब्बा</strong> — दोनों में से जो भी हो।</li>
+<li><strong>अपना Aadhaar</strong>।</li>
+</ul>
 
 <h2 id="dukaan-se">दुकान से लेने पर क्या फ़र्क़ पड़ता है</h2>
-<p>Phone हाथ में लेकर देखिए — नाप, वज़न, रंग। डिब्बा आपके सामने खुलता है, GST bill वहीं मिलता है, और नया phone चालू करके, data डालकर ही आप घर जाते हैं।</p>
-<p>बाद में कुछ समझना हो या कोई दिक़्क़त आए, तो आमने-सामने बात हो सकती है — यह <a href="/after-sales-support">After Sales Support</a> वाले page पर लिखा है। नए phone की warranty का काम company के service centre पर ही होता है, यह हम पहले ही साफ़ बता देते हैं।</p>
+<p>Phone हाथ में feel करके देखिए — size, वज़न, colours। Box आपके सामने खुलता है, GST bill मिलता है, और नया phone चालू करके — यहाँ तक कि आप चाहें तो आपका पुराना सारा data नए device में डालकर ही आप घर जाते हैं।</p>
+<p>बाद में कुछ समझना हो या कोई दिक़्क़त आए, तो आमने-सामने कभी भी मिल सकते हैं, या call और message पर बात कर सकते हैं — ज़्यादा जानकारी के लिए <a href="/after-sales-support">After Sales Support</a> या <a href="/after-sales-support#warranty">warranty</a> वाला हिस्सा भी पढ़ सकते हैं।</p>
 <p>Mobile World 2016 से Jawahar Colony में है, और परिवार का यह काम 1973 से चला आ रहा है।</p>
 <p><strong>दुकान का पूरा पता, timing और सारे buttons ठीक नीचे दिए हैं</strong> — एक ही click में WhatsApp कीजिए, call कीजिए, या Google Maps पर रास्ता खोल लीजिए।</p>
 <p>और हाँ — <strong>नए offers, भारी discounts और gifts की ख़बर सबसे पहले वहीं मिलती है</strong>, इसलिए हमें <strong>YouTube</strong>, <strong>Instagram</strong>, <strong>Facebook</strong> और <strong>Google</strong> — चारों जगह follow करना मत भूलिएगा। सबके buttons नीचे लगे हैं।</p>`,
