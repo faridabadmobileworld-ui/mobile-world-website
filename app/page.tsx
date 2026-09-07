@@ -1,5 +1,5 @@
 import { localBusinessSchema, jsonLdScript } from "@/data/schema";
-import { GLPhone } from "@/components/GLPhone";
+import { PhoneScrub } from "@/components/PhoneScrub";
 import { HomeBody } from "@/components/HomeBody";
 
 /* Home page ka saara content ab `components/HomeBody.tsx` mein hai, taaki
@@ -12,7 +12,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: jsonLdScript(localBusinessSchema()) }} />
 
       <div className="wrap">
-        <GLPhone />
+        <PhoneScrub />
         <HomeBody current="/" />
       </div>
     </>

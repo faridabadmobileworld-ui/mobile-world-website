@@ -2381,81 +2381,102 @@ main .rbody .hn{flex:none;display:grid;place-items:center;min-width:30px;height:
 @keyframes faq-in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 
 /* ══════════════════════════════════════════════════════════════════════
-   HEADER का 3D PHONE — 7 Sep 2026
+   HOME के सबसे ऊपर — owner की अपनी video, scroll के साथ चलती हुई
 
-   Owner ने अपनी भेजी video का वही क्रम माँगा: जुड़ा हुआ phone, scroll के
-   साथ खुलता हुआ, अंदर के हिस्से दिखते हुए, फिर वापस पूरा जुड़ जाना।
+   Owner (7 Sep 2026): *"mujhe meri original same video chahiye yahan same
+   to same Exactly jo maine di h 16:9 ratio me ye... ise exactly ise hi
+   scrolling ke saath Animate karna h bina isme kuch b badli."*
 
-   ढाँचा: एक लंबा हिस्सा (`.phero`) जिसके अंदर screen भर की एक चिपकी हुई
-   परत (`.phero-pin`) है। जितना लंबा हिस्सा, उतनी scroll की जगह — और उसी
-   जगह में खुलने-जुड़ने का पूरा सफ़र बैठता है।
+   ढाँचा वही है जो "हमारा सफ़र" का है — एक लंबा हिस्सा (`.phv-scroll`)
+   जिसके अंदर screen भर की एक चिपकी हुई परत (`.phv-pin`)। जितना लंबा
+   हिस्सा, उतनी scroll की जगह, और उसी जगह में पूरी video चलती है।
+
+   ⚠️ Video **16:9 में पूरी दिखती है, कटती नहीं** (`object-fit:contain`)।
+      `cover` लगाने पर छोटी screen पर बाएँ कोने का "iPhone 18 Pro Max"
+      कट जाता — owner ने कहा है कुछ भी बदलना नहीं।
+   ⚠️ दुकान का नाम video के **नीचे** है, ऊपर नहीं — video के अपने अक्षर
+      बाएँ कोने में हैं, दोनों टकराते।
    ══════════════════════════════════════════════════════════════════════ */
-.phero{position:relative;height:230vh;margin:0 0 8px}
-@media(max-width:700px){ .phero{height:200vh} }
+.phv{position:relative;margin:0 0 8px}
+.phv-scroll{position:relative;height:230vh}
+@media(max-width:700px){ .phv-scroll{height:200vh} }
 
-.phero-pin{position:sticky;top:calc(var(--hdr) + 6px);
-  height:calc(100svh - var(--hdr) - 74px);
-  display:grid;place-items:center;overflow:hidden;
-  border-radius:var(--r-lg);isolation:isolate;
-  background:
-    radial-gradient(90% 70% at 50% 8%, #241A2E 0%, #140F1C 55%, #0B0810 100%);
-  box-shadow:var(--sh-3),var(--ring)}
-
-/* ⚠️ `touch-action: pan-y` सबसे ज़रूरी line है। इसके बिना छूने वाले phone
-   पर सीधा-नीचे वाला drag canvas खा जाता और ग्राहक यहीं फँस जाता — उँगली
-   चलाता रहता और page आगे बढ़ता ही नहीं। अब नीचे वाला drag scroll करता है,
-   बग़ल वाला phone घुमाता है। */
-.phero-gl{position:absolute;inset:0;width:100%;height:100%;
-  touch-action:pan-y;cursor:grab;opacity:0;transition:opacity 1s var(--ease)}
-.phero-gl:active{cursor:grabbing}
-.gl-on .phero-gl{opacity:1}
-
-/* Text उँगली के रास्ते में न आए — सिर्फ़ button पकड़ में आएँ */
-/* Phone ऊपर है, लिखाई नीचे — दोनों कभी एक-दूसरे पर नहीं चढ़ते। */
-.phero-c{position:relative;z-index:1;pointer-events:none;
-  text-align:center;padding:16px 20px 0;max-width:34ch;
-  align-self:end;margin-bottom:clamp(16px,4.5vh,44px)}
-.phero-c .btn{pointer-events:auto}
-/* लिखाई के पीछे नरम अँधेरा — phone का कोई हिस्सा पीछे से गुज़रे तो भी पढ़ा
-   जाए। ⚠️ यह `filter` नहीं, सिर्फ़ gradient है — filter LCP दोगुना करता है। */
-.phero-c::before{content:"";position:absolute;inset:-18px -30px -24px;z-index:-1;
-  background:radial-gradient(76% 66% at 50% 58%,
-    rgba(8,6,14,.86), rgba(8,6,14,.58) 58%, transparent 80%)}
-
-.phero-soon{display:inline-block;font-size:11px;font-weight:800;
-  letter-spacing:.2em;text-transform:uppercase;
-  color:#F6D9A6;background:rgba(246,217,166,.10);
-  border:1px solid rgba(246,217,166,.32);border-radius:99px;
-  padding:5px 13px;margin-bottom:12px}
-
-.phero-h{font-size:clamp(1.35rem,4.6vw,2.4rem);font-weight:800;
-  letter-spacing:-.032em;line-height:1.2;margin:0 0 8px;color:#fff;
-  text-wrap:balance;text-shadow:0 2px 22px rgba(0,0,0,.6)}
-.phero-h span{color:#F0C98A}
-
-.phero-p{margin:0 0 6px;color:#CFC4DE;font-size:13.5px;line-height:1.6;
-  text-wrap:pretty;text-shadow:0 1px 12px rgba(0,0,0,.55)}
-
-.phero-hint{margin:0 0 16px;font-size:11.5px;font-weight:700;
-  letter-spacing:.03em;color:#A99BC6}
-@media(prefers-reduced-motion:no-preference){
-  .phero-hint{animation:hint-saans 2.8s ease-in-out infinite}
+/* ⚠️ ऊपर दो चिपकी हुई पट्टियाँ हैं — header (59px) और category strip (62px)।
+   सिर्फ़ `--hdr` छोड़ने पर video का ऊपरी किनारा strip के पीछे चला जाता था।
+   नीचे phone पर तीसरी पट्टी (mobile bar, 53px) भी है। */
+.phv-pin{position:sticky;top:calc(var(--hdr) + 68px);
+  height:calc(100svh - var(--hdr) - 84px);
+  display:flex;flex-direction:column;justify-content:center;
+  gap:clamp(12px,2.4vh,26px)}
+@media(max-width:700px){
+  .phv-pin{height:calc(100svh - var(--hdr) - 134px)}
 }
-@keyframes hint-saans{0%,100%{opacity:.5}50%{opacity:1}}
 
-.phero-cta{display:flex;flex-wrap:wrap;gap:9px;justify-content:center}
+/* Stage की चौड़ाई ऊँचाई से निकलती है, ताकि 16:9 का frame हमेशा पूरा बैठे
+   और दोनों तरफ़ बेवजह काली पट्टियाँ न बचें। */
+.phv-stage{position:relative;align-self:center;aspect-ratio:16/9;
+  flex:0 1 auto;width:100%;max-width:100%;
+  border-radius:var(--r-lg);overflow:hidden;isolation:isolate;
+  background:radial-gradient(90% 70% at 50% 8%, #241A2E 0%, #140F1C 55%, #0B0810 100%);
+  box-shadow:var(--sh-3),var(--ring)}
+.phv-stage img,.phv-stage video{position:absolute;inset:0;
+  width:100%;height:100%;object-fit:contain}
+/* Video आने तक ठहरी हुई तस्वीर — फिर video उसी के ऊपर आ जाती है।
+   ⚠️ यहाँ `filter` कभी मत लगाइए, वो LCP दोगुना कर देता है। */
+.phv-v{opacity:0;transition:opacity .5s var(--ease)}
+.phv-live .phv-v{opacity:1}
 
-/* बहुत छोटी लेटी हुई screen पर लिखाई और phone आपस में टकराते हैं —
-   वहाँ हिस्सा छोटा कर दीजिए। */
+/* बड़ी screen पर stage बची हुई ऊँचाई ले लेता है और उसी से उसकी चौड़ाई
+   निकलती है (`aspect-ratio` + `align-self:center`) — इसलिए 16:9 का डिब्बा
+   हमेशा पूरा बैठता है, न ऊपर से कटता है न नीचे से।
+   ⚠️ `min-height:0` के बिना flex item सिकुड़ता ही नहीं और video header के
+   पीछे चली जाती है — यही पहली बार हुआ था। */
+@media(min-width:701px){
+  .phv-stage{flex:1 1 0;min-height:0;width:auto}
+}
+
+.phv-c{flex:none;text-align:center;padding:0 20px;max-width:30ch;
+  margin:0 auto}
+@media(min-width:701px){ .phv-c{max-width:46ch} }
+
+.phv-pill{display:inline-flex;align-items:center;gap:7px;
+  font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
+  color:#8A6A2E;background:rgba(240,201,138,.16);
+  border:1px solid rgba(196,150,72,.42);border-radius:99px;
+  padding:5px 13px;margin:0 0 10px}
+.phv-pill i{width:6px;height:6px;border-radius:50%;background:#C49648}
+@media(prefers-reduced-motion:no-preference){
+  .phv-pill i{animation:phv-saans 2.4s ease-in-out infinite}
+}
+@keyframes phv-saans{0%,100%{opacity:.35}50%{opacity:1}}
+
+.phv h1{font-size:clamp(1.3rem,4.4vw,2.2rem);font-weight:800;
+  letter-spacing:-.032em;line-height:1.22;margin:0 0 7px;
+  text-wrap:balance}
+.phv h1 span{color:var(--brand)}
+
+.phv-sub{margin:0 0 6px;color:var(--ink-2);font-size:13.5px;line-height:1.6;
+  text-wrap:pretty}
+
+.phv-hint{margin:0 0 14px;font-size:11.5px;font-weight:700;
+  letter-spacing:.03em;color:var(--ink-3)}
+@media(prefers-reduced-motion:no-preference){
+  .phv-hint{animation:phv-saans 2.8s ease-in-out infinite}
+}
+
+.phv-btns{display:flex;flex-wrap:wrap;gap:9px;justify-content:center}
+
+/* बहुत छोटी लेटी हुई screen — वहाँ video और लिखाई दोनों नहीं बैठतीं।
+   ⚠️ यही नाप `PhoneScrub.tsx` की `GATES` में भी लिखी है, एक बदले तो दूसरी भी। */
 @media(max-height:520px){
-  .phero{height:150vh}
-  .phero-hint{display:none}
+  .phv-scroll{height:150vh}
+  .phv-hint{display:none}
 }
 
 /* ── 8. डिब्बों का झुकाव — उँगली जिस तरफ़, card उसी तरफ़ ──────────────
    Owner (7 Sep 2026): "3d webgl animations sab lagao... poori website ka
-   UI completely unbelievable lge." Home के सबसे ऊपर असली 3D phone लग
-   चुका है; यह उसी सोच की हल्की परत बाक़ी site पर — हर card cursor की तरफ़
+   UI completely unbelievable lge." Home के सबसे ऊपर owner की अपनी video
+   scroll के साथ चलती है; यह उसी सोच की हल्की परत बाक़ी site पर — हर card cursor की तरफ़
    ज़रा सा झुक जाता है, जैसे मेज़ पर रखा असली कार्ड।
 
    झुकाव के दोनों कोण `Aura.tsx` से आते हैं (`--tx`, `--ty`) — वही एक
