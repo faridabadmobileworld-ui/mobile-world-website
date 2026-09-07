@@ -426,6 +426,15 @@ export type Post = {
    * वरना post अपने आप live नहीं होगी।
    */
   publishAt?: string;
+  /**
+   * Article के सबसे ऊपर तस्वीर की जगह चलती हुई video।
+   *
+   * `poster` वही तस्वीर है जो video में दिखती है — इसलिए autoplay बंद हो,
+   * video न चले, या अभी उतरी न हो, तब भी वही चीज़ दिखती रहती है।
+   * `image` फिर भी ज़रूरी है: WhatsApp और Facebook पर link भेजने पर वही
+   * तस्वीर जाती है (video वहाँ नहीं चलती)।
+   */
+  heroVideo?: { src: string; poster: string };
   title: string;
   excerpt: string;
   image: string;
@@ -456,7 +465,7 @@ export const posts: Post[] = [
     dateISO: "2026-09-07",
     // 7 Sep 2026, सुबह 10 बजे से दिखेगी। उससे पहले पूरी site पर कहीं नहीं।
     publishAt: "2026-09-07T10:00:00+05:30",
-    title: "Redmi 17 5G Pre-Booking: Colors, Storage, Price & Specs in Faridabad",
+    title: "7900mAh बैटरी और Snapdragon की Power के साथ बाज़ार में तहलका मचाने आ रहा है Xiaomi का New Redmi 17 5G!",
     excerpt:
       "Redmi 17 5G के सारे colors, storage variants और दाम एक जगह। 7,900mAh battery, " +
       "Snapdragon 4 Gen 5, 50MP camera — और Jawahar Colony, NIT Faridabad पर pre-booking खुली है।",
@@ -464,14 +473,19 @@ export const posts: Post[] = [
     imageW: 1400,
     imageH: 788,
     alt: "Redmi 17 5G के तीनों रंग — Eternal Orange, Endless Blue और Absolute Black",
+    // सबसे ऊपर चलती हुई video। Share करने पर तस्वीर ऊपर वाली `image` जाती है।
+    heroVideo: {
+      src: "/posts/redmi-17-5g/counter-display.mp4",
+      poster: "/posts/redmi-17-5g/counter-display.webp",
+    },
     body: `
 <p>अगर आप ऐसे 5G phone के इंतज़ार में थे जिसकी battery बार-बार charge करने का झंझट ही ख़त्म कर दे, तो भाई… अब और बोरिंग इंतज़ार नहीं करना पड़ेगा!</p>
-<p>Xiaomi ने India में अपना बिलकुल नया <strong>Redmi 17 5G</strong> उतार दिया है। इसकी official sale <strong>10 September</strong> से शुरू हो रही है — और Mobile World (Jawahar Colony) पर इसकी pre-booking अभी से खुल चुकी है।</p>
+<p>Xiaomi ने India में अपना बिलकुल नया <strong>Redmi 17 5G</strong> उतार दिया है — कंपनी ने 16 को सीधा बाय-बाय कहकर 17 पर छलांग मार दी! इसकी official sale <strong>10 September</strong> से शुरू हो रही है, और Mobile World (Jawahar Colony) पर इसकी pre-booking अभी से खुल चुकी है।</p>
 <p>आइए बिना किसी बोरिंग ज्ञान के, बिलकुल आसान भाषा में इसके एक-एक feature, colour और storage की चीर-फाड़ करते हैं!</p>
 
 <figure class="rvid">
-<video src="/posts/redmi-17-5g/counter-display.mp4" poster="/posts/redmi-17-5g/counter-display.webp" width="1280" height="720" autoplay loop muted playsinline preload="none" aria-label="Redmi 17 5G का display और 10 September से sale शुरू होने की सूचना, Mobile World Faridabad"></video>
-<figcaption>Sale 10 September से। Pre-booking का काउंटर अभी से चालू है।</figcaption>
+<video src="/posts/redmi-17-5g/hands-on.mp4" poster="/posts/redmi-17-5g/hands-on.webp" width="1280" height="722" autoplay loop muted playsinline preload="none" aria-label="Redmi 17 5G, Eternal Orange — Mobile World, Jawahar Colony में हाथ में"></video>
+<figcaption>Eternal Orange — पीछे vegan leather वाली finish। हाथ में लेकर देखिए, तभी पता चलता है कि पकड़ कैसी बैठती है।</figcaption>
 </figure>
 
 <h2 id="battery">1. Battery और Charging 🔋</h2>
@@ -508,16 +522,11 @@ export const posts: Post[] = [
 <li><strong>IP64 rating:</strong> अचानक हल्की बारिश आ जाए या पानी के छींटे पड़ जाएँ — डरने की ज़रूरत नहीं। यह dust और water splash proof है।</li>
 </ul>
 
-<figure class="rvid">
-<video src="/posts/redmi-17-5g/hands-on.mp4" poster="/posts/redmi-17-5g/hands-on.webp" width="1280" height="722" autoplay loop muted playsinline preload="none" aria-label="Redmi 17 5G, Eternal Orange — Mobile World, Jawahar Colony में हाथ में"></video>
-<figcaption>Eternal Orange — पीछे vegan leather वाली finish। हाथ में लेकर देखिए, तभी पता चलता है कि पकड़ कैसी बैठती है।</figcaption>
-</figure>
-
 <h2 id="colours">🎨 Colours, Storage Variants और दाम 🏷️</h2>
 <p>भाई, phone लेने से पहले रंग और storage का हिसाब एकदम साफ़ होना चाहिए। Xiaomi ने इसे इन options में उतारा है:</p>
 
-<figure class="rvid">
-<img src="/posts/redmi-17-5g/colours.webp" alt="Redmi 17 5G के तीनों रंग — Eternal Orange, Endless Blue और Absolute Black" width="1400" height="788" loading="lazy" decoding="async" />
+<figure class="rvid rvid-zoom">
+<span class="zw"><img src="/posts/redmi-17-5g/colours.webp" alt="Redmi 17 5G के तीनों रंग — Eternal Orange, Endless Blue और Absolute Black" width="1400" height="788" loading="lazy" decoding="async" /></span>
 <figcaption>तीनों रंग एक साथ। दुकान पर तीनों सामने रखकर देख लीजिए — तस्वीर में रंग हमेशा अलग लगता है।</figcaption>
 </figure>
 
@@ -528,7 +537,7 @@ export const posts: Post[] = [
 <li><strong>Absolute Black</strong></li>
 </ul>
 
-<h3>Storage और Xiaomi की बताई क़ीमत</h3>
+<h3>Storage और Price</h3>
 <table>
 <thead><tr><th>Variant</th><th>क़ीमत</th></tr></thead>
 <tbody>
@@ -546,7 +555,8 @@ export const posts: Post[] = [
 <h2 id="dukaan-se">दुकान से लेने पर क्या फ़र्क़ पड़ता है</h2>
 <p>Phone हाथ में लेकर देखिए — नाप, वज़न, रंग। डिब्बा आपके सामने खुलता है, GST bill वहीं मिलता है, और नया phone चालू करके, data डालकर ही आप घर जाते हैं।</p>
 <p>बाद में कुछ समझना हो या कोई दिक़्क़त आए, तो आमने-सामने बात हो सकती है — यह <a href="/after-sales-support">After Sales Support</a> वाले page पर लिखा है। नए phone की warranty का काम company के service centre पर ही होता है, यह हम पहले ही साफ़ बता देते हैं।</p>
-<p>Mobile World 2016 से Jawahar Colony में है, और परिवार का यह काम 1973 से चला आ रहा है। दुकान तक पहुँचने का रास्ता <a href="/visit">दुकान पर आइए</a> वाले page पर है।</p>`,
+<p>Mobile World 2016 से Jawahar Colony में है, और परिवार का यह काम 1973 से चला आ रहा है।</p>
+<p><strong>दुकान का पूरा पता, timing और सारे buttons ठीक नीचे दिए हैं</strong> — एक ही click में WhatsApp कीजिए, call कीजिए, या Google Maps पर रास्ता खोल लीजिए। YouTube, Instagram और Facebook के buttons भी वहीं हैं।</p>`,
   },
   {
     slug: "phone-exchange-guide",

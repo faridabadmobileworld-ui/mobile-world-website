@@ -87,9 +87,19 @@ export default async function PostPage({ params }: Params) {
             </div>
 
             <div className="rmedia">
-              <Image className="ph-img" src={post.image} alt={post.alt}
-                width={post.imageW} height={post.imageH} priority
-                sizes="(max-width:900px) 100vw, 900px" />
+              {post.heroVideo ? (
+                /* Poster वही तस्वीर है जो video में है — इसलिए धीमे internet
+                   पर या autoplay बंद होने पर भी डिब्बा कभी ख़ाली नहीं दिखता। */
+                <video className="ph-img" src={post.heroVideo.src}
+                  poster={post.heroVideo.poster}
+                  width={post.imageW} height={post.imageH}
+                  autoPlay loop muted playsInline preload="none"
+                  aria-label={post.alt} />
+              ) : (
+                <Image className="ph-img" src={post.image} alt={post.alt}
+                  width={post.imageW} height={post.imageH} priority
+                  sizes="(max-width:900px) 100vw, 900px" />
+              )}
             </div>
 
             <TableOfContents items={toc} />
@@ -108,8 +118,11 @@ export default async function PostPage({ params }: Params) {
               </div>
             </div>
 
-            {/* Post यहीं ख़त्म हुई — इसलिए लेखक का नाम यहीं आता है, नीचे
-                "और भी पढ़िए" वाली list से पहले। */}
+            {/* Owner ने 7 Sep 2026 को यह क्रम तय किया: post का content ख़त्म →
+                पता और सारे buttons → लेखक का नाम → उसके बाद बाक़ी posts के
+                सुझाव। यानी पढ़ने वाला जहाँ रुकता है, वहीं दुकान तक पहुँचने का
+                रास्ता मिल जाता है — नीचे तक scroll नहीं करना पड़ता। */}
+            <PageFoot />
             <Byline date={post.date} />
 
             <div className="shead" style={{ marginTop: 26 }}><h2>और भी पढ़िए</h2></div>
@@ -127,7 +140,6 @@ export default async function PostPage({ params }: Params) {
                 </Link>
               ))}
             </div>
-            <PageFoot />
           </article>
         </div>
       </div>

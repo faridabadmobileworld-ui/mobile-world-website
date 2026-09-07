@@ -1685,3 +1685,67 @@ main .sec.jrn{content-visibility:visible;contain-intrinsic-size:auto}
 .rbody tbody td{padding:11px 10px;border-bottom:1px solid var(--line);
   color:var(--ink-2);line-height:1.5}
 .rbody tbody tr:last-child td{border-bottom:0}
+
+/* ══════════════════════════════════════════════════════════════════════
+   Article ko premium roop — 7 Sep 2026
+
+   Owner: "page ko thoda premium feel do. animations text fonts sab premium
+   luxury feel do."
+
+   Teen niyam jo yahan tode nahi gaye:
+   • Koi nayi font file nahi mangwayi (§4 — bina puchhe koi nayi cheez nahi,
+     aur ek bahar se aane wali font 4G par LCP bigaad deti hai). Nafasat
+     maujuda type-scale se aayi hai — kasavat, sahi vazan aur behtar rhythm.
+   • Art direction wahi hai jo poori site ki hai: kaanch jaise tairte dibbe,
+     asli parchhaiyan, halki gehrai. Naya andaz nahi ghusaya.
+   • Har animation `main` ke andar hai aur `prefers-reduced-motion` par
+     poori tarah ruk jaati hai.
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* ── Article ka sheershak ─────────────────────────────────────────────── */
+main .reader .rtitle{letter-spacing:-.038em;line-height:1.18;
+  text-wrap:balance;font-weight:800}
+main .reader .rhead .k{letter-spacing:.14em}
+
+/* ── Media ka frame: patli halki dhaar + do parat wali parchhai ───────── */
+main .rmedia,main .rbody .rvid video,main .rbody .rvid img{
+  box-shadow:0 1px 2px rgba(17,17,26,.05),0 10px 28px -6px rgba(17,17,26,.13),
+             0 30px 60px -30px rgba(17,17,26,.18)}
+/* Hairline seedhe media par — pseudo-element ka naap figure ke caption ke
+   saath badal jata, isliye outline hi sabse saaf raasta hai. */
+main .rbody .rvid video,main .rbody .rvid img,main .rbody .rvid-zoom .zw{
+  outline:1px solid rgba(17,17,26,.07);outline-offset:-1px}
+main .rmedia::after{content:"";position:absolute;inset:0;border-radius:inherit;
+  pointer-events:none;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.5),inset 0 0 0 1.5px rgba(17,17,26,.05)}
+main .reader .rmedia video.ph-img{object-fit:cover;background:#EDEDF4}
+
+/* ── Teeno rang wali tasveer par bahut halki zoom, aage-peeche ──────────
+   Nap 1.5% se zyada nahi — itni ki nazar mein aaye, itni nahi ki padhne
+   mein khalal daale. 18 second ka poora chakkar, taaki jhatka na lage.   */
+@keyframes mw-breathe{
+  0%  {transform:scale(1)      translate3d(0,0,0)}
+  50% {transform:scale(1.045)  translate3d(0,-.5%,0)}
+  100%{transform:scale(1)      translate3d(0,0,0)}
+}
+/* Zoom ke liye tasveer ko apne dibbe mein band kiya hai — warna badhti hui
+   tasveer figcaption ke upar chadh jati aur parchhai caption ko bhi ghere. */
+main .rbody .rvid-zoom .zw{display:block;overflow:hidden;border-radius:var(--r-lg);
+  box-shadow:0 1px 2px rgba(17,17,26,.05),0 10px 28px -6px rgba(17,17,26,.13),
+             0 30px 60px -30px rgba(17,17,26,.18)}
+main .rbody .rvid-zoom img{border-radius:0;box-shadow:none;outline:0;
+  animation:mw-breathe 18s var(--ease) infinite;will-change:transform}
+
+/* ── Table ko ek saaf card ka roop ────────────────────────────────────── */
+main .rbody table{background:var(--card);border-radius:var(--r-lg);overflow:hidden;
+  box-shadow:0 1px 2px rgba(17,17,26,.05),0 8px 22px -8px rgba(17,17,26,.12)}
+main .rbody thead th{background:linear-gradient(180deg,#FAFAFE,#F3F3F9);
+  padding:11px 14px 10px;border-bottom:1px solid var(--line)}
+main .rbody tbody td{padding:13px 14px}
+main .rbody tbody td:last-child{color:var(--ink);font-weight:800;
+  font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+
+/* ── Paragraph ka rhythm aur zor dene wale shabd ──────────────────────── */
+main .rbody>p{line-height:1.8}
+main .rbody li strong:first-child{color:var(--ink)}
+
