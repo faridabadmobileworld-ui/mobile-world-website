@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 const toc: TocItem[] = [
   { id: "abhi-baat", label: "अभी बात कीजिए — हम आपके लिए खुले हैं" },
   { id: "pata", label: "हमारी दुकान का exact पता" },
-  { id: "pehle-message", label: "आने से पहले एक छोटा सा WhatsApp message" },
+  { id: "pehle-message", label: "पहले WhatsApp कीजिए" },
   { id: "grievance", label: "शिकायत हो तो सीधे मालिक से" },
   { id: "google", label: "Google पर हमारी listing" },
 ];

@@ -40,7 +40,7 @@ export default function Posts() {
             चाहिए। और साथ में दुकान की अपनी ख़बरें।
           </p>
         </div>
-        <TableOfContents items={toc} heading="इस page पर ये articles हैं" />
+        <TableOfContents items={toc} heading="इस page पर ये articles हैं" cols={2} />
         <div className="posts">
           {livePosts().map((p) => (
             <Link className="post rv in" key={p.slug} id={p.slug} href={`/posts/${p.slug}`}>

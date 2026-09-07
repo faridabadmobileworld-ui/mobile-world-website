@@ -18,8 +18,8 @@ export const metadata: Metadata = {
 };
 
 const toc: TocItem[] = [
-  { id: "list", label: "हमारी Repairing Services की पूरी list" },
-  { id: "approach", label: "हमारा Repairing Approach — 100% Transparency" },
+  { id: "list", label: "पूरी Services list" },
+  { id: "approach", label: "हमारा तरीक़ा" },
   { id: "aaiye", label: "अपने phone को लेकर सीधे दुकान पर आइए" },
 ];
 

@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 const toc: TocItem[] = [
   { id: "madad", label: "सामान लेने के बाद हम किस तरह मदद करते हैं" },
-  { id: "warranty", label: "Brand Warranty और Service Centre — पूरी पारदर्शिता" },
+  { id: "warranty", label: "Warranty और Service Centre" },
   { id: "vaada", label: "हमारा वादा — honest guidance" },
 ];
 

@@ -26,9 +26,9 @@ import { NextClosure } from "@/components/StoreStatus";
 const toc: TocItem[] = [
   { id: "hamara-safar", label: "हमारा सफ़र" },
   { id: "kya-milta-hai", label: "क्या-क्या मिलता है" },
-  { id: "ek-chhat", label: "सब कुछ, एक ही छत के नीचे" },
-  { id: "emi-exchange-repair", label: "EMI, Exchange और Repairing" },
-  { id: "finance", label: "Paper Finance पर EMI किन-किन bank से मिलती है" },
+  { id: "ek-chhat", label: "एक ही छत के नीचे" },
+  { id: "emi-exchange-repair", label: "EMI, Exchange, Repair" },
+  { id: "finance", label: "EMI किन bank से" },
   { id: "dukaan-ke-andar", label: "दुकान के अंदर" },
   { id: "nai-jaankari", label: "Tech Blog & Guides" },
   { id: "insta", label: "Instagram पर हम" },

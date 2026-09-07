@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 };
 
 const toc: TocItem[] = [
-  { id: "partners", label: "Paper Finance पर EMI किन-किन bank से मिलती है" },
+  { id: "partners", label: "EMI किन bank से" },
   { id: "hisaab", label: "किश्त का अंदाज़ा लगाइए" },
   { id: "card", label: "Credit Card पर EMI" },
   { id: "rules", label: "Approval और rules — साफ़ बात" },

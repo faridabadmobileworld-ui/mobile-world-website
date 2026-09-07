@@ -2602,3 +2602,84 @@ main .rbody .hn{flex:none;display:grid;place-items:center;min-width:30px;height:
       rotateX(var(--tx,0deg)) rotateY(var(--ty,0deg)) scale(.985);
     transition-duration:.09s}
 }
+
+/* ══════════════════════════════════════════════════════════════════════
+   "इस page पर" — अब सूची नहीं, एक dashboard (7 Sep 2026)
+
+   Owner: *"Is page par kya kya h wale ko professional dashboard me switch
+   karo, chhota karo, buttons me set karo. agar 9 h wo abhi points, to 3-3
+   ki 3 lines bna do. alag alag colours me show karo. animations daalo."*
+
+   इसलिए हर point अब अपने रंग वाला बटन है, **तीन-तीन की क़तार में**।
+   रंग नौ हैं और `nth-child(9n+…)` से बारी-बारी आते हैं — कोई नई data file
+   नहीं बनाई, क्योंकि यह सजावट है, जानकारी नहीं।
+
+   ⚠️ तीन की क़तार में एक डिब्बा 110-140px चौड़ा होता है — इसलिए हर label
+   ज़्यादा से ज़्यादा **तीन line** तक दिखता है, उसके बाद कट जाता है।
+   लंबी heading वाले page पर TOC का label छोटा लिखिए।
+   ══════════════════════════════════════════════════════════════════════ */
+.toc-g{display:grid !important;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px !important}
+.toc-g li{display:flex}
+.toc-g li a{--tc:var(--brand);
+  position:relative;flex:1;display:flex;flex-direction:column;
+  align-items:flex-start;justify-content:flex-start;gap:6px;
+  min-height:0;padding:10px 10px 11px;border-radius:12px;
+  border:1px solid var(--line);background:var(--card);
+  font-size:clamp(11px,2.9vw,12.5px);font-weight:700;line-height:1.32;
+  letter-spacing:-.01em;color:var(--ink);overflow:hidden;
+  box-shadow:var(--sh-1);
+  transition:transform .22s var(--ease),box-shadow .22s var(--ease),
+    border-color .22s var(--ease),background .22s var(--ease)}
+
+/* बाईं तरफ़ उसी रंग की पतली धार — hover पर पूरी चौड़ी हो जाती है */
+.toc-g li a::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--tc);opacity:.85;transition:width .24s var(--ease)}
+.toc-g li a:hover::before{width:100%;opacity:.09}
+
+.toc-g .toc-n{width:22px;height:22px;margin:0;border-radius:7px;
+  background:color-mix(in oklab,var(--tc) 16%,transparent);
+  color:var(--tc);font-size:11px;font-weight:800;
+  display:grid;place-items:center;flex:none;
+  transition:transform .24s var(--ease)}
+.toc-g .toc-l{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;
+  overflow:hidden;overflow-wrap:anywhere}
+
+.toc-g li a:hover{background:var(--card);color:var(--tc);
+  border-color:color-mix(in oklab,var(--tc) 42%,var(--line));
+  box-shadow:0 10px 24px -14px color-mix(in oklab,var(--tc) 70%,transparent),
+    var(--sh-1)}
+.toc-g li a:hover .toc-n{transform:scale(1.1) rotate(-6deg)}
+.toc-g li a:active{transform:scale(.975)}
+.toc-g li a:focus-visible{outline:2px solid var(--tc);outline-offset:2px}
+
+/* नौ रंग — हर क़तार में तीन अलग, और नीचे वाली क़तारें भी अलग दिखें */
+.toc-g li:nth-child(9n+1) a{--tc:#5B3FD9}
+.toc-g li:nth-child(9n+2) a{--tc:#0E8F6E}
+.toc-g li:nth-child(9n+3) a{--tc:#C2410C}
+.toc-g li:nth-child(9n+4) a{--tc:#0369A1}
+.toc-g li:nth-child(9n+5) a{--tc:#A21CAF}
+.toc-g li:nth-child(9n+6) a{--tc:#B45309}
+.toc-g li:nth-child(9n+7) a{--tc:#15803D}
+.toc-g li:nth-child(9n+8) a{--tc:#BE123C}
+.toc-g li:nth-child(9n+9) a{--tc:#4338CA}
+
+/* एक-एक करके उभरना — बाएँ से दाएँ, ऊपर से नीचे */
+@media(prefers-reduced-motion:no-preference){
+  @keyframes toc-aao{from{opacity:0;transform:translateY(8px) scale(.97)}
+                     to{opacity:1;transform:none}}
+  .toc-g li{animation:toc-aao .42s var(--ease) both;
+    animation-delay:calc(var(--i,0) * 45ms)}
+}
+
+@media(min-width:768px){
+  .toc-g{gap:10px !important}
+  .toc-g li a{padding:12px 12px 13px;font-size:13px;gap:8px}
+}
+
+/* `/posts` पर labels असली article के नाम हैं — तीन की क़तार में वो कट जाते
+   थे। इसलिए वहाँ दो की क़तार, और चार line तक दिखती हैं। */
+.toc-g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+/* सबसे लंबा article का नाम छह line लेता है — इसलिए छह, चार नहीं */
+.toc-g2 .toc-l{-webkit-line-clamp:6}
