@@ -45,6 +45,14 @@ export const metadata: Metadata = {
     index: true, follow: true,
     googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
+  // Phone की home screen पर लगने के लिए — पूरा ब्योरा `app/manifest.ts` में।
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    title: shop.name,
+    // iPhone पर ऊपर की पट्टी सफ़ेद रहे, जैसे header है।
+    statusBarStyle: "default",
+  },
 };
 
 /** Mobile-first site है — zoom बंद नहीं करना, accessibility के लिए ज़रूरी। */
