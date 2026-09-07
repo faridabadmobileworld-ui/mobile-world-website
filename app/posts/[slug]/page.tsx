@@ -122,11 +122,20 @@ export default async function PostPage({ params }: Params) {
               {post.heroVideo ? (
                 /* Poster वही तस्वीर है जो video में है — इसलिए धीमे internet
                    पर या autoplay बंद होने पर भी डिब्बा कभी ख़ाली नहीं दिखता। */
-                <video className="ph-img" src={post.heroVideo.src}
+                /* ⚠️ छोटी screen पर हल्की file — `media` वाला `<source>`
+                   browser ख़ुद चुन लेता है, कोई JavaScript नहीं लगती।
+                   पहले सिर्फ़ बड़ी file थी और phone पर पूरी 1.7 MB उतरती थी। */
+                <video className="ph-img"
                   poster={post.heroVideo.poster}
                   width={post.imageW} height={post.imageH}
                   autoPlay loop muted playsInline preload="none"
-                  aria-label={post.alt} />
+                  aria-label={post.alt}>
+                  {post.heroVideo.srcSm && (
+                    <source media="(max-width:860px)"
+                      src={post.heroVideo.srcSm} type="video/mp4" />
+                  )}
+                  <source src={post.heroVideo.src} type="video/mp4" />
+                </video>
               ) : (
                 <Image className="ph-img" src={post.image} alt={post.alt}
                   width={post.imageW} height={post.imageH} priority

@@ -2401,21 +2401,52 @@ main .rbody .hn{flex:none;display:grid;place-items:center;min-width:30px;height:
 .phv-scroll{position:relative;height:230vh}
 @media(max-width:700px){ .phv-scroll{height:200vh} }
 
-/* ⚠️ ऊपर दो चिपकी हुई पट्टियाँ हैं — header (59px) और category strip (62px)।
-   सिर्फ़ `--hdr` छोड़ने पर video का ऊपरी किनारा strip के पीछे चला जाता था।
-   नीचे phone पर तीसरी पट्टी (mobile bar, 53px) भी है। */
-.phv-pin{position:sticky;top:calc(var(--hdr) + 68px);
-  height:calc(100svh - var(--hdr) - 84px);
-  display:flex;flex-direction:column;justify-content:center;
-  gap:clamp(12px,2.4vh,26px)}
+/* ⚠️⚠️ यह पूरी नाप-जोख दो बार टूट चुकी है — दोबारा मत तोड़िएगा।
+
+   ऊपर दो चिपकी हुई पट्टियाँ हैं: header (59px) और category strip (62px)।
+   नीचे phone पर तीसरी (mobile bar, 53px)। इन्हें छोड़े बिना video का
+   ऊपरी किनारा strip के पीछे चला जाता है।
+
+   ⛔ **Stage को flex से फैलने मत दीजिए।** पहले `flex:1 1 0` लगा था —
+   उससे उसकी ऊँचाई बची हुई जगह से आती थी, फिर `aspect-ratio` उतनी चौड़ाई
+   माँगता था जो `max-width:100%` से कट जाती थी, और डिब्बा **खड़ा (portrait)**
+   हो जाता था। Owner के phone पर — desktop mode में और सीधी screen पर, दोनों
+   जगह — video बीच में छोटी सी और ऊपर-नीचे बड़ी काली पट्टियाँ दिख रही थीं।
+
+   ✅ सही तरीक़ा: चौड़ाई **ऊँचाई के बजट से** निकालिए, ऊँचाई चौड़ाई से नहीं।
+   इसलिए stage `flex:none` है और उसकी चौड़ाई दो में से जो छोटी हो वो —
+   (क) जितनी जगह है, (ख) जितनी ऊँचाई बची है उसका 16/9। इस तरह 16:9 कभी
+   टूटता ही नहीं, और stage + लिखाई मिलकर pin से बाहर कभी नहीं जाते। */
+.phv-pin{position:sticky;
+  /* ऊपर की दोनों पट्टियाँ + नीचे की जगह + लिखाई का बजट — चारों एक जगह */
+  --phv-top:calc(var(--hdr) + 68px);
+  /* ⚠️ ऊँचाई `--phv-top` से नहीं, `--phv-flow` से नापी जाती है।
+     Page के बिलकुल ऊपर (scrollY = 0) pin अभी चिपका नहीं होता — वो अपनी
+     असली जगह पर होता है, जो 163px नीचे है। सिर्फ़ 127px मानकर नापने से
+     उसी हालत में लिखाई नीचे वाली पट्टी पर चढ़ जाती थी। */
+  --phv-flow:168px;
+  --phv-bot:24px;
+  /* लिखाई का बजट — यह अंदाज़ा नहीं, नापकर रखा गया है: caption 321px +
+     बीच का gap 24px = 345px, ऊपर 7px की गुंजाइश। इसमें कुछ जोड़िए
+     (नई line, बड़ा बटन) तो यह नाप दोबारा लीजिए, वरना video और लिखाई
+     एक-दूसरे पर चढ़ जाएँगी। */
+  --phv-cap:352px;
+  top:var(--phv-top);
+  height:calc(100svh - var(--phv-flow) - var(--phv-bot));
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  gap:clamp(10px,2.2vh,24px)}
 @media(max-width:700px){
-  .phv-pin{height:calc(100svh - var(--hdr) - 134px)}
+  /* phone पर caption 304-324px, gap 19px — इसलिए 344px।
+     ⚠️ नीचे 96px छोड़े गए हैं: mobile bar 53px + इतनी गुंजाइश कि page के
+     बिलकुल ऊपर (जब pin अभी चिपका नहीं है) भी लिखाई पट्टी पर न चढ़े। */
+  .phv-pin{--phv-bot:62px;--phv-cap:344px}
 }
 
-/* Stage की चौड़ाई ऊँचाई से निकलती है, ताकि 16:9 का frame हमेशा पूरा बैठे
-   और दोनों तरफ़ बेवजह काली पट्टियाँ न बचें। */
-.phv-stage{position:relative;align-self:center;aspect-ratio:16/9;
-  flex:0 1 auto;width:100%;max-width:100%;
+
+
+
+.phv-stage{position:relative;flex:none;aspect-ratio:16/9;
+  width:clamp(180px, calc((100svh - var(--phv-flow) - var(--phv-bot) - var(--phv-cap)) * 16 / 9), 100%);
   border-radius:var(--r-lg);overflow:hidden;isolation:isolate;
   background:radial-gradient(90% 70% at 50% 8%, #241A2E 0%, #140F1C 55%, #0B0810 100%);
   box-shadow:var(--sh-3),var(--ring)}
@@ -2426,18 +2457,8 @@ main .rbody .hn{flex:none;display:grid;place-items:center;min-width:30px;height:
 .phv-v{opacity:0;transition:opacity .5s var(--ease)}
 .phv-live .phv-v{opacity:1}
 
-/* बड़ी screen पर stage बची हुई ऊँचाई ले लेता है और उसी से उसकी चौड़ाई
-   निकलती है (`aspect-ratio` + `align-self:center`) — इसलिए 16:9 का डिब्बा
-   हमेशा पूरा बैठता है, न ऊपर से कटता है न नीचे से।
-   ⚠️ `min-height:0` के बिना flex item सिकुड़ता ही नहीं और video header के
-   पीछे चली जाती है — यही पहली बार हुआ था। */
-@media(min-width:701px){
-  .phv-stage{flex:1 1 0;min-height:0;width:auto}
-}
-
-.phv-c{flex:none;text-align:center;padding:0 20px;max-width:30ch;
-  margin:0 auto}
-@media(min-width:701px){ .phv-c{max-width:46ch} }
+.phv-c{flex:none;text-align:center;padding:0 20px;max-width:32ch;margin:0 auto}
+@media(min-width:701px){ .phv-c{max-width:52ch} }
 
 .phv-pill{display:inline-flex;align-items:center;gap:7px;
   font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
@@ -2450,13 +2471,28 @@ main .rbody .hn{flex:none;display:grid;place-items:center;min-width:30px;height:
 }
 @keyframes phv-saans{0%,100%{opacity:.35}50%{opacity:1}}
 
-.phv h1{font-size:clamp(1.3rem,4.4vw,2.2rem);font-weight:800;
-  letter-spacing:-.032em;line-height:1.22;margin:0 0 7px;
+.phv h1{font-size:clamp(1.15rem,3.9vw,2rem);font-weight:800;
+  letter-spacing:-.032em;line-height:1.22;margin:0 0 10px;
   text-wrap:balance}
-.phv h1 span{color:var(--brand)}
 
-.phv-sub{margin:0 0 6px;color:var(--ink-2);font-size:13.5px;line-height:1.6;
-  text-wrap:pretty}
+/* ── दुकान की पहचान — logo, नाम, tagline (ऊपर से नीचे) ──────────────
+   Owner (7 Sep 2026): "logo use karo, Red Glossy me likha ho Mobile World
+   b, aur just uske hi niche tagline b... tagline ek hi single line me."   */
+.phv-brand{display:flex;flex-direction:column;align-items:center;gap:3px;
+  margin:0 0 10px}
+.phv-logo{width:clamp(38px,9vw,54px);height:auto}
+
+/* लाल, चमकती हुई लिखाई — ⚠️ `filter` नहीं, सिर्फ़ gradient (LCP का नियम) */
+.phv-name{margin:0;font-size:clamp(1.05rem,3.6vw,1.7rem);font-weight:900;
+  letter-spacing:-.025em;line-height:1.1;
+  background:linear-gradient(180deg,#FF7A6E 0%,#F0322A 34%,#B8110B 62%,#FF6A5C 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ⚠️ tagline हमेशा एक ही line में — owner ने साफ़ कहा। इसीलिए `nowrap` है
+   और नाप screen के साथ घटती-बढ़ती है। नया शब्द जोड़ने से पहले 320px पर
+   जाँच लीजिए। */
+.phv-tag{margin:0;white-space:nowrap;font-weight:700;
+  font-size:clamp(8.5px,2.45vw,13px);letter-spacing:.02em;color:var(--ink-2)}
 
 .phv-hint{margin:0 0 14px;font-size:11.5px;font-weight:700;
   letter-spacing:.03em;color:var(--ink-3)}
@@ -2468,9 +2504,57 @@ main .rbody .hn{flex:none;display:grid;place-items:center;min-width:30px;height:
 
 /* बहुत छोटी लेटी हुई screen — वहाँ video और लिखाई दोनों नहीं बैठतीं।
    ⚠️ यही नाप `PhoneScrub.tsx` की `GATES` में भी लिखी है, एक बदले तो दूसरी भी। */
-@media(max-height:520px){
-  .phv-scroll{height:150vh}
+@media(max-height:620px){
+  .phv-scroll{height:160vh}
   .phv-hint{display:none}
+  .phv h1{font-size:clamp(1rem,2.6vw,1.3rem);margin-bottom:6px}
+  .phv-brand{margin-bottom:6px;gap:1px}
+}
+
+/* ⚠️ यह block सारे `.phv-*` नियमों के **बाद** है। पहले यह ऊपर लिखा था
+   और बराबर specificity होने से नीचे वाले base नियम जीत जाते थे — छोटी
+   screen पर कुछ भी नहीं सिमटता था। */
+/* ── छोटी ऊँचाई वाली screen (640px और उससे कम) ─────────────────────────
+   ऐसे phone पर दो चिपकी पट्टियों के बाद इतनी जगह बचती ही नहीं कि पूरी
+   लिखाई और video दोनों बैठ सकें — 320x640 पर लिखाई नीचे वाली पट्टी पर
+   चढ़ रही थी। इसलिए यहाँ लिखाई सिमट जाती है (इशारा हट जाता है, heading
+   और logo छोटे) और बजट 236px का रह जाता है। */
+@media(max-height:700px){
+  /* नापकर: यहाँ caption 242px का रह जाता है, gap 14px — इसलिए 258px */
+  .phv-pin{--phv-cap:258px}
+  .phv-hint{display:none}
+  .phv h1{font-size:clamp(1rem,3.4vw,1.35rem);margin-bottom:6px}
+  .phv-pill{margin-bottom:6px;padding:4px 11px}
+  .phv-brand{margin-bottom:7px;gap:1px}
+  .phv-logo{width:clamp(30px,7vw,40px)}
+  /* दोनों बटन एक ही क़तार में — दो क़तारों में ~50px और लग जाते थे */
+  .phv-btns{flex-wrap:nowrap;gap:7px}
+  .phv-btns .btn{font-size:12px;padding:9px 11px;min-height:40px}
+}
+
+/* ── लेटी हुई छोटी screen — यहाँ ऊपर-नीचे जगह है ही नहीं ───────────────
+   844x390 पर दोनों पट्टियों के बाद सिर्फ़ 249px बचते हैं। ऊपर-नीचे रखने पर
+   video 101px की रह जाती थी और लिखाई नीचे वाली पट्टी पर चढ़ जाती थी।
+   इसलिए यहाँ दोनों **अगल-बग़ल** हैं — video बाएँ, लिखाई दाएँ।
+
+   ⚠️ यह block `.phv-stage` वाले नियम के **बाद** होना चाहिए। पहले यह ऊपर
+   लिखा था और बराबर की specificity होने से नीचे वाला clamp जीत जाता था —
+   landscape में video 180px की ही रह जाती थी। */
+@media(orientation:landscape) and (max-height:620px){
+  .phv-pin{--phv-bot:62px;flex-direction:row;align-items:center;
+    justify-content:center;gap:18px}
+  .phv-stage{width:min(56%,
+    calc((100svh - var(--phv-flow) - var(--phv-bot)) * 16 / 9))}
+  .phv-c{flex:1 1 auto;max-width:40ch;text-align:left;padding:0;margin:0}
+  .phv-brand{align-items:flex-start}
+  .phv-btns{justify-content:flex-start}
+  /* ⚠️ यहाँ ऊँचाई सिर्फ़ ~160px बचती है। इतने में pill और logo दोनों नहीं
+     बैठते, और लिखाई नीचे वाली पट्टी पर चढ़ जाती थी — इसलिए दोनों हटा दिए।
+     नाम और tagline फिर भी दिखते हैं, वही ज़रूरी हैं। */
+  .phv-pill,.phv-logo{display:none}
+  .phv h1{font-size:clamp(.92rem,2.1vw,1.15rem);line-height:1.2;margin-bottom:5px}
+  .phv-name{font-size:clamp(.95rem,2vw,1.2rem)}
+  .phv-brand{margin-bottom:6px}
 }
 
 /* ── 8. डिब्बों का झुकाव — उँगली जिस तरफ़, card उसी तरफ़ ──────────────

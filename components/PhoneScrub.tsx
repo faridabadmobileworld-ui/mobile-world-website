@@ -182,11 +182,19 @@ export function PhoneScrub() {
           <div className="phv-c">
             <p className="phv-pill"><i aria-hidden="true" />Coming Soon</p>
             <h1 id="phv-h">
-              नया iPhone जल्दी ही — <span>{shop.name}</span> पर
+              नया iPhone जल्दी ही — {shop.address.locality}, {shop.address.city} में
             </h1>
-            <p className="phv-sub">
-              {shop.address.locality}, {shop.address.city} — {shop.tagline}
-            </p>
+
+            {/* Owner (7 Sep 2026): "logo use karo, Red Glossy me likha ho
+                Mobile World b, aur just uske hi niche tagline b. logo, name,
+                tagline upar niche. tagline ek hi single line me likhna." */}
+            <div className="phv-brand">
+              <Image className="phv-logo" src="/images/mobile-world-logo-79e75645.webp"
+                     alt="" width={240} height={240} sizes="52px" />
+              <p className="phv-name">{shop.name}</p>
+              <p className="phv-tag">{shop.tagline}</p>
+            </div>
+
             <p className="phv-hint" aria-hidden="true">
               Scroll कीजिए — phone आपके सामने खुलेगा
             </p>

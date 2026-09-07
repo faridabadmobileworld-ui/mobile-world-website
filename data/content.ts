@@ -434,7 +434,9 @@ export type Post = {
    * `image` फिर भी ज़रूरी है: WhatsApp और Facebook पर link भेजने पर वही
    * तस्वीर जाती है (video वहाँ नहीं चलती)।
    */
-  heroVideo?: { src: string; poster: string };
+  /** Article के ऊपर चलने वाली video। `srcSm` छोटी screen के लिए हल्की file
+   *  है — बिना उसके phone पर पूरी बड़ी file उतरती है (Redmi वाली 1.7 MB थी)। */
+  heroVideo?: { src: string; srcSm?: string; poster: string };
   title: string;
   excerpt: string;
   image: string;
@@ -495,6 +497,7 @@ export const posts: Post[] = [
     // सबसे ऊपर चलती हुई video। Share करने पर तस्वीर ऊपर वाली `image` जाती है।
     heroVideo: {
       src: "/posts/redmi-17-5g/counter-display.mp4",
+      srcSm: "/posts/redmi-17-5g/counter-display-sm.mp4",
       poster: "/posts/redmi-17-5g/counter-display.webp",
     },
     body: `
