@@ -760,6 +760,48 @@ material से **मत** लो। वो उनका copyright है। ज
 करो (जैसे preview में `#a-phone`, `#a-tv` हैं) — placeholder या किसी और
 की image नहीं।
 
+### 🖌️ n8n वाली "तस्वीर बनाओ" machine — 7 Sep 2026
+
+Owner ने कहा था कि हर बार ChatGPT/Gemini पर जाकर अलग से तस्वीर बनवानी
+पड़ती है। इसलिए n8n में एक workflow बना — **`Tasveer Banao — Image Studio`**
+(id `seJpd7Virm3oizkD`, project `HzDQKEnRpMtfvgRX`)।
+
+पाँच क़दम: **Webhook → prompt साफ़ → OpenAI `gpt-image-1-mini` → webp में
+web-size → owner का Google Drive → सिर्फ़ `{fileId, link}` वापस**।
+
+- **कोई API key नहीं लगती** — OpenAI का ख़र्च n8n के **Gateway credits** से
+  कटता है, credential अपने आप जुड़ जाता है। ⚠️ इसलिए `openAi` node पर
+  `credentials` मत लिखिए, वरना auto-assign नहीं होगा।
+- **Gemini से तस्वीर नहीं बनती** — free tier `limit: 0` देता है
+  (`gemini-3.1-flash-image` और `gemini-2.5-flash-preview-image`, दोनों)।
+  Owner की key `XB3b3CoQp5kEOg7w` में है पर image के काम की नहीं।
+- Google Drive का credential owner ने ख़ुद जोड़ा (`yTjCMlifvSKyjdtC`)।
+
+⚠️ **चार बातें जो बनाते वक़्त टूटीं — दोबारा मत तोड़िएगा:**
+1. **Drive credential connect करते ही `driveId`/`folderId` ख़ाली हो जाते हैं।**
+   दोनों `list` mode में `cachedResultName` समेत भरिए (`My Drive` और
+   `/ (Root folder)`)। `id` mode में `My Drive` डालने पर n8n
+   *"Not a valid Google Drive Drive ID"* कहकर workflow ही नहीं चलाता।
+2. **OpenAI 1.5–2 MB की PNG देता है।** वो न website के लायक़ है, न इस
+   session तक लाने के। इसलिए बीच में `Edit Image` (resize → `onlyIfLarger`,
+   `format: webp`) का क़दम है — 1200px की webp बस 8–9 KB की बनी।
+   ⚠️ webp पर n8n `quality` का खाना छुपा देता है; ज़रूरत पड़े तो `jpeg` +
+   `quality` इस्तेमाल कीजिए।
+3. **तस्वीर सिर्फ़ Google Drive connector से ही यहाँ तक आ सकती है।**
+   `mobileworldfaridabad.app.n8n.cloud` और `drive.google.com` — दोनों agent
+   proxy से बंद हैं (`connect_rejected` 403)। इसीलिए workflow बड़ी file कभी
+   जवाब में नहीं भेजता, सिर्फ़ `fileId` और `link`।
+4. **आख़िरी `Set` node पर `options.includeBinary: false` रहने दीजिए** —
+   वरना पूरी तस्वीर जवाब में घुस आएगी।
+
+📌 **इन तस्वीरों का इस्तेमाल कहाँ हो सकता है, कहाँ नहीं:**
+ये **सिर्फ़ सजावट और illustration** के लिए हैं — article के ऊपर की drawing,
+background की परत। **दुकान की photo, product की photo और `og-image.jpg`
+हमेशा owner की अपनी खींची हुई ही रहेंगी** (ऊपर वाला नियम इन पर पूरा लागू है)।
+और हर बनी हुई तस्वीर लगाने से पहले **खोलकर देखिए** — prompt में हर बार
+`no text, no letters, no numbers, no logos` लिखा जाता है, फिर भी जाँच ज़रूरी
+है (31 Aug वाले banner audit का नियम)।
+
 ---
 
 ## 12. दावे — जो साबित न हो सके, वो मत लिखो
