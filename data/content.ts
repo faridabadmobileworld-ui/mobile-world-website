@@ -460,13 +460,18 @@ export const posts: Post[] = [
     excerpt:
       "7,900mAh battery, Snapdragon 4 Gen 5 और 50MP camera — Redmi 17 5G की sale 10 September से। " +
       "Jawahar Colony, NIT Faridabad की दुकान पर pre-booking खुली है।",
-    image: "/images/mid-range-5g-phones-five-colours-v2-7c07be19.webp",
-    imageW: 900,
-    imageH: 900,
-    alt: "Mobile World, Jawahar Colony में मिलने वाले mid-range 5G smartphones",
+    image: "/images/redmi-17-5g-at-mobile-world-faridabad.webp",
+    imageW: 1400,
+    imageH: 788,
+    alt: "Redmi 17 5G, Eternal Orange — Mobile World, Jawahar Colony के counter पर",
     body: `
 <p>अगर आप ऐसे 5G phone का इंतज़ार कर रहे थे जिसकी battery दिन में बार-बार charger न माँगे, तो Xiaomi ने भारत में <strong>Redmi 17 5G</strong> उतार दिया है। Sale <strong>10 September</strong> से शुरू हो रही है, और Mobile World पर इसकी pre-booking खुल चुकी है।</p>
 <p>नीचे वही बातें लिखी हैं जो Xiaomi ने ख़ुद बताई हैं — ताकि दुकान आने से पहले आपको पता हो कि आप क्या ले रहे हैं।</p>
+
+<figure class="rvid">
+<video src="/posts/redmi-17-5g/hands-on.mp4" poster="/posts/redmi-17-5g/hands-on.webp" width="1280" height="722" autoplay loop muted playsinline preload="none" aria-label="Redmi 17 5G, Eternal Orange — Mobile World, Jawahar Colony में हाथ में"></video>
+<figcaption>Eternal Orange — पीछे vegan leather वाली finish। हाथ में लेकर देखिए, तभी पता चलता है कि पकड़ कैसी बैठती है।</figcaption>
+</figure>
 
 <h2 id="battery">Battery और charging — 7,900mAh</h2>
 <p>इस phone की सबसे बड़ी बात इसकी <strong>7,900mAh (typ) battery</strong> है। Xiaomi का कहना है कि यह ढाई दिन तक चल जाती है।</p>
@@ -492,6 +497,11 @@ export const posts: Post[] = [
 <li><strong>300% Volume Boost</strong>, और <strong>IP64</strong> — छींटे, धूल और हल्के पानी से बचाव।</li>
 <li>Memory extension के साथ RAM <strong>16GB तक</strong> बढ़ जाती है।</li>
 </ul>
+
+<figure class="rvid">
+<video src="/posts/redmi-17-5g/counter-display.mp4" poster="/posts/redmi-17-5g/counter-display.webp" width="1280" height="720" autoplay loop muted playsinline preload="none" aria-label="Redmi 17 5G का display और 10 September से sale शुरू होने की सूचना, Mobile World Faridabad"></video>
+<figcaption>Sale 10 September से। Pre-booking अभी से चल रही है।</figcaption>
+</figure>
 
 <h2 id="keemat">क़ीमत और pre-booking</h2>
 <p>Xiaomi ने शुरुआती क़ीमत <strong>₹23,999</strong> बताई है। कौन सा variant कितने का पड़ेगा, यह RAM और storage के हिसाब से बदलता है — पूरा हिसाब counter पर सामने रख दिया जाएगा।</p>
