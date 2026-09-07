@@ -91,20 +91,39 @@ Cash · UPI · Credit Card · Debit Card · EMI
   कम करके बचे हुए पैसे लेते हैं।"* बाक़ी शर्तें (कौन से brand, टूटी screen वाला
   लेते हैं या नहीं) अभी owner से पूछनी बाक़ी हैं।
 
-### 🖼️ तस्वीरों का नियम — 31 Aug 2026 के audit के बाद बना
+### 🖼️ तस्वीरों का नियम — 7 Sep 2026 को owner ने साफ़ किया
 
-**तस्वीर के अंदर कोई दावा, कोई फ़ोन नंबर, कोई timing मत छपने दो।**
+**पहले यहाँ लिखा था कि तस्वीर के अंदर text या इंसान नहीं आना चाहिए।
+वो नियम ग़लत समझा गया था। Owner ने 7 Sep 2026 को साफ़ किया:**
 
-उस दिन के audit में पकड़ा गया कि sample banners के अंदर छपा हुआ था —
-"BEST PRICES GUARANTEED", "TRUSTED SINCE 1973", "Three Generations of
-Service", "AFTER SALES SERVICE YOU CAN RELY ON", "No Cost EMI",
-और **एक पुराना बंद हो चुका फ़ोन नंबर (99533 35535) + ग़लत timing
-(10 AM–9 PM, All Days Open)**। वो सारी तस्वीरें हटा दी गईं।
+> *"Image me naam, insaan, text ya kuch nhi hoga — aisa koi b rule nhi h.
+> Sab ho sakta h... insaan, text ya kuch b, kaisi b image ho sakti h,
+> original ho ya AI generated, but acchi ho — sab lagegi. Waise b edit
+> karke b AI se hi banani padti h, to sab chalengi hi."*
 
-तस्वीर के अंदर का text किसी scan में नहीं पकड़ा जाता, Google उसे पढ़ नहीं
-सकता, और phone पर वो पढ़ने लायक़ भी नहीं रहता। इसलिए:
-जो कहना है वो **असली HTML text में लिखो**, तस्वीर सिर्फ़ दिखाने के लिए हो।
-कोई नई banner जोड़ने से पहले उसे खोलकर पढ़ो — हर शब्द।
+तो अब यह पक्का है:
+
+**✅ तस्वीर में सब कुछ आ सकता है** — इंसान, चेहरे, नाम, heading, text,
+दुकान का नाम। तस्वीर **असली खींची हुई हो या AI से बनी** — दोनों चलेंगी।
+इकलौती शर्त: **तस्वीर अच्छी लगनी चाहिए।** ख़राब, भद्दी या नक़ली लगने वाली
+तस्वीर मत लगाइए, चाहे वो असली ही क्यों न हो।
+
+**⛔ फिर भी तीन चीज़ें तस्वीर के अंदर कभी नहीं आएँगी** — ये design का नहीं,
+सच्चाई का सवाल है (§12), और तस्वीर के अंदर होने की वजह से ये किसी जाँच में
+पकड़ में भी नहीं आतीं:
+
+1. **ऐसा दावा जो साबित न हो सके** — "BEST PRICE", "GUARANTEED",
+   "TRUSTED", "No.1", "100% SECURE"
+2. **ग़लत या पुराना फ़ोन नंबर, और ग़लत timing** — 31 Aug को पकड़ा गया था कि
+   एक banner में बंद हो चुका नंबर (99533 35535) और ग़लत समय (10 AM–9 PM)
+   छपा था
+3. **दूसरी कंपनियों के logo जो internet से उठाए गए हों** — Visa, Mastercard,
+   Bajaj Finserv वग़ैरह। वो उनका trademark है। Logo owner से या company के
+   brand kit से ही आना चाहिए।
+
+⚠️ **इसीलिए कोई नई banner लगाने से पहले उसे खोलकर पढ़िए — हर शब्द।**
+जो बात दावे वाली हो, उसे तस्वीर में मत छापिए; उसे असली HTML text में
+लिखिए, ताकि वो जाँची जा सके।
 
 📌 **7 Sep 2026 — तीन और banner इसी बीमारी के पकड़े गए और हटा दिए गए।**
 उस दिन तक ये चल रहे थे, क्योंकि दावे तस्वीर के *अंदर* छपे थे:
@@ -304,6 +323,20 @@ Visitor details save करना, customer login।
 ---
 
 ## 9. Claude के लिए working rules
+
+### ⚡ सबसे पहला नियम — जो काम पूरा हो, वो उसी वक़्त live (7 Sep 2026)
+
+Owner के अपने शब्दों में:
+
+> *"Jo b, ek b kaam hota jaye, usko live karte hue chalo turant hi. Wait
+> mat karna ye sab khatam hone ka ek baar me hi. Jo jo hota jaye use live
+> karte chalo, haathon haath hi. Baar baar mujhe bolna na pade."*
+
+यानी: **सारे काम जमा करके एक साथ मत भेजिए।** एक काम पूरा हुआ → जाँच
+(typecheck, lint, build, verify script) → commit → `main` पर merge →
+push। Vercel अपने आप live कर देगा। फिर अगला काम।
+
+इसके लिए हर बार पूछना नहीं है — यह owner का खड़ा हुआ आदेश है।
 
 1. कोई भी बड़ा change करने से पहले **plan बताओ, फिर पूछो**
 2. एक बार में एक feature। 5 चीज़ें एक साथ मत बनाओ
