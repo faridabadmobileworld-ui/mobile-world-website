@@ -495,7 +495,7 @@ export const posts: Post[] = [
 <figcaption>Eternal Orange — पीछे vegan leather वाली finish। हाथ में लेकर देखिए, तभी पता चलता है कि पकड़ कैसी बैठती है।</figcaption>
 </figure>
 
-<h2 id="battery">1. Battery और Charging 🔋</h2>
+<h2 id="battery"><span class="hn">01</span>Battery और Charging</h2>
 <ul>
 <li><strong>7,900mAh का असली monster:</strong> भाई साहब, इस phone का सबसे बड़ा USP इसकी massive <strong>7,900mAh</strong> battery है। normal इस्तेमाल पर यह आराम से ढाई दिन तक बिना हिले-डुले चलती है।</li>
 <li><strong>Non-stop entertainment:</strong> एक बार full charge कीजिए, और <strong>146 घंटे</strong> तक लगातार music बजाइए या <strong>20+ घंटे</strong> तक video binge-watch करते रहिए।</li>
@@ -503,33 +503,33 @@ export const posts: Post[] = [
 <li><strong>Powerbank जैसी ताक़त:</strong> इसमें <strong>22.5W wired reverse-charging</strong> का मज़ा भी है। यानी ज़रूरत पड़ने पर आप इससे अपने earbuds या दोस्त का दूसरा phone भी charge कर सकते हैं!</li>
 </ul>
 
-<h2 id="display">2. Display और Screen Quality 📱</h2>
+<h2 id="display"><span class="hn">02</span>Display और Screen Quality</h2>
 <ul>
 <li><strong>6.9 इंच की cinema screen:</strong> movies देखने या gaming का कीड़ा है, तो इसकी <strong>17.53cm (6.9 इंच)</strong> की बड़ी HD clarity display आपका दिल जीत लेगी।</li>
 <li><strong>120Hz की चिकनाई:</strong> इसमें <strong>120Hz तक AdaptiveSync</strong> refresh rate है — scroll करते वक़्त मक्खन जैसा मज़ा आएगा।</li>
 <li><strong>मज़बूत शीशा:</strong> screen की सुरक्षा के लिए <strong>Corning Gorilla Glass 7i</strong> लगा है, ताकि ग़लती से हाथ से गिरे तो दिल की धड़कन बोरिंग तरीक़े से तेज़ न हो!</li>
 </ul>
 
-<h2 id="performance">3. Performance और Processor 🚀</h2>
+<h2 id="performance"><span class="hn">03</span>Performance और Processor</h2>
 <ul>
 <li><strong>Snapdragon की ताक़त:</strong> इस phone के अंदर latest <strong>Snapdragon 4 Gen 5 5G</strong> processor (4nm) दौड़ रहा है।</li>
 <li><strong>Lag-free life:</strong> background में 10 app खुली हों या heavy gaming चल रही हो — यह बिना अटके भागता रहेगा।</li>
 <li><strong>RAM और Storage:</strong> यह <strong>6GB और 8GB RAM</strong> में मिलता है। साथ में <strong>Memory Extension</strong> का support है, जिसके ज़रिए इसे <strong>16GB RAM तक</strong> खींचा जा सकता है!</li>
 </ul>
 
-<h2 id="camera">4. Camera और Style 📸</h2>
+<h2 id="camera"><span class="hn">04</span>Camera और Style</h2>
 <ul>
 <li><strong>50MP AI Dual Camera:</strong> पीछे तगड़ा 50MP main camera है, जो दिन हो या रात (Night Mode के साथ) — crisp और vibrant photos खींचता है। Selfie के लिए <strong>8MP</strong> का front camera है।</li>
 <li><strong>Dynamic RGB Light</strong> (सबकी नज़रें इसी पर!): इसकी सबसे cool चीज़ है इसका नया <strong>RGB ring-light camera module</strong>। यह <strong>8 अलग-अलग रंगों</strong> में चमकता है — notification और gaming के वक़्त अलग ही vibe देता है।</li>
 </ul>
 
-<h2 id="sound">5. Durability और Sound 🔊</h2>
+<h2 id="sound"><span class="hn">05</span>Durability और Sound</h2>
 <ul>
 <li><strong>300% Volume Boost:</strong> सड़क पर कितना भी शोर हो, इसके dual stereo speakers की आवाज़ इतनी तेज़ और साफ़ है कि call कभी miss नहीं होगी।</li>
 <li><strong>IP64 rating:</strong> अचानक हल्की बारिश आ जाए या पानी के छींटे पड़ जाएँ — डरने की ज़रूरत नहीं। यह dust और water splash proof है।</li>
 </ul>
 
-<h2 id="colours">🎨 Colours, Storage Variants और दाम 🏷️</h2>
+<h2 id="colours"><span class="hn">06</span>Colours, Storage और Price</h2>
 <p>भाई, phone लेने से पहले रंग और storage का हिसाब एकदम साफ़ होना चाहिए। Xiaomi ने इसे इन options में उतारा है:</p>
 
 <figure class="rvid rvid-zoom">
@@ -538,23 +538,28 @@ export const posts: Post[] = [
 </figure>
 
 <h3>तीन रंग</h3>
-<ul>
-<li><strong>Eternal Orange</strong></li>
-<li><strong>Endless Blue</strong></li>
-<li><strong>Absolute Black</strong></li>
-</ul>
+<div class="swz">
+<div class="sw"><span class="sw-d" style="--a:#F2814F;--b:#BE441C"></span><b>Eternal Orange</b></div>
+<div class="sw"><span class="sw-d" style="--a:#3E7BE4;--b:#152F8C"></span><b>Endless Blue</b></div>
+<div class="sw"><span class="sw-d" style="--a:#4A4A52;--b:#111114"></span><b>Absolute Black</b></div>
+</div>
 
 <h3>Storage और Price</h3>
-<table>
-<thead><tr><th>Variant</th><th>क़ीमत</th></tr></thead>
-<tbody>
-<tr><td>6 GB RAM + 128 GB Storage</td><td><strong>₹23,999</strong></td></tr>
-<tr><td>8 GB RAM + 128 GB Storage</td><td><strong>₹26,999</strong></td></tr>
-</tbody>
-</table>
+<div class="tiers">
+<div class="tier">
+<span class="tier-k">Variant 1</span>
+<b class="tier-s">6 GB <i>RAM</i> <s>+</s> 128 GB <i>Storage</i></b>
+<span class="tier-p">₹23,999</span>
+</div>
+<div class="tier">
+<span class="tier-k">Variant 2</span>
+<b class="tier-s">8 GB <i>RAM</i> <s>+</s> 128 GB <i>Storage</i></b>
+<span class="tier-p">₹26,999</span>
+</div>
+</div>
 <p>कौन सा variant आपके लिए सही रहेगा — 6 GB या 8 GB — यह दुकान पर बैठकर आराम से तय कर लीजिए।</p>
 
-<h2 id="pre-booking">Pre-booking करवाना क्यों ज़रूरी है?</h2>
+<h2 id="pre-booking"><span class="hn">07</span>Pre-booking क्यों ज़रूरी है?</h2>
 <p>भाई, 10 September को जब sale खुलेगी तो शुरू में stock सीमित ही आता है। बाद में पसंद का रंग (ख़ासकर Orange वाला) मिलना मुश्किल हो जाता है।</p>
 <p>Online के चक्करों और बोरिंग confusion से बचना है, तो सीधा दुकान पर आ जाइए। नीचे WhatsApp वाले बटन से message भी कर सकते हैं — जवाब सीधे counter से आएगा।</p>
 <p>किश्तों पर लेना हो तो <a href="/finance">Finance</a> भी available है। पुराना phone देना हो तो हम <a href="/posts/phone-exchange-guide">exchange</a> भी लेते हैं — साथ में बस इतना ले आइए:</p>
@@ -564,7 +569,7 @@ export const posts: Post[] = [
 <li><strong>अपना Aadhaar</strong>।</li>
 </ul>
 
-<h2 id="dukaan-se">दुकान से लेने पर क्या फ़र्क़ पड़ता है</h2>
+<h2 id="dukaan-se"><span class="hn">08</span>दुकान से लेने पर क्या फ़र्क़ पड़ता है</h2>
 <p>Phone हाथ में feel करके देखिए — size, वज़न, colours। Box आपके सामने खुलता है, GST bill मिलता है, और नया phone चालू करके — यहाँ तक कि आप चाहें तो आपका पुराना सारा data नए device में डालकर ही आप घर जाते हैं।</p>
 <p>बाद में कुछ समझना हो या कोई दिक़्क़त आए, तो आमने-सामने कभी भी मिल सकते हैं, या call और message पर बात कर सकते हैं — ज़्यादा जानकारी के लिए <a href="/after-sales-support">After Sales Support</a> या <a href="/after-sales-support#warranty">warranty</a> वाला हिस्सा भी पढ़ सकते हैं।</p>
 <p>Mobile World 2016 से Jawahar Colony में है, और परिवार का यह काम 1973 से चला आ रहा है।</p>

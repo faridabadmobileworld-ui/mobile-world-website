@@ -63,8 +63,23 @@ export default async function PostPage({ params }: Params) {
 
   // Article ke apne <h2 id="..."> se TOC बन जाती है — दोबारा list लिखने की
   // ज़रूरत नहीं, इसलिए heading बदलने पर TOC अपने आप सही रहती है।
-  const toc: TocItem[] = [...post.body.matchAll(/<h2 id="([^"]+)">(.*?)<\/h2>/g)]
-    .map((m) => ({ id: m[1], label: m[2] }));
+  /**
+   * TOC heading के अपने `<h2 id="">` से बनती है।
+   *
+   * Heading के अंदर अब गिनती वाला chip भी होता है (`<span class="hn">01</span>`)।
+   * उसे **पूरा** हटाया जाता है, सिर्फ़ tag नहीं — क्योंकि TOC अपनी गिनती ख़ुद
+   * दिखाती है, वरना list में "01" दो बार आता ("0101 Battery…")। बाक़ी tag
+   * हटाते वक़्त उनकी जगह एक space रखा जाता है, ताकि शब्द आपस में चिपकें नहीं।
+   */
+  const toc: TocItem[] = [...post.body.matchAll(/<h2 id="([^"]+)">([\s\S]*?)<\/h2>/g)]
+    .map((m) => ({
+      id: m[1],
+      label: m[2]
+        .replace(/<span class="hn">[\s\S]*?<\/span>/g, "")
+        .replace(/<[^>]+>/g, " ")
+        .replace(/\s+/g, " ")
+        .trim(),
+    }));
 
   const schema = {
     "@context": "https://schema.org",
