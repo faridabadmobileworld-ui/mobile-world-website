@@ -2703,3 +2703,360 @@ main .rbody .hn{flex:none;display:grid;place-items:center;min-width:30px;height:
 .toc-g2{grid-template-columns:repeat(2,minmax(0,1fr))}
 /* सबसे लंबा article का नाम छह line लेता है — इसलिए छह, चार नहीं */
 .toc-g2 .toc-l{-webkit-line-clamp:6}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   ⬛ APPLE-GRADE परत — 7 Sep 2026
+
+   Owner: *"exactly copy the ui ux theme template text fonts colours style
+   format each and everything from the apple official website... white
+   premium look same to same iski hi tarah exactly. yahan tak ki exactly
+   colour codes exactly text fonts sizes and everything."*
+
+   यह परत सबसे आख़िर में है और ऊपर की सारी पुरानी दिखावट पर चढ़ जाती है।
+   पुराना बैंगनी (#5B3FD9) वाला रूप हटा नहीं, बस ढक दिया गया है — कभी
+   वापस चाहिए तो सिर्फ़ यह परत हटा दीजिए, बाक़ी सब जस का तस है।
+
+   ⚠️ **जो चीज़ें जान-बूझकर नहीं ली गईं, और क्यों:**
+   1. **Apple की SF Pro font file** — उसका licence सिर्फ़ Apple के अपने
+      platform पर बनाने वालों के लिए है, website पर बाँटने के लिए नहीं।
+      इसकी जगह **system font stack** है: iPhone और Mac पर browser ख़ुद
+      SF Pro उठाता है — यानी owner के अपने phone पर अक्षर **हूबहू वही**
+      दिखेंगे। Android पर Roboto, जो सबसे क़रीब है। कोई नई file download
+      नहीं होती, इसलिए page भारी भी नहीं हुआ।
+   2. **Apple की तस्वीरें, product render और उनकी अपनी लिखाई** — वो उनका
+      copyright है। ढाँचा, नाप, रंग और चाल वही है; अंदर हमारा अपना सामान।
+
+   📐 **Apple के असली नाप (यही पूरी परत की बुनियाद हैं):**
+      रंग    — लिखाई #1d1d1f · दूसरी लिखाई #6e6e73 · तीसरी #86868b
+               सफ़ेद #ffffff · हल्की पट्टी #f5f5f7 · लकीर #d2d2d7
+               link नीला #0066cc · बटन नीला #0071e3 (hover #0077ed)
+      पट्टी  — ऊपर वाली 44px (phone) / 48px (desktop),
+               rgba(255,255,255,.8) + saturate(180%) blur(20px)
+      अक्षर  — body 17px/1.47059, letter-spacing -.022em
+               heading 32px→48px, weight 600, letter-spacing -.003em
+               सबसे बड़ी 48px→80px, line-height 1.05
+               nav और क़ानूनी लिखाई 12px/1.33337
+      बटन   — गोल pill, border-radius 980px
+      डिब्बे — border-radius 18px, सफ़ेद, #f5f5f7 पट्टी के ऊपर
+      हिस्से — ऊपर-नीचे 60px (phone) / 100px (desktop)
+   ══════════════════════════════════════════════════════════════════════════ */
+
+:root{
+  /* ── Apple के असली रंग ── */
+  --bg:#ffffff;
+  --bg-2:#f5f5f7;
+  --card:#ffffff;
+  --ink:#1d1d1f;
+  --ink-2:#6e6e73;
+  --ink-3:#86868b;
+  --line:#d2d2d7;
+  --line-2:#e8e8ed;
+
+  /* नीला — link और बटन के लिए अलग-अलग, ठीक Apple की तरह */
+  --blue:#0066cc;
+  --blue-btn:#0071e3;
+  --blue-btn-h:#0077ed;
+
+  /* पुराने नाम जो पूरी site में फैले हैं — अब वो भी Apple के रंग देते हैं,
+     ताकि एक-एक component छूना न पड़े। */
+  --brand:#0066cc; --brand-2:#0071e3; --brand-soft:#f5f5f7;
+  --hot:#0071e3; --hot-ink:#0066cc; --hot-soft:#f5f5f7;
+  --ok:#1d1d1f;
+  --lav:#f5f5f7; --peach:#f5f5f7; --mint:#f5f5f7;
+  --sky:#f5f5f7; --sand:#f5f5f7; --slate:#f5f5f7;
+
+  --r:12px; --r-lg:18px;
+  --w:1024px;
+  --measure:734px;
+  --hdr:48px;
+  --ease:cubic-bezier(.28,.11,.32,1);
+
+  /* Apple के डिब्बों पर परछाईं होती ही नहीं — सिर्फ़ रंग का फ़र्क़ */
+  --sh-1:none; --sh-2:none; --sh-3:none; --ring:none; --hi:none;
+}
+
+/* ── अक्षर ─────────────────────────────────────────────────────────────
+   iPhone/Mac पर यह stack ख़ुद SF Pro उठाता है — वही जो apple.com पर है।
+   Devanagari के लिए Noto Sans Devanagari बीच में रखा है, वरना हिन्दी
+   fallback में भद्दी दिखती है। */
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",
+    "Noto Sans Devanagari","Helvetica Neue",Helvetica,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:17px;line-height:1.47059;letter-spacing:-.022em;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+}
+::selection{background:#b3d4fc;color:#1d1d1f}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:4px}
+
+/* पीछे की बैंगनी परतें और grain — Apple पर ऐसा कुछ नहीं होता, सादा सफ़ेद है */
+.bgfx,.bgfx2{display:none !important}
+body{background-image:none}
+
+.wrap{max-width:var(--w);padding-inline:22px}
+@media(max-width:734px){ .wrap{padding-inline:16px} }
+
+/* ── 1. ऊपर वाली पट्टी — Apple की global nav ─────────────────────────────
+   Apple: 44px (phone) / 48px (desktop), rgba(255,255,255,.8) पर
+   saturate(180%) blur(20px), नीचे 1px की #d2d2d7 लकीर, अक्षर 12px।    */
+.ann{background:#f5f5f7;color:var(--ink-2);font-size:12px;letter-spacing:-.01em;
+  border-bottom:1px solid var(--line)}
+.ann .wrap{min-height:34px}
+.ann a{color:var(--blue);opacity:1}
+.ann b{font-weight:400;color:var(--ink-2)}
+
+.hdr{background:rgba(255,255,255,.8);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid var(--line)}
+.hdr .wrap{min-height:48px;gap:10px}
+@media(max-width:734px){ .hdr .wrap{min-height:44px} }
+
+.logo{font-size:17px;font-weight:600;letter-spacing:-.022em;gap:8px;min-height:44px}
+.logo i{width:28px;height:28px}
+.logo s{font-size:10px;letter-spacing:.01em;color:var(--ink-3);font-weight:400;
+  text-transform:none;margin-top:0}
+@media(max-width:734px){ .logo s{display:none} }
+
+/* ⚠️ 44x44 ही रखिए। Apple की पट्टी भी 44px की है, और site की अपनी जाँच
+   (`verify-site.mjs`) 44px से छोटे बटन पकड़ लेती है — उँगली के लिए यही
+   सबसे छोटी भली नाप है। */
+.iconbtn{width:44px;height:44px;border:0;background:transparent;color:var(--ink);
+  border-radius:50%}
+.iconbtn:hover{background:rgba(0,0,0,.05);color:var(--ink);border:0}
+
+/* Apple की search: सादी, बिना किनारे के, हल्के भूरे डिब्बे में */
+.searchbox input{height:36px;border:0;background:#f5f5f7;border-radius:8px;
+  font-size:14px;letter-spacing:-.016em;color:var(--ink);padding:0 38px 0 14px}
+.searchbox input::placeholder{color:var(--ink-3)}
+.searchbox button{top:2px;color:var(--ink-3)}
+
+/* ── 2. दूसरी पट्टी — Apple की local nav ──────────────────────────────
+   Apple पर यह वही पट्टी है जिस पर बाएँ product का नाम और दाएँ छोटा
+   नीला "Buy" बटन होता है। हमारे यहाँ इसमें सारे page हैं।            */
+.cstrip{background:rgba(255,255,255,.72);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid var(--line);padding-bottom:0}
+.cstrip .wrap{min-height:44px;gap:0;background:none;border:0;border-radius:0;padding-inline:22px}
+@media(max-width:734px){ .cstrip .wrap{padding-inline:16px} }
+.cstrip a{font-size:12px;font-weight:400;letter-spacing:-.01em;text-transform:none;
+  color:var(--ink);opacity:.8;padding:0 12px;min-height:44px;border-radius:0;
+  border-left:0 !important}
+.cstrip a em{display:none}
+.cstrip a:hover{background:none;color:var(--ink);opacity:1}
+.cstrip a[aria-current="page"]{opacity:1;font-weight:600;background:none;color:var(--ink)}
+.cs-pages{font-size:12px;font-weight:400;letter-spacing:-.01em;text-transform:none;
+  background:none;color:var(--ink);opacity:.8;border:0;box-shadow:none;
+  padding:0 12px 0 0;min-height:44px;border-radius:0}
+.cs-pages:hover{background:none;opacity:1}
+
+/* ── 3. बटन — Apple के गोल pill ───────────────────────────────────────
+   भरा हुआ नीला (#0071e3), गोलाई 980px, अक्षर 17px। छोटा रूप 12px का।  */
+.btn{border-radius:980px;font-size:17px;font-weight:400;letter-spacing:-.022em;
+  height:auto;min-height:44px;padding:11px 22px;box-shadow:none;gap:6px;
+  transition:background .18s var(--ease),color .18s,border-color .18s,opacity .18s}
+.btn::after{display:none}
+.btn:active{transform:none;opacity:.85}
+.btn-d{background:var(--blue-btn);color:#fff}
+.btn-d:hover{background:var(--blue-btn-h)}
+.btn-o{background:transparent;border:1px solid var(--blue-btn);color:var(--blue-btn)}
+.btn-o:hover{background:var(--blue-btn);color:#fff;border-color:var(--blue-btn)}
+.btn-h{background:var(--blue-btn);color:#fff}
+.btn-h:hover{background:var(--blue-btn-h)}
+/* WhatsApp का हरा रंग जान-बूझकर रखा — वो उस service की पहचान है, और
+   ग्राहक उसी रंग से पहचानता है। बाक़ी सब Apple के नीले में। */
+.btn-w{background:#25D366;color:#032b13;font-weight:400}
+.btn-w:hover{background:#1FBE5B}
+.btn-s{min-height:44px;height:44px;padding:0 18px;font-size:13px;letter-spacing:-.01em}
+.btns{gap:20px;margin-top:26px}
+@media(max-width:734px){ .btn{font-size:16px;padding:10px 20px} }
+
+/* Apple का text-link: नीला, बिना रेखा के, hover पर रेखा — और आगे › */
+.shead a,.igw-f a,.prose a,.rbody a,.toc-h+*{color:var(--blue)}
+.prose a,.rbody a{text-decoration:none}
+.prose a:hover,.rbody a:hover{text-decoration:underline}
+
+/* ── 4. Heading और हिस्सों की चाल ─────────────────────────────────────
+   Apple के हिस्से ऊपर-नीचे खुली जगह लेते हैं (phone 60px, desktop 100px)
+   और heading बड़ी, कसी हुई और बीच में होती है।                        */
+.sec{padding:60px 0}
+@media(min-width:735px){ .sec{padding:100px 0} }
+.shead{display:block;text-align:left;margin-bottom:28px;position:relative}
+.shead h2{font-size:32px;line-height:1.08349;font-weight:600;letter-spacing:-.003em;
+  margin:0;color:var(--ink)}
+@media(min-width:735px){ .shead h2{font-size:48px} }
+.shead h2::after{display:none !important}
+.shead a{position:absolute;right:0;bottom:6px;margin-left:0;font-size:17px;
+  font-weight:400;letter-spacing:-.022em;color:var(--blue);min-height:auto;padding:0}
+.shead a:hover{color:var(--blue);text-decoration:underline;background:none}
+@media(max-width:734px){
+  .shead a{position:static;display:inline-flex;margin-top:8px}
+}
+h1{letter-spacing:-.015em;line-height:1.05;font-weight:600}
+h2,h3,h4{letter-spacing:-.003em;font-weight:600;color:var(--ink)}
+
+/* पढ़ने वाली लिखाई — Apple का 17px/1.47059 */
+.prose p,.rbody p,.prose li,.rbody li{font-size:17px;line-height:1.47059;
+  letter-spacing:-.022em;color:var(--ink)}
+.prose h2,.rbody h2{font-size:28px;line-height:1.14286;letter-spacing:.007em;
+  font-weight:600;margin-top:1.6em}
+@media(min-width:735px){ .prose h2,.rbody h2{font-size:32px} }
+.prose h2::after,.rbody h2::after{display:none !important}
+
+/* ── 5. डिब्बे — सफ़ेद, 18px गोल, बिना परछाईं ────────────────────────
+   Apple के card पर border या shadow नहीं होती; वो हल्के भूरे (#f5f5f7)
+   हिस्से पर सफ़ेद बैठते हैं, और उसी फ़र्क़ से अलग दिखते हैं।            */
+.pc,.ct,.post,.lnew,.pmini,.lrow,.mlinks a,.toc,main .panel,.qr-card,.shot,.cband,
+.fin,.gmb>div,.faq details{
+  background:#fff;border-radius:18px;border:0;box-shadow:none}
+.pc:hover,.ct:hover,.post:hover,.mlinks a:hover,.lnew:hover{
+  box-shadow:none;transform:none;border-color:transparent}
+.pc .m,.post .m,.ct .m,.pc-m{background:#fff}
+.pc b,.post b,.ct b,.lnew b{font-size:21px;line-height:1.19048;letter-spacing:.011em;
+  font-weight:600;color:var(--ink)}
+.pc s,.post s,.ct s,.lrow em{font-size:14px;line-height:1.42859;letter-spacing:-.016em;
+  color:var(--ink-2);font-weight:400}
+
+/* Apple पर hover का जवाब बहुत हल्का है — इसलिए झुकाव और चमक बंद।
+   ⚠️ यह जान-बूझकर है: owner ने "same to same Apple" कहा, और Apple के
+   card न झुकते हैं न चमकते हैं। दबाने पर हल्का सा जवाब बचा है। */
+html.aura main .pc.aura-on,html.aura main .ct.aura-on,html.aura main .lnew.aura-on,
+html.aura main .pmini.aura-on,html.aura main .lrow.aura-on,
+html.aura main .mlinks a.aura-on{transform:none}
+.aura-on::before,.aura-on::after{opacity:0 !important}
+
+/* ── 6. नीचे वाला footer — Apple जैसा ────────────────────────────────
+   हल्के भूरे पर 12px की छोटी लिखाई, कई खाने, और सबसे नीचे बारीक
+   क़ानूनी पंक्ति।                                                       */
+.ftr{background:#f5f5f7;border-top:0;margin-top:0;padding:40px 0 20px;
+  font-size:12px;line-height:1.33337;letter-spacing:-.01em;color:var(--ink-2)}
+.ftr .fh{font-size:12px;font-weight:600;letter-spacing:-.01em;text-transform:none;
+  color:var(--ink);margin:0 0 8px}
+.ftr li{margin-bottom:6px}
+.ftr li a{font-size:12px;color:#424245;letter-spacing:-.01em}
+.ftr li a:hover{color:var(--ink);text-decoration:underline}
+.ftr address{font-size:12px;line-height:1.6;color:#424245}
+
+/* ── 7. नीचे चिपकी हुई पट्टी (phone पर) ─────────────────────────────── */
+.mbar{background:rgba(255,255,255,.9);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  backdrop-filter:saturate(180%) blur(20px);
+  border-top:1px solid var(--line);box-shadow:none;border-radius:0}
+.mbar a{font-size:10px;letter-spacing:-.01em;color:var(--ink-2)}
+.mbar a[aria-current="page"],.mbar a.on{color:var(--ink)}
+
+/* ── 8. Hero — Apple के क्रम में ─────────────────────────────────────
+   ऊपर छोटा नारंगी label, फिर सबसे बड़ी heading, फिर एक line का परिचय,
+   फिर एक भरा हुआ नीला बटन और एक नीला link। Apple के हर product page
+   पर यही क्रम है।                                                     */
+.phv-pin{--phv-cap:300px;--phv-top:calc(var(--hdr) + 44px);--phv-flow:148px}
+@media(max-width:734px){ .phv-pin{--phv-cap:300px;--phv-bot:62px} }
+.phv-stage{border-radius:18px;box-shadow:none;background:#000}
+
+.phv-eyebrow{margin:0 0 6px;font-size:17px;line-height:1.19048;font-weight:600;
+  letter-spacing:.011em;color:#bf4800}
+.phv h1{font-size:40px;line-height:1.05;font-weight:600;letter-spacing:-.015em;
+  margin:0 0 8px;color:var(--ink)}
+@media(min-width:735px){ .phv h1{font-size:56px} }
+@media(min-width:1069px){ .phv h1{font-size:64px} }
+.phv-sub{margin:0 0 16px;font-size:19px;line-height:1.21053;letter-spacing:.012em;
+  font-weight:400;color:var(--ink)}
+@media(max-width:734px){ .phv-sub{font-size:17px} }
+
+.phv-links{display:flex;flex-wrap:wrap;gap:22px;align-items:center;justify-content:center}
+.phv-a{color:var(--blue);font-size:17px;letter-spacing:-.022em;
+  display:inline-flex;align-items:center;gap:3px;min-height:44px}
+.phv-a:hover{text-decoration:underline}
+
+.phv-brand{margin:18px 0 0;gap:2px}
+.phv-logo{width:clamp(30px,7vw,40px)}
+.phv-name{font-size:19px;letter-spacing:-.022em}
+.phv-tag{font-size:clamp(8.5px,2.4vw,12px);font-weight:400;color:var(--ink-2)}
+.phv-c{max-width:none}
+@media(min-width:735px){ .phv-c{max-width:none} }
+
+/* ── 9. हिस्सों की बारी-बारी पट्टी ────────────────────────────────────
+   Apple पर एक हिस्सा सफ़ेद, अगला हल्का भूरा (#f5f5f7) — पूरी चौड़ाई में।
+   इसी से page में लय आती है और डिब्बे अलग दिखते हैं (उन पर border नहीं है)। */
+main .sec:nth-of-type(even){
+  background:#f5f5f7;
+  /* पूरी चौड़ाई — `.wrap` की सीमा से बाहर निकलकर */
+  margin-inline:calc(50% - 50vw);
+  padding-inline:calc(50vw - 50%);
+}
+main .sec:nth-of-type(even) .shead h2{color:var(--ink)}
+
+/* Heading Apple की तरह बाएँ से — बीच में सिर्फ़ hero की होती है।
+   ⚠️ पुराना नियम headings को बीच में कर देता था; Apple पर वो बाएँ हैं। */
+main .shead h2,main .sec>.shead{text-align:left !important}
+
+/* ── 10. ऊपर की पढ़ाई वाली पट्टी और सजावट — Apple पर ये होती ही नहीं ── */
+.prog{background:var(--blue) !important;height:2px;opacity:.9}
+.prog::after{display:none !important}
+
+/* ── 11. "इस page पर" वाला dashboard — Apple के रंग में ──────────────
+   डिब्बे वही तीन-तीन की क़तार में, पर अब सफ़ेद, 18px गोल, और सारे
+   रंग हटाकर Apple का एक ही नीला।                                      */
+.toc{background:#f5f5f7;border:0;border-radius:18px;padding:22px}
+.toc-h{font-size:12px;font-weight:600;letter-spacing:-.01em;text-transform:none;
+  color:var(--ink-2);text-align:left}
+.toc-c{background:#fff;color:var(--ink-2);font-size:11px}
+.toc-r{background:var(--line)}
+.toc-g li a{--tc:var(--blue) !important;background:#fff;border:0;box-shadow:none;
+  border-radius:14px;font-size:14px;line-height:1.42859;letter-spacing:-.016em;
+  font-weight:400;color:var(--ink);padding:14px 14px 15px}
+.toc-g li a::before{display:none}
+.toc-g li a:hover{background:#fff;color:var(--blue);box-shadow:none;border-color:transparent}
+.toc-g .toc-n{background:#f5f5f7;color:var(--ink-2);font-size:11px;font-weight:600;
+  border-radius:50%}
+.toc-g li a:hover .toc-n{transform:none;background:var(--blue);color:#fff}
+
+/* ── 12. FAQ, panel, banner — सादा Apple रूप ───────────────────────── */
+.faq details{border:0;border-bottom:1px solid var(--line);border-radius:0;background:none}
+.faq summary{font-size:17px;letter-spacing:-.022em;font-weight:600;padding:18px 0}
+.faq p{font-size:17px;line-height:1.47059;letter-spacing:-.022em;color:var(--ink-2)}
+.banner,.teamshot,.afig{padding:0;border:0;box-shadow:none;border-radius:18px;
+  overflow:hidden;background:#f5f5f7}
+.banner img,.teamshot img,.afig img{border-radius:18px}
+.cband{background:#f5f5f7}
+.cband::before{display:none}
+.follow{background:#f5f5f7;box-shadow:none}
+.follow::before{display:none !important}
+
+/* ── 13. Hero की नाप-जोख, Apple वाले नए ढाँचे के लिए ─────────────────
+   ⚠️ यह block Apple परत के **बाद** है — वरना ऊपर वाला `--phv-cap`
+   इस पर चढ़ जाता है (यही ग़लती दो बार हो चुकी है)।
+   हर नाप असली माप से आई है, अंदाज़े से नहीं:
+     desktop/tablet — caption 288px + gap 24px  →  320px
+     phone          — caption 330px + gap 19px  →  356px
+     छोटी ऊँचाई     — सिमटी caption + gap        →  250px            */
+.phv-pin{--phv-cap:320px}
+@media(max-width:734px){ .phv-pin{--phv-cap:356px;--phv-bot:62px} }
+
+@media(max-height:700px){
+  .phv-pin{--phv-cap:250px}
+  .phv-eyebrow{font-size:13px;margin-bottom:2px}
+  .phv h1{font-size:26px;line-height:1.1;margin-bottom:4px}
+  .phv-sub{font-size:14px;line-height:1.3;margin-bottom:10px}
+  .phv-links{gap:12px;flex-wrap:nowrap}
+  .phv-links .btn{font-size:13px;padding:0 16px;min-height:40px;height:40px}
+  .phv-a{font-size:13px;min-height:40px}
+  .phv-brand{margin-top:10px}
+  .phv-logo{width:26px}
+  .phv-name{font-size:15px}
+}
+
+/* लेटी हुई छोटी screen — video बाएँ, लिखाई दाएँ। यहाँ ऊँचाई सिर्फ़ ~180px
+   बचती है, इसलिए logo हट जाता है; नाम और tagline फिर भी रहते हैं। */
+@media(orientation:landscape) and (max-height:620px){
+  .phv-pin{flex-direction:row;align-items:center;justify-content:center;gap:18px}
+  .phv-stage{width:min(56%,
+    calc((100svh - var(--phv-flow) - var(--phv-bot)) * 16 / 9))}
+  .phv-c{flex:1 1 auto;max-width:44ch;text-align:left;padding:0;margin:0}
+  .phv-links{justify-content:flex-start}
+  .phv-brand{align-items:flex-start;margin-top:8px}
+  .phv-logo{display:none}
+  .phv h1{font-size:22px;margin-bottom:3px}
+  .phv-sub{font-size:13px;margin-bottom:8px}
+}

@@ -188,33 +188,32 @@ export function PhoneScrub() {
           </div>
 
           <div className="phv-c">
-            <p className="phv-pill"><i aria-hidden="true" />Coming Soon</p>
-            <h1 id="phv-h">
-              नया iPhone जल्दी ही — {shop.address.locality}, {shop.address.city} में
-            </h1>
-
-            {/* Owner (7 Sep 2026): "logo use karo, Red Glossy me likha ho
-                Mobile World b, aur just uske hi niche tagline b. logo, name,
-                tagline upar niche. tagline ek hi single line me likhna." */}
-            <div className="phv-brand">
-              <Image className="phv-logo" src="/images/mobile-world-logo-79e75645.webp"
-                     alt="" width={240} height={240} sizes="52px" />
-              <p className="phv-name">{shop.name}</p>
-              <p className="phv-tag">{shop.tagline}</p>
-            </div>
-
-            <p className="phv-hint" aria-hidden="true">
-              Scroll कीजिए — phone आपके सामने खुलेगा
+            {/* Apple का hero वाला क्रम: ऊपर छोटा नारंगी label, फिर सबसे बड़ी
+                heading, फिर एक line का परिचय, फिर नीले link। */}
+            <p className="phv-eyebrow">Coming Soon</p>
+            <h1 id="phv-h">नया iPhone जल्दी ही</h1>
+            <p className="phv-sub">
+              {shop.address.locality}, {shop.address.city} में — {shop.name} पर
             </p>
-            <div className="phv-btns">
-              <a className="btn btn-w" href={`${shop.phone.whatsapp}?text=${encodeURIComponent(
+
+            <div className="phv-links">
+              <a className="btn btn-d" href={`${shop.phone.whatsapp}?text=${encodeURIComponent(
                 `Namaste ${shop.name}! नया iPhone आने पर मुझे बता दीजिएगा।`)}`}
                  target="_blank" rel="noopener">
                 <IconWhatsApp />आने पर बता दीजिए
               </a>
-              <Link className="btn btn-o" href="/products">
+              <Link className="phv-a" href="/products">
                 दुकान का सामान देखिए<IconArrow />
               </Link>
+            </div>
+
+            {/* Owner (7 Sep 2026): "logo use karo, Red Glossy me likha ho
+                Mobile World b, aur just uske hi niche tagline b." */}
+            <div className="phv-brand">
+              <Image className="phv-logo" src="/images/mobile-world-logo-79e75645.webp"
+                     alt="" width={240} height={240} sizes="44px" />
+              <p className="phv-name">{shop.name}</p>
+              <p className="phv-tag">{shop.tagline}</p>
             </div>
           </div>
         </div>
