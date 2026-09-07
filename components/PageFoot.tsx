@@ -12,9 +12,11 @@
 
 import { shop } from "@/data/shop";
 import { whatsappGeneral } from "@/data/content";
+import Link from "next/link";
 import {
   IconPhone, IconWhatsApp, IconPin,
   IconYouTube, IconInstagram, IconFacebook,
+  IconCal, IconClock, IconArrow,
 } from "./Icons";
 
 export function PageFoot() {
@@ -75,11 +77,54 @@ export function PageFoot() {
  *
  * ⚠️ एक page पर एक ही बार। verify script दो होने पर पकड़ लेती है।
  */
-export function Byline({ date }: { date?: string }) {
+/**
+ * लेखक का नाम — एक पूरा card, न कि नीचे पड़ी हुई एक फीकी line।
+ *
+ * Owner ने 7 Sep 2026 को कहा: *"written by sachin ko premium tareeke se
+ * likho, professionally, izzat mile... abhi to fike se bas naam ke liye
+ * likh diya h, aisa lag ra h kuch code last me chhoot gya ho."*
+ *
+ * इसलिए अब इसमें monogram, "Written by" वाला kicker, बड़ा नाम, और नीचे
+ * तारीख़ + पढ़ने का समय — सब साफ़ दिखता है।
+ *
+ * ⚠️ तीन बातें जो तोड़नी नहीं हैं:
+ *  • `byline-end` class यहीं रहनी चाहिए — जाँच इसी से गिनती है कि नाम
+ *    page पर ठीक एक बार है और सही जगह है।
+ *  • **"Written by: Sachin" — यही शब्द।** Owner ने 1 Sep 2026 को साफ़ कहा
+ *    था, हिन्दी "लिखा —" नहीं।
+ *  • Sachin की कोई तस्वीर हमारे पास नहीं है, और किसी असली आदमी की नक़ली
+ *    तस्वीर बनाना मना है (§11)। इसलिए monogram — पहला अक्षर।
+ */
+export function Byline({
+  date, dateISO, readMins,
+}: { date?: string; dateISO?: string; readMins?: number }) {
+  const initial = shop.authorName.trim().charAt(0);
   return (
-    <p className="byline byline-end">
-      <span>Written by: <b>{shop.authorName}</b></span>
-      {date && <><i aria-hidden="true" /><span>{date}</span></>}
-    </p>
+    <aside className="byl byline-end">
+      <span className="byl-av" aria-hidden="true">{initial}</span>
+
+      <div className="byl-b">
+        <span className="byl-k">Written by</span>
+        <b className="byl-n">{shop.authorName}</b>
+        {(date || readMins) && (
+          <div className="byl-m">
+            {date && (
+              <span className="byl-p">
+                <IconCal />
+                {dateISO ? <time dateTime={dateISO}>{date}</time> : <span>{date}</span>}
+              </span>
+            )}
+            {date && readMins ? <i aria-hidden="true" /> : null}
+            {readMins && (
+              <span className="byl-p"><IconClock />{readMins} मिनट का पढ़ना</span>
+            )}
+          </div>
+        )}
+      </div>
+
+      <Link className="byl-cta" href="/posts">
+        और लेख <IconArrow />
+      </Link>
+    </aside>
   );
 }

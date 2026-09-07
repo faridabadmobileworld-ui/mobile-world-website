@@ -483,6 +483,13 @@ export const posts: Post[] = [
 <p>Xiaomi ने India में अपना बिलकुल नया <strong>Redmi 17 5G</strong> officially launch कर दिया है — कंपनी ने 16 को सीधा बाय-बाय कहकर 17 पर छलांग मार दी! इस शानदार phone की official sale <strong>10 September 2026</strong> से start होने जा रही है। Faridabad के Jawahar Colony वाले showroom — <strong>MOBILE WORLD</strong> — पर इसकी pre-bookings भी अभी से open कर दी गई हैं।</p>
 <p>आइए, बिलकुल तसल्ली और आसान भाषा में जानते हैं कि इस नए phone में ऐसा क्या ख़ास है।</p>
 
+<div class="specs">
+<div class="spec"><span class="spec-k">Battery</span><b class="spec-v">7,900<em>mAh</em></b></div>
+<div class="spec"><span class="spec-k">Display</span><b class="spec-v">120<em>Hz</em></b></div>
+<div class="spec"><span class="spec-k">Camera</span><b class="spec-v">50<em>MP</em></b></div>
+<div class="spec"><span class="spec-k">Charging</span><b class="spec-v">45<em>W</em></b></div>
+</div>
+
 <figure class="rvid">
 <video src="/posts/redmi-17-5g/hands-on.mp4" poster="/posts/redmi-17-5g/hands-on.webp" width="1280" height="722" autoplay loop muted playsinline preload="none" aria-label="Redmi 17 5G, Eternal Orange — Mobile World, Jawahar Colony में हाथ में"></video>
 <figcaption>Eternal Orange — पीछे vegan leather वाली finish। हाथ में लेकर देखिए, तभी पता चलता है कि पकड़ कैसी बैठती है।</figcaption>

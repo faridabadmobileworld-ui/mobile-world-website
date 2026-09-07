@@ -126,3 +126,28 @@ export const IconCheck = () => (
     <path d="m5 12.5 4.5 4.5L19 7.5" />
   </svg>
 );
+
+/** तारीख़ — byline के लिए। */
+export const IconCal = () => (
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect x="3.5" y="5" width="17" height="16" rx="3" />
+    <path d="M3.5 10h17M8 3v4M16 3v4" />
+  </svg>
+);
+
+/** घड़ी — पढ़ने में कितना समय लगेगा। */
+export const IconClock = () => (
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="9" /><path d="M12 7.2V12l3.2 2" />
+  </svg>
+);
+
+/** सूची — कितने हिस्से हैं। */
+export const IconList = () => (
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M9 6.5h11M9 12h11M9 17.5h11M4.5 6.5h.01M4.5 12h.01M4.5 17.5h.01" />
+  </svg>
+);

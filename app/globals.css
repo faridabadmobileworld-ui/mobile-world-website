@@ -1847,3 +1847,87 @@ main .readerwrap .toc li a:focus-visible{outline:2px solid var(--brand);
   color:var(--ink-3);font-weight:700;margin:0 0 11px}
 .shr-b{display:flex;flex-wrap:wrap;gap:8px}
 .shr-b .btn{font-size:13.5px}
+
+/* ══════════════════════════════════════════════════════════════════════
+   Lekhak ka card — 7 Sep 2026
+
+   Owner: "written by sachin ko premium tareeke se likho professionally,
+   izzat mile... abhi to fike se bas naam ke liye likh diya h. pta chal b
+   nhi raha, aisa lag ra h kuch code last me chhoot gya ho."
+
+   Pehle ye 13px ki ek halke rang wali line thi jo lakeer ke neeche dab
+   jaati thi. Ab ek poora card: monogram, "WRITTEN BY" ka kicker, bada
+   naam, aur neeche tareekh + padhne ka samay — dono nishaan ke saath.
+   ══════════════════════════════════════════════════════════════════════ */
+.byl{display:flex;align-items:center;gap:14px;margin:26px 0 0;padding:15px 16px;
+  border-radius:var(--r-lg);max-width:var(--measure);
+  background:linear-gradient(180deg,#fff,#FCFCFE);
+  box-shadow:0 1px 2px rgba(17,17,26,.05),0 12px 30px -14px rgba(17,17,26,.18),
+             inset 0 0 0 1px rgba(17,17,26,.055)}
+.byl-end,.byline-end{border-top:0}
+
+/* Monogram — Sachin ki tasveer hamare paas nahi, aur kisi asli aadmi ki
+   nakli tasveer banana mana hai (§11). Isliye pehla akshar. */
+.byl-av{flex:none;width:46px;height:46px;border-radius:99px;display:grid;
+  place-items:center;font-size:19px;font-weight:800;color:#fff;letter-spacing:-.02em;
+  background:linear-gradient(145deg,var(--brand-2),var(--brand));
+  box-shadow:0 6px 16px -6px rgba(91,63,217,.7),inset 0 1px 0 rgba(255,255,255,.35)}
+
+.byl-b{min-width:0;flex:1}
+.byl-k{display:block;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:800;line-height:1}
+.byl-n{display:block;font-size:16.5px;font-weight:800;color:var(--ink);
+  letter-spacing:-.02em;line-height:1.25;margin:4px 0 0}
+.byl-m{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:6px 0 0;
+  font-size:12px;color:var(--ink-3);font-weight:600}
+.byl-m i{width:3px;height:3px;border-radius:99px;background:var(--line);flex:none}
+.byl-p{display:inline-flex;align-items:center;gap:5px}
+.byl-p svg{opacity:.7}
+.byl-p time{font-variant-numeric:tabular-nums}
+
+.byl-cta{flex:none;display:inline-flex;align-items:center;gap:6px;
+  padding:9px 13px;border-radius:99px;font-size:12.5px;font-weight:800;
+  color:var(--brand);background:var(--brand-soft);text-decoration:none;
+  transition:background .28s var(--ease),transform .28s var(--ease),
+             box-shadow .28s var(--ease)}
+.byl-cta:hover{background:var(--brand);color:#fff;transform:translateX(2px);
+  box-shadow:0 6px 16px -6px rgba(91,63,217,.65)}
+.byl-cta:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+
+/* Chhoti screen par CTA neeche apni line mein, taaki naam na dabe */
+@media(max-width:480px){
+  .byl{flex-wrap:wrap;gap:12px}
+  .byl-b{flex:1 1 auto}
+  .byl-cta{flex:1 1 100%;justify-content:center}
+}
+
+/* ── Article ke sheershak ke neeche ek nazar wali patti ──────────────── */
+.rmeta{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin:10px 0 0;
+  font-size:12px;font-weight:600;color:var(--ink-3)}
+.rmeta i{width:3px;height:3px;border-radius:99px;background:var(--line);flex:none}
+.rmeta-p{display:inline-flex;align-items:center;gap:5px}
+.rmeta-p svg{opacity:.7}
+.rmeta-p time{font-variant-numeric:tabular-nums}
+main .reader .rhead .k{display:inline-flex;align-items:center;padding:4px 10px;
+  border-radius:99px;background:var(--brand-soft);color:var(--brand);
+  font-size:10px;font-weight:800}
+
+/* ── Ek nazar mein — post ke shuru ki spec patti ──────────────────────
+   Chaar sabse badi baatein, bade ank mein. Phone par do-do ki grid, badi
+   screen par charon ek line mein. Ank tabular-nums mein hain taaki seedhe
+   khade rahen. Ye koi naya daava nahi — yahi teen cheezein neeche post
+   mein poori likhi hain.                                                */
+.rbody .specs{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;
+  margin:18px 0 22px;max-width:var(--measure)}
+.rbody .spec{padding:13px 14px;border-radius:var(--r);
+  background:linear-gradient(180deg,#fff,#FBFBFE);
+  box-shadow:0 1px 2px rgba(17,17,26,.05),0 8px 20px -12px rgba(17,17,26,.16),
+             inset 0 0 0 1px rgba(17,17,26,.05)}
+.rbody .spec-k{display:block;font-size:9.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-3);font-weight:800;line-height:1}
+.rbody .spec-v{display:block;margin:7px 0 0;font-size:clamp(1.15rem,4.6vw,1.45rem);
+  font-weight:800;color:var(--ink);letter-spacing:-.035em;line-height:1;
+  font-variant-numeric:tabular-nums}
+.rbody .spec-v em{font-style:normal;font-size:.55em;font-weight:700;
+  color:var(--brand);margin-left:2px;letter-spacing:0}
+@media(min-width:620px){ .rbody .specs{grid-template-columns:repeat(4,1fr)} }

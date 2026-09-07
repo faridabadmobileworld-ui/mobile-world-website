@@ -7,7 +7,7 @@ import { PageFoot, Byline } from "@/components/PageFoot";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { livePosts } from "@/data/content";
 import { jsonLdScript } from "@/data/schema";
-import { IconWhatsApp, IconPhone } from "@/components/Icons";
+import { IconWhatsApp, IconPhone, IconCal, IconClock, IconList } from "@/components/Icons";
 import { ShareRow } from "@/components/ShareRow";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -51,6 +51,16 @@ export default async function PostPage({ params }: Params) {
 
   const others = all.filter((p) => p.slug !== post.slug);
 
+  /**
+   * पढ़ने में कितना समय लगेगा — post के अपने शब्द गिनकर।
+   *
+   * कोई अंदाज़ा नहीं: HTML के tag हटाकर असली शब्द गिने जाते हैं। रफ़्तार
+   * 180 शब्द प्रति मिनट रखी है — देवनागरी और English मिली-जुली है, इसलिए
+   * सादे English के 200-220 से थोड़ी कम।
+   */
+  const words = post.body.replace(/<[^>]+>/g, " ").trim().split(/\s+/).length;
+  const readMins = Math.max(1, Math.round(words / 180));
+
   // Article ke apne <h2 id="..."> se TOC बन जाती है — दोबारा list लिखने की
   // ज़रूरत नहीं, इसलिए heading बदलने पर TOC अपने आप सही रहती है।
   const toc: TocItem[] = [...post.body.matchAll(/<h2 id="([^"]+)">(.*?)<\/h2>/g)]
@@ -83,8 +93,19 @@ export default async function PostPage({ params }: Params) {
             <Link className="btn btn-o btn-s rback" href="/posts">← Tech Blog &amp; Guides</Link>
 
             <div className="rhead">
-              <span className="k">{post.kicker}<em>{post.date}</em></span>
+              <span className="k">{post.kicker}</span>
               <h1 className="rtitle">{post.title}</h1>
+              {/* Ek nazar mein: kab likhi gayi, kitni der lagegi, kitne hisse
+                  hain. Teeno gine hue hain — koi andaza nahi. */}
+              <div className="rmeta">
+                <span className="rmeta-p">
+                  <IconCal /><time dateTime={post.dateISO}>{post.date}</time>
+                </span>
+                <i aria-hidden="true" />
+                <span className="rmeta-p"><IconClock />{readMins} मिनट</span>
+                <i aria-hidden="true" />
+                <span className="rmeta-p"><IconList />{toc.length} हिस्से</span>
+              </div>
             </div>
 
             <div className="rmedia">
@@ -126,7 +147,7 @@ export default async function PostPage({ params }: Params) {
                 सुझाव। यानी पढ़ने वाला जहाँ रुकता है, वहीं दुकान तक पहुँचने का
                 रास्ता मिल जाता है — नीचे तक scroll नहीं करना पड़ता। */}
             <PageFoot />
-            <Byline date={post.date} />
+            <Byline date={post.date} dateISO={post.dateISO} readMins={readMins} />
 
             <div className="shead" style={{ marginTop: 26 }}><h2>और भी पढ़िए</h2></div>
             <div className="posts">
