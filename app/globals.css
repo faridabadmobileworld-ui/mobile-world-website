@@ -227,7 +227,12 @@ ul{list-style:none;margin:0;padding:0}
 .sec{padding:22px 0}
 .shead{display:flex;align-items:center;gap:12px;margin-bottom:14px}
 .shead h2{font-size:clamp(1.05rem,2.2vw,1.35rem);font-weight:800;letter-spacing:-.026em;margin:0}
-.shead a{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--ink-2);display:inline-flex;align-items:center;gap:4px}
+.shead a{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--ink-2);display:inline-flex;align-items:center;gap:4px;
+  /* ⚠️ ये "सब देखिए / रास्ता देखिए" वाले link उँगली के लिए बहुत छोटे थे
+     (28px से कम)। अब इनका छूने वाला हिस्सा 34px का है — लिखाई वैसी की वैसी,
+     बस उसके चारों तरफ़ जगह। जाँच में यही पकड़ा गया था (7 Sep 2026)। */
+  min-height:34px;padding:6px 8px;margin-right:-8px;border-radius:8px}
+.shead a:active{background:var(--line-2)}
 .shead a:hover{color:var(--brand)}
 .snav{margin-left:auto;display:flex;gap:6px}
 .snav button{width:32px;height:32px;border-radius:8px;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;color:var(--ink-2)}
@@ -1109,7 +1114,10 @@ main .panel:hover,.toc:hover{box-shadow:var(--sh-3),var(--ring)}
   .igs-nav.next{right:-6px}
 }
 .igw-f{margin:12px 0 2px;font-size:13px;line-height:1.7;color:var(--ink-2);text-align:center}
+/* ⚠️ यह वाक्य के अंदर का link नहीं, अपने आप में एक बटन है — इसलिए इसका
+   छूने वाला हिस्सा 34px का है (जाँच में छोटा पकड़ा गया था, 7 Sep 2026)। */
 .igw-f a{display:inline-flex;align-items:center;gap:5px;margin-left:6px;
+  min-height:34px;padding:5px 9px;border-radius:8px;
   color:var(--ig2);font-weight:800}
 .igw-f a:hover{text-decoration:underline}
 
@@ -2665,12 +2673,24 @@ main .rbody .hn{flex:none;display:grid;place-items:center;min-width:30px;height:
 .toc-g li:nth-child(9n+8) a{--tc:#BE123C}
 .toc-g li:nth-child(9n+9) a{--tc:#4338CA}
 
-/* एक-एक करके उभरना — बाएँ से दाएँ, ऊपर से नीचे */
-@media(prefers-reduced-motion:no-preference){
-  @keyframes toc-aao{from{opacity:0;transform:translateY(8px) scale(.97)}
-                     to{opacity:1;transform:none}}
-  .toc-g li{animation:toc-aao .42s var(--ease) both;
-    animation-delay:calc(var(--i,0) * 45ms)}
+/* एक-एक करके उभरना — बाएँ से दाएँ, ऊपर से नीचे।
+
+   ⚠️ यह **scroll से चलती है, page खुलते ही नहीं**। पहले यह समय वाली
+   animation थी (`.42s` + हर अगले पर 45ms की देर) और page खुलते ही नौ
+   डिब्बे एक साथ चलने लगते थे — वो भी screen से बहुत नीचे, जहाँ कोई देख
+   भी नहीं रहा। धीमे phone पर वो काम ठीक उसी वक़्त होता था जब LCP गिना
+   जाता है: home का LCP 1228ms से बढ़कर 1450ms हो गया था। नापकर पकड़ा गया।
+
+   यही नियम पूरी site पर है (हिस्सा 6 — "scroll पर उभरना")। नई animation
+   लिखते वक़्त उसी में रहिए। */
+@supports(animation-timeline:view()){
+  @media(prefers-reduced-motion:no-preference){
+    @keyframes toc-aao{from{opacity:0;transform:translateY(10px) scale(.97)}
+                       to{opacity:1;transform:none}}
+    main .toc-g li{animation:toc-aao linear both;
+      animation-timeline:view();
+      animation-range:entry 0% entry calc(200px + var(--i,0) * 26px)}
+  }
 }
 
 @media(min-width:768px){

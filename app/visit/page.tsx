@@ -15,9 +15,10 @@ import { LiveBadge, NextClosure } from "@/components/StoreStatus";
 export const metadata: Metadata = {
   title: "दुकान पर आइए",
   description:
-    `${shop.name} — ${shop.address.street}, ${shop.address.landmark}, ` +
+    // ⚠️ Google 155-160 अक्षर के बाद काट देता है — यह 210 की थी (7 Sep 2026)
+    `${shop.name} — ${shop.address.street}, ` +
     `${shop.address.locality}, ${shop.address.city} – ${shop.address.postalCode}। ` +
-    `रोज़ सुबह 10 से रात 10, सातों दिन। हर महीने की आख़िरी तारीख़ को बंद।`,
+    `रोज़ सुबह 10 से रात 10। महीने की आख़िरी तारीख़ बंद।`,
   alternates: { canonical: "/visit" },
 };
 

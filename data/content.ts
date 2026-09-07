@@ -488,8 +488,8 @@ export const posts: Post[] = [
     publishAt: "2026-09-07T10:00:00+05:30",
     title: "7900mAh बैटरी और Snapdragon की Power के साथ बाज़ार में तहलका मचाने आ रहा है Xiaomi का New Redmi 17 5G!",
     excerpt:
-      "Redmi 17 5G के सारे colors, storage variants और दाम एक जगह। 7,900mAh battery, " +
-      "Snapdragon 4 Gen 5, 50MP camera — और Jawahar Colony, NIT Faridabad पर pre-booking खुली है।",
+      "Redmi 17 5G के colors, storage variants और दाम एक जगह। 7,900mAh battery, " +
+      "Snapdragon 4 Gen 5, 50MP camera — Jawahar Colony पर pre-booking खुली है।",
     image: "/images/redmi-17-5g-colours-mobile-world-faridabad.webp",
     imageW: 1400,
     imageH: 788,

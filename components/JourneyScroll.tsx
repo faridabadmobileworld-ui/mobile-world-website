@@ -232,8 +232,12 @@ export function JourneyScroll({ hero = false }: { hero?: boolean }) {
 
   return (
     <section className={hero ? "sec jrn jrn-hero" : "sec jrn"}>
+      {/* ⚠️ hero वाले रूप में यह `h1` है, `h2` नहीं। `/showcase` पर यही page
+          का सबसे ऊपर वाला हिस्सा है और वहाँ कोई दूसरा `h1` नहीं — जाँच में
+          "h1 = 0" पकड़ा गया था (7 Sep 2026)। Home page पर यह hero नहीं है,
+          वहाँ `h1` hero video वाले हिस्से का है। */}
       {hero
-        ? <h2 className="sr" id="hamara-safar">हमारा सफ़र — 1973 से आज तक</h2>
+        ? <h1 className="sr" id="hamara-safar">हमारा सफ़र — 1973 से आज तक</h1>
         : <div className="shead"><h2 id="hamara-safar">हमारा सफ़र</h2></div>}
 
       <div className="jrn-scroll" ref={rootRef}>

@@ -13,9 +13,10 @@ import { MoreLinks } from "@/components/MoreLinks";
 export const metadata: Metadata = {
   title: `About Us — ${shop.legacyStartYear} से Faridabad का भरोसा`,
   description:
-    `परिवार का business सफ़र ${shop.legacyStartYear} में Aggarwal Kiryana Store से शुरू हुआ, ` +
-    `और ${shop.foundingYear} में इसी विरासत को आगे बढ़ाते हुए Mobile World की शुरुआत हुई। ` +
-    `${shop.address.road}, ${shop.address.locality}, ${shop.address.city}।`,
+    // ⚠️ Google 155-160 अक्षर के बाद काट देता है — यह 184 की थी (7 Sep 2026)
+    `परिवार का business ${shop.legacyStartYear} में Aggarwal Kiryana Store से शुरू हुआ, ` +
+    `और ${shop.foundingYear} में Mobile World बनी। ` +
+    `${shop.address.locality}, ${shop.address.city}।`,
   alternates: { canonical: "/about" },
 };
 

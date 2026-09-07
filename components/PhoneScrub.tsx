@@ -173,9 +173,17 @@ export function PhoneScrub() {
         <div className="phv-pin">
           <div className="phv-stage">
             {/* video आने तक — और phone/reduce-motion पर हमेशा — यही तस्वीर */}
+            {/* ⚠️ `unoptimized` लगाकर देखा गया था (यह सोचकर कि optimizer एक
+                पड़ाव और जोड़ता है) — नाप ने उल्टा बताया: LCP 1450ms से बढ़कर
+                2040ms हो गया, क्योंकि तब पूरी 73 KB की JPEG जाती है, छोटी
+                WebP नहीं। इसलिए optimizer से ही जाने दीजिए। */}
             <Image className="phv-still" src={POSTER} alt="" width={1280} height={720}
                    sizes="(max-width:860px) 100vw, 1100px" priority />
-            <video className="phv-v" poster={POSTER} muted playsInline preload="none"
+            {/* ⚠️ यहाँ `poster` जान-बूझकर नहीं है। पीछे वही तस्वीर `<Image>`
+                से पहले ही दिख रही है; `poster` लगाने पर browser **वही file
+                दोबारा**, पूरी 73 KB की कच्ची JPEG में उतारता है — और वो
+                ठीक उसी वक़्त होता है जब पहला दृश्य बन रहा होता है। */}
+            <video className="phv-v" muted playsInline preload="none"
                    aria-hidden="true" tabIndex={-1} />
           </div>
 
