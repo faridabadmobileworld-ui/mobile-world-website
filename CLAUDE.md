@@ -106,6 +106,21 @@ Service", "AFTER SALES SERVICE YOU CAN RELY ON", "No Cost EMI",
 जो कहना है वो **असली HTML text में लिखो**, तस्वीर सिर्फ़ दिखाने के लिए हो।
 कोई नई banner जोड़ने से पहले उसे खोलकर पढ़ो — हर शब्द।
 
+📌 **7 Sep 2026 — तीन और banner इसी बीमारी के पकड़े गए और हटा दिए गए।**
+उस दिन तक ये चल रहे थे, क्योंकि दावे तस्वीर के *अंदर* छपे थे:
+- **Exchange वाला** — "BEST VALUE FOR YOUR OLD PHONE", "100% SAFE & SECURE",
+  "TRUSTED PROCESS", "COMPLETE SATISFACTION GUARANTEED"
+- **Repairing वाला** — "EXPERT REPAIRING", "QUICK | RELIABLE | TRUSTED",
+  "Genuine & Safe", "High Quality Parts", और "Water Damage Recovery"
+  (जो owner की बताई repair list में है ही नहीं)
+- **EMI वाला — सबसे गंभीर** — "No Cost EMI" (दो बार), "FLEXIBLE TENURE
+  3/6/9/12/18/24 Months", "100% SECURE", और **Visa, Mastercard, RuPay,
+  Bajaj Finserv के logo**। "No Cost EMI" और tenure — दोनों owner से confirm
+  नहीं हैं, इसीलिए पूरी website के text में कहीं नहीं लिखे थे। तस्वीर के
+  रास्ते वो फिर भी site पर आ गए थे।
+
+तीनों की जगह अब n8n से बनी साफ़ तस्वीरें हैं, जिनमें एक अक्षर भी नहीं है।
+
 ### Categories
 Smartphones, Laptops & Tablets, Televisions, Air Conditioners,
 Washing Machines, Refrigerators, Inverters & Batteries, Audio & Wearables,
@@ -426,6 +441,12 @@ Generations of Service" और "Quality Products, Trusted Brands" छपा ह�
    भी इसी बीमारी से बीमार था**, दोनों जगह ठीक किया।
 2. **Video को blob बनाकर चलाइए, सीधे पते से नहीं।** सीधे पते से हर seek एक
    अलग range request बन जाती है; कई जगह video seekable ही नहीं होती।
+   ⚠️ **पर `src` लिखने के बाद `load()` मत बुलाइए।** `src` लिखते ही browser
+   ख़ुद load शुरू कर देता है; उसके बाद `load()` उसी load को **रद्द** कर देता
+   है और बीच वाली request "aborted" गिनी जाती है। जाँच में यह महीनों
+   `reqfail blob:` बनकर कभी-कभी आ रहा था — 7 Sep 2026 को `JourneyScroll` और
+   `CineHero` दोनों से `load()` हटाकर ठीक किया गया (उसके बाद 116/116, चार
+   बार लगातार)।
 3. **`perspective` के नीचे `translateZ` वाली scroll animation मत लिखिए।**
    Chromium गिनती element की *दिखने वाली* जगह से करता है, इसलिए animation
    अपने ही नतीजे पर जा टिकती है — `/showcase` के आख़िरी चार हिस्से हमेशा के
@@ -766,8 +787,16 @@ Owner ने कहा था कि हर बार ChatGPT/Gemini पर ज�
 पड़ती है। इसलिए n8n में एक workflow बना — **`Tasveer Banao — Image Studio`**
 (id `seJpd7Virm3oizkD`, project `HzDQKEnRpMtfvgRX`)।
 
-पाँच क़दम: **Webhook → prompt साफ़ → OpenAI `gpt-image-1-mini` → webp में
-web-size → owner का Google Drive → सिर्फ़ `{fileId, link}` वापस**।
+छह क़दम: **Webhook → prompt साफ़ → OpenAI `gpt-image-1-mini` → webp में
+web-size → (क) owner का Google Drive और (ख) **सीधे repo के `public/images/`
+में commit** → सिर्फ़ `{fileId, link}` वापस**।
+
+⚠️ **GitHub वाली शाखा ही असली रास्ता है।** Drive से तस्वीर यहाँ तक सिर्फ़
+base64 बनकर आ सकती है, और लंबी file हाथ से लिखने पर वो टूट जाती है (7 Sep को
+यही हुआ)। GitHub node तस्वीर सीधे branch पर commit कर देता है, फिर बस
+`git pull` — bytes कभी बीच में से नहीं गुज़रते। उस node पर
+`onError: continueRegularOutput` है, इसलिए credential न होने पर भी बाक़ी
+workflow चलता रहता है।
 
 - **कोई API key नहीं लगती** — OpenAI का ख़र्च n8n के **Gateway credits** से
   कटता है, credential अपने आप जुड़ जाता है। ⚠️ इसलिए `openAi` node पर

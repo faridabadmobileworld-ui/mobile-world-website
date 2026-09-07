@@ -160,9 +160,13 @@ export function JourneyScroll({ hero = false }: { hero?: boolean }) {
           .then((r) => (r.ok ? r.blob() : Promise.reject(new Error("no video"))))
           .then((blob) => {
             v.preload = "auto";
+            // ⚠️ `src` लिखते ही browser ख़ुद load शुरू कर देता है। उसके बाद
+            // `load()` बुलाना उसी शुरू हुए load को **रद्द** कर देता है — media
+            // element रीसेट होकर दोबारा शुरू करता है, और बीच वाली request
+            // "aborted" गिनी जाती है। जाँच में यही `reqfail blob:` बनकर
+            // बार-बार आ रहा था। इसलिए यहाँ `load()` जान-बूझकर नहीं है।
             v.src = URL.createObjectURL(
               blob.type ? blob : new Blob([blob], { type: "video/mp4" }));
-            v.load();
             // iPhone पर जो video कभी चली ही नहीं, उसे seek करने पर कई बार
             // ख़ाली frame दिखता है। एक बार चुपचाप चलाकर तुरंत रोक देने से
             // decoder जाग जाता है और हर seek पर तस्वीर आती है।

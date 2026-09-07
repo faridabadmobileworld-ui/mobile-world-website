@@ -45,8 +45,8 @@ export default function Repairing() {
       </section>
 
       <section className="sec">
-        <Banner src="/images/expert-mobile-repairing-at-mobile-world-f65f73a0.webp"
-          alt={`${shop.name} पर mobile repairing और technical service counter — ${shop.address.locality}, ${shop.address.city}`} />
+        <Banner src="/images/repairing-mez-par-khula-phone-aur-auzaar.webp"
+          alt={`Repairing की मेज़ पर खुला phone, screwdriver और tweezers — ${shop.name}, ${shop.address.locality}, ${shop.address.city}`} />
       </section>
 
       <section className="sec">

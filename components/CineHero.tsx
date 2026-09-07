@@ -204,8 +204,10 @@ export function CineHero() {
           // video ko pehchanta hi nahi (error 4). preload bhi yahin kholna
           // padta hai, warna 'none' rehte hue ek byte bhi buffer nahi hota.
           video.preload = "auto";
+          // `src` likhte hi load shuru ho jaata hai; uske baad `load()`
+          // bulana usi load ko radd kar deta hai aur request "aborted" gini
+          // jaati hai. Isliye yahan `load()` jaan-boojhkar nahi hai.
           video.src = URL.createObjectURL(new Blob(chunks as BlobPart[], { type: mime }));
-          video.load();
           video.addEventListener("canplay", () => {
             requestSeek(heroProgress() * video.duration);
             stage.classList.add("video-ready");
