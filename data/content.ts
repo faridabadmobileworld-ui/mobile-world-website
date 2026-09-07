@@ -453,6 +453,25 @@ export type Post = {
  *
  * **सारी जगहें `livePosts()` ही इस्तेमाल करें, सीधे `posts` नहीं।**
  */
+/**
+ * `publishAt` में लिखा हुआ वक़्त, पढ़ने लायक़ रूप में — "सुबह 10:00 बजे"।
+ *
+ * ⚠️ यहाँ `Date` और `toLocaleTimeString` जान-बूझकर इस्तेमाल नहीं किए।
+ * वो build करने वाली मशीन के समय-क्षेत्र पर निर्भर करते हैं, और Vercel की
+ * मशीन UTC पर चलती है — वहाँ "सुबह 10 बजे" का जवाब "सुबह 4:30" आता।
+ * `publishAt` में offset पहले से लिखा होता है (`+05:30`), इसलिए सीधे उसी
+ * लिखे हुए घंटे-मिनट को उठा लेना ही इकलौता पक्का तरीक़ा है।
+ */
+export function publishTimeLabel(publishAt?: string): string | undefined {
+  if (!publishAt) return undefined;
+  const m = publishAt.match(/T(\d{2}):(\d{2})/);
+  if (!m) return undefined;
+  const h = Number(m[1]);
+  const pahar = h < 4 ? "रात" : h < 12 ? "सुबह" : h < 16 ? "दोपहर" : h < 20 ? "शाम" : "रात";
+  const h12 = h % 12 === 0 ? 12 : h % 12;
+  return `${pahar} ${h12}:${m[2]} बजे`;
+}
+
 export function livePosts(now: Date = new Date()): Post[] {
   return posts.filter((p) => !p.publishAt || new Date(p.publishAt) <= now);
 }

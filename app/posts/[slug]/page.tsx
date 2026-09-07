@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { shop } from "@/data/shop";
 import { PageFoot, Byline } from "@/components/PageFoot";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
-import { livePosts } from "@/data/content";
+import { livePosts, publishTimeLabel } from "@/data/content";
 import { jsonLdScript } from "@/data/schema";
 import { IconWhatsApp, IconPhone, IconCal, IconClock, IconList } from "@/components/Icons";
 import { ShareRow } from "@/components/ShareRow";
@@ -51,15 +51,8 @@ export default async function PostPage({ params }: Params) {
 
   const others = all.filter((p) => p.slug !== post.slug);
 
-  /**
-   * पढ़ने में कितना समय लगेगा — post के अपने शब्द गिनकर।
-   *
-   * कोई अंदाज़ा नहीं: HTML के tag हटाकर असली शब्द गिने जाते हैं। रफ़्तार
-   * 180 शब्द प्रति मिनट रखी है — देवनागरी और English मिली-जुली है, इसलिए
-   * सादे English के 200-220 से थोड़ी कम।
-   */
-  const words = post.body.replace(/<[^>]+>/g, " ").trim().split(/\s+/).length;
-  const readMins = Math.max(1, Math.round(words / 180));
+  // Post ठीक किस वक़्त डाली गई — जहाँ `publishAt` लिखा है वहाँ से।
+  const time = publishTimeLabel(post.publishAt);
 
   // Article ke apne <h2 id="..."> se TOC बन जाती है — दोबारा list लिखने की
   // ज़रूरत नहीं, इसलिए heading बदलने पर TOC अपने आप सही रहती है।
@@ -116,8 +109,10 @@ export default async function PostPage({ params }: Params) {
                 <span className="rmeta-p">
                   <IconCal /><time dateTime={post.dateISO}>{post.date}</time>
                 </span>
-                <i aria-hidden="true" />
-                <span className="rmeta-p"><IconClock />{readMins} मिनट</span>
+                {time && <>
+                  <i aria-hidden="true" />
+                  <span className="rmeta-p"><IconClock />{time}</span>
+                </>}
                 <i aria-hidden="true" />
                 <span className="rmeta-p"><IconList />{toc.length} हिस्से</span>
               </div>
@@ -162,7 +157,7 @@ export default async function PostPage({ params }: Params) {
                 सुझाव। यानी पढ़ने वाला जहाँ रुकता है, वहीं दुकान तक पहुँचने का
                 रास्ता मिल जाता है — नीचे तक scroll नहीं करना पड़ता। */}
             <PageFoot />
-            <Byline date={post.date} dateISO={post.dateISO} readMins={readMins} />
+            <Byline date={post.date} dateISO={post.dateISO} time={time} />
 
             <div className="shead" style={{ marginTop: 26 }}><h2>और भी पढ़िए</h2></div>
             <div className="posts">

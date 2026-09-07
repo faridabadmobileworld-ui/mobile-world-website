@@ -96,8 +96,8 @@ export function PageFoot() {
  *    तस्वीर बनाना मना है (§11)। इसलिए monogram — पहला अक्षर।
  */
 export function Byline({
-  date, dateISO, readMins,
-}: { date?: string; dateISO?: string; readMins?: number }) {
+  date, dateISO, time,
+}: { date?: string; dateISO?: string; time?: string }) {
   const initial = shop.authorName.trim().charAt(0);
   return (
     <aside className="byl byline-end">
@@ -106,18 +106,13 @@ export function Byline({
       <div className="byl-b">
         <span className="byl-k">Written by</span>
         <b className="byl-n">{shop.authorName}</b>
-        {(date || readMins) && (
+        {date && (
           <div className="byl-m">
-            {date && (
-              <span className="byl-p">
-                <IconCal />
-                {dateISO ? <time dateTime={dateISO}>{date}</time> : <span>{date}</span>}
-              </span>
-            )}
-            {date && readMins ? <i aria-hidden="true" /> : null}
-            {readMins && (
-              <span className="byl-p"><IconClock />{readMins} मिनट का पढ़ना</span>
-            )}
+            <span className="byl-p">
+              <IconCal />
+              {dateISO ? <time dateTime={dateISO}>{date}</time> : <span>{date}</span>}
+            </span>
+            {time && <><i aria-hidden="true" /><span className="byl-p"><IconClock />{time}</span></>}
           </div>
         )}
       </div>
