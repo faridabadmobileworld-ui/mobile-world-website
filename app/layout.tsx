@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { shop } from "@/data/shop";
 import { SiteHeader } from "@/components/SiteHeader";
+import { buildSearchIndex } from "@/data/search";
 import { SiteFooter, MobileBar } from "@/components/SiteFooter";
 import { ArtSprite } from "@/components/ArtSprite";
 import "./globals.css";
@@ -78,7 +79,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <div className="prog" aria-hidden="true" />
         <Aura />
         <ArtSprite />
-        <SiteHeader />
+        <SiteHeader searchIndex={buildSearchIndex()} />
         <main id="main">{children}</main>
         <SiteFooter />
         <MobileBar />

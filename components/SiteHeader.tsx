@@ -11,8 +11,9 @@ import { productMenu } from "@/data/menu";
 import { Art } from "./ArtSprite";
 import { LiveBadge } from "./StoreStatus";
 import { IconMenu, IconSearch, IconPhone, IconWhatsApp, IconGrid } from "./Icons";
+import { searchIn, type SearchEntry } from "@/data/search";
 
-export function SiteHeader() {
+export function SiteHeader({ searchIndex }: { searchIndex: SearchEntry[] }) {
   const [open, setOpen] = useState(false);
   // जिस page पर ग्राहक अभी है, पट्टी में वो अलग दिखे।
   const path = usePathname();
@@ -67,7 +68,7 @@ export function SiteHeader() {
             <i><Image src="/images/mobile-world-logo-79e75645.webp" alt="" width={240} height={240} sizes="40px" /></i><span>{shop.name}<s>{shop.tagline}</s></span>
           </Link>
 
-          <SearchBox id="q-header" />
+          <SearchBox id="q-header" index={searchIndex} />
 
           <div className="hdr-a">
             <a className="iconbtn" href={shop.phone.tel} aria-label="दुकान को call कीजिए"><IconPhone /></a>
@@ -108,7 +109,7 @@ export function SiteHeader() {
             <i><Image src="/images/mobile-world-logo-79e75645.webp" alt="" width={240} height={240} sizes="40px" /></i><span>{shop.name}<s>{shop.tagline}</s></span>
           </Link>
 
-          <SearchBox id="q-drawer" onDone={() => setOpen(false)} />
+          <SearchBox id="q-drawer" index={searchIndex} onDone={() => setOpen(false)} />
 
           {/* पहली सीढ़ी — सारे page */}
           <h2 className="dh">सारे Page</h2>
@@ -166,27 +167,98 @@ export function SiteHeader() {
  * `id` alag isliye chahiye ki ek hi page par do input hote hain, aur
  * label ka `htmlFor` sahi input se juda rehna chahiye.
  */
-function SearchBox({ id, onDone }: { id: string; onDone?: () => void }) {
+function SearchBox({ id, index, onDone }:
+  { id: string; index: SearchEntry[]; onDone?: () => void }) {
   const [q, setQ] = useState("");
+  // कौन सा नतीजा चुना हुआ है — तीर वाली key से बदलता है। -1 = कोई नहीं।
+  const [sel, setSel] = useState(-1);
+  const [shut, setShut] = useState(false);
   const router = useRouter();
+  const box = useRef<HTMLDivElement>(null);
+
+  const hits = q.trim() ? searchIn(index, q) : [];
+  const open = hits.length > 0 && !shut;
+
+  // बाहर कहीं click हो तो list बंद — वरना वो page के ऊपर टँगी रह जाती है।
+  useEffect(() => {
+    if (!open) return;
+    const away = (e: PointerEvent) => {
+      if (!box.current?.contains(e.target as Node)) setShut(true);
+    };
+    document.addEventListener("pointerdown", away);
+    return () => document.removeEventListener("pointerdown", away);
+  }, [open]);
+
+  function go(href: string) {
+    setShut(true);
+    setQ("");
+    onDone?.();
+    router.push(href);
+  }
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
     const v = q.trim();
     if (!v) return;
+    // कोई नतीजा चुना हुआ है तो सीधे वहीं, वरना पूरी list वाले page पर।
+    if (sel >= 0 && hits[sel]) return go(hits[sel].h);
+    setShut(true);
     onDone?.();
     router.push(`/products?q=${encodeURIComponent(v)}`);
   }
 
+  function keys(e: React.KeyboardEvent) {
+    if (e.key === "Escape") { setShut(true); return; }
+    if (!open) return;
+    if (e.key === "ArrowDown") { e.preventDefault(); setSel((n) => (n + 1) % hits.length); }
+    if (e.key === "ArrowUp") { e.preventDefault(); setSel((n) => (n <= 0 ? hits.length : n) - 1); }
+  }
+
+  const listId = `${id}-list`;
+
   return (
-    <form className="searchbox" onSubmit={submit} role="search">
-      <label className="sr" htmlFor={id}>सामान ढूँढ़िए</label>
-      <input
-        id={id} type="search" autoComplete="off" value={q}
-        onChange={(e) => setQ(e.target.value)}
-        placeholder="क्या ढूँढ़ रहे हैं — TV, AC, Laptop…"
-      />
-      <button type="submit" aria-label="ढूँढ़िए"><IconSearch /></button>
-    </form>
+    <div className="searchwrap" ref={box}>
+      <form className="searchbox" onSubmit={submit} role="search">
+        <label className="sr" htmlFor={id}>सामान ढूँढ़िए</label>
+        <input
+          id={id} type="search" autoComplete="off" value={q}
+          onChange={(e) => { setQ(e.target.value); setSel(-1); setShut(false); }}
+          onKeyDown={keys}
+          role="combobox" aria-expanded={open} aria-controls={listId}
+          aria-autocomplete="list"
+          placeholder="क्या ढूँढ़ रहे हैं — TV, AC, Laptop…"
+        />
+        <button type="submit" aria-label="ढूँढ़िए"><IconSearch /></button>
+      </form>
+
+      {open && (
+        <ul className="sres" id={listId} role="listbox">
+          {hits.map((h, i) => (
+            <li key={h.h + h.t} role="option" aria-selected={i === sel}>
+              <button type="button" className={i === sel ? "on" : undefined}
+                onPointerEnter={() => setSel(i)}
+                onClick={() => go(h.h)}>
+                <b>{h.t}</b><i>{h.k}</i>
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {/* कुछ न मिले तो ख़ाली मत छोड़िए — WhatsApp का रास्ता दिखाइए।
+          दुकान पर चीज़ हो सकती है, बस इस list में न हो। */}
+      {q.trim() && !hits.length && !shut && (
+        <ul className="sres" role="listbox">
+          <li>
+            <a href={`${shop.phone.whatsapp}?text=${encodeURIComponent(
+              `Namaste Mobile World! क्या आपके पास ${q.trim()} है?`)}`}
+              target="_blank" rel="noopener" onClick={() => { setShut(true); onDone?.(); }}>
+              <b>“{q.trim()}” यहाँ नहीं मिला</b>
+              <i>WhatsApp पर पूछ लीजिए — दुकान पर हो सकता है</i>
+            </a>
+          </li>
+        </ul>
+      )}
+    </div>
   );
 }

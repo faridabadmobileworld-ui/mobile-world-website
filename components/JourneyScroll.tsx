@@ -167,14 +167,20 @@ export function JourneyScroll({ hero = false }: { hero?: boolean }) {
             // बार-बार आ रहा था। इसलिए यहाँ `load()` जान-बूझकर नहीं है।
             v.src = URL.createObjectURL(
               blob.type ? blob : new Blob([blob], { type: "video/mp4" }));
-            // iPhone पर जो video कभी चली ही नहीं, उसे seek करने पर कई बार
-            // ख़ाली frame दिखता है। एक बार चुपचाप चलाकर तुरंत रोक देने से
-            // decoder जाग जाता है और हर seek पर तस्वीर आती है।
-            const prime = v.play();
-            if (prime && typeof prime.then === "function") {
-              prime.then(() => v.pause()).catch(() => { /* चलने न दे तो भी ठीक */ });
-            }
             v.addEventListener("loadeddata", () => {
+              // iPhone पर जो video कभी चली ही नहीं, उसे seek करने पर कई बार
+              // ख़ाली frame दिखता है। एक बार चुपचाप चलाकर तुरंत रोक देने से
+              // decoder जाग जाता है और हर seek पर तस्वीर आती है।
+              //
+              // ⚠️ यह `loadeddata` के **अंदर** है, बाहर नहीं। `src` लिखने के
+              // तुरंत बाद `play()` बुलाने पर browser अभी चल रही load को बीच
+              // में रोककर दोबारा शुरू करता है, और वो अधूरी request "aborted"
+              // गिनी जाती है — जाँच में यही `reqfail blob:` बनकर आता रहा।
+              // `load()` हटाने से यह कम हुआ था, पर पूरा यहीं ठीक होता है।
+              const prime = v.play();
+              if (prime && typeof prime.then === "function") {
+                prime.then(() => v.pause()).catch(() => { /* चलने न दे तो भी ठीक */ });
+              }
               // ⚠️ तीनों का इंतज़ार मत कीजिए। पहली video सबसे नीचे की परत है
               // और वही पूरा frame ढकती है — वो आते ही तस्वीर हटा दीजिए।
               // पहले तीनों का इंतज़ार होता था, इसलिए 5 MB उतरने तक ग्राहक को
