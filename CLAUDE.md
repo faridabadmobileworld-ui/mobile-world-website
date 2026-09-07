@@ -645,9 +645,30 @@ Owner ने 2 Sep 2026 को कहा: *"nai jaankari, iske badalkar ye kardo
 `phone-exchange-guide` · `best-laptops-students` · `smart-tv-guide` ·
 `inverter-vs-non-inverter-ac` · `ac-tonnage` · `new-phones` · `monthly-closure`
 
-नया article जोड़ना हो तो सिर्फ़ दो जगह — `data/content.ts` में एक entry, और
-`scripts/bundle-preview.mjs` में एक line। Sitemap, TOC, "और भी पढ़िए" और
-verify script — सब अपने आप जुड़ जाते हैं (TOC article के `<h2 id="">` से बनती है)।
+नया article जोड़ना हो तो **सिर्फ़ एक जगह** — `data/content.ts` में एक entry।
+Sitemap, TOC, "और भी पढ़िए", preview bundle और verify script — सब अपने आप जुड़
+जाते हैं (TOC article के `<h2 id="">` से बनती है, और `bundle-preview.mjs` अब
+posts की list `out/posts/` से ख़ुद उठा लेता है)।
+
+### ⏰ Post को तय समय पर live करना — `publishAt`
+
+Post की entry में `publishAt: "2026-09-07T10:00:00+05:30"` लिख दीजिए। जिसका
+वक़्त नहीं आया, वो **हर जगह से ग़ायब** रहती है — hub, home page, sitemap,
+"और भी पढ़िए", और उसका अपना URL भी (`dynamicParams = false`, इसलिए पता
+टाइप करके भी नहीं खुलती)। Google को अधूरी post कभी नहीं मिलती।
+
+⚠️ **यह जाँच build के वक़्त होती है, page खुलने के वक़्त नहीं।** Site static है
+और Next.js का ISR `output: export` के साथ चलता ही नहीं (Next के अपने docs:
+`incremental-static-regeneration.md:578`)। **इसलिए तय समय के बाद site का एक
+rebuild होना ज़रूरी है, वरना post अपने आप live नहीं होगी।**
+
+Rebuild के दो तरीक़े:
+1. `main` पर कोई commit push कर दीजिए — Vercel अपने आप build कर देता है।
+2. Vercel के dashboard में उस deployment पर **Redeploy** दबा दीजिए।
+
+📌 सबसे पक्का इंतज़ाम: Vercel में एक **Deploy Hook** बनाकर उसका link n8n के
+Schedule Trigger से जोड़ दीजिए। फिर हर बार अपने आप हो जाएगा, किसी को याद
+रखना नहीं पड़ेगा।
 
 ⚠️ इन articles में जो बातें **जान-बूझकर नहीं लिखीं**: AC/TV लगाना (installation
 दुकान नहीं करती — बल्कि यह साफ़ लिखा है कि नहीं करते), "zero down payment",
