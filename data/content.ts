@@ -531,7 +531,7 @@ export const posts: Post[] = [
 
 <h2 id="performance"><span class="hn">03</span>Performance और Processor</h2>
 <ul>
-<li><strong>Snapdragon की ताक़त:</strong> इस phone के अंदर latest <strong>Snapdragon 4 Gen 5 5G</strong> processor (4nm) दौड़ रहा है।</li>
+<li><strong>Snapdragon की ताक़त:</strong> इस phone के अंदर <strong>Snapdragon 4 Gen 5 Mobile Platform</strong> है — 4nm का octa-core processor, 2.4GHz तक।</li>
 <li><strong>Lag-free life:</strong> background में 10 app खुली हों या heavy gaming चल रही हो — यह बिना अटके भागता रहेगा।</li>
 <li><strong>RAM और Storage:</strong> यह <strong>6GB और 8GB RAM</strong> में मिलता है। साथ में <strong>Memory Extension</strong> का support है, जिसके ज़रिए इसे <strong>16GB RAM तक</strong> खींचा जा सकता है!</li>
 </ul>
