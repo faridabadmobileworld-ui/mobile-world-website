@@ -8,6 +8,7 @@ import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { livePosts } from "@/data/content";
 import { jsonLdScript } from "@/data/schema";
 import { IconWhatsApp, IconPhone } from "@/components/Icons";
+import { ShareRow } from "@/components/ShareRow";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -117,6 +118,8 @@ export default async function PostPage({ params }: Params) {
                 <a className="btn btn-o" href={shop.phone.tel}><IconPhone /> {shop.phone.display}</a>
               </div>
             </div>
+
+            <ShareRow title={post.title} url={`${shop.siteUrl}/posts/${post.slug}`} />
 
             {/* Owner ने 7 Sep 2026 को यह क्रम तय किया: post का content ख़त्म →
                 पता और सारे buttons → लेखक का नाम → उसके बाद बाक़ी posts के

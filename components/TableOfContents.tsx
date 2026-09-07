@@ -30,13 +30,17 @@ export function TableOfContents({
 
   return (
     <nav className="toc rv in" aria-label={heading}>
-      <b className="toc-h">{heading}</b>
+      <div className="toc-t">
+        <b className="toc-h">{heading}</b>
+        <i className="toc-r" aria-hidden="true" />
+        <span className="toc-c">{items.length}</span>
+      </div>
       <ol>
         {items.map((t, i) => (
           <li key={t.id}>
             <a href={`#${t.id}`}>
               <span className="toc-n">{i + 1}</span>
-              {t.label}
+              <span className="toc-l">{t.label}</span>
             </a>
           </li>
         ))}

@@ -479,9 +479,9 @@ export const posts: Post[] = [
       poster: "/posts/redmi-17-5g/counter-display.webp",
     },
     body: `
-<p>अगर आप ऐसे 5G phone के इंतज़ार में थे जिसकी battery बार-बार charge करने का झंझट ही ख़त्म कर दे, तो भाई… अब और बोरिंग इंतज़ार नहीं करना पड़ेगा!</p>
-<p>Xiaomi ने India में अपना बिलकुल नया <strong>Redmi 17 5G</strong> उतार दिया है — कंपनी ने 16 को सीधा बाय-बाय कहकर 17 पर छलांग मार दी! इसकी official sale <strong>10 September</strong> से शुरू हो रही है, और Mobile World (Jawahar Colony) पर इसकी pre-booking अभी से खुल चुकी है।</p>
-<p>आइए बिना किसी बोरिंग ज्ञान के, बिलकुल आसान भाषा में इसके एक-एक feature, colour और storage की चीर-फाड़ करते हैं!</p>
+<p>अगर आप एक ऐसे 5G phone की तलाश में हैं जिसमें battery को बार-बार charge करने का झंझट ही हमेशा के लिए ख़त्म हो जाए, तो आपका इंतज़ार अब पूरा होने वाला है।</p>
+<p>Xiaomi ने India में अपना बिलकुल नया <strong>Redmi 17 5G</strong> officially launch कर दिया है — कंपनी ने 16 को सीधा बाय-बाय कहकर 17 पर छलांग मार दी! इस शानदार phone की official sale <strong>10 September 2026</strong> से start होने जा रही है। Faridabad के Jawahar Colony वाले showroom — <strong>MOBILE WORLD</strong> — पर इसकी pre-bookings भी अभी से open कर दी गई हैं।</p>
+<p>आइए, बिलकुल तसल्ली और आसान भाषा में जानते हैं कि इस नए phone में ऐसा क्या ख़ास है।</p>
 
 <figure class="rvid">
 <video src="/posts/redmi-17-5g/hands-on.mp4" poster="/posts/redmi-17-5g/hands-on.webp" width="1280" height="722" autoplay loop muted playsinline preload="none" aria-label="Redmi 17 5G, Eternal Orange — Mobile World, Jawahar Colony में हाथ में"></video>
@@ -490,7 +490,7 @@ export const posts: Post[] = [
 
 <h2 id="battery">1. Battery और Charging 🔋</h2>
 <ul>
-<li><strong>7,900mAh का असली monster:</strong> भाई साहब, इस phone का सबसे बड़ा USP इसकी massive <strong>7,900mAh (typ)</strong> battery है। normal इस्तेमाल पर यह आराम से ढाई दिन तक बिना हिले-डुले चलती है।</li>
+<li><strong>7,900mAh का असली monster:</strong> भाई साहब, इस phone का सबसे बड़ा USP इसकी massive <strong>7,900mAh</strong> battery है। normal इस्तेमाल पर यह आराम से ढाई दिन तक बिना हिले-डुले चलती है।</li>
 <li><strong>Non-stop entertainment:</strong> एक बार full charge कीजिए, और <strong>146 घंटे</strong> तक लगातार music बजाइए या <strong>20+ घंटे</strong> तक video binge-watch करते रहिए।</li>
 <li><strong>45W Turbo Charging:</strong> डिब्बे के अंदर ही 45W का fast charger मिलेगा, जो इस बड़े पेट वाले phone को मात्र <strong>96 मिनट</strong> में 100% कर देगा।</li>
 <li><strong>Powerbank जैसी ताक़त:</strong> इसमें <strong>22.5W wired reverse-charging</strong> का मज़ा भी है। यानी ज़रूरत पड़ने पर आप इससे अपने earbuds या दोस्त का दूसरा phone भी charge कर सकते हैं!</li>
@@ -556,7 +556,8 @@ export const posts: Post[] = [
 <p>Phone हाथ में लेकर देखिए — नाप, वज़न, रंग। डिब्बा आपके सामने खुलता है, GST bill वहीं मिलता है, और नया phone चालू करके, data डालकर ही आप घर जाते हैं।</p>
 <p>बाद में कुछ समझना हो या कोई दिक़्क़त आए, तो आमने-सामने बात हो सकती है — यह <a href="/after-sales-support">After Sales Support</a> वाले page पर लिखा है। नए phone की warranty का काम company के service centre पर ही होता है, यह हम पहले ही साफ़ बता देते हैं।</p>
 <p>Mobile World 2016 से Jawahar Colony में है, और परिवार का यह काम 1973 से चला आ रहा है।</p>
-<p><strong>दुकान का पूरा पता, timing और सारे buttons ठीक नीचे दिए हैं</strong> — एक ही click में WhatsApp कीजिए, call कीजिए, या Google Maps पर रास्ता खोल लीजिए। YouTube, Instagram और Facebook के buttons भी वहीं हैं।</p>`,
+<p><strong>दुकान का पूरा पता, timing और सारे buttons ठीक नीचे दिए हैं</strong> — एक ही click में WhatsApp कीजिए, call कीजिए, या Google Maps पर रास्ता खोल लीजिए।</p>
+<p>और हाँ — <strong>नए offers, भारी discounts और gifts की ख़बर सबसे पहले वहीं मिलती है</strong>, इसलिए हमें <strong>YouTube</strong>, <strong>Instagram</strong>, <strong>Facebook</strong> और <strong>Google</strong> — चारों जगह follow करना मत भूलिएगा। सबके buttons नीचे लगे हैं।</p>`,
   },
   {
     slug: "phone-exchange-guide",
