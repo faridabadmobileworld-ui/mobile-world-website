@@ -3147,3 +3147,38 @@ main .shead:has(a) h2::before{display:none !important}
 .follow .btn-fb:hover{background:#1462C6}
 .follow .btn-w{background:#25D366;color:#04240F}
 .follow .btn-w:hover{background:#1FBE5B}
+
+/* ── 16. "किसी भी जानकारी के लिए सीधे संपर्क कीजिए" — वापस पहले जैसा ──
+   Owner ने 7 Sep 2026 को "हमसे जुड़े रहिए" के साथ-साथ यह band भी पुराने
+   रूप में वापस माँगा। Apple वाली परत ने इसे सादा भूरा कर दिया था और बटन
+   नीला हो गया था।
+
+   ⚠️ यह भी जान-बूझकर Apple वाले रूप का अपवाद है — दोबारा "साफ़" मत कीजिए।  */
+.strip{
+  background:linear-gradient(90deg,#241C4D,#4B31C4);
+  color:#fff;border-radius:18px;padding:20px;
+  display:flex;flex-wrap:wrap;align-items:center;gap:14px;
+  box-shadow:0 18px 40px -24px rgba(36,28,77,.7)}
+.strip *{color:#fff}
+.strip b,.strip h2{font-size:clamp(1rem,2.2vw,1.3rem);font-weight:800;
+  letter-spacing:-.02em;line-height:1.35;color:#fff}
+.strip p,.strip s{margin:4px 0 0;font-size:13px;line-height:1.7;color:#CFC7F2;
+  letter-spacing:normal}
+.strip a:not(.btn){color:#fff}
+
+/* बटन वापस अपने नारंगी रंग में — Apple वाला नीला यहाँ नहीं चलेगा */
+.strip .btn-h{background:linear-gradient(180deg,#F0663F,#E8542F);color:#fff;
+  border-radius:980px;font-weight:700;
+  box-shadow:0 10px 22px -12px rgba(232,84,47,.85),inset 0 1px 0 rgba(255,255,255,.35)}
+.strip .btn-h:hover{background:linear-gradient(180deg,#F4744F,#DB4B27)}
+
+/* Instagram का असली रंग — चारों रंगों की तिरछी धार, जैसी पहले थी।
+   (पिछली बार यहाँ सादा गुलाबी रह गया था।) */
+.follow .btn-ig{
+  background:linear-gradient(60deg,var(--ig1),var(--ig2),var(--ig3),var(--ig4),var(--ig1));
+  background-size:280% 280%;color:#fff;
+  box-shadow:0 10px 22px -12px rgba(221,42,123,.85),inset 0 1px 0 rgba(255,255,255,.3)}
+.follow .btn-yt{
+  box-shadow:0 10px 22px -12px rgba(224,0,0,.8),inset 0 1px 0 rgba(255,255,255,.3)}
+.follow .btn-fb{
+  box-shadow:0 10px 22px -12px rgba(24,119,242,.8),inset 0 1px 0 rgba(255,255,255,.3)}
