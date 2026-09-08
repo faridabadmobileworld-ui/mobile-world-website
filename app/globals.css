@@ -3327,3 +3327,24 @@ main .rbody h3::after,main .prose h3::after{
    Apple परत में `.shead a` पर `padding:0` लग गया था। उँगली के लिए यह
    सबसे छोटी भली नाप है, इसे मत घटाइए। */
 .shead a{min-height:34px;padding:6px 0;display:inline-flex;align-items:center}
+
+/* ── 21. काली पट्टियाँ हटीं — video अब पूरा हिस्सा भरती है (8 Sep 2026) ──
+   Owner: *"ye black bars hatao side me se. complete 100% area me only ye
+   hero image video hi aani chahiye jo lgi h."*
+
+   पहले `object-fit:contain` था — video पूरी 16:9 में दिखती थी और बची हुई
+   जगह काली रह जाती थी। अब `cover` है: video खिंचकर पूरा हिस्सा भर देती है,
+   एक भी काली पट्टी नहीं बचती।
+
+   ⚠️ इसकी क़ीमत: सीधे phone पर frame के दोनों किनारे थोड़े कट जाते हैं
+   (video चौड़ी 16:9 की है, screen लंबी)। Video खिंचती या टेढ़ी नहीं होती —
+   बस किनारे बाहर रह जाते हैं। Owner ने यही माँगा है।
+   पूरा frame वापस चाहिए हो तो सिर्फ़ `cover` को `contain` कर दीजिए। */
+.phv-stage img,.phv-stage video{object-fit:cover;object-position:50% 50%}
+
+/* Article की ऊपर वाली video — तस्वीर नीचे, video उसके ऊपर आकर चलती है।
+   डिब्बा कभी ख़ाली नहीं दिखता। */
+.av{position:relative;display:block}
+.av .av-v{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transition:opacity .45s var(--ease)}
+.av.av-on .av-v{opacity:1}
