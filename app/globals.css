@@ -3223,3 +3223,107 @@ main .rbody h3::after,main .prose h3::after{
 }
 /* Section वाली heading (`.shead h2`) पर यह लकीर जान-बूझकर नहीं — वहाँ
    दाईं तरफ़ "सब देखिए" वाला link होता है और दोनों साथ में भरे-भरे लगते हैं। */
+
+/* ── 19. Hero अब पूरी screen भरता है — 8 Sep 2026 ─────────────────────
+   Owner: *"Hero se poori screen bharo, wide karo full screen par.
+   Desktop mode me blank h hero ke baad, fix it now."*
+
+   पहले क्या हो रहा था: video 16:9 की है और phone सीधा (portrait) होता है,
+   इसलिए वो हमेशा एक पतली पट्टी बन जाती थी। बची हुई सारी ऊँचाई सफ़ेद पड़ी
+   रहती थी — desktop mode में तो पूरी एक screen जितनी।
+
+   ✅ अब stage **पूरी चौड़ाई में (edge to edge)** है और **बची हुई सारी
+   ऊँचाई ले लेता है**, काले रंग के साथ। Video उसके बीच में पूरी 16:9 में
+   बैठती है (`object-fit:contain`) — एक भी किनारा कटता नहीं, और ऊपर-नीचे
+   जो जगह बचती है वो सिनेमा जैसी काली पट्टी बन जाती है, सफ़ेद ख़ालीपन नहीं।
+
+   ⚠️ `cover` मत लगाइए — उससे video कट जाएगी, और owner ने साफ़ कहा है कि
+   video में कुछ भी नहीं बदलना।                                          */
+.phv-pin{
+  height:calc(100svh - var(--phv-flow) - var(--phv-bot));
+  max-height:none;padding-top:0;gap:0;
+  justify-content:flex-start;align-items:stretch}
+
+.phv-stage{
+  flex:1 1 auto;min-height:0;width:auto;aspect-ratio:auto;
+  /* पूरी चौड़ाई — `.wrap` की सीमा से बाहर निकलकर */
+  margin-inline:calc(50% - 50vw);
+  border-radius:0;background:#000}
+.phv-stage img,.phv-stage video{object-fit:contain;
+  /* Video बीच में नहीं, ज़रा ऊपर बैठती है — बहुत लंबी screen (desktop
+     mode) पर तब काली जगह ज़्यादातर नीचे रहती है और ऊपर सीधे video दिखती
+     है, बजाय इसके कि आधी screen खाली काली दिखे। */
+  object-position:50% 38%}
+
+.phv-c{flex:none;padding-top:18px;padding-bottom:4px}
+@media(max-width:734px){ .phv-c{padding-top:14px} }
+
+/* ── 20. Menu वाला बटन — पट्टी खिसकाने पर उसके पीछे से नाम निकल रहे थे ──
+   Owner: *"Menu baar me sab kuch menu ke niche se nikal ra h."*
+
+   `Menu` बटन बाएँ चिपका रहता है (`position:sticky`) और बाक़ी नाम उसके
+   पीछे से खिसकते हैं। Apple वाली परत ने इसका background हटा दिया था,
+   इसलिए नाम उसके आर-पार दिखने लगे थे।
+
+   अब उसके पीछे ठोस सफ़ेद है और दाईं तरफ़ हल्की सी छाया — नाम उसके पीछे
+   जाकर साफ़ ग़ायब हो जाते हैं।                                            */
+.cs-pages{
+  position:sticky;left:0;z-index:3;
+  background:#fff;
+  padding:0 16px 0 0;margin-right:2px;
+  box-shadow:10px 0 10px -8px rgba(0,0,0,.10);
+  border-radius:0}
+.cs-pages:hover{background:#fff;opacity:1}
+.cstrip a{position:relative;z-index:1}
+
+/* ⚠️ नीचे वाली पट्टी (`.mbar`) **1000px तक** दिखती है, 734px तक नहीं।
+   बजट सिर्फ़ 734px पर बदलने से tablet और desktop-mode पर लिखाई उसी पट्टी
+   पर चढ़ रही थी (8 Sep 2026 को नापकर पकड़ा)। इसलिए यही नाप —
+   `@media(min-width:1000px){ .mbar{display:none} }` — यहाँ भी। */
+@media(max-width:999px){
+  .phv-pin{--phv-bot:62px}
+}
+
+/* ⚠️ Menu वाला बटन पट्टी के **बिलकुल बाएँ किनारे** से शुरू होना चाहिए।
+   `.cstrip .wrap` के अंदर 16-22px की जगह छोड़ी हुई है, और बटन उसके बाद
+   से शुरू होता था — इसलिए उस पतली सी जगह में से पीछे वाले नाम झाँकते
+   रहते थे ("r S⠿ Menu")। अब बटन उतना ही बाएँ खिंच जाता है और उतनी ही
+   जगह अपने अंदर ले लेता है, इसलिए किनारे पर कोई झिरी बचती ही नहीं। */
+.cs-pages{margin-left:-16px;padding-left:16px;padding-right:18px}
+@media(min-width:735px){
+  .cs-pages{margin-left:-22px;padding-left:22px}
+}
+
+/* ⚠️ ऊपर वाला negative margin काम नहीं आया — `position:sticky` का
+   `left:0` scroller के **padding किनारे** से नापा जाता है, इसलिए बटन
+   हमेशा उतना ही अंदर रह जाता था जितनी padding थी, और उसी झिरी में से
+   पीछे वाले नाम झाँकते रहते थे।
+
+   ✅ असली हल: पट्टी के scroller से बग़ल की padding हटा दीजिए और वही जगह
+   पहले-आख़िरी item के अंदर डाल दीजिए। तब `left:0` का मतलब सचमुच किनारा
+   होता है और झिरी बचती ही नहीं। */
+.cstrip .wrap{padding-inline:0}
+.cs-pages{margin-left:0;padding-left:16px;padding-right:18px}
+.cstrip a:last-of-type{margin-right:16px}
+@media(min-width:735px){
+  .cs-pages{padding-left:22px}
+  .cstrip a:last-of-type{margin-right:22px}
+}
+
+/* ⚠️⚠️ असली वजह यही थी: Apple वाली परत में `.cs-pages` पर `opacity:.8`
+   लगा हुआ था (बाक़ी nav links की तरह)। उससे बटन का सफ़ेद background भी
+   80% ही रह जाता था, और पीछे से खिसकते हुए नाम उसके आर-पार झलकते रहते थे।
+   बटन का background ठोस चाहिए, इसलिए यहाँ opacity पूरी। */
+.cs-pages{opacity:1}
+
+/* ⚠️ लेटी हुई छोटी screen पर video और लिखाई अगल-बग़ल हैं — वहाँ stage को
+   पूरी चौड़ाई मत दीजिए, वरना वो लिखाई के ऊपर चढ़ जाता है (8 Sep 2026 को
+   जाँच में पकड़ा गया)। */
+@media(orientation:landscape) and (max-height:620px){
+  .phv-stage{margin-inline:0;border-radius:14px}
+}
+
+/* ⚠️ "सब देखिए / रास्ता देखिए" वाले link फिर से 34px से छोटे हो गए थे —
+   Apple परत में `.shead a` पर `padding:0` लग गया था। उँगली के लिए यह
+   सबसे छोटी भली नाप है, इसे मत घटाइए। */
+.shead a{min-height:34px;padding:6px 0;display:inline-flex;align-items:center}
