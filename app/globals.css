@@ -3348,3 +3348,80 @@ main .rbody h3::after,main .prose h3::after{
 .av .av-v{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   opacity:0;transition:opacity .45s var(--ease)}
 .av.av-on .av-v{opacity:1}
+
+/* ══════════════════════════════════════════════════════════════════════
+   ⬛ HERO की आख़िरी और सही नाप — 8 Sep 2026
+
+   इस एक चीज़ पर तीन बार ग़लती हुई। पूरी बात यहाँ लिख रहा हूँ ताकि दोबारा
+   न हो:
+
+   ❌ **कोशिश 1 — `contain` + बची हुई ऊँचाई भरना।** Video पूरी दिखती थी पर
+      ऊपर-नीचे काली पट्टियाँ बन जाती थीं। Owner: *"ye black bars hatao"*
+   ❌ **कोशिश 2 — `cover`।** काली पट्टियाँ गईं, पर video के किनारे कट गए।
+      Owner: *"crop hi kar diya hero video ko, wo hi kat rhi h ab"*
+
+   ✅ **सही तरीक़ा — डिब्बे को video की ही नाप का बना दीजिए।**
+      Stage ख़ुद 16:9 का है, इसलिए video उसमें ठीक-ठीक बैठती है:
+      **न कोई काली पट्टी बचती है, न एक pixel कटता है।**
+      चौड़ाई पूरी screen की है, बस इतनी कि लिखाई भी साथ में बैठ जाए।
+
+   📐 गणित (यह समझ लीजिए, तभी दोबारा नहीं टूटेगा):
+      16:9 की video सीधे phone पर हमेशा चौड़ी-पतली पट्टी बनेगी — 390px चौड़ी
+      screen पर वो सिर्फ़ 219px ऊँची होती है। इसलिए तीनों बातें एक साथ
+      **असंभव** हैं: पूरी screen भरना + कुछ न काटना + कोई काली पट्टी न होना।
+      इनमें से "पूरी screen भरना" छोड़ा गया है, क्योंकि बाक़ी दो owner ने
+      साफ़ मना की हैं। नीचे जो जगह बचती है वो काली नहीं, page का अपना सफ़ेद
+      है — और उसके ठीक बाद अगला हिस्सा आ जाता है।                          */
+
+/* Scroll की दूरी घटाई — पहले 230vh थी, यानी video ख़त्म होने के बाद भी
+   डेढ़ screen ख़ाली scroll होती थी। अब सिर्फ़ एक screen। */
+.phv-scroll{height:calc(100svh + 100vh)}
+
+.phv-pin{
+  height:auto;
+  max-height:calc(100svh - var(--phv-flow) - var(--phv-bot));
+  justify-content:flex-start;align-items:center;
+  padding-top:0;gap:0}
+
+.phv-stage{
+  flex:none;aspect-ratio:16/9;min-height:0;border-radius:0;background:#000;
+  /* चौड़ाई: पूरी screen — पर इतनी ही कि नीचे लिखाई भी बैठ जाए */
+  width:min(100vw, calc((100svh - var(--phv-flow) - var(--phv-bot) - var(--phv-cap)) * 16 / 9));
+  margin-inline:auto}
+
+/* ⚠️ `cover` ही रहने दीजिए। डिब्बा और video दोनों 16:9 के हैं, इसलिए यह
+   कुछ काटता नहीं — बस गोल की हुई नाप से कभी-कभी बनने वाली 1px की झिरी
+   नहीं बनने देता। */
+.phv-stage img,.phv-stage video{object-fit:cover;object-position:50% 50%}
+
+/* जब चौड़ाई पूरी screen की हो, तब डिब्बा किनारे से किनारे तक जाए */
+@media(max-width:1439px){
+  .phv-stage{margin-inline:calc(50% - 50vw)}
+}
+
+/* ⚠️ लेटी हुई छोटी screen — यह block ऊपर वाले नए नियम के **बाद** होना
+   ज़रूरी है। वहाँ video और लिखाई अगल-बग़ल हैं, इसलिए चौड़ाई पूरी बची हुई
+   ऊँचाई से निकलती है (लिखाई का बजट घटाए बिना) — वरना घटाव ऋणात्मक हो
+   जाता है और डिब्बा 0x0 का रह जाता है। (8 Sep 2026 को नापकर पकड़ा।) */
+@media(orientation:landscape) and (max-height:620px){
+  .phv-pin{flex-direction:row;align-items:center;justify-content:center;gap:18px}
+  .phv-stage{
+    width:min(56%, calc((100svh - var(--phv-flow) - var(--phv-bot)) * 16 / 9));
+    margin-inline:0;border-radius:14px}
+  .phv-c{flex:1 1 auto;max-width:44ch;text-align:left;padding:0;margin:0}
+}
+
+/* बड़ी screen पर लिखाई को सिमटा दीजिए — जितनी कम ऊँचाई वो लेगी, उतनी
+   ज़्यादा video को मिलेगी। यहाँ logo, नाम और tagline एक ही क़तार में हैं। */
+@media(min-width:735px){
+  .phv-pin{--phv-cap:212px}
+  .phv-c{padding-top:14px}
+  .phv h1{font-size:clamp(1.7rem,3.2vw,2.5rem);margin-bottom:4px}
+  .phv-eyebrow{font-size:15px;margin-bottom:2px}
+  .phv-sub{font-size:17px;margin-bottom:12px}
+  .phv-brand{flex-direction:row;align-items:center;justify-content:center;
+    gap:10px;margin-top:14px}
+  .phv-logo{width:30px}
+  .phv-name{font-size:17px}
+  .phv-tag{font-size:12px}
+}
