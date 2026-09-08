@@ -3101,3 +3101,49 @@ main .shead:has(a) h2::before{display:none !important}
 .shot .t{font-size:11px;font-weight:600;letter-spacing:-.01em;text-transform:uppercase;
   color:var(--ink-2)}
 .shot::after{display:none !important}
+
+/* ── 15. "हमसे जुड़े रहिए" — वापस पहले जैसा (7 Sep 2026) ───────────────
+   Owner ने इसी हिस्से की तरफ़ इशारा करके कहा: *"ise pahle jaise karo."*
+
+   Apple वाली परत ने इसे सादा भूरा डिब्बा बना दिया था और चारों social
+   buttons एक ही नीले रंग के हो गए थे। यह पूरा हिस्सा अब वापस अपने पुराने
+   रूप में है — गहरा बैंगनी, ऊपर से गुज़रती हुई रोशनी, और हर button अपनी
+   ही company के रंग में (YouTube लाल, Instagram गुलाबी, Facebook नीला,
+   WhatsApp हरा)।
+
+   ⚠️ यह जान-बूझकर Apple वाले रूप का अपवाद है। इसे दोबारा "साफ़" करने की
+   कोशिश मत कीजिए — owner ने ख़ास तौर पर यही वापस माँगा है।
+
+   सिर्फ़ एक चीज़ नई रखी गई है: कोनों की गोलाई 18px (पहले 14px थी), ताकि
+   अपने अगल-बग़ल वाले डिब्बों से मेल खाए।                                */
+.follow{
+  background:linear-gradient(135deg,#241C4D,#4B31C4);
+  color:#fff;border-radius:18px;padding:22px 20px;
+  box-shadow:0 18px 40px -24px rgba(36,28,77,.75);
+  position:relative;overflow:hidden}
+.follow *{color:#fff}
+.follow b,.follow h2{font-size:clamp(1.05rem,2.4vw,1.35rem);font-weight:800;
+  letter-spacing:-.022em;line-height:1.3;color:#fff}
+.follow p,.follow s{font-size:13.5px;line-height:1.75;color:#D3CCF4;
+  letter-spacing:normal;max-width:62ch}
+.follow a:not(.btn){color:#fff}
+
+/* ऊपर से गुज़रती हुई रोशनी — वही जो पहले थी */
+.follow::before{content:"";display:block;position:absolute;inset:-40%;
+  pointer-events:none;z-index:0;
+  background:conic-gradient(from 0deg,transparent 0 70%,rgba(255,255,255,.14) 82%,transparent 92%)}
+@media(prefers-reduced-motion:no-preference){
+  .follow::before{animation:ghoomo 14s linear infinite}
+}
+.follow>*{position:relative;z-index:1}
+
+/* चारों button अपने-अपने रंग में — Apple वाला नीला यहाँ नहीं चलेगा */
+.follow .btn{border-radius:980px;font-weight:700;height:46px;min-height:46px}
+.follow .btn-yt{background:linear-gradient(180deg,#FF2323,#E00000);color:#fff}
+.follow .btn-yt:hover{background:#D90000}
+.follow .btn-ig{background:#C13584;color:#fff}
+.follow .btn-ig:hover{background:#A32B6F}
+.follow .btn-fb{background:linear-gradient(180deg,#2A88FF,#1462C6);color:#fff}
+.follow .btn-fb:hover{background:#1462C6}
+.follow .btn-w{background:#25D366;color:#04240F}
+.follow .btn-w:hover{background:#1FBE5B}
