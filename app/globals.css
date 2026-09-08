@@ -3182,3 +3182,44 @@ main .shead:has(a) h2::before{display:none !important}
   box-shadow:0 10px 22px -12px rgba(224,0,0,.8),inset 0 1px 0 rgba(255,255,255,.3)}
 .follow .btn-fb{
   box-shadow:0 10px 22px -12px rgba(24,119,242,.8),inset 0 1px 0 rgba(255,255,255,.3)}
+
+/* ── 17. Hero के ऊपर-नीचे की ख़ाली जगह — 8 Sep 2026 ────────────────────
+   Owner ने अपने phone से भेजा: video बहुत नीचे चली जाती है और ऊपर-नीचे
+   बड़ी सफ़ेद जगह पड़ी रहती है।
+
+   वजह: `.phv-pin` पूरी screen जितना ऊँचा था और उसके बीच में content
+   रखा जाता था। 16:9 की video portrait phone पर चौड़ाई से बँधी होती है
+   (390px चौड़ी = सिर्फ़ 219px ऊँची), इसलिए बची हुई सारी ऊँचाई ऊपर और नीचे
+   ख़ाली जगह बनकर बँट जाती थी — screen जितनी लंबी, जगह उतनी ज़्यादा।
+
+   ✅ अब pin **अपने content जितना ही ऊँचा** है (`height:auto`) और ऊपर से
+   शुरू होता है। Video पट्टी के ठीक नीचे आती है, ख़ाली जगह बचती ही नहीं।
+   `max-height` अब भी है ताकि यह कभी screen से बाहर न जाए।              */
+.phv-pin{height:auto;
+  max-height:calc(100svh - var(--phv-flow) - var(--phv-bot));
+  justify-content:flex-start;padding-top:10px}
+
+/* ── 18. Heading के नीचे वाली लकीर — वापस पहले जैसी ───────────────────
+   Owner: *"Blogs wagairah me Headlines me ek line si khinchi hui thi
+   pahle... ab nhi aa raha h wo. Wo b waise hi karo."*
+
+   Apple वाली परत ने इसे बंद कर दिया था। अब वही लकीर वापस है — scroll के
+   साथ बाएँ से दाएँ खिंचती हुई। रंग अब site के अपने नीले में है, ताकि
+   बाक़ी सफ़ेद रूप से मेल खाए।                                            */
+:root{ --brand-3:#5AC8FA; }
+
+main .rbody h2::after,main .prose h2::after,
+main .rbody h3::after,main .prose h3::after{
+  content:"";display:block !important;height:3px;width:100%;max-width:120px;
+  margin-top:10px;border-radius:99px;transform-origin:0 50%;
+  background:linear-gradient(90deg,var(--blue),var(--brand-3),transparent)}
+@supports(animation-timeline:view()){
+  @media(prefers-reduced-motion:no-preference){
+    main .rbody h2::after,main .prose h2::after,
+    main .rbody h3::after,main .prose h3::after{
+      animation:dhaar linear both;animation-timeline:view();
+      animation-range:entry 0% entry 320px}
+  }
+}
+/* Section वाली heading (`.shead h2`) पर यह लकीर जान-बूझकर नहीं — वहाँ
+   दाईं तरफ़ "सब देखिए" वाला link होता है और दोनों साथ में भरे-भरे लगते हैं। */
