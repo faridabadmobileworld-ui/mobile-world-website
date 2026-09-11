@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { shop } from "@/data/shop";
-import { livePosts } from "@/data/content";
+import { postGroups } from "@/data/content";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { PageFoot, Byline } from "@/components/PageFoot";
 import { FollowUs } from "@/components/FollowUs";
@@ -17,10 +17,11 @@ export const metadata: Metadata = {
 };
 
 /**
- * TOC और list दोनों `livePosts()` से बनती हैं — जिस post का वक़्त नहीं
- * आया, वो यहाँ भी नहीं दिखती।
+ * ⚠️ 11 Sep 2026 — TOC अब हर article का नाम नहीं, **हिस्सों के नाम** दिखाती है।
+ * Owner: *"sabhi blogs ko categorised karo with all the headings lables etc."*
+ * Article के पूरे नाम बटन में कट जाते थे; हिस्सों के नाम छोटे और साफ़ हैं।
  */
-const toc: TocItem[] = livePosts().map((p) => ({ id: p.slug, label: p.title }));
+const toc: TocItem[] = postGroups().map((g) => ({ id: g.id, label: g.name }));
 
 export default function Posts() {
   return (
@@ -40,26 +41,36 @@ export default function Posts() {
             चाहिए। और साथ में दुकान की अपनी ख़बरें।
           </p>
         </div>
-        <TableOfContents items={toc} heading="इस page पर ये articles हैं" cols={2} />
-        <div className="posts">
-          {livePosts().map((p) => (
-            <Link className="post rv in" key={p.slug} id={p.slug} href={`/posts/${p.slug}`}>
-              <div className="m">
-                <Image src={p.image} alt={p.alt} width={p.imageW} height={p.imageH}
-                  sizes="(max-width:700px) 100vw, 33vw" />
-              </div>
-              <div className="b">
-                <span className="k">{p.kicker}<em>{p.date}</em></span>
-                <h2 style={{ fontSize: "1rem", fontWeight: 700, margin: "6px 0 0", lineHeight: 1.35 }}>
-                  {p.title}
-                </h2>
-                <p style={{ fontSize: 13.5, color: "var(--ink-2)", margin: "8px 0 0", lineHeight: 1.6 }}>
-                  {p.excerpt}
-                </p>
-              </div>
-            </Link>
-          ))}
-        </div>
+        <TableOfContents items={toc} heading="इस page पर ये हिस्से हैं" />
+
+        {postGroups().map((g) => (
+          <div className="pgrp" key={g.id}>
+            <div className="shead">
+              <h2 id={g.id}>{g.name}</h2>
+              <span className="pgrp-n">{g.posts.length}</span>
+            </div>
+            <p className="pgrp-note">{g.note}</p>
+            <div className="posts">
+              {g.posts.map((p) => (
+                <Link className="post rv in" key={p.slug} id={p.slug} href={`/posts/${p.slug}`}>
+                  <div className="m">
+                    <Image src={p.image} alt={p.alt} width={p.imageW} height={p.imageH}
+                      sizes="(max-width:700px) 100vw, 33vw" />
+                  </div>
+                  <div className="b">
+                    <span className="k">{p.kicker}<em>{p.date}</em></span>
+                    <h3 style={{ fontSize: "1rem", fontWeight: 700, margin: "6px 0 0", lineHeight: 1.35 }}>
+                      {p.title}
+                    </h3>
+                    <p style={{ fontSize: 13.5, color: "var(--ink-2)", margin: "8px 0 0", lineHeight: 1.6 }}>
+                      {p.excerpt}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        ))}
       </section>
       <Byline />
       <MoreLinks current="/posts" />

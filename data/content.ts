@@ -456,6 +456,61 @@ export type Post = {
  * **सारी जगहें `livePosts()` ही इस्तेमाल करें, सीधे `posts` नहीं।**
  */
 /**
+ * Articles को हिस्सों में बाँटना — 11 Sep 2026
+ *
+ * Owner: *"sabhi blogs ko categorised karo with all the headings lables etc
+ * jo b professionally banna chahiye banao."*
+ *
+ * बँटवारा हर post के अपने `kicker` से होता है — कोई नई जानकारी दोबारा नहीं
+ * लिखी गई। नया hissa चाहिए तो नीचे वाली list में एक line जोड़िए और post का
+ * `kicker` वही रख दीजिए।
+ *
+ * ⚠️ जिस post का `kicker` किसी हिस्से से नहीं मिलता, वो चुपचाप छूटती नहीं —
+ * वो आख़िरी हिस्से ("और भी") में चली जाती है। इसलिए कोई article कभी ग़ायब
+ * नहीं होता।
+ */
+export type PostGroup = {
+  /** heading पर लगने वाली id — TOC इसी से जुड़ती है */
+  id: string;
+  name: string;
+  note: string;
+  /** कौन-कौन से `kicker` इस हिस्से में आते हैं */
+  kickers: readonly string[];
+  posts: Post[];
+};
+
+const GROUPS: ReadonlyArray<Omit<PostGroup, "posts">> = [
+  { id: "tech-updates", name: "नई ख़बरें — Tech Updates",
+    note: "बाज़ार में क्या नया आ रहा है, और दुकान पर कब मिलेगा।",
+    kickers: ["Tech Update"] },
+  { id: "buying-guides", name: "ख़रीदने से पहले — Buying Guides",
+    note: "कौन सा model आपके काम का रहेगा — बिना उलझाए, सीधी बात।",
+    kickers: ["Buying Guide", "ख़रीदने से पहले"] },
+  { id: "store-updates", name: "दुकान की ख़बरें — Store Updates",
+    note: "छुट्टी, समय और दुकान से जुड़ी बाक़ी जानकारी।",
+    kickers: ["Store Update"] },
+];
+
+/** जो articles अभी दिख रहे हैं, हिस्सों में बँटे हुए। ख़ाली हिस्सा नहीं लौटता। */
+export function postGroups(): PostGroup[] {
+  const live = livePosts();
+  const liye = new Set<string>();
+
+  const out: PostGroup[] = GROUPS.map((g) => {
+    const posts = live.filter((p) => g.kickers.includes(p.kicker));
+    posts.forEach((p) => liye.add(p.slug));
+    return { ...g, posts };
+  }).filter((g) => g.posts.length > 0);
+
+  const bache = live.filter((p) => !liye.has(p.slug));
+  if (bache.length) {
+    out.push({ id: "aur-bhi", name: "और भी पढ़िए", kickers: [],
+      note: "बाक़ी बातें जो जानने लायक़ हैं।", posts: bache });
+  }
+  return out;
+}
+
+/**
  * `publishAt` में लिखा हुआ वक़्त, पढ़ने लायक़ रूप में — "सुबह 10:00 बजे"।
  *
  * ⚠️ यहाँ `Date` और `toLocaleTimeString` जान-बूझकर इस्तेमाल नहीं किए।

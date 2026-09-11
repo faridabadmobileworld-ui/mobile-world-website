@@ -3637,3 +3637,15 @@ main .rbody h3::after,main .prose h3::after{
 @media(min-width:768px){
   .toc-g li a{padding:17px 17px 18px;font-size:14.5px;gap:12px}
 }
+
+/* Articles के हिस्से — हर हिस्से का अपना नाम, गिनती और एक line का परिचय */
+.pgrp{margin:0 0 46px}
+.pgrp:last-child{margin-bottom:0}
+.pgrp .shead{margin-bottom:6px}
+.pgrp-n{flex:none;margin-left:10px;font-size:12px;font-weight:700;
+  color:var(--ink-2);background:#f5f5f7;border:1px solid var(--line);
+  border-radius:999px;padding:3px 10px;font-variant-numeric:tabular-nums}
+.pgrp .shead h2{display:inline-flex;align-items:center}
+.pgrp-note{margin:0 0 18px;font-size:15px;line-height:1.5;color:var(--ink-2);
+  max-width:var(--measure)}
+@media(min-width:735px){ .pgrp{margin-bottom:64px} }
