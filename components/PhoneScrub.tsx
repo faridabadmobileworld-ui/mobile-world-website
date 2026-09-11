@@ -56,6 +56,11 @@ export function PhoneScrub() {
     if (!v) return;
 
     const clamp = (n: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, n));
+    /* ⚠️ बड़ी screen पर hero चिपकता नहीं (देखिए `globals.css` का पूरी
+       चौड़ाई वाला हिस्सा) — वहाँ scroll की कोई दूरी बचती ही नहीं। ऐसी
+       हालत में video scroll से नहीं, अपने आप चलती है। */
+    const scrubKar = () => root.offsetHeight - window.innerHeight > 0;
+
     const progress = () => {
       const range = root.offsetHeight - window.innerHeight;
       if (range <= 0) return 0;
@@ -82,6 +87,7 @@ export function PhoneScrub() {
 
     function paint(p: number) {
       root.style.setProperty("--p", p.toFixed(3));
+      if (!scrubKar()) return;
       if (v!.duration) seek(clamp(p, 0, 1) * v!.duration);
     }
 
@@ -141,7 +147,13 @@ export function PhoneScrub() {
               prime.then(() => vid.pause()).catch(() => { /* न चले तो भी ठीक */ });
             }
             root.classList.add("phv-live");
-            onScroll();
+            if (scrubKar()) { onScroll(); }
+            else {
+              // पूरी चौड़ाई वाला रूप — video अपने आप चलती और दोहराती रहे
+              vid.loop = true;
+              const go = vid.play();
+              if (go && typeof go.then === "function") go.catch(() => { /* न चले तो तस्वीर */ });
+            }
           }, { once: true });
         })
         .catch(() => { /* video न आए तो ठहरी हुई तस्वीर ही रहती है */ });

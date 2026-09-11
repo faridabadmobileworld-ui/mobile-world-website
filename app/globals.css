@@ -3484,3 +3484,45 @@ main .rbody h3::after,main .prose h3::after{
   /* दुकान का नाम दो line में मत टूटने दीजिए */
   .phv-name{white-space:nowrap}
 }
+
+/* ══════════════════════════════════════════════════════════════════════
+   🖥️ पूरी चौड़ाई — 11 Sep 2026
+
+   Owner: *"Side blank na rhe. Full width par karo. Perfectly aligned.
+   HEADER WALA HERO B FULL WIDTH PAR HO. and text niche."*
+
+   1. पूरा page अब screen की पूरी चौड़ाई लेता है — सिर्फ़ किनारे पर एक
+      बराबर हाशिया बचता है, और वही हाशिया हर हिस्से पर लगता है, इसलिए
+      सब कुछ एक सीध में रहता है।
+   2. Hero की video **किनारे से किनारे तक (100vw)**, और लिखाई उसके **नीचे**।
+      पहले बड़ी screen पर दोनों बग़ल-बग़ल थे।
+
+   ⚠️ पढ़ने वाली लिखाई की चौड़ाई (`--measure`, 734px) फिर भी नहीं बढ़ाई —
+      पूरी screen जितनी लंबी line पढ़ने में तकलीफ़ देती है। सिर्फ़ cards,
+      grid और media चौड़े होते हैं।
+   ══════════════════════════════════════════════════════════════════════ */
+@media(min-width:1200px){
+  :root{ --w:none }
+  .wrap{max-width:none;padding-inline:clamp(28px,3.2vw,64px)}
+}
+
+/* ── Hero: बड़ी screen पर पूरी चौड़ाई, लिखाई नीचे ──────────────────────
+   ⚠️ यहाँ pin **चिपकाया नहीं जाता**। पूरी चौड़ाई की 16:9 video 1920px की
+   screen पर 1080px ऊँची होती है — यानी पूरी screen से भी ज़्यादा। चिपकी
+   हुई परत उससे बड़ी नहीं हो सकती, इसलिए बड़ी screen पर hero एक सादा
+   हिस्सा है: ऊपर video, नीचे लिखाई। Video वहाँ scroll से नहीं चलती,
+   अपने आप चलती रहती है (नीचे `PhoneScrub.tsx` में वही जाँच है)।
+   छोटी screen पर scroll वाली चाल जस की तस है।                          */
+@media(min-width:1024px){
+  .phv-scroll{height:auto}
+  .phv-pin{position:static;height:auto;max-height:none;
+    flex-direction:column;align-items:stretch;justify-content:flex-start;
+    gap:0;padding-top:0}
+  .phv-stage{width:100vw;margin-inline:calc(50% - 50vw);
+    aspect-ratio:16/9;border-radius:0;flex:none}
+  .phv-c{flex:none;max-width:none;text-align:center;
+    padding:34px 20px 8px;margin:0 auto}
+  .phv-links{justify-content:center}
+  .phv-brand{flex-direction:row;align-items:center;justify-content:center}
+  .phv h1{font-size:clamp(2.2rem,3.6vw,3.4rem)}
+}
