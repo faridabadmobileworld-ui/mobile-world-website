@@ -3534,7 +3534,10 @@ main .rbody h3::after,main .prose h3::after{
    karo likhkar icon ke saath me hi... abhi khuli h address number likha h
    sabse upar usko b Highlight karo dikh hi nhi raha."*
    ══════════════════════════════════════════════════════════════════════ */
-.callbtn{width:auto;border-radius:999px;gap:7px;padding:0 14px;
+/* ⚠️ `display` ज़रूरी है — base `.iconbtn` पर `grid` लगा है, जिससे icon और
+   नंबर ऊपर-नीचे बैठ जाते थे। इन्हें बग़ल-बग़ल रहना चाहिए। */
+.callbtn{display:inline-flex;align-items:center;justify-content:center;
+  width:auto;border-radius:999px;gap:8px;padding:0 15px;
   font-size:14px;font-weight:600;letter-spacing:-.01em;color:var(--ink);
   border:1px solid var(--line);background:#fff}
 .callbtn:hover{background:#f5f5f7;border-color:var(--ink-3)}
@@ -3649,3 +3652,42 @@ main .rbody h3::after,main .prose h3::after{
 .pgrp-note{margin:0 0 18px;font-size:15px;line-height:1.5;color:var(--ink-2);
   max-width:var(--measure)}
 @media(min-width:735px){ .pgrp{margin-bottom:64px} }
+
+/* ══════════════════════════════════════════════════════════════════════
+   🎬 पूरी animation एक ही नज़र में — header के नीचे कुछ नहीं छुपता
+   (11 Sep 2026)
+
+   Owner: *"Animation khatam hone se pahle page Scroll hokar header upar
+   ghuskar chupe nhi."*
+
+   दिक़्क़त: video पूरी चौड़ाई की थी, यानी 1920px की screen पर 1080px ऊँची —
+   ऊपर की पट्टी के बाद इतनी जगह बचती ही नहीं। इसलिए frame का ऊपरी हिस्सा
+   पट्टी के पीछे चला जाता था और पूरी video एक साथ कभी दिखती ही नहीं थी।
+
+   ✅ अब video की ऊँचाई उतनी ही है जितनी पट्टी के नीचे जगह बची है, इसलिए
+   **पूरा frame एक ही नज़र में दिखता है** — कुछ भी पट्टी के पीछे नहीं जाता।
+   और जो जगह बग़ल में बचती है वो सफ़ेद नहीं, **video जैसी ही गहरी** है —
+   पूरी चौड़ाई में एक सिनेमा जैसी पट्टी। इसलिए किनारे ख़ाली नहीं लगते।
+
+   ⚠️ यही दोनों बातें एक साथ पाने का इकलौता तरीक़ा है — 16:9 की video और
+   16:9 से लंबी screen का गणित बदला नहीं जा सकता (पूरी बात ऊपर "HERO की
+   आख़िरी और सही नाप" वाले हिस्से में लिखी है)।
+   ══════════════════════════════════════════════════════════════════════ */
+@media(min-width:1024px){
+  .phv-scroll{
+    background:radial-gradient(120% 90% at 50% 0%, #16121d 0%, #0a0810 70%, #070509 100%);
+    margin-inline:calc(50% - 50vw);
+    padding-inline:calc(50vw - 50%)}
+  .phv-stage{
+    width:min(100vw, calc((100svh - var(--phv-flow) - 26px) * 16 / 9));
+    margin-inline:auto;background:transparent}
+  /* लिखाई अब गहरे रंग पर है — उजली चाहिए */
+  .phv-c{background:transparent}
+  .phv h1{color:#fff}
+  .phv-sub{color:#CFC7E4}
+  .phv-eyebrow{color:#FFA35C}
+  .phv-name{background:linear-gradient(180deg,#FF8C80 0%,#F5443A 40%,#C9231C 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .phv-tag{color:#B9B2CB}
+  .phv-a{color:#7FC4FF}
+}
