@@ -3003,7 +3003,7 @@ main .shead h2,main .sec>.shead{text-align:left !important}
   color:var(--ink-2);text-align:left}
 .toc-c{background:#fff;color:var(--ink-2);font-size:11px}
 .toc-r{background:var(--line)}
-.toc-g li a{--tc:var(--blue) !important;background:#fff;border:0;box-shadow:none;
+.toc-g li a{background:#fff;border:0;box-shadow:none;
   border-radius:14px;font-size:14px;line-height:1.42859;letter-spacing:-.016em;
   font-weight:400;color:var(--ink);padding:14px 14px 15px}
 .toc-g li a::before{display:none}
@@ -3555,3 +3555,85 @@ main .rbody h3::after,main .prose h3::after{
 .ann .live i{width:9px;height:9px}
 .ann .r{gap:20px}
 @media(max-width:734px){ .ann{font-size:12px} .ann .wrap{min-height:36px} }
+
+/* ══════════════════════════════════════════════════════════════════════
+   🎛️ "इस page पर" के नौ बटन — रंगीन, 3D, dashboard जैसे (11 Sep 2026)
+
+   Owner: *"Is page par 9 bottons ko colourfull and professional buttons me
+   convert karo 3d me."*
+
+   हर बटन का अपना रंग है (नौ रंग, `nth-child(9n+…)` से), ऊपर से नीचे हल्का
+   ढाल, नीचे उसी रंग की गहरी परछाईं — इसी से उठा हुआ दिखता है। छूने पर
+   ज़रा ऊपर उठकर आपकी तरफ़ झुकता है, दबाने पर बैठ जाता है।
+
+   ⚠️ गहराई सिर्फ़ `transform` और `box-shadow` से आई है — `filter` कभी मत
+   लगाइए (CLAUDE.md: उसने LCP 652ms से 1416ms कर दिया था)।
+   ⚠️ `prefers-reduced-motion` पर हिलना-डुलना बंद, रंग वैसे ही रहते हैं।
+   ══════════════════════════════════════════════════════════════════════ */
+.toc{background:linear-gradient(180deg,#fff,#f5f5f7);
+  border:1px solid var(--line);border-radius:20px;padding:20px 18px 22px;
+  box-shadow:0 1px 2px rgba(17,17,26,.04)}
+.toc-h{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink-2)}
+.toc-c{background:var(--ink);color:#fff;font-weight:700}
+
+.toc-g{gap:12px !important}
+.toc-g li a{
+  --tc:var(--blue);
+  position:relative;flex:1;display:flex;flex-direction:column;
+  align-items:flex-start;gap:10px;padding:15px 15px 16px;
+  border-radius:16px;border:1px solid color-mix(in oklab,var(--tc) 22%,var(--line));
+  background:linear-gradient(180deg,#fff 0%,color-mix(in oklab,var(--tc) 7%,#fff) 100%);
+  font-size:14px;line-height:1.4;font-weight:600;letter-spacing:-.012em;
+  color:var(--ink);overflow:hidden;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.9) inset,
+    0 6px 14px -8px color-mix(in oklab,var(--tc) 55%,transparent),
+    0 2px 4px -2px rgba(17,17,26,.10);
+  transition:transform .24s var(--ease),box-shadow .24s var(--ease),
+    border-color .24s var(--ease)}
+
+/* ऊपर उसी रंग की पतली धार — dashboard वाला भाव */
+.toc-g li a::before{content:"";display:block;position:absolute;
+  left:0;right:0;top:0;height:3px;
+  background:linear-gradient(90deg,var(--tc),color-mix(in oklab,var(--tc) 40%,#fff));
+  opacity:.95;width:auto}
+
+.toc-g .toc-n{width:30px;height:30px;border-radius:10px;flex:none;
+  display:grid;place-items:center;font-size:12px;font-weight:800;
+  color:#fff;
+  background:linear-gradient(180deg,color-mix(in oklab,var(--tc) 78%,#fff),var(--tc));
+  box-shadow:0 2px 6px -2px color-mix(in oklab,var(--tc) 70%,transparent),
+    0 1px 0 rgba(255,255,255,.6) inset;
+  transition:transform .24s var(--ease)}
+.toc-g .toc-l{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;
+  overflow:hidden;overflow-wrap:anywhere}
+
+@media(prefers-reduced-motion:no-preference){
+  .toc-g li a:hover{
+    transform:perspective(700px) translateY(-4px) rotateX(5deg);
+    border-color:color-mix(in oklab,var(--tc) 55%,var(--line));
+    box-shadow:
+      0 1px 0 rgba(255,255,255,.9) inset,
+      0 16px 28px -12px color-mix(in oklab,var(--tc) 65%,transparent),
+      0 4px 8px -4px rgba(17,17,26,.14)}
+  .toc-g li a:hover .toc-n{transform:translateY(-1px) scale(1.06)}
+}
+.toc-g li a:active{transform:translateY(1px) scale(.985);
+  box-shadow:0 2px 6px -4px color-mix(in oklab,var(--tc) 60%,transparent)}
+.toc-g li a:focus-visible{outline:2px solid var(--tc);outline-offset:3px}
+
+/* नौ रंग — हर क़तार में तीन अलग, नीचे वाली क़तारें भी अलग */
+.toc-g li:nth-child(9n+1) a{--tc:#0071e3}
+.toc-g li:nth-child(9n+2) a{--tc:#0E9F6E}
+.toc-g li:nth-child(9n+3) a{--tc:#F05A28}
+.toc-g li:nth-child(9n+4) a{--tc:#7C4DFF}
+.toc-g li:nth-child(9n+5) a{--tc:#0A9396}
+.toc-g li:nth-child(9n+6) a{--tc:#D4A017}
+.toc-g li:nth-child(9n+7) a{--tc:#C2255C}
+.toc-g li:nth-child(9n+8) a{--tc:#2563EB}
+.toc-g li:nth-child(9n+9) a{--tc:#166534}
+
+@media(min-width:768px){
+  .toc-g li a{padding:17px 17px 18px;font-size:14.5px;gap:12px}
+}

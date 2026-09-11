@@ -25,6 +25,7 @@ import { NextClosure } from "@/components/StoreStatus";
 
 const toc: TocItem[] = [
   { id: "hamara-safar", label: "हमारा सफ़र" },
+  { id: "featured", label: "Featured Post" },
   { id: "kya-milta-hai", label: "क्या-क्या मिलता है" },
   { id: "ek-chhat", label: "एक ही छत के नीचे" },
   { id: "emi-exchange-repair", label: "आपके काम की Services" },
