@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { shop } from "@/data/shop";
-import { items, storePhotos, serviceBanners, livePosts, helpPoints, serviceList,
+import { items, serviceBanners, livePosts, helpPoints, serviceList,
          artForCategory, ask, whatsappGeneral, navCategories } from "@/data/content";
 import { ProductCard } from "@/components/ProductCard";
 import { Art } from "@/components/ArtSprite";
@@ -27,11 +27,10 @@ const toc: TocItem[] = [
   { id: "hamara-safar", label: "हमारा सफ़र" },
   { id: "kya-milta-hai", label: "क्या-क्या मिलता है" },
   { id: "ek-chhat", label: "एक ही छत के नीचे" },
-  { id: "emi-exchange-repair", label: "EMI, Exchange, Repair" },
+  { id: "emi-exchange-repair", label: "आपके काम की Services" },
   { id: "finance", label: "EMI किन bank से" },
-  { id: "dukaan-ke-andar", label: "दुकान के अंदर" },
   { id: "nai-jaankari", label: "Tech Blog & Guides" },
-  { id: "insta", label: "Instagram पर हम" },
+  { id: "insta", label: "Follow us on Instagram" },
   { id: "dukaan-par-aaiye", label: "दुकान पर आइए" },
 ];
 
@@ -122,7 +121,7 @@ export function HomeBody({ current = "/", journey = true }:
       </section>
 
       <section className="sec">
-        <div className="shead"><h2 id="emi-exchange-repair">EMI, Exchange और Repairing</h2></div>
+        <div className="shead"><h2 id="emi-exchange-repair">आपके काम की Services — EMI, Exchange और Repairing</h2></div>
         <div className="sbanners">
           {serviceBanners.filter((b) => shop.services[b.key]).map((b) => (
             <a className="sbanner rv in" key={b.key} href={ask(b.topic)}
@@ -136,7 +135,7 @@ export function HomeBody({ current = "/", journey = true }:
 
       <section className="sec">
         <div className="shead">
-          <h2 id="finance">Paper Finance पर EMI किन-किन bank से मिलती है</h2>
+          <h2 id="finance">Paper Finance पर EMI — किन bank से मिलती है</h2>
         </div>
         <p style={{ color: "var(--ink-2)", maxWidth: "62ch", margin: "0 0 14px" }}>
           Aadhaar, PAN और bank की details पर बनने वाली EMI — यानी paper finance —
@@ -152,24 +151,6 @@ export function HomeBody({ current = "/", journey = true }:
           <a className="btn btn-w" href={ask("EMI")} target="_blank" rel="noopener">
             <IconWhatsApp /> EMI के बारे में पूछिए
           </a>
-        </div>
-      </section>
-
-      <section className="sec" id="store-photos">
-        <div className="shead">
-          <h2 id="dukaan-ke-andar">दुकान के अंदर</h2>
-          <a href={shop.social.googleMaps} target="_blank" rel="noopener">रास्ता देखिए <IconArrow /></a>
-        </div>
-        <div className="shots">
-          {storePhotos.map((p) => (
-            <figure className="shot rv in" key={p.src} style={{ margin: 0 }}>
-              <Image className="ph-img" src={p.src} alt={p.alt} width={p.w} height={p.h}
-                sizes="(max-width:700px) 100vw, 25vw" />
-              <figcaption>
-                <span className="t">{p.title}</span><span className="d">{p.caption}</span>
-              </figcaption>
-            </figure>
-          ))}
         </div>
       </section>
 
@@ -197,7 +178,7 @@ export function HomeBody({ current = "/", journey = true }:
       <section className="sec">
         <div className="cols2">
           <div className="panel rv in">
-            <h2 style={{ fontSize: "1.05rem", margin: "0 0 12px" }}>काम की बातें</h2>
+            <h2 style={{ fontSize: "1.05rem", margin: "0 0 12px" }}>ख़रीदने से पहले — काम की बातें</h2>
             {helpPoints.map((h) => (
               <a className="lrow" key={h.title} href={ask(h.topic)} target="_blank" rel="noopener">
                 <span className="m">

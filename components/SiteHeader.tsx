@@ -71,7 +71,13 @@ export function SiteHeader({ searchIndex }: { searchIndex: SearchEntry[] }) {
           <SearchBox id="q-header" index={searchIndex} />
 
           <div className="hdr-a">
-            <a className="iconbtn" href={shop.phone.tel} aria-label="दुकान को call कीजिए"><IconPhone /></a>
+            {/* ⚠️ 11 Sep 2026 — owner: "call ka icon h header me wahan Mobile
+                number b show karo likhkar icon ke saath me hi"। बड़ी screen पर
+                नंबर icon के साथ लिखा दिखता है; phone पर सिर्फ़ icon (वहाँ जगह
+                नहीं, और नंबर ऊपर वाली पट्टी में पहले से है)। */}
+            <a className="iconbtn callbtn" href={shop.phone.tel} aria-label="दुकान को call कीजिए">
+              <IconPhone /><span className="lbl">{shop.phone.display}</span>
+            </a>
             <a className="btn btn-w btn-s" href={whatsappGeneral} target="_blank" rel="noopener"
                aria-label="WhatsApp पर message कीजिए">
               <IconWhatsApp /> <span className="lbl">WhatsApp</span>

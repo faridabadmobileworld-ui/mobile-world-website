@@ -26,7 +26,14 @@ export function LatestPost() {
   const time = publishTimeLabel(post.publishAt);
 
   return (
-    <section className="sec">
+    <section className="sec" aria-labelledby="featured">
+      {/* ⚠️ 11 Sep 2026 — owner: "Redmi 17 ki post ke upar heading banao
+          kuch, like Featured Post". Post का अपना title अब `h3` है, क्योंकि
+          इस हिस्से की heading यह `h2` है। */}
+      <div className="shead">
+        <h2 id="featured">Featured Post — सबसे नई ख़बर</h2>
+        <Link href="/posts">सारे articles <IconArrow /></Link>
+      </div>
       <Link className="lnew rv in" href={`/posts/${post.slug}`}>
         <span className="lnew-m">
           <Image className="ph-img" src={post.image} alt={post.alt}
@@ -37,7 +44,7 @@ export function LatestPost() {
 
         <span className="lnew-b">
           <span className="lnew-k">{post.kicker}</span>
-          <h2 className="lnew-h">{post.title}</h2>
+          <h3 className="lnew-h">{post.title}</h3>
           <span className="lnew-x">{post.excerpt}</span>
 
           <span className="lnew-meta">

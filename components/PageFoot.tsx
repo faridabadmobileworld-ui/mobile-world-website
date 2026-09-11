@@ -23,7 +23,7 @@ export function PageFoot() {
   return (
     <section className="sec">
       <div className="pfoot rv in">
-        <h2>📍 {shop.name}</h2>
+        <h2>दुकान का पता और संपर्क</h2>
         <address>
           {shop.address.street}<br />
           {shop.address.landmark}<br />

@@ -3526,3 +3526,32 @@ main .rbody h3::after,main .prose h3::after{
   .phv-brand{flex-direction:row;align-items:center;justify-content:center}
   .phv h1{font-size:clamp(2.2rem,3.6vw,3.4rem)}
 }
+
+/* ══════════════════════════════════════════════════════════════════════
+   ☎️ Header का फ़ोन नंबर, और ऊपर वाली पट्टी — 11 Sep 2026
+
+   Owner: *"top me jo call ka icon h header me wahan Mobile number b show
+   karo likhkar icon ke saath me hi... abhi khuli h address number likha h
+   sabse upar usko b Highlight karo dikh hi nhi raha."*
+   ══════════════════════════════════════════════════════════════════════ */
+.callbtn{width:auto;border-radius:999px;gap:7px;padding:0 14px;
+  font-size:14px;font-weight:600;letter-spacing:-.01em;color:var(--ink);
+  border:1px solid var(--line);background:#fff}
+.callbtn:hover{background:#f5f5f7;border-color:var(--ink-3)}
+.callbtn .lbl{display:none;white-space:nowrap}
+@media(min-width:900px){ .callbtn .lbl{display:inline} }
+
+/* ऊपर वाली पट्टी — पहले हल्की भूरी थी और लगभग दिखती ही नहीं थी।
+   अब साफ़ दिखती है: गाढ़ी लिखाई, नीचे रंगीन धार, और खुले/बंद का निशान बड़ा। */
+.ann{background:linear-gradient(180deg,#fff,#f5f5f7);
+  border-bottom:1px solid var(--line);
+  font-size:13px;font-weight:600;letter-spacing:-.012em;color:var(--ink);
+  position:relative}
+.ann::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;
+  background:linear-gradient(90deg,var(--blue),#5AC8FA 42%,#25D366)}
+.ann .wrap{min-height:40px}
+.ann b{font-weight:700;color:var(--ink)}
+.ann a{color:var(--blue);font-weight:600}
+.ann .live i{width:9px;height:9px}
+.ann .r{gap:20px}
+@media(max-width:734px){ .ann{font-size:12px} .ann .wrap{min-height:36px} }
