@@ -20,11 +20,16 @@ export function VideoRow() {
 
   return (
     <section className="sec" aria-labelledby="video">
+      {/* ⚠️ 11 Sep 2026 — पहले इस हिस्से की कोई heading ही नहीं थी; नाम
+          सिर्फ़ card के अंदर `<b>` में था। Owner ने laptop पर यही पकड़ा:
+          *"heading wagairah b nhi h kisi ki"*। हर हिस्से की अपनी `<h2>`
+          होनी चाहिए — page की रूपरेखा भी इसी से बनती है। */}
+      <div className="shead"><h2 id="video">दुकान के video</h2></div>
       <div className="ytw fx">
         <div className="igw-h">
           <span className="yt-dp" aria-hidden="true"><IconYouTube /></span>
           <span className="igw-n">
-            <b id="video">दुकान के video</b>
+            <b>दुकान के video</b>
             <s>YouTube पर हमारा channel</s>
           </span>
           <a className="btn btn-yt btn-s igw-cta" href={shop.social.youtube}

@@ -96,7 +96,7 @@ export function HomeBody({ current = "/", journey = true }:
       <section className="sec">
         <div className="strip rv in">
           <div>
-            <b>किसी भी जानकारी के लिए सीधे संपर्क कीजिए</b>
+            <h2>किसी भी जानकारी के लिए सीधे संपर्क कीजिए</h2>
             <p>किसी भी product के बारे में जानना हो तो हमसे सीधे बात कीजिए। यहाँ से order नहीं होता, किसी account की ज़रूरत नहीं।</p>
           </div>
           <a className="btn btn-h go" href={whatsappGeneral} target="_blank" rel="noopener">

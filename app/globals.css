@@ -3425,3 +3425,62 @@ main .rbody h3::after,main .prose h3::after{
   .phv-name{font-size:17px}
   .phv-tag{font-size:12px}
 }
+
+/* ══════════════════════════════════════════════════════════════════════
+   🖥️ बड़ी screen — 11 Sep 2026
+
+   Owner ने laptop से भेजा: *"Sides bilkul khali h. Header itna bhadda lag
+   ra h... Create all home page like an professional page first perfect
+   look. And heading wagairah b nhi h kisi ki."*
+
+   तीन बातें ठीक हो रही हैं:
+   1. पूरा page 1024px का था — 1920px की screen पर दोनों तरफ़ 448px ख़ाली
+      पड़े रहते थे। अब screen के साथ चौड़ाई बढ़ती है।
+   2. Hero बड़ी screen पर **दो खानों में** — बाएँ video, दाएँ लिखाई। पहले
+      दोनों ऊपर-नीचे थे, इसलिए छोटी ऊँचाई वाले laptop पर video सिकुड़कर
+      एक तिहाई रह जाती थी।
+   3. चार हिस्सों की कोई heading ही नहीं थी (नीचे JSX में ठीक किए गए)।
+
+   ⚠️ पढ़ने वाली लिखाई की चौड़ाई (`--measure`, 734px) **नहीं बढ़ाई** —
+   लंबी line पढ़ने में तकलीफ़ देती है। सिर्फ़ cards और grid चौड़े हुए हैं।
+   ══════════════════════════════════════════════════════════════════════ */
+@media(min-width:1200px){ :root{ --w:1180px } }
+@media(min-width:1500px){ :root{ --w:1360px } }
+@media(min-width:1800px){ :root{ --w:1520px } }
+
+/* ── Hero: बड़ी screen पर बग़ल-बग़ल ─────────────────────────────────────
+   Video को अब पूरी ऊँचाई मिलती है क्योंकि लिखाई उसके नीचे नहीं, बग़ल में
+   है। छोटी ऊँचाई वाले laptop पर यही सबसे बड़ा फ़र्क़ डालता है।           */
+@media(min-width:1024px){
+  .phv-pin{flex-direction:row;align-items:center;justify-content:center;
+    gap:clamp(24px,3.4vw,56px);--phv-cap:0px}
+  .phv-stage{
+    width:min(58%, calc((100svh - var(--phv-flow) - var(--phv-bot)) * 16 / 9));
+    margin-inline:0;border-radius:18px;flex:none}
+  .phv-c{flex:1 1 0;min-width:0;max-width:none;text-align:left;
+    padding:0;margin:0}
+  .phv-links{justify-content:flex-start}
+  .phv-brand{align-items:flex-start;justify-content:flex-start}
+  .phv h1{font-size:clamp(2rem,3.4vw,3.2rem)}
+  .phv-sub{font-size:19px}
+}
+
+/* ⚠️ पूरी चौड़ाई वाला negative margin सिर्फ़ छोटी screen के लिए है। बड़ी
+   screen पर hero दो खानों में है — वहाँ वो margin video को बाईं तरफ़ खींचकर
+   उसकी चौड़ाई बिगाड़ रहा था। (11 Sep 2026 को नापकर पकड़ा।) */
+@media(min-width:1024px){
+  .phv-stage{margin-inline:0}
+}
+
+/* बड़ी screen पर hero को पूरी बची हुई ऊँचाई दीजिए और उसी में बीचों-बीच
+   रखिए — वरना सारा ख़ाली सफ़ेद नीचे इकट्ठा हो जाता है और page अधूरा लगता है।
+   Video का हिस्सा 58% से बढ़ाकर 66% — लिखाई को 34% में पूरी जगह मिल जाती है। */
+@media(min-width:1024px){
+  .phv-pin{height:calc(100svh - var(--phv-flow) - var(--phv-bot));
+    max-height:none;align-items:center;justify-content:center}
+  .phv-stage{
+    width:min(66%, calc((100svh - var(--phv-flow) - var(--phv-bot)) * 16 / 9))}
+  .phv-c{max-width:46ch}
+  /* दुकान का नाम दो line में मत टूटने दीजिए */
+  .phv-name{white-space:nowrap}
+}

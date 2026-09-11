@@ -108,30 +108,44 @@ export function PhoneScrub() {
          seek एक अलग range request बन जाती है — 4G पर वो अटकती है, और कई जगह
          video seekable होती ही नहीं। */
       const url = matchMedia(SMALL).matches ? SRC_SM : SRC;
+      /* ⚠️ माँगिए **page पूरा खुल जाने के बाद**। यह 2.4 MB की file है; पहले
+         यह page की अपनी तस्वीरों और लिखाई से bandwidth छीन रही थी, और जाँच
+         में बीच में कटकर `reqfail blob:` बनकर आती रहती थी। तब तक ग्राहक को
+         वही तस्वीर दिखती है जो video का पहला frame है। */
+      const start = () => fetchVideo(url);
+      if (document.readyState === "complete") setTimeout(start, 500);
+      else addEventListener("load", () => setTimeout(start, 500), { once: true });
+      near.disconnect();
+    }, { rootMargin: "300px 0px" });
+
+    /* ⚠️ हाथ से type लिखना ज़रूरी है — यह `function` hoisted है और TypeScript
+       इसके अंदर ऊपर वाली `if (!v) return` वाली जाँच भूल जाता है। (यही बात
+       `JourneyScroll.tsx` में भी लिखी है।) */
+    function fetchVideo(url: string) {
+      const vid: HTMLVideoElement = v!;
       fetch(url)
         .then((r) => (r.ok ? r.blob() : Promise.reject(new Error("no video"))))
         .then((blob) => {
-          v.preload = "auto";
+          vid.preload = "auto";
           // ⚠️ `src` लिखते ही browser ख़ुद load शुरू कर देता है। उसके बाद
           // `load()` बुलाना उसी load को **रद्द** कर देता है और वो request
           // "aborted" गिनी जाती है। इसलिए यहाँ `load()` जान-बूझकर नहीं है।
-          v.src = URL.createObjectURL(
+          vid.src = URL.createObjectURL(
             blob.type ? blob : new Blob([blob], { type: "video/mp4" }));
-          v.addEventListener("loadeddata", () => {
+          vid.addEventListener("loadeddata", () => {
             // iPhone पर जो video कभी चली ही नहीं, उसे seek करने पर कई बार
             // ख़ाली frame आता है — एक बार चुपचाप चलाकर रोक देने से decoder
             // जाग जाता है। ⚠️ यह `loadeddata` के **अंदर** है, बाहर नहीं।
-            const prime = v.play();
+            const prime = vid.play();
             if (prime && typeof prime.then === "function") {
-              prime.then(() => v.pause()).catch(() => { /* न चले तो भी ठीक */ });
+              prime.then(() => vid.pause()).catch(() => { /* न चले तो भी ठीक */ });
             }
             root.classList.add("phv-live");
             onScroll();
           }, { once: true });
         })
         .catch(() => { /* video न आए तो ठहरी हुई तस्वीर ही रहती है */ });
-      near.disconnect();
-    }, { rootMargin: "300px 0px" });
+    }
 
     const vis = new IntersectionObserver((es) => {
       onScreen = es[0].isIntersecting;

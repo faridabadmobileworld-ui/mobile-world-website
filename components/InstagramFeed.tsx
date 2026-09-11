@@ -27,6 +27,9 @@ export async function InstagramFeed() {
 
   return (
     <section className="sec" aria-labelledby="insta">
+      {/* ⚠️ 11 Sep 2026 — इस हिस्से की भी heading नहीं थी। `id="insta"` अब
+          इसी `<h2>` पर है, क्योंकि home की TOC का link यहीं आता है। */}
+      <div className="shead"><h2 id="insta">Instagram पर हम</h2></div>
       <div className="igw fx">
         <div className="igw-h">
           <span className="igw-av">
@@ -34,7 +37,7 @@ export async function InstagramFeed() {
                    unoptimized={feed.avatar.startsWith("http")} />
           </span>
           <span className="igw-n">
-            <b id="insta">{shop.name} {shop.address.city}</b>
+            <b>{shop.name} {shop.address.city}</b>
             <s>@{feed.username} · Instagram</s>
           </span>
           <a className="btn btn-ig btn-s igw-cta" href={shop.social.instagram}

@@ -21,7 +21,10 @@ export function FollowUs({ heading = "हमसे जुड़े रहिए"
           <Image src="/images/icon-gift-7b8c26a3.webp" alt="" width={200} height={200} sizes="88px" />
         </span>
         <div>
-          <b>{heading}</b>
+          {/* ⚠️ 11 Sep 2026 — यह `<b>` था, अब `<h2>` है। हर हिस्से की अपनी
+              heading होनी चाहिए; दिखने में कोई फ़र्क़ नहीं पड़ता, CSS दोनों
+              को एक जैसा दिखाती है। */}
+          <h2>{heading}</h2>
           <p>
             भारी discounts, gifts, offers और New Arrivals की जानकारी सबसे पहले पाइए।
             हमें YouTube, Instagram, Facebook और WhatsApp पर follow कीजिए।
