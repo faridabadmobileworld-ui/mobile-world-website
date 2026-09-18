@@ -9,33 +9,37 @@ import { IconArrow, IconWhatsApp } from "./Icons";
 /**
  * Home page के सबसे ऊपर — owner की अपनी video, scroll के साथ आगे-पीछे चलती हुई।
  *
- * Owner ने 7 Sep 2026 को यह video भेजकर साफ़ कहा:
- *   *"mujhe meri original same video chahiye yahan same to same Exactly jo
- *   maine di h 16:9 ratio me ye... ise exactly ise hi scrolling ke saath
- *   Animate karna h bina isme kuch b badli. jaise legacy ke liye 3 peedhiyo
- *   wali real video chalti najar aati h aage piche same waise hi."*
+ * Owner ने 18 Sep 2026 को नई video भेजकर कहा:
+ *   *"Website ke header me top me jo iphone 18 wala hissa h, use 100%
+ *   completely badalkar usme ye animation daalo. full screen par aaye wo 16:9
+ *   screen ratio me. Scrolling me same effect aaya chahiye aage piche karte
+ *   rhne par."*
  *
- * इसलिए यहाँ **कोई बनाई हुई चीज़ नहीं है** — न shader, न drawing। जो video
- * owner ने दी, वही चलती है, उसी 16:9 नाप में, बिना काटे। Scroll आगे बढ़ाइए तो
- * video आगे चलती है, पीछे कीजिए तो पीछे — ठीक वैसे ही जैसे "हमारा सफ़र" वाला
- * हिस्सा (`JourneyScroll.tsx`) चलता है। दोनों की मशीनरी एक ही है।
+ * अब यहाँ **दुकान ख़ुद बनती हुई दिखती है** — ख़ाली इमारत से शुरू होकर brand
+ * के board लगते हैं, फिर लाल "Mobile World" वाला अपना sign जलता है, और आख़िर
+ * में जगमगाती दुकान। Scroll आगे बढ़ाइए तो दुकान बनती है, पीछे कीजिए तो वापस
+ * खुलती जाती है — ठीक वैसे ही जैसे "हमारा सफ़र" वाला हिस्सा
+ * (`JourneyScroll.tsx`) चलता है। दोनों की मशीनरी एक ही है।
  *
- * ⚠️ **`object-fit: contain` जान-बूझकर है।** `cover` लगाने पर छोटी screen पर
- *    video के किनारे कट जाते — और video के बाएँ कोने में ही "iPhone 18 Pro Max"
- *    लिखा है। Owner ने कहा है कुछ भी बदलना नहीं, इसलिए पूरा frame दिखता है।
+ * ⚠️ **यहाँ कुछ भी बनाया हुआ नहीं है** — न shader, न drawing। जो video owner
+ *    ने दी, वही चलती है, उसी 16:9 नाप में, बिना काटे।
  *
- * ⚠️ **दुकान का अपना नाम video के ऊपर नहीं, नीचे है।** Video के अपने अक्षर
- *    बाएँ कोने में हैं; ऊपर लिखने पर दोनों आपस में टकराते।
+ * ⚠️ **`object-fit: contain` जान-बूझकर है।** `cover` लगाने पर दुकान की इमारत
+ *    के किनारे कट जाते हैं — और brand के board ठीक उन्हीं किनारों पर हैं।
+ *    Owner ने कहा है कुछ भी बदलना नहीं, इसलिए पूरा frame दिखता है।
  *
- * ⚠️ चार बातें `public/hero-phone/README.md` में लिखी हैं — video blob बनाकर
+ * ⚠️ **दुकान का नाम video के ऊपर नहीं, नीचे है।** Video के अपने अक्षर
+ *    (लाल "Mobile World") बीच में हैं; ऊपर लिखने पर दोनों आपस में टकराते।
+ *
+ * ⚠️ चार बातें `public/hero-shop/README.md` में लिखी हैं — video blob बनाकर
  *    चलती है, `src` के बाद `load()` कभी नहीं, जहाँ video खड़ी है वहीं seek
  *    नहीं भेजा जाता, और decoder को एक बार चुपचाप चलाकर जगाया जाता है। ये
  *    चारों असली ख़राबियाँ हैं जो पहले पकड़ी जा चुकी हैं — तोड़िएगा मत।
  */
 
-const SRC = "/hero-phone/iphone18.mp4";
-const SRC_SM = "/hero-phone/iphone18-sm.mp4";
-const POSTER = "/hero-phone/iphone18.jpg";
+const SRC = "/hero-shop/shop.mp4";
+const SRC_SM = "/hero-shop/shop-sm.mp4";
+const POSTER = "/hero-shop/shop.jpg";
 
 /** इन हालतों में video माँगी ही नहीं जाती — सिर्फ़ ठहरी हुई तस्वीर दिखती है। */
 const GATES = [
@@ -43,7 +47,7 @@ const GATES = [
   "(orientation: landscape) and (pointer: coarse) and (max-height: 460px)",
 ];
 
-/** छोटी screen पर हल्की वाली file — 561 KB, बड़ी screen पर 2.4 MB */
+/** छोटी screen पर हल्की वाली file — 303 KB, बड़ी screen पर 1.25 MB */
 const SMALL = "(max-width: 860px)";
 
 export function PhoneScrub() {
@@ -114,7 +118,7 @@ export function PhoneScrub() {
          seek एक अलग range request बन जाती है — 4G पर वो अटकती है, और कई जगह
          video seekable होती ही नहीं। */
       const url = matchMedia(SMALL).matches ? SRC_SM : SRC;
-      /* ⚠️ माँगिए **page पूरा खुल जाने के बाद**। यह 2.4 MB की file है; पहले
+      /* ⚠️ माँगिए **page पूरा खुल जाने के बाद**। यह 1.25 MB की file है; पहले
          यह page की अपनी तस्वीरों और लिखाई से bandwidth छीन रही थी, और जाँच
          में बीच में कटकर `reqfail blob:` बनकर आती रहती थी। तब तक ग्राहक को
          वही तस्वीर दिखती है जो video का पहला frame है। */
@@ -216,17 +220,17 @@ export function PhoneScrub() {
           <div className="phv-c">
             {/* Apple का hero वाला क्रम: ऊपर छोटा नारंगी label, फिर सबसे बड़ी
                 heading, फिर एक line का परिचय, फिर नीले link। */}
-            <p className="phv-eyebrow">Coming Soon</p>
-            <h1 id="phv-h">नया iPhone जल्दी ही</h1>
+            <p className="phv-eyebrow">{shop.address.locality}, {shop.address.city}</p>
+            <h1 id="phv-h">Mobile, Laptop और घर का सारा सामान</h1>
             <p className="phv-sub">
-              {shop.address.locality}, {shop.address.city} में — {shop.name} पर
+              फ़ोन से लेकर fridge, AC और washing machine तक — सब एक ही दुकान पर।
             </p>
 
             <div className="phv-links">
               <a className="btn btn-d" href={`${shop.phone.whatsapp}?text=${encodeURIComponent(
-                `Namaste ${shop.name}! नया iPhone आने पर मुझे बता दीजिएगा।`)}`}
+                `Namaste ${shop.name}! मुझे एक चीज़ के बारे में पूछना था — दुकान पर मौजूद है या नहीं?`)}`}
                  target="_blank" rel="noopener">
-                <IconWhatsApp />आने पर बता दीजिए
+                <IconWhatsApp />WhatsApp पर पूछिए
               </a>
               <Link className="phv-a" href="/products">
                 दुकान का सामान देखिए<IconArrow />

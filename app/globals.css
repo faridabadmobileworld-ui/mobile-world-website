@@ -2391,19 +2391,22 @@ main .rbody .hn{flex:none;display:grid;place-items:center;min-width:30px;height:
 /* ══════════════════════════════════════════════════════════════════════
    HOME के सबसे ऊपर — owner की अपनी video, scroll के साथ चलती हुई
 
-   Owner (7 Sep 2026): *"mujhe meri original same video chahiye yahan same
-   to same Exactly jo maine di h 16:9 ratio me ye... ise exactly ise hi
-   scrolling ke saath Animate karna h bina isme kuch b badli."*
+   Owner (18 Sep 2026): *"use 100% completely badalkar usme ye animation
+   daalo. full screen par aaye wo 16:9 screen ratio me. Scrolling me same
+   effect aaya chahiye aage piche karte rhne par."*
+
+   Video में **दुकान ख़ुद बनती हुई** दिखती है — ख़ाली इमारत से लेकर जगमगाती
+   दुकान तक। पूरी बात `public/hero-shop/README.md` में लिखी है।
 
    ढाँचा वही है जो "हमारा सफ़र" का है — एक लंबा हिस्सा (`.phv-scroll`)
    जिसके अंदर screen भर की एक चिपकी हुई परत (`.phv-pin`)। जितना लंबा
    हिस्सा, उतनी scroll की जगह, और उसी जगह में पूरी video चलती है।
 
-   ⚠️ Video **16:9 में पूरी दिखती है, कटती नहीं** (`object-fit:contain`)।
-      `cover` लगाने पर छोटी screen पर बाएँ कोने का "iPhone 18 Pro Max"
-      कट जाता — owner ने कहा है कुछ भी बदलना नहीं।
+   ⚠️ Video **16:9 में पूरी दिखती है, कटती नहीं**। `cover` लगाने पर दुकान
+      की इमारत के किनारे — यानी brand के board — कट जाते हैं। Owner ने कहा
+      है कुछ भी बदलना नहीं।
    ⚠️ दुकान का नाम video के **नीचे** है, ऊपर नहीं — video के अपने अक्षर
-      बाएँ कोने में हैं, दोनों टकराते।
+      (लाल "Mobile World") बीच में हैं, दोनों टकराते।
    ══════════════════════════════════════════════════════════════════════ */
 .phv{position:relative;margin:0 0 8px}
 .phv-scroll{position:relative;height:230vh}
@@ -3690,4 +3693,90 @@ main .rbody h3::after,main .prose h3::after{
     -webkit-background-clip:text;background-clip:text;color:transparent}
   .phv-tag{color:#B9B2CB}
   .phv-a{color:#7FC4FF}
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   🎬 HERO — बड़ी screen पर भी scroll के साथ ही चले (18 Sep 2026)
+
+   Owner ने नई video भेजते हुए कहा:
+   *"full screen par aaye wo 16:9 screen ratio me. Scrolling me same effect
+   aaya chahiye aage piche karte rhne par."*
+
+   ⚠️ अब तक 1024px से बड़ी screen पर hero **चिपकता ही नहीं था** — वहाँ वो
+   एक सादा हिस्सा था और video अपने आप चलती-दोहराती रहती थी (scroll से नहीं)।
+   वजह यह लिखी थी कि पूरी चौड़ाई की 16:9 video screen से ऊँची हो जाती है।
+   पर 11 Sep को video की चौड़ाई पहले ही बची हुई ऊँचाई के हिसाब से बाँध दी
+   गई थी — यानी वो अड़चन बची ही नहीं थी।
+
+   ✅ इसलिए अब बड़ी screen पर भी वही ढाँचा है जो phone पर है: एक लंबा
+   हिस्सा, उसके अंदर screen भर की चिपकी हुई परत, और scroll के हिसाब से
+   video का frame आगे-पीछे। ऊपर video, नीचे लिखाई — दोनों एक ही screen में।
+
+   📐 नाप का गणित वही पुराना है (ऊपर "HERO की आख़िरी और सही नाप" देखिए):
+      video की चौड़ाई = (बची हुई ऊँचाई − लिखाई की जगह) × 16 ÷ 9
+      इसलिए न कुछ कटता है, न कोई काली पट्टी बनती है, और लिखाई कभी
+      video पर नहीं चढ़ती।
+
+   ⚠️ यह block सारे `.phv-*` नियमों के **बाद** है। ऊपर वाले 1024px वाले
+      block में `position:static` और `height:auto` लिखा है — वो इसी
+      क्रम की वजह से यहाँ पलटते हैं। इसे ऊपर मत ले जाइएगा।
+   ══════════════════════════════════════════════════════════════════════ */
+@media(min-width:1024px){
+  /* scroll की दूरी — एक screen video के लिए, एक आगे बढ़ने के लिए */
+  .phv-scroll{height:calc(100svh + 105vh)}
+
+  /* ⚠️ `--phv-cap` अंदाज़े से नहीं, **नापकर** भरा गया है — असली लिखाई
+     1024px से 1920px तक 197–210px की बनती है (हर नाप पर नापा गया)।
+     यहाँ 216px है, यानी 6px की छूट के साथ। बढ़ाइए मत — जितना बढ़ाएँगे,
+     video उतनी ही छोटी होगी। घटाइए भी मत — लिखाई video पर चढ़ जाएगी। */
+  .phv-pin{--phv-cap:216px;--phv-bot:16px;
+    position:sticky;top:var(--phv-top);
+    height:calc(100svh - var(--phv-flow) - var(--phv-bot));
+    max-height:none;
+    flex-direction:column;align-items:center;justify-content:center;
+    gap:0;padding-top:0}
+
+  .phv-stage{flex:none;
+    width:min(100vw, calc((100svh - var(--phv-flow) - var(--phv-bot)
+                           - var(--phv-cap)) * 16 / 9));
+    margin-inline:auto}
+
+  .phv-c{flex:none;max-width:none;text-align:center;padding:20px 20px 0;margin:0}
+  .phv h1{font-size:clamp(1.5rem,2.4vw,2.3rem);margin-bottom:8px}
+  .phv-sub{font-size:17px;margin-bottom:14px}
+  .phv-brand{margin-top:12px}
+}
+
+/* ── Hero की लिखाई phone पर — नापकर (18 Sep 2026) ──────────────────────
+   नई heading पुरानी ("नया iPhone जल्दी ही") से कहीं लंबी है। 390px पर वो
+   40px के अक्षरों में **चार lines** ले रही थी, यानी लिखाई 495px की हो गई
+   थी — और नीचे वाली पट्टी के पीछे दुकान का नाम छुप गया था (screenshot से
+   पकड़ा गया)। अब अक्षर छोटे हैं और नाप फिर से नापकर भरी गई है।
+   ⚠️ `--phv-cap` हमेशा असली नाप से भरिए, अंदाज़े से नहीं।               */
+@media(max-width:734px) and (min-height:701px){
+  .phv h1{font-size:30px;line-height:1.14;margin-bottom:8px}
+  .phv-sub{font-size:15px;line-height:1.33;margin-bottom:12px}
+  .phv-pin{--phv-cap:376px}
+}
+
+/* छोटी ऊँचाई वाली screen (640px तक) — वहाँ लंबी heading तीन lines लेती है,
+   इसलिए अक्षर और छोटे, और नाप फिर से नापी हुई। */
+@media(max-height:700px){
+  .phv h1{font-size:22px;line-height:1.12;margin-bottom:6px}
+  .phv-sub{font-size:13px;line-height:1.3;margin-bottom:8px}
+  .phv-pin{--phv-cap:286px}
+}
+
+/* लेटी हुई छोटी screen — यहाँ लिखाई video के बग़ल में है और पूरी ऊँचाई
+   सिर्फ़ ~180px बचती है। 18 Sep को नापने पर लिखाई 197px की निकली, यानी
+   चिपकी हुई परत से बाहर — नीचे वाली पट्टी को छू रही थी। अब सिमटी हुई है। */
+@media(orientation:landscape) and (max-height:620px){
+  .phv h1{font-size:17px;line-height:1.14;margin-bottom:3px}
+  .phv-sub{font-size:11.5px;line-height:1.28;margin-bottom:6px}
+  .phv-links{gap:9px}
+  .phv-links .btn{font-size:12px;padding:0 12px;min-height:34px;height:34px}
+  .phv-a{font-size:12px;min-height:34px}
+  .phv-brand{margin-top:5px}
+  .phv-name{font-size:13px}
+  .phv-tag{font-size:9px}
 }
