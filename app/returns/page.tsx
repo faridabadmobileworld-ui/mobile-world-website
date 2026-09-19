@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { shop } from "@/data/shop";
 import { ask } from "@/data/content";
@@ -52,6 +53,23 @@ export default function Returns() {
   return (
     <div className="wrap">
       <section className="sec">
+        {/* Owner ने 19 Sep 2026 को यह banner भेजकर कहा: "is image ko return
+            exchange wale page pe lagao top me."
+            ⚠️ लगाने से पहले पूरी तस्वीर खोलकर हर शब्द पढ़ा गया (CLAUDE.md
+            का banner वाला नियम): कोई ऐसा दावा नहीं जो साबित न हो सके, कोई
+            फ़ोन नंबर या timing नहीं (इसलिए कभी पुराना नहीं पड़ेगा), और चारों
+            बातें — Genuine Products, पक्का GST Bill, Exchange (brand policy),
+            After Sales Support — वही हैं जो owner ने ख़ुद confirm की हैं।
+            📌 यह पहली तस्वीर है, इसलिए `priority` — नीचे की लिखाई से पहले यही
+            दिखती है। */}
+        <figure className="banner">
+          <Image src="/images/return-aur-exchange-9c382686.webp"
+                 alt={`${shop.name} ${shop.address.locality} — Return और Exchange: ` +
+                      `counter पर रखे phone, laptop, TV और घर के सामान के डिब्बे`}
+                 width={1536} height={1024} sizes="(max-width:734px) 100vw, 1100px"
+                 priority />
+        </figure>
+
         <h1 style={{ fontSize: "clamp(1.4rem,4vw,2rem)", fontWeight: 800,
                      letterSpacing: "-.03em", margin: "0 0 10px" }}>
           Return, Refund और Exchange — साफ़ बात, पक्का भरोसा 🤝

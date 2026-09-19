@@ -140,6 +140,25 @@ Cash · UPI · Credit Card · Debit Card · EMI
 
 तीनों की जगह अब n8n से बनी साफ़ तस्वीरें हैं, जिनमें एक अक्षर भी नहीं है।
 
+📌 **19 Sep 2026 — एक banner वापस लगा, जाँच के बाद।** Owner ने
+*"is image ko return exchange wale page pe lagao top me"* कहकर `Return और
+Exchange` वाला banner भेजा। लगाने से पहले पूरी तस्वीर खोलकर हर शब्द पढ़ा गया:
+
+- कोई ऐसा दावा नहीं जो साबित न हो सके — "BEST PRICE", "GUARANTEED", "No.1",
+  "100% SECURE" में से एक भी नहीं
+- **कोई फ़ोन नंबर और कोई timing नहीं** — इसलिए यह कभी पुरानी नहीं पड़ेगी
+- चारों बातें owner की अपनी confirm की हुई हैं — Genuine Products · पक्का GST
+  Bill · Exchange (brand policy) · After Sales Support
+- नीचे की category list भी वही है जो `data/shop.ts` में है
+
+⚠️ तस्वीर के अंदर सामान के डिब्बों पर brand के निशान दिखते हैं (HP, Samsung,
+xiaomi, boAt)। ये दुकान में बिकने वाले सामान के डिब्बे हैं, owner की अपनी भेजी
+तस्वीर में — internet से उठाए हुए logo नहीं, और न ही किसी साझेदारी का दावा
+(वो अलग बात है, §"Finance companies के logo" देखिए)।
+
+File: `public/images/return-aur-exchange-9c382686.webp` (1536×1024, 183 KB),
+page: `app/returns/page.tsx` के सबसे ऊपर।
+
 ### Categories
 Smartphones, Laptops & Tablets, Televisions, Air Conditioners,
 Washing Machines, Refrigerators, Inverters & Batteries, Audio & Wearables,
