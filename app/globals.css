@@ -3780,3 +3780,74 @@ main .rbody h3::after,main .prose h3::after{
   .phv-name{font-size:13px}
   .phv-tag{font-size:9px}
 }
+
+/* ══════════════════════════════════════════════════════════════════════
+   📐 HERO पूरी चौड़ाई में — किनारे से किनारे तक (19 Sep 2026)
+
+   Owner: *"CHHOTI SI AA RHI H YE BEECH ME. FULL WIDTH PE LAGAO 16:9 RATIO
+   ME POORI EDGE TO EDGE."*
+
+   अब तक video की चौड़ाई बची हुई ऊँचाई से निकलती थी, इसलिए 1366×768 के
+   laptop पर वो सिर्फ़ 690px की रह जाती थी और दोनों तरफ़ गहरी पट्टी दिखती थी।
+   अब चौड़ाई **100vw** है — बिलकुल किनारे से किनारे तक — और ऊँचाई उसी से
+   निकलती है (16:9 यानी 56.25vw)। कुछ भी काटा नहीं जाता।
+
+   ⚠️ **इसका एक नतीजा है, और वो गणित है, ग़लती नहीं:** 1366px चौड़ी screen पर
+   पूरी चौड़ाई वाली 16:9 video **768px ऊँची** होती है, जबकि header के नीचे
+   जगह क़रीब 690px ही बचती है। यानी पूरी चौड़ाई लेते ही video screen से लंबी
+   हो जाती है। इसलिए:
+
+   - चिपकने की जगह (`top`) अब `min()` से निकलती है। Video screen से छोटी हो
+     तो वो header के ठीक नीचे चिपकती है (पहले जैसी)। लंबी हो तो पहले ज़रा
+     ऊपर सरकती है — जब तक नीचे की लिखाई पूरी दिख न जाए — और फिर चिपक जाती
+     है। यही वो इकलौता तरीक़ा है जिससे **पूरी चौड़ाई भी मिले और नीचे की
+     लिखाई भी दिखे**, बिना एक pixel काटे।
+   - इस सरकने में video का ऊपरी किनारा थोड़ी देर header की पट्टी के पीछे
+     जाता है। पूरी चौड़ाई माँगने पर यह टाला नहीं जा सकता।
+
+   ⚠️ यह block सबसे आख़िर में है — ऊपर वाले `@media(min-width:1024px)` इसी
+      क्रम की वजह से पलटते हैं। इसे ऊपर मत ले जाइएगा।
+   ══════════════════════════════════════════════════════════════════════ */
+@media(min-width:1024px){
+  /* scroll की दूरी — video की अपनी ऊँचाई + एक screen */
+  .phv-scroll{height:calc(56.25vw + 110vh)}
+
+  .phv-pin{
+    /* चिपके हुए हिस्से की पूरी ऊँचाई = video + लिखाई */
+    --phv-h:calc(56.25vw + var(--phv-cap));
+    position:sticky;
+    top:min(var(--phv-top), calc(100svh - var(--phv-h) - 10px));
+    height:var(--phv-h);max-height:none;
+    flex-direction:column;align-items:stretch;justify-content:flex-start;
+    gap:0;padding-top:0}
+
+  /* किनारे से किनारे तक — पूरी चौड़ाई, 16:9, कुछ भी कटे बिना */
+  .phv-stage{flex:none;width:100vw;margin-inline:calc(50% - 50vw);
+    aspect-ratio:16/9;border-radius:0}
+
+  .phv-c{flex:none;max-width:none;text-align:center;padding:18px 20px 0;margin:0}
+  .phv h1{font-size:clamp(1.5rem,2.4vw,2.3rem);margin-bottom:8px}
+  .phv-sub{font-size:17px;margin-bottom:12px}
+  .phv-brand{margin-top:10px}
+}
+
+/* Phone/tablet (सीधी पकड़ी हुई) पर भी video किनारे से किनारे तक। 320×640
+   जैसी छोटी screen पर वो पहले 256px की रह जाती थी — अब पूरी चौड़ाई, और
+   लिखाई उसी हिसाब से सिमटी हुई (नापकर)।
+   ⚠️ लेटी हुई phone screen इसमें जान-बूझकर नहीं है — वहाँ पूरी चौड़ाई की
+   16:9 video screen से ऊँची हो जाती है, इसलिए वहाँ लिखाई बग़ल में रहती है। */
+@media(max-width:1023px) and (orientation:portrait){
+  /* ⚠️ `100%` मत लिखिए — ऊपर वाले डिब्बे में दोनों तरफ़ padding है, इसलिए
+     `100%` से video किनारे से 16px अंदर रह जाती है। `100vw` + उल्टा margin
+     ही उसे सचमुच किनारे से किनारे तक ले जाता है। */
+  .phv-stage{width:100vw;margin-inline:calc(50% - 50vw)}
+}
+@media(max-width:1023px) and (orientation:portrait) and (max-height:700px){
+  .phv h1{font-size:19px;line-height:1.12;margin-bottom:5px}
+  .phv-sub{font-size:12px;line-height:1.3;margin-bottom:7px}
+  .phv-links .btn{min-height:36px;height:36px;font-size:12px;padding:0 14px}
+  .phv-a{font-size:12px;min-height:36px}
+  .phv-logo{width:22px}
+  .phv-name{font-size:13px}
+  .phv-pin{--phv-cap:248px}
+}
