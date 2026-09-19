@@ -3851,3 +3851,38 @@ main .rbody h3::after,main .prose h3::after{
   .phv-name{font-size:13px}
   .phv-pin{--phv-cap:248px}
 }
+
+/* ══════════════════════════════════════════════════════════════════════
+   🔒 ऊपर की पट्टी और menu bar — scroll पर ठोस, कुछ भी पीछे से न दिखे
+   (19 Sep 2026)
+
+   Owner: *"header ki scrolling position ko lock kardo wo menu baar me niche
+   na ghuse scroll karte samay."*
+
+   दिक़्क़त क्या थी: दोनों पट्टियाँ काँच जैसी पारदर्शी थीं — header 80% सफ़ेद,
+   menu bar 72% सफ़ेद। जब तक पीछे सफ़ेद page था, ठीक लगता था। पर hero की
+   **गहरी video** अब पूरी चौड़ाई की है, और scroll करते ही वो इन्हीं पट्टियों
+   के पीछे से गुज़रती है — आधी पट्टी काली पड़ जाती थी और "Terms", "Privacy"
+   जैसे शब्द पढ़ने लायक़ ही नहीं बचते थे। यही "घुसना" दिख रहा था।
+
+   ✅ अब दोनों **पूरी तरह ठोस सफ़ेद** हैं। पीछे चाहे video हो या कुछ और,
+   एक भी pixel आर-पार नहीं दिखता। दोनों अपनी जगह चिपकी रहती हैं (header
+   सबसे ऊपर, menu bar ठीक उसके नीचे — बीच में एक भी pixel की झिरी नहीं)।
+
+   ⚠️ `backdrop-filter` यहाँ जान-बूझकर हटाया गया है — ठोस background के पीछे
+      उसका कोई असर नहीं होता, बस हर scroll पर browser का काम बढ़ता है।
+   ⚠️ इन्हें दोबारा पारदर्शी मत कीजिए। Apple पर काँच इसलिए चलता है क्योंकि
+      उसके पीछे उजला page होता है; यहाँ पीछे रात की गहरी video है।
+   ══════════════════════════════════════════════════════════════════════ */
+.hdr{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;
+  border-bottom:1px solid var(--line)}
+.cstrip{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;
+  border-bottom:1px solid var(--line)}
+/* ⚠️ अंदर वाले pill पर 8px का `margin-top` था। उसका margin बाहर निकलकर
+   पूरी menu bar को 8px नीचे सरका देता था — यानी header के नीचे 8px की
+   पारदर्शी झिरी बन जाती थी, और scroll करते वक़्त video ठीक उसी झिरी में से
+   गुज़रती दिखती थी। अब दोनों पट्टियाँ आपस में चिपकी हुई हैं, एक भी pixel
+   की जगह बीच में नहीं। */
+.cstrip{padding-top:0;padding-bottom:0}
+.cstrip .wrap{background:transparent;border:0;margin-top:0;
+  box-shadow:none;-webkit-mask-image:none;mask-image:none}

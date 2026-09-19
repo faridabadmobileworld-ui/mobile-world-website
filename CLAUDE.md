@@ -577,6 +577,29 @@ Files: `public/hero-shop/shop.mp4` (1.25 MB) · `shop-sm.mp4` (303 KB) ·
 `page.route` से बदल दीजिए — तभी `currentTime` सच बताता है। (18 Sep: desktop,
 laptop और phone — तीनों पर 0 → 4.04s और वापस, 18/18 पास।)
 
+### 🔒 ऊपर की पट्टी और menu bar — ठोस, चिपकी हुई (19 Sep 2026)
+
+Owner: *"header ki scrolling position ko lock kardo wo menu baar me niche na
+ghuse scroll karte samay."*
+
+दो असली ख़राबियाँ थीं, दोनों तभी दिखीं जब hero की गहरी video पूरी चौड़ाई की हुई:
+
+1. **दोनों पट्टियाँ काँच जैसी पारदर्शी थीं** (header 80% सफ़ेद, menu bar 72%)।
+   पीछे उजला page हो तो ठीक लगता था, पर रात वाली video पीछे से गुज़रते ही आधी
+   पट्टी काली पड़ जाती थी और "Terms", "Privacy" पढ़ने लायक़ नहीं बचते थे।
+   अब दोनों **पूरी तरह ठोस सफ़ेद** हैं, `backdrop-filter` हटा दिया गया।
+2. **बीच में 8px की झिरी थी** — menu bar के अंदर वाले pill पर `margin-top:8px`
+   था, और उसका margin बाहर निकलकर पूरी पट्टी को नीचे सरका देता था। उसी झिरी
+   में से video गुज़रती दिखती थी। अब `padding` और `margin` दोनों शून्य हैं।
+
+⚠️ इन्हें दोबारा पारदर्शी मत कीजिए। Apple पर काँच इसलिए चलता है क्योंकि उसके
+पीछे उजला page होता है; यहाँ पीछे रात की गहरी video है।
+
+📌 जाँच का script: `scratchpad/hdr3.mjs` — पाँच नाप × चार scroll position पर
+देखता है कि header ऊपर चिपका है, menu bar ठीक उसके नीचे (झिरी 0px), दोनों का
+background पूरी तरह ठोस है, और पट्टी के अंदर किसी भी जगह सबसे ऊपर वही पट्टी है
+(पीछे की video नहीं)। 20/20 पास।
+
 ### 🌃 `/showcase` — वही home page, cinematic (3 Sep 2026)
 
 Owner ने 3 Sep को कहा: *"Ye showcase hamari existing home page par jo b kuch h
