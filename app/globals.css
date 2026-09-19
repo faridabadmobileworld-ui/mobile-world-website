@@ -3886,3 +3886,176 @@ main .rbody h3::after,main .prose h3::after{
 .cstrip{padding-top:0;padding-bottom:0}
 .cstrip .wrap{background:transparent;border:0;margin-top:0;
   box-shadow:none;-webkit-mask-image:none;mask-image:none}
+
+/* ══════════════════════════════════════════════════════════════════════
+   🧊 पूरी website की 3D परत — 19 Sep 2026
+
+   Owner: *"create 3d effects in overall complete website now, every text
+   font animations hovers etc sab kuch pe."*
+
+   यह सब **सिर्फ़ CSS से** है — कोई नई library नहीं, कोई नई file download
+   नहीं (§4 और §7: page speed हर feature से ऊपर)। गहराई तीन चीज़ों से आती है:
+   `transform` के अपने `perspective()`, परतदार `box-shadow`, और लिखाई पर
+   परतदार `text-shadow`। तीनों compositor/paint पर सस्ते हैं।
+
+   ⚠️ पाँच नियम जो यहाँ हर हाल में लागू हैं:
+
+   1. **`filter` कहीं नहीं।** एक `filter:saturate()` ने home का LCP 652ms से
+      1416ms कर दिया था (ऊपर नाप लिखी है)। सिर्फ़ `transform`।
+   2. **`perspective` किसी parent पर property की तरह नहीं लगाई** — वो
+      containing block बना देती है और sticky/fixed (header, menu bar, hero
+      का pin, drawer) तोड़ देती है। गहराई हमेशा `transform:perspective(...)`
+      के अंदर से आती है।
+   3. **`prefers-reduced-motion` पर सारी हलचल बंद।** सिर्फ़ ठहरी हुई गहराई
+      (shadow) बची रहती है।
+   4. **जिन डिब्बों का `transform` scroll वाली animation के हाथ में है
+      (`.post`, `.shot`, `.toc`, `.panel`), उन पर hover का `transform`
+      लिखा ही नहीं** — CSS में animation हमेशा जीतती है। वहाँ गहराई सिर्फ़
+      परछाईं से आती है।
+   5. **कुछ भी छुपेगा नहीं।** scroll वाली सारी animation पहले से
+      `@supports(animation-timeline:view())` के अंदर है और `to{}` पर
+      हर चीज़ पूरी दिखती है।
+   ══════════════════════════════════════════════════════════════════════ */
+
+:root{
+  --d3:900px;                     /* गहराई की दूरी */
+  --sh3-1:0 1px 2px rgba(17,17,26,.06), 0 6px 14px -8px rgba(17,17,26,.22);
+  --sh3-2:0 2px 4px rgba(17,17,26,.07), 0 18px 34px -18px rgba(17,17,26,.32);
+  --sh3-3:0 3px 6px rgba(17,17,26,.08), 0 34px 60px -28px rgba(17,17,26,.42);
+}
+
+/* ── 1. लिखाई में गहराई ──────────────────────────────────────────────
+   हर बड़ी heading अब काग़ज़ से ज़रा सा उठी हुई लगती है — तीन पतली परतें
+   और एक नरम परछाईं। रंग नहीं बदलता, सिर्फ़ गहराई आती है।
+   ⚠️ पढ़ने वाले पैराग्राफ़ पर कुछ नहीं लगाया — वहाँ परछाईं पढ़ना मुश्किल
+      करती है। सिर्फ़ heading, बड़े अंक और button की लिखाई पर।              */
+/* ⚠️ सिर्फ़ **दो** परतें। चार परतों से slow 4G + 4× धीमे CPU पर home का
+   LCP 1344ms से 1412ms हो गया था (नापकर पकड़ा)। दो परतों में वही गहराई
+   दिखती है और नाप वापस अपनी जगह आ जाती है। परतें बढ़ाइए मत। */
+main h1,main h2,main h3,.ftr h3,.drawer .dh{
+  text-shadow:0 1px 0 rgba(17,17,26,.08),
+              0 8px 18px rgba(17,17,26,.12)}
+
+/* गहरे background पर उजली लिखाई — वहाँ परछाईं गहरी चाहिए, हल्की नहीं */
+.phv h1,.phv-sub,.phv-eyebrow,.follow h2,.follow b,.jrn h2,.jrn-t,
+.sc-h1,.cine .shead h2{
+  text-shadow:0 1px 0 rgba(0,0,0,.32),
+              0 10px 26px rgba(0,0,0,.45)}
+
+/* ── 2. बटन — दबाने लायक़ लगें ────────────────────────────────────────
+   ऊपर से ज़रा सा झुका हुआ, नीचे परछाईं। Hover पर उठता है, दबाने पर
+   सचमुच दब जाता है (यह छूने वाले phone पर भी चलता है)।                */
+/* ⚠️ यहाँ `translateZ(0)` जान-बूझकर **नहीं** है। वो हर बटन को अलग
+   compositor परत बना देता था — ऊपर दिखने वाले पाँच-छह बटन के लिए यह
+   मुफ़्त नहीं पड़ता। गहराई सिर्फ़ परछाईं से, हलचल hover/active पर।    */
+.btn{box-shadow:var(--sh3-1)}
+@media(prefers-reduced-motion:no-preference){
+  .btn{transition:transform .2s var(--ease),box-shadow .2s var(--ease),
+    background-color .2s var(--ease)}
+  @media(hover:hover) and (pointer:fine){
+    .btn:hover{transform:perspective(var(--d3)) translateY(-2px) rotateX(9deg) scale(1.02);
+      box-shadow:var(--sh3-2)}
+  }
+  .btn:active{transform:perspective(var(--d3)) translateY(1px) rotateX(3deg) scale(.978);
+    box-shadow:var(--sh3-1);transition-duration:.08s}
+}
+
+/* ── 3. डिब्बे — मेज़ पर रखे असली कार्ड जैसे ─────────────────────────
+   जिन पर scroll वाली animation नहीं है, वो hover पर उठते और झुकते हैं।
+   (उँगली की तरफ़ झुकने वाला हिस्सा ऊपर `html.aura` में है — वो mouse
+   वाली screen पर और भी बारीक़ है। यह उसके नीचे की सादा परत है।)        */
+main .pc,main .ct,main .lnew,main .pmini,main .lrow,main .mlinks a,
+main .qr-card,main .rbody .spec,main .rbody .tier,main .rbody .sw,
+main .fin-list li,main .igrid li{
+  box-shadow:var(--sh3-1)}
+@media(prefers-reduced-motion:no-preference){
+  main .pc,main .ct,main .lnew,main .pmini,main .lrow,main .mlinks a,
+  main .qr-card,main .rbody .spec,main .rbody .tier,main .rbody .sw{
+    transition:transform .26s var(--ease),box-shadow .26s var(--ease),
+      border-color .26s var(--ease)}
+  @media(hover:hover) and (pointer:fine){
+    main .pc:hover,main .ct:hover,main .lnew:hover,main .pmini:hover,
+    main .lrow:hover,main .mlinks a:hover,main .qr-card:hover,
+    main .rbody .spec:hover,main .rbody .tier:hover,main .rbody .sw:hover{
+      transform:perspective(var(--d3)) translateY(-5px) rotateX(4deg) scale(1.012);
+      box-shadow:var(--sh3-3)}
+  }
+  main .pc:active,main .ct:active,main .lnew:active,main .pmini:active,
+  main .lrow:active,main .mlinks a:active{
+    transform:perspective(var(--d3)) translateY(0) scale(.985);
+    transition-duration:.08s}
+}
+
+/* जिनका `transform` scroll animation के हाथ में है — वहाँ सिर्फ़ परछाईं।
+   (नियम 4 ऊपर) */
+@media(hover:hover) and (pointer:fine){
+  main .post:hover,main .shot:hover,main .panel:hover{box-shadow:var(--sh3-3)}
+}
+@media(prefers-reduced-motion:no-preference){
+  main .post,main .shot,main .panel{transition:box-shadow .26s var(--ease)}
+}
+
+/* ── 4. ऊपर की पट्टी, menu और footer के links ────────────────────────
+   हर link hover पर ज़रा सा उठकर आगे की ओर झुकता है।                   */
+@media(prefers-reduced-motion:no-preference){
+  .cstrip a,.ftr a,.drawer a,.drawer summary,.mbar a,.iconbtn{
+    transition:transform .2s var(--ease),box-shadow .2s var(--ease),
+      background-color .2s var(--ease),color .2s var(--ease)}
+  @media(hover:hover) and (pointer:fine){
+    .cstrip a:hover{transform:perspective(600px) translateY(-2px) rotateX(12deg)}
+    .ftr a:hover,.drawer a:hover,.drawer summary:hover{
+      transform:perspective(600px) translateY(-1px) rotateX(9deg)}
+    .iconbtn:hover{transform:perspective(600px) translateY(-2px) rotateX(9deg);
+      box-shadow:var(--sh3-2)}
+  }
+  /* दबने वाला जवाब — यह phone पर भी चलता है */
+  .cstrip a:active,.ftr a:active,.drawer a:active,.mbar a:active,
+  .iconbtn:active{transform:perspective(600px) scale(.94);transition-duration:.08s}
+}
+
+/* ── 5. तस्वीरें — frame के अंदर उठी हुई ─────────────────────────────
+   ⚠️ तस्वीर पर `filter` कभी नहीं (ऊपर नियम 1)। सिर्फ़ परछाईं और
+      `transform`, दोनों compositor पर चलते हैं।                        */
+@media(prefers-reduced-motion:no-preference) and (hover:hover) and (pointer:fine){
+  main .pc:hover .ph-img,main .lnew:hover .ph-img,main .post:hover .ph-img{
+    box-shadow:0 26px 48px -26px rgba(17,17,26,.55)}
+}
+
+/* ── 6. scroll पर उभरना — अब सीधा नहीं, गहराई से ─────────────────────
+   यही `fx-ubhro` ऊपर हिस्सा 6 में सीधा (सिर्फ़ ऊपर-नीचे) था। अब हर
+   हिस्सा ज़रा सा पीछे झुका हुआ आता है और सीधा होकर बैठ जाता है — वही
+   3D वाला असर, पूरी site पर, बिना कोई नया selector जोड़े।
+   ⚠️ `to{transform:none}` — यानी बैठने के बाद कोई transform बचता ही
+      नहीं, इसलिए न कोई containing block बनता है, न कुछ टेढ़ा रहता है।  */
+@keyframes fx-ubhro{
+  from{opacity:0;transform:perspective(1100px) rotateX(9deg) translateY(22px) scale(.985)}
+  to{opacity:1;transform:none}
+}
+
+/* ── 7. Apple वाली परत की रोक हटाई (19 Sep 2026) ─────────────────────
+   11 Sep को owner ने "same to same Apple" कहा था, और Apple के card न
+   झुकते हैं न चमकते हैं — इसलिए उस दिन cards का झुकाव, परछाईं और उँगली
+   के पीछे चलने वाली रोशनी तीनों बंद कर दी गई थीं
+   (`html.aura main .pc.aura-on{transform:none}` और
+   `.aura-on::before,.aura-on::after{opacity:0!important}`).
+
+   19 Sep को owner ने साफ़ कहा: *"create 3d effects in overall complete
+   website now... sab kuch pe."* इसलिए वो रोक यहाँ हटाई गई है।
+   ⚠️ पुरानी rules जस की तस छोड़ी हैं (मिटाई नहीं) — owner कहें तो यह
+      आख़िरी हिस्सा हटा देने भर से Apple वाला सादा रूप वापस आ जाएगा।      */
+@media(prefers-reduced-motion:no-preference){
+  html.aura main .pc.aura-on:hover,html.aura main .ct.aura-on:hover,
+  html.aura main .lnew.aura-on:hover,html.aura main .pmini.aura-on:hover,
+  html.aura main .lrow.aura-on:hover,html.aura main .mlinks a.aura-on:hover{
+    transform:perspective(var(--d3)) rotateX(var(--tx,0deg)) rotateY(var(--ty,0deg))
+      translateY(-5px) scale(1.012);
+    box-shadow:var(--sh3-3);
+    transition:transform .11s linear,box-shadow .3s var(--ease)}
+  html.aura main .pc.aura-on:active,html.aura main .ct.aura-on:active,
+  html.aura main .lnew.aura-on:active,html.aura main .pmini.aura-on:active,
+  html.aura main .lrow.aura-on:active,html.aura main .mlinks a.aura-on:active{
+    transform:perspective(var(--d3)) rotateX(var(--tx,0deg)) rotateY(var(--ty,0deg))
+      scale(.985);transition-duration:.08s}
+}
+/* उँगली के पीछे चलने वाली नरम रोशनी वापस (सिर्फ़ `::after` वाली परत) */
+html.aura .aura-on::after{opacity:1 !important}

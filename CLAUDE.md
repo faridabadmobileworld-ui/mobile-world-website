@@ -768,6 +768,47 @@ owner के अपने blueprint का भाग 5 भी यही कह�
 और रँगने के काम को छूता ही नहीं। नई animation लिखने से पहले यह नाप दोबारा
 कर लीजिए (`preview/` वाले तरीक़े से)।
 
+### 🧊 पूरी site की 3D परत — 19 Sep 2026
+
+Owner: *"create 3d effects in overall complete website now, every text font
+animations hovers etc sab kuch pe."*
+
+सब कुछ **सिर्फ़ CSS से** है — कोई नई library नहीं, कोई नई file download नहीं।
+गहराई तीन चीज़ों से आती है: `transform` के अपने `perspective()`, परतदार
+`box-shadow`, और heading पर दो-परत वाला `text-shadow`।
+
+क्या-क्या: हर heading काग़ज़ से उठी हुई · हर button hover पर झुककर उठता और
+दबाने पर सचमुच दबता है · हर card cursor की तरफ़ झुकता है (mouse वाली screen
+पर उँगली के पीछे चलती रोशनी के साथ) · पट्टी, menu, drawer और footer के links
+hover पर आगे की ओर झुकते हैं · और scroll पर हर हिस्सा अब सीधा नहीं, **ज़रा
+पीछे झुका हुआ आकर सीधा बैठता है** (यही पुरानी `fx-ubhro` अब 3D है — एक भी
+नया selector जोड़े बिना पूरी site पर लागू)।
+
+⚠️ **पाँच नियम जो इस परत पर हमेशा लागू हैं:**
+1. **`filter` कहीं नहीं** — LCP वाली नाप ऊपर लिखी है (652ms → 1416ms)।
+2. **`perspective` किसी parent पर property की तरह नहीं** — वो containing
+   block बना देती है और sticky/fixed (header, menu bar, hero का pin, drawer)
+   तोड़ देती है। हमेशा `transform:perspective(...)` के अंदर से।
+3. **`prefers-reduced-motion` पर सारी हलचल बंद** — सिर्फ़ ठहरी परछाईं बचती है।
+4. **जिनका `transform` scroll animation के हाथ में है** (`.post`, `.shot`,
+   `.toc`, `.panel`) वहाँ hover का transform लिखा ही नहीं — animation हमेशा
+   जीतती है। वहाँ गहराई सिर्फ़ परछाईं से।
+5. **`text-shadow` सिर्फ़ दो परतों का।** चार परतों से home का LCP 1344ms से
+   **1412ms** हो गया था (slow 4G + 4× धीमा CPU पर नापकर)। दो परतों में वही
+   गहराई दिखती है। बटनों पर `translateZ(0)` भी नहीं — वो हर बटन की अलग
+   compositor परत बना देता था।
+
+📌 **11 Sep वाली Apple रोक हटाई गई।** उस दिन "same to same Apple" के लिए
+cards का झुकाव, परछाईं और रोशनी बंद की गई थीं
+(`html.aura main .pc.aura-on{transform:none}` और `.aura-on::after{opacity:0}`)।
+वो पुरानी rules **मिटाई नहीं गईं** — `globals.css` के सबसे आख़िरी हिस्से को
+हटा देने भर से Apple वाला सादा रूप वापस आ जाएगा।
+
+📌 **जाँच के script:** `scratchpad/hov.mjs` (hover पर सचमुच 3D matrix बनता है,
+और reduce-motion पर नहीं बनता — 7/7) और `scratchpad/dim.mjs` (10 pages × 2 नाप
+पर scroll करके देखता है कि `fx-ubhro` वाला कोई हिस्सा कहीं मद्धम नहीं रह जाता
+— 20/20)। LCP इस परत के बाद **1384ms** (पहले 1344ms)।
+
 ### 🎨 दिखावट और animation — 2 Sep 2026
 
 Owner ने कहा: *"har jagah animations add karo... buttons ko thode designs do,
