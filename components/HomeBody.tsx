@@ -2,19 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { shop } from "@/data/shop";
 import { items, serviceBanners, livePosts, helpPoints, serviceList,
-         artForCategory, ask, whatsappGeneral, navCategories } from "@/data/content";
+         ask, whatsappGeneral, navCategories } from "@/data/content";
 import { ProductCard } from "@/components/ProductCard";
-import { Art } from "@/components/ArtSprite";
 import { IconArrow, IconWhatsApp, IconPin, IconPhone } from "@/components/Icons";
 import { FollowUs } from "@/components/FollowUs";
 import { MoreLinks } from "@/components/MoreLinks";
 import { GoogleQR } from "@/components/GoogleQR";
-import { JourneyScroll } from "@/components/JourneyScroll";
 import { LatestPost } from "@/components/LatestPost";
 import { FinanceStrip } from "@/components/FinanceStrip";
 import { InstagramFeed } from "@/components/InstagramFeed";
 import { VideoRow } from "@/components/VideoRow";
-import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { PageFoot, Byline } from "@/components/PageFoot";
 import { NextClosure } from "@/components/StoreStatus";
 
@@ -23,27 +20,16 @@ import { NextClosure } from "@/components/StoreStatus";
    kabhi do jagah likha nahi jaata. Nayi section yahan jodiye, dono par aa
    jayegi. */
 
-const toc: TocItem[] = [
-  { id: "hamara-safar", label: "हमारा सफ़र" },
-  { id: "featured", label: "Featured Post" },
-  { id: "kya-milta-hai", label: "क्या-क्या मिलता है" },
-  { id: "ek-chhat", label: "एक ही छत के नीचे" },
-  { id: "emi-exchange-repair", label: "आपके काम की Services" },
-  { id: "finance", label: "EMI किन bank से" },
-  { id: "nai-jaankari", label: "Tech Blog & Guides" },
-  { id: "insta", label: "Follow us on Instagram" },
-  { id: "dukaan-par-aaiye", label: "दुकान पर आइए" },
-];
-
 export function HomeBody({ current = "/", journey = true }:
   { current?: string; /** `/showcase` par सफ़र ऊपर hero बन जाता है, इसलिए false */
     journey?: boolean }) {
-  const top = items.slice(0, 8);
+  const top = navCategories.flatMap((category) => {
+    const item = items.find((candidate) => candidate.category === category.slug);
+    return item ? [item] : [];
+  }).slice(0, 8);
 
   return (
     <>
-      <TableOfContents items={toc} />
-
       <div className="prow">
         {shop.services.emi && (
           <a className="pmini rv in" href={ask("EMI")} target="_blank" rel="noopener">
@@ -71,24 +57,14 @@ export function HomeBody({ current = "/", journey = true }:
         )}
       </div>
 
-      {/* पहले यहाँ "TRUST SINCE 1973" वाला banner था। उसके अंदर "Three
-          Generations of Service" और "Quality Products, Trusted Brands" जैसे
-          दावे छपे हुए थे — तस्वीर के अंदर, इसलिए किसी scan में पकड़ में भी नहीं
-          आते थे। अब वही कहानी owner की भेजी तीन videos से चलती है, और हर शब्द
-          असली HTML text में है (`legacy` से, दोबारा कहीं नहीं लिखा)। */}
-      {journey && <JourneyScroll />}
-
-      {/* सफ़र के ठीक बाद — सबसे नई post, ताकि home पर आते ही दिख जाए। */}
-      <LatestPost />
-
       <section className="sec">
         <div className="shead">
-          <h2 id="kya-milta-hai">क्या-क्या मिलता है</h2>
+          <h2 id="kya-milta-hai">अपनी ज़रूरत से चुनिए</h2>
           <Link href="/products">सब देखिए <IconArrow /></Link>
         </div>
         <div className="pgrid">
-          {top.map((it, n) => (
-            <ProductCard key={it.title} item={it} badge={n === 0 ? "लोकप्रिय" : undefined} />
+          {top.map((it) => (
+            <ProductCard key={it.title} item={it} />
           ))}
         </div>
       </section>
@@ -106,22 +82,6 @@ export function HomeBody({ current = "/", journey = true }:
       </section>
 
       <section className="sec">
-        <div className="shead"><h2 id="ek-chhat">सब कुछ, एक ही छत के नीचे</h2></div>
-        <div className="ctiles">
-          {navCategories.map((c) => (
-            <Link key={c.slug} className="ct rv in" href={`/products#${c.slug}`}>
-              <span className="m">
-                {c.image
-                  ? <Image className="ph-img" src={c.image} alt="" width={200} height={200} sizes="58px" />
-                  : <Art id={artForCategory(c.slug)} />}
-              </span>
-              <span><b>{c.label}</b><s>{blurbFor(c.slug)}</s></span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="sec">
         <div className="shead"><h2 id="emi-exchange-repair">आपके काम की Services — EMI, Exchange और Repairing</h2></div>
         <div className="sbanners">
           {serviceBanners.filter((b) => shop.services[b.key]).map((b) => (
@@ -129,6 +89,7 @@ export function HomeBody({ current = "/", journey = true }:
                target="_blank" rel="noopener">
               <Image src={b.src} alt={b.alt} width={1400} height={933}
                 sizes="(max-width:900px) 100vw, 33vw" />
+              <span className="shopping-service-caption">{b.key === "repair" ? "Mobile Repairing" : b.key === "exchange" ? "Phone Exchange" : "EMI & Finance"}<IconArrow /></span>
             </a>
           ))}
         </div>
@@ -154,6 +115,8 @@ export function HomeBody({ current = "/", journey = true }:
           </a>
         </div>
       </section>
+
+      <LatestPost />
 
       <section className="sec">
         <div className="shead">
@@ -204,6 +167,20 @@ export function HomeBody({ current = "/", journey = true }:
         </div>
       </section>
 
+      {journey && (
+        <section className="shopping-story" aria-labelledby="hamara-safar">
+          <div>
+            <p className="shopping-overline">MEET MOBILE WORLD</p>
+            <h2 id="hamara-safar">दुकान के पीछे, एक परिवार.</h2>
+            <p>{shop.legacyStartYear} में परिवार के business की शुरुआत। {shop.foundingYear} से Mobile World। हमारे सफ़र और counter पर मिलने वाली team से परिचय कीजिए।</p>
+          </div>
+          <div className="shopping-story-links">
+            <Link href="/about">हमारा सफ़र <IconArrow /></Link>
+            <Link href="/team">हमारी team <IconArrow /></Link>
+          </div>
+        </section>
+      )}
+
       {/* Video की list ख़ाली हो तो यह हिस्सा अपने आप छुप जाता है। */}
       <VideoRow />
 
@@ -243,18 +220,3 @@ export function HomeBody({ current = "/", journey = true }:
   );
 }
 
-function blurbFor(slug: string): string {
-  const m: Record<string, string> = {
-    smartphones: "हर बड़ा brand, हर budget",
-    "laptops-tablets": "पढ़ाई, office और gaming",
-    televisions: "32″ से 75″ तक, 4K और Smart",
-    "air-conditioners": "1 ton से 2 ton तक",
-    "washing-machines": "Semi, Top Load, Front Load",
-    refrigerators: "Single door, Double door, Frost-free",
-    "inverters-batteries": "Inverter, Battery, Stabilizer",
-    "audio-wearables": "Speaker, Earbuds, Smart Watch",
-    "kitchen-appliances": "Air Fryer, Microwave, Mixer, RO",
-    accessories: "Cover, Glass, Charger, Cable",
-  };
-  return m[slug] ?? "";
-}
