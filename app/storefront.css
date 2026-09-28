@@ -75,7 +75,7 @@
 .shopping-section-heading>a{display:flex;align-items:center;gap:6px;white-space:nowrap;font-size:13px;color:#0066cc;min-height:44px}
 .shopping-category-grid{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:12px}
 .shopping-category{display:flex;align-items:center;flex-direction:column;gap:12px;min-width:0;text-align:center;font-size:11px;line-height:1.45;color:#35445a;font-weight:600;letter-spacing:0}
-.shopping-category-image{display:grid;place-items:center;width:100%;aspect-ratio:1;background:#f6f8fb;border:1px solid #edf0f5;border-radius:17px;overflow:hidden;padding:12px;transition:border-color .2s,background .2s}
+.shopping-category-image{position:relative;display:grid;place-items:center;width:100%;aspect-ratio:1;background:#f6f8fb;border:1px solid #edf0f5;border-radius:17px;overflow:hidden;padding:12px;transition:border-color .2s,background .2s}
 .shopping-category-image img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;transition:transform .2s}
 .shopping-category-image svg{width:100%;height:100%}
 .shopping-category:hover .shopping-category-image{border-color:#9ebce8;background:#eef4ff}
