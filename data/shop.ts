@@ -48,6 +48,7 @@ export type Social = {
   youtube: string;
   instagram: string;
   facebook: string;
+  whatsappChannel: string;
   /** TODO (owner): Google Maps listing का पूरा URL। तब तक खाली। */
   googleMaps: string;
 };
@@ -267,6 +268,7 @@ export const shop: Shop = {
   },
 
   social: {
+    whatsappChannel: "https://whatsapp.com/channel/0029Vb8e4Al7oQhhXlcodY3P",
     youtube: "https://youtube.com/@mobileworldfaridabad",
     instagram: "https://www.instagram.com/mobileworldfaridabad",
     facebook: "https://www.facebook.com/mobileworldfaridabad/",
@@ -288,7 +290,7 @@ export const shop: Shop = {
    * दुकान की नींव किसने रखी — स्व. श्री बाबू लाल अग्रवाल जी (owner के पिताजी)।
    * Owner: Mr. Tarun Gupta S/O Lt. Shri Babu Lal Aggarwal.
    */
-  founderName: "स्व. श्री बाबू लाल अग्रवाल",
+  founderName: "स्व. श्री बाबू लाल जी",
   /** Website का content कौन लिखता है — हर article के नीचे यही नाम जाता है। */
   authorName: "Sachin",
 

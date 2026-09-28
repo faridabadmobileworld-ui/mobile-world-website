@@ -1,3 +1,4 @@
+import { phoneModels } from "@/data/catalog";
 import { categories } from "@/data/shop";
 import { items, livePosts } from "@/data/content";
 import { sitePages } from "@/data/pages";
@@ -57,7 +58,7 @@ function key(...parts: (string | undefined)[]): string {
  * category, फिर पढ़ने की चीज़ें, और आख़िर में बाक़ी pages।
  */
 export function buildSearchIndex(): SearchEntry[] {
-  const out: SearchEntry[] = [];
+  const out: SearchEntry[] = phoneModels.map((p) => ({t: `${p.brand} ${p.name}`, k: "Model की जानकारी", h: `/products?model=${p.id}`, s: key(p.brand, p.name, p.processor, "phone mobile मोबाइल") }));
 
   // 1. दुकान का सामान
   for (const it of items) {

@@ -13,12 +13,12 @@ import { shop, categories } from "@/data/shop";
 /** WhatsApp पर सवाल भेजने का link। Text हमेशा encode होकर जाता है। */
 export function ask(topic: string): string {
   return `${shop.phone.whatsapp}?text=${encodeURIComponent(
-    `Namaste Mobile World! मुझे ${topic} के बारे में जानना है।`,
+    `नमस्ते Mobile World! मुझे ${topic} के बारे में जानना है।`,
   )}`;
 }
 
 export const whatsappGeneral = `${shop.phone.whatsapp}?text=${encodeURIComponent(
-  "Namaste Mobile World! मुझे एक product के बारे में जानकारी चाहिए।",
+  "नमस्ते Mobile World! मुझे एक product के बारे में जानकारी चाहिए।",
 )}`;
 
 /**
@@ -55,9 +55,7 @@ const categoryImages: Record<string, string> = {
   refrigerators: "/images/double-door-refrigerator-8c144446.webp",
   "inverters-batteries": "/images/inverter-and-battery-fbb02fc5.webp",
   "audio-wearables": "/images/wireless-earbuds-0e160569.webp",
-  // TODO (owner): Kitchen Appliances की safed background वाली photo चाहिए।
-  // तब तक यहाँ कुछ नहीं — tile पर code वाली साफ़ drawing लग जाती है,
-  // क्योंकि बाक़ी सब tiles safed हैं और एक गहरी तस्वीर अलग दिखती है।
+  "kitchen-appliances": "/images/kitchen-appliances-on-the-counter-a35bd84a.webp",
   accessories: "/images/fast-charger-and-cable-93b9db0d.webp",
 };
 
@@ -117,8 +115,8 @@ export const items: Item[] = [
   {
     category: "smartphones",
     kicker: "Smartphones",
-    title: "Mid-range 5G — तीन-चार साल चलने वाले",
-    tags: ["लंबे updates", "Fast charge"],
+    title: "रोज़ के इस्तेमाल के लिए 5G phones",
+    tags: ["Camera", "Battery", "Display"],
     image: "/images/mid-range-5g-phones-five-colours-v2-7c07be19.webp",
   },
   {
@@ -132,14 +130,14 @@ export const items: Item[] = [
     category: "laptops-tablets",
     kicker: "Tablets",
     title: "पढ़ाई और काम के लिए Tablets",
-    tags: ["हर size"],
+    tags: ["Size और model पूछिए"],
     image: "/images/tablets-in-four-colours-9b68921c.webp",
   },
   {
     category: "laptops-tablets",
     kicker: "Monitors",
     title: "Office और gaming के Monitors",
-    tags: ["हर size"],
+    tags: ["Size और model पूछिए"],
     image: "/images/computer-monitor-579cd6b9.webp",
   },
   {
@@ -153,7 +151,7 @@ export const items: Item[] = [
     category: "air-conditioners",
     kicker: "Air Conditioners",
     title: "Split और Window AC",
-    tags: ["1–2 ton", "हर brand"],
+    tags: ["Capacity और model पूछिए"],
     image: "/images/split-air-conditioner-indoor-unit-24422a50.webp",
   },
   {
@@ -181,7 +179,7 @@ export const items: Item[] = [
     category: "audio-wearables",
     kicker: "Audio & Wearables",
     title: "Earbuds, Speakers और Smart Watches",
-    tags: ["दुकान पर सुनकर देखिए", "Warranty"],
+    tags: ["Features की जानकारी पूछिए"],
     image: "/images/wireless-earbuds-0e160569.webp",
   },
   {
@@ -954,3 +952,4 @@ export const serviceBanners = [
     topic: "EMI",
   },
 ];
+
