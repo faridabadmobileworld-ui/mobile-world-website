@@ -6,7 +6,10 @@ import { SiteFooter, MobileBar } from "@/components/SiteFooter";
 import { ArtSprite } from "@/components/ArtSprite";
 import "./globals.css";
 import "./storefront.css";
-import { Aura } from "@/components/Aura";
+import { Inter, Noto_Sans_Devanagari } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+const hindi = Noto_Sans_Devanagari({ subsets: ["devanagari"], variable: "--font-hindi", display: "swap" });
 
 /**
  * पूरी site की default metadata।
@@ -61,12 +64,12 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#5B3FD9",
+  themeColor: "#CF202F",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="hi">
+    <html lang="hi" className={`${inter.variable} ${hindi.variable}`}>
       <body>
         <a className="skip" href="#main">सीधे content पर जाइए</a>
         {/*
@@ -74,11 +77,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           ऊपर का सारा content इसके ऊपर अपने-अपने डिब्बों में चलता है।
           (Owner, 2 Sep 2026: "2 layers ho — ek background wali, ek scrolling wali")
         */}
-        <div className="bgfx" aria-hidden="true" />
-        <div className="bgfx2" aria-hidden="true" />
+
+
         {/* ऊपर पतली सी पट्टी — page कितना पढ़ लिया, वो दिखाती है। */}
-        <div className="prog" aria-hidden="true" />
-        <Aura />
+
+
         <ArtSprite />
         <SiteHeader searchIndex={buildSearchIndex()} />
         <main id="main">{children}</main>
