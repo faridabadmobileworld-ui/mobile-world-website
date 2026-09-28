@@ -116,8 +116,10 @@ export default function Privacy() {
             {" "}न Google Analytics, न Facebook pixel, न किसी और तरह का tracking script।
           </p>
           <p>
-            इसका मतलब है कि आपकी browsing history, IP address या location हम इकट्ठा
-            नहीं करते। आप यहाँ बिना किसी निशान के आ-जा सकते हैं।
+            Product shortlist आपके browser की local storage में रहती है। आप products page
+            पर models हटाकर इसे खाली कर सकते हैं। Share किए गए shortlist link में सिर्फ़
+            model IDs होते हैं। Website hosting provider सुरक्षा और संचालन के लिए request
+            logs रख सकता है।
           </p>
           <p>
             आगे कभी हमने analytics लगाया, तो यह बात <strong>पहले इसी page पर</strong>
@@ -247,7 +249,7 @@ export default function Privacy() {
             पर दिया गया है।
           </p>
           <p style={{ color: "var(--ink-3)", fontSize: "13px" }}>
-            आख़िरी बार बदला: 7 September 2026
+            आख़िरी बार बदला: 28 September 2026
           </p>
         </div>
       </section>
@@ -260,3 +262,4 @@ export default function Privacy() {
     </div>
   );
 }
+

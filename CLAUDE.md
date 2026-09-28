@@ -1,3 +1,18 @@
+# Current owner-approved upgrade — 28 September 2026
+
+The owner has authorized applying the full premium UI/UX audit to the existing website and publishing it. This supersedes older visual instructions about multicolour cards, ubiquitous author cards, duplicate contact blocks, and continuous 3D motion.
+
+- All new customer copy and chat: Hindi in Devanagari with natural English terms. Never romanized Hindi. Preserve the exact owner-provided family story on /about.
+- Unified graphite (#111827), red (#CF202F), off-white (#F7F8FA) design, Inter + Noto Sans Devanagari. WhatsApp alone uses green.
+- Keep customer products, discovery and services first. History/team belong on their pages and lower in the experience.
+- Product reference specifications live in data/catalog.ts with official source URLs. These are NOT inventory. Never invent store prices, stock, offers, ratings, reviews or financing approval.
+- Phone Finder ranks by features and platform. Budget is passed to the store for verification; never pretend this is a live price filter.
+- Product shortlist stays in browser localStorage; shared links contain only validated model IDs. No checkout, account or automatic message sending.
+- Latest owner instruction (28 September 2026, evening): remove the EMI calculator completely. Finance pages retain options, documents and terms only. Do not reintroduce a calculator.
+- Contact/social links are consolidated in SiteFooter; legacy PageFoot/FollowUs wrappers intentionally return null. Dated article bylines remain; other pages use footer credit.
+- Preserve canonical category slugs, business facts and the monthly last-calendar-day closure.
+- First verify typecheck, lint and production build, then publish through the existing GitHub/Vercel project. No new domain or separate replacement website.
+
 # CLAUDE.md — Mobile World Website
 
 ## Current storefront direction — owner request, 28 September 2026
@@ -737,8 +752,8 @@ Faridabad में mid-range Android और 4G पर है। इसलिए
 - **BreadcrumbList** हर page पर (`MoreLinks` से अपने आप) और **FAQPage**
   `/finance` पर (जवाब वही जो page पर लिखे हैं — Google का नियम यही है)
 - **`public/llms.txt`** — AI search engines के लिए दुकान का साफ़ परिचय
-- **EMI का अंदाज़ा लगाने वाला calculator** `/finance` पर — कोई दर पहले से भरी
-  हुई नहीं, और नीचे साफ़ लिखा है कि पक्की scheme finance company तय करती है
+- **EMI calculator हटा दिया गया है** — owner के 28 September 2026 के निर्देश पर।
+  `/finance` पर केवल options, documents और terms की जानकारी है।
 
 **जान-बूझकर नहीं लिया (और क्यों):**
 - **Lenis, GSAP ScrollTrigger, Motion, Three.js/R3F, shaders, 3D hero** — पाँचों

@@ -8,7 +8,7 @@ export function ShoppingCategories() {
   return (
     <section className="shopping-categories" aria-labelledby="shop-by-category">
       <div className="shopping-section-heading">
-        <div><p className="shopping-overline">FIND WHAT YOU NEED</p><h2 id="shop-by-category">आपको क्या चाहिए?</h2></div>
+        <div><p className="shopping-overline">CATEGORIES · अपनी ज़रूरत चुनिए</p><h2 id="shop-by-category">आपको क्या चाहिए?</h2></div>
         <Link href="/products">सभी products <IconArrow /></Link>
       </div>
       <div className="shopping-category-grid">

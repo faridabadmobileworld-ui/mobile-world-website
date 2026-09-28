@@ -1272,27 +1272,6 @@ main .sec:first-of-type,.hero,.cstrip,.hdr,.ftr,.mbar{content-visibility:visible
    जाता। उसके अंदर sticky stage भी है, जिसे सही नाप चाहिए ही चाहिए। */
 main .sec.jrn{content-visibility:visible;contain-intrinsic-size:auto}
 
-/* ── EMI का अंदाज़ा लगाने वाला डिब्बा (सिर्फ़ /finance पर) ───────────── */
-.emi{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);
-  padding:14px;box-shadow:var(--sh-2),var(--ring);max-width:var(--measure)}
-.emi-in{display:grid;gap:10px;grid-template-columns:1fr}
-@media(min-width:560px){ .emi-in{grid-template-columns:1.2fr 1fr 1fr} }
-.emi label{display:block}
-.emi label span{display:block;font-size:11.5px;font-weight:700;letter-spacing:.05em;
-  text-transform:uppercase;color:var(--ink-3);margin-bottom:5px}
-.emi input,.emi select{width:100%;height:46px;border:1px solid var(--line);border-radius:10px;
-  padding:0 12px;font-size:15.5px;font-weight:700;color:var(--ink);background:var(--bg);
-  font-family:inherit}
-.emi input:focus-visible,.emi select:focus-visible{outline:2.5px solid var(--brand);
-  outline-offset:1px;background:#fff}
-.emi-out{display:block;margin-top:14px;padding:14px 16px;border-radius:var(--r);
-  background:linear-gradient(135deg,var(--brand-soft),color-mix(in srgb,var(--brand) 8%,#fff));
-  text-align:center}
-.emi-out b{display:block;font-size:clamp(1.6rem,6vw,2.2rem);font-weight:800;
-  letter-spacing:-.03em;color:var(--brand);line-height:1.1}
-.emi-out span{display:block;font-size:13.5px;font-weight:700;color:var(--ink);margin-top:4px}
-.emi-out em{display:block;font-style:normal;font-size:12.5px;color:var(--ink-2);margin-top:6px}
-
 /* ── दुकान के video — home page की पट्टी ────────────────────────────
    Instagram वाली पट्टी का ही ढाँचा, बस रंग YouTube का लाल। */
 .ytw{position:relative;background:var(--card);border:1px solid var(--line);
@@ -4059,3 +4038,4 @@ main .fin-list li,main .igrid li{
 }
 /* उँगली के पीछे चलने वाली नरम रोशनी वापस (सिर्फ़ `::after` वाली परत) */
 html.aura .aura-on::after{opacity:1 !important}
+

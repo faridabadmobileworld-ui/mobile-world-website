@@ -146,7 +146,7 @@ export default async function PostPage({ params }: Params) {
               <div className="btns">
                 <a className="btn btn-w" href={
                   `${shop.phone.whatsapp}?text=${encodeURIComponent(
-                    `Namaste Mobile World! मुझे "${post.title}" के बारे में पूछना है।`)}`
+                    `नमस्ते Mobile World! मुझे "${post.title}" के बारे में पूछना है।`)}`
                 } target="_blank" rel="noopener"><IconWhatsApp /> WhatsApp पर पूछिए</a>
                 <a className="btn btn-o" href={shop.phone.tel}><IconPhone /> {shop.phone.display}</a>
               </div>
@@ -182,3 +182,4 @@ export default async function PostPage({ params }: Params) {
     </>
   );
 }
+

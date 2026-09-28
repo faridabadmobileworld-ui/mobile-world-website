@@ -30,8 +30,8 @@ export default function manifest(): MetadataRoute.Manifest {
     orientation: "portrait",
     // Header सफ़ेद है, इसलिए ऊपर की पट्टी भी सफ़ेद — वरना खुलते ही
     // बैंगनी पट्टी और सफ़ेद header के बीच एक भद्दी लकीर दिखती है।
-    background_color: "#F3F3F7",
-    theme_color: "#FFFFFF",
+    background_color: "#F7F8FA",
+    theme_color: "#CF202F",
     categories: ["shopping", "business"],
     icons: [
       { src: "/icon-192.png", sizes: "192x192", type: "image/png", purpose: "any" },
@@ -58,3 +58,4 @@ export default function manifest(): MetadataRoute.Manifest {
     ],
   };
 }
+

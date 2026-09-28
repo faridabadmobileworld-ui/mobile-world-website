@@ -228,7 +228,7 @@ export function PhoneScrub() {
 
             <div className="phv-links">
               <a className="btn btn-d" href={`${shop.phone.whatsapp}?text=${encodeURIComponent(
-                `Namaste ${shop.name}! मुझे एक चीज़ के बारे में पूछना था — दुकान पर मौजूद है या नहीं?`)}`}
+                `नमस्ते ${shop.name}! मुझे एक चीज़ के बारे में पूछना था — दुकान पर मौजूद है या नहीं?`)}`}
                  target="_blank" rel="noopener">
                 <IconWhatsApp />WhatsApp पर पूछिए
               </a>
@@ -251,3 +251,4 @@ export function PhoneScrub() {
     </section>
   );
 }
+
