@@ -8,9 +8,10 @@ import { shop } from "@/data/shop";
 import { artForCategory, whatsappGeneral } from "@/data/content";
 import { sitePages } from "@/data/pages";
 import { productMenu } from "@/data/menu";
+import { primaryCategories } from "@/data/storefront";
 import { Art } from "./ArtSprite";
 import { LiveBadge } from "./StoreStatus";
-import { IconMenu, IconSearch, IconPhone, IconWhatsApp, IconGrid } from "./Icons";
+import { IconMenu, IconSearch, IconPhone, IconWhatsApp, IconGrid, IconPin } from "./Icons";
 import { searchIn, type SearchEntry } from "@/data/search";
 
 export function SiteHeader({ searchIndex }: { searchIndex: SearchEntry[] }) {
@@ -18,6 +19,7 @@ export function SiteHeader({ searchIndex }: { searchIndex: SearchEntry[] }) {
   // जिस page पर ग्राहक अभी है, पट्टी में वो अलग दिखे।
   const path = usePathname();
   const headerRef = useRef<HTMLElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   // Category strip header के नीचे चिपकती है। Header की असली ऊँचाई नापो —
   // 58px मान लेने से phone पर strip header के ऊपर चढ़ जाती थी।
@@ -36,12 +38,30 @@ export function SiteHeader({ searchIndex }: { searchIndex: SearchEntry[] }) {
     return () => { removeEventListener("resize", sync); ro?.disconnect(); };
   }, []);
 
-  // Drawer खुला हो तो page scroll बंद, और Escape से बंद हो।
+  // Keep keyboard focus inside the open menu, then return it to the trigger.
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    const esc = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
-    addEventListener("keydown", esc);
-    return () => { removeEventListener("keydown", esc); document.body.style.overflow = ""; };
+    if (!open) return;
+    const previousFocus = document.activeElement as HTMLElement | null;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const frame = requestAnimationFrame(() => dialogRef.current?.querySelector<HTMLButtonElement>(".drawer-close")?.focus());
+    const keys = (event: KeyboardEvent) => {
+      if (event.key === "Escape") { event.preventDefault(); setOpen(false); }
+      if (event.key !== "Tab") return;
+      const elements = Array.from(dialogRef.current?.querySelectorAll<HTMLElement>(
+        'a[href],button,input,summary,[tabindex="0"]',
+      ) ?? []).filter((element) => element.getClientRects().length > 0 && !element.hasAttribute("disabled"));
+      const first = elements[0], last = elements[elements.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+      if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+    };
+    document.addEventListener("keydown", keys);
+    return () => {
+      cancelAnimationFrame(frame);
+      document.removeEventListener("keydown", keys);
+      document.body.style.overflow = previousOverflow;
+      previousFocus?.focus();
+    };
   }, [open]);
 
   return (
@@ -50,13 +70,13 @@ export function SiteHeader({ searchIndex }: { searchIndex: SearchEntry[] }) {
         <div className="wrap">
           <LiveBadge />
           <span className="r">
-            <span>{shop.address.road}, {shop.address.locality}, {shop.address.city}</span>
+            <a className="shopping-location" href={shop.social.googleMaps} target="_blank" rel="noopener noreferrer"><IconPin /> {shop.address.locality}, {shop.address.city}</a>
             <a href={shop.phone.tel}><b>{shop.phone.display}</b></a>
           </span>
         </div>
       </div>
 
-      <header className="hdr" ref={headerRef}>
+      <header className="hdr shopping-header" ref={headerRef}>
         <div className="wrap">
           <button
             className="iconbtn" aria-label="Menu kholiye"
@@ -86,46 +106,30 @@ export function SiteHeader({ searchIndex }: { searchIndex: SearchEntry[] }) {
         </div>
       </header>
 
-      {/*
-        Strip का सबसे पहला button — "सारे Page"।
-        Owner ने 2 Sep 2026 को कहा: home page पर कहीं दिखता ही नहीं था कि और
-        page भी हैं। यह button वही menu खोलता है जिसमें सारे page हैं, और
-        strip को उँगली से खिसकाने पर भी बाएँ चिपका रहता है (sticky)।
-      */}
-      <nav className="cstrip" aria-label="Website ke page">
+      <nav className="cstrip shopping-nav" aria-label="Products और customer services">
         <div className="wrap">
-          <button
-            className="cs-pages" type="button"
-            aria-label="पूरा menu खोलिए" aria-expanded={open} aria-controls="drawer"
-            onClick={() => setOpen(true)}
-          ><IconGrid /> Menu</button>
-          {sitePages.map((p) => (
-            <Link key={p.href} href={p.href} aria-current={path === p.href ? "page" : undefined}
-                  style={{ "--t": p.tone } as React.CSSProperties}>
-              <em aria-hidden="true">{p.emoji}</em>{p.short}
-            </Link>
+          <button className="cs-pages" type="button" aria-label="सभी categories और menu खोलिए"
+            aria-expanded={open} aria-controls="drawer" onClick={() => setOpen(true)}>
+            <IconGrid /> सभी categories
+          </button>
+          {primaryCategories.map((category) => (
+            <Link key={category.slug} href={`/products#${category.slug}`}>{category.shortName ?? category.name}</Link>
           ))}
+          <Link className="shopping-nav-service" href="/finance" aria-current={path === "/finance" ? "page" : undefined}>EMI & Finance</Link>
+          <Link href="/repairing" aria-current={path === "/repairing" ? "page" : undefined}>Repairing</Link>
+          <Link className="shopping-nav-visit" href="/visit"><IconPin /> Visit store</Link>
         </div>
       </nav>
 
-      <div className={`drawer${open ? " open" : ""}`} id="drawer">
+      <div className={`drawer shopping-drawer${open ? " open" : ""}`} id="drawer" aria-hidden={!open} inert={!open}>
         <div className="veil" onClick={() => setOpen(false)} />
-        <div className="panel">
+        <div className="panel" ref={dialogRef} role="dialog" aria-modal="true" aria-label="Mobile World menu">
+          <button type="button" className="drawer-close" aria-label="Menu बंद कीजिए" onClick={() => setOpen(false)}>×</button>
           <Link className="logo" href="/" onClick={() => setOpen(false)}>
             <i><Image src="/images/mobile-world-logo-79e75645.webp" alt="" width={240} height={240} sizes="40px" /></i><span>{shop.name}<s>{shop.tagline}</s></span>
           </Link>
 
           <SearchBox id="q-drawer" index={searchIndex} onDone={() => setOpen(false)} />
-
-          {/* पहली सीढ़ी — सारे page */}
-          <h2 className="dh">सारे Page</h2>
-          {sitePages.map((p) => (
-            <Link key={p.href} className="d" href={p.href} onClick={() => setOpen(false)}
-                  style={{ "--t": p.tone } as React.CSSProperties}>
-              <i className="tone" aria-hidden="true">{p.emoji}</i>
-              {p.label}
-            </Link>
-          ))}
 
           {/*
             दूसरी और तीसरी सीढ़ी — सामान।
@@ -134,7 +138,7 @@ export function SiteHeader({ searchIndex }: { searchIndex: SearchEntry[] }) {
           */}
           <h2 className="dh">सामान — category से चुनिए</h2>
           {productMenu.map((g) => (
-            <details className="dsub" key={g.label}>
+            <details className="dsub" key={g.label} open>
               <summary>
                 <i className="tone" aria-hidden="true">{g.emoji}</i>
                 {g.label}
@@ -151,6 +155,15 @@ export function SiteHeader({ searchIndex }: { searchIndex: SearchEntry[] }) {
                 ))}
               </div>
             </details>
+          ))}
+
+          <h2 className="dh">Customer services</h2>
+          {sitePages.filter((page) => ["/products", "/finance", "/returns", "/repairing", "/after-sales-support", "/visit", "/contact"].includes(page.href)).map((page) => (
+            <Link className="d" key={page.href} href={page.href} onClick={() => setOpen(false)}>{page.label}</Link>
+          ))}
+          <h2 className="dh">Mobile World के बारे में</h2>
+          {sitePages.filter((page) => ["/", "/about", "/team", "/posts", "/terms", "/privacy"].includes(page.href)).map((page) => (
+            <Link className="d" key={page.href} href={page.href} onClick={() => setOpen(false)}>{page.label}</Link>
           ))}
 
           <div className="btns" style={{ marginTop: 18 }}>
@@ -232,6 +245,7 @@ function SearchBox({ id, index, onDone }:
           onKeyDown={keys}
           role="combobox" aria-expanded={open} aria-controls={listId}
           aria-autocomplete="list"
+          aria-activedescendant={open && sel >= 0 ? `${id}-option-${sel}` : undefined}
           placeholder="क्या ढूँढ़ रहे हैं — TV, AC, Laptop…"
         />
         <button type="submit" aria-label="ढूँढ़िए"><IconSearch /></button>
@@ -240,7 +254,7 @@ function SearchBox({ id, index, onDone }:
       {open && (
         <ul className="sres" id={listId} role="listbox">
           {hits.map((h, i) => (
-            <li key={h.h + h.t} role="option" aria-selected={i === sel}>
+            <li key={h.h + h.t} id={`${id}-option-${i}`} role="option" aria-selected={i === sel}>
               <button type="button" className={i === sel ? "on" : undefined}
                 onPointerEnter={() => setSel(i)}
                 onClick={() => go(h.h)}>
@@ -268,3 +282,4 @@ function SearchBox({ id, index, onDone }:
     </div>
   );
 }
+

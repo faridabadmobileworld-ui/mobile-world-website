@@ -1,5 +1,17 @@
 # CLAUDE.md — Mobile World Website
 
+## Current storefront direction — owner request, 28 September 2026
+
+The owner now wants the header and first screen to prioritize customers: product
+categories, visible search, product slides and useful CTAs. This supersedes the
+earlier requirements to lead with the scroll video, family history, and all-page
+navigation. The homepage now uses ShoppingHero + ShoppingCategories. History and
+the team are linked from a compact lower section and remain on /about and /team;
+/showcase retains the cinematic version. Product categories remain canonical in
+data/shop.ts; existing category URL slugs are unchanged. The new scoped styles
+are app/storefront.css. Keep this customer-first order in future edits.
+
+
 यह file हर Claude Code session में automatically load होती है।
 जो यहाँ लिखा है, वो हर बार दोहराना नहीं पड़ेगा।
 
@@ -1104,3 +1116,4 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+

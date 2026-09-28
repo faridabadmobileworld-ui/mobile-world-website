@@ -1,5 +1,6 @@
 import { localBusinessSchema, jsonLdScript } from "@/data/schema";
-import { PhoneScrub } from "@/components/PhoneScrub";
+import { ShoppingHero } from "@/components/ShoppingHero";
+import { ShoppingCategories } from "@/components/ShoppingCategories";
 import { HomeBody } from "@/components/HomeBody";
 
 /* Home page ka saara content ab `components/HomeBody.tsx` mein hai, taaki
@@ -11,8 +12,9 @@ export default function Home() {
       <script type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLdScript(localBusinessSchema()) }} />
 
-      <div className="wrap">
-        <PhoneScrub />
+      <div className="wrap shopping-home">
+        <ShoppingHero />
+        <ShoppingCategories />
         <HomeBody current="/" />
       </div>
     </>

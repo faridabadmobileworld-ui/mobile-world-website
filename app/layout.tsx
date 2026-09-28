@@ -5,6 +5,7 @@ import { buildSearchIndex } from "@/data/search";
 import { SiteFooter, MobileBar } from "@/components/SiteFooter";
 import { ArtSprite } from "@/components/ArtSprite";
 import "./globals.css";
+import "./storefront.css";
 import { Aura } from "@/components/Aura";
 
 /**

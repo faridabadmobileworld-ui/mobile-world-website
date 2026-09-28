@@ -2,33 +2,21 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { ask } from "@/data/content";
 import { IconWhatsApp } from "./Icons";
 
-/**
- * `?q=` ke hisaab se products chhaanta hai.
- *
- * Saare cards server par hi HTML mein aa jaate hain — Google ko poori
- * list dikhti hai — aur ye component sirf na-milne wale cards chhupa
- * deta hai. Isliye page static rehta hai aur SEO bhi bacha rehta hai.
- *
- * `useSearchParams` jaanbujh kar istemaal nahi kiya: usse ye hissa
- * Suspense mein chala jaata hai aur static HTML khaali reh jaata hai.
- */
+/** Cards remain server-rendered. URL query changes filter them after hydration. */
 export function ProductFilter() {
-  const [q, setQ] = useState("");
+  const params = useSearchParams();
+  const q = (params.get("q") ?? "").trim();
   const [hits, setHits] = useState<number | null>(null);
 
   useEffect(() => {
-    const read = () => {
-      const term = (new URLSearchParams(location.search).get("q") ?? "").trim();
-      setQ(term);
-      setHits(applyFilter(term));
-    };
-    read();
-    addEventListener("popstate", read);
-    return () => removeEventListener("popstate", read);
-  }, []);
+    // Query changes on this same page must update the visible products too.
+    const frame = requestAnimationFrame(() => setHits(applyFilter(q)));
+    return () => cancelAnimationFrame(frame);
+  }, [q]);
 
   if (!q) {
     return (
@@ -58,12 +46,12 @@ export function ProductFilter() {
 
 /** Cards chhupata/dikhata hai aur kitne mile wo batata hai. */
 function applyFilter(term: string): number {
-  const needle = term.toLowerCase();
+  const words = term.toLowerCase().split(/\s+/).filter(Boolean);
   const cards = [...document.querySelectorAll<HTMLElement>("[data-search]")];
   let hits = 0;
 
   for (const card of cards) {
-    const match = !needle || (card.dataset.search ?? "").includes(needle);
+    const match = words.every((word) => (card.dataset.search ?? "").includes(word));
     card.hidden = !match;
     if (match) hits++;
   }
@@ -76,3 +64,4 @@ function applyFilter(term: string): number {
 
   return hits;
 }
+

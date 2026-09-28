@@ -71,6 +71,7 @@ export type OpeningHours = {
 export type Category = {
   slug: string;
   name: string;
+  shortName?: string;
 };
 
 export type Brand = {
@@ -175,15 +176,15 @@ export type Services = {
  * कम से कम एक सामान डालिए, वरना Products page पर वो heading ख़ाली रहेगी।
  */
 export const categories: Category[] = [
-  { slug: "smartphones", name: "Smartphones" },
+  { slug: "smartphones", name: "Mobiles", shortName: "Mobiles" },
   { slug: "laptops-tablets", name: "Laptops & Tablets" },
-  { slug: "televisions", name: "Televisions" },
-  { slug: "air-conditioners", name: "Air Conditioners" },
+  { slug: "televisions", name: "Televisions", shortName: "TVs" },
+  { slug: "air-conditioners", name: "Air Conditioners", shortName: "ACs" },
   { slug: "washing-machines", name: "Washing Machines" },
   { slug: "refrigerators", name: "Refrigerators" },
   { slug: "inverters-batteries", name: "Inverters & Batteries" },
   { slug: "audio-wearables", name: "Audio & Wearables" },
-  { slug: "kitchen-appliances", name: "Kitchen Appliances" },
+  { slug: "kitchen-appliances", name: "Kitchen & Home Appliances", shortName: "Home Appliances" },
   { slug: "accessories", name: "Accessories" },
 ];
 
