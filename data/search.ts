@@ -32,7 +32,7 @@ export type SearchEntry = {
  * "Air Conditioners" नहीं लिखता — "ac" लिखता है। ये जोड़े बिना search
  * ख़ाली हाथ लौटाता है, और ग्राहक समझता है कि दुकान पर चीज़ है ही नहीं।
  */
-const alias: Record<string, string> = {
+export const categorySearchAliases: Record<string, string> = {
   "smartphones": "phone mobile फ़ोन फोन मोबाइल smartphone 5g android iphone",
   "laptops-tablets": "laptop tablet लैपटॉप टैबलेट computer कंप्यूटर notebook ipad",
   "televisions": "tv television टीवी टेलीविजन smart tv led 32 43 55 inch",
@@ -65,7 +65,7 @@ export function buildSearchIndex(): SearchEntry[] {
       t: it.title,
       k: it.kicker,
       h: `/products#${it.category}`,
-      s: key(it.title, it.kicker, it.tags.join(" "), alias[it.category]),
+      s: key(it.title, it.kicker, it.tags.join(" "), categorySearchAliases[it.category]),
     });
   }
 
@@ -75,7 +75,7 @@ export function buildSearchIndex(): SearchEntry[] {
       t: c.name,
       k: "Category",
       h: `/products#${c.slug}`,
-      s: key(c.name, alias[c.slug]),
+      s: key(c.name, categorySearchAliases[c.slug]),
     });
   }
 
@@ -134,3 +134,4 @@ export function searchIn(index: SearchEntry[], term: string, limit = 8): SearchE
   hits.sort((a, b) => a.rank - b.rank);
   return hits.slice(0, limit).map((h) => h.e);
 }
+
