@@ -71,7 +71,7 @@ export function SiteHeader({ searchIndex }: { searchIndex: SearchEntry[] }) {
           <LiveBadge />
           <span className="r">
             <a className="shopping-location" href={shop.social.googleMaps} target="_blank" rel="noopener noreferrer"><IconPin /> {shop.address.locality}, {shop.address.city}</a>
-            <a href={shop.phone.tel}><b>{shop.phone.display}</b></a>
+            <span className="mw-header-hours">10 AM–10 PM · महीने की आख़िरी तारीख़ बंद</span>
           </span>
         </div>
       </div>
@@ -79,7 +79,7 @@ export function SiteHeader({ searchIndex }: { searchIndex: SearchEntry[] }) {
       <header className="hdr shopping-header" ref={headerRef}>
         <div className="wrap">
           <button
-            className="iconbtn" aria-label="Menu kholiye"
+            className="iconbtn" aria-label="Menu खोलिए"
             aria-expanded={open} aria-controls="drawer"
             onClick={() => setOpen(true)}
           ><IconMenu /></button>
@@ -108,16 +108,13 @@ export function SiteHeader({ searchIndex }: { searchIndex: SearchEntry[] }) {
 
       <nav className="cstrip shopping-nav" aria-label="Products और customer services">
         <div className="wrap">
-          <button className="cs-pages" type="button" aria-label="सभी categories और menu खोलिए"
-            aria-expanded={open} aria-controls="drawer" onClick={() => setOpen(true)}>
-            <IconGrid /> सभी categories
-          </button>
+          <Link className="cs-pages" href="/products"><IconGrid /> सभी products</Link>
           {primaryCategories.map((category) => (
             <Link key={category.slug} href={`/products#${category.slug}`}>{category.shortName ?? category.name}</Link>
           ))}
           <Link className="shopping-nav-service" href="/finance" aria-current={path === "/finance" ? "page" : undefined}>EMI & Finance</Link>
           <Link href="/repairing" aria-current={path === "/repairing" ? "page" : undefined}>Repairing</Link>
-          <Link className="shopping-nav-visit" href="/visit"><IconPin /> Visit store</Link>
+          <Link className="shopping-nav-visit" href="/visit"><IconPin /> दुकान पर आइए</Link>
         </div>
       </nav>
 
@@ -271,7 +268,7 @@ function SearchBox({ id, index, onDone }:
         <ul className="sres" role="listbox">
           <li>
             <a href={`${shop.phone.whatsapp}?text=${encodeURIComponent(
-              `Namaste Mobile World! क्या आपके पास ${q.trim()} है?`)}`}
+              `नमस्ते Mobile World! क्या आपके पास ${q.trim()} है?`)}`}
               target="_blank" rel="noopener" onClick={() => { setShut(true); onDone?.(); }}>
               <b>“{q.trim()}” यहाँ नहीं मिला</b>
               <i>WhatsApp पर पूछ लीजिए — दुकान पर हो सकता है</i>

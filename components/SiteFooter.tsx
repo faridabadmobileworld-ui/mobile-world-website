@@ -2,97 +2,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { shop } from "@/data/shop";
 import { AskWhatsApp } from "./AskWhatsApp";
-import { ask, navCategories } from "@/data/content";
-import { sitePages } from "@/data/pages";
-import { LiveBadge, NextClosure } from "./StoreStatus";
-import { IconYouTube, IconInstagram, IconFacebook, IconHome, IconGrid, IconPin } from "./Icons";
-
-/** नीचे वाले दो खाने — कौन सा page किस खाने में। बाक़ी सब menu में है। */
-const DUKAAN = ["/about", "/team", "/products", "/posts", "/visit"];
-const MADAD = ["/repairing", "/after-sales-support", "/finance", "/returns", "/contact"];
+import { IconYouTube, IconInstagram, IconFacebook, IconHome, IconGrid, IconPin, IconWhatsApp } from "./Icons";
 
 export function SiteFooter() {
-  return (
-    <footer className="ftr">
-      <div className="wrap">
-        <div className="fgrid">
-          <div>
-            <Link className="logo" href="/"><i><Image src="/images/mobile-world-logo-79e75645.webp" alt="" width={240} height={240} sizes="40px" /></i><span>{shop.name}<s>{shop.tagline}</s></span></Link>
-            <address style={{ marginTop: 12 }}>
-              {shop.address.street}<br />
-              {shop.address.landmark}<br />
-              {shop.address.locality}, {shop.address.city}, {shop.address.state} {shop.address.postalCode}<br /><br />
-              <a href={shop.phone.tel}><b>{shop.phone.display}</b></a><br />
-              रोज़ सुबह 10 से रात 10
-            </address>
-            <div className="soc">
-              <a href={shop.social.youtube} target="_blank" rel="noopener" aria-label="YouTube"><IconYouTube /></a>
-              <a href={shop.social.instagram} target="_blank" rel="noopener" aria-label="Instagram"><IconInstagram /></a>
-              <a href={shop.social.facebook} target="_blank" rel="noopener" aria-label="Facebook"><IconFacebook /></a>
-            </div>
-          </div>
-
-          {/* Page की list `data/pages.ts` से — क्रम और नाम वहीं एक जगह बदलते हैं। */}
-          <div>
-            <h2 className="fh">दुकान</h2>
-            <ul>
-              {sitePages.filter((p) => DUKAAN.includes(p.href)).map((p) => (
-                <li key={p.href}><Link href={p.href}>{p.label}</Link></li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h2 className="fh">सामान</h2>
-            <ul>
-              {navCategories.slice(0, 6).map((c) => (
-                <li key={c.slug}><Link href={`/products#${c.slug}`}>{c.label}</Link></li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h2 className="fh">मदद</h2>
-            <ul>
-              {sitePages.filter((p) => MADAD.includes(p.href)).map((p) => (
-                <li key={p.href}><Link href={p.href}>{p.label}</Link></li>
-              ))}
-              <li><a href={ask("पुराने phone के Exchange")} target="_blank" rel="noopener">Exchange</a></li>
-              <li><a href={ask("EMI")} target="_blank" rel="noopener">EMI</a></li>
-              <li><a href={ask("Delivery")} target="_blank" rel="noopener">Delivery</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h2 className="fh">दुकान की जानकारी</h2>
-            <ul>
-              <li><LiveBadge /></li>
-              <li>हर महीने की आख़िरी तारीख़ को बंद</li>
-              <li>अगली छुट्टी: <NextClosure /></li>
-              <li>Proprietor: {shop.owner}</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="fbot">
-          <span>© {new Date().getFullYear()} {shop.name} · {shop.registeredName}</span>
-          <span>
-            <Link href="/terms">Terms &amp; Conditions</Link> · <Link href="/returns">Return और Exchange</Link> · <Link href="/privacy">Privacy</Link> · सिर्फ़ पूछताछ के लिए — यहाँ से order नहीं होता
-          </span>
-        </div>
-      </div>
-    </footer>
-  );
+  return <footer className="ftr mw-footer"><div className="wrap">
+    <div className="mw-footer-top"><div><Link className="logo" href="/"><i><Image src="/images/mobile-world-logo-79e75645.webp" alt="" width={100} height={100} sizes="40px" /></i><span>MOBILE WORLD<s>Mobile · Laptop · Electronics · Home Appliances</s></span></Link><p>आपकी ज़रूरत का सामान।<br />आपकी अपनी दुकान।</p></div>
+      <div><h2>Explore कीजिए</h2><Link href="/products">Products और comparison</Link><Link href="/products?view=shortlist">मेरी shortlist</Link><Link href="/posts">Tech Blog और Guides</Link><Link href="/about">हमारा सफ़र</Link><Link href="/team">हमारी Team</Link></div>
+      <div><h2>आपकी मदद के लिए</h2><Link href="/finance">EMI और Finance</Link><Link href="/returns">Return और Exchange</Link><Link href="/repairing">Mobile Repairing</Link><Link href="/after-sales-support">ख़रीदने के बाद Support</Link><Link href="/contact">Contact और शिकायत</Link></div>
+      <div><h2>हमसे जुड़े रहिए</h2><a href={shop.phone.tel}>{shop.phone.display}</a><Link href="/visit">Gurudwara Road, NIT Faridabad</Link><span>10 AM–10 PM</span><small>हर महीने की आख़िरी तारीख़ को बंद</small><div className="soc"><a href={shop.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram पर Mobile World"><IconInstagram /></a><a href={shop.social.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube पर Mobile World"><IconYouTube /></a><a href={shop.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook पर Mobile World"><IconFacebook /></a><a href={shop.social.whatsappChannel} target="_blank" rel="noopener noreferrer" aria-label="Mobile World का WhatsApp Channel"><IconWhatsApp /></a></div></div>
+    </div>
+    <div className="mw-footer-bottom"><span>© {new Date().getFullYear()} {shop.name} · {shop.registeredName}</span><div><Link href="/terms">Terms</Link><Link href="/privacy">Privacy</Link><span>Content: {shop.authorName}</span></div></div>
+  </div></footer>;
 }
 
-/** Phone पर नीचे चिपकी quick actions bar। */
 export function MobileBar() {
-  return (
-    <nav className="mbar" aria-label="Quick actions">
-      <Link href="/"><IconHome />Home</Link>
-      <Link href="/products"><IconGrid />सामान</Link>
-      <AskWhatsApp />
-      <a href={shop.social.googleMaps} target="_blank" rel="noopener"><IconPin />रास्ता</a>
-    </nav>
-  );
+  return <nav className="mbar" aria-label="जल्दी पहुँचिए"><Link href="/"><IconHome />Home</Link><Link href="/products"><IconGrid />Products</Link><AskWhatsApp /><a href={shop.social.googleMaps} target="_blank" rel="noopener noreferrer"><IconPin />रास्ता</a></nav>;
 }

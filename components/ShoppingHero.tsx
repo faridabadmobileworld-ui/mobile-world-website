@@ -75,6 +75,8 @@ export function ShoppingHero() {
               </div>
             </div>
             <div className="shopping-visual">
+              <span className="mw-hero-orbit" aria-hidden="true" />
+              <span className="mw-hero-stamp">MOBILE WORLD<span>पसंद आपकी · मदद हमारी</span></span>
               <div className="shopping-image">
                 <Image src={slide.image} alt={slide.alt} fill sizes="(max-width:700px) 92vw, 560px"
                   priority={n === 0} />

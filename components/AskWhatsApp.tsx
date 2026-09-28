@@ -39,7 +39,7 @@ export function askFor(path: string): string {
 
 /** Message की असली line — हर हाल में एक भली, सीधी बात। */
 function line(path: string): string {
-  const hi = "Namaste Mobile World!";
+  const hi = "नमस्ते Mobile World!";
 
   // Article पढ़ते हुए पूछा तो — कौन सी post, यह `/posts/slug` से नहीं
   // निकालना; slug अंग्रेज़ी में है और message में भद्दा लगता। Article के
@@ -69,3 +69,4 @@ function line(path: string): string {
 
   return `${hi} मुझे ${page.label} के बारे में जानना है।`;
 }
+
