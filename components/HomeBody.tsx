@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { shop, brands } from "@/data/shop";
 import { livePosts, storePhotos } from "@/data/content";
-import { availablePhoneModels, upcomingPhoneModels } from "@/data/catalog";
+import { phoneBrands, upcomingPhoneModels } from "@/data/catalog";
 import { PhoneFinder } from "./PhoneFinder";
 import { IconArrow, IconWhatsApp, IconPin, IconPhone } from "./Icons";
 import { LiveBadge } from "./StoreStatus";
@@ -11,18 +11,18 @@ export function HomeBody({ journey = true }: { current?: string; journey?: boole
   const guideSlugs = ["new-phones", "best-laptops-students", "phone-exchange-guide"];
   const guides = guideSlugs.flatMap((slug) => livePosts().filter((p) => p.slug === slug));
   const guideImages = ["/images/iphone-display-at-the-mobile-world-counter-346d3e71.webp", "/images/laptop-for-study-and-office-a146b020.webp", "/images/purana-aur-naya-phone-counter-par.webp"];
-  const featuredModels = availablePhoneModels.slice(0, 6);
+  const featuredBrands = phoneBrands.slice(0, 6);
   return <>
     <section className="mw-section" id="selected-models">
       <div className="shopping-section-heading"><div><p className="shopping-overline">करीब से देखिए · SELECTED MODELS</p><h2>आपकी अगली पसंद, यहाँ से।</h2></div><Link href="/products">Models compare कीजिए <IconArrow /></Link></div>
       <div className="mw-model-grid">
-        {featuredModels.map((p) => <Link href={`/products?model=${p.id}`} className="mw-model-card mw-featured" key={p.id}>
-          <div className="mw-model-media"><Image src={p.image} alt={p.imageAlt} width={800} height={600} sizes="(max-width:700px) 85vw, 380px" /><span className="mw-brand">{p.brand}</span><span className="mw-round-arrow" aria-hidden="true"><IconArrow /></span></div>
-          <div className="mw-model-body"><h3>{p.name}</h3><p>{p.note}</p><div className="mw-featured-bottom"><span>{p.processor}</span><b>जानकारी देखिए <IconArrow /></b></div></div>
+        {featuredBrands.map((b) => <Link href={`/products?brand=${b.slug}#smartphones`} className="mw-model-card mw-featured" key={b.slug}>
+          <div className="mw-model-media"><Image src={b.image} alt={b.imageAlt} width={800} height={600} sizes="(max-width:700px) 85vw, 380px" /><span className="mw-brand">{b.name}</span><span className="mw-round-arrow" aria-hidden="true"><IconArrow /></span></div>
+          <div className="mw-model-body"><h3>{b.name}</h3><p>{b.note}</p><div className="mw-featured-bottom"><span>{b.models.length} models · high to low</span><b>Models देखिए <IconArrow /></b></div></div>
         </Link>)}
       </div>
 
-      {upcomingPhoneModels.length > 0 && <div className="mw-upcoming-strip" aria-label="Upcoming models"><span>Upcoming</span>{upcomingPhoneModels.map((p) => <Link key={p.id} href={`/products?model=${p.id}`}>{p.name} · details बाद में</Link>)}</div>}
+      {upcomingPhoneModels.length > 0 && <div className="mw-upcoming-strip" aria-label="Upcoming models"><span>Upcoming</span>{upcomingPhoneModels.map((p) => <Link key={p.id} href="/products?brand=xiaomi#smartphones">{p.name} · details बाद में</Link>)}</div>}
       <div className="mw-brands"><span>अपना brand चुनिए</span><p>{brands.map((b) => b.name).join(" · ")}</p></div>
     </section>
 
