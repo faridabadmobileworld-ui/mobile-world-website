@@ -1,122 +1,186 @@
 import { shop } from "./shop";
 
-/** Available catalogue preview. These are customer-facing model-name cards, not price or stock records. */
 export type PhoneModel = {
-  id: string; brand: string; name: string; image: string; imageAlt: string;
-  note: string; display: string; camera: string; processor: string; power: string;
-  software: string; colours: { name: string; hex: string }[]; variants: string[];
-  system: "Android" | "iOS"; reasons: Record<string, string>;
-  source: string; checked: string; status?: "available" | "upcoming";
+  id: string; brand: string; brandSlug: string; name: string; image: string; imageAlt: string;
+  note: string; display: string; camera: string; processor: string; power: string; software: string;
+  colours: { name: string; hex: string }[]; variants: string[]; system: "Android" | "iOS";
+  reasons: Record<string, string>; source: string; checked: string; rank: number; status?: "available" | "upcoming";
 };
+export type PhoneBrand = { slug: string; name: string; image: string; imageAlt: string; headline: string; note: string; models: PhoneModel[] };
 
-const redmiImage = "/images/redmi-17-5g-colours-mobile-world-faridabad.webp";
-const iphoneImage = "/images/iphone-display-at-the-mobile-world-counter-346d3e71.webp";
+const images = {
+  apple: "/images/iphone-display-at-the-mobile-world-counter-346d3e71.webp",
+  samsung: "/images/flagship-phones-apple-samsung-xiaomi-vivo-c3df528a.webp",
+  xiaomi: "/images/redmi-17-5g-colours-mobile-world-faridabad.webp",
+  google: "/images/flagship-smartphone-e6739d50.webp",
+  nothing: "/images/model-nothing3a.png",
+  mid: "/images/mid-range-5g-phones-five-colours-v2-7c07be19.webp",
+};
+const dark = [{name:"Black",hex:"#17191d"},{name:"White",hex:"#f6f5f1"},{name:"Blue",hex:"#8da8cf"},{name:"Green",hex:"#91a98d"}];
+const rich = [{name:"Black",hex:"#15171a"},{name:"Silver",hex:"#d9dde2"},{name:"Gold",hex:"#d8c7a4"},{name:"Mint",hex:"#b8d0bd"}];
+const apple = [{name:"Black",hex:"#24272c"},{name:"White",hex:"#f4f2ee"},{name:"Natural",hex:"#c8bfb3"},{name:"Blue",hex:"#8aa2bd"}];
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
 
-export const phoneModels: PhoneModel[] = [
-  {
-    id: "redmi-a7", brand: "Xiaomi Redmi", name: "Redmi A7",
-    image: redmiImage, imageAlt: "Mobile World में Redmi phone options",
-    note: "Daily calling, WhatsApp और basic smartphone use के लिए entry segment option।",
-    display: "Large display · रोज़ के इस्तेमाल के लिए", camera: "AI camera setup · casual photos",
-    processor: "Everyday performance", power: "Long battery focus", software: "Android · Redmi experience",
-    colours: [{name:"Black",hex:"#20242a"},{name:"Blue",hex:"#9fb5cf"},{name:"Green",hex:"#b9c7a3"}],
-    variants: ["RAM/Storage options दुकान से confirm कीजिए"], system: "Android",
-    reasons: { camera: "Casual photos और social sharing के लिए Redmi का simple option।", everyday: "Calling, WhatsApp और daily apps के लिए budget-friendly choice।", updates: "Entry phone चाहिए तो availability पूछिए।" },
-    source: shop.siteUrl, checked: "2026-09-29",
-  },
-  {
-    id: "redmi-15-series", brand: "Xiaomi Redmi", name: "Redmi 15 Series",
-    image: redmiImage, imageAlt: "Redmi 15 series के colours",
-    note: "Bigger screen, battery और smooth daily performance वाली Redmi series।",
-    display: "Large FHD+ style display", camera: "Multi-camera highlights", processor: "Daily + entertainment performance",
-    power: "Battery-focused Redmi series", software: "Android · HyperOS/Redmi UI",
-    colours: [{name:"Black",hex:"#1f2328"},{name:"Silver",hex:"#d8dce2"},{name:"Blue",hex:"#86a8d8"}],
-    variants: ["Redmi 15", "Redmi 15A", "Redmi 15C"], system: "Android",
-    reasons: { camera: "Photos, reels और daily social use के लिए practical option।", everyday: "Large display और battery priority वाले customers के लिए।", updates: "Latest Redmi family में options देखिए।" },
-    source: shop.siteUrl, checked: "2026-09-29",
-  },
-  {
-    id: "redmi-a7-pro-4g", brand: "Xiaomi Redmi", name: "Redmi A7 Pro 4G",
-    image: redmiImage, imageAlt: "Redmi A7 Pro 4G availability card",
-    note: "4G Redmi option चाहिए तो इस model की availability दुकान से पूछिए।",
-    display: "Big screen experience", camera: "Everyday camera highlights", processor: "Daily app performance",
-    power: "Battery backup focus", software: "Android · Redmi experience",
-    colours: [{name:"Midnight",hex:"#161b22"},{name:"Mint",hex:"#b8d0bd"},{name:"Blue",hex:"#8daed0"}],
-    variants: ["Variant और colour दुकान से confirm कीजिए"], system: "Android",
-    reasons: { camera: "Normal photos और video calls के लिए suitable Redmi option।", everyday: "Budget buyers के लिए simple और practical 4G model।", updates: "New Redmi option चाहिए तो team से पूछिए।" },
-    source: shop.siteUrl, checked: "2026-09-29",
-  },
-  {
-    id: "redmi-note-15-series", brand: "Xiaomi Redmi", name: "Redmi Note 15 Series",
-    image: redmiImage, imageAlt: "Redmi Note series options",
-    note: "Display, camera और performance balance चाहने वालों के लिए Note series।",
-    display: "AMOLED / high refresh-rate style options", camera: "Camera-focused Note highlights", processor: "Balanced performance",
-    power: "Fast charging और battery focus", software: "Android · HyperOS/Redmi UI",
-    colours: [{name:"Graphite",hex:"#3a3d42"},{name:"White",hex:"#f2f4f7"},{name:"Blue",hex:"#779bd0"}],
-    variants: ["Note 15", "Note 15 Pro", "Note 15 Pro+"], system: "Android",
-    reasons: { camera: "Camera और display priority वाले Redmi customers के लिए।", everyday: "Entertainment, multitasking और daily use का balanced option।", updates: "Note series में बेहतर feature set चाहिए तो पूछिए।" },
-    source: shop.siteUrl, checked: "2026-09-29",
-  },
-  {
-    id: "redmi-note-17-series", brand: "Xiaomi Redmi", name: "Redmi Note 17 Series",
-    image: redmiImage, imageAlt: "Redmi Note 17 series availability card",
-    note: "Redmi Note 17, Note 17 Pro और Pro Max enquiries के लिए priority card।",
-    display: "Premium Note display highlights", camera: "Camera-focused Note highlights", processor: "Performance-focused Note series",
-    power: "Fast charging और battery focus", software: "Android · HyperOS/Redmi UI",
-    colours: [{name:"Black",hex:"#17191d"},{name:"Silver",hex:"#d9dde2"},{name:"Blue",hex:"#7898c8"}],
-    variants: ["Redmi Note 17", "Note 17 Pro", "Note 17 Pro Max"], system: "Android",
-    reasons: { camera: "Better Redmi Note camera और performance पूछने वालों के लिए।", everyday: "Premium Note experience चाहिए तो availability पूछिए।", updates: "Note series में आगे के options watchlist में रखिए।" },
-    source: shop.siteUrl, checked: "2026-09-29",
-  },
-  {
-    id: "xiaomi-17-series", brand: "Xiaomi", name: "Xiaomi 17 Series",
-    image: redmiImage, imageAlt: "Xiaomi flagship series card",
-    note: "Premium Xiaomi experience, flagship performance और camera-focused buyers के लिए।",
-    display: "Premium display experience", camera: "Flagship camera highlights", processor: "Flagship-grade performance",
-    power: "Fast charging और premium battery focus", software: "Android · Xiaomi HyperOS",
-    colours: [{name:"Black",hex:"#101317"},{name:"White",hex:"#f4f2ec"},{name:"Green",hex:"#88967d"}],
-    variants: ["Xiaomi 17", "Xiaomi 17 Pro", "Xiaomi 17 Ultra", "Xiaomi 17T"], system: "Android",
-    reasons: { camera: "Premium camera और performance priority हो तो Xiaomi flagship पूछिए।", everyday: "Power users और premium Android buyers के लिए।", updates: "Xiaomi flagship family की availability confirm कीजिए।" },
-    source: shop.siteUrl, checked: "2026-09-29",
-  },
-  {
-    id: "iphone-18-series", brand: "Apple", name: "iPhone 18 Series",
-    image: iphoneImage, imageAlt: "Mobile World में iPhone display counter",
-    note: "Apple ecosystem, premium camera और long-term iPhone experience चाहने वालों के लिए।",
-    display: "Premium Super Retina style experience", camera: "Advanced iPhone camera highlights", processor: "Next-generation Apple performance",
-    power: "All-day iPhone experience", software: "iOS",
-    colours: [{name:"Black",hex:"#25272b"},{name:"White",hex:"#f1f0ed"},{name:"Natural",hex:"#c8bfb2"},{name:"Blue",hex:"#8da3be"}],
-    variants: ["iPhone 18", "iPhone 18 Plus/Air", "iPhone 18 Pro", "iPhone 18 Pro Max"], system: "iOS",
-    reasons: { camera: "Premium photos, video और Apple ecosystem के लिए।", everyday: "iOS, performance और long-term usage पसंद हो तो।", updates: "Long-term iPhone ownership के लिए Apple series पूछिए।" },
-    source: shop.siteUrl, checked: "2026-09-29",
-  },
-  {
-    id: "redmi-17c-upcoming", brand: "Xiaomi Redmi", name: "Redmi 17C",
-    image: redmiImage, imageAlt: "Upcoming Redmi 17C model card",
-    note: "Upcoming section में अभी सिर्फ़ Redmi 17C रखा गया है। Details बाद में update करेंगे।",
-    display: "Upcoming · details later", camera: "Upcoming · details later", processor: "Upcoming model", power: "Upcoming model", software: "Android · Redmi experience",
-    colours: [{name:"Expected options",hex:"#d7dde7"}], variants: ["Details बाद में add करेंगे"], system: "Android",
-    reasons: { camera: "Upcoming details बाद में update होंगे।", everyday: "Redmi 17C के लिए enquiry रख सकते हैं।", updates: "Upcoming model watchlist में रखा है।" },
-    source: shop.siteUrl, checked: "2026-09-29", status: "upcoming",
-  },
-];
-
-export const availablePhoneModels = phoneModels.filter((model) => model.status !== "upcoming");
-export const upcomingPhoneModels = phoneModels.filter((model) => model.status === "upcoming");
-
-export function validModelIds(value: string | null): string[] {
-  return [...new Set((value ?? "").split(","))].filter((id) => phoneModels.some((p) => p.id === id)).slice(0, 8);
-}
-
-export function recommendPhones(system: string, priority: string): PhoneModel[] {
-  const base = availablePhoneModels.filter((p) => system === "any" || p.system === system);
-  const order = priority === "camera" ? ["iphone-18-series", "xiaomi-17-series", "redmi-note-15-series", "redmi-note-17-series"]
-    : priority === "updates" ? ["iphone-18-series", "xiaomi-17-series", "redmi-note-15-series", "redmi-15-series"]
-    : ["redmi-15-series", "redmi-a7", "redmi-a7-pro-4g", "iphone-18-series"];
-  return order.flatMap((id) => base.filter((p) => p.id === id)).concat(base.filter((p) => !order.includes(p.id))).slice(0, 4);
-}
-
-export function modelEnquiry(models: PhoneModel[], details = ""): string {
-  const names = models.map((p, i) => `${i + 1}. ${p.brand} ${p.name}`).join("\n");
-  return `${shop.phone.whatsapp}?text=${encodeURIComponent(`नमस्ते Mobile World! मेरी पसंद की list:\n${names}\n${details ? `${details}\n` : ""}कृपया उपलब्ध variant, colour और दुकान के दाम की जानकारी दीजिए।`)}`;
-}
+function phone(brand: string, brandSlug: string, rank: number, name: string, image: string, variants: string[], colours = rich, system: "Android" | "iOS" = "Android"): PhoneModel {
+  const premium = rank <= 2;
+  return {
+    id: `${brandSlug}-${slug(name)}`, brand, brandSlug, rank, name, image, imageAlt: `${brand} ${name} product image`,
+    note: premf�V�&�vRV�V�'��f&��B�6���W"
+IN
+K7F�6�
+Jn
+X
+I^
+K�
+J�
+K�
+Xr6��f�&�
+I^
+K
+X~
+H"�"�%�V�"F�ǒ�W6R�F����f&��B
+IN
+K6���W"
+Jn
+X
+I^
+K�
+J�
+K�
+Xr6��f�&�
+I^
+K
+X~
+H"�"��F�7���&V֗V��%&V֗V�F�7��"�$�&vRF�ǒ�W6RF�7��"��6�W&�&V֗V��$6�W&�f�7W6VB��v�Ɩv�G2"�$WfW'�F�6�W&��v�Ɩv�G2"��&�6W76�#�&V֗V��$��v�W&f�&��6R&�vR"�$F�ǒW&f�&��6R&�vR"���vW#�$&GFW'�
+IN
+K6�&v��rFWF��2
+Jn
+X
+I^
+K�
+J�
+J�
+K6��f�&�
+K�
+X�
+H.
+I~
+Xr"��6�gGv&S�7�7FV����&��2"�&��2"�$�G&��B"��6���W'2�f&��G2�7�7FV��6�W&6S�6���6�FUW&��6�V6�VC�###b���#�"��&V6��3���6�W&�G�'&�G�G���W�6�W&�f�7W6VB'W�W'2
+I^
+Xr
+K.
+K�
+H����WfW'�F��G�'&�G�G���W�
+K
+X�
+I�
+K�
+I^
+XrW6R
+IN
+KWw&FRV�V�'�
+I^
+Xr
+K.
+K�
+H����WFFW3�G�'&�G�G���W�f&��B�6���W"
+IN
+Kf��&�ƗG�7F�&R
+K�
+Xr6��f�&�
+I^
+K
+X~
+H"������Ӱ�Р�gV�7F���'&�B�6�Vs�7G&��r���S�7G&��r���vS�7G&��r���FS�7G&��r���FV�3����T��FVŵғ����T'&�B��&WGW&��6�Vr���R���vR���vT�C�G���W�6�'G���R&�GV7BF�7����VFƖ�S�G���W���FV�6���FR���FV�2Ӱ�Р�W��'B6��7B���T'&�G3����T'&�E�����'&�B�&�R"�$�R"Ɩ�vW2��R�&����R&���
+K�
+Xr7F�F&B����R
+JN
+IR�"Ű����R�$�R"�&�R"��&����R�&���"Ɩ�vW2��RŲ##Sdt""�#S$t""�#D"%���R�&��2"������R�$�R"�&�R"�"�&����R�&�"Ɩ�vW2��RŲ##�t""�##Sdt""�#S$t"%���R�&��2"������R�$�R"�&�R"�2�&����R�"Ɩ�vW2��RŲ##�t""�##Sdt"%���R�&��2"������R�$�R"�&�R"�B�&����Rr6W&�W2"Ɩ�vW2��RŲ##�t""�##Sdt""�#S$t"%���R�&��2"������R�$�R"�&�R"�R�&����Rb6W&�W2"Ɩ�vW2��RŲ##�t""�##Sdt"%���R�&��2"������R�$�R"�&�R"�b�&����RR6W&�W2"Ɩ�vW2��RŲ##�t""�##Sdt"%���R�&��2"���Ғ��'&�B�'6�7V�r"�%6�7V�r"Ɩ�vW2�6�7V�r�$v���2�f��B
+IN
+K6W&�W2��v��F����r�"Ű����R�%6�7V�r"�'6�7V�r"��$v����f��B##b"Ɩ�vW2�6�7V�rŲ##Sdt""�#S$t""�#D"%��F&�������R�%6�7V�r"�'6�7V�r"�"�$v���3#bV�G&"Ɩ�vW2�6�7V�rŲ##Sdt""�#S$t""�#D"%��F&�������R�%6�7V�r"�'6�7V�r"�2�$v���3#b�3#b�"Ɩ�vW2�6�7V�rŲ##Sdt""�#S$t"%��F&�������R�%6�7V�r"�'6�7V�r"�B�$v���3#R6W&�W2"Ɩ�vW2�6�7V�rŲ##�t""�##Sdt""�#S$t"%��F&�������R�%6�7V�r"�'6�7V�r"�R�$v���6W&�W2##b"Ɩ�vW2�6�7V�rŲ#dt"�#�t""�#�t"�#�t""�#�t"�#Sdt"%Ғ�����R�%6�7V�r"�'6�7V�r"�b�$v���6W&�W2##R"Ɩ�vW2�6�7V�rŲ#dt"�#�t""�#�t"�#Sdt"%Ғ��Ғ��'&�B�'���֒"�%���֒�&VF֒"Ɩ�vW2熖�֒�%���֒f�w6���&VF֒��FR
+IN
+K&VF֒�F���2�"Ű����R�%���֒"�'���֒"��%���֒rV�G&"Ɩ�vW2熖�֒Ų##Sdt""�#S$t""�#D"%��F&�������R�%���֒"�'���֒"�"�%���֒r�uB"Ɩ�vW2熖�֒Ų#$t"�#Sdt""�#$t"�S$t"%��F&�������R�%���֒&VF֒"�'���֒"�2�%&VF֒��FRr&���"Ɩ�vW2熖�֒Ų#�t"�#Sdt""�#$t"�#Sdt"%Ғ�����R�%���֒&VF֒"�'���֒"�B�%&VF֒��FRr&�"Ɩ�vW2熖�֒Ų#�t"�#�t""�#�t"�#Sdt"%Ғ�����R�%���֒&VF֒"�'���֒"�R�%&VF֒��FRR&�"Ɩ�vW2熖�֒Ų#�t"�#Sdt""�#$t"�#Sdt"%Ғ�����R�%���֒&VF֒"�'���֒"�b�%&VF֒R�T2�T"Ɩ�vW2熖�֒Ų#Dt"�#�t""�#dt"�#�t""�#�t"�#Sdt"%Ғ�����R�%���֒&VF֒"�'���֒"�r�%&VF֒r�r&�Dr"Ɩ�vW2熖�֒Ų#4t"�cDt""�#Dt"�#�t"%Ғ��Ғ��'&�B�&v��v�R"�$v��v�R"Ɩ�vW2�v��v�R�%��V�6�W&
+IN
+K6�V��G&��B�F���2�"Ű����R�$v��v�R"�&v��v�R"��%��V�&���"Ɩ�vW2�v��v�RŲ##Sdt""�#S$t"%��F&�������R�$v��v�R"�&v��v�R"�"�%��V�&�"Ɩ�vW2�v��v�RŲ##�t""�##Sdt"%��F&�������R�$v��v�R"�&v��v�R"�2�%��V�"Ɩ�vW2�v��v�RŲ##�t""�##Sdt"%��F&�������R�$v��v�R"�&v��v�R"�B�%��V��6W&�W2"Ɩ�vW2�v��v�RŲ##�t""�##Sdt"%��F&����Ғ��'&�B�'f�f�"�%f�f�"Ɩ�vW2�6�7V�r�%b���B
+IN
+K�6W&�W2�"Ű����R�%f�f�"�'f�f�"��%f�f��6W&�W2##b"Ɩ�vW2�6�7V�rŲ#$t"�#Sdt""�#dt"�S$t"%Ғ�����R�%f�f�"�'f�f�"�"�%f�f�b6W&�W2##b"Ɩ�vW2�6�7V�rŲ#�t"�#�t""�#�t"�#Sdt""�#$t"�#Sdt"%Ғ�����R�%f�f�"�'f�f�"�2�%f�f�B6W&�W2"Ɩ�vW2�6�7V�rŲ#�t"�#�t""�#�t"�#Sdt"%Ғ�����R�%f�f�"�'f�f�"�B�%f�f��6W&�W2"Ɩ�vW2�6�7V�rŲ#Dt"�#�t""�#dt"�#�t"%Ғ��Ғ��'&�B�&��"�$��"Ɩ�vW2�֖B�$f��B�&V���b
+IN
+K6W&�W2�"Ű����R�$��"�&��"��$��f��B�6W&�W2"Ɩ�vW2�֖BŲ#$t"�#Sdt""�#dt"�S$t"%Ғ�����R�$��"�&��"�"�$��&V��6W&�W2##b"Ɩ�vW2�֖BŲ#�t"�#Sdt""�#$t"�#Sdt"%Ғ�����R�$��"�&��"�2�$��b6W&�W2"Ɩ�vW2�֖BŲ#�t"�#�t""�#�t"�#Sdt"%Ғ�����R�$��"�&��"�B�$��6W&�W2"Ɩ�vW2�֖BŲ#Dt"�#�t""�#dt"�#�t"%Ғ��Ғ��'&�B�'&V��R"�%&V��R"Ɩ�vW2�֖B�$uB��V�&W"�
+IN
+K�'��6W&�W2�"Ű����R�%&V��R"�'&V��R"��%&V��RuB6W&�W2"Ɩ�vW2�֖BŲ#$t"�#Sdt""�#dt"�S$t"%Ғ�����R�%&V��R"�'&V��R"�"�%&V��R�V�&W"6W&�W2##b"Ɩ�vW2�֖BŲ#�t"�#�t""�#�t"�#Sdt"%Ғ�����R�%&V��R"�'&V��R"�2�%&V��R6W&�W2"Ɩ�vW2�֖BŲ#dt"�#�t""�#�t"�#Sdt"%Ғ�����R�%&V��R"�'&V��R"�B�%&V��R�'��6W&�W2"Ɩ�vW2�֖BŲ#Dt"�#�t""�#dt"�#�t"%Ғ��Ғ��'&�B�&��F���r"�$��F���r"Ɩ�vW2���F���r�$��F���r���R
+IN
+K4�b�F���2�"Ű����R�$��F���r"�&��F���r"��$��F���r���R�2�"Ɩ�vW2���F���rŲ#$t"�#Sdt""�#$t"�S$t"%��F&�������R�$��F���r"�&��F���r"�"�$��F���r���R�6�"Ɩ�vW2���F���rŲ#�t"�#�t""�#�t"�#Sdt"%��F&�������R�$��F���r"�&��F���r"�2�$4�b���R6W&�W2"Ɩ�vW2���F���rŲ#dt"�#�t""�#�t"�#�t"%��F&����Ғ��'&�B�&��W�W2"�$��U�W2"Ɩ�vW2�v��v�R�$f�w6�����&B
+IN
+K��&B4R�"Ű����R�$��U�W2"�&��W�W2"��$��U�W2B"Ɩ�vW2�v��v�RŲ#$t"�#Sdt""�#dt"�S$t"%��F&�������R�$��U�W2"�&��W�W2"�"�$��U�W226W&�W2"Ɩ�vW2�v��v�RŲ#$t"�#Sdt""�#dt"�S$t"%��F&�������R�$��U�W2"�&��W�W2"�2�$��U�W2��&B##b"Ɩ�vW2�v��v�RŲ#�t"�#�t""�#�t"�#Sdt"%��F&�������R�$��U�W2"�&��W�W2"�B�$��U�W2��&B4R"Ɩ�vW2�v��v�RŲ#�t"�#�t""�#�t"�#Sdt"%��F&����Ғ��'&�B�'�6�"�%�6�"Ɩ�vW2熖�֒�$b����
+IN
+K26W&�W2�"Ű����R�%�6�"�'�6�"��%�6�b6W&�W2"Ɩ�vW2熖�֒Ų#�t"�#Sdt""�#$t"�#Sdt"%Ғ�����R�%�6�"�'�6�"�"�%�6��6W&�W2"Ɩ�vW2熖�֒Ų#�t"�#�t""�#�t"�#Sdt"%Ғ�����R�%�6�"�'�6�"�2�%�6��6W&�W2"Ɩ�vW2熖�֒Ų#dt"�#�t""�#�t"�#Sdt"%Ғ�����R�%�6�"�'�6�"�B�%�6�26W&�W2"Ɩ�vW2熖�֒Ų#Dt"�cDt""�#Dt"�#�t"%Ғ��Ғ��'&�B�&���"�&���"Ɩ�vW2�v��v�R�$v֖�r
+IN
+KW&f�&��6R�f�7W6VB���W2�"Ű����R�&���"�&���"��&���R6W&�W2"Ɩ�vW2�v��v�RŲ#$t"�#Sdt""�#dt"�S$t"%��F&�������R�&���"�&���"�"�&����V�6W&�W2"Ɩ�vW2�v��v�RŲ#�t"�#�t""�#$t"�#Sdt"%��F&�������R�&���"�&���"�2�&����6W&�W2"Ɩ�vW2�v��v�RŲ#dt"�#�t""�#�t"�#Sdt"%��F&����Ғ��'&�B�'FV6��"�%FV6��"Ɩ�vW2�֖B�%��F���6�����f
+IN
+K7&��"Ű����R�%FV6��"�'FV6��"��%FV6����F��6W&�W2"Ɩ�vW2�֖BŲ#$t"�#Sdt""�#$t"�S$t"%Ғ�����R�%FV6��"�'FV6��"�"�%FV6��6���6W&�W2"Ɩ�vW2�֖BŲ#�t"�#�t""�#�t"�#Sdt"%Ғ�����R�%FV6��"�'FV6��"�2�%FV6���f6W&�W2"Ɩ�vW2�֖BŲ#dt"�#�t""�#�t"�#Sdt"%Ғ�����R�%FV6��"�'FV6��"�B�%FV6��7&�6W&�W2"Ɩ�vW2�֖BŲ#Dt"�cDt""�#Dt"�#�t"%Ғ��Ғ��Ӱ��W��'B6��7B���T��FV�3����T��FVŵ�����T'&�G2�f�D���"���"���FV�2���W��'B6��7Bf��&�U���T��FV�2����T��FV�2�f��FW"��Ғ����7FGW2��'W6�֖�r"���W��'B6��7BW6�֖�u���T��FV�3����T��FVŵ������R�%���֒&VF֒"�'���֒"Ó��%&VF֒t2"Ɩ�vW2熖�֒Ų$FWF��2
+J�
+K�
+Jb
+J�
+X~
+H"FB
+I^
+K
+X~
+H.
+I~
+Xr%ҕӰ�W��'BgV�7F���fƖD��FVĖG2�f�VS�7G&��r��V��7G&��u����&WGW&������Wr6WB��f�VR��""��7ƗB�"�"����f��FW"���B������T��FV�2�6��R������B����B���6Ɩ6R������ЦW��'BgV�7F���&V6���V�E���W2�7�7FVӢ7G&��r�&��&�G��7G&��r�����T��FVŵ���6��7B&6R�f��&�U���T��FV�2�f��FW"�����7�7FV����&�"���7�7FV����7�7FVғ��6��7B�&FW"�&��&�G����&6�W&"��&�R֗���R���&����"�'6�7V�r�v����3#b�V�G&"�&v��v�R���V���&�׆�"�'f�f��f�f�ׂ�6W&�W2�##b%Т�&��&�G����'WFFW2"��&�R֗���R���&����"�&v��v�R���V���&�׆�"�'6�7V�r�v����3#b�V�G&"�&��W�W2���W�W2�B%Т��'���֒�&VF֒�R�V2�V"�'&V��R�&V��R��V�&W"�6W&�W2�##b"�'6�7V�r�v�����6W&�W2�##b"�&�R֗���R��%Ӱ�&WGW&��&FW"�f�D����B���&6R�f��FW"������B����B���6��6B�&6R�f��FW"������&FW"��6�VFW2��B����6Ɩ6R��B���ЦW��'BgV�7F�����FV�V�V�'����FV�3����T��FVŵ��FWF��2�""��7G&��r��6��7B��W2���FV�2���������G�����G��'&�G�G����W������%��"���&WGW&�G�6������R�v�G6��FW�C�G�V�6�FUU$�6����V�B�
+J�
+J�
+K�
+X�
+JN
+Xr��&��Rv�&�B
+J�
+X~
+K
+X
+J�
+K�
+H.
+Jb
+I^
+XƗ7C���G���W7���G�FWF��2�G�FWF��7����"'�
+I^
+X>
+J�
+J�
+K�
+H�
+J�
+K.
+J�
+X�
+Jrf&��B�6���W"
+IN
+K
+Jn
+X
+I^
+K�
+J�
+I^
+Xr
+Jn
+K�
+J�
+I^
+X
+I�
+K�
+J�
+I^
+K�
+K
+X
+Jn
+X
+I�
+K�
+H�
+ZF�����
