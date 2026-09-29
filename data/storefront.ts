@@ -13,11 +13,11 @@ export const primaryCategories = primaryCategorySlugs
 export const shoppingSlides = [
   {
     id: "mobiles", label: "Mobiles", eyebrow: "आपकी दुनिया के लिए · SMARTPHONES",
-    heading: "Redmi और iPhone.\nLatest options यहाँ.",
-    body: "Xiaomi Redmi और iPhone 18 series के model names पहले देखिए। Price नहीं — बस available options और broad highlights, ताकि enquiry आसान हो।",
-    image: "/images/redmi-17-5g-colours-mobile-world-faridabad.webp",
-    alt: "Redmi और latest smartphones के options", theme: "blue",
-    detail: "Redmi A7 · Redmi 15 series · Xiaomi 17 series · iPhone 18 series",
+    heading: "Brand चुनिए.\nModel साफ़ देखिए.",
+    body: "Apple, Samsung, Xiaomi, Vivo, Oppo, Realme और बाकी brands को अलग-अलग देखिए। हर brand में models high-to-low order में हैं, without prices.",
+    image: "/images/flagship-phones-apple-samsung-xiaomi-vivo-c3df528a.webp",
+    alt: "Premium smartphone brands का clean product display", theme: "blue",
+    detail: "Apple · Samsung · Xiaomi · Vivo · Oppo · Realme · Nothing",
     cta: "Mobiles देखिए", href: "/products#smartphones", topic: "नए Smartphone",
   },
   {
