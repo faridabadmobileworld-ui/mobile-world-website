@@ -1,186 +1,27 @@
 import { shop } from "./shop";
-
-export type PhoneModel = {
-  id: string; brand: string; brandSlug: string; name: string; image: string; imageAlt: string;
-  note: string; display: string; camera: string; processor: string; power: string; software: string;
-  colours: { name: string; hex: string }[]; variants: string[]; system: "Android" | "iOS";
-  reasons: Record<string, string>; source: string; checked: string; rank: number; status?: "available" | "upcoming";
-};
-export type PhoneBrand = { slug: string; name: string; image: string; imageAlt: string; headline: string; note: string; models: PhoneModel[] };
-
-const images = {
-  apple: "/images/iphone-display-at-the-mobile-world-counter-346d3e71.webp",
-  samsung: "/images/flagship-phones-apple-samsung-xiaomi-vivo-c3df528a.webp",
-  xiaomi: "/images/redmi-17-5g-colours-mobile-world-faridabad.webp",
-  google: "/images/flagship-smartphone-e6739d50.webp",
-  nothing: "/images/model-nothing3a.png",
-  mid: "/images/mid-range-5g-phones-five-colours-v2-7c07be19.webp",
-};
-const dark = [{name:"Black",hex:"#17191d"},{name:"White",hex:"#f6f5f1"},{name:"Blue",hex:"#8da8cf"},{name:"Green",hex:"#91a98d"}];
-const rich = [{name:"Black",hex:"#15171a"},{name:"Silver",hex:"#d9dde2"},{name:"Gold",hex:"#d8c7a4"},{name:"Mint",hex:"#b8d0bd"}];
-const apple = [{name:"Black",hex:"#24272c"},{name:"White",hex:"#f4f2ee"},{name:"Natural",hex:"#c8bfb3"},{name:"Blue",hex:"#8aa2bd"}];
-const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
-
-function phone(brand: string, brandSlug: string, rank: number, name: string, image: string, variants: string[], colours = rich, system: "Android" | "iOS" = "Android"): PhoneModel {
-  const premium = rank <= 2;
-  return {
-    id: `${brandSlug}-${slug(name)}`, brand, brandSlug, rank, name, image, imageAlt: `${brand} ${name} product image`,
-    note: premf�V�&�vRV�V�'��f&��B�6���W"
-IN
-K7F�6�
-Jn
-X
-I^
-K�
-J�
-K�
-Xr6��f�&�
-I^
-K
-X~
-H"�"�%�V�"F�ǒ�W6R�F����f&��B
-IN
-K6���W"
-Jn
-X
-I^
-K�
-J�
-K�
-Xr6��f�&�
-I^
-K
-X~
-H"�"��F�7���&V֗V��%&V֗V�F�7��"�$�&vRF�ǒ�W6RF�7��"��6�W&�&V֗V��$6�W&�f�7W6VB��v�Ɩv�G2"�$WfW'�F�6�W&��v�Ɩv�G2"��&�6W76�#�&V֗V��$��v�W&f�&��6R&�vR"�$F�ǒW&f�&��6R&�vR"���vW#�$&GFW'�
-IN
-K6�&v��rFWF��2
-Jn
-X
-I^
-K�
-J�
-J�
-K6��f�&�
-K�
-X�
-H.
-I~
-Xr"��6�gGv&S�7�7FV����&��2"�&��2"�$�G&��B"��6���W'2�f&��G2�7�7FV��6�W&6S�6���6�FUW&��6�V6�VC�###b���#�"��&V6��3���6�W&�G�'&�G�G���W�6�W&�f�7W6VB'W�W'2
-I^
-Xr
-K.
-K�
-H����WfW'�F��G�'&�G�G���W�
-K
-X�
-I�
-K�
-I^
-XrW6R
-IN
-KWw&FRV�V�'�
-I^
-Xr
-K.
-K�
-H����WFFW3�G�'&�G�G���W�f&��B�6���W"
-IN
-Kf��&�ƗG�7F�&R
-K�
-Xr6��f�&�
-I^
-K
-X~
-H"������Ӱ�Р�gV�7F���'&�B�6�Vs�7G&��r���S�7G&��r���vS�7G&��r���FS�7G&��r���FV�3����T��FVŵғ����T'&�B��&WGW&��6�Vr���R���vR���vT�C�G���W�6�'G���R&�GV7BF�7����VFƖ�S�G���W���FV�6���FR���FV�2Ӱ�Р�W��'B6��7B���T'&�G3����T'&�E�����'&�B�&�R"�$�R"Ɩ�vW2��R�&����R&���
-K�
-Xr7F�F&B����R
-JN
-IR�"Ű����R�$�R"�&�R"��&����R�&���"Ɩ�vW2��RŲ##Sdt""�#S$t""�#D"%���R�&��2"������R�$�R"�&�R"�"�&����R�&�"Ɩ�vW2��RŲ##�t""�##Sdt""�#S$t"%���R�&��2"������R�$�R"�&�R"�2�&����R�"Ɩ�vW2��RŲ##�t""�##Sdt"%���R�&��2"������R�$�R"�&�R"�B�&����Rr6W&�W2"Ɩ�vW2��RŲ##�t""�##Sdt""�#S$t"%���R�&��2"������R�$�R"�&�R"�R�&����Rb6W&�W2"Ɩ�vW2��RŲ##�t""�##Sdt"%���R�&��2"������R�$�R"�&�R"�b�&����RR6W&�W2"Ɩ�vW2��RŲ##�t""�##Sdt"%���R�&��2"���Ғ��'&�B�'6�7V�r"�%6�7V�r"Ɩ�vW2�6�7V�r�$v���2�f��B
-IN
-K6W&�W2��v��F����r�"Ű����R�%6�7V�r"�'6�7V�r"��$v����f��B##b"Ɩ�vW2�6�7V�rŲ##Sdt""�#S$t""�#D"%��F&�������R�%6�7V�r"�'6�7V�r"�"�$v���3#bV�G&"Ɩ�vW2�6�7V�rŲ##Sdt""�#S$t""�#D"%��F&�������R�%6�7V�r"�'6�7V�r"�2�$v���3#b�3#b�"Ɩ�vW2�6�7V�rŲ##Sdt""�#S$t"%��F&�������R�%6�7V�r"�'6�7V�r"�B�$v���3#R6W&�W2"Ɩ�vW2�6�7V�rŲ##�t""�##Sdt""�#S$t"%��F&�������R�%6�7V�r"�'6�7V�r"�R�$v���6W&�W2##b"Ɩ�vW2�6�7V�rŲ#dt"�#�t""�#�t"�#�t""�#�t"�#Sdt"%Ғ�����R�%6�7V�r"�'6�7V�r"�b�$v���6W&�W2##R"Ɩ�vW2�6�7V�rŲ#dt"�#�t""�#�t"�#Sdt"%Ғ��Ғ��'&�B�'���֒"�%���֒�&VF֒"Ɩ�vW2熖�֒�%���֒f�w6���&VF֒��FR
-IN
-K&VF֒�F���2�"Ű����R�%���֒"�'���֒"��%���֒rV�G&"Ɩ�vW2熖�֒Ų##Sdt""�#S$t""�#D"%��F&�������R�%���֒"�'���֒"�"�%���֒r�uB"Ɩ�vW2熖�֒Ų#$t"�#Sdt""�#$t"�S$t"%��F&�������R�%���֒&VF֒"�'���֒"�2�%&VF֒��FRr&���"Ɩ�vW2熖�֒Ų#�t"�#Sdt""�#$t"�#Sdt"%Ғ�����R�%���֒&VF֒"�'���֒"�B�%&VF֒��FRr&�"Ɩ�vW2熖�֒Ų#�t"�#�t""�#�t"�#Sdt"%Ғ�����R�%���֒&VF֒"�'���֒"�R�%&VF֒��FRR&�"Ɩ�vW2熖�֒Ų#�t"�#Sdt""�#$t"�#Sdt"%Ғ�����R�%���֒&VF֒"�'���֒"�b�%&VF֒R�T2�T"Ɩ�vW2熖�֒Ų#Dt"�#�t""�#dt"�#�t""�#�t"�#Sdt"%Ғ�����R�%���֒&VF֒"�'���֒"�r�%&VF֒r�r&�Dr"Ɩ�vW2熖�֒Ų#4t"�cDt""�#Dt"�#�t"%Ғ��Ғ��'&�B�&v��v�R"�$v��v�R"Ɩ�vW2�v��v�R�%��V�6�W&
-IN
-K6�V��G&��B�F���2�"Ű����R�$v��v�R"�&v��v�R"��%��V�&���"Ɩ�vW2�v��v�RŲ##Sdt""�#S$t"%��F&�������R�$v��v�R"�&v��v�R"�"�%��V�&�"Ɩ�vW2�v��v�RŲ##�t""�##Sdt"%��F&�������R�$v��v�R"�&v��v�R"�2�%��V�"Ɩ�vW2�v��v�RŲ##�t""�##Sdt"%��F&�������R�$v��v�R"�&v��v�R"�B�%��V��6W&�W2"Ɩ�vW2�v��v�RŲ##�t""�##Sdt"%��F&����Ғ��'&�B�'f�f�"�%f�f�"Ɩ�vW2�6�7V�r�%b���B
-IN
-K�6W&�W2�"Ű����R�%f�f�"�'f�f�"��%f�f��6W&�W2##b"Ɩ�vW2�6�7V�rŲ#$t"�#Sdt""�#dt"�S$t"%Ғ�����R�%f�f�"�'f�f�"�"�%f�f�b6W&�W2##b"Ɩ�vW2�6�7V�rŲ#�t"�#�t""�#�t"�#Sdt""�#$t"�#Sdt"%Ғ�����R�%f�f�"�'f�f�"�2�%f�f�B6W&�W2"Ɩ�vW2�6�7V�rŲ#�t"�#�t""�#�t"�#Sdt"%Ғ�����R�%f�f�"�'f�f�"�B�%f�f��6W&�W2"Ɩ�vW2�6�7V�rŲ#Dt"�#�t""�#dt"�#�t"%Ғ��Ғ��'&�B�&��"�$��"Ɩ�vW2�֖B�$f��B�&V���b
-IN
-K6W&�W2�"Ű����R�$��"�&��"��$��f��B�6W&�W2"Ɩ�vW2�֖BŲ#$t"�#Sdt""�#dt"�S$t"%Ғ�����R�$��"�&��"�"�$��&V��6W&�W2##b"Ɩ�vW2�֖BŲ#�t"�#Sdt""�#$t"�#Sdt"%Ғ�����R�$��"�&��"�2�$��b6W&�W2"Ɩ�vW2�֖BŲ#�t"�#�t""�#�t"�#Sdt"%Ғ�����R�$��"�&��"�B�$��6W&�W2"Ɩ�vW2�֖BŲ#Dt"�#�t""�#dt"�#�t"%Ғ��Ғ��'&�B�'&V��R"�%&V��R"Ɩ�vW2�֖B�$uB��V�&W"�
-IN
-K�'��6W&�W2�"Ű����R�%&V��R"�'&V��R"��%&V��RuB6W&�W2"Ɩ�vW2�֖BŲ#$t"�#Sdt""�#dt"�S$t"%Ғ�����R�%&V��R"�'&V��R"�"�%&V��R�V�&W"6W&�W2##b"Ɩ�vW2�֖BŲ#�t"�#�t""�#�t"�#Sdt"%Ғ�����R�%&V��R"�'&V��R"�2�%&V��R6W&�W2"Ɩ�vW2�֖BŲ#dt"�#�t""�#�t"�#Sdt"%Ғ�����R�%&V��R"�'&V��R"�B�%&V��R�'��6W&�W2"Ɩ�vW2�֖BŲ#Dt"�#�t""�#dt"�#�t"%Ғ��Ғ��'&�B�&��F���r"�$��F���r"Ɩ�vW2���F���r�$��F���r���R
-IN
-K4�b�F���2�"Ű����R�$��F���r"�&��F���r"��$��F���r���R�2�"Ɩ�vW2���F���rŲ#$t"�#Sdt""�#$t"�S$t"%��F&�������R�$��F���r"�&��F���r"�"�$��F���r���R�6�"Ɩ�vW2���F���rŲ#�t"�#�t""�#�t"�#Sdt"%��F&�������R�$��F���r"�&��F���r"�2�$4�b���R6W&�W2"Ɩ�vW2���F���rŲ#dt"�#�t""�#�t"�#�t"%��F&����Ғ��'&�B�&��W�W2"�$��U�W2"Ɩ�vW2�v��v�R�$f�w6�����&B
-IN
-K��&B4R�"Ű����R�$��U�W2"�&��W�W2"��$��U�W2B"Ɩ�vW2�v��v�RŲ#$t"�#Sdt""�#dt"�S$t"%��F&�������R�$��U�W2"�&��W�W2"�"�$��U�W226W&�W2"Ɩ�vW2�v��v�RŲ#$t"�#Sdt""�#dt"�S$t"%��F&�������R�$��U�W2"�&��W�W2"�2�$��U�W2��&B##b"Ɩ�vW2�v��v�RŲ#�t"�#�t""�#�t"�#Sdt"%��F&�������R�$��U�W2"�&��W�W2"�B�$��U�W2��&B4R"Ɩ�vW2�v��v�RŲ#�t"�#�t""�#�t"�#Sdt"%��F&����Ғ��'&�B�'�6�"�%�6�"Ɩ�vW2熖�֒�$b����
-IN
-K26W&�W2�"Ű����R�%�6�"�'�6�"��%�6�b6W&�W2"Ɩ�vW2熖�֒Ų#�t"�#Sdt""�#$t"�#Sdt"%Ғ�����R�%�6�"�'�6�"�"�%�6��6W&�W2"Ɩ�vW2熖�֒Ų#�t"�#�t""�#�t"�#Sdt"%Ғ�����R�%�6�"�'�6�"�2�%�6��6W&�W2"Ɩ�vW2熖�֒Ų#dt"�#�t""�#�t"�#Sdt"%Ғ�����R�%�6�"�'�6�"�B�%�6�26W&�W2"Ɩ�vW2熖�֒Ų#Dt"�cDt""�#Dt"�#�t"%Ғ��Ғ��'&�B�&���"�&���"Ɩ�vW2�v��v�R�$v֖�r
-IN
-KW&f�&��6R�f�7W6VB���W2�"Ű����R�&���"�&���"��&���R6W&�W2"Ɩ�vW2�v��v�RŲ#$t"�#Sdt""�#dt"�S$t"%��F&�������R�&���"�&���"�"�&����V�6W&�W2"Ɩ�vW2�v��v�RŲ#�t"�#�t""�#$t"�#Sdt"%��F&�������R�&���"�&���"�2�&����6W&�W2"Ɩ�vW2�v��v�RŲ#dt"�#�t""�#�t"�#Sdt"%��F&����Ғ��'&�B�'FV6��"�%FV6��"Ɩ�vW2�֖B�%��F���6�����f
-IN
-K7&��"Ű����R�%FV6��"�'FV6��"��%FV6����F��6W&�W2"Ɩ�vW2�֖BŲ#$t"�#Sdt""�#$t"�S$t"%Ғ�����R�%FV6��"�'FV6��"�"�%FV6��6���6W&�W2"Ɩ�vW2�֖BŲ#�t"�#�t""�#�t"�#Sdt"%Ғ�����R�%FV6��"�'FV6��"�2�%FV6���f6W&�W2"Ɩ�vW2�֖BŲ#dt"�#�t""�#�t"�#Sdt"%Ғ�����R�%FV6��"�'FV6��"�B�%FV6��7&�6W&�W2"Ɩ�vW2�֖BŲ#Dt"�cDt""�#Dt"�#�t"%Ғ��Ғ��Ӱ��W��'B6��7B���T��FV�3����T��FVŵ�����T'&�G2�f�D���"���"���FV�2���W��'B6��7Bf��&�U���T��FV�2����T��FV�2�f��FW"��Ғ����7FGW2��'W6�֖�r"���W��'B6��7BW6�֖�u���T��FV�3����T��FVŵ������R�%���֒&VF֒"�'���֒"Ó��%&VF֒t2"Ɩ�vW2熖�֒Ų$FWF��2
-J�
-K�
-Jb
-J�
-X~
-H"FB
-I^
-K
-X~
-H.
-I~
-Xr%ҕӰ�W��'BgV�7F���fƖD��FVĖG2�f�VS�7G&��r��V��7G&��u����&WGW&������Wr6WB��f�VR��""��7ƗB�"�"����f��FW"���B������T��FV�2�6��R������B����B���6Ɩ6R������ЦW��'BgV�7F���&V6���V�E���W2�7�7FVӢ7G&��r�&��&�G��7G&��r�����T��FVŵ���6��7B&6R�f��&�U���T��FV�2�f��FW"�����7�7FV����&�"���7�7FV����7�7FVғ��6��7B�&FW"�&��&�G����&6�W&"��&�R֗���R���&����"�'6�7V�r�v����3#b�V�G&"�&v��v�R���V���&�׆�"�'f�f��f�f�ׂ�6W&�W2�##b%Т�&��&�G����'WFFW2"��&�R֗���R���&����"�&v��v�R���V���&�׆�"�'6�7V�r�v����3#b�V�G&"�&��W�W2���W�W2�B%Т��'���֒�&VF֒�R�V2�V"�'&V��R�&V��R��V�&W"�6W&�W2�##b"�'6�7V�r�v�����6W&�W2�##b"�&�R֗���R��%Ӱ�&WGW&��&FW"�f�D����B���&6R�f��FW"������B����B���6��6B�&6R�f��FW"������&FW"��6�VFW2��B����6Ɩ6R��B���ЦW��'BgV�7F�����FV�V�V�'����FV�3����T��FVŵ��FWF��2�""��7G&��r��6��7B��W2���FV�2���������G�����G��'&�G�G����W������%��"���&WGW&�G�6������R�v�G6��FW�C�G�V�6�FUU$�6����V�B�
-J�
-J�
-K�
-X�
-JN
-Xr��&��Rv�&�B
-J�
-X~
-K
-X
-J�
-K�
-H.
-Jb
-I^
-XƗ7C���G���W7���G�FWF��2�G�FWF��7����"'�
-I^
-X>
-J�
-J�
-K�
-H�
-J�
-K.
-J�
-X�
-Jrf&��B�6���W"
-IN
-K
-Jn
-X
-I^
-K�
-J�
-I^
-Xr
-Jn
-K�
-J�
-I^
-X
-I�
-K�
-J�
-I^
-K�
-K
-X
-Jn
-X
-I�
-K�
-H�
-ZF�����
+export type PhoneModel={id:string;brand:string;brandSlug:string;name:string;image:string;imageAlt:string;note:string;display:string;camera:string;processor:string;power:string;software:string;colours:{name:string;hex:string}[];variants:string[];system:"Android"|"iOS";reasons:Record<string,string>;source:string;checked:string;rank:number;status?:"available"|"upcoming"};
+export type PhoneBrand={slug:string;name:string;image:string;imageAlt:string;headline:string;note:string;models:PhoneModel[]};
+const img={apple:"/images/iphone-display-at-the-mobile-world-counter-346d3e71.webp",samsung:"/images/flagship-phones-apple-samsung-xiaomi-vivo-c3df528a.webp",xiaomi:"/images/redmi-17-5g-colours-mobile-world-faridabad.webp",google:"/images/flagship-smartphone-e6739d50.webp",nothing:"/images/model-nothing3a.png",mid:"/images/mid-range-5g-phones-five-colours-v2-7c07be19.webp"};
+const c=[{name:"Black",hex:"#15171a"},{name:"White",hex:"#f6f5f1"},{name:"Blue",hex:"#8da8cf"},{name:"Gold",hex:"#d8c7a4"}];
+const slug=(s:string)=>s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+function p(brand:string,brandSlug:string,rank:number,name:string,image:string,variants:string[],system:"Android"|"iOS"="Android"):PhoneModel{return{id:brandSlug+"-"+slug(name),brand,brandSlug,rank,name,image,imageAlt:brand+" "+name+" product image",note:"Variant, colour and live stock confirm at store.",display:rank<3?"Premium display":"Large daily-use display",camera:rank<3?"Camera-focused highlights":"Everyday camera highlights",processor:rank<3?"High performance range":"Daily performance range",power:"Battery and charging details at store",software:system,colours:c,variants,system,source:shop.siteUrl,checked:"2026-09-29",reasons:{camera:brand+" "+name+" camera buyers ke liye.",everyday:brand+" "+name+" daily use ke liye.",updates:brand+" "+name+" availability store se confirm karein."}}}
+function b(slug:string,name:string,image:string,note:string,models:PhoneModel[]):PhoneBrand{return{slug,name,image,imageAlt:name+" smartphone product display",headline:name+" models",note,models}}
+export const phoneBrands:PhoneBrand[]=[
+b("apple","Apple",img.apple,"iPhone models high-to-low.",[p("Apple","apple",1,"iPhone 18 Pro Max",img.apple,["256GB","512GB","1TB"],"iOS"),p("Apple","apple",2,"iPhone 18 Pro",img.apple,["128GB","256GB","512GB"],"iOS"),p("Apple","apple",3,"iPhone 18",img.apple,["128GB","256GB"],"iOS"),p("Apple","apple",4,"iPhone 17 Series",img.apple,["128GB","256GB","512GB"],"iOS"),p("Apple","apple",5,"iPhone 16 Series",img.apple,["128GB","256GB"],"iOS"),p("Apple","apple",6,"iPhone 15 Series",img.apple,["128GB","256GB"],"iOS")]),
+b("samsung","Samsung",img.samsung,"Galaxy S, Fold and A series.",[p("Samsung","samsung",1,"Galaxy Z Fold 2026",img.samsung,["256GB","512GB","1TB"]),p("Samsung","samsung",2,"Galaxy S26 Ultra",img.samsung,["256GB","512GB","1TB"]),p("Samsung","samsung",3,"Galaxy S26 / S26+",img.samsung,["256GB","512GB"]),p("Samsung","samsung",4,"Galaxy S25 Series",img.samsung,["128GB","256GB","512GB"]),p("Samsung","samsung",5,"Galaxy A Series 2026",img.samsung,["6GB/128GB","8GB/128GB","8GB/256GB"]),p("Samsung","samsung",6,"Galaxy A Series 2025",img.samsung,["6GB/128GB","8GB/256GB"])]),
+b("xiaomi","Xiaomi / Redmi",img.xiaomi,"Xiaomi, Redmi Note and Redmi A options.",[p("Xiaomi","xiaomi",1,"Xiaomi 17 Ultra",img.xiaomi,["256GB","512GB","1TB"]),p("Xiaomi","xiaomi",2,"Xiaomi 17 / 17T",img.xiaomi,["12GB/256GB","12GB/512GB"]),p("Xiaomi Redmi","xiaomi",3,"Redmi Note 17 Pro Max",img.xiaomi,["8GB/256GB","12GB/256GB"]),p("Xiaomi Redmi","xiaomi",4,"Redmi Note 17 Pro",img.xiaomi,["8GB/128GB","8GB/256GB"]),p("Xiaomi Redmi","xiaomi",5,"Redmi Note 15 Pro+",img.xiaomi,["8GB/256GB","12GB/256GB"]),p("Xiaomi Redmi","xiaomi",6,"Redmi 15 / 15C / 15A",img.xiaomi,["4GB/128GB","6GB/128GB","8GB/256GB"]),p("Xiaomi Redmi","xiaomi",7,"Redmi A7 / A7 Pro 4G",img.xiaomi,["3GB/64GB","4GB/128GB"])]),
+b("google","Google",img.google,"Pixel models.",[p("Google","google",1,"Pixel 10 Pro XL",img.google,["256GB","512GB"]),p("Google","google",2,"Pixel 10 Pro",img.google,["128GB","256GB"]),p("Google","google",3,"Pixel 10",img.google,["128GB","256GB"]),p("Google","google",4,"Pixel 9 Series",img.google,["128GB","256GB"])]),
+b("vivo","Vivo",img.samsung,"V, X, T and Y series.",[p("Vivo","vivo",1,"Vivo X Series 2026",img.samsung,["12GB/256GB","16GB/512GB"]),p("Vivo","vivo",2,"Vivo V Series 2026",img.samsung,["8GB/128GB","8GB/256GB","12GB/256GB"]),p("Vivo","vivo",3,"Vivo T Series",img.samsung,["8GB/128GB","8GB/256GB"]),p("Vivo","vivo",4,"Vivo Y Series",img.samsung,["4GB/128GB","6GB/128GB"])]),
+b("oppo","Oppo",img.mid,"Find, Reno, F and A series.",[p("Oppo","oppo",1,"Oppo Find X Series",img.mid,["12GB/256GB","16GB/512GB"]),p("Oppo","oppo",2,"Oppo Reno Series 2026",img.mid,["8GB/256GB","12GB/256GB"]),p("Oppo","oppo",3,"Oppo F Series",img.mid,["8GB/128GB","8GB/256GB"]),p("Oppo","oppo",4,"Oppo A Series",img.mid,["4GB/128GB","6GB/128GB"])]),
+b("realme","Realme",img.mid,"GT, Number, P and Narzo series.",[p("Realme","realme",1,"Realme GT Series",img.mid,["12GB/256GB","16GB/512GB"]),p("Realme","realme",2,"Realme Number Series 2026",img.mid,["8GB/128GB","8GB/256GB"]),p("Realme","realme",3,"Realme P Series",img.mid,["6GB/128GB","8GB/256GB"]),p("Realme","realme",4,"Realme Narzo Series",img.mid,["4GB/128GB","6GB/128GB"])]),
+b("nothing","Nothing",img.nothing,"Nothing Phone and CMF.",[p("Nothing","nothing",1,"Nothing Phone (3)",img.nothing,["12GB/256GB","12GB/512GB"]),p("Nothing","nothing",2,"Nothing Phone (3a)",img.nothing,["8GB/128GB","8GB/256GB"]),p("Nothing","nothing",3,"CMF Phone Series",img.nothing,["6GB/128GB","8GB/128GB"])]),
+b("oneplus","OnePlus",img.google,"Flagship and Nord.",[p("OnePlus","oneplus",1,"OnePlus 14",img.google,["12GB/256GB","16GB/512GB"]),p("OnePlus","oneplus",2,"OnePlus 13 Series",img.google,["12GB/256GB","16GB/512GB"]),p("OnePlus","oneplus",3,"OnePlus Nord 2026",img.google,["8GB/128GB","8GB/256GB"]),p("OnePlus","oneplus",4,"OnePlus Nord CE",img.google,["8GB/128GB","8GB/256GB"])]),
+b("poco","Poco",img.xiaomi,"F, X, M and C series.",[p("Poco","poco",1,"Poco F Series",img.xiaomi,["8GB/256GB","12GB/256GB"]),p("Poco","poco",2,"Poco X Series",img.xiaomi,["8GB/128GB","8GB/256GB"]),p("Poco","poco",3,"Poco M Series",img.xiaomi,["6GB/128GB","8GB/256GB"]),p("Poco","poco",4,"Poco C Series",img.xiaomi,["4GB/64GB","4GB/128GB"])]),
+b("iqoo","iQOO",img.google,"Performance phones.",[p("iQOO","iqoo",1,"iQOO 15 Series",img.google,["12GB/256GB","16GB/512GB"]),p("iQOO","iqoo",2,"iQOO Neo Series",img.google,["8GB/128GB","12GB/256GB"]),p("iQOO","iqoo",3,"iQOO Z Series",img.google,["6GB/128GB","8GB/256GB"])]),
+b("tecno","Tecno",img.mid,"Phantom, Camon, Pova and Spark.",[p("Tecno","tecno",1,"Tecno Phantom Series",img.mid,["12GB/256GB","12GB/512GB"]),p("Tecno","tecno",2,"Tecno Camon Series",img.mid,["8GB/128GB","8GB/256GB"]),p("Tecno","tecno",3,"Tecno Pova Series",img.mid,["6GB/128GB","8GB/256GB"]),p("Tecno","tecno",4,"Tecno Spark Series",img.mid,["4GB/64GB","4GB/128GB"])])];
+export const phoneModels:PhoneModel[]=phoneBrands.flatMap(x=>x.models);
+export const availablePhoneModels=phoneModels.filter(x=>x.status!=="upcoming");
+export const upcomingPhoneModels:PhoneModel[]=[p("Xiaomi Redmi","xiaomi",99,"Redmi 17C",img.xiaomi,["Details later"])];
+export function validModelIds(value:string|null):string[]{return[...new Set((value??"").split(","))].filter(id=>phoneModels.some(p=>p.id===id)).slice(0,8)}
+export function recommendPhones(system:string,priority:string):PhoneModel[]{const base=availablePhoneModels.filter(p=>system==="any"||p.system===system);return base.slice(0,4)}
+export function modelEnquiry(models:PhoneModel[],details=""):string{const names=models.map((p,i)=>(i+1)+". "+p.brand+" "+p.name).join("\n");return shop.phone.whatsapp+"?text="+encodeURIComponent("Namaste Mobile World! My selected models:\n"+names+"\n"+details)}
