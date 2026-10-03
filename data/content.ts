@@ -9,6 +9,7 @@
  */
 
 import { shop, categories } from "@/data/shop";
+import { redmiNote17Post } from "./redmiNote17Post";
 
 /** WhatsApp पर सवाल भेजने का link। Text हमेशा encode होकर जाता है। */
 export function ask(topic: string): string {
@@ -440,6 +441,8 @@ export type Post = {
   image: string;
   imageW: number;
   imageH: number;
+  imageFit?: "contain" | "cover";
+  gallery?: { src: string; alt: string }[];
   alt: string;
   body: string;
 };
@@ -532,6 +535,7 @@ export function livePosts(now: Date = new Date()): Post[] {
 }
 
 export const posts: Post[] = [
+  redmiNote17Post,
   {
     slug: "redmi-17-5g-price-specs-pre-booking-faridabad",
     kicker: "Tech Update",
@@ -952,4 +956,3 @@ export const serviceBanners = [
     topic: "EMI",
   },
 ];
-
