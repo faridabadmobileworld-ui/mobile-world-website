@@ -98,7 +98,7 @@ export default async function PostPage({ params }: Params) {
 
       <div className="readerwrap">
         <div className="wrap">
-          <article className="reader">
+          <article className="reader" data-product-guide={post.imageFit === "contain" ? "true" : undefined}>
             <Link className="btn btn-o btn-s rback" href="/posts">← Tech Blog &amp; Guides</Link>
 
             <div className="rhead">
@@ -120,7 +120,7 @@ export default async function PostPage({ params }: Params) {
             </div>
 
             <div className="rmedia">
-              {post.heroVideo ? (
+              {post.gallery ? <div className="official-phone-gallery">{post.gallery.map((photo) => <Image key={photo.src} src={photo.src} alt={photo.alt} width={277} height={760} sizes="(max-width:767px) 27vw, 200px" preload />)}</div> : post.heroVideo ? (
                 /* ⚠️ यह जान-बूझकर एक client component है। सीधा
                    `<video autoPlay>` लिखने पर browser `preload="none"` को
                    अनदेखा करके page खुलते ही पूरी file उतार लेता था (यहाँ
@@ -182,4 +182,3 @@ export default async function PostPage({ params }: Params) {
     </>
   );
 }
-

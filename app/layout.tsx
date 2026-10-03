@@ -6,6 +6,7 @@ import { SiteFooter, MobileBar } from "@/components/SiteFooter";
 import { ArtSprite } from "@/components/ArtSprite";
 import "./globals.css";
 import "./storefront.css";
+import "./campaigns.css";
 import { Inter, Noto_Sans_Devanagari } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
