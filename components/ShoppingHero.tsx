@@ -6,7 +6,6 @@ import { useEffect, useRef, useState } from "react";
 import { shoppingSlides, slideEnquiry } from "@/data/storefront";
 import { IconArrow, IconChevL, IconChevR, IconPause, IconPlay, IconWhatsApp } from "./Icons";
 
-/** Product discovery stays visible immediately; no scroll-scrub introduction. */
 export function ShoppingHero() {
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(true);
@@ -20,7 +19,7 @@ export function ShoppingHero() {
     const sync = () => {
       clearInterval(timer);
       if (!motion.matches && !document.hidden) {
-        timer = setInterval(() => setIndex((n) => (n + 1) % shoppingSlides.length), 7500);
+        timer = setInterval(() => setIndex((n) => (n + 1) % shoppingSlides.length), 9000);
       }
     };
     sync();
@@ -39,10 +38,10 @@ export function ShoppingHero() {
   }
 
   return (
-    <section className="shopping-hero" aria-label="आपकी ज़रूरत के products" aria-roledescription="carousel"
+    <section className="campaign-hero" aria-label="Mobile World के products और festival highlights" aria-roledescription="carousel"
       onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
       onFocusCapture={(event) => {
-        if (!(event.target as HTMLElement).closest(".shopping-play")) setPlaying(false);
+        if (!(event.target as HTMLElement).closest(".campaign-play")) setPlaying(false);
       }}
       onKeyDown={(event) => {
         if (event.key === "ArrowRight") { event.preventDefault(); choose(index + 1); }
@@ -50,57 +49,56 @@ export function ShoppingHero() {
       }}
       onTouchStart={(event) => { touch.current = { x: event.touches[0].clientX, y: event.touches[0].clientY }; }}
       onTouchEnd={(event) => {
-        if (!touch.current) return;
+        if (!touch.current || !event.changedTouches.length) return;
         const dx = event.changedTouches[0].clientX - touch.current.x;
         const dy = event.changedTouches[0].clientY - touch.current.y;
         if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5) choose(index + (dx < 0 ? 1 : -1));
         touch.current = null;
-      }}>
-      <h1 className="sr">Mobile, Laptop और Home Appliances — Mobile World, Faridabad</h1>
-      <div className="shopping-stage" aria-live={playing ? "off" : "polite"} aria-atomic="false">
+      }} onTouchCancel={() => { touch.current = null; }}>
+      <h1 className="sr">Mobile World, Faridabad · Diwali, Mobiles और Home Appliances</h1>
+      <div className="campaign-stage" aria-live={playing ? "off" : "polite"}>
         {shoppingSlides.map((slide, n) => (
-          <div className={`shopping-slide shopping-${slide.theme}${index === n ? " is-active" : ""}`}
-            key={slide.id} id={`shopping-slide-${n}`} role="group" aria-roledescription="slide"
+          <div className={`campaign-slide campaign-${slide.theme}${index === n ? " is-active" : ""}`}
+            key={slide.id} id={`campaign-slide-${n}`} role="group" aria-roledescription="slide"
             aria-label={`${n + 1} / ${shoppingSlides.length}: ${slide.label}`}
             aria-hidden={index !== n} inert={index !== n}>
-            <div className="shopping-copy">
-              <p className="shopping-eyebrow"><span aria-hidden="true" />{slide.eyebrow}</p>
-              <h2>{slide.heading.split("\n").map((line) => <span key={line}>{line}</span>)}</h2>
-              <p className="shopping-description">{slide.body}</p>
-              <div className="shopping-actions">
-                <Link className="shopping-primary" href={slide.href}>{slide.cta}<IconArrow /></Link>
-                <a className="shopping-secondary" href={slideEnquiry(slide.topic)} target="_blank" rel="noopener noreferrer">
-                  <IconWhatsApp /> WhatsApp <span className="shopping-enquiry-label">पर पूछिए</span>
-                </a>
-              </div>
+            <div className="campaign-art">
+              <Image src={slide.image} alt={slide.alt} fill
+                sizes="(max-width:767px) 160vw, 100vw" preload={n === 0} />
             </div>
-            <div className="shopping-visual">
-              <span className="mw-hero-orbit" aria-hidden="true" />
-              <span className="mw-hero-stamp">MOBILE WORLD<span>पसंद आपकी · मदद हमारी</span></span>
-              <div className="shopping-image">
-                <Image src={slide.image} alt={slide.alt} fill sizes="(max-width:700px) 92vw, 560px"
-                  priority={n === 0} />
+            <div className="campaign-inner">
+              <div className="campaign-copy">
+                <p className="campaign-eyebrow">{slide.eyebrow}</p>
+                <h2>{slide.heading.split("\n").map((line) => <span key={line}>{line}</span>)}</h2>
+                <p className="campaign-description">{slide.body}</p>
+                <div className="campaign-actions">
+                  <Link className="shopping-primary" href={slide.href}>{slide.cta}<IconArrow /></Link>
+                  <a className="shopping-secondary" href={slideEnquiry(slide.topic)} target="_blank" rel="noopener noreferrer">
+                    <IconWhatsApp /> WhatsApp पर पूछिए
+                  </a>
+                </div>
+                <p className="campaign-note">{slide.detail}</p>
               </div>
-              <p className="shopping-detail">{slide.detail}</p>
             </div>
           </div>
         ))}
       </div>
-      <div className="shopping-controls">
-        <div className="shopping-tabs" role="group" aria-label="Slide चुनिए">
+      <div className="campaign-controls wrap">
+        <div className="campaign-tabs" role="group" aria-label="Campaign चुनिए">
           {shoppingSlides.map((slide, n) => (
             <button type="button" key={slide.id} className={index === n ? "is-active" : ""}
-              aria-controls={`shopping-slide-${n}`} aria-pressed={index === n}
-              onClick={() => choose(n)}><span className="shopping-tab-number">0{n + 1}</span>{slide.label}</button>
+              aria-controls={`campaign-slide-${n}`} aria-pressed={index === n}
+              onClick={() => choose(n)}><span aria-hidden="true">{String(n + 1).padStart(2, "0")}</span>{slide.label}</button>
           ))}
         </div>
-        <div className="shopping-arrows">
-          <button type="button" className="shopping-play" onClick={() => setPlaying((v) => !v)}
-            aria-label={playing ? "Slides रोकिए" : "Slides चलाइए"} aria-pressed={playing}>
+        <div className="campaign-arrows">
+          <span className="campaign-count" aria-hidden="true">{index + 1} / {shoppingSlides.length}</span>
+          <button type="button" className="campaign-play" onClick={() => setPlaying((v) => !v)}
+            aria-label={playing ? "Slides रोकिए" : "Slides चलाइए"} aria-pressed={playing} title={playing ? "Slides रोकिए" : "Slides चलाइए"}>
             {playing ? <IconPause /> : <IconPlay />}
           </button>
-          <button type="button" onClick={() => choose(index - 1)} aria-label="पिछली slide"><IconChevL /></button>
-          <button type="button" onClick={() => choose(index + 1)} aria-label="अगली slide"><IconChevR /></button>
+          <button type="button" onClick={() => choose(index - 1)} aria-label="पिछली slide" title="पिछली slide"><IconChevL /></button>
+          <button type="button" onClick={() => choose(index + 1)} aria-label="अगली slide" title="अगली slide"><IconChevR /></button>
         </div>
       </div>
     </section>

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { phoneModels, validModelIds, modelEnquiry, type PhoneModel } from "@/data/catalog";
+import { phoneBrands, phoneModels, validModelIds, modelEnquiry, type PhoneModel } from "@/data/catalog";
 import { categorySearchAliases } from "@/data/search";
 import { shop } from "@/data/shop";
 import type { Item, NavCategory } from "@/data/content";
@@ -48,7 +48,7 @@ export function ProductExplorer({ categories, items }: { categories: NavCategory
   const params = useSearchParams();
   const [query, setQuery] = useState(params.get("q") ?? "");
   const [category, setCategory] = useState("all");
-  const [brand, setBrand] = useState("all");
+  const [brand, setBrand] = useState(phoneBrands.some((b) => b.slug === params.get("brand")) ? params.get("brand")! : "all");
   const [saved, setSaved] = useState<string[]>(validModelIds(params.get("shortlist")));
   const [onlySaved, setOnlySaved] = useState(params.has("shortlist") || params.get("view") === "shortlist");
   const [compare, setCompare] = useState<string[]>([]);
@@ -64,6 +64,7 @@ export function ProductExplorer({ categories, items }: { categories: NavCategory
     };
     const frame = requestAnimationFrame(() => {
       sync(); setQuery(params.get("q") ?? "");
+      setBrand(phoneBrands.some((b) => b.slug === params.get("brand")) ? params.get("brand")! : "all");
       const selected = phoneModels.find((p) => p.id === params.get("model"));
       if (selected) setModel(selected);
       if (!params.has("shortlist")) {
@@ -105,7 +106,7 @@ export function ProductExplorer({ categories, items }: { categories: NavCategory
     catch { setNotice("नीचे दिए link को copy करके share कीजिए।"); }
   }
   const terms = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
-  const models = phoneModels.filter((p) => (category === "all" || category === "smartphones") && (brand === "all" || p.brand === brand) && (!onlySaved || saved.includes(p.id)) && terms.every((w) => `${p.brand} ${p.name} ${p.note} ${p.display} ${p.system} phone mobile मोबाइल फोन फ़ोन smartphone 5g`.toLowerCase().includes(w)));
+  const models = phoneModels.filter((p) => (category === "all" || category === "smartphones") && (brand === "all" || p.brandSlug === brand) && (!onlySaved || saved.includes(p.id)) && terms.every((w) => `${p.brand} ${p.name} ${p.note} ${p.display} ${p.system} phone mobile मोबाइल फोन फ़ोन smartphone 5g`.toLowerCase().includes(w)));
   const generic = onlySaved || brand !== "all" ? [] : items.filter((p) => (category === "all" || category === p.category) && terms.every((w) => `${p.title} ${p.kicker} ${p.tags.join(" ")} ${categorySearchAliases[p.category] ?? ""} ${categories.find((c) => c.slug === p.category)?.label ?? ""}`.toLowerCase().includes(w)));
   const chosen = saved.flatMap((id) => phoneModels.filter((p) => p.id === id));
   const comparing = compare.flatMap((id) => phoneModels.filter((p) => p.id === id));
@@ -113,7 +114,7 @@ export function ProductExplorer({ categories, items }: { categories: NavCategory
   return <>
     <div className="mw-catalog-toolbar">
       <label className="mw-catalog-search"><span className="sr">Product या brand ढूँढ़िए</span><IconSearch /><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Model, brand या सामान का नाम…" type="search" /></label>
-      <label><span className="sr">Brand चुनिए</span><select value={brand} onChange={(e) => { setBrand(e.target.value); setCategory("all"); }}><option value="all">सभी brands / सामान</option>{phoneModels.map((p) => <option key={p.brand}>{p.brand}</option>)}</select></label>
+      <label><span className="sr">Brand चुनिए</span><select value={brand} onChange={(e) => { setBrand(e.target.value); setCategory("all"); }}><option value="all">सभी brands / सामान</option>{phoneBrands.map((b) => <option key={b.slug} value={b.slug}>{b.name}</option>)}</select></label>
       <button className={`mw-filter ${onlySaved ? "active" : ""}`} type="button" aria-pressed={onlySaved} onClick={() => {setOnlySaved(!onlySaved);setCategory("all");setQuery("");setBrand("all");}}>♡ मेरी shortlist <span>{saved.length}</span></button>
     </div>
     <div className="mw-filter-row" aria-label="Product category"><button type="button" className={`mw-filter ${category === "all" ? "active" : ""}`} aria-pressed={category === "all"} onClick={() => chooseCategory("all")}>सभी products</button>{categories.map((c) => <button type="button" key={c.slug} className={`mw-filter ${category === c.slug ? "active" : ""}`} aria-pressed={category === c.slug} onClick={() => chooseCategory(c.slug)}>{c.label}</button>)}</div>

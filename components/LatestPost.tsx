@@ -16,43 +16,39 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { livePosts, publishTimeLabel } from "@/data/content";
-import { IconArrow, IconCal, IconClock } from "@/components/Icons";
+import { livePosts } from "@/data/content";
+import { IconArrow, IconCal } from "@/components/Icons";
 
 export function LatestPost() {
   const post = [...livePosts()].sort((a, b) => b.dateISO.localeCompare(a.dateISO))[0];
   if (!post) return null;
 
-  const time = publishTimeLabel(post.publishAt);
-
   return (
-    <section className="sec" aria-labelledby="featured">
+    <section className="mw-latest" aria-labelledby="featured">
       {/* ⚠️ 11 Sep 2026 — owner: "Redmi 17 ki post ke upar heading banao
           kuch, like Featured Post". Post का अपना title अब `h3` है, क्योंकि
           इस हिस्से की heading यह `h2` है। */}
-      <div className="shead">
-        <h2 id="featured">Featured Post — सबसे नई ख़बर</h2>
+      <div className="shopping-section-heading">
+        <div><p className="shopping-overline">TECH UPDATE · करीब से जानिए</p><h2 id="featured">Featured Post</h2></div>
         <Link href="/posts">सारे articles <IconArrow /></Link>
       </div>
-      <Link className="lnew rv in" href={`/posts/${post.slug}`}>
-        <span className="lnew-m">
-          <Image className="ph-img" src={post.image} alt={post.alt}
+      <Link className="mw-latest-link" href={`/posts/${post.slug}`}>
+        <span className="mw-latest-image">
+          {post.gallery ? <span className="official-phone-gallery">{post.gallery.map((photo) => <Image key={photo.src} src={photo.src} alt={photo.alt} width={277} height={760} sizes="(max-width:767px) 50px, 100px" />)}</span> : <Image className="ph-img" src={post.image} alt={post.alt}
                  width={post.imageW} height={post.imageH}
-                 sizes="(max-width:780px) 100vw, 420px" />
-          <b className="lnew-tag">नया</b>
+                 sizes="(max-width:767px) 150px, 300px" />}
         </span>
 
-        <span className="lnew-b">
-          <span className="lnew-k">{post.kicker}</span>
-          <h3 className="lnew-h">{post.title}</h3>
-          <span className="lnew-x">{post.excerpt}</span>
+        <span className="mw-latest-copy">
+          <span className="mw-latest-kicker">नया ARTICLE · {post.kicker}</span>
+          <h3>{post.title}</h3>
+          <span className="mw-latest-summary">{post.excerpt}</span>
 
-          <span className="lnew-meta">
-            <span><IconCal /><time dateTime={post.dateISO}>{post.date}</time></span>
-            {time && <><i aria-hidden="true" /><span><IconClock />{time}</span></>}
+          <span className="mw-latest-meta">
+            <IconCal /><time dateTime={post.dateISO}>{post.date}</time>
           </span>
 
-          <span className="lnew-go">पूरा पढ़िए <IconArrow /></span>
+          <span className="mw-latest-go">पूरा article पढ़िए <IconArrow /></span>
         </span>
       </Link>
     </section>
