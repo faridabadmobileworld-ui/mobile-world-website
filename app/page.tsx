@@ -4,6 +4,7 @@ import { ShoppingCategories } from "@/components/ShoppingCategories";
 import { HomeBody } from "@/components/HomeBody";
 import { LatestPost } from "@/components/LatestPost";
 import { CampaignSocial, FestivalHighlights } from "@/components/CampaignHighlights";
+import { TechChallenge } from "./TechChallenge";
 
 /* Home page ka saara content ab `components/HomeBody.tsx` mein hai, taaki
    `/showcase` bhi bilkul wahi content dikha sake — do jagah likhe bina. */
@@ -16,6 +17,7 @@ export default function Home() {
 
       <ShoppingHero />
       <div className="wrap shopping-home">
+        <TechChallenge />
         <LatestPost />
         <ShoppingCategories />
         <FestivalHighlights />
