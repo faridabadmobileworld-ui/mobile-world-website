@@ -4,9 +4,11 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { buildSearchIndex } from "@/data/search";
 import { SiteFooter, MobileBar } from "@/components/SiteFooter";
 import { ArtSprite } from "@/components/ArtSprite";
+import { FestivalFrame } from "./FestivalFrame";
 import "./globals.css";
 import "./storefront.css";
 import "./campaigns.css";
+import "./festival.css";
 import { Inter, Noto_Sans_Devanagari } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
@@ -71,7 +73,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="hi" className={`${inter.variable} ${hindi.variable}`}>
-      <body>
+      <body className="festival-site">
         <a className="skip" href="#main">सीधे content पर जाइए</a>
         {/*
           पीछे वाली परत — पूरी site के नीचे टिकी रहती है और धीरे-धीरे हिलती है।
@@ -84,6 +86,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 
 
         <ArtSprite />
+        <FestivalFrame />
         <SiteHeader searchIndex={buildSearchIndex()} />
         <main id="main">{children}</main>
         <SiteFooter />
