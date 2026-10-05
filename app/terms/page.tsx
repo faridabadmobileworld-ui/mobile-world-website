@@ -16,6 +16,7 @@ export const metadata: Metadata = {
 
 const toc: TocItem[] = [
   { id: "website", label: "Website सिर्फ़ जानकारी के लिए है" },
+  { id: "tech-challenge-terms", label: "Tech Challenge के नियम" },
   { id: "price", label: "दाम, offer और stock" },
   { id: "bill", label: "पक्का bill और genuine सामान" },
   { id: "warranty", label: "Brand warranty और service" },
@@ -68,6 +69,22 @@ export default function Terms() {
               के counter पर, या हमारे WhatsApp / Call ({shop.phone.display}) पर होती है।
             </li>
           </ul>
+
+          <h2 id="tech-challenge-terms">Tech Challenge के नियम</h2>
+          <p>
+            Tech Challenge सीखने के लिए एक free quiz है। खेलने के लिए ख़रीदारी,
+            account, payment या किसी ad को देखने की ज़रूरत नहीं है। हर सही जवाब
+            knowledge score में गिना जाता है।
+          </p>
+          <p>
+            यह score cash balance, redeemable points, coupon या gift entitlement नहीं है।
+            इसके आधार पर कोई discount, prize या cash payment नहीं मिलता। दोबारा खेलने
+            पर नया score बनता है; पिछला score उसमें जुड़ता नहीं है।
+          </p>
+          <p>
+            Quiz की सामान्य जानकारी आपकी मदद के लिए है। किसी model के features,
+            variant और दुकान पर उपलब्धता की पुष्टि अलग से कीजिए।
+          </p>
 
           <h2 id="price">2. दाम, offer और stock</h2>
           <ul>
