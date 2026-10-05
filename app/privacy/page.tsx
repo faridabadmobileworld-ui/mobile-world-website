@@ -19,6 +19,7 @@ const toc: TocItem[] = [
   { id: "use", label: "हम आपके data का use कैसे करते हैं?" },
   { id: "security", label: "Data protection और security" },
   { id: "cookies", label: "Cookies और tracking" },
+  { id: "tech-challenge-privacy", label: "Tech Challenge और आपका score" },
   { id: "third-party", label: "Third-party links" },
   { id: "rights", label: "आपके अधिकार" },
   { id: "retention", label: "जानकारी कब तक रखी जाती है" },
@@ -124,6 +125,18 @@ export default function Privacy() {
           <p>
             आगे कभी हमने analytics लगाया, तो यह बात <strong>पहले इसी page पर</strong>
             {" "}लिखी जाएगी।
+          </p>
+
+          <h2 id="tech-challenge-privacy">Tech Challenge और आपका score</h2>
+          <p>
+            Tech Challenge में account, नाम या mobile number देने की ज़रूरत नहीं है।
+            आपके जवाब और knowledge score इसी खुले हुए page की memory में रहते हैं।
+            इन्हें हमारे server पर नहीं भेजा जाता और इनके लिए cookie या local storage
+            नहीं बनाई जाती। Page छोड़ने या refresh करने पर score reset हो जाता है।
+          </p>
+          <p>
+            Challenge के WhatsApp link से message अपने आप नहीं जाता। आप जो जानकारी
+            ख़ुद WhatsApp पर भेजते हैं, वही हमें मिलती है।
           </p>
 
           <h2 id="third-party">5. Third-party links</h2>
@@ -249,7 +262,7 @@ export default function Privacy() {
             पर दिया गया है।
           </p>
           <p style={{ color: "var(--ink-3)", fontSize: "13px" }}>
-            आख़िरी बार बदला: 28 September 2026
+            आख़िरी बार बदला: 5 October 2026
           </p>
         </div>
       </section>
@@ -262,4 +275,3 @@ export default function Privacy() {
     </div>
   );
 }
-
