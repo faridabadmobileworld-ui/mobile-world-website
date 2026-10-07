@@ -136,3 +136,4 @@
 }
 @media(max-width:360px){.campaign-inner{padding:21px 17px}.campaign-copy h2{font-size:27px}.campaign-actions .shopping-primary,.campaign-actions .shopping-secondary{font-size:11px;padding-inline:10px}.mw-latest-link{grid-template-columns:90px minmax(0,1fr);gap:12px}.mw-latest-copy h3{font-size:17px}}
 @media(prefers-reduced-motion:reduce){.campaign-slide{transition:none}.campaign-hero *{scroll-behavior:auto}}
+.reader .guide-spec-table{table-layout:fixed}.reader .guide-spec-table th,.reader .guide-spec-table td{white-space:normal;overflow-wrap:anywhere}.reader .rbody .rcta .btn-d{color:#fff;background:#8b263b}.reader .rbody .rcta .btn{height:auto;min-height:46px;line-height:1.6;padding:12px 18px}

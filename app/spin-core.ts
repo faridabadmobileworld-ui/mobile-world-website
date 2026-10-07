@@ -1,6 +1,6 @@
 // Server cryptography only. The secret is supplied by spin-actions, never by a client.
 import { createHmac, timingSafeEqual } from "node:crypto";
-import { SPIN_CAMPAIGN, rewardForRoll, type SpinCoupon } from "./spin-rewards";
+import { SPIN_CAMPAIGN, rewardForRoll, type SpinCoupon, type SpinRewardId } from "./spin-rewards";
 
 export function normalizeSpinPhone(input: unknown): string | null {
   if (typeof input !== "string" || input.length > 30 || !/^[+\d\s()-]+$/.test(input)) return null;
@@ -15,7 +15,7 @@ function digest(secret: string, purpose: string, value: string) {
   return createHmac("sha256", secret).update(`${SPIN_CAMPAIGN}:${purpose}:${value}`).digest();
 }
 
-export function createSpinCoupon(phone: string, secret: string): SpinCoupon {
+function drawForPhone(phone: string, secret: string) {
   if (normalizeSpinPhone(phone) !== phone) throw new Error("Invalid normalized phone");
   // A keyed, pseudorandom draw is stable for this campaign + phone. A new
   // browser, cleared storage, concurrent calls or a refresh cannot reroll it.
@@ -25,9 +25,16 @@ export function createSpinCoupon(phone: string, secret: string): SpinCoupon {
     value = digest(secret, `draw:${round}`, phone).readUInt32BE(0);
     if (value < limit) break; // Rejection sampling removes modulo bias.
   }
-  const reward = rewardForRoll(value % 10000);
-  const signature = digest(secret, "coupon", `${phone}:${reward.id}`).toString("hex").slice(0, 24).toUpperCase();
-  return { campaign: SPIN_CAMPAIGN, rewardId: reward.id, code: `MW26-${signature.match(/.{6}/g)!.join("-")}`, phoneLast4: phone.slice(-4) };
+  return value % 10000;
+}
+
+function signCoupon(phone: string, rewardId: SpinRewardId, secret: string): SpinCoupon {
+  const signature = digest(secret, "coupon", `${phone}:${rewardId}`).toString("hex").slice(0, 24).toUpperCase();
+  return { campaign: SPIN_CAMPAIGN, rewardId, code: `MW26-${signature.match(/.{6}/g)!.join("-")}`, phoneLast4: phone.slice(-4) };
+}
+
+export function createSpinCoupon(phone: string, secret: string): SpinCoupon {
+  return signCoupon(phone, rewardForRoll(drawForPhone(phone, secret)).id, secret);
 }
 
 export function verifySpinCoupon(code: unknown, phone: string, secret: string): SpinCoupon | null {
@@ -35,5 +42,12 @@ export function verifySpinCoupon(code: unknown, phone: string, secret: string): 
   const normalized = code.trim().toUpperCase();
   if (!/^MW26-(?:[A-F0-9]{6}-){3}[A-F0-9]{6}$/.test(normalized)) return null;
   const expected = createSpinCoupon(phone, secret);
-  return timingSafeEqual(Buffer.from(normalized), Buffer.from(expected.code)) ? expected : null;
+  if (timingSafeEqual(Buffer.from(normalized), Buffer.from(expected.code))) return expected;
+  // Preserve authenticity checks for codes genuinely signed before the reward
+  // was retired. This path cannot issue a new coupon or redeem an existing one.
+  if (drawForPhone(phone, secret) >= 9980) {
+    const legacy = signCoupon(phone, "discount-1000", secret);
+    if (timingSafeEqual(Buffer.from(normalized), Buffer.from(legacy.code))) return legacy;
+  }
+  return null;
 }

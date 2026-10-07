@@ -30,7 +30,22 @@ test('Every possible draw gives the declared probabilities, totaling exactly 100
   for (let roll = 0; roll < 10000; roll++) counts[rewardForRoll(roll).id]++;
   for (const reward of spinRewards) assert.equal(counts[reward.id], reward.weight);
   assert.equal(counts['discount-100'] + counts.neckband, 9900);
+  assert.equal(spinRewards.length, 6);
+  assert.equal(counts['discount-1000'], undefined);
   for (const bad of [-1, 10000, NaN, 1.5]) assert.throws(() => rewardForRoll(bad));
+});
+test('Retiring a reward preserves other existing outcomes and old signed coupons', () => {
+  const originalIds = ['discount-100', 'neckband', 'discount-200', 'buds', 'discount-500', 'mini-speaker'];
+  for (let roll = 0; roll < 9980; roll++) {
+    const index = roll < 9800 ? 0 : roll < 9900 ? 1 : 2 + Math.floor((roll - 9900) / 20);
+    assert.equal(rewardForRoll(roll).id, originalIds[index]);
+  }
+  // A fixture signed by the previous version, using the isolated test key.
+  const oldPhone = '9999901044';
+  const oldCode = 'MW26-FBF7C4-94F0E8-4C0D05-88B6B0';
+  assert.equal(verifySpinCoupon(oldCode, oldPhone, secret)?.rewardId, 'discount-1000');
+  assert.notEqual(createSpinCoupon(oldPhone, secret).rewardId, 'discount-1000');
+  assert.equal(verifySpinCoupon(oldCode, phone, secret), null);
 });
 test('Phone normalization handles +91 but rejects malformed or non-Indian input', () => {
   assert.equal(normalizeSpinPhone('+91 99999 00000'), phone);
