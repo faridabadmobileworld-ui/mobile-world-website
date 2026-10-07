@@ -19,7 +19,7 @@ const toc: TocItem[] = [
   { id: "use", label: "हम आपके data का use कैसे करते हैं?" },
   { id: "security", label: "Data protection और security" },
   { id: "cookies", label: "Cookies और tracking" },
-  { id: "tech-challenge-privacy", label: "Tech Challenge और आपका score" },
+  { id: "spin-wheel-privacy", label: "Spin Wheel और reward code" },
   { id: "third-party", label: "Third-party links" },
   { id: "rights", label: "आपके अधिकार" },
   { id: "retention", label: "जानकारी कब तक रखी जाती है" },
@@ -60,20 +60,20 @@ export default function Privacy() {
         <div className="prose">
           <h2 id="collect">1. हम कौन सी information collect करते हैं?</h2>
           <p>
-            हमारी website पूरी तरह से जानकारी देने के लिए है। हम website के ज़रिए कोई
-            online payment या order process नहीं करते।
+            हमारी website पर products की जानकारी और free Diwali Spin Wheel है। हम
+            website के ज़रिए कोई online payment या order process नहीं करते।
           </p>
           <p>
-            <strong>यह website ख़ुद आपसे कोई जानकारी नहीं लेती।</strong> यहाँ कोई
-            contact form नहीं है, कोई account नहीं बनता, और कोई tracking नहीं चलती।
-            जो आप हमारे search box में लिखते हैं, वो आपके अपने phone में ही रहता है —
-            हम तक नहीं आता।
+            Account बनाए बिना website देख सकते हैं। Spin Wheel खेलने या reward code
+            की जाँच करने पर आपका mobile number हमारे server को भेजा जाता है। इसकी
+            पूरी जानकारी नीचे है। Search box में लिखा text आपके browser में ही रहता है।
           </p>
           <p>
-            हमें जानकारी सिर्फ़ तब मिलती है जब <strong>आप ख़ुद</strong> हमसे संपर्क
-            करते हैं:
+            आप Spin Wheel इस्तेमाल करें, ख़रीदारी करें या ख़ुद हमसे संपर्क करें,
+            तो ज़रूरत के अनुसार यह जानकारी इस्तेमाल होती है:
           </p>
           <ul>
+            <li><strong>Spin का mobile number और code</strong> — reward तय करने और उसकी जाँच के लिए।</li>
             <li>
               <strong>आपका नाम और mobile number</strong> — जब आप WhatsApp पर message
               भेजते हैं या call करते हैं।
@@ -97,6 +97,7 @@ export default function Privacy() {
             <li>Stock है या नहीं, यह बताने के लिए।</li>
             <li>Repairing या सामान लेने के बाद की मदद में आपसे बात करने के लिए।</li>
             <li>GST bill और warranty का record रखने के लिए।</li>
+            <li>एक mobile number का reward स्थिर रखने, code जाँचने और duplicate claim रोकने के लिए।</li>
           </ul>
 
           <h2 id="security">3. Data protection और security</h2>
@@ -127,16 +128,33 @@ export default function Privacy() {
             {" "}लिखी जाएगी।
           </p>
 
-          <h2 id="tech-challenge-privacy">Tech Challenge और आपका score</h2>
+          <span id="tech-challenge-privacy" />
+          <h2 id="spin-wheel-privacy">Spin Wheel और reward code</h2>
           <p>
-            Tech Challenge में account, नाम या mobile number देने की ज़रूरत नहीं है।
-            आपके जवाब और knowledge score इसी खुले हुए page की memory में रहते हैं।
-            इन्हें हमारे server पर नहीं भेजा जाता और इनके लिए cookie या local storage
-            नहीं बनाई जाती। Page छोड़ने या refresh करने पर score reset हो जाता है।
+            Spin के लिए आप अपना mobile number देते हैं और नियम पढ़कर सहमति चुनते हैं।
+            Number हमारे server पर reward और उसके code की गणना के लिए process होता है।
+            इस feature के लिए हमारे app में customer database नहीं बनाया गया है और
+            पूरा number server database में save नहीं होता। इसी campaign में वही number
+            फिर देने पर वही reward और code निकलता है। कोई OTP या account password नहीं माँगा जाता।
           </p>
           <p>
-            Challenge के WhatsApp link से message अपने आप नहीं जाता। आप जो जानकारी
-            ख़ुद WhatsApp पर भेजते हैं, वही हमें मिलती है।
+            आपका reward, code और number के केवल आख़िरी चार अंक browser की local storage
+            में रहते हैं, ताकि refresh के बाद result दिख सके। Wheel पर “इस browser से
+            result हटाएँ” दबाकर या browser data साफ़ करके इन्हें हटा सकते हैं। इससे उसी
+            number का reward नहीं बदलता। Code में पूरा mobile number नहीं लिखा होता।
+          </p>
+          <p>
+            Code की जाँच के लिए दर्ज number और code server तक जाते हैं। सुरक्षा के लिए
+            IP का keyed hash और request count कुछ समय server memory में रखा जाता है;
+            यह एक मिनट में expire होता है। Hosting provider संचालन और सुरक्षा के लिए
+            अलग request logs रख सकता है।
+          </p>
+          <p>
+            Claim के समय दुकान number का access जाँचती है और इस्तेमाल हुए code का record
+            register में रखती है। Website code की authenticity बताती है; redeemed status
+            का online database नहीं है। Claim से जुड़ी जानकारी या record के बारे में हमारी
+            team से संपर्क कर सकते हैं। WhatsApp link से message अपने आप नहीं जाता—आपके
+            भेजने पर ही दुकान को मिलता है और WhatsApp की अपनी privacy terms लागू होती हैं।
           </p>
 
           <h2 id="third-party">5. Third-party links</h2>
