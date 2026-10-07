@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { phoneBrands, phoneModels, validModelIds, modelEnquiry, type PhoneModel } from "@/data/catalog";
@@ -39,7 +40,7 @@ function ModelDetails({ model, save, saved }: { model: PhoneModel; save: () => v
       <label>आपकी variant preference<select value={variant} onChange={(e) => setVariant(e.target.value)}><option value="">अभी तय नहीं</option>{model.variants.map((v) => <option key={v}>{v}</option>)}</select></label></div>
       <p className="mw-small">Colour, variant और stock की पुष्टि दुकान से कीजिए। *Battery और charging के आँकड़े brand की testing पर आधारित हैं; असल इस्तेमाल अलग हो सकता है। Updates की अवधि launch से गिनी जाती है।</p>
       <div className="btns"><a className="btn btn-w" href={modelEnquiry([model], `Colour preference: ${colour || "कोई भी"}। Variant preference: ${variant || "अभी तय नहीं"}।`)} target="_blank" rel="noopener noreferrer"><IconWhatsApp /> इस model के बारे में पूछिए</a><button className="btn btn-o" type="button" onClick={save} aria-pressed={saved}>{saved ? "✓ Shortlist में है" : "Shortlist में रखिए"}</button></div>
-      <a className="mw-source" href={model.source} target="_blank" rel="noopener noreferrer">Brand की specifications देखिए ↗</a>
+      {model.source.startsWith("/") ? <Link className="mw-source" href={model.source}>Offers और पूरी specifications पढ़िए <IconArrow /></Link> : <a className="mw-source" href={model.source} target="_blank" rel="noopener noreferrer">Brand की specifications देखिए ↗</a>}
     </div>
   </div>;
 }
