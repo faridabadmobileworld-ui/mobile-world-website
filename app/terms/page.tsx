@@ -5,6 +5,7 @@ import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { MoreLinks } from "@/components/MoreLinks";
 import { PageFoot, Byline } from "@/components/PageFoot";
 import { FollowUs } from "@/components/FollowUs";
+import { spinRewards } from "../spin-rewards";
 
 export const metadata: Metadata = {
   title: "Terms & Conditions — दुकान के नियम",
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 
 const toc: TocItem[] = [
   { id: "website", label: "Website सिर्फ़ जानकारी के लिए है" },
-  { id: "tech-challenge-terms", label: "Tech Challenge के नियम" },
+  { id: "spin-wheel-terms", label: "Diwali Spin Wheel के नियम" },
   { id: "price", label: "दाम, offer और stock" },
   { id: "bill", label: "पक्का bill और genuine सामान" },
   { id: "warranty", label: "Brand warranty और service" },
@@ -57,8 +58,8 @@ export default function Terms() {
           <h2 id="website">1. Website सिर्फ़ जानकारी के लिए है</h2>
           <ul>
             <li>
-              यह website ({shop.siteUrl.replace("https://", "")}) पूरी तरह जानकारी
-              देने के लिए है।
+              यह website ({shop.siteUrl.replace("https://", "")}) products की जानकारी,
+              customer services और free Diwali Spin Wheel के लिए है।
             </li>
             <li>
               यहाँ <strong>कोई online ख़रीद-बिक्री या payment gateway नहीं है</strong>।
@@ -70,21 +71,27 @@ export default function Terms() {
             </li>
           </ul>
 
-          <h2 id="tech-challenge-terms">Tech Challenge के नियम</h2>
-          <p>
-            Tech Challenge सीखने के लिए एक free quiz है। खेलने के लिए ख़रीदारी,
-            account, payment या किसी ad को देखने की ज़रूरत नहीं है। हर सही जवाब
-            knowledge score में गिना जाता है।
-          </p>
-          <p>
-            यह score cash balance, redeemable points, coupon या gift entitlement नहीं है।
-            इसके आधार पर कोई discount, prize या cash payment नहीं मिलता। दोबारा खेलने
-            पर नया score बनता है; पिछला score उसमें जुड़ता नहीं है।
-          </p>
-          <p>
-            Quiz की सामान्य जानकारी आपकी मदद के लिए है। किसी model के features,
-            variant और दुकान पर उपलब्धता की पुष्टि अलग से कीजिए।
-          </p>
+          <span id="tech-challenge-terms" />
+          <h2 id="spin-wheel-terms">Diwali Spin Wheel के नियम</h2>
+          <p>Mobile World का Spin Wheel एक free promotion है। Spin के लिए payment,
+            ख़रीदारी, account या किसी ad को देखना ज़रूरी नहीं है। ₹ वाली rewards bill
+            discounts हैं; cash payment या withdraw करने वाला balance नहीं हैं।</p>
+          <ul>
+            <li>एक व्यक्ति और एक mobile number पर इस campaign में एक reward redeem होगा। अपना ही number डालें।</li>
+            <li>एक number का result server पर तय रहता है। Refresh, browser बदलने या storage साफ़ करने से उस number का reward या code नहीं बदलता।</li>
+            <li>हर reward की probability नीचे दी गई है। Wheel के बराबर दिखने वाले हिस्से बराबर chance नहीं दर्शाते। ये population probabilities हैं; हर 100 spins में तय संख्या की guarantee नहीं है।</li>
+          </ul>
+          <ul>{spinRewards.map(reward => <li key={reward.id}><strong>{reward.label}</strong> — {reward.odds}</li>)}</ul>
+          <p>₹100 discount और Neckband की संयुक्त probability 99% है। बाकी पाँच rewards की संयुक्त probability 1% है।</p>
+          <ul>
+            <li>Discount दुकान की ख़रीदारी के bill पर लागू होगा, अधिकतम bill amount तक। बची रकम cash में नहीं मिलेगी। दूसरे offers के साथ इस्तेमाल की पुष्टि ख़रीदारी से पहले दुकान पर करें।</li>
+            <li>Neckband, Buds और Mini Speaker gifts लेने के लिए ख़रीदारी ज़रूरी नहीं। Gift का brand, model और colour दुकान तय करेगी।</li>
+            <li>Claim के लिए दुकान पर code और उसी mobile number का access दिखाना होगा। Team code की authenticity और पहले redeem किए गए rewards का register जाँचेगी।</li>
+            <li>Website का verification सिर्फ़ code सही होने की पुष्टि करता है। यह redemption नहीं करता और used/unused status नहीं बताता। Team reward देने पर code को अपने register में redeemed दर्ज करेगी।</li>
+            <li>Screenshot अकेला claim का प्रमाण नहीं है। Edited screenshots, गलत numbers और पहले इस्तेमाल हुए codes से नया reward नहीं मिलता।</li>
+            <li>Demo mode में दिखाई देने वाले results का कोई claim value नहीं है। “DEMO” code redeem नहीं होता।</li>
+          </ul>
+          <p>Mobile number और browser storage की जानकारी <Link href="/privacy#spin-wheel-privacy">Spin Wheel Privacy</Link> में पढ़िए। कोई OTP, password या payment यहाँ न दें।</p>
 
           <h2 id="price">2. दाम, offer और stock</h2>
           <ul>
