@@ -1,5 +1,5 @@
 import { shop } from "./shop";
-export type PhoneModel={id:string;brand:string;brandSlug:string;name:string;image:string;imageAlt:string;note:string;display:string;camera:string;processor:string;power:string;software:string;colours:{name:string;hex:string}[];variants:string[];system:"Android"|"iOS";reasons:Record<string,string>;source:string;checked:string;rank:number;status?:"available"|"upcoming"};
+export type PhoneModel={id:string;brand:string;brandSlug:string;name:string;image:string;imageAlt:string;note:string;display:string;camera:string;processor:string;power:string;software:string;colours:{name:string;hex:string}[];variants:string[];system:"Android"|"iOS";reasons:Record<string,string>;source:string;checked:string;rank:number;status?:"available"|"upcoming"|"prebooking"};
 export type PhoneBrand={slug:string;name:string;image:string;imageAlt:string;headline:string;note:string;models:PhoneModel[]};
 const img={apple:"/images/iphone-display-at-the-mobile-world-counter-346d3e71.webp",samsung:"/images/flagship-phones-apple-samsung-xiaomi-vivo-c3df528a.webp",xiaomi:"/images/redmi-17-5g-colours-mobile-world-faridabad.webp",google:"/images/flagship-smartphone-e6739d50.webp",nothing:"/images/model-nothing3a.png",mid:"/images/mid-range-5g-phones-five-colours-v2-7c07be19.webp"};
 const c=[{name:"Black",hex:"#15171a"},{name:"White",hex:"#f6f5f1"},{name:"Blue",hex:"#8da8cf"},{name:"Gold",hex:"#d8c7a4"}];
@@ -32,9 +32,34 @@ b("oneplus","OnePlus",img.google,"Flagship and Nord.",[p("OnePlus","oneplus",1,"
 b("poco","Poco",img.xiaomi,"F, X, M and C series.",[p("Poco","poco",1,"Poco F Series",img.xiaomi,["8GB/256GB","12GB/256GB"]),p("Poco","poco",2,"Poco X Series",img.xiaomi,["8GB/128GB","8GB/256GB"]),p("Poco","poco",3,"Poco M Series",img.xiaomi,["6GB/128GB","8GB/256GB"]),p("Poco","poco",4,"Poco C Series",img.xiaomi,["4GB/64GB","4GB/128GB"])]),
 b("iqoo","iQOO",img.google,"Performance phones.",[p("iQOO","iqoo",1,"iQOO 15 Series",img.google,["12GB/256GB","16GB/512GB"]),p("iQOO","iqoo",2,"iQOO Neo Series",img.google,["8GB/128GB","12GB/256GB"]),p("iQOO","iqoo",3,"iQOO Z Series",img.google,["6GB/128GB","8GB/256GB"])]),
 b("tecno","Tecno",img.mid,"Phantom, Camon, Pova and Spark.",[p("Tecno","tecno",1,"Tecno Phantom Series",img.mid,["12GB/256GB","12GB/512GB"]),p("Tecno","tecno",2,"Tecno Camon Series",img.mid,["8GB/128GB","8GB/256GB"]),p("Tecno","tecno",3,"Tecno Pova Series",img.mid,["6GB/128GB","8GB/256GB"]),p("Tecno","tecno",4,"Tecno Spark Series",img.mid,["4GB/64GB","4GB/128GB"])])];
+// Owner-confirmed sale / pre-booking offers, 7 October 2026.
+// Device specifications and catalogue images are from the official India pages.
+const redmi17C:PhoneModel={
+  ...p("Xiaomi Redmi","xiaomi",8,"REDMI 17C 5G","/images/redmi-17c-official-colours.png",["4GB / 128GB","6GB / 128GB"]),
+  status:"available", imageAlt:"REDMI 17C 5G Dark Night, Coffee Brew और Purple Dawn — official Xiaomi India product image",
+  note:"Sale शुरू हो चुकी है। ₹17 Customer PF offer की eligibility और variant का stock दुकान से पूछिए।",
+  display:"6.9-inch HD+ · up to 120Hz", camera:"50MP main camera · 8MP front camera",
+  processor:"MediaTek Dimensity 6300 5G", power:"6000mAh · 33W charging · 33W charger in box",
+  software:"Xiaomi HyperOS 3", colours:[{name:"Dark Night",hex:"#2c2b30"},{name:"Coffee Brew",hex:"#b79070"},{name:"Purple Dawn",hex:"#b8a0cd"}],
+  source:"https://www.mi.com/in/product/redmi-17c-5g/specs/",checked:"2026-10-07",
+  reasons:{camera:"50MP camera को करीब से देखिए।",everyday:"6000mAh battery और 120Hz display की जानकारी लीजिए।",updates:"Software और current variant की जानकारी दुकान से पूछिए।"}
+};
+const vivoV80:PhoneModel={
+  ...p("Vivo","vivo",1.5,"vivo V80 5G","/images/vivo-v80-sunrise-official.png",["8GB / 128GB","8GB / 256GB","8GB / 512GB"]),
+  status:"prebooking",imageAlt:"vivo V80 Sunrise Anthem — official vivo India product image",
+  note:"Pre-booking चालू है और live demo उपलब्ध है। Cashback, warranty benefit, backpack और finance की शर्तें दुकान से जानिए।",
+  display:"6.59-inch AMOLED · up to 144Hz",camera:"50MP OIS main + 50MP telephoto + 8MP wide · 50MP front",
+  processor:"Snapdragon 7 Gen 4",power:"7200mAh · 90W FlashCharge",software:"OriginOS 7 / Android 17",
+  colours:[{name:"Sunrise Anthem",hex:"#d59953"},{name:"Horizon Blue",hex:"#94bbb9"},{name:"Stellar Black",hex:"#363638"}],
+  source:"https://www.vivo.com/in/products/param/v80",checked:"2026-10-07",
+  reasons:{camera:"ZEISS camera और portraits का live demo देखिए।",everyday:"बड़ी battery और AMOLED display को करीब से देखिए।",updates:"Pre-booking और उपलब्ध variants की पुष्टि team से कीजिए।"}
+};
+phoneBrands.find(brand=>brand.slug==="xiaomi")?.models.push(redmi17C);
+phoneBrands.find(brand=>brand.slug==="vivo")?.models.push(vivoV80);
+for(const brand of phoneBrands) brand.models.sort((a,b)=>a.rank-b.rank);
 export const phoneModels:PhoneModel[]=phoneBrands.flatMap(x=>x.models);
 export const availablePhoneModels=phoneModels.filter(x=>x.status!=="upcoming");
-export const upcomingPhoneModels:PhoneModel[]=[p("Xiaomi Redmi","xiaomi",99,"Redmi 17C",img.xiaomi,["Details later"])];
+export const upcomingPhoneModels:PhoneModel[]=[];
 export function validModelIds(value:string|null):string[]{return[...new Set((value??"").split(","))].filter(id=>phoneModels.some(p=>p.id===id)).slice(0,8)}
 export function recommendPhones(system:string,priority:string):PhoneModel[]{const base=availablePhoneModels.filter(p=>system==="any"||p.system===system);return base.slice(0,4)}
 export function modelEnquiry(models:PhoneModel[],details=""):string{const names=models.map((p,i)=>(i+1)+". "+p.brand+" "+p.name).join("\n");return shop.phone.whatsapp+"?text="+encodeURIComponent("Namaste Mobile World! My selected models:\n"+names+"\n"+details)}
