@@ -41,7 +41,7 @@ const redmi17C:PhoneModel={
   display:"6.9-inch HD+ · up to 120Hz", camera:"50MP main camera · 8MP front camera",
   processor:"MediaTek Dimensity 6300 5G", power:"6000mAh · 33W charging · 33W charger in box",
   software:"Xiaomi HyperOS 3", colours:[{name:"Dark Night",hex:"#2c2b30"},{name:"Coffee Brew",hex:"#b79070"},{name:"Purple Dawn",hex:"#b8a0cd"}],
-  source:"https://www.mi.com/in/product/redmi-17c-5g/specs/",checked:"2026-10-07",
+  source:"/posts/redmi-17c-5g-sale-offer-specifications-faridabad",checked:"2026-10-07",
   reasons:{camera:"50MP camera को करीब से देखिए।",everyday:"6000mAh battery और 120Hz display की जानकारी लीजिए।",updates:"Software और current variant की जानकारी दुकान से पूछिए।"}
 };
 const vivoV80:PhoneModel={
@@ -51,7 +51,7 @@ const vivoV80:PhoneModel={
   display:"6.59-inch AMOLED · up to 144Hz",camera:"50MP OIS main + 50MP telephoto + 8MP wide · 50MP front",
   processor:"Snapdragon 7 Gen 4",power:"7200mAh · 90W FlashCharge",software:"OriginOS 7 / Android 17",
   colours:[{name:"Sunrise Anthem",hex:"#d59953"},{name:"Horizon Blue",hex:"#94bbb9"},{name:"Stellar Black",hex:"#363638"}],
-  source:"https://www.vivo.com/in/products/param/v80",checked:"2026-10-07",
+  source:"/posts/vivo-v80-prebooking-offers-specifications-faridabad",checked:"2026-10-07",
   reasons:{camera:"ZEISS camera और portraits का live demo देखिए।",everyday:"बड़ी battery और AMOLED display को करीब से देखिए।",updates:"Pre-booking और उपलब्ध variants की पुष्टि team से कीजिए।"}
 };
 phoneBrands.find(brand=>brand.slug==="xiaomi")?.models.push(redmi17C);
