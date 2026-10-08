@@ -1,6 +1,20 @@
 // Server cryptography only. The secret is supplied by spin-actions, never by a client.
 import { createHmac, timingSafeEqual } from "node:crypto";
-import { SPIN_CAMPAIGN, rewardForRoll, type SpinCoupon, type SpinRewardId } from "./spin-rewards";
+import { SPIN_CAMPAIGN, spinRewards, type SpinCoupon, type SpinRewardId } from "./spin-rewards";
+
+export function rewardForRoll(roll: number) {
+  if (!Number.isInteger(roll) || roll < 0 || roll >= 10000) throw new Error("Invalid reward roll");
+  // Server-side budget policy: 99% discount, 1% neckband. Preserve the original
+  // neckband range and map every retired prize range to the current discount.
+  return spinRewards[roll >= 9800 && roll < 9900 ? 1 : 0];
+}
+
+function previousRewardsForRoll(roll: number): SpinRewardId[] {
+  if (roll < 9900) return [];
+  const previous = ["discount-200", "buds", "discount-500", "mini-speaker"] as const;
+  if (roll < 9980) return [previous[Math.floor((roll - 9900) / 20)]];
+  return [previous[Math.floor((roll - 9980) / 5)], "discount-1000"];
+}
 
 export function normalizeSpinPhone(input: unknown): string | null {
   if (typeof input !== "string" || input.length > 30 || !/^[+\d\s()-]+$/.test(input)) return null;
@@ -45,8 +59,8 @@ export function verifySpinCoupon(code: unknown, phone: string, secret: string): 
   if (timingSafeEqual(Buffer.from(normalized), Buffer.from(expected.code))) return expected;
   // Preserve authenticity checks for codes genuinely signed before the reward
   // was retired. This path cannot issue a new coupon or redeem an existing one.
-  if (drawForPhone(phone, secret) >= 9980) {
-    const legacy = signCoupon(phone, "discount-1000", secret);
+  for (const rewardId of previousRewardsForRoll(drawForPhone(phone, secret))) {
+    const legacy = signCoupon(phone, rewardId, secret);
     if (timingSafeEqual(Buffer.from(normalized), Buffer.from(legacy.code))) return legacy;
   }
   return null;

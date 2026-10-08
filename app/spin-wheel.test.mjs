@@ -21,31 +21,38 @@ function load(name) {
   mod._compile(output, filename);
   return mod.exports;
 }
-const { spinRewards, rewardForRoll, wheelStopAngle } = load('spin-rewards');
-const { normalizeSpinPhone, createSpinCoupon, verifySpinCoupon } = load('spin-core');
+const { spinRewards, wheelStopAngle } = load('spin-rewards');
+const { rewardForRoll, normalizeSpinPhone, createSpinCoupon, verifySpinCoupon } = load('spin-core');
 const secret = 'isolated-test-secret-never-used-on-the-live-website';
 const phone = '9999900000';
-test('Every possible draw gives the declared probabilities, totaling exactly 100%', () => {
+test('Every possible new draw stays within the two advertised rewards and budget policy', () => {
   const counts = Object.fromEntries(spinRewards.map(reward => [reward.id, 0]));
   for (let roll = 0; roll < 10000; roll++) counts[rewardForRoll(roll).id]++;
-  for (const reward of spinRewards) assert.equal(counts[reward.id], reward.weight);
-  assert.equal(counts['discount-100'] + counts.neckband, 9900);
-  assert.equal(spinRewards.length, 6);
-  assert.equal(counts['discount-1000'], undefined);
+  assert.deepEqual(counts, { 'discount-100': 9900, neckband: 100 });
+  assert.equal(spinRewards.length, 2);
   for (const bad of [-1, 10000, NaN, 1.5]) assert.throws(() => rewardForRoll(bad));
 });
-test('Retiring a reward preserves other existing outcomes and old signed coupons', () => {
-  const originalIds = ['discount-100', 'neckband', 'discount-200', 'buds', 'discount-500', 'mini-speaker'];
-  for (let roll = 0; roll < 9980; roll++) {
-    const index = roll < 9800 ? 0 : roll < 9900 ? 1 : 2 + Math.floor((roll - 9900) / 20);
-    assert.equal(rewardForRoll(roll).id, originalIds[index]);
+test('Existing discount and neckband outcomes stay stable, and all older signed coupons verify', () => {
+  for (let roll = 0; roll < 9900; roll++) {
+    assert.equal(rewardForRoll(roll).id, roll < 9800 ? 'discount-100' : 'neckband');
   }
-  // A fixture signed by the previous version, using the isolated test key.
-  const oldPhone = '9999901044';
-  const oldCode = 'MW26-FBF7C4-94F0E8-4C0D05-88B6B0';
-  assert.equal(verifySpinCoupon(oldCode, oldPhone, secret)?.rewardId, 'discount-1000');
-  assert.notEqual(createSpinCoupon(oldPhone, secret).rewardId, 'discount-1000');
-  assert.equal(verifySpinCoupon(oldCode, phone, secret), null);
+  // Captured from the previous deployed versions with the isolated test key.
+  const fixtures = [
+    ['9999900219', 'discount-200', 'MW26-511939-6B0BCF-DC77BE-8AF001'],
+    ['9999900341', 'mini-speaker', 'MW26-971E88-E2671A-4D4A9B-D753AA'],
+    ['9999900434', 'discount-500', 'MW26-3D23F0-4A429D-6270D8-6F7895'],
+    ['9999901044', 'discount-500', 'MW26-47BD39-9F3B06-ED8DBB-4F1310'],
+    ['9999901695', 'discount-200', 'MW26-E08A5D-35AFF8-60B0FB-BB8120'],
+    ['9999903002', 'buds', 'MW26-A3E827-3F78E5-7BA88A-2D8CCA'],
+    ['9999903455', 'mini-speaker', 'MW26-9318A4-EF7E16-94DE60-B2FD03'],
+    ['9999905698', 'buds', 'MW26-627F0D-49D740-766343-F4FEE5'],
+    ['9999901044', 'discount-1000', 'MW26-FBF7C4-94F0E8-4C0D05-88B6B0'],
+  ];
+  for (const [oldPhone, rewardId, code] of fixtures) {
+    assert.equal(verifySpinCoupon(code, oldPhone, secret)?.rewardId, rewardId);
+    assert.equal(createSpinCoupon(oldPhone, secret).rewardId, 'discount-100');
+    assert.equal(verifySpinCoupon(code, phone, secret), null);
+  }
 });
 test('Phone normalization handles +91 but rejects malformed or non-Indian input', () => {
   assert.equal(normalizeSpinPhone('+91 99999 00000'), phone);
