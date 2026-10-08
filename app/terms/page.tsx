@@ -79,13 +79,13 @@ export default function Terms() {
           <ul>
             <li>एक व्यक्ति और एक mobile number पर इस campaign में एक reward redeem होगा। अपना ही number डालें।</li>
             <li>अपना reward code सँभालकर रखिए। पहले जारी हुए codes की जाँच जारी रहेगी; एक व्यक्ति को एक ही reward दिया जाएगा।</li>
-            <li>हर reward की probability नीचे दी गई है। Wheel के बराबर दिखने वाले हिस्से बराबर chance नहीं दर्शाते। ये population probabilities हैं; हर 100 spins में तय संख्या की guarantee नहीं है।</li>
+            <li>दोनों rewards के chances अलग हैं। Wheel के बराबर दिखने वाले हिस्से बराबर chance नहीं दर्शाते।</li>
           </ul>
-          <ul>{spinRewards.map(reward => <li key={reward.id}><strong>{reward.label}</strong> — {reward.odds}</li>)}</ul>
-          <p>₹100 discount और Neckband की संयुक्त probability 99% है। बाकी चार rewards की संयुक्त probability 1% है।</p>
+          <ul>{spinRewards.map(reward => <li key={reward.id}><strong>{reward.label}</strong></li>)}</ul>
+          <p>मौजूदा promotion में ₹100 discount और Neckband gift हैं। पहले जारी हुए valid reward codes अपनी मूल reward details के साथ जाँचे जाएँगे।</p>
           <ul>
             <li>Discount दुकान की ख़रीदारी के bill पर लागू होगा, अधिकतम bill amount तक। बची रकम cash में नहीं मिलेगी। दूसरे offers के साथ इस्तेमाल की पुष्टि ख़रीदारी से पहले दुकान पर करें।</li>
-            <li>Neckband, Buds और Mini Speaker gifts लेने के लिए ख़रीदारी ज़रूरी नहीं। Gift का brand, model और colour दुकान तय करेगी।</li>
+            <li>Neckband gift लेने के लिए ख़रीदारी ज़रूरी नहीं। Gift का brand, model और colour दुकान तय करेगी।</li>
             <li>Claim के लिए दुकान पर code और उसी mobile number का access दिखाना होगा। Team code की authenticity और पहले redeem किए गए rewards का register जाँचेगी।</li>
             <li>Website का verification सिर्फ़ code सही होने की पुष्टि करता है। यह redemption नहीं करता और used/unused status नहीं बताता। Team reward देने पर code को अपने register में redeemed दर्ज करेगी।</li>
             <li>Screenshot अकेला claim का प्रमाण नहीं है। Edited screenshots, गलत numbers और पहले इस्तेमाल हुए codes से नया reward नहीं मिलता।</li>
