@@ -130,32 +130,10 @@ export default function Privacy() {
 
           <span id="tech-challenge-privacy" />
           <h2 id="spin-wheel-privacy">Spin Wheel और reward code</h2>
-          <p>
-            Spin के लिए आप अपना mobile number देते हैं और नियम पढ़कर सहमति चुनते हैं।
-            Number हमारे server पर reward और उसके code की गणना के लिए process होता है।
-            इस feature के लिए हमारे app में customer database नहीं बनाया गया है और
-            पूरा number server database में save नहीं होता। इसी campaign में वही number
-            फिर देने पर वही reward और code निकलता है। कोई OTP या account password नहीं माँगा जाता।
-          </p>
-          <p>
-            आपका reward, code और number के केवल आख़िरी चार अंक browser की local storage
-            में रहते हैं, ताकि refresh के बाद result दिख सके। Wheel पर “इस browser से
-            result हटाएँ” दबाकर या browser data साफ़ करके इन्हें हटा सकते हैं। इससे उसी
-            number का reward नहीं बदलता। Code में पूरा mobile number नहीं लिखा होता।
-          </p>
-          <p>
-            Code की जाँच के लिए दर्ज number और code server तक जाते हैं। सुरक्षा के लिए
-            IP का keyed hash और request count कुछ समय server memory में रखा जाता है;
-            यह एक मिनट में expire होता है। Hosting provider संचालन और सुरक्षा के लिए
-            अलग request logs रख सकता है।
-          </p>
-          <p>
-            Claim के समय दुकान number का access जाँचती है और इस्तेमाल हुए code का record
-            register में रखती है। Website code की authenticity बताती है; redeemed status
-            का online database नहीं है। Claim से जुड़ी जानकारी या record के बारे में हमारी
-            team से संपर्क कर सकते हैं। WhatsApp link से message अपने आप नहीं जाता—आपके
-            भेजने पर ही दुकान को मिलता है और WhatsApp की अपनी privacy terms लागू होती हैं।
-          </p>
+          <p>Spin करने पर आपका mobile number, reward, code और entry की तारीख़ हमारे private store record में save होते हैं। पूरा number encrypted रूप में रखा जाता है। इसे केवल owner password से खुलने वाले dashboard में हमारी अधिकृत team देख सकती है। यह data public pages या search engines को नहीं दिया जाता।</p>
+          <p>एक number का reward दोबारा बदलता नहीं है। Code इस्तेमाल होने पर bill number, product, bill line, amount और redemption की तारीख़ दर्ज होती है, ताकि उसी number या product पर दूसरा code न लगाया जा सके। इस form पर OTP, account password या payment नहीं माँगा जाता; code इसी screen पर दिखाई देता है।</p>
+          <p>Browser में केवल reward code और number के आख़िरी चार अंक रखे जाते हैं। “इस browser से result हटाएँ” से यह local copy हटती है; दुकान का record नहीं मिटता। अपना record देखने या हटाने की request के लिए Contact page से हमारी team से संपर्क कीजिए। आवश्यक transaction records लागू record-keeping जरूरतों के अनुसार रखे जा सकते हैं।</p>
+          <p>Private records हमारी hosting service Vercel पर सुरक्षित रखे जाते हैं। Login की सुरक्षा के लिए IP का keyed hash और सीमित समय का attempt count रखा जाता है। Customer numbers इस promotion को चलाने और claim की जाँच के लिए हैं; marketing messages के लिए अलग सहमति ली जाएगी।</p>
 
           <h2 id="third-party">5. Third-party links</h2>
           <p>
