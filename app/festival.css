@@ -15,3 +15,4 @@ body.festival-site{padding-inline:var(--festival-gutter);background:var(--festiv
 @media(max-width:370px){.festival-site .shopping-header .logo{font-size:16px;gap:4px}.festival-site .shopping-header .logo i{width:27px;height:27px}.festival-site .shopping-header .wrap{gap:3px}.festival-site .shopping-header .callbtn,.festival-site .shopping-header .wrap>.iconbtn{width:32px;min-width:32px}.festival-site .shopping-category{font-size:11px}}
 @media(prefers-reduced-motion:reduce){.festival-flight{transform:none!important;will-change:auto}}
 @media print{.festival-crown,.festival-rail,.festival-flight-scene,.festival-greeting{display:none}body.festival-site{padding-inline:0}}
+.festival-site .festival-flight-copy h2{color:#fff5df}
