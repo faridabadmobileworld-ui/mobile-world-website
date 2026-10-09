@@ -72,26 +72,13 @@ export default function Terms() {
           </ul>
 
           <span id="tech-challenge-terms" />
-          <h2 id="spin-wheel-terms">Diwali Spin Wheel के नियम</h2>
-          <p>Mobile World का Spin Wheel एक free promotion है। Spin के लिए payment,
-            ख़रीदारी, account या किसी ad को देखना ज़रूरी नहीं है। ₹ वाली rewards bill
-            discounts हैं; cash payment या withdraw करने वाला balance नहीं हैं।</p>
-          <ul>
-            <li>एक व्यक्ति और एक mobile number पर इस campaign में एक reward redeem होगा। अपना ही number डालें।</li>
-            <li>अपना reward code सँभालकर रखिए। पहले जारी हुए codes की जाँच जारी रहेगी; एक व्यक्ति को एक ही reward दिया जाएगा।</li>
-            <li>दोनों rewards के chances अलग हैं। Wheel के बराबर दिखने वाले हिस्से बराबर chance नहीं दर्शाते।</li>
-          </ul>
+          <h2 id="spin-wheel-terms">Diwali Spin Wheel</h2>
+          <p>Spin free है। एक mobile number पर एक reward code मिलेगा; code इसी screen पर दिखेगा। वही number दोबारा देने पर नया reward नहीं मिलेगा। ₹ वाली reward ख़रीदारी के bill पर discount है।</p>
           <ul>{spinRewards.map(reward => <li key={reward.id}><strong>{reward.label}</strong></li>)}</ul>
-          <p>मौजूदा promotion में ₹100 discount और Neckband gift हैं। पहले जारी हुए valid reward codes अपनी मूल reward details के साथ जाँचे जाएँगे।</p>
-          <ul>
-            <li>Discount दुकान की ख़रीदारी के bill पर लागू होगा, अधिकतम bill amount तक। बची रकम cash में नहीं मिलेगी। दूसरे offers के साथ इस्तेमाल की पुष्टि ख़रीदारी से पहले दुकान पर करें।</li>
-            <li>Neckband gift लेने के लिए ख़रीदारी ज़रूरी नहीं। Gift का brand, model और colour दुकान तय करेगी।</li>
-            <li>Claim के लिए दुकान पर code और उसी mobile number का access दिखाना होगा। Team code की authenticity और पहले redeem किए गए rewards का register जाँचेगी।</li>
-            <li>Website का verification सिर्फ़ code सही होने की पुष्टि करता है। यह redemption नहीं करता और used/unused status नहीं बताता। Team reward देने पर code को अपने register में redeemed दर्ज करेगी।</li>
-            <li>Screenshot अकेला claim का प्रमाण नहीं है। Edited screenshots, गलत numbers और पहले इस्तेमाल हुए codes से नया reward नहीं मिलता।</li>
-            <li>Demo mode में दिखाई देने वाले results का कोई claim value नहीं है। “DEMO” code redeem नहीं होता।</li>
-          </ul>
-          <p>Mobile number और browser storage की जानकारी <Link href="/privacy#spin-wheel-privacy">Spin Wheel Privacy</Link> में पढ़िए। कोई OTP, password या payment यहाँ न दें।</p>
+          <p>दोनों rewards के chances अलग हैं। Wheel के हिस्सों का आकार बराबर chance नहीं दर्शाता।</p>
+          <p>9 October 2026 से जारी नए codes, ₹5,000 से अधिक की Mobile, Laptop, Electronics या Home Appliance की ख़रीदारी पर लागू हैं। एक product पर एक code और एक number पर एक redemption होगा। छोटे accessories शामिल नहीं हैं। पुराने valid codes के मूल benefits सुरक्षित हैं।</p>
+          <p>दुकान की team उसी number का access और code verify करेगी तथा reward देने पर bill और product के साथ Used status दर्ज करेगी। इस्तेमाल हुए code को दोबारा redeem नहीं किया जा सकता। Gift का उपलब्ध brand, model और colour दुकान पर बताया जाएगा। Demo result redeem नहीं होता।</p>
+          <p>Number और reward record की जानकारी <Link href="/privacy#spin-wheel-privacy">Privacy</Link> में है।</p>
 
           <h2 id="price">2. दाम, offer और stock</h2>
           <ul>

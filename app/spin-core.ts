@@ -1,6 +1,6 @@
 // Server cryptography only. The secret is supplied by spin-actions, never by a client.
 import { createHmac, timingSafeEqual } from "node:crypto";
-import { SPIN_CAMPAIGN, spinRewards, type SpinCoupon, type SpinRewardId } from "./spin-rewards";
+import { SPIN_CAMPAIGN, LEGACY_SPIN_CAMPAIGN, spinRewards, type SpinCoupon, type SpinRewardId } from "./spin-rewards";
 
 export function rewardForRoll(roll: number) {
   if (!Number.isInteger(roll) || roll < 0 || roll >= 10000) throw new Error("Invalid reward roll");
@@ -24,9 +24,9 @@ export function normalizeSpinPhone(input: unknown): string | null {
   return /^[6-9]\d{9}$/.test(phone) ? phone : null;
 }
 
-function digest(secret: string, purpose: string, value: string) {
+function digest(secret: string, purpose: string, value: string, campaign: string = LEGACY_SPIN_CAMPAIGN) {
   if (secret.length < 32) throw new Error("Wheel signing secret is unavailable");
-  return createHmac("sha256", secret).update(`${SPIN_CAMPAIGN}:${purpose}:${value}`).digest();
+  return createHmac("sha256", secret).update(`${campaign}:${purpose}:${value}`).digest();
 }
 
 function drawForPhone(phone: string, secret: string) {
@@ -42,9 +42,9 @@ function drawForPhone(phone: string, secret: string) {
   return value % 10000;
 }
 
-function signCoupon(phone: string, rewardId: SpinRewardId, secret: string): SpinCoupon {
-  const signature = digest(secret, "coupon", `${phone}:${rewardId}`).toString("hex").slice(0, 24).toUpperCase();
-  return { campaign: SPIN_CAMPAIGN, rewardId, code: `MW26-${signature.match(/.{6}/g)!.join("-")}`, phoneLast4: phone.slice(-4) };
+function signCoupon(phone: string, rewardId: SpinRewardId, secret: string, campaign: string = SPIN_CAMPAIGN): SpinCoupon {
+  const signature = digest(secret, "coupon", `${phone}:${rewardId}`, campaign).toString("hex").slice(0, 24).toUpperCase();
+  return { campaign, rewardId, code: `MW26-${signature.match(/.{6}/g)!.join("-")}`, phoneLast4: phone.slice(-4) };
 }
 
 export function createSpinCoupon(phone: string, secret: string): SpinCoupon {
@@ -59,8 +59,8 @@ export function verifySpinCoupon(code: unknown, phone: string, secret: string): 
   if (timingSafeEqual(Buffer.from(normalized), Buffer.from(expected.code))) return expected;
   // Preserve authenticity checks for codes genuinely signed before the reward
   // was retired. This path cannot issue a new coupon or redeem an existing one.
-  for (const rewardId of previousRewardsForRoll(drawForPhone(phone, secret))) {
-    const legacy = signCoupon(phone, rewardId, secret);
+  for (const rewardId of [expected.rewardId, ...previousRewardsForRoll(drawForPhone(phone, secret))]) {
+    const legacy = signCoupon(phone, rewardId, secret, LEGACY_SPIN_CAMPAIGN);
     if (timingSafeEqual(Buffer.from(normalized), Buffer.from(legacy.code))) return legacy;
   }
   return null;

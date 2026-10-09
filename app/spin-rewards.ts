@@ -1,4 +1,5 @@
-export const SPIN_CAMPAIGN = "mw-diwali-2026-v1";
+export const SPIN_CAMPAIGN = "mw-diwali-2026-v2";
+export const LEGACY_SPIN_CAMPAIGN = "mw-diwali-2026-v1";
 export const SPIN_STORAGE_KEY = "mw-diwali-2026-reward";
 
 // Display data only. Reward selection stays in the server-only crypto module.

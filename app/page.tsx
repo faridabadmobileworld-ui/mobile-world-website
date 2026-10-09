@@ -4,6 +4,7 @@ import { ShoppingCategories } from "@/components/ShoppingCategories";
 import { HomeBody } from "@/components/HomeBody";
 import { LatestPost } from "@/components/LatestPost";
 import { CampaignSocial, FestivalHighlights } from "@/components/CampaignHighlights";
+import { FestivalFlightScene } from "./FestivalFrame";
 import { SpinWheel } from "./SpinWheel";
 import { CurrentOffers } from "./CurrentOffers";
 
@@ -19,6 +20,7 @@ export default function Home() {
       <ShoppingHero />
       <div className="wrap shopping-home">
         <CurrentOffers />
+        <FestivalFlightScene />
         <SpinWheel />
         <LatestPost />
         <ShoppingCategories />

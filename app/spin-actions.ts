@@ -3,6 +3,7 @@
 import { createHmac } from "node:crypto";
 import { headers } from "next/headers";
 import { createSpinCoupon, normalizeSpinPhone, verifySpinCoupon } from "./spin-core";
+import { saveSpin } from "./spin-store";
 import type { SpinResponse } from "./spin-rewards";
 
 // Best-effort abuse throttling per running server instance. Not a global
@@ -24,11 +25,16 @@ async function withinLimit(secret: string, action: string) {
 export async function playSpin(rawPhone: unknown, accepted: unknown): Promise<SpinResponse> {
   const secret = process.env.SPIN_WHEEL_SECRET;
   if (!secret || secret.length < 32) return { ok: false, message: "Spin अभी उपलब्ध नहीं है। थोड़ी देर बाद फिर कोशिश कीजिए।" };
-  if (accepted !== true) return { ok: false, message: "पहले reward के नियम और Privacy पढ़कर सहमति दीजिए।" };
+  if (accepted !== true) return { ok: false, message: "Spin के लिए अपना number और Privacy की सहमति दीजिए।" };
   const phone = normalizeSpinPhone(rawPhone);
   if (!phone) return { ok: false, message: "अपना सही 10-digit Indian mobile number लिखिए।" };
   if (!(await withinLimit(secret, "spin"))) return { ok: false, message: "कई requests आ चुकी हैं। एक मिनट बाद फिर कोशिश कीजिए।" };
-  return { ok: true, coupon: createSpinCoupon(phone, secret) };
+  try {
+    const coupon = await saveSpin(phone, createSpinCoupon(phone, secret));
+    return { ok: true, coupon };
+  } catch {
+    return { ok: false, message: "Code सुरक्षित नहीं हो पाया। उसी number से फिर कोशिश कीजिए।" };
+  }
 }
 
 export async function verifySpin(rawCode: unknown, rawPhone: unknown): Promise<SpinResponse> {
