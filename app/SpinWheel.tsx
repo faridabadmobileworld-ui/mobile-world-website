@@ -5,8 +5,8 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { IconArrow, IconWhatsApp } from "@/components/Icons";
 import { shop } from "@/data/shop";
-import { playSpin, verifySpin } from "./spin-actions";
-import { SPIN_CAMPAIGN, SPIN_STORAGE_KEY, spinRewards, getSpinReward, wheelStopAngle, type SpinCoupon, type SpinResponse } from "./spin-rewards";
+import { playSpin } from "./spin-actions";
+import { SPIN_CAMPAIGN, LEGACY_SPIN_CAMPAIGN, SPIN_STORAGE_KEY, spinRewards, getSpinReward, wheelStopAngle, type SpinCoupon, type SpinResponse } from "./spin-rewards";
 import "./spin-wheel.css";
 
 const segmentAngle = 360 / spinRewards.length;
@@ -28,7 +28,7 @@ function storedCoupon(raw: string | null): SpinCoupon | null {
   try {
     if (!raw) return null;
     const value = JSON.parse(raw);
-    return value.campaign === SPIN_CAMPAIGN && getSpinReward(value.rewardId) && /^MW26-(?:[A-F0-9]{6}-){3}[A-F0-9]{6}$/.test(value.code) && /^\d{4}$/.test(value.phoneLast4) ? value : null;
+    return [SPIN_CAMPAIGN, LEGACY_SPIN_CAMPAIGN].includes(value.campaign) && getSpinReward(value.rewardId) && /^MW26-(?:[A-F0-9]{6}-){3}[A-F0-9]{6}$/.test(value.code) && /^\d{4}$/.test(value.phoneLast4) ? value : null;
   } catch { return null; }
 }
 
@@ -63,7 +63,6 @@ function SpinWheelContent() {
   const saved = useSyncExternalStore(subscribeToCoupon, couponSnapshot, () => null);
   const remembered = isDemo ? null : storedCoupon(saved);
   const [phone, setPhone] = useState("");
-  const [accepted, setAccepted] = useState(false);
   const [phase, setPhase] = useState<"idle" | "loading" | "spinning" | "result">("idle");
   const [rotation, setRotation] = useState(0);
   const [coupon, setCoupon] = useState<SpinCoupon | null>(null);
@@ -74,10 +73,6 @@ function SpinWheelContent() {
   const requestActive = useRef(false);
   const resultHeading = useRef<HTMLHeadingElement>(null);
   const demoRound = useRef(0);
-  const [verificationCode, setVerificationCode] = useState("");
-  const [verificationPhone, setVerificationPhone] = useState("");
-  const [verification, setVerification] = useState<SpinResponse | null>(null);
-  const [verifying, setVerifying] = useState(false);
   const busy = phase === "loading" || phase === "spinning";
   const shownCoupon = busy ? null : coupon || remembered;
   const reward = getSpinReward(shownCoupon?.rewardId);
@@ -103,7 +98,7 @@ function SpinWheelContent() {
     try {
       const response: SpinResponse = isDemo
         ? { ok: true, coupon: { campaign: "demo", code: "DEMO — claim के लिए नहीं", phoneLast4: "0000", rewardId: spinRewards[demoRound.current++ % spinRewards.length].id } }
-        : await playSpin(phone, accepted);
+        : await playSpin(phone, true);
       if (!response.ok) { setError(response.message); setPhase("idle"); requestActive.current = false; return; }
       pending.current = response.coupon;
       const index = spinRewards.findIndex(item => item.id === response.coupon.rewardId);
@@ -118,32 +113,30 @@ function SpinWheelContent() {
   function clearSaved() {
     if (busy) return;
     try { localStorage.removeItem(SPIN_STORAGE_KEY); window.dispatchEvent(new Event("mw-spin-change")); } catch { /* Storage may be disabled. */ }
-    setCoupon(null); setPhase("idle"); setPhone(""); setAccepted(false); setCopyStatus(""); setError("");
+    setCoupon(null); setPhase("idle"); setPhone(""); setCopyStatus(""); setError("");
   }
 
   return <section id="spin-wheel" className="spin-section" aria-labelledby="spin-title">
     {isDemo && <div className="spin-demo-notice" role="status">DEMO MODE · Animation की जाँच। कोई असली reward या claim code जारी नहीं होगा।</div>}
-    <div className="spin-intro"><p className="spin-eyebrow">MOBILE WORLD · DIWALI SPIN &amp; WIN</p><h2 id="spin-title">एक Spin.<br/><span>आपकी ख़ुशी का एक मौक़ा।</span></h2><p>₹100 discount या चुनिंदा spins में Neckband। अपना code सँभालिए और दुकान पर दिखाइए।</p><div className="spin-pills"><span>Free Spin</span><span>{spinRewards.length} Rewards</span><span>दुकान पर Claim</span></div></div>
+    <div className="spin-intro"><p className="spin-eyebrow">MOBILE WORLD · DIWALI SPIN &amp; WIN</p><h2 id="spin-title">एक Spin.<br/><span>आपकी ख़ुशी का एक मौक़ा।</span></h2><p>अपना number डालिए। Wheel घुमाइए। अपना reward code दुकान पर दिखाइए।</p><div className="spin-pills"><span>Free Spin</span><span>एक number · एक reward</span><span>दुकान पर Claim</span></div></div>
     <div className="spin-play-area">
       <div className="spin-visual">{shownCoupon && !spinRewards.some(item => item.id === shownCoupon.rewardId) ? <div className="spin-archived"><span>✦</span><h3>आपका पहले का reward</h3><p>अपना सुरक्षित code दुकान पर दिखाइए।</p></div> : <><WheelGraphic rotation={shownCoupon ? Math.floor(rotation / 360) * 360 + ((360 - spinRewards.findIndex(item => item.id === shownCoupon.rewardId) * segmentAngle) % 360) : rotation} moving={busy} onEnd={finishSpin}/><p className="spin-wheel-caption">ऊपर का pointer आपका reward दिखाएगा।</p></>}</div>
       <div className="spin-control">
         {shownCoupon && reward ? <div className="spin-result" aria-live="polite">
-          <span className="spin-result-spark" aria-hidden="true">✦</span><p className="spin-eyebrow">{isDemo ? "DEMO RESULT" : "आपका DIWALI REWARD"}</p><h3 ref={resultHeading} tabIndex={-1}>{reward.label}</h3><p>{isDemo ? "यह सिर्फ़ preview है। इसे दुकान पर redeem नहीं किया जा सकता।" : reward.kind === "discount" ? "यह discount आपके ख़रीदारी के bill पर लागू होगा। Cash payout नहीं है।" : "अपना gift लेने के लिए यह code दुकान पर दिखाइए। Brand, model और colour दुकान तय करेगी।"}</p>
+          <span className="spin-result-spark" aria-hidden="true">✦</span><p className="spin-eyebrow">{isDemo ? "DEMO RESULT" : "आपका DIWALI REWARD"}</p><h3 ref={resultHeading} tabIndex={-1}>{reward.label}</h3><p>{isDemo ? "यह सिर्फ़ preview है। इसे दुकान पर redeem नहीं किया जा सकता।" : reward.kind === "discount" ? "अपना code दुकान पर दिखाइए और ख़रीदारी पर discount पाइए।" : "अपनी ख़रीदारी के साथ gift लेने के लिए यह code दुकान पर दिखाइए।"}</p>
           <div className="spin-coupon"><span>{isDemo ? "DEMO" : `Mobile number · ••••••${shownCoupon.phoneLast4}`}</span><code>{shownCoupon.code}</code><small>{isDemo ? "कोई claim code जारी नहीं हुआ" : "यह code रखें या screenshot ले लें।"}</small></div>
           {!isDemo && <div className="spin-result-actions"><button type="button" className="spin-secondary" onClick={async () => { try { await navigator.clipboard.writeText(shownCoupon.code); setCopyStatus("Code copy हो गया।"); } catch { setCopyStatus("Code select करके copy कीजिए या screenshot ले लीजिए।"); } }}>Code copy कीजिए</button><a className="spin-whatsapp" href={`${shop.phone.whatsapp}?text=${encodeURIComponent(`नमस्ते Mobile World! मेरा Diwali Spin reward ${reward.label} है।\nCode: ${shownCoupon.code}\nMobile number के आख़िरी अंक: ${shownCoupon.phoneLast4}\nमैं इसे दुकान पर claim करना चाहता/चाहती हूँ।`)}`} target="_blank" rel="noopener noreferrer"><IconWhatsApp/> WhatsApp पर दिखाइए</a></div>}
           {copyStatus && <p className="spin-small" role="status">{copyStatus}</p>}
-          {!isDemo && <p className="spin-claim-note">Claim के समय इसी mobile number की पुष्टि और पहले इस्तेमाल हुए codes के record की जाँच होगी। केवल screenshot से claim पूरा नहीं होगा।</p>}
           <button type="button" className="spin-clear" onClick={clearSaved}>{isDemo ? "अगला demo spin" : "इस browser से result हटाएँ"}</button>
         </div> : <form className="spin-form" onSubmit={startSpin}>
           <p className="spin-eyebrow">आपकी बारी</p><h3>{busy ? "आपका wheel घूम रहा है…" : "देखें, आपके लिए क्या है?"}</h3>
-          {!isDemo && <><label htmlFor="spin-phone">आपका mobile number</label><div className="spin-phone-field"><span>+91</span><input id="spin-phone" type="tel" inputMode="tel" autoComplete="tel-national" maxLength={16} placeholder="10-digit mobile number" value={phone} onChange={event => setPhone(event.target.value)} required disabled={busy} aria-describedby="spin-phone-help"/></div><p id="spin-phone-help" className="spin-small">अपना reward code इसी number से दुकान पर दिखाइए।</p><label className="spin-consent"><input type="checkbox" checked={accepted} onChange={event => setAccepted(event.target.checked)} required disabled={busy}/><span>यह मेरा number है। मैंने <a href="#spin-rules">reward के नियम</a> और <Link href="/privacy#spin-wheel-privacy">Privacy</Link> पढ़ लिए हैं।</span></label></>}
-          <button type="submit" className="spin-primary" disabled={busy || (!isDemo && (!accepted || phone.replace(/\D/g, "").length < 10))}>{busy ? "थोड़ा इंतज़ार कीजिए…" : isDemo ? "Demo wheel घुमाइए" : "अपना Wheel घुमाइए"}<IconArrow/></button>
+          {!isDemo && <><label htmlFor="spin-phone">आपका mobile number</label><div className="spin-phone-field"><span>+91</span><input id="spin-phone" type="tel" inputMode="tel" autoComplete="tel-national" maxLength={16} placeholder="10-digit mobile number" value={phone} onChange={event => setPhone(event.target.value)} required disabled={busy} aria-describedby="spin-phone-help"/></div><p id="spin-phone-help" className="spin-small">अपना reward code इसी number से दुकान पर दिखाइए।</p><p className="spin-privacy-note">Spin करने पर आपका number और reward हमारे private store record में सुरक्षित होंगे। <Link href="/privacy#spin-wheel-privacy">Privacy</Link></p></>}
+          <button type="submit" className="spin-primary" disabled={busy || (!isDemo && (phone.replace(/\D/g, "").length < 10))}>{busy ? "थोड़ा इंतज़ार कीजिए…" : isDemo ? "Demo wheel घुमाइए" : "अपना Wheel घुमाइए"}<IconArrow/></button>
           <p className="spin-free-note">Spin के लिए कोई payment या ख़रीदारी ज़रूरी नहीं।</p><p className="spin-progress" role="status" aria-live="polite">{phase === "loading" ? "आपका reward तय हो रहा है…" : phase === "spinning" ? "Wheel रुकने पर result दिखाई देगा।" : ""}</p>{error && <p className="spin-error" role="alert">{error}</p>}
         </form>}
       </div>
     </div>
-    <details id="spin-rules" className="spin-details"><summary>Game rules · Reward कैसे मिलेगा?</summary><p className="spin-rules-intro">हर reward का chance अलग है। Wheel के बराबर हिस्सों का मतलब बराबर chance नहीं है।</p><ol><li>यह free Diwali promotion है। Spin के लिए ख़रीदारी, payment या किसी ad को देखना ज़रूरी नहीं है।</li><li>एक व्यक्ति और एक mobile number पर इस campaign में एक reward redeem होगा। अपना code सँभालकर रखिए। पहले जारी हुए codes की जाँच जारी रहेगी; एक व्यक्ति को एक ही reward दिया जाएगा।</li><li>₹100 reward आपके bill पर discount है। Discount bill amount से अधिक नहीं होगा; बची रकम cash में नहीं मिलेगी। दूसरे offers के साथ इस्तेमाल की पुष्टि ख़रीदारी से पहले दुकान पर कीजिए।</li><li>Neckband gift को claim करने के लिए ख़रीदारी ज़रूरी नहीं है। Gift का brand, model और colour दुकान तय करेगी।</li><li>दुकान पर code और उसी mobile number का access दिखाइए। Team code जाँचेगी, पहले redeem हुए rewards का register देखेगी और इस्तेमाल किए गए code का record रखेगी।</li><li>Screenshot अकेले claim का प्रमाण नहीं है। कोई OTP, password या payment website पर न दें।</li></ol><Link href="/terms#spin-wheel-terms">पूरे नियम देखिए <IconArrow/></Link></details>
-    <details className="spin-details spin-verify"><summary>Reward code की जाँच कीजिए</summary><p>Code की authenticity जाँचने के लिए वही mobile number लिखिए। यह जाँच code को redeem नहीं करती और पहले इस्तेमाल होने का status नहीं बताती। Team को अपना redemption register भी देखना होगा।</p><form onSubmit={async event => { event.preventDefault(); if (verifying) return; setVerifying(true); setVerification(null); try { setVerification(await verifySpin(verificationCode, verificationPhone)); } catch { setVerification({ ok: false, message: "Connection की दिक़्क़त है। फिर कोशिश कीजिए।" }); } finally { setVerifying(false); } }}><label>Reward code<input name="reward-code" value={verificationCode} onChange={event => setVerificationCode(event.target.value)} autoComplete="off" maxLength={70} required placeholder="MW26-…"/></label><label>Spin वाला mobile number<input name="reward-phone" type="tel" inputMode="tel" value={verificationPhone} onChange={event => setVerificationPhone(event.target.value)} maxLength={16} required placeholder="10-digit mobile number" autoComplete="off"/></label><button type="submit" className="spin-secondary" disabled={verifying}>{verifying ? "जाँच जारी है…" : "Code जाँचिए"}</button></form>{verification && <p className={verification.ok ? "spin-verified" : "spin-error"} role="status">{verification.ok ? `Code सही है · ${getSpinReward(verification.coupon.rewardId)?.label} · Number के आख़िरी अंक ${verification.coupon.phoneLast4}। Claim देने से पहले number का access और redemption register जाँचिए।` : verification.message}</p>}</details>
+    <p className="spin-eligibility">नए codes: ₹5,000 से अधिक के Mobile, Laptop, Electronics या Home Appliance पर · एक product, एक code।</p>
   </section>;
 }
 
