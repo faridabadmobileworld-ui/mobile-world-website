@@ -1,5 +1,5 @@
 import { shop } from "./shop";
-export type PhoneModel={id:string;brand:string;brandSlug:string;name:string;image:string;imageAlt:string;note:string;display:string;camera:string;processor:string;power:string;software:string;colours:{name:string;hex:string}[];variants:string[];system:"Android"|"iOS";reasons:Record<string,string>;source:string;checked:string;rank:number;status?:"available"|"upcoming"|"prebooking"};
+export type PhoneModel={id:string;brand:string;brandSlug:string;name:string;image:string;imageAlt:string;imageKind?:"creative";gallery?:{src:string;alt:string}[];note:string;display:string;camera:string;processor:string;power:string;software:string;colours:{name:string;hex:string}[];variants:string[];system:"Android"|"iOS";reasons:Record<string,string>;source:string;checked:string;rank:number;status?:"available"|"upcoming"|"prebooking"};
 export type PhoneBrand={slug:string;name:string;image:string;imageAlt:string;headline:string;note:string;models:PhoneModel[]};
 const img={apple:"/images/iphone-display-at-the-mobile-world-counter-346d3e71.webp",samsung:"/images/flagship-phones-apple-samsung-xiaomi-vivo-c3df528a.webp",xiaomi:"/images/redmi-17-5g-colours-mobile-world-faridabad.webp",google:"/images/flagship-smartphone-e6739d50.webp",nothing:"/images/model-nothing3a.png",mid:"/images/mid-range-5g-phones-five-colours-v2-7c07be19.webp"};
 const c=[{name:"Black",hex:"#15171a"},{name:"White",hex:"#f6f5f1"},{name:"Blue",hex:"#8da8cf"},{name:"Gold",hex:"#d8c7a4"}];
@@ -56,6 +56,61 @@ const vivoV80:PhoneModel={
 };
 phoneBrands.find(brand=>brand.slug==="xiaomi")?.models.push(redmi17C);
 phoneBrands.find(brand=>brand.slug==="vivo")?.models.push(vivoV80);
+// Owner-supplied product artwork, matched by the model/series printed on each image.
+// Keep these creatives distinct from official specification sources.
+const artworkRoot = "/images/mw-art-";
+const xiaomiBrand = phoneBrands.find(brand => brand.slug === "xiaomi")!;
+const xiaomi17 = xiaomiBrand.models.find(model => model.id === "xiaomi-xiaomi-17-17t")!;
+xiaomi17.name = "Xiaomi 17"; // Preserve the existing shared model link.
+xiaomi17.note = "Xiaomi 17 के colour, variant और stock की पुष्टि दुकान से कीजिए।";
+xiaomi17.reasons = { camera: "Xiaomi 17 का camera दुकान पर देखिए।", everyday: "अपनी ज़रूरत के अनुसार Xiaomi 17 को जानिए।", updates: "Software और variant की जानकारी दुकान से पूछिए।" };
+xiaomiBrand.models.push(
+  p("Xiaomi", "xiaomi", 2.5, "Xiaomi 17T", img.xiaomi, []),
+  p("Xiaomi Redmi", "xiaomi", 4.5, "Redmi Note 17", img.xiaomi, []),
+  p("Xiaomi Redmi", "xiaomi", 5.5, "Redmi 17", img.xiaomi, []),
+);
+for (const model of xiaomiBrand.models.filter(model => ["xiaomi-xiaomi-17t", "xiaomi-redmi-note-17", "xiaomi-redmi-17"].includes(model.id))) {
+  model.colours = [];
+  model.source = "";
+  model.note = "अपने पसंदीदा colour, variant और stock की जानकारी दुकान से लीजिए।";
+  model.display = "Display की जानकारी दुकान से पूछिए।";
+  model.camera = "Camera को दुकान पर करीब से देखिए।";
+  model.processor = "Processor की जानकारी दुकान से पूछिए।";
+  model.power = "Battery और charging की पुष्टि दुकान से कीजिए।";
+  model.reasons = { camera: "Camera की जानकारी दुकान से लीजिए।", everyday: "अपनी ज़रूरत के अनुसार model जानिए।", updates: "Software और variant की जानकारी दुकान से पूछिए।" };
+}
+const artworkByModel: Record<string, { title: string; files: string[] }> = {
+  "samsung-galaxy-z-fold-2026": { title: "Samsung Galaxy Z Fold8 Series", files: ["galaxy-z-fold8.webp"] },
+  "samsung-galaxy-s26-ultra": { title: "Samsung Galaxy S26 Series", files: ["galaxy-s26-series.webp"] },
+  "samsung-galaxy-s26-s26": { title: "Samsung Galaxy S26 Series", files: ["galaxy-s26-series.webp"] },
+  "samsung-galaxy-s25-series": { title: "Samsung Galaxy S25 Series", files: ["galaxy-s25-series.webp"] },
+  "samsung-galaxy-a-series-2026": { title: "Samsung Galaxy A Series", files: ["galaxy-a-series.webp"] },
+  "samsung-galaxy-a-series-2025": { title: "Samsung Galaxy A Series", files: ["galaxy-a-series.webp"] },
+  "xiaomi-xiaomi-17-ultra": { title: "Xiaomi 17 Ultra", files: ["xiaomi-17-ultra.webp"] },
+  "xiaomi-xiaomi-17-17t": { title: "Xiaomi 17", files: ["xiaomi-17.webp"] },
+  "xiaomi-xiaomi-17t": { title: "Xiaomi 17T", files: ["xiaomi-17t.webp"] },
+  "xiaomi-redmi-note-17-pro-max": { title: "REDMI Note 17 Pro Max", files: ["redmi-note-17-pro-max.webp", "redmi-note-17-pro-max-alternate.webp"] },
+  "xiaomi-redmi-note-17-pro": { title: "REDMI Note 17 Pro", files: ["redmi-note-17-pro.webp"] },
+  "xiaomi-redmi-note-17": { title: "REDMI Note 17", files: ["redmi-note-17-battery.webp", "redmi-note-17-emerald.webp"] },
+  "xiaomi-redmi-17": { title: "REDMI 17", files: ["redmi-17.webp"] },
+  "xiaomi-redmi-17c-5g": { title: "REDMI 17C", files: ["redmi-17c.webp"] },
+};
+for (const brand of phoneBrands) {
+  for (const model of brand.models) {
+    const artwork = artworkByModel[model.id];
+    if (!artwork) continue;
+    model.gallery = artwork.files.map((file, index) => ({ src: artworkRoot + file, alt: `${artwork.title} का Mobile World product creative${index ? " · दूसरा view" : ""}` }));
+    model.image = model.gallery[0].src;
+    model.imageAlt = model.gallery[0].alt;
+    model.imageKind = "creative";
+    if (model.id === "samsung-galaxy-z-fold-2026") model.name = "Galaxy Z Fold8 Series";
+  }
+  if (brand.slug === "samsung" || brand.slug === "xiaomi") {
+    const cover = brand.slug === "samsung" ? artworkByModel["samsung-galaxy-s26-ultra"] : artworkByModel["xiaomi-xiaomi-17-ultra"];
+    brand.image = artworkRoot + cover.files[0];
+    brand.imageAlt = cover.title + " का Mobile World product creative";
+  }
+}
 for(const brand of phoneBrands) brand.models.sort((a,b)=>a.rank-b.rank);
 export const phoneModels:PhoneModel[]=phoneBrands.flatMap(x=>x.models);
 export const availablePhoneModels=phoneModels.filter(x=>x.status!=="upcoming");
