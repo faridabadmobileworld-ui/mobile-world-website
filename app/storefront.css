@@ -47,7 +47,7 @@ main .panel:hover,main .post:hover,main .pc:hover,main .shot:hover,main .toc:hov
 .mw-model-creative .mw-model-media{height:auto;aspect-ratio:4/5;background:#fff;padding:0}
 .mw-model-creative .mw-image-button{display:block}
 .mw-model-creative .mw-model-media img{width:100%;height:100%;object-fit:contain;padding:0;transform:none;mix-blend-mode:normal}
-.mw-model-creative .mw-model-media .mw-brand{bottom:8px;left:8px;font-size:9px}
+.mw-model-creative .mw-model-media .mw-brand{top:auto;bottom:8px;left:8px;font-size:9px}
 .mw-detail-creative>img{height:auto;max-height:580px;aspect-ratio:4/5;object-fit:contain}
 .mw-gallery-thumbnails{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:14px 0}
 .mw-gallery-thumbnails button{width:70px;min-height:84px;padding:3px;border:2px solid #e3e5e9;border-radius:8px;background:#fff;overflow:hidden}
