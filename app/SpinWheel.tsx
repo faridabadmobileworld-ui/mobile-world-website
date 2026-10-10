@@ -102,6 +102,7 @@ function SpinWheelContent() {
       if (!response.ok) { setError(response.message); setPhase("idle"); requestActive.current = false; return; }
       pending.current = response.coupon;
       const index = spinRewards.findIndex(item => item.id === response.coupon.rewardId);
+      if (index < 0) { finishSpin(); return; }
       setRotation(previous => wheelStopAngle(index, previous)); setPhase("spinning");
       const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       timer.current = setTimeout(finishSpin, reduced ? 80 : 5600);
@@ -137,9 +138,10 @@ function SpinWheelContent() {
       </div>
     </div>
     <p className="spin-eligibility">नए codes: ₹5,000 से अधिक के Mobile, Laptop, Electronics या Home Appliance पर · एक product, एक code।</p>
+    <details className="spin-details"><summary>Rewards की chances और नियम</summary><p className="spin-rules-intro">Wheel के हिस्से बराबर दिखते हैं; rewards की chances अलग हैं। ₹ वाले rewards ख़रीदारी पर discount हैं।</p><ul className="spin-chances"><li><span>₹100 discount</span><b>98%</b></li><li><span>Neckband</span><b>1%</b></li><li><span>₹200 discount</span><b>0.4%</b></li><li><span>Earbuds</span><b>0.3%</b></li><li><span>₹500 discount</span><b>0.2%</b></li><li><span>₹1,000 discount</span><b>0.1%</b></li></ul><Link href="/terms#spin-wheel-terms">पूरे नियम पढ़िए <IconArrow/></Link></details>
   </section>;
 }
 
 export function SpinWheel() {
-  return <Suspense fallback={<section className="spin-section spin-loading" id="spin-wheel"><p className="spin-eyebrow">MOBILE WORLD · DIWALI SPIN &amp; WIN</p><h2>आपका Spin Wheel तैयार हो रहा है…</h2><p>₹100 discount · Neckband gift</p></section>}><SpinWheelContent/></Suspense>;
+  return <Suspense fallback={<section className="spin-section spin-loading" id="spin-wheel"><p className="spin-eyebrow">MOBILE WORLD · DIWALI SPIN &amp; WIN</p><h2>आपका Spin Wheel तैयार हो रहा है…</h2><p>₹100 · ₹200 · ₹500 · ₹1000 discount · Neckband · Earbuds</p></section>}><SpinWheelContent/></Suspense>;
 }

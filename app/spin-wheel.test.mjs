@@ -7,6 +7,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import Module, { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
+import { createHmac } from 'node:crypto';
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 const cache = new Map();
 function load(name) {
@@ -25,11 +26,11 @@ const { spinRewards, wheelStopAngle } = load('spin-rewards');
 const { rewardForRoll, normalizeSpinPhone, createSpinCoupon, verifySpinCoupon } = load('spin-core');
 const secret = 'isolated-test-secret-never-used-on-the-live-website';
 const phone = '9999900000';
-test('Every possible new draw stays within the two advertised rewards and budget policy', () => {
+test('All six advertised rewards are attainable and follow the campaign probabilities', () => {
   const counts = Object.fromEntries(spinRewards.map(reward => [reward.id, 0]));
   for (let roll = 0; roll < 10000; roll++) counts[rewardForRoll(roll).id]++;
-  assert.deepEqual(counts, { 'discount-100': 9900, neckband: 100 });
-  assert.equal(spinRewards.length, 2);
+  assert.deepEqual(counts, { 'discount-100': 9800, 'discount-200': 40, 'discount-500': 20, 'discount-1000': 10, neckband: 100, buds: 30 });
+  assert.equal(spinRewards.length, 6);
   for (const bad of [-1, 10000, NaN, 1.5]) assert.throws(() => rewardForRoll(bad));
 });
 test('Existing discount and neckband outcomes stay stable, and all older signed coupons verify', () => {
@@ -50,7 +51,9 @@ test('Existing discount and neckband outcomes stay stable, and all older signed 
   ];
   for (const [oldPhone, rewardId, code] of fixtures) {
     assert.equal(verifySpinCoupon(code, oldPhone, secret)?.rewardId, rewardId);
-    assert.equal(createSpinCoupon(oldPhone, secret).rewardId, 'discount-100');
+    const oldSignature = createHmac('sha256', secret).update(`mw-diwali-2026-v2:coupon:${oldPhone}:discount-100`).digest('hex').slice(0, 24).toUpperCase();
+    const oldDiscountCode = `MW26-${oldSignature.match(/.{6}/g).join('-')}`;
+    assert.equal(verifySpinCoupon(oldDiscountCode, oldPhone, secret)?.rewardId, 'discount-100');
     assert.equal(verifySpinCoupon(code, phone, secret), null);
   }
 });

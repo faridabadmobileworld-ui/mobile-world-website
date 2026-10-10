@@ -4,9 +4,14 @@ import { SPIN_CAMPAIGN, LEGACY_SPIN_CAMPAIGN, spinRewards, type SpinCoupon, type
 
 export function rewardForRoll(roll: number) {
   if (!Number.isInteger(roll) || roll < 0 || roll >= 10000) throw new Error("Invalid reward roll");
-  // Server-side budget policy: 99% discount, 1% neckband. Preserve the original
-  // neckband range and map every retired prize range to the current discount.
-  return spinRewards[roll >= 9800 && roll < 9900 ? 1 : 0];
+  // 99% combined for ₹100 / Neckband; the other four rewards share 1%.
+  // Keep the existing ₹100 and Neckband ranges stable.
+  if (roll < 9800) return spinRewards[0];
+  if (roll < 9900) return spinRewards[4];
+  if (roll < 9940) return spinRewards[1];
+  if (roll < 9970) return spinRewards[5];
+  if (roll < 9990) return spinRewards[2];
+  return spinRewards[3];
 }
 
 function previousRewardsForRoll(roll: number): SpinRewardId[] {
@@ -57,9 +62,16 @@ export function verifySpinCoupon(code: unknown, phone: string, secret: string): 
   if (!/^MW26-(?:[A-F0-9]{6}-){3}[A-F0-9]{6}$/.test(normalized)) return null;
   const expected = createSpinCoupon(phone, secret);
   if (timingSafeEqual(Buffer.from(normalized), Buffer.from(expected.code))) return expected;
+  // The previous two-reward version issued ₹100 for the last 1% of draws.
+  // Those genuinely signed codes remain valid after restoring all six rewards.
+  const roll = drawForPhone(phone, secret);
+  if (roll >= 9900) {
+    const previous = signCoupon(phone, "discount-100", secret);
+    if (timingSafeEqual(Buffer.from(normalized), Buffer.from(previous.code))) return previous;
+  }
   // Preserve authenticity checks for codes genuinely signed before the reward
   // was retired. This path cannot issue a new coupon or redeem an existing one.
-  for (const rewardId of [expected.rewardId, ...previousRewardsForRoll(drawForPhone(phone, secret))]) {
+  for (const rewardId of [expected.rewardId, ...previousRewardsForRoll(roll)]) {
     const legacy = signCoupon(phone, rewardId, secret, LEGACY_SPIN_CAMPAIGN);
     if (timingSafeEqual(Buffer.from(normalized), Buffer.from(legacy.code))) return legacy;
   }

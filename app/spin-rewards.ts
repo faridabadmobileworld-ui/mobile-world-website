@@ -5,17 +5,17 @@ export const SPIN_STORAGE_KEY = "mw-diwali-2026-reward";
 // Display data only. Reward selection stays in the server-only crypto module.
 export const spinRewards = [
   { id: "discount-100", label: "₹100 discount", wheel: "₹100", sub: "DISCOUNT", colour: "#7d142c", ink: "#fff5dc", kind: "discount" },
-  { id: "neckband", label: "Neckband", wheel: "Neckband", sub: "GIFT", colour: "#f4d28d", ink: "#531326", kind: "gift" },
+  { id: "discount-200", label: "₹200 discount", wheel: "₹200", sub: "DISCOUNT", colour: "#f4d28d", ink: "#531326", kind: "discount" },
+  { id: "discount-500", label: "₹500 discount", wheel: "₹500", sub: "DISCOUNT", colour: "#9a3450", ink: "#fff5dc", kind: "discount" },
+  { id: "discount-1000", label: "₹1,000 discount", wheel: "₹1000", sub: "DISCOUNT", colour: "#f8e4bc", ink: "#531326", kind: "discount" },
+  { id: "neckband", label: "Neckband", wheel: "Neckband", sub: "GIFT", colour: "#65172b", ink: "#fff5dc", kind: "gift" },
+  { id: "buds", label: "Earbuds", wheel: "Earbuds", sub: "GIFT", colour: "#e9bc76", ink: "#531326", kind: "gift" },
 ] as const;
 
 // Previously issued signed coupons retain their original label and validity.
 // These rewards are never issued or advertised in the current promotion.
 const retiredRewards = [
-  { id: "discount-200", label: "₹200 discount", kind: "discount" },
-  { id: "buds", label: "Buds", kind: "gift" },
-  { id: "discount-500", label: "₹500 discount", kind: "discount" },
   { id: "mini-speaker", label: "Mini Speaker", kind: "gift" },
-  { id: "discount-1000", label: "₹1,000 discount", kind: "discount" },
 ] as const;
 export function getSpinReward(id: string | undefined) {
   return spinRewards.find(reward => reward.id === id) ?? retiredRewards.find(reward => reward.id === id);
