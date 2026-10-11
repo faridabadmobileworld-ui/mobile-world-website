@@ -10,7 +10,7 @@
 
 import { shop, categories } from "@/data/shop";
 import { redmiNote17Post } from "./redmiNote17Post";
-import { redmi17CPost, vivoV80Post } from "./phoneLaunchPosts";
+import { redmi17CPost, vivoV80Post, oppoF35ProPost } from "./phoneLaunchPosts";
 
 /** WhatsApp पर सवाल भेजने का link। Text हमेशा encode होकर जाता है। */
 export function ask(topic: string): string {
@@ -536,6 +536,7 @@ export function livePosts(now: Date = new Date()): Post[] {
 }
 
 export const posts: Post[] = [
+  oppoF35ProPost,
   redmi17CPost,
   vivoV80Post,
   redmiNote17Post,

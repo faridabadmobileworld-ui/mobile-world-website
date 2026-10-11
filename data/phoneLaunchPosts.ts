@@ -1,6 +1,52 @@
 import type { Post } from "./content";
 import { shop } from "./shop";
 
+// OPPO India product and specifications pages, checked 10 October 2026.
+export const oppoF35ProPost: Post = {
+  slug: "oppo-f35-pro-5g-launch-specifications-faridabad",
+  kicker: "Tech Update", date: "11 October 2026", dateISO: "2026-10-11",
+  title: "OPPO F35 Pro 5G: group selfies, बड़ी battery और नए colours को जानिए।",
+  excerpt: "OPPO F35 Pro के 50MP selfie camera, 8000mAh battery, 80W charging, AMOLED display, colours और RAM/storage options की जानकारी।",
+  image: "/images/oppo-f35-pro-colours-official.png", imageW: 1042, imageH: 720, imageFit: "contain",
+  alt: "OPPO F35 Pro 5G के Twilight Brown, Wave Blue, Sunrise Orange और front views — official OPPO India image",
+  body: `
+<p>दोस्तों के साथ एक group selfie हो या परिवार के छोटे-छोटे पल—phone चुनते समय camera और battery दोनों मायने रखते हैं। <strong>OPPO F35 Pro 5G</strong> की नई पेशकश में इन्हीं बातों पर ध्यान है। अपनी अगली पसंद बनाने से पहले इसके highlights, colours और variants समझिए।</p>
+
+<h2 id="camera">Group selfie में सबको साथ रखिए</h2>
+<p>इसमें <strong>50MP front camera, autofocus और 100° field of view</strong> है। पीछे <strong>50MP main camera with OIS</strong> तथा 8MP ultra-wide मिलता है। Front और rear, दोनों से 4K video 30fps तक record हो सकती है।</p>
+<p>अपनी photos में आप किसे ज़्यादा इस्तेमाल करते हैं—selfie, portraits या video? Colour और face detail का अपना अनुभव लेकर phone चुनना बेहतर रहेगा।</p>
+
+<h2 id="battery">बड़ी battery, तेज़ charging</h2>
+<p><strong>8000mAh typical battery और 80W SUPERVOOC charging</strong> इसके मुख्य highlights हैं। असली backup और charging time, इस्तेमाल तथा परिस्थितियों के अनुसार बदलते हैं। OPPO का छह साल battery durability वाला दावा laboratory testing पर आधारित है; इसका मतलब छह साल की battery warranty नहीं है।</p>
+
+<h2 id="display-performance">Screen और performance एक नज़र में</h2>
+<table class="guide-spec-table"><caption>OPPO F35 Pro 5G · India specifications</caption><tbody>
+<tr><th scope="row">Display</th><td>17.22cm AMOLED · 2772 × 1272 pixels</td></tr>
+<tr><th scope="row">Refresh rate</th><td>60/90/120Hz adaptive · maximum 144Hz</td></tr>
+<tr><th scope="row">Processor</th><td>MediaTek Dimensity 7360 MAX</td></tr>
+<tr><th scope="row">Memory</th><td>LPDDR4X RAM · UFS 3.1 storage</td></tr>
+<tr><th scope="row">Software</th><td>ColorOS 16.5, specifications page के अनुसार</td></tr>
+<tr><th scope="row">Connectivity</th><td>5G · Wi-Fi 6 · Bluetooth 5.4 · USB-C</td></tr>
+<tr><th scope="row">Unlock</th><td>Under-screen fingerprint · face recognition</td></tr>
+</tbody></table>
+<p>144Hz हर app में लगातार लागू नहीं होता। Display का refresh rate, supported content और settings पर निर्भर करता है।</p>
+
+<h2 id="colours-variants">आपका colour, आपका storage</h2>
+<p>तीन colours हैं: <strong>Sunrise Orange, Wave Blue और Twilight Brown</strong>। RAM/storage options: <strong>6GB + 128GB, 8GB + 128GB और 8GB + 256GB</strong>। लगभग 210g weight और 8.4mm thickness वाले phone की grip भी अपनी पसंद के अनुसार देखिए। Memory card support नहीं है, इसलिए photos और videos के लिए पर्याप्त storage चुनिए।</p>
+<p>Box में phone, charger, USB cable, protective case, SIM ejector और quick guide दिए गए हैं। अपने colour और variant की उपलब्धता हमारी team से पूछिए।</p>
+
+<h2 id="durability">Durability की बात भी समझिए</h2>
+<p>OPPO ने IP69K resistance और 360° Armour Body को highlight किया है। Water resistance और drop testing की अपनी शर्तें हैं; phone को जानबूझकर पानी में डालना या गिराना ठीक नहीं है। छह साल Smoothness Protection वाला दावा 8GB + 256GB variant के लिए है—यह lag कभी नहीं होगा या उतने साल OS updates मिलेंगे, ऐसी guarantee नहीं है।</p>
+
+<h2 id="store-visit">Mobile World पर अपनी पसंद बताइए</h2>
+<p>F35 Pro पसंद आया? अपना colour और storage बताइए। हमारी team आपको दुकान की availability, demo और लागू offers की जानकारी देगी। OPPO online store के bank discounts या free gifts, दुकान के offers से अलग हो सकते हैं; booking से पहले अपने benefit की पुष्टि कर लीजिए।</p>
+<p><a href="/products?brand=oppo#smartphones">OPPO के products देखिए →</a> · <a href="/visit">दुकान का रास्ता और timings देखिए →</a></p>
+
+<h2 id="official-sources">जानकारी कहाँ से ली गई है?</h2>
+<p>Specifications और product image: OPPO India, 10 October 2026 को जाँची गई जानकारी। <a href="https://www.oppo.com/in/smartphones/series-f/f35-pro-5g/specs/" target="_blank" rel="noopener noreferrer">Official specifications</a> · <a href="https://www.oppo.com/in/smartphones/series-f/f35-pro-5g/" target="_blank" rel="noopener noreferrer">Features और testing conditions</a> · <a href="https://www.oppo.com/in/product/f35-pro-5g.P.P1110180" target="_blank" rel="noopener noreferrer">OPPO product page</a></p>
+<p><a href="/posts/redmi-17c-5g-sale-offer-specifications-faridabad">REDMI 17C का article पढ़िए →</a> · <a href="/posts/vivo-v80-prebooking-offers-specifications-faridabad">vivo V80 को जानिए →</a></p>`,
+};
+
 // Specifications verified 2026-10-07 from the manufacturers' India pages:
 // https://www.mi.com/in/product/redmi-17c-5g/specs/
 // https://www.vivo.com/in/products/param/v80

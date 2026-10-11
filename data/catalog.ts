@@ -111,6 +111,50 @@ for (const brand of phoneBrands) {
     brand.imageAlt = cover.title + " का Mobile World product creative";
   }
 }
+// Original manufacturer logos, obtained from their official websites on 10 October 2026.
+export const homepageBrands = [
+  { slug: "apple", name: "Apple", logo: "/images/brand-apple.svg" },
+  { slug: "samsung", name: "Samsung", logo: "/images/brand-samsung.svg" },
+  { slug: "xiaomi", name: "Xiaomi / Redmi", logo: "/images/brand-xiaomi.svg" },
+  { slug: "google", name: "Google", logo: "/images/brand-google.svg" },
+  { slug: "vivo", name: "vivo", logo: "/images/brand-vivo.svg" },
+  { slug: "oppo", name: "OPPO", logo: "/images/brand-oppo.svg" },
+  { slug: "motorola", name: "Motorola", logo: "/images/brand-motorola.png" },
+  { slug: "realme", name: "realme", logo: "/images/brand-realme.svg" },
+  { slug: "nothing", name: "Nothing", logo: "/images/brand-nothing.svg" },
+  { slug: "tecno", name: "TECNO", logo: "/images/brand-tecno.svg" },
+];
+
+// Names and product photos are from motorola.in. Store availability is not implied.
+const motorolaModels: PhoneModel[] = [
+  { name: "motorola razr fold", file: "motorola-razr-fold-official.png", path: "smartphones-motorola-razr-fold" },
+  { name: "motorola edge 70 max", file: "motorola-edge-70-max-official.png", path: "smartphones-motorola-edge-70-max" },
+].map((model, index) => ({
+  ...p("Motorola", "motorola", index + 1, model.name, `/images/${model.file}`, []),
+  imageAlt: `${model.name} की official Motorola product image`,
+  note: "अपना पसंदीदा colour, variant और stock दुकान से जानिए।",
+  display: "Display की जानकारी दुकान से पूछिए।", camera: "Camera की जानकारी दुकान से पूछिए।",
+  processor: "Processor की जानकारी दुकान से पूछिए।", power: "Battery और charging की जानकारी दुकान से पूछिए।",
+  software: "Android · version की पुष्टि कीजिए।", colours: [],
+  source: `https://www.motorola.in/${model.path}/p`, checked: "2026-10-10",
+  reasons: { camera: "Camera और variants के बारे में बात कीजिए।", everyday: "अपनी ज़रूरत के अनुसार phone चुनिए।", updates: "Software support की जानकारी brand से जानिए।" },
+}));
+phoneBrands.push(b("motorola", "Motorola", motorolaModels[0].image, "razr और edge के models देखिए।", motorolaModels));
+
+const oppoF35Pro: PhoneModel = {
+  ...p("OPPO", "oppo", 2.5, "F35 Pro 5G", "/images/oppo-f35-pro-colours-official.png", ["6GB / 128GB", "8GB / 128GB", "8GB / 256GB"]),
+  imageAlt: "OPPO F35 Pro 5G के तीन colours और front view — official OPPO India image",
+  note: "50MP autofocus selfie camera और 8000mAh battery। अपने colour और stock की जानकारी दुकान से लीजिए।",
+  display: "17.22cm AMOLED · 2772 × 1272 · maximum 144Hz",
+  camera: "50MP OIS main + 8MP ultra-wide · 50MP AF selfie",
+  processor: "MediaTek Dimensity 7360 MAX · LPDDR4X · UFS 3.1",
+  power: "8000mAh typical · 80W SUPERVOOC", software: "ColorOS 16.5",
+  colours: [{ name: "Sunrise Orange", hex: "#efa278" }, { name: "Wave Blue", hex: "#bed4e9" }, { name: "Twilight Brown", hex: "#6c5551" }],
+  source: "https://www.oppo.com/in/smartphones/series-f/f35-pro-5g/specs/", checked: "2026-10-10",
+  reasons: { camera: "100° selfie camera और OIS main camera को जानिए।", everyday: "बड़ी battery और AMOLED display की जानकारी लीजिए।", updates: "अपने variant की software support policy OPPO से जानिए।" },
+};
+phoneBrands.find(brand => brand.slug === "oppo")?.models.push(oppoF35Pro);
+
 for(const brand of phoneBrands) brand.models.sort((a,b)=>a.rank-b.rank);
 export const phoneModels:PhoneModel[]=phoneBrands.flatMap(x=>x.models);
 export const availablePhoneModels=phoneModels.filter(x=>x.status!=="upcoming");
