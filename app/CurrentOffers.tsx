@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { IconArrow } from "@/components/Icons";
 import "./current-offers.css";
+import { oppoF35ProPost } from "@/data/phoneLaunchPosts";
 
 export function CurrentOffers() {
   return <section id="current-offers" className="current-offers" aria-labelledby="current-offers-title">
@@ -27,6 +28,17 @@ export function CurrentOffers() {
           <div className="offer-benefits"><div><strong>1 + 1</strong><span>साल warranty benefit</span></div><div><strong>FREE</strong><span>Premium backpack</span></div><div><strong>₹101</strong><span>Down payment offer</span></div></div>
           <p className="offer-summary">Camera से colours तक, V80 को करीब से जानिए और अपना पसंदीदा variant चुनिए।</p>
           <div className="offer-actions"><Link className="offer-cta" href="/posts/vivo-v80-prebooking-offers-specifications-faridabad">Pre-booking benefits देखिए <IconArrow/></Link></div>
+        </div>
+      </article>
+      <article className="offer-card offer-oppo" aria-labelledby="oppo-launch-title">
+        <header className="offer-card-heading"><div><span className="offer-brand">OPPO · F SERIES</span><h3 id="oppo-launch-title">F35 Pro <small>5G</small></h3></div><span className="offer-status"><i aria-hidden="true"/>नया launch</span></header>
+        <Link className="offer-image" href={`/posts/${oppoF35ProPost.slug}`} aria-label="OPPO F35 Pro की पूरी जानकारी पढ़िए"><Image src={oppoF35ProPost.image} alt={oppoF35ProPost.alt} width={oppoF35ProPost.imageW} height={oppoF35ProPost.imageH} sizes="(max-width:760px) calc(100vw - 62px), (max-width:1100px) 45vw, 380px" /></Link>
+        <div className="offer-card-content">
+          <p className="offer-kicker">GROUP SELFIES · अपनों के साथ</p>
+          <div className="offer-main-benefit"><strong>50MP</strong><div><b>Selfie camera</b><span>100° view और autofocus</span></div></div>
+          <div className="offer-specs" aria-label="OPPO F35 Pro के highlights"><span>8000mAh battery</span><span>80W SUPERVOOC</span><span>144Hz तक AMOLED</span></div>
+          <p className="offer-summary">Sunrise Orange, Wave Blue या Twilight Brown—अपने colour और RAM/storage options को जानिए।</p>
+          <div className="offer-actions"><Link className="offer-cta" href={`/posts/${oppoF35ProPost.slug}`}>F35 Pro की पूरी जानकारी <IconArrow/></Link></div>
         </div>
       </article>
     </div>
