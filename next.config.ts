@@ -1,4 +1,6 @@
 import type { NextConfig } from "next";
+import { readdirSync } from "node:fs";
+import { join } from "node:path";
 
 /**
  * `EXPORT_PREVIEW=1 npm run build` चलाने पर पूरी site `out/` में static
@@ -8,8 +10,15 @@ import type { NextConfig } from "next";
  * का optimisation चालू रहता है।
  */
 const preview = process.env.EXPORT_PREVIEW === "1";
+// Only completed, checked-in images enter the catalogue. Each image upload
+// triggers a deployment and switches its own model without waiting for a batch.
+const studioImageIds = readdirSync(join(process.cwd(), "public/images"))
+  .filter((file) => /^mw-studio-[a-z0-9-]+\.webp$/.test(file))
+  .map((file) => file.slice("mw-studio-".length, -".webp".length))
+  .sort();
 
 const nextConfig: NextConfig = {
+  env: { NEXT_PUBLIC_STUDIO_IMAGE_IDS: JSON.stringify(studioImageIds) },
   /**
    * Instagram की तस्वीरें उनके अपने server (CDN) से आती हैं। हम उन्हें
    * `unoptimized` रखते हैं — Instagram हर घंटे नया पता देता है, इसलिए उन्हें
