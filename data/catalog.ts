@@ -156,6 +156,20 @@ const oppoF35Pro: PhoneModel = {
 phoneBrands.find(brand => brand.slug === "oppo")?.models.push(oppoF35Pro);
 
 for(const brand of phoneBrands) brand.models.sort((a,b)=>a.rank-b.rank);
+// Owner-approved studio images replace both the card and its detail gallery.
+// The build includes a model only after its image has actually been published.
+const studioImageIds = new Set<string>(JSON.parse(process.env.NEXT_PUBLIC_STUDIO_IMAGE_IDS || "[]"));
+for (const brand of phoneBrands) {
+  for (const model of brand.models) {
+    if (!studioImageIds.has(model.id)) continue;
+    model.image = `/images/mw-studio-${model.id}.webp`;
+    model.imageAlt = `${model.brand} ${model.name} का साफ़ studio product visual`;
+    model.imageKind = "creative";
+    model.gallery = [{ src: model.image, alt: model.imageAlt }];
+  }
+  const cover = brand.models.find((model) => studioImageIds.has(model.id));
+  if (cover) { brand.image = cover.image; brand.imageAlt = cover.imageAlt; }
+}
 export const phoneModels:PhoneModel[]=phoneBrands.flatMap(x=>x.models);
 export const availablePhoneModels=phoneModels.filter(x=>x.status!=="upcoming");
 export const upcomingPhoneModels:PhoneModel[]=[];
