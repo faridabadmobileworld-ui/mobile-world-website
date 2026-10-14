@@ -1,5 +1,5 @@
 import { shop } from "./shop";
-export type PhoneModel={id:string;brand:string;brandSlug:string;name:string;image:string;imageAlt:string;imageKind?:"creative";gallery?:{src:string;alt:string}[];note:string;display:string;camera:string;processor:string;power:string;software:string;colours:{name:string;hex:string}[];variants:string[];system:"Android"|"iOS";reasons:Record<string,string>;source:string;checked:string;rank:number;status?:"available"|"upcoming"|"prebooking"};
+export type PhoneModel={id:string;brand:string;brandSlug:string;name:string;image:string;imageAlt:string;imageKind?:"creative";imageCaption?:string;imageSource?:string;gallery?:{src:string;alt:string}[];note:string;display:string;camera:string;processor:string;power:string;software:string;colours:{name:string;hex:string}[];variants:string[];system:"Android"|"iOS";reasons:Record<string,string>;source:string;checked:string;rank:number;status?:"available"|"upcoming"|"prebooking"};
 export type PhoneBrand={slug:string;name:string;image:string;imageAlt:string;headline:string;note:string;models:PhoneModel[]};
 const img={apple:"/images/iphone-display-at-the-mobile-world-counter-346d3e71.webp",samsung:"/images/flagship-phones-apple-samsung-xiaomi-vivo-c3df528a.webp",xiaomi:"/images/redmi-17-5g-colours-mobile-world-faridabad.webp",google:"/images/flagship-smartphone-e6739d50.webp",nothing:"/images/model-nothing3a.png",mid:"/images/mid-range-5g-phones-five-colours-v2-7c07be19.webp"};
 const c=[{name:"Black",hex:"#15171a"},{name:"White",hex:"#f6f5f1"},{name:"Blue",hex:"#8da8cf"},{name:"Gold",hex:"#d8c7a4"}];
@@ -155,16 +155,379 @@ const oppoF35Pro: PhoneModel = {
 };
 phoneBrands.find(brand => brand.slug === "oppo")?.models.push(oppoF35Pro);
 
-for(const brand of phoneBrands) brand.models.sort((a,b)=>a.rank-b.rank);
-// Owner-approved studio images replace both the card and its detail gallery.
-// The build includes a model only after its image has actually been published.
+// Exact-model source audit: do not publish a different phone under an unverified name.
+const unverifiedModelIds = new Set(["apple-iphone-18", "oneplus-oneplus-14"]);
+for (const brand of phoneBrands) {
+  brand.models = brand.models.filter(model => !unverifiedModelIds.has(model.id));
+  brand.models.sort((a, b) => a.rank - b.rank);
+}
+const studioImageReferences: Record<string, { name: string; source: string; representative: boolean; creative: boolean }> = {
+  "google-pixel-9-series": {
+    "name": "Google Pixel 9, Peony",
+    "source": "https://store.google.com/in/magazine/compare_pixel?hl=en-IN&toggler0=Pixel+9&toggler1=Pixel+10+Pro&toggler2=Pixel+10",
+    "representative": true,
+    "creative": false
+  },
+  "google-pixel-10-pro": {
+    "name": "Google Pixel 10 Pro, Moonstone",
+    "source": "https://store.google.com/in/magazine/compare_pixel?hl=en-IN&toggler0=Pixel+9&toggler1=Pixel+10+Pro&toggler2=Pixel+10",
+    "representative": false,
+    "creative": false
+  },
+  "google-pixel-10": {
+    "name": "Google Pixel 10, Indigo",
+    "source": "https://store.google.com/in/magazine/compare_pixel?hl=en-IN&toggler0=Pixel+9&toggler1=Pixel+10+Pro&toggler2=Pixel+10",
+    "representative": false,
+    "creative": false
+  },
+  "google-pixel-10-pro-xl": {
+    "name": "Google Pixel 10 Pro XL, Moonstone",
+    "source": "https://store.google.com/in/magazine/compare_pixel?hl=en-IN&toggler0=Pixel+10+Pro+XL&toggler1=Pixel+10+Pro&toggler2=Pixel+10",
+    "representative": false,
+    "creative": false
+  },
+  "vivo-vivo-x-series-2026": {
+    "name": "vivo X300 Ultra, Eclipse Black",
+    "source": "https://www.vivo.com/in/products/param/x300-ultra",
+    "representative": true,
+    "creative": false
+  },
+  "vivo-vivo-t-series": {
+    "name": "vivo T5 5G",
+    "source": "https://www.vivo.com/in/products/t5-5g",
+    "representative": true,
+    "creative": false
+  },
+  "vivo-vivo-y-series": {
+    "name": "vivo Y51 Pro 5G, Festive Red",
+    "source": "https://www.vivo.com/in/products/param/y51-pro-5g",
+    "representative": true,
+    "creative": false
+  },
+  "vivo-vivo-v80-5g": {
+    "name": "vivo V80 5G, Sunrise Anthem",
+    "source": "https://www.vivo.com/in/products/v80",
+    "representative": false,
+    "creative": false
+  },
+  "vivo-vivo-v-series-2026": {
+    "name": "vivo V80 5G, Sunrise Anthem",
+    "source": "https://www.vivo.com/in/products/v80",
+    "representative": true,
+    "creative": false
+  },
+  "oppo-oppo-find-x-series": {
+    "name": "OPPO Find X9 Ultra",
+    "source": "https://www.oppo.com/in/product/oppo-find-x9-ultra.P.P1110142",
+    "representative": true,
+    "creative": false
+  },
+  "oppo-oppo-reno-series-2026": {
+    "name": "OPPO Reno16 5G",
+    "source": "https://www.oppo.com/in/product/reno16-5g.P.P1110156",
+    "representative": true,
+    "creative": false
+  },
+  "oppo-oppo-a-series": {
+    "name": "OPPO A6 Pro 5G",
+    "source": "https://www.oppo.com/in/smartphones/series-a/a6-pro-5g/",
+    "representative": true,
+    "creative": false
+  },
+  "oppo-f35-pro-5g": {
+    "name": "OPPO F35 Pro 5G, three colours",
+    "source": "https://www.oppo.com/in/smartphones/series-f/f35-pro-5g/specs/",
+    "representative": false,
+    "creative": false
+  },
+  "oppo-oppo-f-series": {
+    "name": "OPPO F35 Pro 5G, three colours",
+    "source": "https://www.oppo.com/in/smartphones/series-f/f35-pro-5g/specs/",
+    "representative": true,
+    "creative": false
+  },
+  "realme-realme-p-series": {
+    "name": "realme P4s 5G",
+    "source": "https://www.realme.com/in/realme-p4s-5g",
+    "representative": true,
+    "creative": false
+  },
+  "realme-realme-gt-series": {
+    "name": "realme GT 8 Pro",
+    "source": "https://www.realme.com/in/realme-gt-8-pro",
+    "representative": true,
+    "creative": false
+  },
+  "realme-realme-number-series-2026": {
+    "name": "realme 16 Pro+ 5G",
+    "source": "https://www.realme.com/in/realme-16-pro-plus-5g",
+    "representative": true,
+    "creative": false
+  },
+  "realme-realme-narzo-series": {
+    "name": "realme NARZO 100x 5G",
+    "source": "https://www.realme.com/in/realme-narzo-100x-5g",
+    "representative": true,
+    "creative": false
+  },
+  "nothing-nothing-phone-3": {
+    "name": "Nothing Phone (3), White",
+    "source": "https://in.nothing.tech/products/phone-3",
+    "representative": false,
+    "creative": false
+  },
+  "nothing-nothing-phone-3a": {
+    "name": "Nothing Phone (3a), White",
+    "source": "https://in.nothing.tech/products/phone-3a",
+    "representative": false,
+    "creative": false
+  },
+  "nothing-cmf-phone-series": {
+    "name": "CMF Phone 2 Pro, Orange",
+    "source": "https://in.nothing.tech/products/cmf-phone-2-pro",
+    "representative": true,
+    "creative": false
+  },
+  "oneplus-oneplus-13-series": {
+    "name": "OnePlus 13 — Midnight Ocean",
+    "source": "https://www.oneplus.in/13/specs",
+    "representative": true,
+    "creative": false
+  },
+  "oneplus-oneplus-nord-2026": {
+    "name": "OnePlus Nord 6 — Fresh Mint",
+    "source": "https://www.oneplus.in/nord-6/specs",
+    "representative": true,
+    "creative": false
+  },
+  "oneplus-oneplus-nord-ce": {
+    "name": "OnePlus Nord CE6",
+    "source": "https://www.oneplus.in/nord-ce6/specs",
+    "representative": true,
+    "creative": false
+  },
+  "poco-poco-f-series": {
+    "name": "POCO F9 Ultra",
+    "source": "https://www.po.co/global/product/poco-f9-ultra/specs/",
+    "representative": true,
+    "creative": false
+  },
+  "poco-poco-x-series": {
+    "name": "POCO X8 Pro Max",
+    "source": "https://www.mi.com/global/product/poco-x8-pro-max/",
+    "representative": true,
+    "creative": false
+  },
+  "poco-poco-m-series": {
+    "name": "POCO M8 Pro 5G",
+    "source": "https://www.mi.com/global/product/poco-m8-pro-5g/",
+    "representative": true,
+    "creative": false
+  },
+  "poco-poco-c-series": {
+    "name": "POCO C81 Pro",
+    "source": "https://www.mi.com/global/product/poco-c81-pro/",
+    "representative": true,
+    "creative": false
+  },
+  "iqoo-iqoo-15-series": {
+    "name": "iQOO 15",
+    "source": "https://www.iqoo.com/in/products",
+    "representative": true,
+    "creative": false
+  },
+  "iqoo-iqoo-neo-series": {
+    "name": "iQOO Neo 10 — Asphalt Black",
+    "source": "https://shop.iqoo.com/in/product/2063?skuId=8452",
+    "representative": true,
+    "creative": false
+  },
+  "iqoo-iqoo-z-series": {
+    "name": "iQOO Z11 5G — Aurora Green",
+    "source": "https://www.iqoo.com/in/products",
+    "representative": true,
+    "creative": false
+  },
+  "tecno-tecno-phantom-series": {
+    "name": "TECNO PHANTOM V Fold2 5G",
+    "source": "https://www.tecno-mobile.in/",
+    "representative": true,
+    "creative": false
+  },
+  "tecno-tecno-camon-series": {
+    "name": "TECNO CAMON 50 Ultra 5G",
+    "source": "https://www.tecno-mobile.in/products/mobile/camon-50-ultra-5g/",
+    "representative": true,
+    "creative": false
+  },
+  "tecno-tecno-pova-series": {
+    "name": "TECNO POVA 8 Pro 5G",
+    "source": "https://www.tecno-mobile.in/products/mobile/pova-8-pro-5g/",
+    "representative": true,
+    "creative": false
+  },
+  "tecno-tecno-spark-series": {
+    "name": "TECNO SPARK Go 3 Pro",
+    "source": "https://www.tecno-mobile.in/products/mobile/spark-go-3-pro/",
+    "representative": true,
+    "creative": false
+  },
+  "motorola-motorola-razr-fold": {
+    "name": "Motorola razr fold",
+    "source": "https://www.motorola.in/smartphones-motorola-razr-fold/p",
+    "representative": false,
+    "creative": false
+  },
+  "motorola-motorola-edge-70-max": {
+    "name": "Motorola edge 70 max",
+    "source": "https://www.motorola.in/smartphones-motorola-edge-70-max/p",
+    "representative": false,
+    "creative": true
+  },
+  "xiaomi-redmi-17c-5g": {
+    "name": "REDMI 17C 5G",
+    "source": "https://www.mi.com/in/product/redmi-17c-5g/",
+    "representative": false,
+    "creative": false
+  },
+  "samsung-galaxy-z-fold-2026": {
+    "name": "Samsung Galaxy Z Fold8, Cream",
+    "source": "https://www.samsung.com/in/smartphones/galaxy-z-fold8/buy/",
+    "representative": true,
+    "creative": false
+  },
+  "samsung-galaxy-s26-ultra": {
+    "name": "Samsung Galaxy S26 Ultra, Cobalt Violet",
+    "source": "https://www.samsung.com/in/smartphones/galaxy-s26-ultra/buy/",
+    "representative": false,
+    "creative": false
+  },
+  "samsung-galaxy-s26-s26": {
+    "name": "Samsung Galaxy S26, Sky Blue",
+    "source": "https://www.samsung.com/in/smartphones/galaxy-s26/buy/",
+    "representative": true,
+    "creative": false
+  },
+  "samsung-galaxy-s25-series": {
+    "name": "Samsung Galaxy S25 Ultra, Titanium Silverblue",
+    "source": "https://www.samsung.com/in/smartphones/galaxy-s25-ultra/buy/",
+    "representative": true,
+    "creative": false
+  },
+  "samsung-galaxy-a-series-2026": {
+    "name": "Samsung Galaxy A57 5G, Awesome Icyblue",
+    "source": "https://www.samsung.com/in/smartphones/galaxy-a57/buy/",
+    "representative": true,
+    "creative": false
+  },
+  "samsung-galaxy-a-series-2025": {
+    "name": "Samsung Galaxy A56 5G, Awesome Olive",
+    "source": "https://www.samsung.com/in/smartphones/galaxy-a56/buy/",
+    "representative": true,
+    "creative": false
+  },
+  "xiaomi-xiaomi-17-17t": {
+    "name": "Xiaomi 17",
+    "source": "https://www.mi.com/in/product/xiaomi-17/specs/",
+    "representative": false,
+    "creative": false
+  },
+  "xiaomi-redmi-note-17-pro-max": {
+    "name": "REDMI Note 17 Pro Max 5G — Stealth Black",
+    "source": "https://www.mi.com/in/product/redmi-note-17-pro-max-5g/specs/",
+    "representative": false,
+    "creative": false
+  },
+  "xiaomi-redmi-note-17-pro": {
+    "name": "REDMI Note 17 Pro 5G",
+    "source": "https://www.mi.com/in/product/redmi-note-17-pro-5g/specs/",
+    "representative": false,
+    "creative": false
+  },
+  "xiaomi-redmi-note-17": {
+    "name": "REDMI Note 17 5G",
+    "source": "https://www.mi.com/in/product/redmi-note-17-5g/specs/",
+    "representative": false,
+    "creative": false
+  },
+  "xiaomi-redmi-17": {
+    "name": "REDMI 17 5G",
+    "source": "https://www.mi.com/in/product/redmi-17-5g/specs/",
+    "representative": false,
+    "creative": false
+  },
+  "xiaomi-redmi-note-15-pro": {
+    "name": "REDMI Note 15 Pro+ 5G",
+    "source": "https://www.mi.com/in/product/redmi-note-15-pro-plus-5g/",
+    "representative": false,
+    "creative": false
+  },
+  "xiaomi-xiaomi-17-ultra": {
+    "name": "Xiaomi 17 Ultra",
+    "source": "https://www.mi.com/in/product/xiaomi-17-ultra/specs/",
+    "representative": false,
+    "creative": true
+  },
+  "xiaomi-xiaomi-17t": {
+    "name": "Xiaomi 17T",
+    "source": "https://www.mi.com/in/product/xiaomi-17t/specs/",
+    "representative": false,
+    "creative": true
+  },
+  "xiaomi-redmi-15-15c-15a": {
+    "name": "REDMI 15 5G / REDMI 15C 5G / REDMI 15A 5G",
+    "source": "https://www.mi.com/in/product/redmi-15-5g/",
+    "representative": false,
+    "creative": true
+  },
+  "xiaomi-redmi-a7-a7-pro-4g": {
+    "name": "REDMI A7 / REDMI A7 Pro 4G",
+    "source": "https://www.mi.com/bd/product/redmi-a7/specs/",
+    "representative": false,
+    "creative": true
+  },
+  "apple-iphone-18-pro-max": {
+    "name": "iPhone 18 Pro Max · Burgundy",
+    "source": "https://www.apple.com/in/iphone-18-pro/",
+    "representative": false,
+    "creative": true
+  },
+  "apple-iphone-18-pro": {
+    "name": "iPhone 18 Pro · Silver",
+    "source": "https://www.apple.com/in/iphone-18-pro/",
+    "representative": false,
+    "creative": true
+  },
+  "apple-iphone-17-series": {
+    "name": "iPhone 17e, iPhone 17, iPhone 17 Pro, iPhone 17 Pro Max और iPhone Air",
+    "source": "https://www.apple.com/in/iphone/",
+    "representative": false,
+    "creative": true
+  },
+  "apple-iphone-16-series": {
+    "name": "iPhone 16, 16 Plus, 16 Pro, 16 Pro Max और 16e",
+    "source": "https://support.apple.com/en-in/108044",
+    "representative": false,
+    "creative": true
+  },
+  "apple-iphone-15-series": {
+    "name": "iPhone 15, 15 Plus, 15 Pro और 15 Pro Max",
+    "source": "https://www.apple.com/in/newsroom/2023/09/apple-unveils-iphone-15-pro-and-iphone-15-pro-max/",
+    "representative": false,
+    "creative": true
+  }
+};
+// A completed image becomes active only after that individual asset is published.
 const studioImageIds = new Set<string>(JSON.parse(process.env.NEXT_PUBLIC_STUDIO_IMAGE_IDS || "[]"));
 for (const brand of phoneBrands) {
   for (const model of brand.models) {
     if (!studioImageIds.has(model.id)) continue;
+    const reference = studioImageReferences[model.id];
     model.image = `/images/mw-studio-${model.id}.webp`;
-    model.imageAlt = `${model.brand} ${model.name} का साफ़ studio product visual`;
-    model.imageKind = "creative";
+    model.imageAlt = `${reference?.name ?? model.name} की साफ़ product image`;
+    model.imageKind = reference?.creative ? "creative" : undefined;
+    model.imageCaption = reference ? `तस्वीर में: ${reference.name}${reference.representative ? " · इस series का model" : ""}।` : undefined;
+    model.imageSource = reference?.source;
     model.gallery = [{ src: model.image, alt: model.imageAlt }];
   }
   const cover = brand.models.find((model) => studioImageIds.has(model.id));
