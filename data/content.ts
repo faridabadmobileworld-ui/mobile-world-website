@@ -568,16 +568,11 @@ export const posts: Post[] = [
     excerpt:
       "Redmi 17 5G के colors, storage variants और दाम एक जगह। 7,900mAh battery, " +
       "Snapdragon 4 Gen 5, 50MP camera — Jawahar Colony पर pre-booking खुली है।",
-    image: "/images/redmi-17-5g-colours-mobile-world-faridabad.webp",
-    imageW: 1400,
-    imageH: 788,
+    image: "/images/mw-studio-xiaomi-redmi-17.webp",
+    imageW: 837,
+    imageH: 630,
+    imageFit: "contain",
     alt: "Redmi 17 5G के तीनों रंग — Eternal Orange, Endless Blue और Absolute Black",
-    // सबसे ऊपर चलती हुई video। Share करने पर तस्वीर ऊपर वाली `image` जाती है।
-    heroVideo: {
-      src: "/posts/redmi-17-5g/counter-display.mp4",
-      srcSm: "/posts/redmi-17-5g/counter-display-sm.mp4",
-      poster: "/posts/redmi-17-5g/counter-display.webp",
-    },
     body: `
 <p>अगर आप एक ऐसे 5G phone की तलाश में हैं जिसमें battery को बार-बार charge करने का झंझट ही हमेशा के लिए ख़त्म हो जाए, तो आपका इंतज़ार अब पूरा होने वाला है।</p>
 <p>Xiaomi ने India में अपना बिलकुल नया <strong>Redmi 17 5G</strong> officially launch कर दिया है — कंपनी ने 16 को सीधा बाय-बाय कहकर 17 पर छलांग मार दी! इस शानदार phone की official sale <strong>10 September 2026</strong> से start होने जा रही है। Faridabad के Jawahar Colony वाले showroom — <strong>MOBILE WORLD</strong> — पर इसकी pre-bookings भी अभी से open कर दी गई हैं।</p>
@@ -590,10 +585,7 @@ export const posts: Post[] = [
 <div class="spec"><span class="spec-k">Charging</span><b class="spec-v">45<em>W</em></b></div>
 </div>
 
-<figure class="rvid">
-<video src="/posts/redmi-17-5g/hands-on.mp4" poster="/posts/redmi-17-5g/hands-on.webp" width="1280" height="722" autoplay loop muted playsinline preload="none" aria-label="Redmi 17 5G, Eternal Orange — Mobile World, Jawahar Colony में हाथ में"></video>
-<figcaption>Eternal Orange — पीछे vegan leather वाली finish। हाथ में लेकर देखिए, तभी पता चलता है कि पकड़ कैसी बैठती है।</figcaption>
-</figure>
+
 
 <h2 id="battery"><span class="hn">01</span>Battery और Charging</h2>
 <ul>
@@ -632,8 +624,8 @@ export const posts: Post[] = [
 <h2 id="colours"><span class="hn">06</span>Colours, Storage और Price</h2>
 <p>भाई, phone लेने से पहले रंग और storage का हिसाब एकदम साफ़ होना चाहिए। Xiaomi ने इसे इन options में उतारा है:</p>
 
-<figure class="rvid rvid-zoom">
-<span class="zw"><img src="/posts/redmi-17-5g/colours.webp" alt="Redmi 17 5G के तीनों रंग — Eternal Orange, Endless Blue और Absolute Black" width="1400" height="788" loading="lazy" decoding="async" /></span>
+<figure class="rvid">
+<span><img src="/images/mw-studio-xiaomi-redmi-17.webp" alt="Redmi 17 5G के तीनों रंग — Eternal Orange, Endless Blue और Absolute Black" width="837" height="630" loading="lazy" decoding="async" /></span>
 <figcaption>तीनों रंग एक साथ — Eternal Orange, Endless Blue और Absolute Black। दुकान पर तीनों सामने रखकर देखिए, असली रोशनी में और भी अच्छे लगते हैं।</figcaption>
 </figure>
 
@@ -776,10 +768,11 @@ export const posts: Post[] = [
     title: "Inverter AC और normal AC में फ़र्क़ क्या है?",
     excerpt:
       "नाम से लगता है कि यह घर के inverter पर चलेगा — ऐसा नहीं है। फ़र्क़ compressor का है, और उसी से बिजली का बिल तय होता है।",
-    image: "/images/split-air-conditioner-in-a-room-17b0cbd3.webp",
+    image: productImage("air-conditioners", "/images/split-air-conditioner-indoor-unit-24422a50.webp"),
+    imageFit: "contain",
     imageW: 900,
     imageH: 900,
-    alt: "कमरे में लगी split AC की indoor unit",
+    alt: "Split और Window AC — category की सांकेतिक तस्वीर",
     body: `
 <p>पहले एक ग़लतफ़हमी दूर कर लीजिए — <strong>Inverter AC का मतलब यह नहीं कि वो घर के inverter (battery) पर चलेगा।</strong> यह नाम उसके compressor की वजह से है।</p>
 <h2 id="normal-ac">Normal (non-inverter) AC कैसे चलता है</h2>
@@ -805,10 +798,11 @@ export const posts: Post[] = [
     title: "अपने कमरे के लिए सही AC tonnage कैसे चुनें",
     excerpt:
       "बड़ा AC अपने आप बेहतर नहीं होता। हम counter पर कमरे का हिसाब कैसे लगाते हैं, वही यहाँ लिखा है।",
-    image: "/images/split-ac-indoor-unit-wide-8c7ac6ae.webp",
+    image: productImage("air-conditioners", "/images/split-air-conditioner-indoor-unit-24422a50.webp"),
+    imageFit: "contain",
     imageW: 1200,
     imageH: 675,
-    alt: "दीवार पर लगी split AC की indoor unit",
+    alt: "Split और Window AC — category की सांकेतिक तस्वीर",
     body: `
 <p>बड़ा AC अपने आप बेहतर नहीं होता। ज़रूरत से बड़ा AC कमरे को झट से ठंडा करके बंद हो जाता है, फिर थोड़ी देर में दोबारा चालू — इससे बिजली ज़्यादा लगती है और कमरे में नमी बनी रहती है। छोटा AC कभी बंद ही नहीं होता, और उसका compressor जल्दी थक जाता है।</p>
 <h2 id="ton-ka-matlab">'Ton' का मतलब वज़न नहीं होता</h2>
