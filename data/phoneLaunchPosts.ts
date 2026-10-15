@@ -66,8 +66,8 @@ export const redmi17CPost: Post = {
   kicker: "Tech Update", date: "7 October 2026", dateISO: "2026-10-07",
   title: "REDMI 17C 5G की sale शुरू: ₹17 Processing Fee offer के साथ जानिए पूरा phone।",
   excerpt: "REDMI 17C की battery, display, camera, RAM और colours की पूरी जानकारी। Mobile World पर IDFC FIRST Bank का ₹17 Processing Fee offer जानिए।",
-  image: "/images/redmi-17c-sale-offer-oct2026.png", imageW: 1536, imageH: 1024, imageFit: "contain",
-  alt: "REDMI 17C 5G के Coffee Brew, Purple Dawn और front views का campaign artwork",
+  image: "/images/mw-studio-xiaomi-redmi-17c-5g.webp", imageW: 643, imageH: 530, imageFit: "contain",
+  alt: "REDMI 17C 5G — official Xiaomi India colour lineup",
   body: `
 <p>नया phone लेते समय कुछ बातें सबसे पहले मन में आती हैं—screen कैसी है, battery कितनी बड़ी है और अपना पसंदीदा colour कौन सा होगा। <strong>REDMI 17C 5G की sale शुरू हो चुकी है।</strong> Mobile World पर इसे जानिए और अपनी अगली पसंद की शुरुआत कीजिए।</p>
 
@@ -118,8 +118,8 @@ export const vivoV80Post: Post = {
   kicker: "Tech Update", date: "7 October 2026", dateISO: "2026-10-07",
   title: "vivo V80 Pre-booking: cashback, gifts और camera की पूरी जानकारी।",
   excerpt: "vivo V80 के pre-booking benefits, ZEISS camera, 7200mAh battery, colours और variants जानिए। Live demo के लिए Mobile World, Faridabad आइए।",
-  image: "/images/vivo-v80-prebooking-oct2026.png", imageW: 1536, imageH: 1024, imageFit: "contain",
-  alt: "vivo V80 के Sunrise Anthem, Horizon Blue, Stellar Black और front views का campaign artwork",
+  image: "/images/mw-studio-vivo-vivo-v80-5g.webp", imageW: 640, imageH: 640, imageFit: "contain",
+  alt: "vivo V80 5G, Sunrise Anthem — official vivo product image",
   body: `
 <p>परिवार की photos, दोस्तों के साथ videos या अपनी रोज़ की छोटी-छोटी यादें—phone का camera अक्सर हमारे साथ रहता है। <strong>vivo V80 की pre-booking Mobile World पर खुली है</strong> और <strong>live demo</strong> भी उपलब्ध है। पहले phone को जानिए, फिर दुकान पर अपने हाथ से आज़माइए।</p>
 
