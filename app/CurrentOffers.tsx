@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { IconArrow } from "@/components/Icons";
 import "./current-offers.css";
-import { oppoF35ProPost } from "@/data/phoneLaunchPosts";
+import { oppoF35ProPost, redmi17CPost, vivoV80Post } from "@/data/phoneLaunchPosts";
 
 export function CurrentOffers() {
   return <section id="current-offers" className="current-offers" aria-labelledby="current-offers-title">
@@ -10,7 +10,7 @@ export function CurrentOffers() {
     <div className="current-offers-grid">
       <article className="offer-card offer-redmi" aria-labelledby="redmi-sale-title">
         <header className="offer-card-heading"><div><span className="offer-brand">XIAOMI · REDMI</span><h3 id="redmi-sale-title">REDMI 17C <small>5G</small></h3></div><span className="offer-status"><i aria-hidden="true"/>Sale शुरू</span></header>
-        <Link className="offer-image" href="/posts/redmi-17c-5g-sale-offer-specifications-faridabad" aria-label="REDMI 17C की पूरी जानकारी पढ़िए"><Image src="/images/redmi-17c-sale-offer-oct2026.png" alt="REDMI 17C 5G के front, Coffee Brew और Purple Dawn views" width={1536} height={1024} sizes="(max-width: 760px) calc(100vw - 62px), (max-width: 1100px) 45vw, 560px" loading="eager"/></Link>
+        <Link className="offer-image" href="/posts/redmi-17c-5g-sale-offer-specifications-faridabad" aria-label="REDMI 17C की पूरी जानकारी पढ़िए"><Image src={redmi17CPost.image} alt={redmi17CPost.alt} width={redmi17CPost.imageW} height={redmi17CPost.imageH} sizes="(max-width: 760px) calc(100vw - 62px), (max-width: 1100px) 45vw, 560px" loading="eager"/></Link>
         <div className="offer-card-content">
           <p className="offer-kicker">IDFC FIRST BANK · 8|0 SCHEME</p>
           <div className="offer-main-benefit"><strong>₹17</strong><div><b>Processing Fee</b><span>के साथ नया REDMI 17C घर लाइए।</span></div></div>
@@ -21,7 +21,7 @@ export function CurrentOffers() {
       </article>
       <article className="offer-card offer-vivo" aria-labelledby="vivo-prebook-title">
         <header className="offer-card-heading"><div><span className="offer-brand">vivo · V SERIES</span><h3 id="vivo-prebook-title">vivo V80 <small>5G</small></h3></div><span className="offer-status"><i aria-hidden="true"/>Pre-booking</span></header>
-        <Link className="offer-image" href="/posts/vivo-v80-prebooking-offers-specifications-faridabad" aria-label="vivo V80 की पूरी जानकारी पढ़िए"><Image src="/images/vivo-v80-prebooking-oct2026.png" alt="vivo V80 के Sunrise Anthem, Horizon Blue, Stellar Black और front views" width={1536} height={1024} sizes="(max-width: 760px) calc(100vw - 62px), (max-width: 1100px) 45vw, 560px" loading="eager"/></Link>
+        <Link className="offer-image" href="/posts/vivo-v80-prebooking-offers-specifications-faridabad" aria-label="vivo V80 की पूरी जानकारी पढ़िए"><Image src={vivoV80Post.image} alt={vivoV80Post.alt} width={vivoV80Post.imageW} height={vivoV80Post.imageH} sizes="(max-width: 760px) calc(100vw - 62px), (max-width: 1100px) 45vw, 560px" loading="eager"/></Link>
         <div className="offer-card-content">
           <p className="offer-kicker">PRE-BOOKING SPECIAL · LIVE DEMO उपलब्ध</p>
           <div className="offer-main-benefit"><strong>10%</strong><div><b>Cashback</b><span>Credit card offer पर</span></div></div>
