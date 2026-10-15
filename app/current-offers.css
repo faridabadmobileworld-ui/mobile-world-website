@@ -10,3 +10,7 @@
 .offer-oppo .offer-summary{color:#567260}
 @media(min-width:1101px){.current-offers-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.offer-card-heading{padding:22px 20px 17px}.offer-card-content{padding:24px 20px}.offer-card h3{font-size:27px}.offer-main-benefit{gap:10px}.offer-main-benefit b{font-size:17px}.offer-main-benefit>strong{font-size:50px}.offer-benefits strong{font-size:21px}.offer-cta{font-size:12px;padding-inline:13px}}
 @media(min-width:761px) and (max-width:1100px){.offer-oppo{grid-column:1/-1;max-width:650px;width:100%;justify-self:center}}
+
+/* Match launch models to the same plain studio images as the catalogue. */
+.current-offers .offer-image{background:#fff;padding:18px}
+.current-offers .offer-image img,.current-offers .offer-card:hover .offer-image img{object-fit:contain;transform:none;transition:none;animation:none}
