@@ -73,3 +73,8 @@ main .panel:hover,main .post:hover,main .pc:hover,main .shot:hover,main .toc:hov
 .pc-image-caption{font-size:11px;line-height:1.6;color:var(--ink-3);margin:0 0 12px}
 
 .post:hover img[src*="mw-studio-"],.post:hover img[src*="mw-product-"],.rmedia:hover img[src*="mw-studio-"],.rmedia:hover img[src*="mw-product-"]{transform:none;transition:none;animation:none}
+
+/* Owner's original video sits directly below the slides, edge to edge. */
+.mw-home-video{display:block;width:100%;max-width:none;margin:0;padding:0;background:#000;scroll-margin-top:60px}
+.mw-home-video-player{display:block;width:100%;max-width:none;height:auto;aspect-ratio:16/9;object-fit:contain;background:#000}
+.mw-home-video-player:focus-visible{outline:3px solid #cf202f;outline-offset:-3px}
