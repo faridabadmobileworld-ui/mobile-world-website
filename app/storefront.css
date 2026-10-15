@@ -71,3 +71,5 @@ main .panel:hover,main .post:hover,main .pc:hover,main .shot:hover,main .toc:hov
 .pc .pc-m::after{display:none}
 .shopping-category-image img{mix-blend-mode:normal;transform:none;filter:none}
 .pc-image-caption{font-size:11px;line-height:1.6;color:var(--ink-3);margin:0 0 12px}
+
+.post:hover img[src*="mw-studio-"],.post:hover img[src*="mw-product-"],.rmedia:hover img[src*="mw-studio-"],.rmedia:hover img[src*="mw-product-"]{transform:none;transition:none;animation:none}
