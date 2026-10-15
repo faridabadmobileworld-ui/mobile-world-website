@@ -64,3 +64,10 @@ main .panel:hover,main .post:hover,main .pc:hover,main .shot:hover,main .toc:hov
 @media(max-width:1000px){.mw-brand-logo{height:112px;padding:21px}.mw-brand-logo-grid{gap:12px}}
 @media(max-width:760px){.mw-brand-logo-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.mw-brand-logo{height:106px;padding:23px}.mw-brand-logo img{height:45px;max-width:140px}.mw-brand-logo-apple img,.mw-brand-logo-xiaomi img{width:46px;height:46px}}
 @media(prefers-reduced-motion:reduce){.mw-brand-logo{transition:none}}
+
+/* Product/category imagery stays still on the same plain white surface. */
+.mw-catalog .pc-m,.shopping-category-image{background:#fff}
+.pc .pc-m .ph-img,.pc:hover .pc-m .ph-img{object-fit:contain;transform:none;animation:none;transition:none;filter:none;mix-blend-mode:normal;background:#fff;padding:6%}
+.pc .pc-m::after{display:none}
+.shopping-category-image img{mix-blend-mode:normal;transform:none;filter:none}
+.pc-image-caption{font-size:11px;line-height:1.6;color:var(--ink-3);margin:0 0 12px}
