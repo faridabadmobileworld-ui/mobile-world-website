@@ -16,9 +16,16 @@ const studioImageIds = readdirSync(join(process.cwd(), "public/images"))
   .filter((file) => /^mw-studio-[a-z0-9-]+\.webp$/.test(file))
   .map((file) => file.slice("mw-studio-".length, -".webp".length))
   .sort();
+const productImageIds = readdirSync(join(process.cwd(), "public/images"))
+  .filter((file) => /^mw-product-[a-z0-9-]+\.webp$/.test(file))
+  .map((file) => file.slice("mw-product-".length, -".webp".length))
+  .sort();
 
 const nextConfig: NextConfig = {
-  env: { NEXT_PUBLIC_STUDIO_IMAGE_IDS: JSON.stringify(studioImageIds) },
+  env: {
+    NEXT_PUBLIC_STUDIO_IMAGE_IDS: JSON.stringify(studioImageIds),
+    NEXT_PUBLIC_PRODUCT_IMAGE_IDS: JSON.stringify(productImageIds),
+  },
   /**
    * Instagram की तस्वीरें उनके अपने server (CDN) से आती हैं। हम उन्हें
    * `unoptimized` रखते हैं — Instagram हर घंटे नया पता देता है, इसलिए उन्हें
