@@ -89,5 +89,7 @@ main .panel:hover,main .post:hover,main .pc:hover,main .shot:hover,main .toc:hov
 .mw-rap-heading h2{margin:0 0 14px;color:#fff;font-size:clamp(27px,3.8vw,46px);line-height:1.25;letter-spacing:-.025em}
 .mw-rap-heading>p:not(.mw-rap-kicker){margin:0;color:#e5e7eb;font-size:clamp(14px,1.5vw,17px);line-height:1.85}
 .mw-rap-hint{display:block;margin-top:16px;color:#d1d5db;font-size:13px;line-height:1.7}
+.mw-rap-story{display:inline-block;margin-top:16px;color:#fff;font-size:14px;font-weight:600;text-decoration:underline;text-underline-offset:4px}
+.mw-rap-story:focus-visible{outline:3px solid #fff;outline-offset:5px;border-radius:2px}
 .mw-rap-embed{position:relative;width:100%;aspect-ratio:16/9;min-height:200px;background:#000}
 .mw-rap-embed iframe{position:absolute;inset:0;display:block;width:100%;height:100%;border:0}

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { localBusinessSchema, jsonLdScript } from "@/data/schema";
 import { ShoppingHero } from "@/components/ShoppingHero";
 import { HomeProductVideo } from "@/components/HomeProductVideo";
@@ -26,7 +27,8 @@ export default function Home() {
             <p className="mw-rap-kicker">MOBILE WORLD ORIGINAL · OFFICIAL RAP</p>
             <h2 id="mw-rap-title">अपनी कहानी। अपना Rap।</h2>
             <p>1973 की छोटी Kiryana Store से आज की Mobile World तक—परिवार की मेहनत और आपके भरोसे का सफ़र, अब एक गाने में।</p>
-            <span className="mw-rap-hint">नीचे Play दबाइए और पूरा गाना यहीं सुनिए।</span>
+            <span className="mw-rap-hint">गाने का Premiere और पूरा video इसी player में देखिए।</span>
+            <Link className="mw-rap-story" href="/posts/mobile-world-faridabad-official-rap-song">इस गाने के पीछे की कहानी पढ़िए →</Link>
           </div>
           <div className="mw-rap-embed">
             <iframe
