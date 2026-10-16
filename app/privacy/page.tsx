@@ -145,11 +145,12 @@ export default function Privacy() {
             privacy policy लागू होती है — हमारी नहीं।
           </p>
           <p>
-            <strong>YouTube वाले video:</strong> home page पर video की पट्टी में
-            पहले सिर्फ़ एक तस्वीर दिखती है। <strong>जब तक आप play नहीं दबाते, YouTube
-            का player चलता ही नहीं</strong> — यानी तब तक कोई cookie नहीं बनती।
-            Play दबाने पर video YouTube के <em>no-cookie</em> वाले पते से चलता है।
-            तस्वीर ज़रूर YouTube के server से आती है।
+            <strong>YouTube वाले video:</strong> home page और कुछ articles में
+            YouTube का embedded player है। यह <em>Privacy Enhanced Mode</em>
+            {" "}(youtube-nocookie.com) इस्तेमाल करता है। Player या उसकी तस्वीर
+            load होने पर आपका browser YouTube के servers से जुड़ सकता है।
+            Video आप Play दबाकर चलाते हैं। Player के इस्तेमाल पर Google और
+            YouTube की अपनी privacy policy लागू होती है।
           </p>
           <p>
             <strong>एक बात साफ़-साफ़:</strong> home page पर हमारी Instagram वाली पट्टी
