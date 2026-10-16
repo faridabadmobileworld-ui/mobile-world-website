@@ -553,6 +553,40 @@ export function livePosts(now: Date = new Date()): Post[] {
 }
 
 export const posts: Post[] = [
+  {
+    slug: "mobile-world-faridabad-official-rap-song",
+    kicker: "Store Update",
+    date: "16 October 2026",
+    dateISO: "2026-10-16",
+    title: "Mobile World Faridabad Rap Song | 1973 से आज तक भरोसे का सफ़र",
+    excerpt: "1973 में Aggarwal Kiryana Store से शुरू हुआ परिवार का सफ़र, 2016 में Mobile World की शुरुआत और आपके भरोसे की कहानी—अब हमारे Official Rap Song में। Video इसी page पर देखिए।",
+    image: "/images/mobile-world-storefront-on-gurudwara-road-ja-a182b026.webp",
+    imageW: 720,
+    imageH: 340,
+    alt: "Gurudwara Road, Jawahar Colony पर Mobile World की दुकान",
+    body: `
+<p class="lead">हर सफ़र की शुरुआत एक भरोसे से होती है। हमारे परिवार के business की कहानी अब एक गाने में है। <strong>Mobile World Faridabad का Official Rap Song</strong> परिवार की मेहनत, अपने काम के प्रति सम्मान और वर्षों से हमारे साथ जुड़े ग्राहकों को समर्पित है।</p>
+
+<h2 id="official-rap">Official Rap Song यहीं देखिए</h2>
+<p>नीचे YouTube player में Play दबाइए। गाना इसी website पर चलेगा। अगर player में Premiere का समय दिखे, तो video उस समय से उपलब्ध होगा।</p>
+<div class="mw-rap-embed">
+<iframe src="https://www.youtube-nocookie.com/embed/OhNIewPYwuY?rel=0&amp;playsinline=1" title="Mobile World Faridabad Official Rap Song" width="1280" height="720" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+
+<h2 id="family-journey">इस कहानी के चार पड़ाव</h2>
+<ul>
+<li><strong>1973:</strong> स्व. श्री बाबू लाल जी ने Aggarwal Kiryana Store की नींव रखी। यह हमारे परिवार के business की शुरुआत थी।</li>
+<li><strong>1996:</strong> Tarun Gupta जी अपने आदरणीय पिताजी के साथ इस पारिवारिक व्यापार से जुड़े और उसे आगे बढ़ाया।</li>
+<li><strong>2006:</strong> यह सफ़र Aggarwal Kiryana &amp; Communication के रूप में आगे बढ़ा।</li>
+<li><strong>2016:</strong> इसी विरासत को आगे बढ़ाते हुए Mobile World की शुरुआत हुई।</li>
+</ul>
+<p>नाम और products बदलते गए, लेकिन अपने ग्राहकों के साथ रिश्ता इस सफ़र का हिस्सा बना रहा। आज Mobile World में Mobile, Laptop, Electronics और Home Appliances के लिए आप हमसे मिल सकते हैं।</p>
+
+<h2 id="thank-you">यह गाना आप सबके नाम</h2>
+<p>हमारे साथ जुड़े हर ग्राहक और परिवार का दिल से धन्यवाद। आपका भरोसा, आपकी सलाह और दुकान पर होने वाली छोटी-छोटी मुलाक़ातें हमारी कहानी को आगे बढ़ाती हैं। इस Rap के ज़रिए हम उसी रिश्ते को याद कर रहे हैं।</p>
+<p>गाना सुनिए और अपने परिवार के साथ हमारी कहानी साझा कीजिए। पूरे सफ़र के बारे में <a href="/about">हमारी कहानी</a> पढ़िए, या <a href="/visit">दुकान पर मिलने आइए</a>।</p>
+`,
+  },
   oppoF35ProPost,
   redmi17CPost,
   vivoV80Post,
