@@ -75,6 +75,9 @@ main .panel:hover,main .post:hover,main .pc:hover,main .shot:hover,main .toc:hov
 .post:hover img[src*="mw-studio-"],.post:hover img[src*="mw-product-"],.rmedia:hover img[src*="mw-studio-"],.rmedia:hover img[src*="mw-product-"]{transform:none;transition:none;animation:none}
 
 /* Owner's original video sits directly below the slides, edge to edge. */
-.mw-home-video{display:block;width:100%;max-width:none;margin:0;padding:0;background:#000;scroll-margin-top:60px}
-.mw-home-video-player{display:block;width:100%;max-width:none;height:auto;aspect-ratio:16/9;object-fit:contain;background:#000}
-.mw-home-video-player:focus-visible{outline:3px solid #cf202f;outline-offset:-3px}
+.mw-home-video{position:relative;display:block;width:100%;max-width:none;margin:0;padding:0;background:#000;scroll-margin-top:60px}
+.mw-home-video-player{display:block;width:100%;max-width:none;height:auto;aspect-ratio:16/9;object-fit:contain;background:#000;pointer-events:none}
+.mw-home-video-sound{position:absolute;right:clamp(12px,2vw,28px);bottom:clamp(12px,2vw,28px);z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:118px;min-height:44px;padding:10px 15px;border:1px solid rgba(255,255,255,.6);border-radius:999px;background:rgba(0,0,0,.72);color:#fff;font:600 13px/1.2 var(--font-inter),sans-serif;cursor:pointer;touch-action:manipulation}
+.mw-home-video-sound svg{width:20px;height:20px;flex:none}
+.mw-home-video-sound:hover{background:rgba(0,0,0,.9)}
+.mw-home-video-sound:focus-visible{outline:3px solid #fff;outline-offset:3px}

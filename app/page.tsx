@@ -1,5 +1,6 @@
 import { localBusinessSchema, jsonLdScript } from "@/data/schema";
 import { ShoppingHero } from "@/components/ShoppingHero";
+import { HomeProductVideo } from "@/components/HomeProductVideo";
 import { ShoppingCategories } from "@/components/ShoppingCategories";
 import { HomeBody } from "@/components/HomeBody";
 import { LatestPost } from "@/components/LatestPost";
@@ -18,21 +19,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: jsonLdScript(localBusinessSchema()) }} />
 
       <ShoppingHero />
-      <section id="mobile-world-video" className="mw-home-video" aria-label="Mobile World का product video">
-        <video
-          className="mw-home-video-player"
-          controls
-          playsInline
-          preload="metadata"
-          poster="/images/mobile-world-product-video-poster.jpg"
-          width={854}
-          height={480}
-          aria-label="Mobile World product video — Play दबाकर original sound के साथ देखिए"
-        >
-          <source src="/videos/mobile-world-products-original-128.mp4" type="video/mp4" />
-          आपका browser यह video नहीं चला पा रहा है। <a href="/videos/mobile-world-products-original-128.mp4">Video खोलिए</a>।
-        </video>
-      </section>
+      <HomeProductVideo />
       <div className="wrap shopping-home">
         <CurrentOffers />
         <FestivalFlightScene />
