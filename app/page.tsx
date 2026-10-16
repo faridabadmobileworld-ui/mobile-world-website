@@ -21,6 +21,26 @@ export default function Home() {
       <ShoppingHero />
       <HomeProductVideo />
       <div className="wrap shopping-home">
+        <section id="mobile-world-rap" className="mw-rap-highlight" aria-labelledby="mw-rap-title">
+          <div className="mw-rap-heading">
+            <p className="mw-rap-kicker">MOBILE WORLD ORIGINAL · OFFICIAL RAP</p>
+            <h2 id="mw-rap-title">अपनी कहानी। अपना Rap।</h2>
+            <p>1973 की छोटी Kiryana Store से आज की Mobile World तक—परिवार की मेहनत और आपके भरोसे का सफ़र, अब एक गाने में।</p>
+            <span className="mw-rap-hint">नीचे Play दबाइए और पूरा गाना यहीं सुनिए।</span>
+          </div>
+          <div className="mw-rap-embed">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/OhNIewPYwuY?rel=0&playsinline=1"
+              title="Mobile World Faridabad Rap Song | 1973 से आज तक भरोसे का सफ़र"
+              width={1280}
+              height={720}
+              loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+        </section>
         <CurrentOffers />
         <FestivalFlightScene />
         <SpinWheel />

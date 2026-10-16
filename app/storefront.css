@@ -81,3 +81,13 @@ main .panel:hover,main .post:hover,main .pc:hover,main .shot:hover,main .toc:hov
 .mw-home-video-sound svg{width:20px;height:20px;flex:none}
 .mw-home-video-sound:hover{background:rgba(0,0,0,.9)}
 .mw-home-video-sound:focus-visible{outline:3px solid #fff;outline-offset:3px}
+
+/* Original YouTube player: visitors start the song with YouTube's own Play button. */
+.mw-rap-highlight{margin:clamp(28px,5vw,64px) 0;overflow:hidden;border-radius:24px;background:#111827;color:#fff;scroll-margin-top:150px}
+.mw-rap-heading{padding:clamp(22px,4vw,44px);max-width:850px}
+.mw-rap-kicker{margin:0 0 12px!important;color:#fda4af;font-size:11px;font-weight:800;letter-spacing:.16em}
+.mw-rap-heading h2{margin:0 0 14px;color:#fff;font-size:clamp(27px,3.8vw,46px);line-height:1.25;letter-spacing:-.025em}
+.mw-rap-heading>p:not(.mw-rap-kicker){margin:0;color:#e5e7eb;font-size:clamp(14px,1.5vw,17px);line-height:1.85}
+.mw-rap-hint{display:block;margin-top:16px;color:#d1d5db;font-size:13px;line-height:1.7}
+.mw-rap-embed{position:relative;width:100%;aspect-ratio:16/9;min-height:200px;background:#000}
+.mw-rap-embed iframe{position:absolute;inset:0;display:block;width:100%;height:100%;border:0}
