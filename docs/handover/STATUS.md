@@ -29,16 +29,16 @@ Current release/connections verification has **12 equal acceptance milestones**.
 | 9 | Analytics, enquiries, archive/restore and owner-private flows verified | Newer source/live authorized access required |
 | 10 | Campaign/reward persistence, abuse/authorization and old-code preservation verified on current source | Old mocked tests only; current-source checks pending |
 | 11 | Final public/private mobile/tablet/desktop production regression and SEO checked | Local old-source audit only; live blocked |
-| 12 | Owner handover, permanent instructions, field contract and evidence committed/pushed for continuation | Complete when this branch's commit/push is confirmed in delivery; otherwise pending |
+| 12 | Owner handover, permanent instructions, field contract and evidence committed/pushed for continuation | Complete: commit `40066ac45ad31e6dc1d843be65b6cc3634481980` pushed and remote ref re-read successfully |
 
-Before persistence push: 1/12 = 8/100. After confirmed handover branch push: 2/12 = 17/100. Do not increase for fixture tests, repeated tool calls or documentation restatements.
+Verified checkpoint: **2/12 = 17/100** after the handover branch push; the prior pre-persistence checkpoint was 1/12 = 8/100. Do not increase for fixture tests, repeated tool calls or documentation restatements.
 
 Catalogue phase is separate: **0 newly manufacturer-verified models / 59 entries in the available older catalogue**. Complete production catalogue denominator is unknown until recovery. Fifty older entries have generic specs/source-link gaps; 86-field unresolved counts and missing image counts cannot be honestly calculated before Kit/schema/source import. The owner-supplied 86 names/numbers are checked into `phone-core-contract.json` as an acceptance contract, with no invented Kit stable keys.
 
 ## Tests and evidence
 
 - Earlier restored-instance audit: local old-source build/typecheck passed; 11 website tests passed; lint had one warning. Browser checks covered five routes at mobile/desktop, basic search/compare, and reproduced shortlist 9→8 after reload. These do not validate the described newer live release.
-- Current recovery tooling: run `python -m unittest discover -s tools/source-recovery -p 'test_*.py' -v`. Tests use synthetic fixtures and do not count toward application regression totals.
+- Current recovery tooling: run `python -m unittest discover -s tools/source-recovery -p 'test_*.py' -v`. 17/17 recovery-tool tests passed (14 source-comparison and 3 provenance tests). Tests use synthetic fixtures and do not count toward application regression totals.
 - Source inventory: `SOURCE-RECOVERY-INVENTORY.md`.
 - Retained local backup directory: `/workspace/recovery/mobile-world-website-20261028/`; full Git bundles, historical source tar and `manifest.json` with hashes. This snapshot backup contains available Git source only; it is not a durable customer-data backup or Vercel production rollback.
 - Baseline preservation SHA: `2f5b6a98cf0f6b0cf5c9c5640b71aaaccf8d69f0`. To recover files, inspect/clone the bundle into a separate authorized recovery directory; never reset a user's live checkout or deploy the baseline automatically.
@@ -49,7 +49,7 @@ Catalogue phase is separate: **0 newly manufacturer-verified models / 59 entries
 - Draft saved with existing font hosts preserved and added: `www.mobileworldfaridabad.com`, `mobileworldfaridabad.com`, `api.github.com`, `api.vercel.com`, `vercel.com`, `api.sanity.io`, `chatgpt.com`. User review/save and publication are required by the configuration workflow; saving a draft does not apply runtime access. Recheck after a meaningful runtime change.
 - No configured Vercel/Sanity/Windsor secret bindings or outbound identities were present. No Vercel/Sanity CLI auth configuration found. `VERCEL_TOKEN` requirement saved for `api.vercel.com`; supply securely in environment settings or connect an available authenticated integration. Never put its value in chat/source/logs.
 - No Vercel, Sanity, Windsor, Library or automation connector tools are callable in this session. Task-list dynamic tool was unavailable; do not fabricate other-chat status.
-- Full handover attachment is now local and preserved verbatim here. Library Kit `libfile_2cc3b812796c8191a788d550fff1644d` and original brief `libfile_e72604f92dc48191b664a4b6494f2016` remain missing. Only request these actual files or a complete source archive if the owner has it; do not assume Library IDs are downloadable Sediment IDs.
+- Full handover attachment is now local and preserved here with terminal blank lines normalized; the original attachment remains unchanged. Library Kit `libfile_2cc3b812796c8191a788d550fff1644d` and original brief `libfile_e72604f92dc48191b664a4b6494f2016` remain missing. Only request these actual files or a complete source archive if the owner has it; do not assume Library IDs are downloadable Sediment IDs.
 
 ## Exact next action
 

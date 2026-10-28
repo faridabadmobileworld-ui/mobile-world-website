@@ -411,4 +411,3 @@ Existing approved scope में bugs, broken links, data mappings, content-edi
 मेरे business के लिए useful technical decisions स्वयं लो। बार-बार वही error दिखाकर मत रुकना। Safe authorized alternatives खोजो, evidence record करो और काम पूरा करो।
 
 अब इसी project को खोलो, available source और current production verify करो, exact pending release recover करो और implementation शुरू करो। केवल इस command का summary या नया plan देकर turn समाप्त मत करो।
-
