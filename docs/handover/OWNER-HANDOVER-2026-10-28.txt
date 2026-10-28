@@ -1,0 +1,414 @@
+MOBILE WORLD — CODEX COMPLETE PROJECT HANDOVER & EXECUTION COMMAND
+Handover reference date: 28 October 2026 | Timezone: Asia/Kolkata
+
+तुम अब Mobile World की existing website के ongoing development, maintenance, debugging, CMS, analytics, product catalogue और deployments का काम सँभालो। नीचे दिया गया context पढ़कर उसी project में काम आगे बढ़ाओ। मुझे केवल plan या suggestions देकर मत रुकना। Available authorized access से implementation, testing और live verification पूरा करो।
+
+1. मेरी working preferences समझो।
+
+मेरा नाम Tarun Gupta है। मैं चाहता हूँ कि routine technical decisions तुम स्वयं लो, errors का कारण खोजो, सही fixes करो और tested changes live करो। हर छोटे काम के लिए “आगे बढ़ूँ?” या “permission दें” मत पूछो। Existing project में reversible fixes, branches, commits, PRs, testing और verified deployments के लिए मेरी अनुमति है।
+
+जहाँ account-owner का वास्तविक login, MFA, OAuth consent या कोई unavailable access आवश्यक हो, उसे bypass मत करना। पहले उपलब्ध authorized रास्ते जाँचो और बाकी independent काम जारी रखो। केवल आवश्यक manual step के लिए मुझे बहुत आसान, छोटे, numbered instructions दो। Password, API key या recovery code chat में मत माँगो।
+
+हर response में देवनागरी हिन्दी और English technical terms का natural मिश्रण रखो। Romanized Hindi मत लिखो। केवल English या केवल हिन्दी में पूरा response मत दो।
+
+2. इसी business और इसी website पर काम करना है।
+
+Business/public brand: MOBILE WORLD.
+Business identity: Mobile World — Aggarwal Kiryana And Communication.
+Owner: Tarun Gupta, जिन्हें customers “Tarun Bhaiya” भी कहते हैं।
+Location: Jawahar Colony, NIT Faridabad, Haryana, India.
+Preferred tagline: Mobile • Laptop • Electronics • Home Appliances.
+Regular requested hours: 10:00 AM–10:00 PM.
+Website: https://www.mobileworldfaridabad.com/
+Apex domain: https://mobileworldfaridabad.com/
+
+यह existing live website है। नया replacement project, नया domain या अलग website बनाकर पुराना काम छोड़ना नहीं है। Existing branding, content, URLs, customer data और working features सुरक्षित रखने हैं। Exact postal address, phone और Maps link current approved settings से लो; अनुमान मत लगाओ।
+
+3. Project के ये identifiers पुराने saved audit से मिले हैं; शुरुआत में current state verify करो।
+
+| Item | Known identifier |
+|---|---|
+| GitHub repository | https://github.com/faridabadmobileworld-ui/mobile-world-website |
+| Repository owner | faridabadmobileworld-ui |
+| Repository name | mobile-world-website |
+| Historically used branch | main |
+| Vercel project | mobile-world-website |
+| Vercel project ID | prj_dplwsmDwQWMjfoePft2dDLIA3QDI |
+| Vercel team slug | faridabadmobileworld-2892 |
+| Production deployment inspected in 27 October audit | dpl_aaGzHrJnxrvidMDZAhrJpGsAJhMd |
+| GitHub main SHA recorded in that audit | 2f5b6a98cf0f6b0cf5c9c5640b71aaaccf8d69f0 |
+
+ऊपर का deployment और SHA historical checkpoints हैं; इन्हें बिना जाँच latest मत मानना। उस audit में apex से www redirect और production READY status दर्ज था। Current deployment, domain assignment और repository head दोबारा verify करना।
+
+4. सबसे पहले source-code mismatch समझो; यही सबसे बड़ा unfinished technical risk था।
+
+पिछले workflow में कुछ changes Vercel पर deploy हुए, लेकिन GitHub write request पर “403: Resource not accessible by integration” आया। एक earlier checkpoint में 10 commits और 48 changed files unsynced बताए गए थे। वह पुराना count है; fresh diff निकालना।
+
+Saved audit में newer production source के ये areas पुराने GitHub main से missing बताए गए:
+- app/products/[category]/
+- app/admin/analytics/
+- app/admin/business/
+- app/admin/campaigns/
+
+इसलिए GitHub main को clone करके सीधे redeploy मत करना। इससे live analytics, business dashboard, category pages और अन्य नए features हट सकते हैं।
+
+पहले current production deployment की provenance, available source snapshot, existing checkout, commits और authorized backups खोजो। Latest complete source को recover करो, सुरक्षित backup बनाओ, changes compare करो, conflicts resolve करो और GitHub के साथ reconcile करो। Implementation Kit अकेले पूरी website का source नहीं है।
+
+यदि केवल compiled deployment मिला है और original editable source पूरा नहीं मिल रहा, तो इसे साफ़ बताओ; compiled files को complete original source बताकर काम मत शुरू करो। जो recovery और independent implementation संभव है, वह जारी रखो।
+
+5. GitHub access को वास्तविक write capability से verify करो।
+
+GitHub website खुलना, login होना या repository पढ़ पाना code push की permission साबित नहीं करता। पुराने connector की rejected request बार-बार दोहराने के बजाय current Codex repository environment, installed integration और available authenticated git/PR workflow की capabilities जाँचो।
+
+Repository-scoped access इस्तेमाल करो। Existing changes preserve करो। Force-push, destructive reset, live data deletion या unrelated repositories में बदलाव मत करो।
+
+यदि GitHub write अभी भी blocked हो, तो available source recovery, code preparation, tests और preview work जारी रखो। Current complete source और rollback सुरक्षित हों तो existing authorized Vercel workflow की उपलब्धता जाँचो; GitHub blocker को Vercel blocker मानकर हर काम मत रोक दो। लेकिन stale या incomplete source कभी production पर deploy मत करना। Unsynced source रहते हुए project को 100% complete मत बताना।
+
+6. आख़िरी बातचीत का exact stopping point यह था।
+
+Previous assistant की आख़िरी reported progress: 93/100 — उस समय के website/dashboard और connection work के लिए। यह पूरे catalogue, सभी specifications और सभी future requirements का verified completion percentage नहीं है।
+
+आख़िरी message के अनुसार:
+- Product Editor का code तैयार था।
+- Detailed product pages और sitemap integration तैयार बताए गए।
+- 25 tests, TypeScript और lint pass बताए गए।
+- Local build cache error के बाद clean production build pass बताया गया।
+- अगला action उसी existing Vercel project में release/deployment करना था।
+- उसके बाद live pages और login protection जाँचनी थी।
+
+उस आख़िरी message के बाद successful deployment का नया ID, production confirmation या final live verification उपलब्ध context में नहीं है। इसलिए इस release को “already live” मत मानना। पहले पता लगाओ कि वह deploy हुई थी या अब करनी है।
+
+Earlier checkpoints में 19, फिर 23, फिर 25 tests बताए गए थे। अलग Implementation Kit में 7 tests थे। इन counts को जोड़कर कोई नया total मत बनाना; current repository के actual tests चलाओ।
+
+7. पिछले काम की स्थिति को इस baseline से verify करो।
+
+| Area | Previous conversation में स्थिति | अब क्या करना है |
+|---|---|---|
+| Homepage sequence और category SEO pages | Live और checked बताए गए | Current production regression check |
+| Owner analytics dashboard | Login, filters, CSV और reports checked बताए गए | Existing owner access से current signed-in checks |
+| Campaign/offer controls | Save और dates checked बताए गए | Persistence और public behaviour verify |
+| Business dashboard | Google snapshot, enquiry register और archive live बताए गए | Latest implementation और end-to-end checks |
+| Analytics save conflict | Retry fix और live saves successful बताए गए | Current code और concurrency behaviour preserve |
+| Video behaviour | Scroll pause/resume, ratio और controls checked बताए गए | Current mobile/desktop regression check |
+| Windsor Search Console + Business Profile | दोनों से data fetch होने की पुष्टि पहले मिली | Current connector/account access verify |
+| Website Google automatic sync | Secure API credential connection pending थी | Server-side connection और scheduled sync पूरा करो |
+| GitHub sync | 403 और production/source divergence बाकी थे | Recover, reconcile, commit/push और deployment mapping |
+| Sanity | Editor code बना; actual project connection verified नहीं था | Real working CMS integration पूरा करो |
+| Latest Product Editor release | Build passed बताया; deployment शुरू होने वाला था | Actual deployment पता करो, फिर release और verify |
+| Detailed product information/images | अलग detailed phase अधूरा था | Verified reference product से आगे catalogue audit |
+
+“पहले बताया गया” और “मैंने अभी verify किया” को reports में अलग रखो।
+
+8. ये existing reference files पढ़ो और compatible काम reuse करो।
+
+A. Mobile_World_86_Specifications_Implementation_Kit.zip
+Library ID: libfile_2cc3b812796c8191a788d550fff1644d
+Link: https://chatgpt.com/library?file_id=libfile_2cc3b812796c8191a788d550fff1644d&account_id=personal
+Handover बनाते समय इसके version 2 के documents पढ़े गए थे।
+
+इसके अंदर relevant files:
+- data/mobile-specification-master.json
+- data/xiaomi-17t-india.json
+- src/spec-utils.mjs
+- src/MobileSpecifications.tsx
+- src/mobile-specifications.css
+- src/ExampleRoute.tsx
+- tests/specifications.test.mjs
+- preview.html
+- docs/INTEGRATION-AND-SAFETY.md
+- docs/AUDIT-RESULT-2026-10-27.md
+- docs/OWNER-ACCESS-AND-CODEX-HANDOFF.md
+
+B. Pasted text(1).txt
+Library ID: libfile_e72604f92dc48191b664a4b6494f2016
+Link: https://chatgpt.com/library?file_id=libfile_e72604f92dc48191b664a4b6494f2016&account_id=personal
+
+यह original 86-field master brief है। इसके पुराने assistant-written sample specifications को independently verified current manufacturer data मत मानना।
+
+Kit का अपना README इसे standalone, not-yet-integrated package बताता है। Kit में listed potential colour/storage combinations को वास्तविक sellable SKUs मत मानना। Official India availability और store inventory से verify करना।
+
+अगर नए environment को Library या attachments की access नहीं मिले, तो इसी handover के identifiers और instructions से बाकी काम शुरू करो; केवल वास्तव में missing file के लिए मुझे बताओ। पुराने session की files, browser login और secrets अपने-आप transfer हुए हैं, ऐसा मत मानना।
+
+9. Existing public और private routes सुरक्षित रखो।
+
+Known live links:
+- Website: https://www.mobileworldfaridabad.com/
+- Analytics: https://www.mobileworldfaridabad.com/admin/analytics
+- Business dashboard: https://www.mobileworldfaridabad.com/admin/business
+- Phone Exchange Guide: https://www.mobileworldfaridabad.com/posts/phone-exchange-guide
+
+अन्य categories, product URLs, campaign routes और editor routes current source से discover करो। अनुमानित route को working link बताकर मत भेजना।
+
+Owner अपना password पहले बना चुके हैं और login भी कर चुके हैं। Account दोबारा बनवाना या password reset करना default solution नहीं है। पहले existing session/access इस्तेमाल करो। पहले का one-time setup secret इस handover में जानबूझकर शामिल नहीं है; उसे दोबारा expose या reuse मत करना। Public setup route से account takeover संभव नहीं होना चाहिए।
+
+10. Sanity को वास्तव में working editor बनाना है।
+
+User ने WordPress/Blogger के विकल्पों के बाद Sanity चुना था। Existing site को दूसरे CMS पर migrate करने की नई चर्चा मत शुरू करो। पहले existing Sanity project, organization, dataset, Studio, dependencies, environment configuration और access खोजो; duplicate project मत बनाओ।
+
+CMS से owner को ये चीज़ें manage करनी हों:
+- Homepage banners, slider images और section text/order.
+- Offers, campaign start/end dates और active/inactive state.
+- Brands, series, models, RAM/storage/colour variants और images.
+- Detailed specifications, verification sources और publish state.
+- Blogs और product-related internal links.
+- Footer/contact content और store updates.
+- Existing spin/reward controls को owner dashboard से स्पष्ट access.
+
+Product editor बनना और Sanity connect होकर data save/publish होना अलग milestones हैं। Create draft → save → reload → edit → validate → publish → public page update का पूरा flow verify करो। Draft/unverified products public pages, sitemap या public API से leak न हों।
+
+Current production catalogue को खाली Sanity dataset से replace करके गायब मत कर देना। Migration mapping, stable IDs/slugs, backups और content-preserving rollout रखो। CMS outage में existing verified content के लिए उचित fallback तय करो।
+
+Read/write tokens server-side और उचित scopes में रहें। Admin permissions, CORS, preview और cache revalidation/webhook flow verify करो। Ordinary owner content editing के लिए AI credits आवश्यक न हों; hosting/CMS plan को unlimited/free होने का झूठा वादा मत करना।
+
+11. Product data का permanent rule लागू करो।
+
+ONE SPECIFICATION = ONE INDEPENDENT FIELD.
+
+RAM और storage, CPU count और clock speed, Wi-Fi और Bluetooth, main camera OIS और telephoto OIS, optical और digital zoom, OS और UI, wired और wireless charging अलग fields रहें।
+
+UNKNOWN VALUE = सच में blank.
+Unknown value में “N/A”, “Unknown”, “Coming soon”, “Contact store”, dash, zero, “No” या guessed default मत भरो। Existing storage की compatibility रखते हुए actual empty representation अपनाओ।
+
+Admin में सभी fields editable रहें। Customer page पर empty row hide हो और पूरा empty section भी hide हो। Verified “No”, meaningful zero और false को empty समझकर गलती से hide मत करना।
+
+Public product prices default hidden रहें। Internal price manage हो सकता है, लेकिन private price को public HTML, structured data, page payload या API में leak मत करना। Product schema के लिए invented price/rating/review मत डालना।
+
+12. Exact core template में 86 fields और 11 ordered sections रहें।
+
+नीचे हर semicolon से अलग नाम एक अलग field है। Existing kit की stable keys और numbering preserve करो।
+
+| Section | Field numbers | Individual fields |
+|---|---:|---|
+| Basic Information | 1–7 | Brand; Model Name; Brand Origin; Manufacturing Country; India Launch Date; Available Colours; Price |
+| Design & Build | 8–15 | Height; Width; Thickness; Weight; Front Material; Back Material; Frame Material; IP Rating |
+| Display | 16–21 | Display Size; Display Type; Display Resolution; Refresh Rate; Peak Brightness; Display Protection |
+| Processor & Memory | 22–31 | Processor Name; CPU Core Count; CPU Maximum Clock Speed; GPU; RAM Capacity; RAM Type; Internal Storage; Storage Technology; Storage Version; Memory Card Support |
+| Camera & Video | 32–45 | Main Rear Camera; Ultra-Wide Camera; Periscope Telephoto Camera; Front Camera; Main Camera Sensor; Main Camera OIS; Telephoto Camera OIS; EIS; Optical Zoom; Digital Zoom; Rear Video Resolution; Rear Video Frame Rate; Front Video Resolution; Front Video Frame Rate |
+| Battery & Charging | 46–53 | Battery Capacity; Battery Technology; Battery Backup; Wired Fast Charging; Wireless Charging; Reverse Wired Charging; Reverse Wireless Charging; Charging Time |
+| Software | 54–58 | Operating System; User Interface; OS Update Support; Security Update Support; AI Platform |
+| Network & Connectivity | 59–72 | Network Support; 5G Bands; SIM Slots; eSIM Support; VoLTE; Wi-Fi Calling; Wi-Fi Version; Bluetooth Version; NFC; GPS; IR Blaster; USB Port; USB OTG; Headphone Jack |
+| Security & Multimedia | 73–79 | Fingerprint Sensor; Face Unlock; Speakers; Dolby Atmos; Gyroscope; FM Radio; Torch |
+| Warranty | 80–82 | Phone Warranty; Battery Warranty; Accessories Warranty |
+| Box Contents | 83–86 | Charger Included; USB Cable Included; Protective Case Included; SIM Ejector Included |
+
+Core 86 को maintain करते हुए genuinely needed advanced attributes अलग optional fields में जोड़ सकते हो—जैसे second display, macro camera, virtual RAM, separate 5G SA/NSA bands या additional sensors। Phone-only fields refrigerator या laptop पर force मत करना; दूसरी categories के लिए अलग templates हों।
+
+13. Catalogue hierarchy और variants सही रखो।
+
+Permanent hierarchy:
+Brand → Series → Model → RAM → Storage → Colour.
+
+Model-level shared specifications और variant-level RAM/storage/colour/SKU/availability अलग रखें। References और unique IDs से गलत cross-linking रोकें। Variant बदलने पर selected specs, valid options और correct image update हों। Invalid combinations selectable न हों। हर colour को हर storage से जोड़कर imaginary stock मत बनाना।
+
+Brand → models को user-friendly premium-to-entry order में रखने के लिए explicit display order और verified lineup इस्तेमाल करो; hidden prices invent करके ranking मत बनाना।
+
+Requested core brands:
+Apple, Samsung, Xiaomi/Redmi, Google, Vivo, Oppo, Realme, Nothing, OnePlus, Poco, iQOO और Tecno.
+Existing approved catalogue में Motorola, Infinix, keypad phones या अन्य categories हों तो उन्हें अनजाने में मत हटाना।
+
+Discontinued models को active selling catalogue से हटाने/archive करने की व्यवस्था करो, लेकिन useful old URLs को बिना redirect/content decision delete मत करना। Upcoming section अलग रहे। Earlier “Redmi 17c only” upcoming instruction historical थी; latest verified launch/availability के अनुसार update करो।
+
+14. Product facts को independently verify करो।
+
+पहले Xiaomi 17T को reference product के रूप में integrate और verify करो, फिर existing catalogue के बाकी models पर यही framework लागू करो। यदि exact model/India version official sources से confirm नहीं होता तो record draft रखो और fields blank रहने दो।
+
+Source priority: official India specifications/product/support pages → official relevant regulatory documentation → compatible official global information. Regional conflicts स्पष्ट resolve करो। Independent test results को manufacturer claims से अलग रखो।
+
+हर populated field या appropriate evidence group के लिए source URL, region, checked date और revision trace रखो। Brand origin और manufacturing country अलग हैं। IP rating को unlimited waterproof claim मत बनाना। Physical और virtual RAM अलग हैं। Battery backup, charging time, warranty, box contents और update commitments बिना evidence मत भरो।
+
+Past chats या sample files में Xiaomi 17T, Redmi 17c, Vivo V80, iPhone 18 या अन्य names/specs लिखे होने से वे current verified Indian products नहीं बन जाते। Official evidence के बिना public claim मत publish करना।
+
+15. Images और product pages पूरे करो।
+
+Correct model और colour की official/licensed product images इस्तेमाल करो। White/transparent product backgrounds, consistent ratio, natural proportions, proper alt text, responsive sizing, mobile gallery और zoom रखें। किसी दूसरे model का camera layout या गलत colour substitute मत करना। AI promotional artwork को official product packshot की तरह मत दिखाना।
+
+Earlier shared product/series images को locate करके visually verify करो और सही individual records से map करो। सभी products पर एक generic image मत लगाना। Assets unavailable हों तो source/file requirement स्पष्ट रखो; image update हुआ है ऐसा मत कहना।
+
+Product page में clear model header, image gallery, valid RAM/storage/colour selectors, verified highlights, 11-section specifications, optional features, warranty, box contents, related products और Call/WhatsApp enquiry रहें। Enquiry text में selected model/variant जा सके। Unnecessary duplicate variant URLs मत बनाना।
+
+16. Homepage के approved design decisions preserve करो।
+
+Customer-relevant slides और CTA पहले आएँ। Main slides के नीचे offer highlights, उसके बाद spin-wheel section और उचित brand/product/blog navigation रहे। Live layout में approved refinements को audit करके preserve करो।
+
+Diwali creative direction: Maa Vaishno Devi Bhawan, garlands ऊपर और sides, ऊपर double-U treatment; premium festive presentation। Garland asset का background transparent हो और केवल garland का approved fixed/sticky behaviour रहे। Menu/search bar सामान्य page scroll के साथ चले। Main hero में पुराना personal portrait वापस मत जोड़ना। Helicopter winner/gift theme existing approved creative के अनुसार रहे।
+
+एक master slide image mobile/tablet/desktop पर proportionately adapt हो; अलग uploads owner पर अनिवार्य मत बनाओ। Important content crop न हो।
+
+EMI calculator हटाने का instruction कायम है। Footer में approved address/contact/hours, useful links और actual product-category images/icons रहें। अनावश्यक लम्बी product text lists से बचो।
+
+महीने की आख़िरी तारीख़ वाले closure update में actual last calendar date calculate हो—हमेशा 30 या 31 assume मत करना। Permanent weekly closure खुद से invent मत करना।
+
+17. Existing video behaviour preserve करो।
+
+Approved video behaviour:
+- 16:9 aspect ratio.
+- Loop enabled.
+- Sound On/Off control.
+- Viewport से बाहर जाने पर pause.
+- वापस दिखने पर उसी playback position से resume.
+- Lazy/deferred loading ताकि homepage खुलते ही पूरी heavy video download न हो।
+
+Autoplay/browser restrictions और reduced-motion/accessibility behaviour ठीक से handle करो। पहले report किया 13.51-second pause test historical evidence है; current runtime पर अपना check करो।
+
+18. Brand story जहाँ relevant हो, यह approved wording preserve करो।
+
+“हर सफ़र की शुरुआत एक भरोसे से होती है। ❤️
+हमारे परिवार का business सफ़र 1973 में Aggarwal Kiryana Store से शुरू हुआ।
+स्व. श्री बाबू लाल जी ने 1973 में एक छोटी सी Kiryana store और बहुत बड़ी ईमानदारी के साथ इस सफ़र की नींव रखी थी।
+साल 1996 में Tarun Gupta जी ने अपने आदरणीय पिताजी के साथ इस business को सँभाला और आगे बढ़ाया।
+इसके बाद 2006 में ज़रूरतें बदलीं, और यह सफ़र Aggarwal Kiryana & Communication के रूप में आगे बढ़ा।
+और 2016 में इसी विरासत को आगे बढ़ाते हुए Mobile World की शुरुआत हुई।
+तब से लेकर आज तक, हमारे साथ जुड़े हर ग्राहक ने इस सफ़र को आगे बढ़ाने में अपना योगदान दिया है।
+हम उन सभी ग्राहकों का दिल से धन्यवाद करते हैं, जिन्होंने वर्षों से हम पर अपना भरोसा बनाए रखा और Mobile World को अपने परिवार का हिस्सा माना।”
+
+19. Offers और spin wheel के existing rules सुरक्षित रखो।
+
+Earlier homepage offers में Redmi 17c sale और Vivo V80 pre-booking माँगी गई थी। अब इनके actual current launch/availability और campaign dates verify करो; expired offer को active मत दिखाना। Offer CTA relevant internal blog/product page पर जाए। Customer को details के लिए automatically external brand website पर मत भेजना।
+
+Spin wheel prizes: ₹100, ₹200, ₹500, ₹1,000, Neckband, Buds.
+Flow: mobile number → one eligible attempt → single-use reward/code.
+Owner admin में number, attempt, issued reward/code और redemption status दिखें।
+
+One-number/one-attempt और code redemption backend enforce करे; केवल localStorage पर भरोसा न हो। Phone normalization, duplicate/concurrent requests और reward persistence verify करो। SMS OTP verification को existing reward code से confuse मत करना; paid SMS service स्वतः शुरू मत करना।
+
+Eligibility mobile/laptop/electronics/home appliances जैसी eligible categories और ₹5,000 वाली approved minimum-purchase setting से जुड़ी थी; current exact threshold rule audit करके preserve करो। Visible probability/debug/rules clutter हटाने का instruction कायम है; backend checks बने रहें।
+
+Campaign off होने पर नए rewards रुकें; पुराने issued customer codes सुरक्षित रहें। उन codes की validity/redemption current approved rules से चले। Test spins से real customer entitlements न बदलें।
+
+20. Analytics और owner security regression-free रहें।
+
+Existing analytics में visits/sessions, browsers, page views, active time, sections, product views, searches, compare/shortlist actions, Call/WhatsApp clicks, visitor journeys, date filters और CSV export शामिल बताए गए थे।
+
+Daily/weekly/monthly/custom date ranges, “तारीख़ें लागू कीजिए” action, dashboard refresh और CSV totals verify करो। Previously dashboard 30 seconds में refresh होता था; current implementation में duplicate counting न हो।
+
+Hindi section names की मात्राएँ हटने का bug ठीक किया गया था; normalization फिर से उसे न तोड़े। Legacy labels और new labels readable रहें।
+
+Storage conflict/concurrent updates पर retry handling का fix हुआ था। Actual current storage provider और SDK से verify करो; नए provider का अनुमान मत लगाओ। Retries से events double-count न हों। Test traffic customer reports से exclude हो।
+
+Unauthenticated requests से private reports, customer numbers, settings या exports न मिलें। Server-side authorization, safe cookies, login throttling, input validation और applicable write protections जाँचो। Owner password या secrets logs, screenshots, commits या public bundles में न जाएँ।
+
+Call/WhatsApp clicks को completed calls, delivered messages, enquiries या sales के बराबर मत दिखाना।
+
+21. Google reports का genuine automatic sync पूरा करो।
+
+Windsor के through Search Console और Google Business Profile पहले दोनों connected मिले थे। Current session में connector/accounts/fields को relevant tools से validate करो; उपलब्ध होने पर get_connectors, get_fields और get_options से सही schema/property/location verify करो।
+
+Historical reported snapshots:
+- Search Console, 28 September–23 October 2026: 4,296 impressions; 33 clicks; लगभग 0.77% CTR.
+- Business Profile, 28 September–25 October 2026: corrected total 8,074 impressions और 437 call-button clicks.
+- Earlier 9,018/486 statement बाद में correct किया गया था; उसे reuse मत करना।
+
+ये पुराने snapshots हैं, आज का live result नहीं। Latest available source date, fetched time, date range और timezone स्पष्ट दिखाओ। Provider processing lag को zero performance मत समझो।
+
+ChatGPT में connector connected होना website backend को API access मिलना नहीं है। Existing secure form/server credentials से website sync connect करो। Windsor/API secrets server-side रखें। Available authorized account access से configuration स्वयं करो; missing secret हो तो secure owner input mechanism दो, chat में key मत माँगो।
+
+Scheduled fetch, manual refresh, stale/error state, retry, deduplication, date boundaries और last-good snapshot verify करो। केवल API response आना काफी नहीं: correct property/location का data save होकर dashboard में दिखे और next automatic run भी काम करे।
+
+22. Enquiry register और analytics archive पूरे verify करो।
+
+Business dashboard में enquiry source, product, status और confirmed sale amount का register बनाया गया था।
+Intended flow: enquiry → quotation → store visit → sale.
+
+Owner द्वारा confirmed sale entry ही sale/revenue में गिने। Clicks को automatic sale न बनाओ। Status changes, editing, persistence, filters, exports और totals जाँचो। Test entries clearly marked हों और केवल अपनी test entries cleanup करो।
+
+Daily analytics archive में aggregate summaries रखने का decision था, हर individual customer journey को हमेशा archive करना नहीं। Existing job, retention, timezone, duplicate-run handling, backup failure visibility और restore procedure verify करो। Vercel/local ephemeral disk को durable backup मत मानना।
+
+23. Existing daily report automation को duplicate मत बनाना।
+
+Known task title: Mobile World daily Google report.
+Known task ID: 6adebdc837d88191938f78135f1b6de4.
+
+पुरानी conversation में 8:30 AM IST कहा गया था; available task summary में 9:00 schedule भी दिखा था। Current automation configuration और timezone पढ़कर actual schedule resolve करो। अनुमान से time मत बताना और दूसरी duplicate automation मत बनाना।
+
+ChatGPT की daily report और website backend का Google sync अलग workflows हैं। दोनों की success/failure अलग verify करो। User-facing dates/times Asia/Kolkata में हों।
+
+Future monitoring, backups या recurring maintenance तभी “automatic” कहो जब actual scheduler/workflow configured, enabled और tested हो। केवल prompt पढ़ने से session के बाहर हमेशा काम करने का दावा मत करना।
+
+24. SEO और local-business basics सुरक्षित रखो।
+
+Phone Exchange Guide पहले high-impression opportunity के कारण सुधारा गया था। Local clear title, useful opening answer, exchange process, documents, data-transfer preparation और enquiry CTA preserve/verify करो।
+
+Smartphones, laptops/tablets और TVs के category pages, unique titles/descriptions, sharing images, internal links, canonical URLs और sitemap verify करो। Published verified products ही sitemap में जाएँ। Admin/drafts index न हों। Structured data वास्तविक visible facts से match करे।
+
+Google Search Console में correct property और sitemap submission/status जाँचो जहाँ access उपलब्ध हो। Indexing या ranking की guarantee मत दो।
+
+Business Profile में correct name, approved address, phone, hours, categories और closure updates verify करो। Fake reviews, unsupported offers या invented business information publish मत करना।
+
+25. Implementation और testing ऐसे करो।
+
+पहले repository का AGENTS.md, package manifest, lockfile, scripts और actual framework/version पढ़ो। Existing code Next.js/React/TypeScript आधारित बताया गया था; current source authoritative है। Installed stack को अनावश्यक rewrite मत करो।
+
+Working tree और customer data का backup लो। Small reviewable changes करो। Schema/data migrations backwards-compatible और recoverable हों। Environment values को broadly overwrite मत करो। Existing auth, storage और domain configuration preserve करो।
+
+Relevant unit/integration tests, typecheck, lint और production build चलाओ—जो scripts वास्तव में available हैं। Package manager lockfile से चुनो। Meaningful tests खासकर blank/false handling, private data, variant selection, reward uniqueness, analytics concurrency और persistence पर हों।
+
+Mobile, tablet और desktop पर visual/functional QA करो: no horizontal overflow, readable Hindi, touch targets, valid navigation, images, page loading, video behaviour, product routes, forms और authenticated dashboard।
+
+GitHub commit/push या Vercel build success अकेले live success नहीं है। Production alias, custom domain, deployed commit/source, redirects और live page/API behaviour verify करो। Failed cache/build issue root cause सहित fix करो; हर error पर बिना कारण dependencies बदलना शुरू मत करो।
+
+26. हर completed change सही क्रम में live करो।
+
+मेरी preference है: tested finished work step-by-step उसी existing website पर publish हो। Final mega-release का अनावश्यक इंतज़ार मत करो।
+
+हर release से पहले current complete source, relevant tests, preview/review और rollback readiness सुनिश्चित करो। उसके बाद authorized deployment आगे बढ़ाओ; routine publish permission फिर से मत माँगो। Real required consent या platform restriction हो तो उसे साफ़ बताओ।
+
+Production release के साथ commit SHA/source checkpoint, deployment ID, URL, affected routes और verification result record करो। Public और private user flows दोनों जाँचो। कोई live regression मिले तो approved working version restore/rollback करके fix जारी रखो।
+
+27. Progress percentage अब permanent reporting rule है।
+
+हर meaningful progress update में scoped percentage दिखाओ। उदाहरण:
+“Progress: X/100 — current release और connection work। यह काम verified हुआ है; अब यह बाकी है।”
+
+X वास्तविक accepted tasks/evidence से निकले। वही काम दोहराने, सिर्फ code लिखने या tool call करने से percentage मत बढ़ाना। पिछला 93/100 historical baseline है, current fresh verification नहीं।
+
+Production/CMS/connections और detailed catalogue population का progress अलग रखो जहाँ scope अलग है। Catalogue में verified models / total audited models, remaining images और unresolved fields बताओ। Fixed scope और denominator document करो; blocker को denominator से हटाकर 100 मत बनाओ।
+
+हर update में छोटा सा बताओ: क्या पूरा हुआ, evidence क्या है, अब क्या चल रहा है। लंबे काम में meaningful updates देते रहो। केवल progress message देकर implementation बंद मत कर देना।
+
+28. शुरुआत से completion तक execution order अपनाओ।
+
+पहला: Current access, latest production, actual repository और source divergence verify करके complete source सुरक्षित/reconcile करो।
+
+दूसरा: Last pending Product Editor release locate करो; current source के साथ build/test करके publish और live verify करो।
+
+तीसरा: Actual Sanity project/dataset/Studio connect करके owner editing से public publish तक पूरा flow चालू करो।
+
+चौथा: Website Google automatic sync और existing report automation की actual configuration verify/complete करो।
+
+पाँचवाँ: Analytics, enquiry register, campaign/reward controls, daily archives और backup/restore की remaining end-to-end checks करो।
+
+छठा: 86-field reusable system में Xiaomi 17T reference को official sources से verify करो; फिर existing products/images/variants का counted backlog पूरा करो। दूसरी categories के appropriate templates जोड़ो।
+
+सातवाँ: Homepage, video, SEO, performance, mobile usability और existing customer flows की final regression audit करो।
+
+किसी step का owner-only blocker हो तो बाकी independent work आगे बढ़ाओ। अधूरा critical dependency छिपाकर dependent production release मत करो।
+
+29. अगले sessions के लिए context project में सुरक्षित रखो।
+
+Existing project instructions में मेरी preferences और agreed rules merge करो; unrelated instructions overwrite मत करना। Project-appropriate handover/status files में ये record रखो:
+- Current source location, branch और latest known production commit/deployment.
+- Completed tasks और pending backlog.
+- Sanity/Windsor/Google configuration status; secret values नहीं।
+- Tests और live verification evidence.
+- Known issues, rollback instructions और exact next action.
+- Product audit counts और unresolved data/source questions.
+- Progress scope और calculation.
+
+AGENTS.md या existing equivalent में useful permanent instructions रखो ताकि future Codex sessions context पढ़कर आगे चल सकें। “मुझे हमेशा याद रहेगा” कहकर persistence assume मत करना।
+
+30. 100% का अर्थ evidence के साथ completion होगा।
+
+Current agreed release के लिए तभी 100/100 कहो जब latest source safely recover और sync हो; pending release live हो; real CMS save/publish चले; Google website sync और scheduled jobs verify हों; private data protected हो; owner flows और public website regression checks pass हों; कोई unresolved required blocker न छिपा हो।
+
+Catalogue phase के लिए models, variants, fields और images का अलग completion record दो। Unknown facts को invented values से भरकर 100% हासिल मत करना। Missing official evidence को transparent data limitation रखो।
+
+Final delivery में working website/editor/dashboard links, GitHub commit या PR, deployment ID, concise test outcomes, updated counts और truly remaining work दो। Manual काम केवल वही बताओ जो तुम available tools/access से सच में नहीं कर सकते।
+
+31. Future work में भी यही operating style रखो।
+
+Existing approved scope में bugs, broken links, data mappings, content-editor usability और routine maintenance proactively सँभालो। New paid services, account deletion, destructive migrations, domain transfer, public announcements या customers को messages भेजना इस blanket technical permission का हिस्सा मत मानना।
+
+मेरे business के लिए useful technical decisions स्वयं लो। बार-बार वही error दिखाकर मत रुकना। Safe authorized alternatives खोजो, evidence record करो और काम पूरा करो।
+
+अब इसी project को खोलो, available source और current production verify करो, exact pending release recover करो और implementation शुरू करो। केवल इस command का summary या नया plan देकर turn समाप्त मत करो।
+
