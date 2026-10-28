@@ -1,3 +1,4 @@
+import { withSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,13 +11,13 @@ import { PageFoot, Byline } from "@/components/PageFoot";
 import { FollowUs } from "@/components/FollowUs";
 import { IconWhatsApp, IconPhone } from "@/components/Icons";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSocialMetadata({
   title: "Return, Refund और Exchange के नियम",
   description:
     `${shop.name} ${shop.address.locality}, ${shop.address.city} के return, refund ` +
     `और पुराने phone के exchange के नियम — साफ़-साफ़, बिना घुमाए।`,
   alternates: { canonical: "/returns" },
-};
+});
 
 const toc: TocItem[] = [
   { id: "return", label: "Return और refund के नियम" },

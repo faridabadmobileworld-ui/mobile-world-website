@@ -1,3 +1,5 @@
+import { publicCampaigns } from "@/lib/campaigns/store";
+import { campaignIsLive, type CampaignId } from "@/lib/campaigns/core";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,6 +21,7 @@ type Params = { params: Promise<{ slug: string }> };
  * किसी को (Google को भी) वो post किसी तरह नहीं मिल सकती।
  */
 export const dynamicParams = false;
+export const revalidate = 60;
 
 /** हर post अपने URL पर बनती है — इसीलिए Google इन्हें अलग page मान सकता है। */
 export function generateStaticParams() {
@@ -33,12 +36,14 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     title: post.title,
     description: post.excerpt,
     alternates: { canonical: `/posts/${post.slug}` },
+    twitter: { card: "summary_large_image", title: post.title, description: post.excerpt, images: [post.image] },
     openGraph: {
       type: "article",
       title: post.title,
       description: post.excerpt,
       url: `/posts/${post.slug}`,
       publishedTime: post.dateISO,
+      modifiedTime: post.updatedISO ?? post.dateISO,
       images: [{ url: post.image }],
     },
   };
@@ -50,6 +55,8 @@ export default async function PostPage({ params }: Params) {
   const post = all.find((p) => p.slug === slug);
   if (!post) notFound();
 
+  const campaignId: CampaignId | undefined = slug.startsWith("redmi-17c-") ? "redmi" : slug.startsWith("vivo-v80-") ? "vivo" : slug.startsWith("oppo-f35-") ? "oppo" : undefined;
+  const campaign = campaignId ? (await publicCampaigns()).items[campaignId] : undefined;
   const others = all.filter((p) => p.slug !== post.slug);
 
   // Post ठीक किस वक़्त डाली गई — जहाँ `publishAt` लिखा है वहाँ से।
@@ -81,7 +88,7 @@ export default async function PostPage({ params }: Params) {
     headline: post.title,
     description: post.excerpt,
     datePublished: post.dateISO,
-    dateModified: post.dateISO,
+    dateModified: post.updatedISO ?? post.dateISO,
     image: `${shop.siteUrl}${post.image}`,
     author: { "@type": "Person", name: shop.authorName },
     publisher: {
@@ -101,6 +108,7 @@ export default async function PostPage({ params }: Params) {
           <article className="reader" data-product-guide={post.imageFit === "contain" ? "true" : undefined}>
             <Link className="btn btn-o btn-s rback" href="/posts">← Tech Blog &amp; Guides</Link>
 
+            {campaign && <aside className="mw-offer-validity" role="note"><strong>{campaignIsLive(campaign) ? "Offer और stock की पुष्टि ज़रूरी है।" : "यह launch/offer की पुरानी जानकारी है; campaign अभी चालू नहीं है।"}</strong><p>इस post की जानकारी उसके प्रकाशन समय की है। आज के दाम, eligibility और उपलब्धता दुकान से पूछिए। {campaign.note}</p></aside>}
             <div className="rhead">
               <span className="k">{post.kicker}</span>
               <h1 className="rtitle">{post.title}</h1>
@@ -110,6 +118,7 @@ export default async function PostPage({ params }: Params) {
                 <span className="rmeta-p">
                   <IconCal /><time dateTime={post.dateISO}>{post.date}</time>
                 </span>
+                {post.updatedISO && <span className="rmeta-p">अपडेट: <time dateTime={post.updatedISO}>{new Date(post.updatedISO + 'T00:00:00+05:30').toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata', day: 'numeric', month: 'short', year: 'numeric' })}</time></span>}
                 {time && <>
                   <i aria-hidden="true" />
                   <span className="rmeta-p"><IconClock />{time}</span>

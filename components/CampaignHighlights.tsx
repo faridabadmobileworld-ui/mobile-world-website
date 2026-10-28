@@ -1,21 +1,25 @@
+import { campaignIsLive, defaultCampaigns, type CampaignSettings } from "@/lib/campaigns/core";
 import Image from "next/image";
 import { shop } from "@/data/shop";
 import { slideEnquiry } from "@/data/storefront";
 import { IconArrow, IconFacebook, IconInstagram, IconWhatsApp, IconYouTube } from "./Icons";
 
-export function FestivalHighlights() {
+export function FestivalHighlights({ settings = defaultCampaigns() }: { settings?: CampaignSettings }) {
+  const diwali = campaignIsLive(settings.items.diwali), gifts = campaignIsLive(settings.items.gifts);
+  if (!diwali && !gifts) return null;
   return <section className="festival-section" id="festival-highlights" aria-labelledby="festival-title">
     <div className="shopping-section-heading"><div><p className="shopping-overline">DIWALI SPECIAL · ख़ुशियों के साथ</p><h2 id="festival-title">इस बार, कुछ ख़ास।</h2></div></div>
     <div className="festival-grid">
-      <article className="festival-card festival-travel">
+      {diwali && <article className="festival-card festival-travel">
         <div className="festival-image"><Image src="/images/mw-diwali-2026.webp" alt="माँ वैष्णो देवी helicopter यात्रा और Diwali gifts का campaign artwork" fill sizes="(max-width:767px) 160vw, 850px" /></div>
         <div className="festival-copy"><p className="shopping-overline">DIWALI CAMPAIGN</p><h3>माँ वैष्णो देवी यात्रा वाली ख़ुशी।</h3><p>Couples के लिए helicopter यात्रा और Fridge, Washing Machine, TV व Oven जैसे campaign prizes की जानकारी लीजिए।</p><a className="mw-text-link" href={slideEnquiry("Diwali campaign की dates, भागीदारी, prize selection और यात्रा की पूरी शर्तों")} target="_blank" rel="noopener noreferrer">पूरी शर्तें जानिए <IconArrow /></a></div>
-      </article>
-      <article className="festival-card">
+      </article>}
+      {gifts && <article className="festival-card">
         <div className="festival-image"><Image src="/images/mw-festival-gifts-2026.webp" alt="Trolley bag, cycle, soundbar और smartwatch का festival gift display" fill sizes="(max-width:767px) 160vw, 850px" /></div>
         <div className="festival-copy"><p className="shopping-overline">GIFTS और ACCESSORY OFFERS</p><h3>आपकी ख़रीदारी, आपकी ख़ुशी।</h3><p>Gifts, Apple/Samsung charger offers और दूसरे festival benefits की current eligibility हमारी team से समझिए।</p><a className="mw-text-link" href={slideEnquiry("मेरे चुने हुए product पर festival gifts और accessory offers की eligibility")} target="_blank" rel="noopener noreferrer">मेरे product पर क्या लागू है? <IconArrow /></a></div>
-      </article>
+      </article>}
     </div>
+    {diwali && settings.items.diwali.note && <p className="festival-terms">{settings.items.diwali.note}</p>}{gifts && settings.items.gifts.note && <p className="festival-terms">{settings.items.gifts.note}</p>}
     <p className="festival-terms">Campaign visuals सांकेतिक हैं। Gifts, participation, dates और stock की पुष्टि दुकान से कीजिए।</p>
   </section>;
 }

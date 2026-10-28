@@ -1,3 +1,4 @@
+import { categoryHref } from "@/data/category-guides";
 import Image from "next/image";
 import Link from "next/link";
 import { navCategories, artForCategory } from "@/data/content";
@@ -13,7 +14,7 @@ export function ShoppingCategories() {
       </div>
       <div className="shopping-category-grid">
         {navCategories.map((category) => (
-          <Link href={`/products#${category.slug}`} key={category.slug} className="shopping-category">
+          <Link href={categoryHref(category.slug)} key={category.slug} className="shopping-category">
             <span className="shopping-category-image">
               {category.image
                 ? <Image src={category.image} alt="" width={200} height={200} sizes="(max-width:700px) 100px, 110px" />

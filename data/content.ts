@@ -431,6 +431,7 @@ export type Post = {
   kicker: string;
   date: string;
   dateISO: string;
+  updatedISO?: string;
   /**
    * Post कब से दिखनी चाहिए (ISO, +05:30 के साथ)।
    *
@@ -707,15 +708,18 @@ export const posts: Post[] = [
     kicker: "Buying Guide",
     date: "1 September 2026",
     dateISO: "2026-09-01",
-    title: "पुराना phone exchange में देना है? पहले यह पढ़ लीजिए",
+    updatedISO: "2026-10-26",
+    title: "Faridabad में पुराना phone exchange: value, documents और data की तैयारी",
     excerpt:
-      "Value कैसे तय होती है, साथ में क्या लाना ज़रूरी है, और आपके data का क्या होता है — पूरी बात एक जगह।",
+      "Jawahar Colony, Faridabad में phone exchange कैसे होता है? Mobile World पर value की जाँच, ज़रूरी documents और पुराने phone का data सुरक्षित रखने की तैयारी जानिए।",
     image: "/images/purana-aur-naya-phone-counter-par.webp",
     imageW: 1200,
     imageH: 800,
     alt: "दुकान के counter पर पुराना phone और उसके बग़ल में नया phone",
     body: `
-<p>नया phone लेते समय पुराना phone दराज़ में पड़ा रहे, इसकी कोई ज़रूरत नहीं। उसकी value लगवाकर नए phone के दाम में से कम करवाई जा सकती है — बचे हुए पैसे ही देने होते हैं।</p>
+<p><strong>Faridabad में पुराना phone exchange करना है?</strong> Mobile World, Jawahar Colony पर phone की हालत देखकर exchange value बताई जाती है। सौदा तय होने पर यह value नए phone की कीमत से कम होती है; बाकी रकम आप देते हैं। Website पर अनुमानित exchange price को पक्के दाम की तरह नहीं दिखाया जाता।</p>
+<p><a href="${shop.phone.whatsapp}?text=${encodeURIComponent('नमस्ते Mobile World, phone exchange के बारे में जानना है। मेरा पुराना model: __। RAM/storage: __। हालत: __। नया phone: __। Website की exchange guide से आया हूँ।')}">अपने model के बारे में WhatsApp पर पूछिए</a> · <a href="${shop.phone.tel}">दुकान पर call कीजिए</a></p>
+<p>Model, storage और phone की हालत बताने से बातचीत शुरू हो जाती है। Final exchange value phone की जाँच के बाद ही तय होगी।</p>
 <h2 id="value-kaise">Value कैसे तय होती है</h2>
 <p>Phone आपके सामने counter पर ही चेक होता है — screen, battery, चलने की हालत, सब। उसी हालत के हिसाब से value बनती है और वहीं बता दी जाती है।</p>
 <p>इसीलिए हम website पर exchange का कोई दाम नहीं लिखते। हर phone की हालत अलग होती है, और अंदाज़े से बताया गया दाम बाद में बदलना पड़े — यह हमें ठीक नहीं लगता।</p>
@@ -726,9 +730,15 @@ export const posts: Post[] = [
 <li><strong>Original charger और बाक़ी सामान</strong> — साथ हो तो साथ रखिए, पूरा सामान होने पर हालत बेहतर मानी जाती है।</li>
 </ul>
 <h2 id="data">पहले data, फिर format</h2>
-<p>पुराना phone हाथ से जाने से पहले उसका contacts, photos और WhatsApp — सब नए phone में डाल दिया जाता है। उसके बाद ही पुराना phone format होता है। यह काम दुकान पर, आपके सामने होता है।</p>
-<h2 id="online-se-farak">Online exchange से फ़र्क़ क्या है</h2>
-<p>Online पर exchange value पहले दिख जाती है, और सामान लेने आया आदमी phone में कमियाँ निकालकर वो value कम कर देता है या order ही वापस चला जाता है। यहाँ ऐसा नहीं होता — चेक करना, दाम लगाना और सौदा, तीनों एक ही जगह, आपके सामने।</p>
+<p>दुकान पर data transfer और settings समझने में मदद मिलती है। कौन-सा data transfer हो सकेगा, यह दोनों phones, apps और backup की स्थिति पर निर्भर है। हर app या file के अपने आप transfer होने का वादा नहीं है।</p>
+<ol><li>आने से पहले photos, contacts और ज़रूरी files का backup रखिए। WhatsApp और authenticator apps की transfer/backup settings भी जाँचिए।</li><li>नए phone में ज़रूरी data खुल रहा है, यह अपने सामने देखिए। Password और OTP खुद डालिए; message में मत भेजिए।</li><li>Account sign-out, device lock और reset की प्रक्रिया अपने सामने पूरी कराइए। Data की पुष्टि किए बिना पुराना phone reset मत कीजिए।</li><li>SIM और memory card निकालना न भूलिए; eSIM हो तो transfer की व्यवस्था पहले समझिए।</li></ol>
+<h2 id="kaise-hoga">दुकान पर exchange के चार कदम</h2>
+<ol><li>पुराना phone, bill या original box और पहचान पत्र साथ लाइए।</li><li>Phone की हालत की जाँच और बताई गई value समझिए।</li><li>नए model का आज का price, उपलब्धता और बाकी भुगतान स्पष्ट कर लीजिए।</li><li>Data और account की तैयारी पूरी करने के बाद ही पुराना phone दीजिए।</li></ol>
+<h2 id="sawal">Exchange के आम सवाल</h2>
+<h3>मेरे phone की कितनी value मिलेगी?</h3><p>सिर्फ़ model के नाम से पक्का दाम नहीं बताया जा सकता। Screen, battery और काम करने की हालत देखकर value तय होती है।</p>
+<h3>टूटी screen या खराब phone लिया जाएगा?</h3><p>ऐसे phone की eligibility पहले दुकान से पूछिए। सभी हालत और सभी models के लिए exchange का वादा नहीं है।</p>
+<h3>Bill और box दोनों नहीं हैं तो?</h3><p>दुकान के नियम के अनुसार bill या original box में से एक ज़रूरी है। दोनों में से कुछ भी न हो तो phone नहीं लिया जा सकेगा।</p>
+<h3>दुकान कहाँ है और कब आ सकते हैं?</h3><p>Mobile World, Gurudwara Road, Jawahar Colony, NIT Faridabad में है। समय सुबह 10 बजे से रात 10 बजे तक; हर महीने की आख़िरी तारीख़ को छुट्टी रहती है। <a href="/visit">पूरा पता और रास्ता देखिए</a>।</p>
 <h2 id="niyam">पूरे नियम कहाँ लिखे हैं</h2>
 <p>Exchange, return और refund की पूरी शर्तें <a href="/returns">Return और Exchange</a> वाले page पर एक जगह लिखी हैं।</p>
 <p>अपना पुराना phone लेकर आ जाइए। हालत देखकर उसी वक़्त बता देंगे कि कितनी value बनती है।</p>`,

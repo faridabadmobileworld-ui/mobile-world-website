@@ -1,3 +1,4 @@
+import { withSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { shop } from "@/data/shop";
@@ -7,13 +8,13 @@ import { PageFoot, Byline } from "@/components/PageFoot";
 import { FollowUs } from "@/components/FollowUs";
 import { spinRewards } from "../spin-rewards";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSocialMetadata({
   title: "Terms & Conditions — दुकान के नियम",
   description:
     `${shop.name} ${shop.address.locality} के नियम और शर्तें — bill, brand ` +
     `warranty, exchange, delivery और timing की पूरी जानकारी।`,
   alternates: { canonical: "/terms" },
-};
+});
 
 const toc: TocItem[] = [
   { id: "website", label: "Website सिर्फ़ जानकारी के लिए है" },
@@ -75,7 +76,7 @@ export default function Terms() {
           <h2 id="spin-wheel-terms">Diwali Spin Wheel</h2>
           <p>Spin free है। एक mobile number पर एक reward code मिलेगा; code इसी screen पर दिखेगा। वही number दोबारा देने पर नया reward नहीं मिलेगा। ₹ वाली reward ख़रीदारी के bill पर discount है।</p>
           <ul>{spinRewards.map(reward => <li key={reward.id}><strong>{reward.label}</strong></li>)}</ul>
-          <p>दोनों rewards के chances अलग हैं। Wheel के हिस्सों का आकार बराबर chance नहीं दर्शाता।</p>
+          <p>अलग-अलग rewards के chances अलग हैं। Wheel के हिस्सों का आकार बराबर chance नहीं दर्शाता।</p>
           <p>9 October 2026 से जारी नए codes, ₹5,000 से अधिक की Mobile, Laptop, Electronics या Home Appliance की ख़रीदारी पर लागू हैं। एक product पर एक code और एक number पर एक redemption होगा। छोटे accessories शामिल नहीं हैं। पुराने valid codes के मूल benefits सुरक्षित हैं।</p>
           <p>दुकान की team उसी number का access और code verify करेगी तथा reward देने पर bill और product के साथ Used status दर्ज करेगी। इस्तेमाल हुए code को दोबारा redeem नहीं किया जा सकता। Gift का उपलब्ध brand, model और colour दुकान पर बताया जाएगा। Demo result redeem नहीं होता।</p>
           <p>Number और reward record की जानकारी <Link href="/privacy#spin-wheel-privacy">Privacy</Link> में है।</p>
@@ -84,7 +85,7 @@ export default function Terms() {
           <ul>
             <li>
               Smartphone, laptop और appliances के दाम market के हिसाब से बदलते रहते
-              हैं। इसीलिए इस website पर कोई दाम नहीं लिखा जाता।
+              हैं। किसी guide या offer में लिखा दाम उस जानकारी की तारीख़ और बताए गए variant के लिए है। वर्तमान दाम, tax, finance charges और stock की पुष्टि ख़रीदने से पहले कीजिए।
             </li>
             <li>
               आने से पहले WhatsApp पर product का नाम भेज दीजिए — हम बता देंगे कि वो
@@ -190,8 +191,8 @@ export default function Terms() {
           <h2 id="ipr">8. Content किसका है</h2>
           <ul>
             <li>
-              इस website का सारा content, text, तस्वीरें और branding
-              {" "}{shop.name} और proprietor {shop.owner} की संपत्ति है।
+              इस website का अपना text और Mobile World branding
+              {" "}{shop.name} और proprietor {shop.owner} के हैं। Brand logos, product photographs और third-party सामग्री पर अधिकार उनके संबंधित मालिकों के हैं।
             </li>
             <li>
               बिना लिखित इजाज़त के इसे किसी दूसरी commercial website या platform पर

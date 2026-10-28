@@ -4039,3 +4039,5 @@ main .fin-list li,main .igrid li{
 /* उँगली के पीछे चलने वाली नरम रोशनी वापस (सिर्फ़ `::after` वाली परत) */
 html.aura .aura-on::after{opacity:1 !important}
 
+
+.mw-offer-validity{margin:20px 0;padding:18px 22px;background:#fff8eb;border:1px solid #e8d6ad;border-radius:12px;font-size:13px;line-height:1.8}.mw-offer-validity p{margin:6px 0 0}

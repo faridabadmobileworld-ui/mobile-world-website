@@ -1,5 +1,6 @@
 "use client";
 
+import { trackAction } from "./WebsiteAnalytics";
 import { useEffect, useRef, useState } from "react";
 
 export function HomeProductVideo() {
@@ -15,6 +16,14 @@ export function HomeProductVideo() {
     let pageActive = true;
     let disposed = false;
     let requestVersion = 0;
+    let sourceAttached = false;
+    function attachSource() {
+      if (sourceAttached) return;
+      sourceAttached = true;
+      video!.preload = "metadata";
+      video!.src = "/videos/mobile-world-products-original-128.mp4";
+      video!.load();
+    }
     const shouldPlay = () => visible && pageActive && !document.hidden && !disposed;
 
     function syncPlayback() {
@@ -24,6 +33,7 @@ export function HomeProductVideo() {
         video!.pause();
         return;
       }
+      attachSource();
       if (!video!.paused) return;
 
       void video!.play().then(() => {
@@ -45,6 +55,14 @@ export function HomeProductVideo() {
       syncPlayback();
     }, { threshold: [0, 0.001] });
 
+    const loader = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { attachSource(); loader.disconnect(); }
+    }, { rootMargin: "600px 0px" });
+    loader.observe(video);
+    const onPlay = () => trackAction("video", "product video: playing");
+    const onPause = () => { if (video.currentTime > 0) trackAction("video", "product video: paused"); };
+    video.addEventListener("play", onPlay);
+    video.addEventListener("pause", onPause);
     const guardPlayback = () => { if (!shouldPlay()) video.pause(); };
     const syncSound = () => setMuted(video.muted);
     const hidePage = () => { pageActive = false; syncPlayback(); };
@@ -64,6 +82,9 @@ export function HomeProductVideo() {
       disposed = true;
       syncPlaybackRef.current = null;
       observer.disconnect();
+      loader.disconnect();
+      video.removeEventListener("play", onPlay);
+      video.removeEventListener("pause", onPause);
       video.removeEventListener("loadeddata", syncPlayback);
       video.removeEventListener("canplay", syncPlayback);
       video.removeEventListener("playing", guardPlayback);
@@ -79,6 +100,7 @@ export function HomeProductVideo() {
     const video = videoRef.current;
     if (!video) return;
     video.muted = !video.muted;
+    trackAction("video", video.muted ? "product video: sound off" : "product video: sound on");
     setMuted(video.muted);
     syncPlaybackRef.current?.();
   }
@@ -91,7 +113,7 @@ export function HomeProductVideo() {
         loop
         muted={muted}
         playsInline
-        preload="metadata"
+        preload="none"
         disablePictureInPicture
         disableRemotePlayback
         poster="/images/mobile-world-product-video-poster.jpg"
@@ -100,7 +122,6 @@ export function HomeProductVideo() {
         tabIndex={-1}
         aria-label="Mobile World का product video"
       >
-        <source src="/videos/mobile-world-products-original-128.mp4" type="video/mp4" />
         आपका browser यह video नहीं चला पा रहा है।
       </video>
       <button

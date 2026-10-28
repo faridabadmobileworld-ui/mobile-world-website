@@ -1,3 +1,4 @@
+import { withSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import { shop } from "@/data/shop";
 import { ask } from "@/data/content";
@@ -8,13 +9,13 @@ import { FollowUs } from "@/components/FollowUs";
 import { MoreLinks } from "@/components/MoreLinks";
 import { IconWhatsApp } from "@/components/Icons";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSocialMetadata({
   title: "After Sales Service और Support",
   description:
     `${shop.name} ${shop.address.locality} में सामान लेने के बाद भी पूरा support ` +
     `मिलता है। Data transfer, settings और honest guidance के लिए दुकान पर आइए।`,
   alternates: { canonical: "/after-sales-support" },
-};
+});
 
 const toc: TocItem[] = [
   { id: "madad", label: "सामान लेने के बाद हम किस तरह मदद करते हैं" },

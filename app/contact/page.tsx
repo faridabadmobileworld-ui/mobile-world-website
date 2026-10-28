@@ -1,3 +1,4 @@
+import { withSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import { shop } from "@/data/shop";
 import { whatsappGeneral } from "@/data/content";
@@ -10,13 +11,13 @@ import { LiveBadge, NextClosure } from "@/components/StoreStatus";
 import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 import { PageFoot, Byline } from "@/components/PageFoot";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSocialMetadata({
   title: "Contact Us — सीधे Call और WhatsApp",
   description:
     `${shop.address.city} में mobile, laptop या electronics के लिए सीधे contact ` +
     `कीजिए। ${shop.address.locality} की shop timing, phone number और WhatsApp यहाँ।`,
   alternates: { canonical: "/contact" },
-};
+});
 
 const toc: TocItem[] = [
   { id: "abhi-baat", label: "अभी बात कीजिए — हम आपके लिए खुले हैं" },

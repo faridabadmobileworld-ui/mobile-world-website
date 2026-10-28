@@ -1,3 +1,5 @@
+import { withSocialMetadata } from "@/lib/page-metadata";
+import { AnalyticsPrivacy } from "@/components/WebsiteAnalytics";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { shop } from "@/data/shop";
@@ -6,13 +8,13 @@ import { MoreLinks } from "@/components/MoreLinks";
 import { PageFoot, Byline } from "@/components/PageFoot";
 import { FollowUs } from "@/components/FollowUs";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSocialMetadata({
   title: "Privacy Policy — आपका data सुरक्षित है",
   description:
     `${shop.name} ${shop.address.locality} की Privacy Policy। हम आपके personal ` +
     `data की पूरी respect करते हैं — साफ़ और पारदर्शी नियम।`,
   alternates: { canonical: "/privacy" },
-};
+});
 
 const toc: TocItem[] = [
   { id: "collect", label: "हम कौन सी information collect करते हैं?" },
@@ -66,7 +68,7 @@ export default function Privacy() {
           <p>
             Account बनाए बिना website देख सकते हैं। Spin Wheel खेलने या reward code
             की जाँच करने पर आपका mobile number हमारे server को भेजा जाता है। इसकी
-            पूरी जानकारी नीचे है। Search box में लिखा text आपके browser में ही रहता है।
+            पूरी जानकारी नीचे है। Analytics में search के पहचाने गए shopping terms दर्ज होते हैं; पूरा typed text नहीं।
           </p>
           <p>
             आप Spin Wheel इस्तेमाल करें, ख़रीदारी करें या ख़ुद हमसे संपर्क करें,
@@ -112,21 +114,12 @@ export default function Privacy() {
             message उनकी अपनी terms के हिसाब से चलते हैं।
           </p>
 
-          <h2 id="cookies">4. Cookies और tracking</h2>
-          <p>
-            <strong>यह website कोई cookie नहीं बनाती और कोई tracking नहीं चलाती।</strong>
-            {" "}न Google Analytics, न Facebook pixel, न किसी और तरह का tracking script।
-          </p>
-          <p>
-            Product shortlist आपके browser की local storage में रहती है। आप products page
-            पर models हटाकर इसे खाली कर सकते हैं। Share किए गए shortlist link में सिर्फ़
-            model IDs होते हैं। Website hosting provider सुरक्षा और संचालन के लिए request
-            logs रख सकता है।
-          </p>
-          <p>
-            आगे कभी हमने analytics लगाया, तो यह बात <strong>पहले इसी page पर</strong>
-            {" "}लिखी जाएगी।
-          </p>
+          <h2 id="cookies">4. Cookies और website analytics</h2>
+          <p>Website को बेहतर बनाने के लिए public pages की visits, contact-button clicks, product interactions, scroll और active screen time दर्ज होते हैं। Random browser और session IDs को server पर keyed hash में बदलकर private storage में रखा जाता है। यह customer की पहचान नहीं बताता।</p>
+          <p>Analytics में नाम, phone number, password, WhatsApp messages या form का पूरा text record नहीं होता। Search में केवल पहचाने गए shopping terms आते हैं। Referrer, campaign, device type और approximate country भी report में आ सकते हैं। Call/WhatsApp click से वास्तविक बातचीत की पुष्टि नहीं होती।</p>
+          <p>Browser ID अधिकतम 90 दिन और session 30 मिनट की inactivity तक चलता है। Detailed reports पिछले 90 दिनों की हैं; पुराने server records owner dashboard की अगली maintenance पर हटाए जाते हैं। Hosting provider संचालन और सुरक्षा के request logs अलग रख सकता है।</p>
+          <p>Analytics owner login के पीछे है। Browser का Do Not Track और Global Privacy Control माना जाता है। नीचे analytics बंद कर सकते हैं। Product shortlist browser में रहती है। Owner login के लिए सुरक्षित session cookie इस्तेमाल होती है।</p>
+          <AnalyticsPrivacy />
 
           <span id="tech-challenge-privacy" />
           <h2 id="spin-wheel-privacy">Spin Wheel और reward code</h2>
@@ -156,8 +149,7 @@ export default function Privacy() {
             <strong>एक बात साफ़-साफ़:</strong> home page पर हमारी Instagram वाली पट्टी
             में जो तस्वीरें दिखती हैं, वो सीधे <strong>Instagram के server से</strong>
             {" "}आती हैं। यानी उतनी देर के लिए Instagram को इतना पता चल जाता है कि
-            किसी ने वो तस्वीर खोली। यह हमारी तरफ़ से कोई tracking नहीं है — हम अब भी
-            आपकी कोई जानकारी इकट्ठा नहीं करते।
+            किसी ने वो तस्वीर खोली। Instagram की अपनी privacy policy लागू होती है। हमारी website analytics की जानकारी ऊपर दी गई है।
           </p>
 
           <h2 id="rights">6. आपके अधिकार</h2>

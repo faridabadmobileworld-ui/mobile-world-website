@@ -1,5 +1,7 @@
 "use server";
 
+import { publicCampaigns } from "@/lib/campaigns/store";
+import { campaignIsLive } from "@/lib/campaigns/core";
 import { createHmac } from "node:crypto";
 import { headers } from "next/headers";
 import { createSpinCoupon, normalizeSpinPhone, verifySpinCoupon } from "./spin-core";
@@ -30,6 +32,7 @@ export async function playSpin(rawPhone: unknown, accepted: unknown): Promise<Sp
   if (!phone) return { ok: false, message: "अपना सही 10-digit Indian mobile number लिखिए।" };
   if (!(await withinLimit(secret, "spin"))) return { ok: false, message: "कई requests आ चुकी हैं। एक मिनट बाद फिर कोशिश कीजिए।" };
   try {
+    if (!campaignIsLive((await publicCampaigns(true)).items.spin)) return { ok: false, message: "नए spins अभी चालू नहीं हैं। पहले जारी हुए codes के benefits सुरक्षित हैं।" };
     const coupon = await saveSpin(phone, createSpinCoupon(phone, secret));
     return { ok: true, coupon };
   } catch {

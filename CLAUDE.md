@@ -1,3 +1,9 @@
+# Progress reporting — owner request, 26 October 2026
+
+- Every progress update must show a percentage out of 100 for the explicitly stated current work phase. Describe completed verification and real remaining dependencies; never count a blocked integration as complete.
+- Continue authorized implementation and publish verified increments without repeated confirmations. Never request passwords, OTPs or API keys in chat; use the service's secure authorization or the private owner settings form.
+- The detailed model/specification/colour/price content phase remains deferred by the owner. Do not count it as finished.
+
 # Current owner-approved upgrade — 28 September 2026
 
 The owner has authorized applying the full premium UI/UX audit to the existing website and publishing it. This supersedes older visual instructions about multicolour cards, ubiquitous author cards, duplicate contact blocks, and continuous 3D motion.

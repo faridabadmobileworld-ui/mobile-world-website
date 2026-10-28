@@ -58,7 +58,7 @@ function WheelGraphic({ rotation, moving, onEnd }: { rotation: number; moving: b
   </div>;
 }
 
-function SpinWheelContent() {
+function SpinWheelContent({ enabled, note }: { enabled: boolean; note: string }) {
   const isDemo = useSearchParams().get("wheelPreview") === "1";
   const saved = useSyncExternalStore(subscribeToCoupon, couponSnapshot, () => null);
   const remembered = isDemo ? null : storedCoupon(saved);
@@ -93,7 +93,7 @@ function SpinWheelContent() {
 
   async function startSpin(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (requestActive.current) return;
+    if (requestActive.current || (!enabled && !isDemo)) return;
     requestActive.current = true; setError(""); setCopyStatus(""); setPhase("loading");
     try {
       const response: SpinResponse = isDemo
@@ -117,9 +117,10 @@ function SpinWheelContent() {
     setCoupon(null); setPhase("idle"); setPhone(""); setCopyStatus(""); setError("");
   }
 
+  if (!enabled && !shownCoupon && !isDemo) return null;
   return <section id="spin-wheel" className="spin-section" aria-labelledby="spin-title">
     {isDemo && <div className="spin-demo-notice" role="status">DEMO MODE · Animation की जाँच। कोई असली reward या claim code जारी नहीं होगा।</div>}
-    <div className="spin-intro"><p className="spin-eyebrow">MOBILE WORLD · DIWALI SPIN &amp; WIN</p><h2 id="spin-title">एक Spin.<br/><span>आपकी ख़ुशी का एक मौक़ा।</span></h2><p>अपना number डालिए। Wheel घुमाइए। अपना reward code दुकान पर दिखाइए।</p><div className="spin-pills"><span>Free Spin</span><span>एक number · एक reward</span><span>दुकान पर Claim</span></div></div>
+    <div className="spin-intro"><p className="spin-eyebrow">MOBILE WORLD · DIWALI SPIN &amp; WIN</p><h2 id="spin-title">एक Spin.<br/><span>आपकी ख़ुशी का एक मौक़ा।</span></h2><p>{enabled ? "अपना number डालिए। Wheel घुमाइए। अपना reward code दुकान पर दिखाइए।" : "नए spins अभी बंद हैं। पहले जारी हुआ आपका code यहाँ सुरक्षित है।"}</p>{note && <p>{note}</p>}<div className="spin-pills"><span>Free Spin</span><span>एक number · एक reward</span><span>दुकान पर Claim</span></div></div>
     <div className="spin-play-area">
       <div className="spin-visual">{shownCoupon && !spinRewards.some(item => item.id === shownCoupon.rewardId) ? <div className="spin-archived"><span>✦</span><h3>आपका पहले का reward</h3><p>अपना सुरक्षित code दुकान पर दिखाइए।</p></div> : <><WheelGraphic rotation={shownCoupon ? Math.floor(rotation / 360) * 360 + ((360 - spinRewards.findIndex(item => item.id === shownCoupon.rewardId) * segmentAngle) % 360) : rotation} moving={busy} onEnd={finishSpin}/><p className="spin-wheel-caption">ऊपर का pointer आपका reward दिखाएगा।</p></>}</div>
       <div className="spin-control">
@@ -138,10 +139,10 @@ function SpinWheelContent() {
       </div>
     </div>
     <p className="spin-eligibility">नए codes: ₹5,000 से अधिक के Mobile, Laptop, Electronics या Home Appliance पर · एक product, एक code।</p>
-    <details className="spin-details"><summary>Rewards की chances और नियम</summary><p className="spin-rules-intro">Wheel के हिस्से बराबर दिखते हैं; rewards की chances अलग हैं। ₹ वाले rewards ख़रीदारी पर discount हैं।</p><ul className="spin-chances"><li><span>₹100 discount</span><b>98%</b></li><li><span>Neckband</span><b>1%</b></li><li><span>₹200 discount</span><b>0.4%</b></li><li><span>Earbuds</span><b>0.3%</b></li><li><span>₹500 discount</span><b>0.2%</b></li><li><span>₹1,000 discount</span><b>0.1%</b></li></ul><Link href="/terms#spin-wheel-terms">पूरे नियम पढ़िए <IconArrow/></Link></details>
+
   </section>;
 }
 
-export function SpinWheel() {
-  return <Suspense fallback={<section className="spin-section spin-loading" id="spin-wheel"><p className="spin-eyebrow">MOBILE WORLD · DIWALI SPIN &amp; WIN</p><h2>आपका Spin Wheel तैयार हो रहा है…</h2><p>₹100 · ₹200 · ₹500 · ₹1000 discount · Neckband · Earbuds</p></section>}><SpinWheelContent/></Suspense>;
+export function SpinWheel({ enabled = true, note = "" }: { enabled?: boolean; note?: string }) {
+  return <Suspense fallback={<section className="spin-section spin-loading" id="spin-wheel"><p className="spin-eyebrow">MOBILE WORLD · DIWALI SPIN &amp; WIN</p><h2>आपका Spin Wheel तैयार हो रहा है…</h2><p>₹100 · ₹200 · ₹500 · ₹1000 discount · Neckband · Earbuds</p></section>}><SpinWheelContent enabled={enabled} note={note}/></Suspense>;
 }

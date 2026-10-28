@@ -1,3 +1,4 @@
+import { withSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -5,7 +6,7 @@ import { shop, legacy } from "@/data/shop";
 import { MoreLinks } from "@/components/MoreLinks";
 import { IconArrow } from "@/components/Icons";
 
-export const metadata: Metadata = {title:"हमारा सफ़र — 1973 से परिवार का business",description:"1973 में Aggarwal Kiryana Store से शुरू हुआ परिवार का business सफ़र, 1996 में अगली पीढ़ी, 2006 में Communication और 2016 में Mobile World।",alternates:{canonical:"/about"}};
+export const metadata: Metadata = withSocialMetadata({title:"हमारा सफ़र — 1973 से परिवार का business",description:"1973 में Aggarwal Kiryana Store से शुरू हुआ परिवार का business सफ़र, 1996 में अगली पीढ़ी, 2006 में Communication और 2016 में Mobile World।",alternates:{canonical:"/about"}});
 export default function About() {
   return <div className="wrap"><section className="mw-about-intro"><div><p className="shopping-overline">MOBILE WORLD · हमारा सफ़र</p><h1>हर सफ़र की शुरुआत<br />एक भरोसे से होती है। ❤️</h1>
     <p>हमारे परिवार का business सफ़र 1973 में Aggarwal Kiryana Store से शुरू हुआ।</p>

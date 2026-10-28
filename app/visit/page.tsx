@@ -1,3 +1,4 @@
+import { withSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { shop } from "@/data/shop";
@@ -12,7 +13,7 @@ import { Banner } from "@/components/Banner";
 import { GoogleQR } from "@/components/GoogleQR";
 import { LiveBadge, NextClosure } from "@/components/StoreStatus";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSocialMetadata({
   title: "दुकान पर आइए",
   description:
     // ⚠️ Google 155-160 अक्षर के बाद काट देता है — यह 210 की थी (7 Sep 2026)
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
     `${shop.address.locality}, ${shop.address.city} – ${shop.address.postalCode}। ` +
     `रोज़ सुबह 10 से रात 10। महीने की आख़िरी तारीख़ बंद।`,
   alternates: { canonical: "/visit" },
-};
+});
 
 const toc: TocItem[] = [
   { id: "pata", label: "दुकान का पता और नक़्शा" },

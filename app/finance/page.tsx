@@ -1,3 +1,4 @@
+import { withSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import { shop } from "@/data/shop";
 import { ask } from "@/data/content";
@@ -5,7 +6,7 @@ import { FinanceStrip } from "@/components/FinanceStrip";
 import { MoreLinks } from "@/components/MoreLinks";
 import { IconWhatsApp } from "@/components/Icons";
 
-export const metadata: Metadata = {title:"Finance और EMI — options और शर्तें समझिए",description:"Mobile World पर Card EMI, paper finance और ज़रूरी documents की जानकारी। Approval और final terms bank या finance company तय करती है।",alternates:{canonical:"/finance"}};
+export const metadata: Metadata = withSocialMetadata({title:"Finance और EMI — options और शर्तें समझिए",description:"Mobile World पर Card EMI, paper finance और ज़रूरी documents की जानकारी। Approval और final terms bank या finance company तय करती है।",alternates:{canonical:"/finance"}});
 const answers = [
   {id:"card",q:"Card पर EMI कैसे बनती है?",a:"दुकान पर credit card और कुछ banks के debit card पर EMI की सुविधा है। Card की eligibility, अवधि, interest और processing fee आपका bank तय करता है। Counter पर अपने card की सुविधा check कराइए।"},
   {id:"rules",q:"Approval, down payment और charges कौन तय करता है?",a:"Finance company या bank आपके credit record और अपनी policy के आधार पर approval, limit, down payment, interest और processing fee तय करता है। हमारी team system में उपलब्ध scheme समझने में मदद करती है; approval का वादा नहीं किया जाता।"},

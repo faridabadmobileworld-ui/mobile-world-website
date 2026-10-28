@@ -1,3 +1,4 @@
+import { categoryGuides } from "@/data/category-guides";
 import type { MetadataRoute } from "next";
 import { shop } from "@/data/shop";
 import { livePosts } from "@/data/content";
@@ -39,5 +40,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }));
 
-  return [...pages, ...articles];
+  return [...pages, ...Object.keys(categoryGuides).map(category => ({ url: `${shop.siteUrl}/products/${category}`, lastModified: new Date("2026-10-24T00:00:00+05:30"), changeFrequency: "monthly" as const, priority: 0.8 })), ...articles];
 }

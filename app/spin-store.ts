@@ -1,5 +1,5 @@
 import 'server-only';
-import { get, put } from '@vercel/blob';
+import { BlobError, BlobPreconditionFailedError, get, put } from '@vercel/blob';
 import { addEntry, emptyLedger, privateKey, type Ledger } from './spin-ledger-core';
 import type { SpinCoupon } from './spin-rewards';
 
@@ -9,7 +9,8 @@ export function spinSecret() {
   return secret;
 }
 export async function readPrivate<T>(path: string): Promise<{ value: T; etag: string } | null> {
-  const result = await get(path, { access: 'private', useCache: false });
+  // A compressed response can carry a weak ETag, which cannot guard a write.
+  const result = await get(path, { access: 'private', useCache: false, headers: { 'accept-encoding': 'identity' } });
   if (!result || result.statusCode !== 200) return null;
   return { value: await new Response(result.stream).json() as T, etag: result.blob.etag };
 }
@@ -23,8 +24,11 @@ export async function transactPrivate<T, R>(path: string, initial: () => T, upda
       await put(path, JSON.stringify(state), { access: 'private', contentType: 'application/json', addRandomSuffix: false, cacheControlMaxAge: 60, ...(previous ? { allowOverwrite: true, ifMatch: previous.etag } : { allowOverwrite: false }) });
       return result.value;
     } catch (error) {
-      // These are the only retriable conflicts; never hide a storage/auth failure.
-      if (!(error instanceof Error) || !['BlobPreconditionFailedError', 'BlobAlreadyExistsError'].includes(error.name)) throw error;
+      // SDK subclasses inherit name="Error"; use the exported class, not name.
+      const conflict = error instanceof BlobPreconditionFailedError || (!previous && error instanceof BlobError && /already exists/i.test(error.message));
+      if (!conflict) throw error;
+      if (attempt === 6) throw new Error(`Private storage conflict after retries (weak ETag: ${previous?.etag.startsWith('W/') ?? false}).`);
+      await new Promise(resolve => setTimeout(resolve, 40 * (attempt + 1) + Math.random() * 60));
     }
   }
   throw new Error('एक साथ कई requests हैं। उसी number से फिर कोशिश कीजिए।');

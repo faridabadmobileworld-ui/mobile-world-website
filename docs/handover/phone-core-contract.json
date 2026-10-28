@@ -1,0 +1,405 @@
+{
+  "source": "OWNER-HANDOVER-2026-10-28.txt section 12",
+  "status": "acceptance contract; Kit stable implementation keys await recovery",
+  "sections": [
+    {
+      "name": "Basic Information",
+      "fields": [
+        {
+          "number": 1,
+          "label": "Brand"
+        },
+        {
+          "number": 2,
+          "label": "Model Name"
+        },
+        {
+          "number": 3,
+          "label": "Brand Origin"
+        },
+        {
+          "number": 4,
+          "label": "Manufacturing Country"
+        },
+        {
+          "number": 5,
+          "label": "India Launch Date"
+        },
+        {
+          "number": 6,
+          "label": "Available Colours"
+        },
+        {
+          "number": 7,
+          "label": "Price"
+        }
+      ]
+    },
+    {
+      "name": "Design & Build",
+      "fields": [
+        {
+          "number": 8,
+          "label": "Height"
+        },
+        {
+          "number": 9,
+          "label": "Width"
+        },
+        {
+          "number": 10,
+          "label": "Thickness"
+        },
+        {
+          "number": 11,
+          "label": "Weight"
+        },
+        {
+          "number": 12,
+          "label": "Front Material"
+        },
+        {
+          "number": 13,
+          "label": "Back Material"
+        },
+        {
+          "number": 14,
+          "label": "Frame Material"
+        },
+        {
+          "number": 15,
+          "label": "IP Rating"
+        }
+      ]
+    },
+    {
+      "name": "Display",
+      "fields": [
+        {
+          "number": 16,
+          "label": "Display Size"
+        },
+        {
+          "number": 17,
+          "label": "Display Type"
+        },
+        {
+          "number": 18,
+          "label": "Display Resolution"
+        },
+        {
+          "number": 19,
+          "label": "Refresh Rate"
+        },
+        {
+          "number": 20,
+          "label": "Peak Brightness"
+        },
+        {
+          "number": 21,
+          "label": "Display Protection"
+        }
+      ]
+    },
+    {
+      "name": "Processor & Memory",
+      "fields": [
+        {
+          "number": 22,
+          "label": "Processor Name"
+        },
+        {
+          "number": 23,
+          "label": "CPU Core Count"
+        },
+        {
+          "number": 24,
+          "label": "CPU Maximum Clock Speed"
+        },
+        {
+          "number": 25,
+          "label": "GPU"
+        },
+        {
+          "number": 26,
+          "label": "RAM Capacity"
+        },
+        {
+          "number": 27,
+          "label": "RAM Type"
+        },
+        {
+          "number": 28,
+          "label": "Internal Storage"
+        },
+        {
+          "number": 29,
+          "label": "Storage Technology"
+        },
+        {
+          "number": 30,
+          "label": "Storage Version"
+        },
+        {
+          "number": 31,
+          "label": "Memory Card Support"
+        }
+      ]
+    },
+    {
+      "name": "Camera & Video",
+      "fields": [
+        {
+          "number": 32,
+          "label": "Main Rear Camera"
+        },
+        {
+          "number": 33,
+          "label": "Ultra-Wide Camera"
+        },
+        {
+          "number": 34,
+          "label": "Periscope Telephoto Camera"
+        },
+        {
+          "number": 35,
+          "label": "Front Camera"
+        },
+        {
+          "number": 36,
+          "label": "Main Camera Sensor"
+        },
+        {
+          "number": 37,
+          "label": "Main Camera OIS"
+        },
+        {
+          "number": 38,
+          "label": "Telephoto Camera OIS"
+        },
+        {
+          "number": 39,
+          "label": "EIS"
+        },
+        {
+          "number": 40,
+          "label": "Optical Zoom"
+        },
+        {
+          "number": 41,
+          "label": "Digital Zoom"
+        },
+        {
+          "number": 42,
+          "label": "Rear Video Resolution"
+        },
+        {
+          "number": 43,
+          "label": "Rear Video Frame Rate"
+        },
+        {
+          "number": 44,
+          "label": "Front Video Resolution"
+        },
+        {
+          "number": 45,
+          "label": "Front Video Frame Rate"
+        }
+      ]
+    },
+    {
+      "name": "Battery & Charging",
+      "fields": [
+        {
+          "number": 46,
+          "label": "Battery Capacity"
+        },
+        {
+          "number": 47,
+          "label": "Battery Technology"
+        },
+        {
+          "number": 48,
+          "label": "Battery Backup"
+        },
+        {
+          "number": 49,
+          "label": "Wired Fast Charging"
+        },
+        {
+          "number": 50,
+          "label": "Wireless Charging"
+        },
+        {
+          "number": 51,
+          "label": "Reverse Wired Charging"
+        },
+        {
+          "number": 52,
+          "label": "Reverse Wireless Charging"
+        },
+        {
+          "number": 53,
+          "label": "Charging Time"
+        }
+      ]
+    },
+    {
+      "name": "Software",
+      "fields": [
+        {
+          "number": 54,
+          "label": "Operating System"
+        },
+        {
+          "number": 55,
+          "label": "User Interface"
+        },
+        {
+          "number": 56,
+          "label": "OS Update Support"
+        },
+        {
+          "number": 57,
+          "label": "Security Update Support"
+        },
+        {
+          "number": 58,
+          "label": "AI Platform"
+        }
+      ]
+    },
+    {
+      "name": "Network & Connectivity",
+      "fields": [
+        {
+          "number": 59,
+          "label": "Network Support"
+        },
+        {
+          "number": 60,
+          "label": "5G Bands"
+        },
+        {
+          "number": 61,
+          "label": "SIM Slots"
+        },
+        {
+          "number": 62,
+          "label": "eSIM Support"
+        },
+        {
+          "number": 63,
+          "label": "VoLTE"
+        },
+        {
+          "number": 64,
+          "label": "Wi-Fi Calling"
+        },
+        {
+          "number": 65,
+          "label": "Wi-Fi Version"
+        },
+        {
+          "number": 66,
+          "label": "Bluetooth Version"
+        },
+        {
+          "number": 67,
+          "label": "NFC"
+        },
+        {
+          "number": 68,
+          "label": "GPS"
+        },
+        {
+          "number": 69,
+          "label": "IR Blaster"
+        },
+        {
+          "number": 70,
+          "label": "USB Port"
+        },
+        {
+          "number": 71,
+          "label": "USB OTG"
+        },
+        {
+          "number": 72,
+          "label": "Headphone Jack"
+        }
+      ]
+    },
+    {
+      "name": "Security & Multimedia",
+      "fields": [
+        {
+          "number": 73,
+          "label": "Fingerprint Sensor"
+        },
+        {
+          "number": 74,
+          "label": "Face Unlock"
+        },
+        {
+          "number": 75,
+          "label": "Speakers"
+        },
+        {
+          "number": 76,
+          "label": "Dolby Atmos"
+        },
+        {
+          "number": 77,
+          "label": "Gyroscope"
+        },
+        {
+          "number": 78,
+          "label": "FM Radio"
+        },
+        {
+          "number": 79,
+          "label": "Torch"
+        }
+      ]
+    },
+    {
+      "name": "Warranty",
+      "fields": [
+        {
+          "number": 80,
+          "label": "Phone Warranty"
+        },
+        {
+          "number": 81,
+          "label": "Battery Warranty"
+        },
+        {
+          "number": 82,
+          "label": "Accessories Warranty"
+        }
+      ]
+    },
+    {
+      "name": "Box Contents",
+      "fields": [
+        {
+          "number": 83,
+          "label": "Charger Included"
+        },
+        {
+          "number": 84,
+          "label": "USB Cable Included"
+        },
+        {
+          "number": 85,
+          "label": "Protective Case Included"
+        },
+        {
+          "number": 86,
+          "label": "SIM Ejector Included"
+        }
+      ]
+    }
+  ]
+}

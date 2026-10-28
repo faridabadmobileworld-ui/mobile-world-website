@@ -1,3 +1,4 @@
+import { withSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import { shop } from "@/data/shop";
 import { ask } from "@/data/content";
@@ -9,13 +10,13 @@ import { MoreLinks } from "@/components/MoreLinks";
 import { Faq, type QA } from "@/components/Faq";
 import { IconWhatsApp, IconPhone } from "@/components/Icons";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSocialMetadata({
   title: "Mobile Repairing Services",
   description:
     `${shop.address.locality}, ${shop.address.city} में mobile repairing। Screen, ` +
     `battery, charging port और software की दिक़्क़त के लिए दुकान पर आइए।`,
   alternates: { canonical: "/repairing" },
-};
+});
 
 const toc: TocItem[] = [
   { id: "list", label: "पूरी Services list" },

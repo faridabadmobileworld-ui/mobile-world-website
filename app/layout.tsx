@@ -5,6 +5,7 @@ import { buildSearchIndex } from "@/data/search";
 import { SiteFooter, MobileBar } from "@/components/SiteFooter";
 import { ArtSprite } from "@/components/ArtSprite";
 import { FestivalFrame } from "./FestivalFrame";
+import { WebsiteAnalytics } from "@/components/WebsiteAnalytics";
 import "./globals.css";
 import "./storefront.css";
 import "./campaigns.css";
@@ -91,6 +92,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <main id="main">{children}</main>
         <SiteFooter />
         <MobileBar />
+        <WebsiteAnalytics />
       </body>
     </html>
   );

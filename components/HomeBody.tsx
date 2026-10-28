@@ -7,11 +7,12 @@ import { PhoneFinder } from "./PhoneFinder";
 import { IconArrow, IconWhatsApp, IconPin, IconPhone } from "./Icons";
 import { LiveBadge } from "./StoreStatus";
 
-export function HomeBody({ journey = true }: { current?: string; journey?: boolean }) {
+export function HomeBody({ journey = true, section = "all" }: { current?: string; journey?: boolean; section?: "all" | "discovery" | "details" }) {
   const guideSlugs = ["new-phones", "best-laptops-students", "phone-exchange-guide"];
   const guides = guideSlugs.flatMap((slug) => livePosts().filter((p) => p.slug === slug));
   const guideImages = ["/images/iphone-display-at-the-mobile-world-counter-346d3e71.webp", "/images/laptop-for-study-and-office-a146b020.webp", "/images/purana-aur-naya-phone-counter-par.webp"];
   return <>
+    {section !== "details" && <>
     <section className="mw-section" id="selected-models">
       <div className="shopping-section-heading"><div><p className="shopping-overline">करीब से देखिए · SELECTED MODELS</p><h2>आपकी अगली पसंद, यहाँ से।</h2></div><Link href="/products">Models compare कीजिए <IconArrow /></Link></div>
       <nav className="mw-brand-logo-grid" aria-label="Brand चुनकर उसके phones देखिए">
@@ -21,9 +22,7 @@ export function HomeBody({ journey = true }: { current?: string; journey?: boole
       </nav>
     </section>
 
-    <PhoneFinder />
-
-    <section className="mw-section">
+    <section className="mw-section" id="services">
       <div className="shopping-section-heading"><div><p className="shopping-overline">ख़रीदारी के साथ · हमारी SERVICES</p><h2>हर अगले क़दम पर, मदद।</h2></div></div>
       <div className="mw-service-grid">
         {[
@@ -34,6 +33,10 @@ export function HomeBody({ journey = true }: { current?: string; journey?: boole
       </div>
     </section>
 
+    <PhoneFinder />
+    </>}
+
+    {section !== "discovery" && <>
     <section className="mw-community" aria-labelledby="community-title">
       <div className="mw-community-copy"><p className="shopping-overline">MOBILE WORLD · अपने लोगों के साथ</p><h2 id="community-title">सिर्फ़ ख़रीदारी नहीं,<br />एक पहचान भी।</h2><p>दुकान पर मिलिए, products देखिए और अपनी ज़रूरत पर खुलकर बात कीजिए। हमारे साथ जुड़े परिवार ही हमारे सफ़र का हिस्सा हैं।</p><a className="mw-text-link" href={shop.social.googleMaps} target="_blank" rel="noopener noreferrer">Google पर ग्राहकों के अनुभव पढ़िए <IconArrow /></a>{journey && <div className="mw-story-mini"><span>1973 से परिवार का business · 2016 से Mobile World</span><Link href="/about">हमारा सफ़र जानिए <IconArrow /></Link></div>}</div>
       <div className="mw-community-photos">{[storePhotos[3],storePhotos[2]].map((p) => <figure key={p.src}><Image src={p.src} alt={p.alt} width={p.w} height={p.h} sizes="(max-width:700px) 45vw, 280px" /><figcaption>{p.title} · Mobile World</figcaption></figure>)}</div>
@@ -48,5 +51,6 @@ export function HomeBody({ journey = true }: { current?: string; journey?: boole
       <div className="mw-visit-image"><Image src={storePhotos[1].src} alt="Gurudwara Road पर Mobile World का असली storefront" width={720} height={340} sizes="(max-width:700px) 94vw, 550px" /><span><IconPin /> Jawahar Colony · NIT Faridabad</span></div>
       <div className="mw-visit-copy"><p className="shopping-overline">ONLINE देखिए · STORE पर मिलिए</p><h2 id="visit-title">आपकी अपनी Mobile World.</h2><p>Product को हाथ में देखिए। अपनी पसंद की तुलना कीजिए। फिर फ़ैसला लीजिए।</p><address>{shop.address.street}, {shop.address.landmark}, {shop.address.locality}, {shop.address.city}, {shop.address.state} – {shop.address.postalCode}</address><div className="mw-hours"><LiveBadge /><span>10:00 AM–10:00 PM · महीने की आख़िरी तारीख़ को बंद</span></div><div className="btns"><a className="shopping-primary" href={shop.social.googleMaps} target="_blank" rel="noopener noreferrer"><IconPin /> रास्ता देखिए</a><a className="shopping-secondary" href={shop.phone.tel}><IconPhone /> Call कीजिए</a></div><a className="mw-text-link mw-visit-chat" href={shop.phone.whatsapp} target="_blank" rel="noopener noreferrer"><IconWhatsApp /> आने से पहले stock पूछ लीजिए</a></div>
     </section>
+    </>}
   </>;
 }

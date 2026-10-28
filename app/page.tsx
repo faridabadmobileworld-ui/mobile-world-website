@@ -1,3 +1,5 @@
+import { publicCampaigns } from "@/lib/campaigns/store";
+import { campaignIsLive } from "@/lib/campaigns/core";
 import Link from "next/link";
 import { localBusinessSchema, jsonLdScript } from "@/data/schema";
 import { ShoppingHero } from "@/components/ShoppingHero";
@@ -13,13 +15,22 @@ import { CurrentOffers } from "./CurrentOffers";
 /* Home page ka saara content ab `components/HomeBody.tsx` mein hai, taaki
    `/showcase` bhi bilkul wahi content dikha sake — do jagah likhe bina. */
 
-export default function Home() {
+export const revalidate = 60;
+export default async function Home() {
+  const campaigns = await publicCampaigns();
+  const live = (id: keyof typeof campaigns.items) => campaignIsLive(campaigns.items[id]);
   return (
     <>
       <script type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLdScript(localBusinessSchema()) }} />
 
-      <ShoppingHero />
+      <ShoppingHero hiddenCampaigns={[...(!live("diwali") ? ["diwali"] : []), ...(!live("gifts") ? ["gifts"] : [])]} />
+      <div className="wrap shopping-home">
+        <ShoppingCategories />
+        <HomeBody current="/" section="discovery" />
+        <CurrentOffers settings={campaigns} />
+        <SpinWheel enabled={live("spin")} note={campaigns.items.spin.note} />
+      </div>
       <HomeProductVideo />
       <div className="wrap shopping-home">
         <section id="mobile-world-rap" className="mw-rap-highlight" aria-labelledby="mw-rap-title">
@@ -27,7 +38,7 @@ export default function Home() {
             <p className="mw-rap-kicker">MOBILE WORLD ORIGINAL · OFFICIAL RAP</p>
             <h2 id="mw-rap-title">अपनी कहानी। अपना Rap।</h2>
             <p>1973 की छोटी Kiryana Store से आज की Mobile World तक—परिवार की मेहनत और आपके भरोसे का सफ़र, अब एक गाने में।</p>
-            <span className="mw-rap-hint">गाने का Premiere और पूरा video इसी player में देखिए।</span>
+            <span className="mw-rap-hint">पूरा गाना इसी player में सुनिए और देखिए।</span>
             <Link className="mw-rap-story" href="/posts/mobile-world-faridabad-official-rap-song">इस गाने के पीछे की कहानी पढ़िए →</Link>
           </div>
           <div className="mw-rap-embed">
@@ -43,13 +54,10 @@ export default function Home() {
             />
           </div>
         </section>
-        <CurrentOffers />
-        <FestivalFlightScene />
-        <SpinWheel />
+        {live("diwali") && <FestivalFlightScene />}
+        <FestivalHighlights settings={campaigns} />
         <LatestPost />
-        <ShoppingCategories />
-        <FestivalHighlights />
-        <HomeBody current="/" />
+        <HomeBody current="/" section="details" />
         <CampaignSocial />
       </div>
     </>

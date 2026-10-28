@@ -6,7 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import { shoppingSlides, slideEnquiry } from "@/data/storefront";
 import { IconArrow, IconChevL, IconChevR, IconPause, IconPlay, IconWhatsApp } from "./Icons";
 
-export function ShoppingHero() {
+export function ShoppingHero({ hiddenCampaigns = [] }: { hiddenCampaigns?: string[] }) {
+  const slides = shoppingSlides.filter(slide => !hiddenCampaigns.includes(slide.id));
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(true);
   const [hovered, setHovered] = useState(false);
@@ -19,7 +20,7 @@ export function ShoppingHero() {
     const sync = () => {
       clearInterval(timer);
       if (!motion.matches && !document.hidden) {
-        timer = setInterval(() => setIndex((n) => (n + 1) % shoppingSlides.length), 9000);
+        timer = setInterval(() => setIndex((n) => (n + 1) % slides.length), 9000);
       }
     };
     sync();
@@ -30,11 +31,11 @@ export function ShoppingHero() {
       document.removeEventListener("visibilitychange", sync);
       motion.removeEventListener("change", sync);
     };
-  }, [playing, hovered, index]);
+  }, [playing, hovered, index, slides.length]);
 
   function choose(next: number) {
     setPlaying(false);
-    setIndex((next + shoppingSlides.length) % shoppingSlides.length);
+    setIndex((next + slides.length) % slides.length);
   }
 
   return (
@@ -55,12 +56,12 @@ export function ShoppingHero() {
         if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5) choose(index + (dx < 0 ? 1 : -1));
         touch.current = null;
       }} onTouchCancel={() => { touch.current = null; }}>
-      <h1 className="sr">Mobile World, Faridabad · Diwali, Mobiles और Home Appliances</h1>
+      <h1 className="sr">Mobile World, Faridabad · Mobiles और Home Appliances</h1>
       <div className="campaign-stage" aria-live={playing ? "off" : "polite"}>
-        {shoppingSlides.map((slide, n) => (
+        {slides.map((slide, n) => (
           <div className={`campaign-slide campaign-${slide.theme}${index === n ? " is-active" : ""}`}
             key={slide.id} id={`campaign-slide-${n}`} role="group" aria-roledescription="slide"
-            aria-label={`${n + 1} / ${shoppingSlides.length}: ${slide.label}`}
+            aria-label={`${n + 1} / ${slides.length}: ${slide.label}`}
             aria-hidden={index !== n} inert={index !== n}>
             <div className="campaign-art">
               <Image src={slide.image} alt={slide.alt} fill
@@ -85,14 +86,14 @@ export function ShoppingHero() {
       </div>
       <div className="campaign-controls wrap">
         <div className="campaign-tabs" role="group" aria-label="Campaign चुनिए">
-          {shoppingSlides.map((slide, n) => (
+          {slides.map((slide, n) => (
             <button type="button" key={slide.id} className={index === n ? "is-active" : ""}
               aria-controls={`campaign-slide-${n}`} aria-pressed={index === n}
               onClick={() => choose(n)}><span aria-hidden="true">{String(n + 1).padStart(2, "0")}</span>{slide.label}</button>
           ))}
         </div>
         <div className="campaign-arrows">
-          <span className="campaign-count" aria-hidden="true">{index + 1} / {shoppingSlides.length}</span>
+          <span className="campaign-count" aria-hidden="true">{index + 1} / {slides.length}</span>
           <button type="button" className="campaign-play" onClick={() => setPlaying((v) => !v)}
             aria-label={playing ? "Slides रोकिए" : "Slides चलाइए"} aria-pressed={playing} title={playing ? "Slides रोकिए" : "Slides चलाइए"}>
             {playing ? <IconPause /> : <IconPlay />}

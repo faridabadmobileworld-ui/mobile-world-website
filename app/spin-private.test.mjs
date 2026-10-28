@@ -5,19 +5,21 @@ import fs from 'node:fs';
 import path from 'node:path';
 import Module, { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
+import { BlobError, BlobPreconditionFailedError } from '@vercel/blob';
 const dir = path.dirname(fileURLToPath(import.meta.url));
 const files = new Map();
 const cache = new Map();
 let writes = 0;
 const cookieJar = new Map();
 const mockBlob = {
+  BlobError, BlobPreconditionFailedError,
   async get(key, options) { assert.equal(options.access, 'private'); assert.equal(options.useCache, false); const item = files.get(key); if (!item) return null; return { statusCode: 200, stream: new Response(item.content).body, blob: { etag: item.etag } }; },
   async put(key, content, options) {
     assert.equal(options.access, 'private'); assert.equal(options.addRandomSuffix, false);
     // Yield to force collisions between concurrent transactions.
     await new Promise(resolve => setTimeout(resolve, 2));
     const old = files.get(key);
-    if (old && (!options.allowOverwrite || old.etag !== options.ifMatch)) { const error = new Error('Conflict'); error.name = options.allowOverwrite ? 'BlobPreconditionFailedError' : 'BlobAlreadyExistsError'; throw error; }
+    if (old && (!options.allowOverwrite || old.etag !== options.ifMatch)) { throw options.allowOverwrite ? new BlobPreconditionFailedError() : new BlobError('This blob already exists.'); }
     files.set(key, { content, etag: String(++writes) }); return {};
   },
 };

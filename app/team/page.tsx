@@ -1,3 +1,4 @@
+import { withSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import { shop } from "@/data/shop";
 import { Banner } from "@/components/Banner";
@@ -6,13 +7,13 @@ import { PageFoot, Byline } from "@/components/PageFoot";
 import { FollowUs } from "@/components/FollowUs";
 import { MoreLinks } from "@/components/MoreLinks";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withSocialMetadata({
   title: "हमारी Team",
   description:
     `${shop.name} ${shop.address.locality} की team से मिलिए। Tarun Gupta जी की ` +
     `direct guidance में काम करने वाली team, जो हमेशा आपकी service के लिए तैयार है।`,
   alternates: { canonical: "/team" },
-};
+});
 
 const toc: TocItem[] = [
   { id: "samarpan", label: "हमारी Team का समर्पण और आपका भरोसा" },

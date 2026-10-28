@@ -23,6 +23,12 @@ async function session() {
   return (await owner())?.version === version;
 }
 async function requireOwner() { if (!(await session())) throw new Error('पहले owner login कीजिए।'); }
+export async function requireOwnerAccess() { await requireOwner(); }
+export async function ownerAccess() {
+  if (!(process.env.BLOB_READ_WRITE_TOKEN || process.env.BLOB_STORE_ID) || !process.env.SPIN_WHEEL_SECRET) return 'unavailable' as const;
+  try { return await session() ? 'ready' as const : (await owner()) ? 'login' as const : 'setup' as const; }
+  catch { return 'unavailable' as const; }
+}
 async function setSession(admin: Admin) {
   const expires = String(Date.now() + 8 * 60 * 60 * 1000);
   const body = `${expires}:${admin.version}`;
