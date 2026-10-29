@@ -2,6 +2,7 @@ import { categoryGuides } from "@/data/category-guides";
 import type { MetadataRoute } from "next";
 import { shop } from "@/data/shop";
 import { livePosts } from "@/data/content";
+import { publicProducts } from '@/lib/catalog/sanity';
 
 /**
  * `/sitemap.xml` अपने आप बन जाती है।
@@ -9,10 +10,9 @@ import { livePosts } from "@/data/content";
  * **नया page बनाओ तो यहाँ उसका URL जोड़ना मत भूलो** — वरना Google उसे
  * ढूँढ़ नहीं पाएगा। Posts अपने आप जुड़ जाती हैं।
  */
-/** दोनों पूरी तरह static हैं — इससे `output: export` भी बन जाता है। */
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
   const pages: MetadataRoute.Sitemap = ([
@@ -40,5 +40,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }));
 
-  return [...pages, ...Object.keys(categoryGuides).map(category => ({ url: `${shop.siteUrl}/products/${category}`, lastModified: new Date("2026-10-24T00:00:00+05:30"), changeFrequency: "monthly" as const, priority: 0.8 })), ...articles];
+  const products: MetadataRoute.Sitemap = (await publicProducts()).map(product => ({
+    url: shop.siteUrl + '/catalog/' + product.slug,
+    ...(Number.isFinite(Date.parse(product.updatedAt)) ? { lastModified: new Date(product.updatedAt) } : {}),
+    changeFrequency: 'weekly', priority: 0.7,
+  }));
+  return [...pages, ...Object.keys(categoryGuides).map(category => ({ url: `${shop.siteUrl}/products/${category}`, lastModified: new Date("2026-10-24T00:00:00+05:30"), changeFrequency: "monthly" as const, priority: 0.8 })), ...articles, ...products];
 }

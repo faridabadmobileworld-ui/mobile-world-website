@@ -1,0 +1,587 @@
+{
+  "version": "2026-10-27",
+  "sections": [
+    {
+      "id": 1,
+      "title": "Basic Information",
+      "fields": [
+        {
+          "id": 1,
+          "key": "spec_001",
+          "label": "Brand",
+          "sectionId": 1
+        },
+        {
+          "id": 2,
+          "key": "spec_002",
+          "label": "Model Name",
+          "sectionId": 1
+        },
+        {
+          "id": 3,
+          "key": "spec_003",
+          "label": "Brand Origin",
+          "sectionId": 1
+        },
+        {
+          "id": 4,
+          "key": "spec_004",
+          "label": "Manufacturing Country",
+          "sectionId": 1
+        },
+        {
+          "id": 5,
+          "key": "spec_005",
+          "label": "India Launch Date",
+          "sectionId": 1
+        },
+        {
+          "id": 6,
+          "key": "spec_006",
+          "label": "Available Colours",
+          "sectionId": 1
+        },
+        {
+          "id": 7,
+          "key": "spec_007",
+          "label": "Price",
+          "sectionId": 1
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Design & Build",
+      "fields": [
+        {
+          "id": 8,
+          "key": "spec_008",
+          "label": "Height",
+          "sectionId": 2
+        },
+        {
+          "id": 9,
+          "key": "spec_009",
+          "label": "Width",
+          "sectionId": 2
+        },
+        {
+          "id": 10,
+          "key": "spec_010",
+          "label": "Thickness",
+          "sectionId": 2
+        },
+        {
+          "id": 11,
+          "key": "spec_011",
+          "label": "Weight",
+          "sectionId": 2
+        },
+        {
+          "id": 12,
+          "key": "spec_012",
+          "label": "Front Material",
+          "sectionId": 2
+        },
+        {
+          "id": 13,
+          "key": "spec_013",
+          "label": "Back Material",
+          "sectionId": 2
+        },
+        {
+          "id": 14,
+          "key": "spec_014",
+          "label": "Frame Material",
+          "sectionId": 2
+        },
+        {
+          "id": 15,
+          "key": "spec_015",
+          "label": "IP Rating",
+          "sectionId": 2
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Display",
+      "fields": [
+        {
+          "id": 16,
+          "key": "spec_016",
+          "label": "Display Size",
+          "sectionId": 3
+        },
+        {
+          "id": 17,
+          "key": "spec_017",
+          "label": "Display Type",
+          "sectionId": 3
+        },
+        {
+          "id": 18,
+          "key": "spec_018",
+          "label": "Display Resolution",
+          "sectionId": 3
+        },
+        {
+          "id": 19,
+          "key": "spec_019",
+          "label": "Refresh Rate",
+          "sectionId": 3
+        },
+        {
+          "id": 20,
+          "key": "spec_020",
+          "label": "Peak Brightness",
+          "sectionId": 3
+        },
+        {
+          "id": 21,
+          "key": "spec_021",
+          "label": "Display Protection",
+          "sectionId": 3
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Processor & Memory",
+      "fields": [
+        {
+          "id": 22,
+          "key": "spec_022",
+          "label": "Processor Name",
+          "sectionId": 4
+        },
+        {
+          "id": 23,
+          "key": "spec_023",
+          "label": "CPU Core Count",
+          "sectionId": 4
+        },
+        {
+          "id": 24,
+          "key": "spec_024",
+          "label": "CPU Maximum Clock Speed",
+          "sectionId": 4
+        },
+        {
+          "id": 25,
+          "key": "spec_025",
+          "label": "GPU",
+          "sectionId": 4
+        },
+        {
+          "id": 26,
+          "key": "spec_026",
+          "label": "RAM Capacity",
+          "sectionId": 4
+        },
+        {
+          "id": 27,
+          "key": "spec_027",
+          "label": "RAM Type",
+          "sectionId": 4
+        },
+        {
+          "id": 28,
+          "key": "spec_028",
+          "label": "Internal Storage",
+          "sectionId": 4
+        },
+        {
+          "id": 29,
+          "key": "spec_029",
+          "label": "Storage Technology",
+          "sectionId": 4
+        },
+        {
+          "id": 30,
+          "key": "spec_030",
+          "label": "Storage Version",
+          "sectionId": 4
+        },
+        {
+          "id": 31,
+          "key": "spec_031",
+          "label": "Memory Card Support",
+          "sectionId": 4
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Camera & Video",
+      "fields": [
+        {
+          "id": 32,
+          "key": "spec_032",
+          "label": "Main Rear Camera",
+          "sectionId": 5
+        },
+        {
+          "id": 33,
+          "key": "spec_033",
+          "label": "Ultra-Wide Camera",
+          "sectionId": 5
+        },
+        {
+          "id": 34,
+          "key": "spec_034",
+          "label": "Periscope Telephoto Camera",
+          "sectionId": 5
+        },
+        {
+          "id": 35,
+          "key": "spec_035",
+          "label": "Front Camera",
+          "sectionId": 5
+        },
+        {
+          "id": 36,
+          "key": "spec_036",
+          "label": "Main Camera Sensor",
+          "sectionId": 5
+        },
+        {
+          "id": 37,
+          "key": "spec_037",
+          "label": "Main Camera OIS",
+          "sectionId": 5
+        },
+        {
+          "id": 38,
+          "key": "spec_038",
+          "label": "Telephoto Camera OIS",
+          "sectionId": 5
+        },
+        {
+          "id": 39,
+          "key": "spec_039",
+          "label": "EIS",
+          "sectionId": 5
+        },
+        {
+          "id": 40,
+          "key": "spec_040",
+          "label": "Optical Zoom",
+          "sectionId": 5
+        },
+        {
+          "id": 41,
+          "key": "spec_041",
+          "label": "Digital Zoom",
+          "sectionId": 5
+        },
+        {
+          "id": 42,
+          "key": "spec_042",
+          "label": "Rear Video Resolution",
+          "sectionId": 5
+        },
+        {
+          "id": 43,
+          "key": "spec_043",
+          "label": "Rear Video Frame Rate",
+          "sectionId": 5
+        },
+        {
+          "id": 44,
+          "key": "spec_044",
+          "label": "Front Video Resolution",
+          "sectionId": 5
+        },
+        {
+          "id": 45,
+          "key": "spec_045",
+          "label": "Front Video Frame Rate",
+          "sectionId": 5
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Battery & Charging",
+      "fields": [
+        {
+          "id": 46,
+          "key": "spec_046",
+          "label": "Battery Capacity",
+          "sectionId": 6
+        },
+        {
+          "id": 47,
+          "key": "spec_047",
+          "label": "Battery Technology",
+          "sectionId": 6
+        },
+        {
+          "id": 48,
+          "key": "spec_048",
+          "label": "Battery Backup",
+          "sectionId": 6
+        },
+        {
+          "id": 49,
+          "key": "spec_049",
+          "label": "Wired Fast Charging",
+          "sectionId": 6
+        },
+        {
+          "id": 50,
+          "key": "spec_050",
+          "label": "Wireless Charging",
+          "sectionId": 6
+        },
+        {
+          "id": 51,
+          "key": "spec_051",
+          "label": "Reverse Wired Charging",
+          "sectionId": 6
+        },
+        {
+          "id": 52,
+          "key": "spec_052",
+          "label": "Reverse Wireless Charging",
+          "sectionId": 6
+        },
+        {
+          "id": 53,
+          "key": "spec_053",
+          "label": "Charging Time",
+          "sectionId": 6
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Software",
+      "fields": [
+        {
+          "id": 54,
+          "key": "spec_054",
+          "label": "Operating System",
+          "sectionId": 7
+        },
+        {
+          "id": 55,
+          "key": "spec_055",
+          "label": "User Interface",
+          "sectionId": 7
+        },
+        {
+          "id": 56,
+          "key": "spec_056",
+          "label": "OS Update Support",
+          "sectionId": 7
+        },
+        {
+          "id": 57,
+          "key": "spec_057",
+          "label": "Security Update Support",
+          "sectionId": 7
+        },
+        {
+          "id": 58,
+          "key": "spec_058",
+          "label": "AI Platform",
+          "sectionId": 7
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Network & Connectivity",
+      "fields": [
+        {
+          "id": 59,
+          "key": "spec_059",
+          "label": "Network Support",
+          "sectionId": 8
+        },
+        {
+          "id": 60,
+          "key": "spec_060",
+          "label": "5G Bands",
+          "sectionId": 8
+        },
+        {
+          "id": 61,
+          "key": "spec_061",
+          "label": "SIM Slots",
+          "sectionId": 8
+        },
+        {
+          "id": 62,
+          "key": "spec_062",
+          "label": "eSIM Support",
+          "sectionId": 8
+        },
+        {
+          "id": 63,
+          "key": "spec_063",
+          "label": "VoLTE",
+          "sectionId": 8
+        },
+        {
+          "id": 64,
+          "key": "spec_064",
+          "label": "Wi-Fi Calling",
+          "sectionId": 8
+        },
+        {
+          "id": 65,
+          "key": "spec_065",
+          "label": "Wi-Fi Version",
+          "sectionId": 8
+        },
+        {
+          "id": 66,
+          "key": "spec_066",
+          "label": "Bluetooth Version",
+          "sectionId": 8
+        },
+        {
+          "id": 67,
+          "key": "spec_067",
+          "label": "NFC",
+          "sectionId": 8
+        },
+        {
+          "id": 68,
+          "key": "spec_068",
+          "label": "GPS",
+          "sectionId": 8
+        },
+        {
+          "id": 69,
+          "key": "spec_069",
+          "label": "IR Blaster",
+          "sectionId": 8
+        },
+        {
+          "id": 70,
+          "key": "spec_070",
+          "label": "USB Port",
+          "sectionId": 8
+        },
+        {
+          "id": 71,
+          "key": "spec_071",
+          "label": "USB OTG",
+          "sectionId": 8
+        },
+        {
+          "id": 72,
+          "key": "spec_072",
+          "label": "Headphone Jack",
+          "sectionId": 8
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Security & Multimedia",
+      "fields": [
+        {
+          "id": 73,
+          "key": "spec_073",
+          "label": "Fingerprint Sensor",
+          "sectionId": 9
+        },
+        {
+          "id": 74,
+          "key": "spec_074",
+          "label": "Face Unlock",
+          "sectionId": 9
+        },
+        {
+          "id": 75,
+          "key": "spec_075",
+          "label": "Speakers",
+          "sectionId": 9
+        },
+        {
+          "id": 76,
+          "key": "spec_076",
+          "label": "Dolby Atmos",
+          "sectionId": 9
+        },
+        {
+          "id": 77,
+          "key": "spec_077",
+          "label": "Gyroscope",
+          "sectionId": 9
+        },
+        {
+          "id": 78,
+          "key": "spec_078",
+          "label": "FM Radio",
+          "sectionId": 9
+        },
+        {
+          "id": 79,
+          "key": "spec_079",
+          "label": "Torch",
+          "sectionId": 9
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Warranty",
+      "fields": [
+        {
+          "id": 80,
+          "key": "spec_080",
+          "label": "Phone Warranty",
+          "sectionId": 10
+        },
+        {
+          "id": 81,
+          "key": "spec_081",
+          "label": "Battery Warranty",
+          "sectionId": 10
+        },
+        {
+          "id": 82,
+          "key": "spec_082",
+          "label": "Accessories Warranty",
+          "sectionId": 10
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Box Contents",
+      "fields": [
+        {
+          "id": 83,
+          "key": "spec_083",
+          "label": "Charger Included",
+          "sectionId": 11
+        },
+        {
+          "id": 84,
+          "key": "spec_084",
+          "label": "USB Cable Included",
+          "sectionId": 11
+        },
+        {
+          "id": 85,
+          "key": "spec_085",
+          "label": "Protective Case Included",
+          "sectionId": 11
+        },
+        {
+          "id": 86,
+          "key": "spec_086",
+          "label": "SIM Ejector Included",
+          "sectionId": 11
+        }
+      ]
+    }
+  ]
+}

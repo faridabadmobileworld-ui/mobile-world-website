@@ -535,6 +535,6 @@ for (const brand of phoneBrands) {
 export const phoneModels:PhoneModel[]=phoneBrands.flatMap(x=>x.models);
 export const availablePhoneModels=phoneModels.filter(x=>x.status!=="upcoming");
 export const upcomingPhoneModels:PhoneModel[]=[];
-export function validModelIds(value:string|null):string[]{return[...new Set((value??"").split(","))].filter(id=>phoneModels.some(p=>p.id===id)).slice(0,8)}
+export function validModelIds(value:string|null):string[]{return[...new Set((value??"").split(","))].filter(id=>phoneModels.some(p=>p.id===id)).slice(0,phoneModels.length)}
 export function recommendPhones(system:string):PhoneModel[]{const base=availablePhoneModels.filter(p=>system==="any"||p.system===system);return base.slice(0,4)}
 export function modelEnquiry(models:PhoneModel[],details=""):string{const names=models.map((p,i)=>(i+1)+". "+p.brand+" "+p.name).join("\n");return shop.phone.whatsapp+"?text="+encodeURIComponent("Namaste Mobile World! My selected models:\n"+names+"\n"+details)}

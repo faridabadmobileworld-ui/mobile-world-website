@@ -1,56 +1,51 @@
 # Mobile World execution status
 
-Checkpoint: 28 October 2026, Asia/Kolkata. Read the complete owner handover in `OWNER-HANDOVER-2026-10-28.txt`. This status is source-recovery evidence, not a claim that the new release is live.
+Checkpoint: 29 October 2026, Asia/Kolkata. This supersedes the older recovery-only checkpoint. Owner requested direct continuation and completion, not another handover. Keep the complete owner brief in OWNER-HANDOVER-2026-10-28.txt.
 
-## Current source and release gate
+## Source and release
 
-- Repository: `faridabadmobileworld-ui/mobile-world-website`.
-- Remote main freshly verified at `2f5b6a98cf0f6b0cf5c9c5640b71aaaccf8d69f0`.
-- Current work: `codex/source-recovery-handover-20261028`, descended from that main. Only instructions, evidence and recovery tooling are being added. No app release/deployment is authorized from this incomplete baseline until complete newer source is recovered and verified.
-- Verified remote preservation branch: `codex/source-recovery-baseline-20261028`, same historical application HEAD. Actual git push succeeded; prior connector 403 is not the current native Git-write state. GitHub API remains separately network-blocked.
-- Original-source candidates: eight fetched remote refs, workspace files, history/reflogs and unreachable objects inspected. No requested newer analytics/business/campaign/category/Sanity/Product Editor source found. `release-festival-dashboard` is an ancestor, 106 commits behind main.
-- Vercel project `prj_dplwsmDwQWMjfoePft2dDLIA3QDI`, team slug `faridabadmobileworld-2892`, historical deployment `dpl_aaGzHrJnxrvidMDZAhrJpGsAJhMd` are owner-provided checkpoints; current production target and domain assignment remain unverified.
-- Latest pending Product Editor release and its reported 25-test suite have not been located. The old local app's 11 passing tests are not that release's tests.
+- Repo: faridabadmobileworld-ui/mobile-world-website. Working branch: codex/complete-owner-editor-20261029.
+- Existing production/rollback: dpl_aaGzHrJnxrvidMDZAhrJpGsAJhMd, READY, www.mobileworldfaridabad.com and mobileworldfaridabad.com. Project prj_dplwsmDwQWMjfoePft2dDLIA3QDI, team faridabadmobileworld-2892.
+- Recovered live source saved through GitHub connector commit 53611ba38e398aa93b7221c14d7d33c1da60607d; recovery tree df0a880d1df3adf733fe5f14c9d273a4cf07edea. Connector Contents writes succeed. CLI push lacks credentials; do not reset credentials or repeatedly retry it.
+- Original release payload comparison: 59 source paths match; docs/OWNER-DASHBOARD-RELEASE.md differs only with later verification notes. Missing .release-assets.json/.mjs are deployment hydration helpers for already tracked assets from historical main 2f5b6a98cf0f6b0cf5c9c5640b71aaaccf8d69f0. 45 visible Vercel application hashes matched the recovered tree. Original video/assets remain tracked. No compiled-output source recovery is used.
+- Source from the other Codex handover branch e5eab94cc366cdf0aa5343411ac6942cfe3d194a was merged; its instructions and recovery tooling are retained. Its two older preview deployments are not Product Editor releases.
+- Original pending editor source was unavailable. Reconstructed implementation uses the recovered version-2 specification Kit, preserving all 86 keys, 11 sections and owner privacy rules. See ../PRODUCT-EDITOR.md.
+- Current editor code is locally validated; preview/production verification and its release SHA/deployment ID are the next update. Do not represent it as live yet.
 
-## Progress definition
+## Fixed acceptance milestones
 
-Current release/connections verification has **12 equal acceptance milestones**. This is checkpoint coverage, not a percentage of engineering hours or features already built. No blocked milestone leaves the denominator. Round `completed / 12 * 100` to the nearest integer. Historical 93/100 is not reused.
+Twelve equal checkpoints; completed / 12, rounded. These measure verified acceptance coverage, not engineering time. Historical 93/100 is not reused.
 
-| # | Acceptance milestone | State/evidence |
+| # | Milestone | Current evidence |
 |---|---|---|
-| 1 | Current Git read/write and verified backup of available source | Complete: actual branch push; Git bundle verification; SHA-256 manifest |
-| 2 | Current production provenance, domains and available rollback identified | Blocked: Vercel/live-domain network and authenticated access |
-| 3 | Complete newer editable source recovered and comparison reviewed | Blocked: no complete candidate found |
-| 4 | Newer source reconciled and synced to GitHub | Pending #3; pushing old baseline does not satisfy this |
-| 5 | Pending Product Editor release tested, deployed and live-verified | Pending #2–4 |
-| 6 | Existing Sanity draft/save/reload/edit/validate/publish/public flow verified | Unknown existing project/dataset/access; never create a duplicate by default |
-| 7 | Correct Google property/location website sync and next scheduled run verified | Windsor/API integration unavailable in this session |
-| 8 | Existing daily-report task schedule and execution verified | Task `6adebdc837d88191938f78135f1b6de4` unavailable; do not duplicate |
-| 9 | Analytics, enquiries, archive/restore and owner-private flows verified | Newer source/live authorized access required |
-| 10 | Campaign/reward persistence, abuse/authorization and old-code preservation verified on current source | Old mocked tests only; current-source checks pending |
-| 11 | Final public/private mobile/tablet/desktop production regression and SEO checked | Local old-source audit only; live blocked |
-| 12 | Owner handover, permanent instructions, field contract and evidence committed/pushed for continuation | Complete: commit `40066ac45ad31e6dc1d843be65b6cc3634481980` pushed and remote ref re-read successfully |
+| 1 | Git read/write and available-source backup | Complete: recovery branch verified by read-back |
+| 2 | Production provenance/domains/rollback | Complete: existing production and aliases verified |
+| 3 | Complete live editable source recovered/reviewed | Complete: original release payload and deployment hashes compared; missing editor reconstructed separately |
+| 4 | Recovered source reconciled/synced to GitHub | Complete: 53611ba and original handover branch retained |
+| 5 | Product Editor tested/deployed/live checked | Local checks pass; deployment pending |
+| 6 | Real Sanity draft/save/reload/edit/publish/public flow | Blocked at existing project sign-in/configuration; no current project ID or token discovered |
+| 7 | Website Google sync and next scheduled run | Existing connector accounts correct; website secure Windsor API connection not verified |
+| 8 | Existing daily report schedule/execution | Complete inspection: enabled, recurrence 09:00 Asia/Calcutta (flexible); latest recorded run 28 October no_update; do not claim a new delivered report |
+| 9 | Private analytics/enquiries/archive/restore | 23 current-source tests pass; current signed-in visual verification remains |
+| 10 | Campaign/reward persistence/security/old codes | Current-source isolated tests pass and production logic retained; final release regression pending |
+| 11 | Final responsive public/private regression and SEO | Pending preview/live checks |
+| 12 | Permanent instructions/evidence pushed | Updated locally; push pending |
 
-Verified checkpoint: **2/12 = 17/100** after the handover branch push; the prior pre-persistence checkpoint was 1/12 = 8/100. Do not increase for fixture tests, repeated tool calls or documentation restatements.
+Current completed checkpoints: 5/12 = 42%. Deployment and documentation will update this figure only when verified.
 
-Catalogue phase is separate: **0 newly manufacturer-verified models / 59 entries in the available older catalogue**. Complete production catalogue denominator is unknown until recovery. Fifty older entries have generic specs/source-link gaps; 86-field unresolved counts and missing image counts cannot be honestly calculated before Kit/schema/source import. The owner-supplied 86 names/numbers are checked into `phone-core-contract.json` as an acceptance contract, with no invented Kit stable keys.
+Catalogue phase remains separate: 0 newly manufacturer-verified models / 59 existing guide entries. Detailed population and first Xiaomi 17T India verification are not claimed complete. No fabricated specifications or fake production models were added.
 
-## Tests and evidence
+## Checks and access
 
-- Earlier restored-instance audit: local old-source build/typecheck passed; 11 website tests passed; lint had one warning. Browser checks covered five routes at mobile/desktop, basic search/compare, and reproduced shortlist 9→8 after reload. These do not validate the described newer live release.
-- Current recovery tooling: run `python -m unittest discover -s tools/source-recovery -p 'test_*.py' -v`. 17/17 recovery-tool tests passed (14 source-comparison and 3 provenance tests). Tests use synthetic fixtures and do not count toward application regression totals.
-- Source inventory: `SOURCE-RECOVERY-INVENTORY.md`.
-- Retained local backup directory: `/workspace/recovery/mobile-world-website-20261028/`; full Git bundles, historical source tar and `manifest.json` with hashes. This snapshot backup contains available Git source only; it is not a durable customer-data backup or Vercel production rollback.
-- Baseline preservation SHA: `2f5b6a98cf0f6b0cf5c9c5640b71aaaccf8d69f0`. To recover files, inspect/clone the bundle into a separate authorized recovery directory; never reset a user's live checkout or deploy the baseline automatically.
+- Existing 23 isolated tests pass; 10 new catalogue tests pass. Typecheck, ESLint and production build pass. New routes /admin/products and /catalog/[slug].
+- Editor: 86 fields/11 sections; drafts private; spec_007 excluded from public Sanity record/HTML/schema/sitemap; actual variants only; verified images; optimistic revision checks; encrypted token; owner-only actions; stale snapshot cannot resurrect unpublished product.
+- Shortlist fix: more than eight saved valid IDs survive reload; unknown and duplicate IDs remain filtered.
+- Vercel production env names observed: BLOB_READ_WRITE_TOKEN, SPIN_WHEEL_SECRET, SPIN_ADMIN_SETUP_HASH, CRON_SECRET, GOOGLE_REPORT_SEED. No Sanity environment keys exist. Values not retrieved. Preview has Blob access but not production owner/cron secrets; never treat its unavailable private login as broken production auth.
+- Sanity browser shows sign-in; no existing authenticated session. Plugin discovery returned no sufficient Sanity plugin. Use secure browser authentication if needed; no secret entry in chat, replacement project or owner account reset.
+- Windsor connector sees searchconsole sc-domain:mobileworldfaridabad.com and google_my_business locations/3321499816072261375 (MOBILE WORLD). Website connection needs its existing secure /admin/business form; connector access is not automatically a website API key.
+- Automation 6adebdc837d88191938f78135f1b6de4 is enabled. RRULE FREQ=DAILY;BYHOUR=9;BYMINUTE=0; timezone Asia/Calcutta; timing flexible_schedule. Last recorded run 28 October 2026 03:43:33Z, status no_update. Latest published result belongs to the older 27 October run. Delivery unknown; next_run_time null. Do not duplicate the task.
+- Website vercel.json cron remains 0 3 * * * (08:30 IST), independent of ChatGPT's report. No live next-run claim yet.
 
-## Access and missing inputs
+## Next action
 
-- Cloud policy currently permits package-manager hosts and Google Fonts. Read attempts to apex/www, Vercel API, GitHub API and ChatGPT Library returned proxy CONNECT 403. This is not evidence of remote websites being down or of invalid account credentials.
-- Draft saved with existing font hosts preserved and added: `www.mobileworldfaridabad.com`, `mobileworldfaridabad.com`, `api.github.com`, `api.vercel.com`, `vercel.com`, `api.sanity.io`, `chatgpt.com`. User review/save and publication are required by the configuration workflow; saving a draft does not apply runtime access. Recheck after a meaningful runtime change.
-- No configured Vercel/Sanity/Windsor secret bindings or outbound identities were present. No Vercel/Sanity CLI auth configuration found. `VERCEL_TOKEN` requirement saved for `api.vercel.com`; supply securely in environment settings or connect an available authenticated integration. Never put its value in chat/source/logs.
-- No Vercel, Sanity, Windsor, Library or automation connector tools are callable in this session. Task-list dynamic tool was unavailable; do not fabricate other-chat status.
-- Full handover attachment is now local and preserved here with terminal blank lines normalized; the original attachment remains unchanged. Library Kit `libfile_2cc3b812796c8191a788d550fff1644d` and original brief `libfile_e72604f92dc48191b664a4b6494f2016` remain missing. Only request these actual files or a complete source archive if the owner has it; do not assume Library IDs are downloadable Sediment IDs.
-
-## Exact next action
-
-After network/access is applied, execute `tools/source-recovery/inspect_vercel.py` with a new report path. Inspect the current production origin/commit and authorized original-source files/backups; compiled artifacts alone do not satisfy recovery. Obtain the missing complete original source (including the pending Product Editor) and Kit. Use `compare_source.py` before merging, verify source-to-deployment mapping and retain rollback. Then follow the owner's order: pending release → working Sanity → Google sync/automation → owner flows/archives → verified catalogue → final regressions. No password reset, secret rotation, customer test spin, paid service, duplicate automation or production deployment has been performed at this checkpoint.
+Push the tested editor branch, inspect its Vercel preview, then release to the existing production project only after checks. Verify aliases, public routes, owner privacy gates, runtime errors and SEO. Continue actual Sanity/Windsor connection only through legitimate secure access; retain useful completed work if login is blocked. Do not issue a test prize, sale or public fixture product. Record final commit/deployment/rollback evidence here.

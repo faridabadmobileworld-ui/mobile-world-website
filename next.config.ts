@@ -22,6 +22,7 @@ const productImageIds = readdirSync(join(process.cwd(), "public/images"))
   .sort();
 
 const nextConfig: NextConfig = {
+  experimental: { serverActions: { bodySizeLimit: '5mb' } },
   env: {
     NEXT_PUBLIC_STUDIO_IMAGE_IDS: JSON.stringify(studioImageIds),
     NEXT_PUBLIC_PRODUCT_IMAGE_IDS: JSON.stringify(productImageIds),
@@ -34,6 +35,7 @@ const nextConfig: NextConfig = {
    */
   images: {
     remotePatterns: [
+      { protocol: "https", hostname: "cdn.sanity.io", pathname: "/images/**", search: "" },
       { protocol: "https", hostname: "**.cdninstagram.com" },
       { protocol: "https", hostname: "**.fbcdn.net" },
     ],

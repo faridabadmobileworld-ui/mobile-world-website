@@ -30,7 +30,7 @@ function Modal({ title, children, close }: { title: string; children: React.Reac
   </dialog>;
 }
 
-function ModelDetails({ model, save, saved }: { model: PhoneModel; save: () => void; saved: boolean }) {
+function ModelDetails({ model, save, saved, detailsHref }: { model: PhoneModel; save: () => void; saved: boolean; detailsHref?: string }) {
   const [colour, setColour] = useState("");
   const [variant, setVariant] = useState("");
   const [imageIndex, setImageIndex] = useState(0);
@@ -39,6 +39,7 @@ function ModelDetails({ model, save, saved }: { model: PhoneModel; save: () => v
   return <div className="mw-detail">
     <div className={`mw-detail-image${model.imageKind === "creative" ? " mw-detail-creative" : ""}`}><Image src={selectedImage.src} alt={selectedImage.alt} width={1122} height={1402} sizes="(max-width:700px) 90vw, 430px" />{gallery.length > 1 && <div className="mw-gallery-thumbnails" role="group" aria-label={`${model.name} की images`}>{gallery.map((item, index) => <button key={item.src} type="button" aria-label={`${model.name} की image ${index + 1} देखिए`} aria-pressed={imageIndex === index} onClick={() => setImageIndex(index)}><Image src={item.src} alt="" width={80} height={100}/></button>)}</div>}{model.imageCaption && <p className="mw-small">{model.imageCaption}</p>}<p className="mw-small">{model.imageKind === "creative" ? "Official reference पर आधारित product creative। चुना हुआ colour और accessories अलग हो सकते हैं।" : "Brand की product तस्वीर। चुना हुआ colour तस्वीर से अलग हो सकता है।"}</p>{model.imageSource && <a className="mw-source" href={model.imageSource} target="_blank" rel="noopener noreferrer">इस तस्वीर का official model देखिए ↗</a>}</div>
     <div><p className="shopping-overline">{model.brand} · जानकारी देखिए</p><h2>{model.name}</h2><p>{model.note}</p>
+      {detailsHref && <p><Link className="btn btn-d" href={detailsHref}>पूरी specifications और actual variants →</Link></p>}
       <dl className="mw-specs">{fields.map((f) => <div key={f.key}><dt>{f.label}</dt><dd>{model[f.key]}</dd></div>)}</dl>
       <div className="mw-form-row"><label>कौन सा colour चाहिए?<select value={colour} onChange={(e) => setColour(e.target.value)}><option value="">दुकान से options पूछिए</option>{model.colours.map((c) => <option key={c.name}>{c.name}</option>)}</select></label>
       <label>आपकी variant preference<select value={variant} onChange={(e) => setVariant(e.target.value)}><option value="">अभी तय नहीं</option>{model.variants.map((v) => <option key={v}>{v}</option>)}</select></label></div>
@@ -49,7 +50,7 @@ function ModelDetails({ model, save, saved }: { model: PhoneModel; save: () => v
   </div>;
 }
 
-export function ProductExplorer({ categories, items }: { categories: NavCategory[]; items: Item[] }) {
+export function ProductExplorer({ categories, items, productPages = {} }: { categories: NavCategory[]; items: Item[]; productPages?: Record<string, string> }) {
   const params = useSearchParams();
   const [query, setQuery] = useState(params.get("q") ?? "");
   const [category, setCategory] = useState("all");
@@ -139,7 +140,7 @@ export function ProductExplorer({ categories, items }: { categories: NavCategory
     {generic.length > 0 && <section className="mw-model-section"><div className="shopping-section-heading"><div><p className="shopping-overline">CATEGORIES · अपनी ज़रूरत से</p><h2>दुकान में और क्या मिलता है?</h2></div></div><div className="pgrid">{generic.map((p) => <ProductCard key={p.title} item={p} />)}</div></section>}
     {!models.length && !generic.length && <div className="mw-empty"><h2>{onlySaved ? "आपकी shortlist अभी खाली है।" : "यहाँ match नहीं मिला।"}</h2><p>आपकी ज़रूरत का सामान list में न दिखे तो हमारी team से पूछिए।</p><div className="btns"><button className="btn btn-d" type="button" onClick={() => {setQuery("");setCategory("all");setBrand("all");setOnlySaved(false);}}>सभी products देखिए</button><a className="btn btn-o" target="_blank" rel="noopener noreferrer" href={`${shop.phone.whatsapp}?text=${encodeURIComponent(`नमस्ते Mobile World! मुझे ${query || "एक product"} के बारे में जानकारी चाहिए।`)}`}>WhatsApp पर पूछिए</a></div></div>}
     {compare.length > 0 && <aside className="mw-compare-tray" aria-label="चुने हुए comparison models"><div><b>{compare.length}/3 models चुने हैं</b><span>{comparing.map((p) => p.name).join(" · ")}</span></div><button className="btn btn-d" type="button" disabled={compare.length < 2} onClick={() => setCompareOpen(true)}>Compare कीजिए <IconArrow /></button><button className="mw-tray-clear" type="button" onClick={() => {setCompare([]);setNotice("");}} aria-label="Comparison list खाली कीजिए">×</button></aside>}
-    {model && <Modal title={`${model.name} की जानकारी`} close={() => setModel(undefined)}><ModelDetails key={model.id} model={model} saved={saved.includes(model.id)} save={() => toggleSaved(model.id)} /></Modal>}
+    {model && <Modal title={`${model.name} की जानकारी`} close={() => setModel(undefined)}><ModelDetails key={model.id} detailsHref={productPages[model.id]} model={model} saved={saved.includes(model.id)} save={() => toggleSaved(model.id)} /></Modal>}
     {compareOpen && <Modal title="Models का comparison" close={() => setCompareOpen(false)}><div className="mw-comparison"><p className="shopping-overline">COMPARE · साथ में देखिए</p><h2>फ़र्क़ साफ़ दिखे, फ़ैसला आसान हो।</h2><div className="mw-table-scroll" tabIndex={0} role="region" aria-label="Product comparison table"><table><caption className="sr">चुने हुए phone models की specifications</caption><thead><tr><th scope="col">ख़ूबी</th>{comparing.map((p) => <th key={p.id} scope="col">{p.brand}<br />{p.name}</th>)}</tr></thead><tbody>{fields.map((f) => <tr key={f.key}><th scope="row">{f.label}</th>{comparing.map((p) => <td key={p.id}>{p[f.key]}</td>)}</tr>)}<tr><th scope="row">दाम / stock</th>{comparing.map((p) => <td key={p.id}>दुकान से confirm कीजिए</td>)}</tr><tr><th scope="row">Specifications का source</th>{comparing.map((p) => <td key={p.id}>{p.source ? <a href={p.source} target="_blank" rel="noopener noreferrer">{p.brand} की जानकारी ↗</a> : "जानकारी दुकान से पूछिए"}</td>)}</tr></tbody></table></div><p className="mw-small">*Brand के test conditions लागू हैं। Battery playback और mAh अलग माप हैं। Software support की अवधि launch से है।</p><a className="btn btn-w" href={modelEnquiry(comparing)} target="_blank" rel="noopener noreferrer"><IconWhatsApp /> इन models के बारे में पूछिए</a></div></Modal>}
   </>;
 }
