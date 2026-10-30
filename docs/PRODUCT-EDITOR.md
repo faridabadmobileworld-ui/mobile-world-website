@@ -23,6 +23,6 @@ Configuration can also use server-only SANITY_PROJECT_ID, SANITY_DATASET and SAN
 
 ## Verified locally
 
-Typecheck, ESLint and production build pass. Ten isolated catalogue tests cover field contract, privacy, false/zero, variant constraints, unsafe URLs, unauthorized actions, encrypted connection, draft/edit/publish revision flow, slug ownership, outage/unpublish behavior, image validation, production validation errors and shortlist reload. The existing 23 tests cover rewards, analytics, owner account, campaigns, enquiries, archives and daily cron authorization.
+Typecheck, ESLint and production build pass. Eleven isolated catalogue tests cover field contract, privacy, false/zero, variant constraints, unsafe URLs, unauthorized actions, encrypted connection, draft/edit/publish revision flow, slug ownership, outage/unpublish behavior, image validation, production validation errors and shortlist reload. Direct CMS records with missing verification dates, missing alt text or unverified variant images are excluded. Contact links rely on the existing global tracker so each click is counted once. The existing 23 tests cover rewards, analytics, owner account, campaigns, enquiries, archives and daily cron authorization.
 
 These use isolated provider fixtures. They do not prove a real Sanity or Windsor connection. No fixture product, enquiry, sale or reward is written to production.

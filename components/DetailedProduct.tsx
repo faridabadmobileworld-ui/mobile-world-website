@@ -4,7 +4,6 @@ import { useRef, useState } from 'react';
 import { shop } from '@/data/shop';
 import { visibleSections, type PublicProduct } from '@/lib/catalog/core';
 import { IconWhatsApp } from './Icons';
-import { trackAction } from './WebsiteAnalytics';
 
 export function DetailedProduct({ product }: { product: PublicProduct }) {
   const [variantKey, setVariantKey] = useState(product.variants[0]?._key ?? '');
@@ -39,7 +38,7 @@ export function DetailedProduct({ product }: { product: PublicProduct }) {
           if (!options.some(Boolean)) return null;
           return <label key={field}>{field === 'ram' ? 'RAM' : field === 'storage' ? 'Storage' : 'Colour'}<select value={variant[field]} onChange={event => select(field, event.target.value)}>{options.map(value => <option value={value} key={value}>{value || 'दर्ज नहीं'}</option>)}</select></label>;
         })}<p className="mw-small" role="status">{preference}</p></fieldset>}
-        <div className="mp-enquiry"><h2>दाम और उपलब्धता पूछिए</h2><p>अपना चुना हुआ variant सीधे दुकान को भेजिए।</p><div className="btns"><a className="btn btn-w" href={enquiry} target="_blank" rel="noopener noreferrer" onClick={() => trackAction('whatsapp', product.name)}><IconWhatsApp /> WhatsApp पर पूछिए</a><a className="btn btn-o" href={shop.phone.tel} onClick={() => trackAction('call', product.name)}>दुकान पर call कीजिए</a></div></div>
+        <div className="mp-enquiry"><h2>दाम और उपलब्धता पूछिए</h2><p>अपना चुना हुआ variant सीधे दुकान को भेजिए।</p><div className="btns"><a className="btn btn-w" href={enquiry} target="_blank" rel="noopener noreferrer"><IconWhatsApp /> WhatsApp पर पूछिए</a><a className="btn btn-o" href={shop.phone.tel}>दुकान पर call कीजिए</a></div></div>
       </div>
     </section>
     {sections.length > 0 && <section className="mp-specifications" aria-labelledby="product-specifications"><div className="shopping-section-heading"><div><p className="shopping-overline">DETAILS · खूबियाँ जानिए</p><h2 id="product-specifications">Specifications</h2></div></div>{sections.map(section => <section className="mp-spec-section" key={section.id}><h3>{section.title}</h3><dl>{section.fields.map(field => <div key={field.key}><dt>{field.label}</dt><dd>{field.value}</dd></div>)}</dl></section>)}</section>}

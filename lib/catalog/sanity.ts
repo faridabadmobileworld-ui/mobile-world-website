@@ -129,7 +129,9 @@ function sanitize(products: unknown[]): PublicProduct[] {
   return products.flatMap(input => {
     try {
       const raw = input as PublicProduct, product = normalizeProduct({ ...raw, sources: [] });
-      if (!product.verified || !product.imageVerified || !product.image || !product.name || !product.brand) return [];
+      if (!product.verified || !product.imageVerified || !product.image || !product.imageAlt || !product.name || !product.brand ||
+          !product.verifiedAt || product.verifiedAt > new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' }) ||
+          product.variants.some(variant => variant.image && !variant.imageVerified)) return [];
       return [publicProduct(product, typeof raw.updatedAt === 'string' ? raw.updatedAt : '')];
     } catch { return []; }
   });

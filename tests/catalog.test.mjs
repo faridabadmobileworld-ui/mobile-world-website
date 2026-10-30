@@ -163,6 +163,14 @@ test('Reserved slug collision cannot overwrite another product', async () => {
   await assert.rejects(cms.publishProduct(saved.id, saved.draftRevision, ''), /दूसरे model/);
   assert.equal((await cms.publicProducts()).length, 1);
 });
+test('Direct CMS records with incomplete verification or unverified variant images stay off public pages', async () => {
+  for (const change of [{ verifiedAt: '' }, { imageAlt: '' }, { verifiedAt: '2099-01-01' },
+    { variants: [{ ...product().variants[0], image: '/images/fixture.png', imageVerified: false }] }]) {
+    documents.set('mw-product.direct-fixture', { ...product('direct-fixture'), ...change, _type: 'mwProduct', _id: 'mw-product.direct-fixture', _rev: 'external' });
+    assert.equal((await cms.publicProducts()).some(p => p.id === 'direct-fixture'), false);
+  }
+  documents.delete('mw-product.direct-fixture');
+});
 test('Last good snapshot works offline; failed refresh cannot resurrect unpublished product', async () => {
   offline = true; assert.equal((await cms.publicProducts()).length, 1); offline = false;
   const saved = (await cms.editorRecords()).find(p => p.id === 'fixture-phone');
