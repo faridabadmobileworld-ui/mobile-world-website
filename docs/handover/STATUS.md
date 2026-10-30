@@ -5,7 +5,7 @@ Checkpoint: 30 October 2026, Asia/Kolkata. Live verification below was performed
 ## Source and release
 
 - Repo: faridabadmobileworld-ui/mobile-world-website. Working branch: codex/complete-owner-editor-20261029.
-- Existing production/rollback: dpl_aaGzHrJnxrvidMDZAhrJpGsAJhMd, READY, www.mobileworldfaridabad.com and mobileworldfaridabad.com. Project prj_dplwsmDwQWMjfoePft2dDLIA3QDI, team faridabadmobileworld-2892.
+- Pre-change production rollback: dpl_aaGzHrJnxrvidMDZAhrJpGsAJhMd, READY, www.mobileworldfaridabad.com and mobileworldfaridabad.com. Project prj_dplwsmDwQWMjfoePft2dDLIA3QDI, team faridabadmobileworld-2892.
 - Recovered live source saved through GitHub connector commit 53611ba38e398aa93b7221c14d7d33c1da60607d; recovery tree df0a880d1df3adf733fe5f14c9d273a4cf07edea. Connector Contents writes succeed. CLI push lacks credentials; do not reset credentials or repeatedly retry it.
 - Original release payload comparison: 59 source paths match; docs/OWNER-DASHBOARD-RELEASE.md differs only with later verification notes. Missing .release-assets.json/.mjs are deployment hydration helpers for already tracked assets from historical main 2f5b6a98cf0f6b0cf5c9c5640b71aaaccf8d69f0. 45 visible Vercel application hashes matched the recovered tree. Original video/assets remain tracked. No compiled-output source recovery is used.
 - Source from the other Codex handover branch e5eab94cc366cdf0aa5343411ac6942cfe3d194a was merged; its instructions and recovery tooling are retained. Its two older preview deployments are not Product Editor releases.
@@ -31,7 +31,7 @@ Twelve equal checkpoints; completed / 12, rounded. These measure verified accept
 | 11 | Final responsive public/private regression and SEO | Public routes, sitemap, canonical, search, 9-model shortlist reload and comparison pass; signed-in private and mobile/tablet visual checks remain |
 | 12 | Permanent instructions/evidence pushed | Owner contract, Kit fields, recovery/source and editor evidence committed; current checkpoint included in follow-up commit |
 
-Current completed checkpoints after this evidence commit is pushed: 8/12 = 67%. Checkpoints 6, 7, 9 and 11 remain incomplete. This is an acceptance count, not a claim that 67% of the site has been built.
+Current completed checkpoints: 8/12 = 67%. Checkpoints 6, 7, 9 and 11 remain incomplete. This is an acceptance count, not a claim that 67% of the site has been built.
 
 Catalogue phase remains separate: 0 newly manufacturer-verified models / 59 existing guide entries. Detailed population and first Xiaomi 17T India verification are not claimed complete. No fabricated specifications or fake production models were added.
 
@@ -55,3 +55,12 @@ Catalogue phase remains separate: 0 newly manufacturer-verified models / 59 exis
 - Existing rollback remains dpl_aaGzHrJnxrvidMDZAhrJpGsAJhMd. Use the existing Vercel project rollback/promote workflow if needed; never deploy the old GitHub baseline to recreate it.
 - Continue through the existing owner login and Sanity secure sign-in. Connect the existing project/dataset and validate a real authorized draft/save/reload/edit/publish flow. Enter the Windsor API credential only in /admin/business. Never put a password or API key in chat. Account recreation, password reset, secret rotation and duplicate projects remain prohibited shortcuts.
 - Finish signed-in UI and mobile/tablet verification once access is available. Do not represent fixture tests, a deployed login page or a stored historical report as a working live CMS/Google feed.
+
+## Final application release — 30 October 2026
+
+- GitHub main and release branch application commit: da2d28aaea6cc462ba35c930a24629a864344dba. Exact local/remote application tree: a0d0247b0ede42efd2cad894c6623cc746f592c1.
+- Final production deployment: dpl_3fe8Mk1QdvPgRsKPTMqUCk9rokGZ, READY, source main / da2d28a, aliases www.mobileworldfaridabad.com and mobileworldfaridabad.com verified. No alias error.
+- Final fixes exclude incomplete direct CMS verification records and remove duplicate contact analytics handlers. All 34 tests, lint, TypeScript and a clean production build pass. A restored Turbopack cache initially failed; removing only generated .next data and rebuilding resolved it.
+- Post-deploy /admin/products, /products and /sitemap.xml return 200; products retains 59 guide models. Nonexistent/unpublished detail returns 404. Runtime error/fatal log inspection returned no matching entries.
+- This final evidence-only checkpoint is retained on codex/complete-owner-editor-20261029; it does not change deployed application files. Main already contains the tested application and owner instructions.
+- Secure owner login is the immediate next access boundary, followed by the existing Sanity project connection and Windsor key in the private dashboard. Neither real CMS publish nor Google automatic refresh is represented as complete.
