@@ -2,6 +2,7 @@
 import { revalidatePath } from 'next/cache';
 import { requireOwnerAccess } from '@/app/spin-admin-actions';
 import { connectSanity, connectionStatus, editorRecords, publishProduct, saveDraft, unpublishProduct, uploadProductImage } from '@/lib/catalog/sanity';
+import { referenceDraft } from '@/lib/catalog/references';
 
 async function ownerAction<T>(work: () => Promise<T>) {
   await requireOwnerAccess();
@@ -12,7 +13,11 @@ async function ownerAction<T>(work: () => Promise<T>) {
 export async function productEditorState() {
   await requireOwnerAccess();
   const connection = await connectionStatus();
-  return { connection, records: connection.configured ? await editorRecords() : [] };
+  try { return { connection, records: connection.configured ? await editorRecords() : [], error: '' }; }
+  catch { return { connection, records: [], error: 'Saved products अभी नहीं खुले। Retry कीजिए या नीचे Connection settings में इसी project की access सुधारिए।' }; }
+}
+export async function productReferenceDraft(id: string) {
+  return ownerAction(async () => referenceDraft(id));
 }
 export async function configureSanity(projectId: string, dataset: string, token: string) {
   return ownerAction(async () => { await connectSanity({ projectId, dataset, token }); return null; });

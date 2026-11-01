@@ -8,7 +8,7 @@ import ts from 'typescript';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const modules = new Map(), privateFiles = new Map();
-let documents = new Map(), revisionNumber = 0, authenticated = false, offline = false, failRefresh = false, writes = 0;
+let documents = new Map(), revisionNumber = 0, authenticated = false, offline = false, failRefresh = false, writes = 0, draftOnly = false;
 const clone = value => structuredClone(value);
 const token = 'fixture-only-project-token-never-real';
 const config = { projectId: 'test1234', dataset: 'testing', token };
@@ -67,6 +67,7 @@ global.fetch = async (url, init) => {
   const next = new Map([...documents].map(([id, doc]) => [id, clone(doc)]));
   for (const mutation of JSON.parse(init.body).mutations) {
     if (mutation.create) {
+      if (draftOnly && !mutation.create._id.startsWith('drafts.')) return Response.json({}, { status: 403 });
       if (next.has(mutation.create._id)) return Response.json({}, { status: 409 });
       const doc = clone(mutation.create); doc._rev = 'rev' + (++revisionNumber); next.set(doc._id, doc);
     } else if (mutation.patch) {
@@ -123,6 +124,7 @@ test('Every editor action authenticates before reading, uploading or writing', a
     () => actions.productEditorState(), () => actions.configureSanity(config.projectId, config.dataset, token),
     () => actions.saveProductDraft(product(), ''), () => actions.publishSavedProduct('fixture-phone', 'x', ''),
     () => actions.unpublishSavedProduct('fixture-phone', 'x'), () => actions.uploadEditorImage(new FormData()),
+    () => actions.productReferenceDraft('xiaomi-xiaomi-17t'),
   ];
   for (const attempt of attempts) await assert.rejects(attempt, /owner login/);
   assert.equal(writes, 0); assert.equal(privateFiles.size, 0);
@@ -133,6 +135,46 @@ test('Connection verifies write access without saving test documents and stores 
   assert.equal(JSON.stringify([...privateFiles.values()]).includes(token), false);
   assert.equal(JSON.stringify(await cms.connectionStatus()).includes(token), false);
   await assert.rejects(cms.connectSanity({ ...config, projectId: 'other123' }), /migration/);
+});
+test('Draft-only credentials cannot replace a working publish-capable connection', async () => {
+  const before = clone([...privateFiles]);
+  draftOnly = true;
+  await assert.rejects(cms.connectSanity(config), /Editor token/);
+  draftOnly = false;
+  assert.deepEqual([...privateFiles], before);
+  assert.equal(documents.size, 0);
+  assert.equal(writes, 0);
+});
+test('CMS outage preserves connection identity so the owner can renew access and retry', async () => {
+  authenticated = true; offline = true;
+  const result = await actions.productEditorState();
+  assert.equal(result.connection.configured, true);
+  assert.equal(result.connection.projectId, config.projectId);
+  assert.deepEqual(result.records, []);
+  assert.match(result.error, /Connection settings/);
+  assert.equal(JSON.stringify(result).includes(token), false);
+  offline = false;
+  assert.equal((await actions.productEditorState()).error, '');
+  authenticated = false;
+});
+test('India reference keeps unconfirmed fields and colour combinations empty, with no CMS writes', async () => {
+  authenticated = true;
+  const before = writes, value = await actions.productReferenceDraft('xiaomi-xiaomi-17t');
+  assert.equal(value.ok, true);
+  const reference = value.data;
+  core.validatePublication(reference);
+  assert.equal(Object.keys(reference.values).length, 86);
+  assert.equal(reference.values.spec_007, '');
+  assert.equal(reference.values.spec_004, '');
+  assert.equal(reference.values.spec_062, '', 'eSIM warning is not a confirmed India capability');
+  assert.equal(reference.values.spec_050, '', 'absence of wireless charging info is not a verified No');
+  assert.equal(reference.variants.length, 2);
+  assert.ok(reference.variants.every(v => v.colour === '' && v.ram === '12 GB'));
+  reference.values.spec_026 = 'Edited in an unsaved draft';
+  assert.equal((await actions.productReferenceDraft('xiaomi-xiaomi-17t')).data.values.spec_026, '12 GB');
+  assert.equal((await actions.productReferenceDraft('unverified-model')).data, null);
+  assert.equal(writes, before);
+  authenticated = false;
 });
 test('Draft save/reload/edit is private; publication is sanitized, revision guarded and URL stable', async () => {
   await cms.saveDraft(product(), '');

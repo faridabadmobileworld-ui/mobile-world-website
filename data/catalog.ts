@@ -532,6 +532,27 @@ for (const brand of phoneBrands) {
   const cover = brand.models.find((model) => studioImageIds.has(model.id));
   if (cover) { brand.image = cover.image; brand.imageAlt = cover.imageAlt; }
 }
+// Verified India reference: override older promotional images only for this model.
+// Keep the existing model ID so saved shortlists and incoming links still work.
+const verified17T = xiaomiBrand.models.find(model => model.id === 'xiaomi-xiaomi-17t')!;
+Object.assign(verified17T, {
+  image: '/images/xiaomi-17t-official-colours.png',
+  imageAlt: 'Xiaomi 17T — Violet, Blue और Black, official Xiaomi India product image',
+  imageKind: undefined,
+  imageCaption: 'Xiaomi India की product image · दुकान का stock enquiry पर confirm होगा।',
+  imageSource: 'https://www.mi.com/in/product/xiaomi-17t/specs/',
+  gallery: [{ src: '/images/xiaomi-17t-official-colours.png', alt: 'Xiaomi 17T के Violet, Blue और Black colours' }],
+  display: '6.59-inch AMOLED · 2756 × 1268 · up to 120 Hz',
+  camera: '50MP main OIS + 50MP 5× telephoto OIS + 12MP ultra-wide · 32MP front',
+  processor: 'Dimensity 8500-Ultra · 12GB LPDDR5X · UFS 4.1',
+  power: '6500mAh silicon-carbon · 67W wired · up to 22.5W reverse wired charging',
+  software: 'HyperOS 3 / Android 16 · 4 Android generations + 6 years security updates',
+  colours: [{ name: 'Violet', hex: '#b2a1b8' }, { name: 'Blue', hex: '#bdd6e9' }, { name: 'Black', hex: '#303035' }],
+  variants: ['12GB / 256GB', '12GB / 512GB'],
+  note: 'India specifications verified हैं। Colour और दुकान के stock की पुष्टि enquiry पर होगी।',
+  source: 'https://www.mi.com/in/product/xiaomi-17t/specs/', checked: '2026-11-01',
+  reasons: { camera: 'Leica main और 5× telephoto cameras को जानिए।', everyday: '6.59-inch display और 6500mAh battery की जानकारी देखिए।', updates: '4 Android generations और 6 years security support का brand commitment।' },
+} satisfies Partial<PhoneModel>);
 export const phoneModels:PhoneModel[]=phoneBrands.flatMap(x=>x.models);
 export const availablePhoneModels=phoneModels.filter(x=>x.status!=="upcoming");
 export const upcomingPhoneModels:PhoneModel[]=[];

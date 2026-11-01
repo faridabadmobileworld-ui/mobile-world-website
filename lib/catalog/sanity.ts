@@ -45,6 +45,7 @@ async function request<T>(config: Connection, path: string, init?: RequestInit):
     cache: 'no-store', redirect: 'error', signal: AbortSignal.timeout(20000),
   });
   if (response.status === 409) throw new Error('दूसरे tab में record बदला है। Refresh करके नया version खोलिए।');
+  if (response.status === 401 || response.status === 403) throw new Error('Sanity token की access या expiry जाँचिए। इसी project का Editor token Connection settings में जोड़िए।');
   if (!response.ok) throw new Error(message);
   return await response.json() as T;
 }
@@ -70,8 +71,14 @@ export async function connectSanity(input: Connection) {
   if (existing && (existing.projectId !== config.projectId || existing.dataset !== config.dataset))
     throw new Error('Connected project बदलने से पहले content migration ज़रूरी है। मौजूदा project ही इस्तेमाल कीजिए।');
   await query(config, 'count(*[_type == "mwProduct"])');
-  // Validate document-write permission without creating a live or draft test record.
-  await mutate(config, [{ create: { _id: 'drafts.mw-connection-check-' + randomBytes(8).toString('hex'), _type: 'mwProduct', connectionCheck: true } }], true);
+  // Validate both draft and publication rights. A draft-only Contributor token
+  // must not appear connected successfully and fail only at publication.
+  // dryRun validates permissions without creating either document.
+  const checkId = 'mw-connection-check-' + randomBytes(8).toString('hex');
+  await mutate(config, [
+    { create: { _id: 'drafts.' + checkId, _type: 'mwProduct', connectionCheck: true } },
+    { create: { _id: checkId, _type: 'mwProduct', connectionCheck: true } },
+  ], true);
   const saved = { projectId: config.projectId, dataset: config.dataset, encryptedToken: encrypt(config.token), checkedAt: new Date().toISOString() };
   await transactPrivate<SavedConnection, boolean>(SETTINGS, () => saved, state => { Object.assign(state, saved); return { value: true, changed: true }; });
 }

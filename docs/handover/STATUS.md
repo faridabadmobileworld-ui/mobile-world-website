@@ -1,6 +1,6 @@
 # Mobile World execution status
 
-Checkpoint: 30 October 2026, Asia/Kolkata. Live verification below was performed on 29 October; final review fixes are included in this checkpoint. This supersedes the older recovery-only checkpoint. Owner requested direct continuation and completion, not another handover. Keep the complete owner brief in OWNER-HANDOVER-2026-10-28.txt.
+Checkpoint: 1 November 2026, Asia/Kolkata. Dated sections below distinguish earlier production evidence from the current continuation. This supersedes the older recovery-only checkpoint. Owner requested direct continuation and completion, not another handover. Keep the complete owner brief in OWNER-HANDOVER-2026-10-28.txt.
 
 ## Source and release
 
@@ -23,17 +23,17 @@ Twelve equal checkpoints; completed / 12, rounded. These measure verified accept
 | 3 | Complete live editable source recovered/reviewed | Complete: original release payload and deployment hashes compared; missing editor reconstructed separately |
 | 4 | Recovered source reconciled/synced to GitHub | Complete: 53611ba and original handover branch retained |
 | 5 | Product Editor tested/deployed/live checked | Complete software release: production route and login boundary verified; actual CMS flow is checkpoint 6 |
-| 6 | Real Sanity draft/save/reload/edit/publish/public flow | Blocked at existing project sign-in/configuration; no current project ID or token discovered |
-| 7 | Website Google sync and next scheduled run | Existing connector accounts correct; website secure Windsor API connection not verified |
+| 6 | Real Sanity draft/save/reload/edit/publish/public flow | Current sign-in and project d7c51kix / production verified; no API tokens exist. Owner-controlled token creation/connection and actual draft-to-publication flow remain |
+| 7 | Website Google sync and next scheduled run | Windsor sign-in and two connected Google sources verified; existing masked API-key control located. Website secure API connection and next scheduled run remain unverified |
 | 8 | Existing daily report schedule/execution | Complete inspection: enabled, recurrence 09:00 Asia/Calcutta (flexible); latest recorded run 29 October no_update; do not claim a new delivered report |
-| 9 | Private analytics/enquiries/archive/restore | 23 current-source tests pass; current signed-in visual verification remains |
+| 9 | Private analytics/enquiries/archive/restore | Signed-in analytics, enquiry controls, archives and filtered CSV export checked; live enquiry mutation and restore verification remain |
 | 10 | Campaign/reward persistence/security/old codes | Complete code regression: concurrent redemption/old-code/owner tests pass, unchanged production reward logic retained, live private boundary verified; no production reward issued/redeemed |
-| 11 | Final responsive public/private regression and SEO | Public routes, sitemap, canonical, search, 9-model shortlist reload and comparison pass; signed-in private and mobile/tablet visual checks remain |
+| 11 | Final responsive public/private regression and SEO | Public routes, sitemap, canonical, search, 9-model shortlist reload, comparison and signed-in private pages checked; mobile/tablet visual checks remain |
 | 12 | Permanent instructions/evidence pushed | Owner contract, Kit fields, recovery/source and editor evidence committed; current checkpoint included in follow-up commit |
 
 Current completed checkpoints: 8/12 = 67%. Checkpoints 6, 7, 9 and 11 remain incomplete. This is an acceptance count, not a claim that 67% of the site has been built.
 
-Catalogue phase remains separate: 0 newly manufacturer-verified models / 59 existing guide entries. Detailed population and first Xiaomi 17T India verification are not claimed complete. No fabricated specifications or fake production models were added.
+Catalogue phase remains separate: 1 source-audited model / 59 existing guide entries (Xiaomi 17T, 65 sourced fields and 21 blanks); 0 newly CMS-published detailed products. No fabricated specifications, stock combinations or fake production models were added. See ../XIAOMI-17T-INDIA-AUDIT.md.
 
 ## Checks and access
 
@@ -41,7 +41,7 @@ Catalogue phase remains separate: 0 newly manufacturer-verified models / 59 exis
 - Editor: 86 fields/11 sections; drafts private; spec_007 excluded from public Sanity record/HTML/schema/sitemap; actual variants only; verified images; optimistic revision checks; encrypted token; owner-only actions; stale snapshot cannot resurrect unpublished product.
 - Shortlist fix: more than eight saved valid IDs survive reload; unknown and duplicate IDs remain filtered.
 - Vercel production env names observed: BLOB_READ_WRITE_TOKEN, SPIN_WHEEL_SECRET, SPIN_ADMIN_SETUP_HASH, CRON_SECRET, GOOGLE_REPORT_SEED. No Sanity environment keys exist. Values not retrieved. Preview has Blob access but not production owner/cron secrets; never treat its unavailable private login as broken production auth.
-- Sanity browser shows sign-in; no existing authenticated session. Plugin discovery returned no sufficient Sanity plugin. Use secure browser authentication if needed; no secret entry in chat, replacement project or owner account reset.
+- Current Sanity project is Mobile World Faridabad Store, d7c51kix, organization olm7g7d9m, dataset production (public). All were verified in the signed-in management UI on 1 November. No API tokens exist. Plugin discovery returned no sufficient Sanity plugin. This supersedes the earlier no-project result; no duplicate was created by the agent.
 - Windsor connector sees searchconsole sc-domain:mobileworldfaridabad.com and google_my_business locations/3321499816072261375 (MOBILE WORLD). Website connection needs its existing secure /admin/business form; connector access is not automatically a website API key.
 - Automation 6adebdc837d88191938f78135f1b6de4 is enabled. RRULE FREQ=DAILY;BYHOUR=9;BYMINUTE=0; timezone Asia/Calcutta; timing flexible_schedule. Last recorded run 29 October 2026 03:41:37Z, status no_update. Latest published result belongs to the older 27 October run. Delivery unknown; next_run_time null. Do not duplicate the task.
 - Website vercel.json cron remains 0 3 * * * (08:30 IST), independent of ChatGPT's report. A live authorized verification returned 200, archived:true and google.synced:false / reason:key-required. Missing Windsor key is confirmed, not inferred. Anonymous endpoint request returned 401; no future scheduled execution is claimed.
@@ -54,7 +54,7 @@ Catalogue phase remains separate: 0 newly manufacturer-verified models / 59 exis
 - Live daily maintenance succeeded, retaining the existing archive logic and reporting the missing Google-sync credential honestly. No fake enquiry, sale, customer record or issued reward was created.
 - Existing rollback remains dpl_aaGzHrJnxrvidMDZAhrJpGsAJhMd. Use the existing Vercel project rollback/promote workflow if needed; never deploy the old GitHub baseline to recreate it.
 - Continue through the existing owner login and Sanity secure sign-in. Connect the existing project/dataset and validate a real authorized draft/save/reload/edit/publish flow. Enter the Windsor API credential only in /admin/business. Never put a password or API key in chat. Account recreation, password reset, secret rotation and duplicate projects remain prohibited shortcuts.
-- Finish signed-in UI and mobile/tablet verification once access is available. Do not represent fixture tests, a deployed login page or a stored historical report as a working live CMS/Google feed.
+- Signed-in dashboard reads, enquiry sale-control behavior and archive export are now checked; finish actual CMS/live enquiry/restore and mobile/tablet verification. Do not represent fixture tests, a deployed login page or a stored historical report as a working live CMS/Google feed.
 
 ## Final application release — 30 October 2026
 
@@ -63,4 +63,28 @@ Catalogue phase remains separate: 0 newly manufacturer-verified models / 59 exis
 - Final fixes exclude incomplete direct CMS verification records and remove duplicate contact analytics handlers. All 34 tests, lint, TypeScript and a clean production build pass. A restored Turbopack cache initially failed; removing only generated .next data and rebuilding resolved it.
 - Post-deploy /admin/products, /products and /sitemap.xml return 200; products retains 59 guide models. Nonexistent/unpublished detail returns 404. Runtime error/fatal log inspection returned no matching entries.
 - This final evidence-only checkpoint is retained on codex/complete-owner-editor-20261029; it does not change deployed application files. Main already contains the tested application and owner instructions.
-- Secure owner login is the immediate next access boundary, followed by the existing Sanity project connection and Windsor key in the private dashboard. Neither real CMS publish nor Google automatic refresh is represented as complete.
+- Existing owner login has now succeeded. Correct Sanity project identification and the Windsor key connection in the private dashboard are the remaining access/configuration boundaries. Neither real CMS publish nor Google automatic refresh is represented as complete.
+
+## Authenticated continuation — 30 October 2026
+
+- Existing owner password was submitted through secure browser authentication. Signed-in analytics, Product Editor connection page, Google/enquiry/archive dashboard, campaigns and rewards pages all opened. Password values were not exposed or stored in project files.
+- The enquiry form enables the sale amount only for Sold and disables it again for Enquiry. The register was empty in the selected period; no artificial customer, sale or reward record was inserted. Existing campaign values were read without saving changes.
+- Daily archive displayed six closed-day rows from 24–29 October. Live CSV download contained exactly the expected eight aggregate columns and six rows, with no individual visitor/customer identifiers. Applying 28–29 October returned two rows in both the UI and a second CSV. Original month filter was restored. Downloaded private reports are temporary QA data and are not committed.
+- Sanity sign-in via the user-selected Google account succeeded at https://www.sanity.io/manage. All organizations reported no projects; searching mobile returned no results. This proves an account/project-discovery blocker, not a working CMS connection. Ask for the existing project's link or correct account; do not infer that a replacement project is authorized.
+- Windsor secure Google sign-in succeeded. The account shows Search Console and Google Business Profile connected, one selected account/location each. Settings at https://onboard.windsor.ai/app/settings/account expose an existing read-only password-type API-key field and copy control. The key was not revealed, read, copied, reset or transferred by the agent.
+- Windsor identifies the account as Trial and displays full access ending 24 November 2026. No purchase, upgrade or write-access setting was changed. Ongoing API availability beyond that date is not established.
+- Website business dashboard still labels its 26 October fetched report as a saved snapshot and explicitly says automatic sync is not connected. The private Daily website sync form is open and ready for owner-controlled credential entry. A successful connect, persisted fresh report, manual refresh and subsequent scheduled run are still required.
+- Production application files are unchanged from da2d28a / dpl_3fe8Mk1QdvPgRsKPTMqUCk9rokGZ. Prior 34-test, lint, typecheck and build results still apply; no redundant application deployment was made for these evidence-only notes.
+- Acceptance remains 8/12 = 67%; milestones 6, 7, 9 and 11 are not promoted merely for successful login. Detailed manufacturer-verified catalogue completion remains 0/59.
+- Persistence boundary: the authenticated continuation above is committed locally. GitHub create-tree automatic approval review timed out twice (initial attempt plus the one allowed retry), so these newest evidence notes are not yet pushed. The verified remote evidence branch remains at 9988f69636df8cb307b79823cd29603181a9c1c7, while production main remains da2d28a. Resume the normal authorized push workflow when review is available; do not bypass it or claim the notes are remotely saved.
+
+## Continuation — 1 November 2026
+
+- User requested sustained completion and incremental verified production releases. Sanity management now shows the same Mobile World Faridabad Store as the user screenshot. Project d7c51kix belongs to organization olm7g7d9m; production is the existing public dataset. The UI shows Growth Trial, 29 days remaining, and zero documents. No billing or visibility change was made.
+- Earlier Sanity emails identified a separate historical Mobile World project za4uwuy7, whose direct page denied access to the then-selected account. It is not the project in the new screenshot. No access-request message was sent and no migration from that project is claimed.
+- API Tokens reports No API tokens yet. A named Editor-token form is prepared but Add token has not been submitted. Creating a persistent project credential and transferring it to the website remain owner-controlled secure actions, not an inferred completion from login.
+- Website owner sign-in succeeded again via browserAuth. Product Editor is signed in; Project ID d7c51kix and dataset production were prepared in its private form. No API secret was read, created, copied into chat, committed or transmitted by the agent.
+- Candidate release fixes connection recovery after expired/denied credentials, rejects draft-only tokens using a no-write publication dry run, preserves draft state on failed refresh, warns before closing/reloading unsaved changes, and adds an explicit discard/reload action.
+- Xiaomi 17T reference is sourced from Xiaomi India specifications, FAQ and warranty pages. Official PNG visually verified and retained unchanged; 65 of 86 fields populated, 21 left empty. Two verified memory options retain empty colour fields. Existing guide ID, all 59 guide entries and old artwork files are preserved.
+- Local verification: 37/37 isolated tests, TypeScript, ESLint and clean production build pass. Initial build hit restored Turbopack persistence corruption; removing only generated .next resolved it. Production release verification is recorded below when completed.
+- Acceptance remains 8/12 (67%); real Sanity publication, Windsor website sync/next scheduled execution, remaining enquiry/restore verification and mobile/tablet visual checks are not complete.

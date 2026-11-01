@@ -1,10 +1,10 @@
 'use client';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { phoneModels } from '@/data/catalog';
 import { blankProduct, imageUrl, specificationSections, type EditorRecord, type ProductDraft } from '@/lib/catalog/core';
-import { configureSanity, productEditorState, publishSavedProduct, saveProductDraft, unpublishSavedProduct, uploadEditorImage } from './actions';
+import { configureSanity, productEditorState, productReferenceDraft, publishSavedProduct, saveProductDraft, unpublishSavedProduct, uploadEditorImage } from './actions';
 
 type State = Awaited<ReturnType<typeof productEditorState>>;
 function result<T>(value: { ok: true; data: T } | { ok: false; error: string }): T {
@@ -14,6 +14,12 @@ function result<T>(value: { ok: true; data: T } | { ok: false; error: string }):
 export function ProductEditor({ initial }: { initial: State }) {
   const [state, setState] = useState(initial), [draft, setDraft] = useState<EditorRecord | null>(initial.records[0] ?? null);
   const [busy, setBusy] = useState(false), [dirty, setDirty] = useState(false), [notice, setNotice] = useState('');
+  useEffect(() => {
+    if (!dirty) return;
+    const warn = (event: BeforeUnloadEvent) => { event.preventDefault(); event.returnValue = ''; };
+    window.addEventListener('beforeunload', warn);
+    return () => window.removeEventListener('beforeunload', warn);
+  }, [dirty]);
   let previewImage = '';
   try { previewImage = imageUrl(draft?.image); } catch { /* Wait until the URL is valid. */ }
   async function run(action: () => Promise<void>) {
@@ -22,7 +28,9 @@ export function ProductEditor({ initial }: { initial: State }) {
     finally { setBusy(false); }
   }
   async function reload(id = draft?.id) {
-    const next = await productEditorState(); setState(next); setDraft(next.records.find(row => row.id === id) ?? next.records[0] ?? null); setDirty(false);
+    const next = await productEditorState();
+    if (next.error) { setState(old => ({ ...old, connection: next.connection, error: next.error })); throw new Error(next.error); }
+    setState(next); setDraft(next.records.find(row => row.id === id) ?? next.records[0] ?? null); setDirty(false);
   }
   function update(patch: Partial<ProductDraft>) {
     if (!draft) return;
@@ -33,34 +41,42 @@ export function ProductEditor({ initial }: { initial: State }) {
     if (dirty) { setNotice('पहले current draft Save कीजिए।'); return; }
     setDraft(record); setNotice('');
   }
-  function add(existingId = '') {
+  async function add(existingId = '') {
     if (dirty) { setNotice('पहले current draft Save कीजिए।'); return; }
     const existing = phoneModels.find(model => model.id === existingId);
     const already = state.records.find(row => row.id === existingId);
     if (already) { choose(already); return; }
-    const base = blankProduct(existingId || 'model-' + crypto.randomUUID());
-    if (existing) { base.name = existing.name; base.brand = existing.brand; base.image = existing.image.startsWith('/images/') ? existing.image : ''; base.imageAlt = existing.imageAlt; }
-    setDraft({ ...base, draftRevision: '', publishedRevision: '', publishedSlug: '' }); setDirty(true); setNotice('नया draft है। Unknown specifications खाली रखें।');
+    const reference = existingId ? result(await productReferenceDraft(existingId)) : null;
+    const base = reference ?? blankProduct(existingId || 'model-' + crypto.randomUUID());
+    if (existing && !reference) { base.name = existing.name; base.brand = existing.brand; base.image = existing.image.startsWith('/images/') ? existing.image : ''; base.imageAlt = existing.imageAlt; }
+    setDraft({ ...base, draftRevision: '', publishedRevision: '', publishedSlug: '' }); setDirty(true);
+    setNotice(reference ? 'Official India sources से तैयार reference खुल गया। Unknown fields खाली हैं; यह अभी Sanity में save या publish नहीं हुआ है।' : 'नया draft है। Unknown specifications खाली रखें।');
   }
   return <main className="mw-analytics mw-editor">
     <header className="ma-heading"><div><p>OWNER DESK · SANITY CMS</p><h1>आपका Product Editor</h1><p>86 अलग fields · 11 sections · Draft से verified publication तक।</p></div><nav><Link href="/admin/analytics">Analytics</Link> · <Link href="/admin/business">Google & Enquiries</Link> · <Link href="/admin/campaigns">Offers</Link></nav></header>
     <p className="me-notice" role="status" aria-live="polite">{notice}</p>
-    {!state.connection.configured ? <section className="ma-card me-connect">
-      <h2>Existing Sanity project connect कीजिए</h2><p>{state.connection.message} आपका owner login पहले से तैयार है।</p>
+    {dirty && <p><button type="button" disabled={busy} onClick={() => {
+      if (window.confirm('Unsaved changes छोड़कर आख़िरी saved version खोलें?')) void run(() => reload());
+    }}>Unsaved changes छोड़ें</button></p>}
+    {state.error && <section className="ma-error" role="alert"><p>{state.error}</p><button type="button" disabled={busy || dirty} onClick={() => void run(() => reload())}>Saved products फिर से खोलिए</button></section>}
+    <details className="ma-card me-connect" open={!state.connection.configured || Boolean(state.error)}>
+      <summary>{state.connection.configured ? 'Connection settings · token renew कीजिए' : 'Existing Sanity project connect कीजिए'}</summary><p>{state.connection.message} आपका owner login पहले से तैयार है।</p>
       <p><a href="https://www.sanity.io/manage" target="_blank" rel="noopener noreferrer">Sanity Manage खोलिए ↗</a> और अपने existing project का Project ID, dataset तथा उसी project का Editor API token इस private form में भरिए।</p>
-      <form onSubmit={event => { event.preventDefault(); const form = event.currentTarget, values = new FormData(form); void run(async () => {
-        result(await configureSanity(String(values.get('projectId') ?? '').trim(), String(values.get('dataset') ?? '').trim(), String(values.get('token') ?? '').trim()));
-        form.reset(); await reload(); setNotice('Sanity read/write connection verify हो गई। अब अपना पहला draft बनाइए।');
+      <form key={state.connection.projectId + '/' + state.connection.dataset} onSubmit={event => { event.preventDefault(); const form = event.currentTarget, values = new FormData(form); void run(async () => {
+        const projectId = String(values.get('projectId') ?? '').trim(), dataset = String(values.get('dataset') ?? '').trim(), token = String(values.get('token') ?? '').trim();
+        form.reset(); result(await configureSanity(projectId, dataset, token));
+        await reload(); setNotice('Sanity draft और publish access verify हो गई। अब अपना draft खोलिए।');
       }); }}>
-        <label>Project ID<input name="projectId" required autoComplete="off" pattern="[a-z0-9]{4,16}" /></label>
-        <label>Existing dataset<input name="dataset" required autoComplete="off" pattern="[a-z0-9][a-z0-9_-]{0,63}" /></label>
+        <label>Project ID<input name="projectId" required autoComplete="off" pattern="[a-z0-9]{4,16}" defaultValue={state.connection.projectId} readOnly={state.connection.configured} /></label>
+        <label>Existing dataset<input name="dataset" required autoComplete="off" pattern="[a-z0-9][a-z0-9_-]{0,63}" defaultValue={state.connection.dataset} readOnly={state.connection.configured} /></label>
         <label>Project API token<input name="token" type="password" required minLength={20} maxLength={3000} autoComplete="off" /></label>
         <p>Token browser को वापस नहीं भेजा जाता। नया project बनाने की आवश्यकता नहीं है।</p>
-        <button className="btn btn-d" disabled={busy}>{busy ? 'Connection जाँची जा रही है…' : 'Connect और verify कीजिए'}</button>
+        <button className="btn btn-d" disabled={busy || dirty}>{busy ? 'Connection जाँची जा रही है…' : 'Connect और verify कीजिए'}</button>
       </form>
-    </section> : <>
-      <section className="ma-card me-toolbar"><p>Connected: <strong>{state.connection.projectId}</strong> / {state.connection.dataset}</p><button className="btn btn-o" disabled={busy || dirty} onClick={() => void run(() => reload())}>Refresh</button><button className="btn btn-d" disabled={busy || dirty} onClick={() => add()}>+ नया product</button>
-        <label>Existing catalogue से draft<select value="" disabled={busy || dirty} onChange={event => add(event.target.value)}><option value="">Model चुनिए</option>{phoneModels.map(model => <option key={model.id} value={model.id}>{model.brand} · {model.name}</option>)}</select></label></section>
+    </details>
+    {state.connection.configured && (!state.error || Boolean(draft)) && <>
+      <section className="ma-card me-toolbar"><p>Connected: <strong>{state.connection.projectId}</strong> / {state.connection.dataset}</p><button className="btn btn-o" disabled={busy || dirty} onClick={() => void run(() => reload())}>Refresh</button><button className="btn btn-d" disabled={busy || dirty} onClick={() => void run(() => add())}>+ नया product</button>
+        <label>Existing catalogue से draft<select value="" disabled={busy || dirty} onChange={event => { const id = event.target.value; void run(() => add(id)); }}><option value="">Model चुनिए</option>{phoneModels.map(model => <option key={model.id} value={model.id}>{model.brand} · {model.name}</option>)}</select></label></section>
       <div className="me-workspace"><aside className="ma-card me-records"><h2>Saved products</h2>{state.records.length === 0 && <p>अभी कोई Sanity product saved नहीं है। Existing website catalogue वैसा ही है।</p>}
         {state.records.map(record => <button type="button" key={record.id} disabled={busy || dirty} aria-pressed={draft?.id === record.id} onClick={() => choose(record)}><b>{record.name || record.id}</b><span>{record.brand} · {record.publishedRevision ? 'Published' : 'Draft'}</span></button>)}</aside>
       {draft && <form className="me-document" onSubmit={event => { event.preventDefault(); void run(async () => { result(await saveProductDraft(draft, draft.draftRevision)); await reload(draft.id); setNotice('Draft Sanity में save हो गया। Publish होने तक customers को बदलाव नहीं दिखेंगे।'); }); }}>

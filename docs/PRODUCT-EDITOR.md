@@ -11,6 +11,14 @@ Story: existing owner login → /admin/products → authenticated server action 
 5. Save draft, reload and check it, then publish the saved revision. A published URL cannot be changed while live. Changes to the private draft do not change the live version until publication. Unpublish removes the public version while retaining the draft.
 6. Published pages appear at /catalog/{slug}, are linked from /products and included in the sitemap. Existing catalogue entries remain available throughout migration. RAM, storage and colour controls select only entered combinations; they do not imply stock.
 
+## Connection recovery and verified reference — 1 November 2026
+
+Connection settings remain reachable when Sanity records cannot be loaded. An expired token can be replaced for the same project/dataset without recreating the project. A failed refresh retains the current draft in memory. Closing/reloading the tab with unsaved changes invokes the browser warning; the owner can explicitly discard edits and reload the saved version.
+
+Connection validation dry-runs both draft and published writes, so a draft-only Contributor token is rejected before it can replace a working connection. The dry run creates no records. Access/expiry errors do not include provider response bodies or tokens.
+
+Choosing Xiaomi 17T from the existing catalogue loads the source-audited India reference: 65 populated fields and 21 blanks, with the official image and two confirmed memory options. Colour combinations and store stock are not invented. It is still an unsaved draft until the owner saves it. See `XIAOMI-17T-INDIA-AUDIT.md` for field evidence, image provenance and remaining unknowns.
+
 ## Boundaries and recovery
 
 All six actions independently require owner authorization. No customer account or owner password reset is introduced. Input validation occurs server-side; validation messages are returned explicitly so production error redaction does not hide corrective instructions. Revisions protect draft edits, publish and unpublish; slug reservation prevents another model taking an existing URL.
