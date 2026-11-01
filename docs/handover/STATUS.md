@@ -4,7 +4,7 @@ Checkpoint: 1 November 2026, Asia/Kolkata. Dated sections below distinguish earl
 
 ## Source and release
 
-- Latest verified production application: a966c226db0272ee559742061f0880fe59f66af2, tree 42771c045e56b6dbeca72a175268742e7a1438ab, deployment dpl_FaRAp5RKq9Y1XzEDTHBe9wiqTptB. READY with both custom domains and no alias error on 1 November. This supersedes the dated 30 October release below.
+- Latest verified production application: 6b0fd4a71c2f7a02ccdd5f53ff26dbdb4de29cf2, tree ba992f886706bc7993815c32d5c5795f9df5d181, deployment dpl_9CTfyk61QoRcA5dcy53Kr4axL2c3. READY with both custom domains and no alias error on 1 November. This supersedes the dated 30 October release below.
 
 - Repo: faridabadmobileworld-ui/mobile-world-website. Working branch: codex/complete-owner-editor-20261029.
 - Pre-change production rollback: dpl_aaGzHrJnxrvidMDZAhrJpGsAJhMd, READY, www.mobileworldfaridabad.com and mobileworldfaridabad.com. Project prj_dplwsmDwQWMjfoePft2dDLIA3QDI, team faridabadmobileworld-2892.
@@ -101,3 +101,16 @@ Catalogue phase remains separate: 1 source-audited model / 59 existing guide ent
 - Recovery candidate validation: 41/41 isolated tests, typecheck, ESLint and clean production build pass. The first build failed on a truncated restored Turbopack cache block. The clean build passed after moving only generated .next data to a separate scratch directory; no dependency or production-storage reset was used.
 - Immediate rollback for the recovery candidate is dpl_FaRAp5RKq9Y1XzEDTHBe9wiqTptB / a966c22. Earlier rollback dpl_3fe8Mk1QdvPgRsKPTMqUCk9rokGZ / da2d28a remains documented.
 - Acceptance remains 8/12 = 67%. Checkpoint 9 still needs the live owner Test entry and non-destructive existing-backup restore check. Checkpoint 11 still needs remaining full responsive/private interaction QA. Catalogue remains 1/59 source-audited guides, 0 CMS-published detail products.
+
+
+## Recovery release verified — 1 November 2026
+
+- GitHub main: 6b0fd4a71c2f7a02ccdd5f53ff26dbdb4de29cf2. Local and remote source trees match ba992f886706bc7993815c32d5c5795f9df5d181 exactly. The existing working branch includes the same tested code; no force push or credential reset was used.
+- Protected preview dpl_8DwJB28XYVVk4YSaqGHjCWjJRgGh reached READY and returned 200 for /admin/business, /products and /sitemap.xml. The private page remained a noindex login boundary; the catalogue retained the official reference image and the unpublished detail stayed out of the sitemap.
+- Production dpl_9CTfyk61QoRcA5dcy53Kr4axL2c3 reached READY from main / 6b0fd4a. URL mobile-world-website-16dbrfmkt-faridabadmobileworld-2892.vercel.app. Both www.mobileworldfaridabad.com and mobileworldfaridabad.com are assigned; aliasError is null.
+- Post-release /admin/business and /admin/products returned 200 with noindex and the owner login boundary. /products and /sitemap.xml returned 200. The product guide image remained present and the unpublished Xiaomi detail remained absent from sitemap. The 30-minute production error/fatal log query returned no matching entries.
+- Live product interaction: search Xiaomi 17T returned exactly one guide; its dialog displayed the official image and sourced summary. Selecting Blue and 12GB / 512GB updated the enquiry link preferences. No message was sent. Browser test traffic used utm_source=internal-verification.
+- Recovery verification remains 41/41 isolated tests, TypeScript, ESLint and clean production build. Source-control preservation and deployment are complete; real authenticated enquiry/archive-import acceptance is still pending. A fresh owner login page explicitly displayed the password form after the prior secure sign-in timeout. Do not treat deployed private code as a passed live mutation check.
+- Immediate rollback for this release: dpl_FaRAp5RKq9Y1XzEDTHBe9wiqTptB / a966c226db0272ee559742061f0880fe59f66af2. All previous rollback references above remain historical evidence.
+- Next owner-dependent action: secure sign-in to the existing owner dashboard; run only marked Test entries and non-destructive existing-archive import. Then complete the existing Sanity d7c51kix / production connection via owner-controlled Editor token creation/entry and Windsor website API connection. Do not put credentials in chat, obtain browser cookies, reset accounts, create duplicate projects or bypass login.
+- This evidence-only follow-up belongs on the working branch; main stays on the tested application commit. Acceptance remains 8/12 = 67%; catalogue 1/59 source-audited, 0 CMS-published details.
