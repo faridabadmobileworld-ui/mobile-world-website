@@ -1,21 +1,29 @@
+import { BusinessInputError } from './result';
 export const SOURCES = ['Website', 'Google Maps', 'WhatsApp', 'Call', 'Walk-in', 'Instagram', 'YouTube', 'Other'] as const;
 export const STAGES = ['Enquiry', 'Quoted', 'Visited', 'Sold', 'Lost'] as const;
-export type Enquiry = { id: string; day: string; source: typeof SOURCES[number]; topic: string; stage: typeof STAGES[number]; amount: number | null; createdAt: number; updatedAt: number; revision: number };
+export type Enquiry = { id: string; day: string; source: typeof SOURCES[number]; topic: string; stage: typeof STAGES[number]; amount: number | null; createdAt: number; updatedAt: number; revision: number; isTest?: boolean; archivedAt?: number | null };
 export type EnquiryLedger = { entries: Record<string, Enquiry> };
 export function calendarDay(value: unknown): value is string {
-  return typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value) && new Date(value + 'T00:00:00Z').toISOString().slice(0, 10) === value;
+  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const time = Date.parse(value + 'T00:00:00Z');
+  return Number.isFinite(time) && new Date(time).toISOString().slice(0, 10) === value;
 }
-export function normalizeEnquiry(input: unknown, today: string): Pick<Enquiry, 'day' | 'source' | 'topic' | 'stage' | 'amount'> {
-  if (!input || typeof input !== 'object') throw new Error('Enquiry की जानकारी भरिए।');
+export function normalizeEnquiry(input: unknown, today: string): Pick<Enquiry, 'day' | 'source' | 'topic' | 'stage' | 'amount' | 'isTest'> {
+  if (!input || typeof input !== 'object') throw new BusinessInputError('Enquiry की जानकारी भरिए।');
   const r = input as Record<string, unknown>;
-  if (!calendarDay(r.day) || r.day > today || r.day < '2020-01-01') throw new Error('सही तारीख़ चुनिए।');
-  if (!SOURCES.includes(r.source as Enquiry['source']) || !STAGES.includes(r.stage as Enquiry['stage'])) throw new Error('Source और status चुनिए।');
+  if (!calendarDay(r.day) || r.day > today || r.day < '2020-01-01') throw new BusinessInputError('सही तारीख़ चुनिए।');
+  if (!SOURCES.includes(r.source as Enquiry['source']) || !STAGES.includes(r.stage as Enquiry['stage'])) throw new BusinessInputError('Source और status चुनिए।');
   const topic = typeof r.topic === 'string' ? r.topic.trim() : '';
-  if (!topic || topic.length > 100 || /[\w.+-]+@[\w.-]+|(?:\+?\d[\s().-]*){7,}|[<>\u0000-\u001f]/.test(topic)) throw new Error('केवल product या enquiry का विषय लिखिए; नाम, phone, email या निजी details नहीं।');
+  if (!topic || topic.length > 100 || /[\w.+-]+@[\w.-]+|(?:\+?\d[\s().-]*){7,}|[<>\u0000-\u001f]/.test(topic)) throw new BusinessInputError('केवल product या enquiry का विषय लिखिए; नाम, phone, email या निजी details नहीं।');
   const amount = r.amount === '' || r.amount == null ? null : Number(r.amount);
-  if (amount !== null && (!Number.isFinite(amount) || amount <= 0 || amount > 10000000 || !/^\d+(?:\.\d{1,2})?$/.test(String(r.amount)))) throw new Error('बिक्री की सही रकम भरिए या खाली छोड़िए।');
-  if (r.stage !== 'Sold' && amount !== null) throw new Error('रकम केवल confirmed Sold entry में भरिए।');
-  return { day: r.day, source: r.source as Enquiry['source'], topic, stage: r.stage as Enquiry['stage'], amount };
+  if (amount !== null && (!Number.isFinite(amount) || amount <= 0 || amount > 10000000 || !/^\d+(?:\.\d{1,2})?$/.test(String(r.amount)))) throw new BusinessInputError('बिक्री की सही रकम भरिए या खाली छोड़िए।');
+  if (r.stage !== 'Sold' && amount !== null) throw new BusinessInputError('रकम केवल confirmed Sold entry में भरिए।');
+  if (r.isTest != null && typeof r.isTest !== 'boolean') throw new BusinessInputError('Test entry की setting सही नहीं है।');
+  return { day: r.day, source: r.source as Enquiry['source'], topic, stage: r.stage as Enquiry['stage'], amount, isTest: r.isTest === true };
+}
+export type EnquiryView = 'active' | 'archived' | 'tests';
+export function selectEnquiries(rows: Enquiry[], from: string, to: string, view: EnquiryView = 'active') {
+  return rows.filter(row => row.day >= from && row.day <= to && (view === 'tests' ? row.isTest === true : row.isTest !== true && (view === 'archived' ? !!row.archivedAt : !row.archivedAt)));
 }
 export type SearchRow = { date?: string; page?: string; query?: string; clicks: number; impressions: number; position: number };
 export type BusinessRow = { date: string; impressions: number; call_clicks: number; website_clicks: number; direction_requests: number };

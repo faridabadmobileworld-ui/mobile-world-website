@@ -4,6 +4,8 @@ Checkpoint: 1 November 2026, Asia/Kolkata. Dated sections below distinguish earl
 
 ## Source and release
 
+- Latest verified production application: a966c226db0272ee559742061f0880fe59f66af2, tree 42771c045e56b6dbeca72a175268742e7a1438ab, deployment dpl_FaRAp5RKq9Y1XzEDTHBe9wiqTptB. READY with both custom domains and no alias error on 1 November. This supersedes the dated 30 October release below.
+
 - Repo: faridabadmobileworld-ui/mobile-world-website. Working branch: codex/complete-owner-editor-20261029.
 - Pre-change production rollback: dpl_aaGzHrJnxrvidMDZAhrJpGsAJhMd, READY, www.mobileworldfaridabad.com and mobileworldfaridabad.com. Project prj_dplwsmDwQWMjfoePft2dDLIA3QDI, team faridabadmobileworld-2892.
 - Recovered live source saved through GitHub connector commit 53611ba38e398aa93b7221c14d7d33c1da60607d; recovery tree df0a880d1df3adf733fe5f14c9d273a4cf07edea. Connector Contents writes succeed. CLI push lacks credentials; do not reset credentials or repeatedly retry it.
@@ -88,3 +90,14 @@ Catalogue phase remains separate: 1 source-audited model / 59 existing guide ent
 - Xiaomi 17T reference is sourced from Xiaomi India specifications, FAQ and warranty pages. Official PNG visually verified and retained unchanged; 65 of 86 fields populated, 21 left empty. Two verified memory options retain empty colour fields. Existing guide ID, all 59 guide entries and old artwork files are preserved.
 - Local verification: 37/37 isolated tests, TypeScript, ESLint and clean production build pass. Initial build hit restored Turbopack persistence corruption; removing only generated .next resolved it. Production release verification is recorded below when completed.
 - Acceptance remains 8/12 (67%); real Sanity publication, Windsor website sync/next scheduled execution, remaining enquiry/restore verification and mobile/tablet visual checks are not complete.
+
+## Verified first release and recovery continuation — 1 November 2026
+
+- CMS recovery/reference release a966c22 is saved on both GitHub main and the working branch. Production dpl_FaRAp5RKq9Y1XzEDTHBe9wiqTptB is READY; its Git source and custom domains match. Preview dpl_bgobK7cAqGgauFH2nG81z9o2Fps7 passed before production. The earlier evidence-push timeout is resolved by this release, which includes those notes.
+- Live /products returned 200 with the official Xiaomi 17T image and corrected chipset. /sitemap.xml returned 200 and excludes the unpublished detail URL. The production error/fatal log query returned no matching records in its 30-minute inspection window.
+- Firecrawl captured current homepage and products initial viewports at 375×812 and 768×1024. All four images were visually inspected; text, header and primary layout remained within the viewport. One screenshot download was truncated; a complete re-download passed PNG validation before inspection. These are initial-viewport checks, not full-page interaction or authenticated mobile/tablet acceptance. Screenshots are temporary QA materials, not owner deliverables.
+- The latest cloud browser no longer held the website owner session. A secure password sign-in request timed out. The required fresh canonical /admin/business check still showed the login boundary. No password, API key or session cookie was read, inferred or bypassed. This does not contradict the earlier successful sign-in; it is the current session boundary.
+- Independent recovery work adds reversible enquiry Archive/Restore, immutable Test entry designation excluded from business totals, list-specific CSV export, and owner-triggered daily-aggregate JSON backup with preview and missing-only restore. Existing archive days cannot be overwritten. No real customer or sales entry was created for testing. See ../BUSINESS-RECOVERY.md.
+- Recovery candidate validation: 41/41 isolated tests, typecheck, ESLint and clean production build pass. The first build failed on a truncated restored Turbopack cache block. The clean build passed after moving only generated .next data to a separate scratch directory; no dependency or production-storage reset was used.
+- Immediate rollback for the recovery candidate is dpl_FaRAp5RKq9Y1XzEDTHBe9wiqTptB / a966c22. Earlier rollback dpl_3fe8Mk1QdvPgRsKPTMqUCk9rokGZ / da2d28a remains documented.
+- Acceptance remains 8/12 = 67%. Checkpoint 9 still needs the live owner Test entry and non-destructive existing-backup restore check. Checkpoint 11 still needs remaining full responsive/private interaction QA. Catalogue remains 1/59 source-audited guides, 0 CMS-published detail products.

@@ -9,11 +9,11 @@ import ts from 'typescript';
 import { BlobError, BlobPreconditionFailedError } from '@vercel/blob';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const files = new Map(), cache = new Map(), cookies = new Map();
-let writes = 0, storageFailure = false;
+let writes = 0, storageFailure = false, writeFailure = false;
 const blob = {
   BlobError, BlobPreconditionFailedError,
   async get(key, options) { assert.equal(options.access, 'private'); assert.equal(options.useCache, false); if (storageFailure) throw new Error('Provider unavailable'); const v = files.get(key); return v ? {statusCode:200, stream:new Response(v.text).body,blob:{etag:v.etag}} : null; },
-  async put(key, text, options) { assert.equal(options.access,'private'); await new Promise(resolve => setTimeout(resolve,2)); const old = files.get(key); if (old && (!options.allowOverwrite || options.ifMatch !== old.etag)) {throw options.allowOverwrite ? new BlobPreconditionFailedError() : new BlobError('This blob already exists.');} files.set(key,{text,etag:String(++writes)});return {}; },
+  async put(key, text, options) { if(writeFailure) throw new Error('provider-internal-diagnostic-must-stay-private'); assert.equal(options.access,'private'); await new Promise(resolve => setTimeout(resolve,2)); const old = files.get(key); if (old && (!options.allowOverwrite || options.ifMatch !== old.etag)) {throw options.allowOverwrite ? new BlobPreconditionFailedError() : new BlobError('This blob already exists.');} files.set(key,{text,etag:String(++writes)});return {}; },
   async list({prefix}) { return {blobs:[...files.keys()].filter(p=>p.startsWith(prefix)).map(pathname=>({pathname,url:'https://test.invalid/'+pathname})),hasMore:false}; },
   async del(urls) {for (const url of urls) files.delete(url.slice('https://test.invalid/'.length));},
 };
@@ -114,7 +114,7 @@ test('Daily archive contains totals but no individual journey identifiers; faile
  assert.equal(files.get(`analytics/archive/v1/${past}.json`).text,before);
 });
 test('Business actions require owner; register validates PII, amounts and stale edits',async()=>{
- const business=load('app/admin/business/actions'), bc=load('lib/business/core');
+ const business=businessActions(), bc=load('lib/business/core');
  await assert.rejects(business.businessReport(),/owner login/);
  await assert.rejects(business.updateEnquiry(crypto.randomUUID(),{},0),/owner login/);
  await assert.rejects(business.configureWindsor('not-a-real-credential'),/owner login/);
@@ -147,4 +147,99 @@ test('Daily maintenance requires a strong cron credential and never returns priv
  const response=await daily.GET(new Request('https://test.invalid/api/business/daily',{headers:{authorization:'Bearer '+process.env.CRON_SECRET}}));
  assert.equal(response.status,200);assert.deepEqual(await response.json(),{archived:true,google:{synced:false,reason:'key-required'}});
  delete process.env.CRON_SECRET;
+});
+
+test('Enquiry archive and restore preserve content, reject stale edits and keep tests out of revenue',async()=>{
+ const business=businessActions(),bc=load('lib/business/core');
+ const id=crypto.randomUUID();
+ await assert.rejects(business.archiveEnquiry(id,0,true),/owner login/);
+ await admin.adminLogin('test-password-for-owner-only');
+ const input={day:today,source:'Other',topic:'Release verification TEST',stage:'Enquiry',amount:null,isTest:true};
+ let row=await business.updateEnquiry(id,input,0);
+ for(const stage of ['Quoted','Visited','Sold']) row=await business.updateEnquiry(id,{...input,stage,amount:stage==='Sold'?'1.00':null},row.revision);
+ assert.equal(bc.selectEnquiries([row],today,today).length,0);
+ assert.equal(bc.selectEnquiries([row],today,today,'tests').length,1);
+ await assert.rejects(business.updateEnquiry(id,{...input,isTest:false},row.revision),/Test status/);
+ const original={...row};
+ row=await business.archiveEnquiry(id,row.revision,true);
+ assert.ok(row.archivedAt);assert.equal(row.amount,original.amount);assert.equal(row.stage,'Sold');
+ await assert.rejects(business.updateEnquiry(id,input,row.revision),/Restore/);
+ await assert.rejects(business.archiveEnquiry(id,original.revision,false),/दूसरे tab/);
+ row=await business.archiveEnquiry(id,row.revision,false);
+ assert.equal(row.archivedAt,null);assert.equal(row.topic,original.topic);assert.equal(row.createdAt,original.createdAt);assert.equal(row.isTest,true);
+ assert.equal(bc.selectEnquiries([row],today,today).length,0);
+ const outcomes=await Promise.allSettled([business.archiveEnquiry(id,row.revision,true),business.updateEnquiry(id,{...input,stage:'Lost'},row.revision)]);
+ assert.equal(outcomes.filter(r=>r.status==='fulfilled').length,1);
+ assert.equal(outcomes.filter(r=>r.status==='rejected').length,1);
+ await assert.rejects(business.archiveEnquiry(id,-1,true),/reference/);
+ await assert.rejects(business.archiveEnquiry(id,row.revision,'true'),/action/);
+ const legacy={...original,id:crypto.randomUUID()};delete legacy.isTest;
+ const real=await business.updateEnquiry(legacy.id,{...input,isTest:false,stage:'Sold',amount:'20.00'},0);
+ assert.equal(bc.selectEnquiries([real],today,today).length,1);
+ const archived=await business.archiveEnquiry(real.id,real.revision,true);
+ assert.equal(bc.selectEnquiries([archived],today,today).length,0);
+ assert.equal(bc.selectEnquiries([archived],today,today,'archived').length,1);
+ const restored=await business.archiveEnquiry(real.id,archived.revision,false);
+ assert.equal(bc.selectEnquiries([restored],today,today)[0].amount,20);
+ await admin.adminLogout();
+});
+
+function businessActions() {
+ const actions=load('app/admin/business/actions'), {businessResult}=load('lib/business/result');
+ return {...actions,...Object.fromEntries(['updateEnquiry','archiveEnquiry','downloadArchiveBackup','previewArchiveRestore','restoreDailyArchive'].map(name=>[name,async(...args)=>businessResult(await actions[name](...args))]))};
+}
+const archiveRow=day=>({version:1,day,savedAt:now,pageViews:3,sessions:2,visitors:1,active:12.5,engagedSessions:1,totals:{call:1,whatsapp:2},pages:[{label:'/products',views:3,active:12.5}]});
+const backupText=rows=>JSON.stringify({version:1,kind:'mobile-world-daily-archive',site:'www.mobileworldfaridabad.com',exportedAt:now,rows});
+test('Archive recovery requires owner and validates the entire backup before writing',async()=>{
+ const business=businessActions();
+ const text=backupText([archiveRow('2026-01-20')]);
+ await assert.rejects(business.downloadArchiveBackup('2026-01-20','2026-01-20'),/owner login/);
+ await assert.rejects(business.previewArchiveRestore(text),/owner login/);
+ await assert.rejects(business.restoreDailyArchive(text),/owner login/);
+ await admin.adminLogin('test-password-for-owner-only');
+ const before=writes;
+ for(const bad of ['bad json','x'.repeat(900001),text.replace('www.mobileworldfaridabad.com','other.example'),backupText([archiveRow(today)]),backupText([archiveRow('2026-01-20'),archiveRow('2026-01-20')]),backupText([{...archiveRow('2026-01-20'),visitor:'private-id'}]),backupText([{...archiveRow('2026-01-20'),pageViews:-1}]),backupText([{...archiveRow('2026-01-20'),totals:{password:1}}]),backupText([archiveRow('2026-01-20'),{...archiveRow('2026-01-21'),pages:[{label:'/admin/analytics',views:1,active:1}]}])]) {
+  await assert.rejects(business.restoreDailyArchive(bad));
+ }
+ assert.equal(writes,before);
+ assert.deepEqual(await business.previewArchiveRestore(text),{days:1,from:'2026-01-20',to:'2026-01-20',existing:0,missing:1});
+ assert.equal(writes,before);
+ await admin.adminLogout();
+});
+test('Archive recovery is private, concurrent-safe and retryable without overwriting existing days',async()=>{
+ const business=businessActions();
+ await admin.adminLogin('test-password-for-owner-only');
+ const row=archiveRow('2026-01-20'),text=backupText([row]);
+ const result=await Promise.all([business.restoreDailyArchive(text),business.restoreDailyArchive(text)]);
+ assert.equal(result.reduce((n,r)=>n+r.restored,0),1);assert.equal(result.reduce((n,r)=>n+r.skipped,0),1);
+ const key='analytics/archive/v1/2026-01-20.json',saved=files.get(key).text;
+ assert.equal(JSON.parse(saved).finalized,true);
+ const changed=backupText([{...row,pageViews:999}]);
+ assert.deepEqual(await business.restoreDailyArchive(changed),{restored:0,skipped:1,failed:0});
+ assert.equal(files.get(key).text,saved);
+ await load('lib/analytics/archive').archiveDay(row.day,[],true);
+ assert.equal(files.get(key).text,saved);
+ const exported=await business.downloadArchiveBackup(row.day,row.day);
+ assert.equal(JSON.parse(exported).rows.length,1);assert.equal(JSON.parse(exported).rows[0].pageViews,3);
+ for(const privateField of ['visitor','sessionId','journeys','encryptedKey']) assert.equal(exported.includes('"'+privateField+'"'),false);
+ const next=backupText([archiveRow('2026-01-21')]);
+ storageFailure=true;const failed=await load('lib/analytics/backup').restoreArchiveBackup(next);storageFailure=false;assert.deepEqual(failed,{restored:0,skipped:0,failed:1});
+ assert.deepEqual(await business.restoreDailyArchive(next),{restored:1,skipped:0,failed:0});
+ assert.deepEqual(await business.restoreDailyArchive(next),{restored:0,skipped:1,failed:0});
+ await admin.adminLogout();
+});
+
+test('Recovery validation reaches the client without leaking provider failures',async()=>{
+ const business=load('app/admin/business/actions');
+ await admin.adminLogin('test-password-for-owner-only');
+ const invalid=await business.previewArchiveRestore('invalid-json');
+ assert.equal(invalid.ok,false);assert.match(invalid.error,/Original JSON/);
+ const row={day:today,source:'Other',topic:'Release test',stage:'Enquiry',amount:null};
+ const result=await business.updateEnquiry(crypto.randomUUID(),{...row,day:'2026-99-99'},0);
+ assert.equal(result.ok,false);assert.match(result.error,/तारीख़/);
+ const backup=await business.downloadArchiveBackup('2026-99-99',today);
+ assert.equal(backup.ok,false);assert.match(backup.error,/अवधि/);
+ writeFailure=true;const unavailable=await business.updateEnquiry(crypto.randomUUID(),row,0);writeFailure=false;
+ assert.equal(unavailable.ok,false);assert.match(unavailable.error,/retry/);assert.equal(unavailable.error.includes('provider-internal'),false);
+ await admin.adminLogout();
 });
