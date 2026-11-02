@@ -592,6 +592,46 @@ Object.assign(verified17Ultra, {
   source: 'https://www.mi.com/in/product/xiaomi-17-ultra/specs/', checked: '2026-11-02',
   reasons: { camera: '1-inch main sensor और 200MP telephoto की जानकारी देखिए।', everyday: '6.9-inch display और 6000mAh battery को जानिए।', updates: 'Android 16 और HyperOS 3 की जानकारी देखिए।' },
 } satisfies Partial<PhoneModel>);
+const verifiedNote17 = xiaomiBrand.models.find(model => model.id === 'xiaomi-redmi-note-17')!;
+Object.assign(verifiedNote17, {
+  name: 'REDMI Note 17 5G',
+  image: '/images/redmi-note-17-official-colours.png',
+  imageAlt: 'REDMI Note 17 5G — Starlight Purple, Dark Night और Arctic Blue, official Xiaomi India image',
+  imageKind: undefined,
+  imageCaption: 'Xiaomi India की product image · दुकान का stock enquiry पर confirm होगा।',
+  imageSource: 'https://www.mi.com/in/product/redmi-note-17-5g/specs/',
+  gallery: [{ src: '/images/redmi-note-17-official-colours.png', alt: 'REDMI Note 17 5G के Starlight Purple, Dark Night और Arctic Blue colours' }],
+  display: '17.75 cm TrueColour AMOLED · 2396 × 1080 · up to 120 Hz',
+  camera: '50MP main · 8MP front · 1080p / 30 fps video',
+  processor: 'Snapdragon 4 Gen 4 · LPDDR4X · UFS 2.2',
+  power: '8000mAh silicon-carbon · 45W wired · up to 22.5W reverse wired charging',
+  software: 'HyperOS 3 / Android 16 · 4 years OS + 6 years security updates',
+  colours: [{ name: 'Starlight Purple', hex: '#c4b8dd' }, { name: 'Dark Night', hex: '#303033' }, { name: 'Arctic Blue', hex: '#b7dbe4' }],
+  variants: ['6GB / 128GB', '8GB / 128GB'],
+  note: '8000mAh battery और AMOLED display को जानिए। Colour, variant और दुकान के stock की पुष्टि enquiry पर होगी।',
+  source: 'https://www.mi.com/in/product/redmi-note-17-5g/specs/', checked: '2026-11-02',
+  reasons: { camera: '50MP camera और 1080p video की जानकारी देखिए।', everyday: '8000mAh battery और 45W charging को जानिए।', updates: 'Brand का 4 years OS और 6 years security support commitment देखिए।' },
+} satisfies Partial<PhoneModel>);
+const verifiedNote17ProMax = xiaomiBrand.models.find(model => model.id === 'xiaomi-redmi-note-17-pro-max')!;
+Object.assign(verifiedNote17ProMax, {
+  name: 'REDMI Note 17 Pro Max 5G',
+  image: '/images/redmi-note-17-pro-max-official-black.png',
+  imageAlt: 'REDMI Note 17 Pro Max 5G — Stealth Black rear view, official Xiaomi India image',
+  imageKind: undefined,
+  imageCaption: 'तस्वीर में Stealth Black का rear view है। दूसरे colour की पुष्टि enquiry पर कीजिए।',
+  imageSource: 'https://www.mi.com/in/product/redmi-note-17-pro-max-5g/specs/',
+  gallery: [{ src: '/images/redmi-note-17-pro-max-official-black.png', alt: 'REDMI Note 17 Pro Max 5G का Stealth Black rear view' }],
+  display: '6.83-inch AMOLED · 2772 × 1280 · up to 120 Hz',
+  camera: '50MP main OIS + 8MP ultra-wide · 32MP front · rear/front 4K / 30 fps',
+  processor: 'Snapdragon 6 Gen 5 · LPDDR5X · UFS 4.1',
+  power: '10000mAh silicon-carbon · 100W wired · up to 27W reverse wired charging',
+  software: 'HyperOS 3 / Android 16 · 4 years OS + 6 years security updates',
+  colours: [{ name: 'Stealth Black', hex: '#333335' }, { name: 'Matcha Green', hex: '#bac4ac' }, { name: 'Secret Sunrise', hex: '#f3e4db' }],
+  variants: ['8GB / 256GB', '12GB / 256GB'],
+  note: '10000mAh battery और 50MP OIS camera को जानिए। Colour, variant और दुकान के stock की पुष्टि enquiry पर होगी।',
+  source: 'https://www.mi.com/in/product/redmi-note-17-pro-max-5g/specs/', checked: '2026-11-02',
+  reasons: { camera: '50MP OIS और rear/front 4K video की जानकारी देखिए।', everyday: '10000mAh battery और 100W charging को जानिए।', updates: 'Brand का 4 years OS और 6 years security support commitment देखिए।' },
+} satisfies Partial<PhoneModel>);
 xiaomiBrand.image = verified17Ultra.image;
 xiaomiBrand.imageAlt = verified17Ultra.imageAlt;
 export const phoneModels:PhoneModel[]=phoneBrands.flatMap(x=>x.models);

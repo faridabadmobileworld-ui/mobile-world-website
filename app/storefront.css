@@ -49,6 +49,11 @@ main .panel:hover,main .post:hover,main .pc:hover,main .shot:hover,main .toc:hov
 .mw-model-card .mw-model-media img{width:100%;height:100%;object-fit:contain;padding:0;transform:none;mix-blend-mode:normal;transition:none;animation:none;filter:none}
 .mw-model-creative .mw-model-media .mw-brand{top:auto;bottom:8px;left:8px;font-size:9px}
 .mw-detail-image>img{height:auto;max-height:580px;aspect-ratio:1;object-fit:contain;background:#fff;transform:none;animation:none;filter:none}
+.mw-detail{grid-template-areas:"image intro" "image content";grid-template-rows:auto 1fr;row-gap:0}
+.mw-detail-intro{grid-area:intro;min-width:0;padding-right:25px}
+.mw-detail-image{grid-area:image;min-width:0}
+.mw-detail-content{grid-area:content;min-width:0}
+@media(max-width:760px){.mw-detail{grid-template-areas:"intro" "image" "content";grid-template-rows:auto;gap:20px}.mw-detail-image>img{height:250px;max-height:42dvh;aspect-ratio:auto}}
 .mw-gallery-thumbnails{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:14px 0}
 .mw-gallery-thumbnails button{width:70px;min-height:84px;padding:3px;border:2px solid #e3e5e9;border-radius:8px;background:#fff;overflow:hidden}
 .mw-gallery-thumbnails button[aria-pressed="true"]{border-color:#a71827}

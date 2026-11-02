@@ -185,6 +185,18 @@ test('India reference keeps unconfirmed fields and colour combinations empty, wi
     assert.equal((await actions.productReferenceDraft(id)).data.variants[0].storage, '512 GB');
   }
   assert.equal((await actions.productReferenceDraft('unverified-model')).data, null);
+  for (const id of ['xiaomi-redmi-note-17', 'xiaomi-redmi-note-17-pro-max']) {
+    const draft = (await actions.productReferenceDraft(id)).data;
+    core.validatePublication(draft);
+    assert.equal(Object.keys(draft.values).length, 86);
+    assert.equal(draft.values.spec_007, '');
+    assert.equal(draft.values.spec_062, '', 'unconfirmed eSIM stays empty');
+    assert.equal(draft.values.spec_067, '', 'unconfirmed NFC stays empty');
+    assert.equal(draft.variants.length, 2);
+    assert.ok(draft.variants.every(v => v.colour === '' && v.image === ''));
+    draft.values.spec_026 = 'Unsaved edit';
+    assert.notEqual((await actions.productReferenceDraft(id)).data.values.spec_026, 'Unsaved edit');
+  }
   assert.equal(writes, before);
   authenticated = false;
 });

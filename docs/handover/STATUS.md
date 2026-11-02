@@ -1,10 +1,10 @@
 # Mobile World execution status
 
-Checkpoint: 1 November 2026, Asia/Kolkata. Dated sections below distinguish earlier production evidence from the current continuation. This supersedes the older recovery-only checkpoint. Owner requested direct continuation and completion, not another handover. Keep the complete owner brief in OWNER-HANDOVER-2026-10-28.txt.
+Checkpoint: 2 November 2026, Asia/Kolkata. Dated sections below distinguish earlier production evidence from the current continuation. This supersedes the older recovery-only checkpoint. Owner requested direct continuation and completion, not another handover. Keep the complete owner brief in OWNER-HANDOVER-2026-10-28.txt.
 
 ## Source and release
 
-- Latest verified production application: 6b0fd4a71c2f7a02ccdd5f53ff26dbdb4de29cf2, tree ba992f886706bc7993815c32d5c5795f9df5d181, deployment dpl_9CTfyk61QoRcA5dcy53Kr4axL2c3. READY with both custom domains and no alias error on 1 November. This supersedes the dated 30 October release below.
+- Latest verified production application: 79934319e495a12fbd3375f1550b3cc1e297516c, tree c3bc3cf672b2a785ec4e5657c3c041bf2e1ee0de, deployment dpl_9anSeZQCbmAxVRFPoUGxNw6ebLL4. READY with both custom domains and no alias error on 2 November. Later candidate work is not production until its verification is recorded below.
 
 - Repo: faridabadmobileworld-ui/mobile-world-website. Working branch: codex/complete-owner-editor-20261029.
 - Pre-change production rollback: dpl_aaGzHrJnxrvidMDZAhrJpGsAJhMd, READY, www.mobileworldfaridabad.com and mobileworldfaridabad.com. Project prj_dplwsmDwQWMjfoePft2dDLIA3QDI, team faridabadmobileworld-2892.
@@ -35,7 +35,7 @@ Twelve equal checkpoints; completed / 12, rounded. These measure verified accept
 
 Current completed checkpoints: 8/12 = 67%. Checkpoints 6, 7, 9 and 11 remain incomplete. This is an acceptance count, not a claim that 67% of the site has been built.
 
-Catalogue phase remains separate: 1 source-audited model / 59 existing guide entries (Xiaomi 17T, 65 sourced fields and 21 blanks); 0 newly CMS-published detailed products. No fabricated specifications, stock combinations or fake production models were added. See ../XIAOMI-17T-INDIA-AUDIT.md.
+Catalogue phase remains separate: 3 source-audited models / 59 existing guide entries (Xiaomi 17T, Xiaomi 17 and Xiaomi 17 Ultra); 0 newly CMS-published detailed products. No fabricated specifications, stock combinations or fake production models were added. See ../XIAOMI-17T-INDIA-AUDIT.md and ../XIAOMI-17-INDIA-AUDIT.md. The two REDMI candidates below are not yet counted as accepted production.
 
 ## Checks and access
 
@@ -124,3 +124,22 @@ Catalogue phase remains separate: 1 source-audited model / 59 existing guide ent
 - Candidate checks passed: 30 catalogue/analytics tests plus 11 spin/reward tests = 41/41, TypeScript, ESLint and production build. The new references extend the existing no-write/unknown-field/isolation regression. Build succeeded without cache removal or dependency changes.
 - Current verified production before this candidate: main 6b0fd4a / dpl_9CTfyk61QoRcA5dcy53Kr4axL2c3. This is the immediate rollback checkpoint. Preview, source-tree equality and final live verification are recorded below only after completion.
 - Fixed acceptance remains 8/12 = 67%. Candidate catalogue coverage is 3/59 source-audited guides, 0 newly CMS-published details. Private owner flows and the complete responsive/private acceptance are not inferred from public guide work.
+
+## Xiaomi 17 release verified — 2 November 2026
+
+- GitHub main and working branch application commit: 79934319e495a12fbd3375f1550b3cc1e297516c. Local/remote source tree matches c3bc3cf672b2a785ec4e5657c3c041bf2e1ee0de. Local merge 892f7a6 preserves the local work history.
+- Preview dpl_FXMSyxVBujaLVgyCcBx2gGdY8eQD reached READY from that exact commit; protected fetches passed for /products, /admin/products and /sitemap.xml. All 59 guides and all three reference images were present, the owner boundary remained noindex, and unpublished details were absent from sitemap.
+- Production dpl_9anSeZQCbmAxVRFPoUGxNw6ebLL4 reached READY from main / 7993431, URL mobile-world-website-jxafl0fq3-faridabadmobileworld-2892.vercel.app. Both custom domains are assigned; aliasError is null. Live /products, /admin/products, /admin/business and /sitemap.xml returned 200 with the intended public/private boundaries.
+- Live Xiaomi 17 and Ultra dialogs displayed their sourced summaries and original manufacturer images. Selecting Venture Green + 12GB/512GB or Black + 16GB/512GB updated the enquiry href, with Devanagari Hindi and no repeated Xiaomi prefix. No WhatsApp message was sent. Desktop content width matched the 1353px viewport.
+- Four live dialog captures at 375×812 and 768×1024 were downloaded, PNG-validated and visually inspected. Images and text fit their viewport. Mobile initially placed the model name below the image/captions; a heading-order improvement is the next independent fix. These are scoped public layout checks, not full private/mobile acceptance.
+- Production error/fatal logs for the inspected 30-minute window returned no matches. 41/41 tests, TypeScript, ESLint and build passed. Immediate rollback: dpl_9CTfyk61QoRcA5dcy53Kr4axL2c3 / 6b0fd4a.
+- After the owner said analytics was open in their new tab, exact-tab lookup found no shared tab. A fresh canonical page showed Owner password. The secure browser-auth request timed out, and the required fresh-page verification still showed the login form. No signed-in state is claimed; no repeated manual handoff, direct secret entry or login bypass was attempted.
+- Accepted catalogue coverage is now 3/59 source-audited guides, 0 CMS-published details. Fixed acceptance remains 8/12 = 67%; owner login, Sanity credential connection, Windsor website sync and remaining private acceptance are still unresolved.
+
+## REDMI and mobile layout candidate — 2 November 2026
+
+- Added India-source reference drafts for REDMI Note 17 5G (53/86 populated, 33 empty) and REDMI Note 17 Pro Max 5G (59/86 populated, 27 empty). Both keep the existing guide IDs, all 59 catalogue entries, blank price, and memory-only variant preferences without fabricated colour/stock combinations. Loading a reference does not write to Sanity. See ../REDMI-NOTE-17-INDIA-AUDIT.md for source conflicts, unknown fields, manufacturer image provenance and hashes.
+- Existing public guide summaries now use the checked India specifications and unchanged original manufacturer PNGs. Pro Max's image is explicitly labelled Stealth Black rear view. Unverified capabilities are empty, not assumed No. Four years of OS support remains years, not Android generations.
+- ModelDetails puts the name and short introduction before the image on mobile, while retaining the two-column desktop arrangement. The 760px breakpoint matches the existing one-column layout; this avoids an implicit extra grid column between 701 and 760px. Image selection, variants and enquiry actions are unchanged.
+- Candidate validation: 41/41 isolated tests, TypeScript, ESLint and production build passed. The meaningful reference test also checks both new drafts for publication validation, 86 fields, blank unknowns, memory-only variants, copy isolation and zero CMS writes. No production customer, sale, reward or CMS record was created.
+- Immediate rollback before this candidate: main 79934319e495a12fbd3375f1550b3cc1e297516c / dpl_9anSeZQCbmAxVRFPoUGxNw6ebLL4. Preview and live mobile/tablet/desktop checks remain release gates. Source-audited catalogue will become 5/59 only after those checks; fixed acceptance remains 8/12 = 67%, with real owner-dependent flows still pending.
