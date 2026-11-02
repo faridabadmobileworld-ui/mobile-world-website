@@ -172,6 +172,18 @@ test('India reference keeps unconfirmed fields and colour combinations empty, wi
   assert.ok(reference.variants.every(v => v.colour === '' && v.ram === '12 GB'));
   reference.values.spec_026 = 'Edited in an unsaved draft';
   assert.equal((await actions.productReferenceDraft('xiaomi-xiaomi-17t')).data.values.spec_026, '12 GB');
+  for (const id of ['xiaomi-xiaomi-17-17t', 'xiaomi-xiaomi-17-ultra']) {
+    const draft = (await actions.productReferenceDraft(id)).data;
+    core.validatePublication(draft);
+    assert.equal(Object.keys(draft.values).length, 86);
+    assert.equal(draft.values.spec_007, '', 'no public/store price inferred from manufacturer pricing');
+    assert.equal(draft.values.spec_083, '', 'uncertain box charger must remain unknown, not No');
+    assert.equal(draft.variants.length, 1);
+    assert.equal(draft.variants[0].storage, '512 GB', 'conflicting/unconfirmed storage options are excluded');
+    assert.equal(draft.variants[0].colour, '', 'model colours are not proof of every SKU combination');
+    draft.variants[0].storage = 'Unsaved edit';
+    assert.equal((await actions.productReferenceDraft(id)).data.variants[0].storage, '512 GB');
+  }
   assert.equal((await actions.productReferenceDraft('unverified-model')).data, null);
   assert.equal(writes, before);
   authenticated = false;

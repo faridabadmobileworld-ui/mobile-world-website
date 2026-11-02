@@ -553,9 +553,58 @@ Object.assign(verified17T, {
   source: 'https://www.mi.com/in/product/xiaomi-17t/specs/', checked: '2026-11-01',
   reasons: { camera: 'Leica main और 5× telephoto cameras को जानिए।', everyday: '6.59-inch display और 6500mAh battery की जानकारी देखिए।', updates: '4 Android generations और 6 years security support का brand commitment।' },
 } satisfies Partial<PhoneModel>);
+// India references checked on 2 November 2026. Existing IDs remain stable.
+const verified17 = xiaomiBrand.models.find(model => model.id === 'xiaomi-xiaomi-17-17t')!;
+Object.assign(verified17, {
+  image: '/images/xiaomi-17-official-colours.png',
+  imageAlt: 'Xiaomi 17 — Ice Blue, Venture Green और Black, official Xiaomi India product image',
+  imageKind: undefined,
+  imageCaption: 'Xiaomi India की product image · दुकान का stock enquiry पर confirm होगा।',
+  imageSource: 'https://www.mi.com/in/product/xiaomi-17/specs/',
+  gallery: [{ src: '/images/xiaomi-17-official-colours.png', alt: 'Xiaomi 17 के Ice Blue, Venture Green और Black colours' }],
+  display: '16 cm CrystalRes OLED · 2656 × 1220 · 1–120 Hz',
+  camera: '50MP main OIS + 50MP 60mm telephoto OIS + 50MP ultra-wide · 50MP autofocus front',
+  processor: 'Snapdragon 8 Elite Gen 5 · 12GB LPDDR5X · UFS 4.1',
+  power: '6330mAh · 100W wired · 50W wireless charging',
+  software: 'HyperOS 3 / Android 16',
+  colours: [{ name: 'Ice Blue', hex: '#c5e1e9' }, { name: 'Venture Green', hex: '#526b58' }, { name: 'Black', hex: '#242428' }],
+  variants: ['12GB / 512GB'],
+  note: 'Leica cameras और 16 cm OLED display को जानिए। Colour, variant और दुकान के stock की पुष्टि enquiry पर होगी।',
+  source: 'https://www.mi.com/in/product/xiaomi-17/specs/', checked: '2026-11-02',
+  reasons: { camera: '50MP Leica cameras और 60mm floating telephoto की जानकारी देखिए।', everyday: '16 cm display और 6330mAh battery को जानिए।', updates: 'Android 16 और HyperOS 3 की जानकारी देखिए।' },
+} satisfies Partial<PhoneModel>);
+const verified17Ultra = xiaomiBrand.models.find(model => model.id === 'xiaomi-xiaomi-17-ultra')!;
+Object.assign(verified17Ultra, {
+  image: '/images/xiaomi-17-ultra-official-colours.png',
+  imageAlt: 'Xiaomi 17 Ultra — White और Black, official Xiaomi India product image',
+  imageKind: undefined,
+  imageCaption: 'Xiaomi India की product image · दुकान का stock enquiry पर confirm होगा।',
+  imageSource: 'https://www.mi.com/in/product/xiaomi-17-ultra/specs/',
+  gallery: [{ src: '/images/xiaomi-17-ultra-official-colours.png', alt: 'Xiaomi 17 Ultra के White और Black colours' }],
+  display: '6.9-inch HyperRGB OLED · 2608 × 1200 · 1–120 Hz',
+  camera: '50MP main OIS + 200MP 75–100mm telephoto OIS + 50MP ultra-wide · 50MP autofocus front',
+  processor: 'Snapdragon 8 Elite Gen 5 · 16GB LPDDR5X · UFS 4.1',
+  power: '6000mAh · 90W wired · 50W wireless charging',
+  software: 'HyperOS 3 / Android 16',
+  colours: [{ name: 'White', hex: '#d6d6d6' }, { name: 'Black', hex: '#242428' }],
+  variants: ['16GB / 512GB'],
+  note: 'Leica cameras और 75–100mm continuous optical zoom को जानिए। Colour, variant और दुकान के stock की पुष्टि enquiry पर होगी।',
+  source: 'https://www.mi.com/in/product/xiaomi-17-ultra/specs/', checked: '2026-11-02',
+  reasons: { camera: '1-inch main sensor और 200MP telephoto की जानकारी देखिए।', everyday: '6.9-inch display और 6000mAh battery को जानिए।', updates: 'Android 16 और HyperOS 3 की जानकारी देखिए।' },
+} satisfies Partial<PhoneModel>);
+xiaomiBrand.image = verified17Ultra.image;
+xiaomiBrand.imageAlt = verified17Ultra.imageAlt;
 export const phoneModels:PhoneModel[]=phoneBrands.flatMap(x=>x.models);
 export const availablePhoneModels=phoneModels.filter(x=>x.status!=="upcoming");
 export const upcomingPhoneModels:PhoneModel[]=[];
 export function validModelIds(value:string|null):string[]{return[...new Set((value??"").split(","))].filter(id=>phoneModels.some(p=>p.id===id)).slice(0,phoneModels.length)}
 export function recommendPhones(system:string):PhoneModel[]{const base=availablePhoneModels.filter(p=>system==="any"||p.system===system);return base.slice(0,4)}
-export function modelEnquiry(models:PhoneModel[],details=""):string{const names=models.map((p,i)=>(i+1)+". "+p.brand+" "+p.name).join("\n");return shop.phone.whatsapp+"?text="+encodeURIComponent("Namaste Mobile World! My selected models:\n"+names+"\n"+details)}
+export function modelDisplayName(model: Pick<PhoneModel, 'brand' | 'name'>): string {
+  const name = model.name.trim(), brand = model.brand.trim();
+  const prefixes = [brand, brand.split(/\s+/).at(-1) ?? ''].filter(Boolean);
+  return prefixes.some(prefix => name.toLowerCase() === prefix.toLowerCase() || name.toLowerCase().startsWith(prefix.toLowerCase() + ' ')) ? name : `${brand} ${name}`.trim();
+}
+export function modelEnquiry(models: PhoneModel[], details = ''): string {
+  const names = models.map((model, index) => `${index + 1}. ${modelDisplayName(model)}`).join('\n');
+  return shop.phone.whatsapp + '?text=' + encodeURIComponent(`नमस्ते Mobile World! मुझे इन models की जानकारी चाहिए:\n${names}${details ? '\n' + details : ''}`);
+}
