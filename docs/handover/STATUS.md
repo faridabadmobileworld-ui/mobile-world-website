@@ -1,10 +1,10 @@
 # Mobile World execution status
 
-Checkpoint: 2 November 2026, Asia/Kolkata. Dated sections below distinguish earlier production evidence from the current continuation. This supersedes the older recovery-only checkpoint. Owner requested direct continuation and completion, not another handover. Keep the complete owner brief in OWNER-HANDOVER-2026-10-28.txt.
+Checkpoint: 3 November 2026, Asia/Kolkata. Dated sections below distinguish earlier production evidence from the current continuation. This supersedes the older recovery-only checkpoint. Owner requested direct continuation and completion, not another handover. Keep the complete owner brief in OWNER-HANDOVER-2026-10-28.txt.
 
 ## Source and release
 
-- Latest verified production application: f8c70c5f9cc8ec8f5cbecb36168e3e041a5840eb, tree 07e0742fb3ebdc15c23af18614a18234b5a57aed, deployment dpl_8ckh1urDqirGiAq1zU47ZVExqvR7. READY with both custom domains and no alias error on 2 November. Later candidate work is not production until its verification is recorded below.
+- Latest verified production application: 588d481564119e89b18819b9a2ab66e8deff5d38, tree e5e39df18167c80d6f16aaf2dab2ad0a48ce2dbe, deployment dpl_CsSJ7oM6xupTDRww7ugH167bmq3B. READY with both custom domains and no alias error on 3 November. Later candidate work is not production until its verification is recorded below.
 
 - Repo: faridabadmobileworld-ui/mobile-world-website. Working branch: codex/complete-owner-editor-20261029.
 - Pre-change production rollback: dpl_aaGzHrJnxrvidMDZAhrJpGsAJhMd, READY, www.mobileworldfaridabad.com and mobileworldfaridabad.com. Project prj_dplwsmDwQWMjfoePft2dDLIA3QDI, team faridabadmobileworld-2892.
@@ -35,7 +35,7 @@ Twelve equal checkpoints; completed / 12, rounded. These measure verified accept
 
 Current completed checkpoints: 8/12 = 67%. Checkpoints 6, 7, 9 and 11 remain incomplete. This is an acceptance count, not a claim that 67% of the site has been built.
 
-Catalogue phase remains separate: 5 source-audited models / 59 existing guide entries (Xiaomi 17T, Xiaomi 17, Xiaomi 17 Ultra, REDMI Note 17 5G and REDMI Note 17 Pro Max 5G); 0 newly CMS-published detailed products. No fabricated specifications, stock combinations or fake production models were added. See ../XIAOMI-17T-INDIA-AUDIT.md and ../XIAOMI-17-INDIA-AUDIT.md. The two REDMI candidates below have now passed the recorded production checks; see ../REDMI-NOTE-17-INDIA-AUDIT.md.
+Catalogue phase remains separate: 8 source-audited models / 59 existing guide entries; 0 newly CMS-published detailed products. The eight checked models are Xiaomi 17T, Xiaomi 17, Xiaomi 17 Ultra, REDMI Note 17, Note 17 Pro, Note 17 Pro Max, REDMI 17 and REDMI 17C. Source evidence and empty fields are documented in the four India audit files. Accepted guide coverage does not establish CMS publication or shop stock.
 
 ## Checks and access
 
@@ -161,3 +161,14 @@ Catalogue phase remains separate: 5 source-audited models / 59 existing guide en
 - Note 17 Pro and REDMI 17 use new unchanged manufacturer PNGs, both visually inspected. The existing 17C original PNG matches the current manufacturer download byte-for-byte and is reused. No existing image or owner artwork is deleted.
 - Candidate tests: 41/41, TypeScript, ESLint and production build pass. The existing authenticated reference regression now validates all eight source references and confirms copy isolation and no CMS writes. This change touches no login, reward, enquiry, archive or credential code.
 - Immediate rollback is production dpl_8ckh1urDqirGiAq1zU47ZVExqvR7 / main f8c70c5f9cc8ec8f5cbecb36168e3e041a5840eb. Accepted coverage is still 5/59 until preview/live checks complete; candidate coverage is 8/59. Fixed acceptance remains 8/12 = 67%; CMS details 0.
+
+
+## Extended REDMI release verified — 3 November 2026
+
+- GitHub main application commit 588d481564119e89b18819b9a2ab66e8deff5d38. Exact local/remote source tree e5e39df18167c80d6f16aaf2dab2ad0a48ce2dbe. Local merge 4faaa9c retained the tested local history and all pre-existing untracked video temporary files.
+- Preview dpl_7Y5KxqZ1x9stZEZKXT5ynr49D3QC reached READY from the exact application commit. Protected /products, /admin/products and /sitemap.xml returned 200 with all 59 guides, three official images, capacity-specific UFS versions, corrected 17C resolution, noindex owner boundary and no unpublished detail URLs.
+- Production dpl_CsSJ7oM6xupTDRww7ugH167bmq3B reached READY from main / 588d481. URL mobile-world-website-4ghzo9qu8-faridabadmobileworld-2892.vercel.app. Both custom domains and existing Vercel aliases were assigned; aliasError null. Live products, admin/products, admin/business and sitemap checks all passed.
+- PNG screenshots at 375x812 for Note 17 Pro and REDMI 17, and 768x1024 for REDMI 17C were downloaded, decoded and visually inspected. Model headings precede the images on mobile; tablet image/text columns, controls and internal 17C offer-blog destination fit. A settled follow-up capture was used to resolve an incomplete initial heading paint. This does not replace pending authenticated private/mobile interaction acceptance.
+- Existing 41/41 isolated tests, TypeScript, ESLint and production build passed for this source. The production error/fatal query for 02:16-02:46 UTC on 3 November returned no matching entries. No production customer, enquiry, sale, reward or CMS document was created.
+- Immediate rollback: dpl_8ckh1urDqirGiAq1zU47ZVExqvR7 / f8c70c5. Source-audited catalogue coverage is now 8/59, with 51 remaining guides not yet accepted as fully source-audited; CMS-published details remain 0. Fixed acceptance is still 8/12 = 67%.
+- User received the task/status table in chat. Progress is tracked in chat and this record; no website progress-bar feature is claimed. The remaining four acceptance checkpoints are real Sanity connection/publication, Windsor website sync plus scheduled verification, live private enquiry/archive restore, and complete public/private responsive regression. Latest observed cloud owner session showed the password form; earlier user-local login did not establish shared cloud authorization. Do not repeat the failed handoff or reset credentials.
