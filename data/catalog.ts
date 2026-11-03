@@ -716,6 +716,30 @@ for (const [id, size, resolution, hours, finish] of [
     reasons: { camera: '48MP camera system और variable aperture की जानकारी देखिए।', everyday: `${size}-inch display और video playback claim को जानिए।`, updates: 'Current iOS और Apple की feature availability देखिए।' },
   } satisfies Partial<PhoneModel>);
 }
+// Google Store India lists one memory option per Pro model in this audit.
+for (const [id, size, resolution, capacity, watts, colours] of [
+  ['google-pixel-10-pro', '6.3', '1280 × 2856', '4870', '15', ['Moonstone', 'Jade', 'Porcelain', 'Obsidian']],
+  ['google-pixel-10-pro-xl', '6.8', '1344 × 2992', '5200', '25', ['Moonstone', 'Jade', 'Obsidian']],
+] as const) {
+  const model = phoneBrands.find(brand => brand.slug === 'google')!.models.find(model => model.id === id)!;
+  const file = `/images/${id.slice(7)}-official-moonstone.webp`;
+  Object.assign(model, {
+    image: file, imageAlt: `${model.name} — Moonstone front and rear, original Google Store India image`, imageKind: undefined,
+    imageCaption: 'तस्वीर में Moonstone colour है। दूसरे colour और दुकान के stock की पुष्टि enquiry पर कीजिए।',
+    imageSource: 'https://store.google.com/in/product/pixel_10_pro?hl=en-IN',
+    gallery: [{ src: file, alt: `${model.name} का Moonstone front और rear view · original Google image` }],
+    display: `${size}-inch Super Actua LTPO OLED · ${resolution} · 1–120 Hz`,
+    camera: '50MP wide + 48MP ultra-wide + 48MP 5x telephoto · 42MP front',
+    processor: 'Google Tensor G5 · Titan M2 · 16GB RAM / 256GB storage',
+    power: `${capacity}mAh typical · USB-C PPS fast charging · Pixelsnap / Qi2 up to ${watts}W`,
+    software: 'Android 16 at launch · 7 years OS/security/Pixel Drop updates, पहली US availability से',
+    colours: colours.map(name => ({ name, hex: ({ Moonstone: '#949ba7', Jade: '#b9cbb7', Porcelain: '#eee9dd', Obsidian: '#303033' } as Record<string, string>)[name] })),
+    variants: ['16GB / 256GB'],
+    note: `${model.name} की India specifications देखिए। Colour, variant और दुकान के stock की पुष्टि enquiry पर होगी।`,
+    source: 'https://store.google.com/in/product/pixel_10_pro_specs?hl=en-IN', checked: '2026-11-03',
+    reasons: { camera: '5x optical telephoto और 42MP autofocus selfie camera को जानिए।', everyday: `${capacity}mAh battery और ${size}-inch display की जानकारी देखिए।`, updates: 'Google का 7 years OS और security support commitment देखिए।' },
+  } satisfies Partial<PhoneModel>);
+}
 xiaomiBrand.image = verified17Ultra.image;
 xiaomiBrand.imageAlt = verified17Ultra.imageAlt;
 export const phoneModels:PhoneModel[]=phoneBrands.flatMap(x=>x.models);

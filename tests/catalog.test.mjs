@@ -210,6 +210,20 @@ test('India reference keeps unconfirmed fields and colour combinations empty, wi
     draft.variants[0].storage = 'Unsaved change';
     assert.equal((await actions.productReferenceDraft(id)).data.variants[0].storage, '256 GB');
   }
+  for (const id of ['google-pixel-10-pro', 'google-pixel-10-pro-xl']) {
+    const result = await actions.productReferenceDraft(id);
+    assert.equal(result.ok, true, result.error);
+    const draft = result.data;
+    core.validatePublication(draft);
+    assert.equal(Object.keys(draft.values).length, 86);
+    assert.equal(draft.values.spec_007, '');
+    assert.equal(draft.values.spec_027, '', 'unconfirmed RAM type stays empty');
+    assert.equal(draft.values.spec_081, '', 'phone warranty does not establish battery warranty');
+    assert.equal(draft.variants.length, 1, 'India source only corroborates 16/256');
+    assert.deepEqual([draft.variants[0].ram, draft.variants[0].storage, draft.variants[0].colour], ['16 GB', '256 GB', '']);
+    draft.values.spec_026 = 'Unsaved change';
+    assert.equal((await actions.productReferenceDraft(id)).data.values.spec_026, '16 GB');
+  }
   assert.equal(writes, before);
   authenticated = false;
 });
