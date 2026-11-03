@@ -138,7 +138,6 @@ function SpinWheelContent({ enabled, note }: { enabled: boolean; note: string })
         </form>}
       </div>
     </div>
-    <p className="spin-eligibility">नए codes: ₹5,000 से अधिक के Mobile, Laptop, Electronics या Home Appliance पर · एक product, एक code।</p>
 
   </section>;
 }

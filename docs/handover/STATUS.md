@@ -4,7 +4,7 @@ Checkpoint: 3 November 2026, Asia/Kolkata. Dated sections below distinguish earl
 
 ## Source and release
 
-- Latest verified production application: 67e32d0e359b46ae2bd99903bf0e796bb7192f72, tree 51fa5d42b36739aced7397baece9189bd73c7d7f, deployment dpl_AjrnUntdMCMngi2B4SoU3fgExPSG. READY with both custom domains and no alias error on 3 November. Later candidate work is not production until its verification is recorded below.
+- Latest verified production application: 79b09898ccda9c39306941a0879664dd8e0002ce, tree 37be989719a3c92cfb05d1e107c7bd43e1d41d0d, deployment dpl_3xQfGV1RrYRnq3DtAhAe8djcaBxg. READY with both custom domains and no alias error on 3 November. Later candidate work is not production until its verification is recorded below.
 
 - Repo: faridabadmobileworld-ui/mobile-world-website. Working branch: codex/complete-owner-editor-20261029.
 - Pre-change production rollback: dpl_aaGzHrJnxrvidMDZAhrJpGsAJhMd, READY, www.mobileworldfaridabad.com and mobileworldfaridabad.com. Project prj_dplwsmDwQWMjfoePft2dDLIA3QDI, team faridabadmobileworld-2892.
@@ -192,3 +192,13 @@ Catalogue phase remains separate: 10 source-audited models / 59 existing guide e
 - 41/41 isolated tests, TypeScript, ESLint and production build passed. Source-audited guide coverage is now 10/59; 49 guides remain to audit. CMS-published details remain 0. Acceptance is 8/12 = 67%. Immediate Apple rollback: dpl_CsSJ7oM6xupTDRww7ugH167bmq3B / 588d481.
 - Next independent issue found: OnePlus, POCO and iQOO have existing catalogue brands but were missing from the Home Selected Models navigation. Added their existing brand-filter destinations. Verified local logos are not available for these three, so ordinary readable names render in the same cards; no fabricated logo or empty Image src is used. All ten existing logo cards remain intact.
 - Home candidate checks pass 41/41 tests, TypeScript, ESLint and production build. Current tested production / rollback for this candidate is dpl_AjrnUntdMCMngi2B4SoU3fgExPSG / 67e32d0. Preview and live responsive/navigation checks remain required.
+
+
+## Home brand navigation verified; Spin copy candidate — 3 November 2026
+
+- Home release main 79b09898ccda9c39306941a0879664dd8e0002ce, exact source tree 37be989719a3c92cfb05d1e107c7bd43e1d41d0d. Preview dpl_3b73RoczCh65JZbaxdV2gCxWPf12 passed and production dpl_3xQfGV1RrYRnq3DtAhAe8djcaBxg is READY from the exact main SHA. Both custom domains and existing aliases assigned; aliasError null.
+- Live Home contains 13 brand cards, including working OnePlus/POCO/iQOO filter destinations, with no empty image src. Filter fetches returned 200 and 3/4/3 existing model guides respectively. A real browser click from Home opened /products?brand=oneplus#smartphones, with OnePlus selected and three model guides. The 13 desktop cards measured 224x128 pixels; document and viewport width both 1353px. The mobile Home screenshot fits 375px; its anchor capture remained at page top, so no claim is made that it visually verified the lower brand grid.
+- Home release passes 41/41 tests, TypeScript, lint and production build. Production error/fatal query over 03:12-03:42 UTC returned no matches. Immediate rollback is dpl_AjrnUntdMCMngi2B4SoU3fgExPSG / 67e32d0. Fixed acceptance 8/12 = 67%; catalogue 10/59, CMS details 0.
+- Further live inspection found a public Spin eligibility paragraph despite the owner's instruction to remove visible rules clutter. Candidate removes only that JSX paragraph. Backend >5000/category/uniqueness/redemption checks, historical issued-code rules and privacy notice are unchanged. No live spin was performed and no reward was issued or redeemed.
+- Candidate checks: 41/41 isolated tests, TypeScript, ESLint and build pass, including the existing backend threshold test rejecting 5000 and accepting eligible fixtures above it. Current rollback is Home production dpl_3xQfGV1RrYRnq3DtAhAe8djcaBxg / 79b0989. Preview/live removal still needs verification.
+- Google Pixel 10 Pro/XL India source research has begun. The checked India specifications list only 16/256 for both; global storage options must not be copied into India references. No Google candidate or accepted count is claimed yet; exact image provenance still needs resolving. The ordinary Pixel 10 specification lookup returned a consent-redirect retrieval error; it was not retried or treated as bot detection.
