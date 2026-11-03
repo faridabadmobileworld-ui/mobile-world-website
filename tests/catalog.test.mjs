@@ -185,7 +185,7 @@ test('India reference keeps unconfirmed fields and colour combinations empty, wi
     assert.equal((await actions.productReferenceDraft(id)).data.variants[0].storage, '512 GB');
   }
   assert.equal((await actions.productReferenceDraft('unverified-model')).data, null);
-  for (const id of ['xiaomi-redmi-note-17', 'xiaomi-redmi-note-17-pro-max']) {
+  for (const id of ['xiaomi-redmi-note-17', 'xiaomi-redmi-note-17-pro-max', 'xiaomi-redmi-note-17-pro', 'xiaomi-redmi-17', 'xiaomi-redmi-17c-5g']) {
     const draft = (await actions.productReferenceDraft(id)).data;
     core.validatePublication(draft);
     assert.equal(Object.keys(draft.values).length, 86);

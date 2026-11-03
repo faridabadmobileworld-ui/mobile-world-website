@@ -632,6 +632,62 @@ Object.assign(verifiedNote17ProMax, {
   source: 'https://www.mi.com/in/product/redmi-note-17-pro-max-5g/specs/', checked: '2026-11-02',
   reasons: { camera: '50MP OIS और rear/front 4K video की जानकारी देखिए।', everyday: '10000mAh battery और 100W charging को जानिए।', updates: 'Brand का 4 years OS और 6 years security support commitment देखिए।' },
 } satisfies Partial<PhoneModel>);
+const verifiedNote17Pro = xiaomiBrand.models.find(model => model.id === 'xiaomi-redmi-note-17-pro')!;
+Object.assign(verifiedNote17Pro, {
+  name: 'REDMI Note 17 Pro 5G',
+  image: '/images/redmi-note-17-pro-official-colours.png',
+  imageAlt: 'REDMI Note 17 Pro 5G — Stealth Black, Purple Vibe और Cloud Blue, official Xiaomi India image',
+  imageKind: undefined,
+  imageCaption: 'Xiaomi India की product image · दुकान का stock enquiry पर confirm होगा।',
+  imageSource: 'https://www.mi.com/in/product/redmi-note-17-pro-5g/specs/',
+  gallery: [{ src: '/images/redmi-note-17-pro-official-colours.png', alt: 'REDMI Note 17 Pro 5G के Stealth Black, Purple Vibe और Cloud Blue colours' }],
+  display: '6.83-inch AMOLED · 2772 × 1280 · up to 120 Hz',
+  camera: '50MP main OIS + 8MP ultra-wide · 16MP front · 1080p / 30 fps video',
+  processor: 'Snapdragon 6s Gen 4 · LPDDR4X · 128GB: UFS 2.2 / 256GB: UFS 3.1',
+  power: '9000mAh silicon-carbon · 67W wired · up to 22.5W reverse wired charging',
+  software: 'HyperOS 3 / Android 16 · 4 years OS + 6 years security updates',
+  colours: [{ name: 'Purple Vibe', hex: '#c5b6d4' }, { name: 'Cloud Blue', hex: '#bfd9ed' }, { name: 'Stealth Black', hex: '#333335' }],
+  variants: ['8GB / 128GB', '8GB / 256GB'],
+  note: '9000mAh battery और 50MP OIS camera को जानिए। 128GB और 256GB variants की storage technology अलग है।',
+  source: 'https://www.mi.com/in/product/redmi-note-17-pro-5g/specs/', checked: '2026-11-02',
+  reasons: { camera: '50MP OIS और 16MP selfie camera की जानकारी देखिए।', everyday: '9000mAh battery और 67W charging को जानिए।', updates: 'Brand का 4 years OS और 6 years security support commitment देखिए।' },
+} satisfies Partial<PhoneModel>);
+const verifiedRedmi17 = xiaomiBrand.models.find(model => model.id === 'xiaomi-redmi-17')!;
+Object.assign(verifiedRedmi17, {
+  name: 'REDMI 17 5G',
+  image: '/images/redmi-17-official-colours.png',
+  imageAlt: 'REDMI 17 5G — Absolute Black, Endless Blue और Eternal Orange, official Xiaomi India image',
+  imageKind: undefined,
+  imageCaption: 'Xiaomi India की product image · दुकान का stock enquiry पर confirm होगा।',
+  imageSource: 'https://www.mi.com/in/product/redmi-17-5g/specs/',
+  gallery: [{ src: '/images/redmi-17-official-colours.png', alt: 'REDMI 17 5G के Absolute Black, Endless Blue और Eternal Orange colours' }],
+  display: '6.9-inch HD+ · up to 120 Hz · Gorilla Glass 7i',
+  camera: '50MP main · 8MP front',
+  processor: 'Snapdragon 4 Gen 5 · LPDDR4X · UFS 2.2',
+  power: '7900mAh · 45W wired · up to 22.5W reverse wired charging',
+  software: 'HyperOS 3 / Android 16 · 4 years OS + 6 years security updates',
+  colours: [{ name: 'Absolute Black', hex: '#333335' }, { name: 'Endless Blue', hex: '#4a6497' }, { name: 'Eternal Orange', hex: '#ed8866' }],
+  variants: ['6GB / 128GB', '8GB / 128GB'],
+  note: '7900mAh battery और Snapdragon 4 Gen 5 की जानकारी देखिए। Colour, variant और दुकान के stock की पुष्टि enquiry पर होगी।',
+  source: 'https://www.mi.com/in/product/redmi-17-5g/specs/', checked: '2026-11-02',
+  reasons: { camera: '50MP main और 8MP front camera को जानिए।', everyday: '7900mAh battery और 120Hz display की जानकारी देखिए।', updates: 'Brand का 4 years OS और 6 years security support commitment देखिए।' },
+} satisfies Partial<PhoneModel>);
+const verifiedRedmi17c = xiaomiBrand.models.find(model => model.id === 'xiaomi-redmi-17c-5g')!;
+Object.assign(verifiedRedmi17c, {
+  image: '/images/redmi-17c-official-colours.png',
+  imageAlt: 'REDMI 17C 5G — Dark Night, Coffee Brew और Purple Dawn, official Xiaomi India image',
+  imageKind: undefined,
+  imageCaption: 'Xiaomi India की original product image · colour और दुकान के stock की पुष्टि enquiry पर कीजिए।',
+  imageSource: 'https://www.mi.com/in/product/redmi-17c-5g/specs/',
+  gallery: [{ src: '/images/redmi-17c-official-colours.png', alt: 'REDMI 17C 5G के Dark Night, Coffee Brew और Purple Dawn colours' }],
+  display: '6.9-inch HD+ · 1600 × 720 · up to 120 Hz',
+  camera: '50MP main · 8MP front · 1080p / 30 fps video',
+  processor: 'MediaTek Dimensity 6300 · LPDDR4X · UFS 2.2',
+  power: '6000mAh · 33W wired · 10W reverse wired charging · 33W charger in box',
+  software: 'HyperOS 3 / Android 16 · 2 years OS + 4 years security updates',
+  checked: '2026-11-02',
+  reasons: { camera: '50MP camera और 1080p video को जानिए।', everyday: '6000mAh battery और 120Hz display की जानकारी देखिए।', updates: 'Brand का 2 years OS और 4 years security support commitment देखिए।' },
+} satisfies Partial<PhoneModel>);
 xiaomiBrand.image = verified17Ultra.image;
 xiaomiBrand.imageAlt = verified17Ultra.imageAlt;
 export const phoneModels:PhoneModel[]=phoneBrands.flatMap(x=>x.models);

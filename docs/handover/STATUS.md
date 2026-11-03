@@ -4,7 +4,7 @@ Checkpoint: 2 November 2026, Asia/Kolkata. Dated sections below distinguish earl
 
 ## Source and release
 
-- Latest verified production application: 79934319e495a12fbd3375f1550b3cc1e297516c, tree c3bc3cf672b2a785ec4e5657c3c041bf2e1ee0de, deployment dpl_9anSeZQCbmAxVRFPoUGxNw6ebLL4. READY with both custom domains and no alias error on 2 November. Later candidate work is not production until its verification is recorded below.
+- Latest verified production application: f8c70c5f9cc8ec8f5cbecb36168e3e041a5840eb, tree 07e0742fb3ebdc15c23af18614a18234b5a57aed, deployment dpl_8ckh1urDqirGiAq1zU47ZVExqvR7. READY with both custom domains and no alias error on 2 November. Later candidate work is not production until its verification is recorded below.
 
 - Repo: faridabadmobileworld-ui/mobile-world-website. Working branch: codex/complete-owner-editor-20261029.
 - Pre-change production rollback: dpl_aaGzHrJnxrvidMDZAhrJpGsAJhMd, READY, www.mobileworldfaridabad.com and mobileworldfaridabad.com. Project prj_dplwsmDwQWMjfoePft2dDLIA3QDI, team faridabadmobileworld-2892.
@@ -35,7 +35,7 @@ Twelve equal checkpoints; completed / 12, rounded. These measure verified accept
 
 Current completed checkpoints: 8/12 = 67%. Checkpoints 6, 7, 9 and 11 remain incomplete. This is an acceptance count, not a claim that 67% of the site has been built.
 
-Catalogue phase remains separate: 3 source-audited models / 59 existing guide entries (Xiaomi 17T, Xiaomi 17 and Xiaomi 17 Ultra); 0 newly CMS-published detailed products. No fabricated specifications, stock combinations or fake production models were added. See ../XIAOMI-17T-INDIA-AUDIT.md and ../XIAOMI-17-INDIA-AUDIT.md. The two REDMI candidates below are not yet counted as accepted production.
+Catalogue phase remains separate: 5 source-audited models / 59 existing guide entries (Xiaomi 17T, Xiaomi 17, Xiaomi 17 Ultra, REDMI Note 17 5G and REDMI Note 17 Pro Max 5G); 0 newly CMS-published detailed products. No fabricated specifications, stock combinations or fake production models were added. See ../XIAOMI-17T-INDIA-AUDIT.md and ../XIAOMI-17-INDIA-AUDIT.md. The two REDMI candidates below have now passed the recorded production checks; see ../REDMI-NOTE-17-INDIA-AUDIT.md.
 
 ## Checks and access
 
@@ -143,3 +143,21 @@ Catalogue phase remains separate: 3 source-audited models / 59 existing guide en
 - ModelDetails puts the name and short introduction before the image on mobile, while retaining the two-column desktop arrangement. The 760px breakpoint matches the existing one-column layout; this avoids an implicit extra grid column between 701 and 760px. Image selection, variants and enquiry actions are unchanged.
 - Candidate validation: 41/41 isolated tests, TypeScript, ESLint and production build passed. The meaningful reference test also checks both new drafts for publication validation, 86 fields, blank unknowns, memory-only variants, copy isolation and zero CMS writes. No production customer, sale, reward or CMS record was created.
 - Immediate rollback before this candidate: main 79934319e495a12fbd3375f1550b3cc1e297516c / dpl_9anSeZQCbmAxVRFPoUGxNw6ebLL4. Preview and live mobile/tablet/desktop checks remain release gates. Source-audited catalogue will become 5/59 only after those checks; fixed acceptance remains 8/12 = 67%, with real owner-dependent flows still pending.
+
+## REDMI and mobile layout release verified — 2 November 2026
+
+- GitHub main and release branch application commit f8c70c5f9cc8ec8f5cbecb36168e3e041a5840eb. Exact local/remote source tree 07e0742fb3ebdc15c23af18614a18234b5a57aed. Local history was merged without reset; pre-existing video temporary files were not staged or removed.
+- Preview dpl_CAzCikXeyjPU3t2f5Lqhj3m8AJMA reached READY from the exact source. /products, /admin/products and /sitemap.xml returned 200; both new official images/spec summaries were present, all 59 guides remained, the Product Editor stayed behind the noindex owner-login boundary and unpublished details stayed out of sitemap.
+- Production dpl_8ckh1urDqirGiAq1zU47ZVExqvR7 reached READY from main / f8c70c5. URL mobile-world-website-jxz80gt1n-faridabadmobileworld-2892.vercel.app. Both custom domains and existing Vercel aliases were assigned; aliasError null. Live /products, /admin/products, /admin/business and /sitemap.xml passed the same route and privacy checks.
+- Live browser selection of Arctic Blue + 8GB/128GB for Note 17 and Matcha Green + 12GB/256GB for Pro Max updated the enquiry href accurately, without duplicate REDMI prefixes. No message was sent. Desktop document width matched its 1353px viewport.
+- Live PNG captures at 375x812, 768x1024 and the 720x900 breakpoint were downloaded, validated and visually inspected. Full model names appear above the image on small screens; the two-column tablet/desktop layout and close control fit. An initial Pro Max screenshot caught an incomplete heading paint; a settled capture confirmed both title lines are visible. These are public layout checks, not authenticated private/mobile acceptance.
+- 41/41 isolated tests, TypeScript, ESLint and the production build passed. The production error/fatal log query for 16:36-17:06 UTC returned no matching entries. Immediate rollback is dpl_9anSeZQCbmAxVRFPoUGxNw6ebLL4 / 7993431.
+- Accepted catalogue coverage is now 5/59; newly CMS-published details remain 0. Fixed acceptance remains 8/12 = 67%. Real owner CMS connection/publication, Windsor website sync, private enquiry/archive restore and remaining private responsive acceptance are still pending. This evidence-only change does not itself require another application deployment.
+
+## Note 17 Pro, REDMI 17 and 17C candidate — 2 November 2026
+
+- Added three no-write India reference drafts: REDMI Note 17 Pro 5G (56/86 populated, 30 empty), REDMI 17 5G (50/86, 36 empty) and REDMI 17C 5G (55/86, 31 empty). All existing IDs and 59 catalogue entries are preserved. Each keeps two verified RAM/storage preferences with no inferred colour combinations, internal price or shop stock. See ../REDMI-17-PRO-C-INDIA-AUDIT.md for sources, conflicts and complete unknown-field inventories.
+- Public summaries now distinguish Note 17 Pro's 128GB/UFS 2.2 and 256GB/UFS 3.1 variants. REDMI 17C uses 1600x720/HD+ corroborated by specifications and FAQ, not the conflicting FHD+ marketing paragraph. Unknown panel types, camera capabilities and box inclusions remain empty. Existing 17C offer wording, status and internal blog destination remain unchanged.
+- Note 17 Pro and REDMI 17 use new unchanged manufacturer PNGs, both visually inspected. The existing 17C original PNG matches the current manufacturer download byte-for-byte and is reused. No existing image or owner artwork is deleted.
+- Candidate tests: 41/41, TypeScript, ESLint and production build pass. The existing authenticated reference regression now validates all eight source references and confirms copy isolation and no CMS writes. This change touches no login, reward, enquiry, archive or credential code.
+- Immediate rollback is production dpl_8ckh1urDqirGiAq1zU47ZVExqvR7 / main f8c70c5f9cc8ec8f5cbecb36168e3e041a5840eb. Accepted coverage is still 5/59 until preview/live checks complete; candidate coverage is 8/59. Fixed acceptance remains 8/12 = 67%; CMS details 0.
