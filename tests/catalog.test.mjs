@@ -197,6 +197,19 @@ test('India reference keeps unconfirmed fields and colour combinations empty, wi
     draft.values.spec_026 = 'Unsaved edit';
     assert.notEqual((await actions.productReferenceDraft(id)).data.values.spec_026, 'Unsaved edit');
   }
+  for (const id of ['apple-iphone-18-pro', 'apple-iphone-18-pro-max']) {
+    const result = await actions.productReferenceDraft(id);
+    assert.equal(result.ok, true, result.error);
+    const draft = result.data;
+    core.validatePublication(draft);
+    assert.equal(Object.keys(draft.values).length, 86);
+    for (const key of ['spec_007', 'spec_024', 'spec_026', 'spec_046', 'spec_056', 'spec_057']) assert.equal(draft.values[key], '');
+    assert.equal(draft.values.spec_083, 'No · compatible power adapter sold separately');
+    assert.equal(draft.variants.length, 4);
+    assert.ok(draft.variants.every(v => v.ram === '' && v.colour === '' && v.image === ''));
+    draft.variants[0].storage = 'Unsaved change';
+    assert.equal((await actions.productReferenceDraft(id)).data.variants[0].storage, '256 GB');
+  }
   assert.equal(writes, before);
   authenticated = false;
 });

@@ -688,6 +688,30 @@ Object.assign(verifiedRedmi17c, {
   checked: '2026-11-02',
   reasons: { camera: '50MP camera और 1080p video को जानिए।', everyday: '6000mAh battery और 120Hz display की जानकारी देखिए।', updates: 'Brand का 2 years OS और 4 years security support commitment देखिए।' },
 } satisfies Partial<PhoneModel>);
+// Apple India audit, 3 November 2026: storage options are preferences, not stock.
+for (const [id, size, resolution, hours, finish] of [
+  ['apple-iphone-18-pro', '6.3', '2622 × 1206', '34', 'Silver'],
+  ['apple-iphone-18-pro-max', '6.9', '2868 × 1320', '43', 'Burgundy'],
+]) {
+  const model = phoneBrands.find(brand => brand.slug === 'apple')!.models.find(model => model.id === id)!;
+  const file = `/images/${id.slice(6)}-official-rear.jpg`;
+  Object.assign(model, {
+    image: file, imageAlt: `${model.name} — ${finish}, original Apple India product image`, imageKind: undefined,
+    imageCaption: `तस्वीर में ${finish} का rear view है। दूसरे colour और दुकान के stock की पुष्टि enquiry पर कीजिए।`,
+    imageSource: 'https://www.apple.com/in/shop/buy-iphone/iphone-18-pro',
+    gallery: [{ src: file, alt: `${model.name} का ${finish} rear view · original Apple image` }, { src: `/images/${id.slice(6)}-official.jpg`, alt: `${model.name} का ${finish} camera close-up · original Apple image` }],
+    display: `${size}-inch Super Retina XDR OLED · ${resolution} · ProMotion up to 120 Hz`,
+    camera: '48MP Fusion main + 48MP ultra-wide + 48MP 4x telephoto · 18MP front',
+    processor: 'Apple A20 Pro · 6-core CPU · 7-core GPU',
+    power: `Apple का up to ${hours} hours video playback claim · MagSafe / Qi2 up to 25W · adapter अलग से`,
+    software: 'iOS 27 · Apple Intelligence की availability language और region पर निर्भर है।',
+    colours: [{ name: 'Black', hex: '#303033' }, { name: 'Silver', hex: '#d8d8da' }, { name: 'Glacier', hex: '#b5c8d5' }, { name: 'Burgundy', hex: '#6d2534' }],
+    variants: ['256GB', '512GB', '1TB', '2TB'],
+    note: `${model.name} की India specifications देखिए। Colour, storage और दुकान के stock की पुष्टि enquiry पर होगी।`,
+    source: 'https://www.apple.com/in/iphone-18-pro/specs/', checked: '2026-11-03',
+    reasons: { camera: '48MP camera system और variable aperture की जानकारी देखिए।', everyday: `${size}-inch display और video playback claim को जानिए।`, updates: 'Current iOS और Apple की feature availability देखिए।' },
+  } satisfies Partial<PhoneModel>);
+}
 xiaomiBrand.image = verified17Ultra.image;
 xiaomiBrand.imageAlt = verified17Ultra.imageAlt;
 export const phoneModels:PhoneModel[]=phoneBrands.flatMap(x=>x.models);

@@ -12,6 +12,8 @@ Use existing isolated checkouts; do not create a worktree unless the owner asks.
 
 Tarun Gupta authorizes routine reversible fixes, branches, commits, PRs, relevant tests and verified releases to the existing project. Take routine technical decisions without repetitive permission requests. Finish independent work while an external prerequisite is blocked. Account login, MFA/OAuth consent and unavailable access must use their legitimate flows. Never request passwords, API keys or recovery codes in chat.
 
+Owner reiterated on 3 November: a completed incremental release is a commentary checkpoint, not a reason to end active work while independently executable tasks remain. Continue the next authorized item within the active session. Do not claim access to a five-hour usage timer or that work runs after a final response; report actual runtime/access limitations honestly. A request for status does not cancel the work.
+
 Use Devanagari Hindi with natural English technical terms in user communication. Report scoped evidence-based progress with a fixed documented denominator; production/connections and catalogue completion are separate. Historical claims and locally verified behavior are different. Never claim continuous background maintenance without a configured, enabled and tested scheduler.
 
 ## Product and business invariants
