@@ -4,7 +4,7 @@ Checkpoint: 3 November 2026, Asia/Kolkata. Dated sections below distinguish earl
 
 ## Source and release
 
-- Latest verified production application: 588d481564119e89b18819b9a2ab66e8deff5d38, tree e5e39df18167c80d6f16aaf2dab2ad0a48ce2dbe, deployment dpl_CsSJ7oM6xupTDRww7ugH167bmq3B. READY with both custom domains and no alias error on 3 November. Later candidate work is not production until its verification is recorded below.
+- Latest verified production application: 67e32d0e359b46ae2bd99903bf0e796bb7192f72, tree 51fa5d42b36739aced7397baece9189bd73c7d7f, deployment dpl_AjrnUntdMCMngi2B4SoU3fgExPSG. READY with both custom domains and no alias error on 3 November. Later candidate work is not production until its verification is recorded below.
 
 - Repo: faridabadmobileworld-ui/mobile-world-website. Working branch: codex/complete-owner-editor-20261029.
 - Pre-change production rollback: dpl_aaGzHrJnxrvidMDZAhrJpGsAJhMd, READY, www.mobileworldfaridabad.com and mobileworldfaridabad.com. Project prj_dplwsmDwQWMjfoePft2dDLIA3QDI, team faridabadmobileworld-2892.
@@ -35,7 +35,7 @@ Twelve equal checkpoints; completed / 12, rounded. These measure verified accept
 
 Current completed checkpoints: 8/12 = 67%. Checkpoints 6, 7, 9 and 11 remain incomplete. This is an acceptance count, not a claim that 67% of the site has been built.
 
-Catalogue phase remains separate: 8 source-audited models / 59 existing guide entries; 0 newly CMS-published detailed products. The eight checked models are Xiaomi 17T, Xiaomi 17, Xiaomi 17 Ultra, REDMI Note 17, Note 17 Pro, Note 17 Pro Max, REDMI 17 and REDMI 17C. Source evidence and empty fields are documented in the four India audit files. Accepted guide coverage does not establish CMS publication or shop stock.
+Catalogue phase remains separate: 10 source-audited models / 59 existing guide entries; 0 newly CMS-published detailed products. The ten checked models are Xiaomi 17T, Xiaomi 17, Xiaomi 17 Ultra, REDMI Note 17, Note 17 Pro, Note 17 Pro Max, REDMI 17, REDMI 17C, iPhone 18 Pro and iPhone 18 Pro Max. Source evidence and empty fields are documented in the four India audit files. Accepted guide coverage does not establish CMS publication or shop stock.
 
 ## Checks and access
 
@@ -182,3 +182,13 @@ Catalogue phase remains separate: 8 source-audited models / 59 existing guide en
 - Initial reference tests detected uppercase characters in generated variant keys; keys were corrected to the existing lower-case contract and all 41 tests passed. This exposed a real validation failure before deployment. Final TypeScript/lint/build results and release verification follow when complete.
 - Accepted catalogue remains 8/59 until preview/live checks complete; candidate 10/59. Fixed acceptance remains 8/12 = 67%, CMS-published details 0. Immediate rollback: dpl_CsSJ7oM6xupTDRww7ugH167bmq3B / main 588d481.
 - Final candidate source passes 41/41 tests, TypeScript, ESLint and production build. No cache reset or dependency change was required.
+
+
+## Apple release verified and brand navigation candidate — 3 November 2026
+
+- Apple application commit 67e32d0e359b46ae2bd99903bf0e796bb7192f72, exact local/remote tree 51fa5d42b36739aced7397baece9189bd73c7d7f. Preview dpl_2CSNsKeu2LGLENaWkkyeC9siD6gq reached READY and passed products, private Product Editor and sitemap checks.
+- Production dpl_AjrnUntdMCMngi2B4SoU3fgExPSG reached READY from main / 67e32d0, URL mobile-world-website-387quyz6i-faridabadmobileworld-2892.vercel.app. Both custom domains and existing aliases assigned; aliasError null. Live products retained all 59 guides, both rear photos, camera close-up assets and gallery controls; private editor remained noindex/login-only, and unpublished Apple detail URLs stayed absent from sitemap.
+- Original live screenshots at 375x812 (Pro) and 768x1024 (Max) were downloaded, decoded and visually checked. Full model names, model-specific photographs, two gallery controls, tablet specs/variant/enquiry controls and close controls fit. No enquiry message or production customer/CMS record was created. These layout checks do not establish owner-authenticated private acceptance.
+- 41/41 isolated tests, TypeScript, ESLint and production build passed. Source-audited guide coverage is now 10/59; 49 guides remain to audit. CMS-published details remain 0. Acceptance is 8/12 = 67%. Immediate Apple rollback: dpl_CsSJ7oM6xupTDRww7ugH167bmq3B / 588d481.
+- Next independent issue found: OnePlus, POCO and iQOO have existing catalogue brands but were missing from the Home Selected Models navigation. Added their existing brand-filter destinations. Verified local logos are not available for these three, so ordinary readable names render in the same cards; no fabricated logo or empty Image src is used. All ten existing logo cards remain intact.
+- Home candidate checks pass 41/41 tests, TypeScript, ESLint and production build. Current tested production / rollback for this candidate is dpl_AjrnUntdMCMngi2B4SoU3fgExPSG / 67e32d0. Preview and live responsive/navigation checks remain required.

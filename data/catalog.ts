@@ -122,6 +122,10 @@ export const homepageBrands = [
   { slug: "realme", name: "realme", logo: "/images/brand-realme.svg" },
   { slug: "nothing", name: "Nothing", logo: "/images/brand-nothing.svg" },
   { slug: "tecno", name: "TECNO", logo: "/images/brand-tecno.svg" },
+  // Keep every catalogue brand reachable even without a locally verified logo.
+  { slug: "oneplus", name: "OnePlus", logo: "" },
+  { slug: "poco", name: "POCO", logo: "" },
+  { slug: "iqoo", name: "iQOO", logo: "" },
 ];
 
 // Names and product photos are from motorola.in. Store availability is not implied.
