@@ -224,6 +224,27 @@ test('India reference keeps unconfirmed fields and colour combinations empty, wi
     draft.values.spec_026 = 'Unsaved change';
     assert.equal((await actions.productReferenceDraft(id)).data.values.spec_026, '16 GB');
   }
+  for (const id of ['nothing-nothing-phone-3', 'nothing-nothing-phone-3a']) {
+    const result = await actions.productReferenceDraft(id);
+    assert.equal(result.ok, true, result.error);
+    const draft = result.data;
+    core.validatePublication(draft);
+    assert.equal(Object.keys(draft.values).length, 86);
+    assert.equal(draft.values.spec_007, '');
+    assert.equal(draft.values.spec_083, '', 'an omitted charger is not a verified No');
+    assert.equal(draft.variants.length, 2);
+    assert.ok(draft.variants.every(v => v.colour === '' && v.image === ''));
+    if (id.endsWith('-3')) {
+      assert.match(draft.values.spec_046, /^5500 mAh/);
+      assert.equal(draft.values.spec_053, '', '5150mAh global charging test does not verify India time');
+    } else {
+      assert.equal(draft.values.spec_011, '', 'conflicting weight remains empty');
+      assert.equal(draft.values.spec_018, '', 'conflicting resolution remains empty');
+      assert.ok(draft.variants.every(v => v.ram === '8 GB'));
+    }
+    draft.values.spec_026 = 'Unsaved change';
+    assert.notEqual((await actions.productReferenceDraft(id)).data.values.spec_026, 'Unsaved change');
+  }
   assert.equal(writes, before);
   authenticated = false;
 });

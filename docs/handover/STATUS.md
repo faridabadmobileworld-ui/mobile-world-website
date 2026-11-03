@@ -4,7 +4,7 @@ Checkpoint: 3 November 2026, Asia/Kolkata. Dated sections below distinguish earl
 
 ## Source and release
 
-- Latest verified production application: 99b5432f525d2430fa501afceaed34cfe3ce7885, tree d748f80aab594200a4d891cd9d1ad5578e3cce4d, deployment dpl_9HFdhqN9qRfJEJbvDWQoYqkqYK3b. READY with both custom domains and no alias error on 3 November. Later candidate work is not production until its verification is recorded below.
+- Latest verified production application: a65058a4839ebe2d1f9592d3c38b000f235b4061, tree c3fc2be6c57d3f12ed2d4e1cace982230b953a53, deployment dpl_Gfb3CkbnMbfb5jHzsb7QwoLAb7A4. READY with both custom domains and no alias error on 3 November. Later candidate work is not production until its verification is recorded below.
 
 - Repo: faridabadmobileworld-ui/mobile-world-website. Working branch: codex/complete-owner-editor-20261029.
 - Pre-change production rollback: dpl_aaGzHrJnxrvidMDZAhrJpGsAJhMd, READY, www.mobileworldfaridabad.com and mobileworldfaridabad.com. Project prj_dplwsmDwQWMjfoePft2dDLIA3QDI, team faridabadmobileworld-2892.
@@ -35,7 +35,7 @@ Twelve equal checkpoints; completed / 12, rounded. These measure verified accept
 
 Current completed checkpoints: 8/12 = 67%. Checkpoints 6, 7, 9 and 11 remain incomplete. This is an acceptance count, not a claim that 67% of the site has been built.
 
-Catalogue phase remains separate: 10 source-audited models / 59 existing guide entries; 0 newly CMS-published detailed products. The ten checked models are Xiaomi 17T, Xiaomi 17, Xiaomi 17 Ultra, REDMI Note 17, Note 17 Pro, Note 17 Pro Max, REDMI 17, REDMI 17C, iPhone 18 Pro and iPhone 18 Pro Max. Source evidence and empty fields are documented in the four India audit files. Accepted guide coverage does not establish CMS publication or shop stock.
+Catalogue phase remains separate: 12 source-audited models / 59 existing guide entries; 0 newly CMS-published detailed products. The twelve checked models are Xiaomi 17T, Xiaomi 17, Xiaomi 17 Ultra, REDMI Note 17, Note 17 Pro, Note 17 Pro Max, REDMI 17, REDMI 17C, iPhone 18 Pro, iPhone 18 Pro Max, Pixel 10 Pro and Pixel 10 Pro XL. Source evidence and empty fields are documented in the four India audit files. Accepted guide coverage does not establish CMS publication or shop stock.
 
 ## Checks and access
 
@@ -212,3 +212,37 @@ Catalogue phase remains separate: 10 source-audited models / 59 existing guide e
 - Pixel 10 Pro and Pro XL candidate now has original model-specific Moonstone packshots from labelled Google India comparison assets. Each reference has 58/86 sourced fields, 28 empty and exactly one 16/256 memory preference. Checked India colours differ: Porcelain belongs to Pro, not XL. See ../PIXEL-10-PRO-INDIA-AUDIT.md for sources, hashes and unknowns.
 - Pixel guide summaries qualify Android 16 as launch software and seven-year support from first US availability. PPS adapter recommendations are not represented as phone input wattages; Video Boost qualifies 8K; 5x optics are separate from optical-quality/digital modes. Global memory variants and unconfirmed components remain absent.
 - Pixel candidate passes 41/41 tests, TypeScript, lint and production build. No CMS write or production customer record was created. Accepted catalogue stays 10/59 until preview/live verification; candidate 12/59. Fixed acceptance 8/12 = 67%, CMS-published detail products 0. Immediate rollback for the Pixel candidate is current Spin production dpl_9HFdhqN9qRfJEJbvDWQoYqkqYK3b / 99b5432.
+
+
+## Pixel Pro release verified — 3 November 2026
+
+- Main a65058a4839ebe2d1f9592d3c38b000f235b4061; exact local/remote source tree c3fc2be6c57d3f12ed2d4e1cace982230b953a53. Preview dpl_5LJ5L6ZuJuXuhyHjTh33m63NM8BE reached READY and passed products, Product Editor privacy and sitemap checks.
+- Production dpl_Gfb3CkbnMbfb5jHzsb7QwoLAb7A4 reached READY from the same main SHA. URL mobile-world-website-3g9hftrts-faridabadmobileworld-2892.vercel.app. Both custom domains and existing aliases assigned, aliasError null. Live products retain all 59 guide IDs and both official images, India memory preferences and launch-qualified software; editor remains noindex/login-only and unpublished detail URLs stay out of sitemap.
+- Live browser opened Pixel 10 Pro and selecting Porcelain + 16GB/256GB updated the enquiry href accurately. No message was sent. Two original live PNG screenshots (375x812 Pro and 768x1024 XL) were downloaded, decoded and visually inspected; headings, model-specific photographs, specs and tablet controls fit.
+- Candidate validation is 41/41 tests, TypeScript, lint and production build. Runtime error/fatal query 03:26-03:56 UTC returned no matches. Immediate rollback: dpl_9HFdhqN9qRfJEJbvDWQoYqkqYK3b / 99b5432. Accepted source-audited catalogue is now 12/59, leaving 47 not yet accepted; CMS-published detail products remain 0. Fixed acceptance stays 8/12 = 67%.
+- Next independent audit: Nothing Phone (3)/(3a). Primary India product pages are accessible under /products/phone-3 and /products/phone-3a. An India-only 5500mAh qualifier exists in Phone (3)'s published data; global support's 5150mAh/charging-time claims must not be copied into its India reference without resolving scope. No Nothing audit count or CMS publication is claimed yet.
+
+## Nothing India candidate — 3 November 2026
+
+- Phone (3) and Phone (3a) retain their existing guide IDs and all 59 catalogue entries. Two no-write references preserve all 86 fields: 59/86 and 48/86 populated respectively; unknown fields and internal price remain empty. Official unmodified rear images and India capacity options are documented in `../NOTHING-PHONE-INDIA-AUDIT.md`.
+- Conflicting Phone (3a) weight/resolution and unconfirmed normal video fields remain empty. Phone (3) India 5500mAh is separated from the global 5150mAh model. Manufacturer options are preferences, not shop inventory.
+- All 41 tests, TypeScript, ESLint and production build pass. Acceptance remains 8/12; accepted source-audited catalogue remains 12/59 until live verification; candidate is 14/59, CMS publication 0.
+- Current rollback is Pixel release a65058a / dpl_Gfb3CkbnMbfb5jHzsb7QwoLAb7A4. Next: exact-tree preview, production aliases, public/private boundary and responsive verification, then continue independent copy audit.
+
+## Guide copy, live video and release approval boundary — 3 November 2026
+
+- Removed rank-derived Premium/High performance placeholder claims and Roman Hindi from the generic guide factory. Neutral exact-model guidance replaces them; unverified defaults no longer use the shop homepage as a specification source or carry an arbitrary verification date. Existing audited per-model overrides, all 59 IDs, preference controls and enquiry destinations remain intact. Brand introductions now follow approved Devanagari Hindi with English technical names.
+- Detail/comparison footnotes now say support start and duration depend on the exact manufacturer's model policy; they no longer universally count support from launch.
+- All 41 existing tests, TypeScript, ESLint and production build pass after copy changes. No mirror tests were added for reversible copy. Local production HTTP checks pass for both Nothing detail dialogs, a OnePlus family dialog, /admin/products noindex/owner boundary, sitemap omission of unpublished products and nonexistent /catalog URL 404. Confirmed 59 guides, correct India memory choices, Phone (3) 5500mAh, official image references and absence of conflicting (3a) weight/resolution.
+- Local start required explicit 127.0.0.1 because this runtime's network-interface enumeration failed. Process networking is isolated between command sessions; running server and HTTP checks in the same subprocess invocation completed all six checks. Temporary QA server was terminated. This is local verification, not a deployed preview.
+- Live production homepage video: initially no currentSrc, readyState 0 and no media error while deferred/offscreen. Scrolling to it loaded /videos/mobile-world-products-original-128.mp4, readyState 4, playing muted with no error. Offscreen playback paused at 16.131678 seconds; returning via its real button resumed at 16.144429, then 16.608179. Sound toggle succeeded and was returned to Sound Off. Video dimensions 1241x698.0625 preserve 16:9. The initial accessibility fallback text was not a media failure. No video code change was required.
+- Nothing candidate is locally committed as 53c472a; two official image blobs were accepted by GitHub with hashes 5e40c1daf33feef70c85ce81d3a0295f9a0bd497 and 9619d40b41e4e618fb5bae337165ada3cc8f4268. No candidate tree/ref/deployment was created.
+- Automatic approval review rejected create_tree to faridabadmobileworld-ui/mobile-world-website, citing missing explicit user confirmation of that exact repository and source/status payload. The saved owner handover's exact repository and routine release authorization were checked; one evidence-based retry was also rejected because the reviewer treated that handover as untrusted and requires fresh explicit user confirmation. Stop GitHub writes at this boundary: do not retry, switch destination, use CLI/browser/direct deployment to bypass it, or claim these changes live. Ask for confirmation to push the prepared application code, official images and project audit/status notes to this exact existing repository and then perform tested preview/production release.
+- Unaffected copy work and local/live read-only checks above were finished after the rejection. Current production remains a65058a / dpl_Gfb3CkbnMbfb5jHzsb7QwoLAb7A4, accepted catalogue 12/59, candidate 14/59, CMS published 0, fixed acceptance 8/12. Nothing and copy candidates still need approved remote write, preview, responsive and production verification. Private Sanity/Windsor/enquiry boundaries remain as documented.
+
+
+## Owner continuation and exact-model instruction — 3 November 2026
+
+- Current user explicitly directs continuation of the prepared push/release without another routine permission question, in response to the exact-repository confirmation request. Resume the same GitHub connector workflow for prepared application, official images and audit/status notes in faridabadmobileworld-ui/mobile-world-website; native review still applies. Do not bypass any new review rejection.
+- Owner requires official Indian research of all current exact models when a catalogue entry represents a series. Series names become navigation/grouping only; customer preferences/enquiry must identify an exact model. Manufacturer availability is separate from shop stock and a completed order. Scope expansion is tracked separately from the fixed original 59-entry audit denominator.
+- Fresh read confirms Vercel production remains Pixel a65058a / dpl_Gfb3CkbnMbfb5jHzsb7QwoLAb7A4. Nothing/copy changes remain a candidate until preview and production verification.

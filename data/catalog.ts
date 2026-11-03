@@ -3,8 +3,24 @@ export type PhoneModel={id:string;brand:string;brandSlug:string;name:string;imag
 export type PhoneBrand={slug:string;name:string;image:string;imageAlt:string;headline:string;note:string;models:PhoneModel[]};
 const img={apple:"/images/iphone-display-at-the-mobile-world-counter-346d3e71.webp",samsung:"/images/flagship-phones-apple-samsung-xiaomi-vivo-c3df528a.webp",xiaomi:"/images/redmi-17-5g-colours-mobile-world-faridabad.webp",google:"/images/flagship-smartphone-e6739d50.webp",nothing:"/images/model-nothing3a.png",mid:"/images/mid-range-5g-phones-five-colours-v2-7c07be19.webp"};
 const slug=(s:string)=>s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
-function p(brand:string,brandSlug:string,rank:number,name:string,image:string,variants:string[],system:"Android"|"iOS"="Android"):PhoneModel{return{id:brandSlug+"-"+slug(name),brand,brandSlug,rank,name,image,imageAlt:brand+" "+name+" product image",note:"अपने colour, variant और stock की पुष्टि दुकान से कीजिए।",display:rank<3?"Premium display":"Large daily-use display",camera:rank<3?"Camera-focused highlights":"Everyday camera highlights",processor:rank<3?"High performance range":"Daily performance range",power:"Battery and charging details at store",software:system,colours:[],variants,system,source:shop.siteUrl,checked:"2026-09-29",reasons:{camera:brand+" "+name+" camera buyers ke liye.",everyday:brand+" "+name+" daily use ke liye.",updates:brand+" "+name+" availability store se confirm karein."}}}
-function b(slug:string,name:string,image:string,note:string,models:PhoneModel[]):PhoneBrand{return{slug,name,image,imageAlt:name+" smartphone product display",headline:name+" models",note,models}}
+function p(brand: string, brandSlug: string, rank: number, name: string, image: string, variants: string[], system: "Android" | "iOS" = "Android"): PhoneModel {
+  return {
+    id: brandSlug + "-" + slug(name), brand, brandSlug, rank, name, image,
+    imageAlt: `${brand} ${name} की product तस्वीर`,
+    note: "अपने colour, variant और stock की पुष्टि दुकान से कीजिए।",
+    display: "Display की जानकारी exact model के अनुसार पूछिए।",
+    camera: "Camera की जानकारी exact model के अनुसार पूछिए।",
+    processor: "Processor की जानकारी exact model के अनुसार पूछिए।",
+    power: "Battery और charging की पुष्टि दुकान से कीजिए।",
+    software: system, colours: [], variants, system, source: "", checked: "",
+    reasons: {
+      camera: `${brand} ${name} में अपनी पसंद के model का camera जानिए।`,
+      everyday: "अपनी ज़रूरत के अनुसार सही model चुनिए।",
+      updates: "Software support की policy exact model के अनुसार जानिए।",
+    },
+  };
+}
+function b(slug:string,name:string,image:string,note:string,models:PhoneModel[]):PhoneBrand{return{slug,name,image,imageAlt:name+" smartphone product display",headline:name+" के models",note,models}}
 const redmiNote17ProMax:PhoneModel={
   ...p("Xiaomi Redmi","xiaomi",3,"Redmi Note 17 Pro Max","/images/redmi-note-17-pro-max-black-official.webp",["8GB / 256GB","12GB / 256GB"]),
   imageAlt:"REDMI Note 17 Pro Max 5G, Stealth Black की official Xiaomi India product image",
@@ -19,18 +35,18 @@ const redmiNote17ProMax:PhoneModel={
   reasons:{camera:"50MP OIS camera की खूबियाँ जानिए।",everyday:"बड़ी battery और AMOLED display को करीब से देखिए।",updates:"Brand की software support policy देखिए।"}
 };
 export const phoneBrands:PhoneBrand[]=[
-b("apple","Apple",img.apple,"iPhone models high-to-low.",[p("Apple","apple",1,"iPhone 18 Pro Max",img.apple,["256GB","512GB","1TB"],"iOS"),p("Apple","apple",2,"iPhone 18 Pro",img.apple,["128GB","256GB","512GB"],"iOS"),p("Apple","apple",3,"iPhone 18",img.apple,["128GB","256GB"],"iOS"),p("Apple","apple",4,"iPhone 17 Series",img.apple,["128GB","256GB","512GB"],"iOS"),p("Apple","apple",5,"iPhone 16 Series",img.apple,["128GB","256GB"],"iOS"),p("Apple","apple",6,"iPhone 15 Series",img.apple,["128GB","256GB"],"iOS")]),
-b("samsung","Samsung",img.samsung,"Galaxy S, Fold and A series.",[p("Samsung","samsung",1,"Galaxy Z Fold 2026",img.samsung,["256GB","512GB","1TB"]),p("Samsung","samsung",2,"Galaxy S26 Ultra",img.samsung,["256GB","512GB","1TB"]),p("Samsung","samsung",3,"Galaxy S26 / S26+",img.samsung,["256GB","512GB"]),p("Samsung","samsung",4,"Galaxy S25 Series",img.samsung,["128GB","256GB","512GB"]),p("Samsung","samsung",5,"Galaxy A Series 2026",img.samsung,["6GB/128GB","8GB/128GB","8GB/256GB"]),p("Samsung","samsung",6,"Galaxy A Series 2025",img.samsung,["6GB/128GB","8GB/256GB"])]),
+b("apple","Apple",img.apple,"iPhone के models देखिए।",[p("Apple","apple",1,"iPhone 18 Pro Max",img.apple,["256GB","512GB","1TB"],"iOS"),p("Apple","apple",2,"iPhone 18 Pro",img.apple,["128GB","256GB","512GB"],"iOS"),p("Apple","apple",3,"iPhone 18",img.apple,["128GB","256GB"],"iOS"),p("Apple","apple",4,"iPhone 17 Series",img.apple,["128GB","256GB","512GB"],"iOS"),p("Apple","apple",5,"iPhone 16 Series",img.apple,["128GB","256GB"],"iOS"),p("Apple","apple",6,"iPhone 15 Series",img.apple,["128GB","256GB"],"iOS")]),
+b("samsung","Samsung",img.samsung,"Galaxy S, Fold और A series देखिए।",[p("Samsung","samsung",1,"Galaxy Z Fold 2026",img.samsung,["256GB","512GB","1TB"]),p("Samsung","samsung",2,"Galaxy S26 Ultra",img.samsung,["256GB","512GB","1TB"]),p("Samsung","samsung",3,"Galaxy S26 / S26+",img.samsung,["256GB","512GB"]),p("Samsung","samsung",4,"Galaxy S25 Series",img.samsung,["128GB","256GB","512GB"]),p("Samsung","samsung",5,"Galaxy A Series 2026",img.samsung,["6GB/128GB","8GB/128GB","8GB/256GB"]),p("Samsung","samsung",6,"Galaxy A Series 2025",img.samsung,["6GB/128GB","8GB/256GB"])]),
 b("xiaomi","Xiaomi / Redmi",img.xiaomi,"Xiaomi और Redmi के models देखिए।",[p("Xiaomi","xiaomi",1,"Xiaomi 17 Ultra",img.xiaomi,["256GB","512GB","1TB"]),p("Xiaomi","xiaomi",2,"Xiaomi 17 / 17T",img.xiaomi,["12GB/256GB","12GB/512GB"]),redmiNote17ProMax,p("Xiaomi Redmi","xiaomi",4,"Redmi Note 17 Pro",img.xiaomi,["8GB/128GB","8GB/256GB"]),p("Xiaomi Redmi","xiaomi",5,"Redmi Note 15 Pro+",img.xiaomi,["8GB/256GB","12GB/256GB"]),p("Xiaomi Redmi","xiaomi",6,"Redmi 15 / 15C / 15A",img.xiaomi,["4GB/128GB","6GB/128GB","8GB/256GB"]),p("Xiaomi Redmi","xiaomi",7,"Redmi A7 / A7 Pro 4G",img.xiaomi,["3GB/64GB","4GB/128GB"])]),
-b("google","Google",img.google,"Pixel models.",[p("Google","google",1,"Pixel 10 Pro XL",img.google,["256GB","512GB"]),p("Google","google",2,"Pixel 10 Pro",img.google,["128GB","256GB"]),p("Google","google",3,"Pixel 10",img.google,["128GB","256GB"]),p("Google","google",4,"Pixel 9 Series",img.google,["128GB","256GB"])]),
-b("vivo","Vivo",img.samsung,"V, X, T and Y series.",[p("Vivo","vivo",1,"Vivo X Series 2026",img.samsung,["12GB/256GB","16GB/512GB"]),p("Vivo","vivo",2,"Vivo V Series 2026",img.samsung,["8GB/128GB","8GB/256GB","12GB/256GB"]),p("Vivo","vivo",3,"Vivo T Series",img.samsung,["8GB/128GB","8GB/256GB"]),p("Vivo","vivo",4,"Vivo Y Series",img.samsung,["4GB/128GB","6GB/128GB"])]),
-b("oppo","Oppo",img.mid,"Find, Reno, F and A series.",[p("Oppo","oppo",1,"Oppo Find X Series",img.mid,["12GB/256GB","16GB/512GB"]),p("Oppo","oppo",2,"Oppo Reno Series 2026",img.mid,["8GB/256GB","12GB/256GB"]),p("Oppo","oppo",3,"Oppo F Series",img.mid,["8GB/128GB","8GB/256GB"]),p("Oppo","oppo",4,"Oppo A Series",img.mid,["4GB/128GB","6GB/128GB"])]),
-b("realme","Realme",img.mid,"GT, Number, P and Narzo series.",[p("Realme","realme",1,"Realme GT Series",img.mid,["12GB/256GB","16GB/512GB"]),p("Realme","realme",2,"Realme Number Series 2026",img.mid,["8GB/128GB","8GB/256GB"]),p("Realme","realme",3,"Realme P Series",img.mid,["6GB/128GB","8GB/256GB"]),p("Realme","realme",4,"Realme Narzo Series",img.mid,["4GB/128GB","6GB/128GB"])]),
-b("nothing","Nothing",img.nothing,"Nothing Phone and CMF.",[p("Nothing","nothing",1,"Nothing Phone (3)",img.nothing,["12GB/256GB","12GB/512GB"]),p("Nothing","nothing",2,"Nothing Phone (3a)",img.nothing,["8GB/128GB","8GB/256GB"]),p("Nothing","nothing",3,"CMF Phone Series",img.nothing,["6GB/128GB","8GB/128GB"])]),
-b("oneplus","OnePlus",img.google,"Flagship and Nord.",[p("OnePlus","oneplus",1,"OnePlus 14",img.google,["12GB/256GB","16GB/512GB"]),p("OnePlus","oneplus",2,"OnePlus 13 Series",img.google,["12GB/256GB","16GB/512GB"]),p("OnePlus","oneplus",3,"OnePlus Nord 2026",img.google,["8GB/128GB","8GB/256GB"]),p("OnePlus","oneplus",4,"OnePlus Nord CE",img.google,["8GB/128GB","8GB/256GB"])]),
-b("poco","Poco",img.xiaomi,"F, X, M and C series.",[p("Poco","poco",1,"Poco F Series",img.xiaomi,["8GB/256GB","12GB/256GB"]),p("Poco","poco",2,"Poco X Series",img.xiaomi,["8GB/128GB","8GB/256GB"]),p("Poco","poco",3,"Poco M Series",img.xiaomi,["6GB/128GB","8GB/256GB"]),p("Poco","poco",4,"Poco C Series",img.xiaomi,["4GB/64GB","4GB/128GB"])]),
-b("iqoo","iQOO",img.google,"Performance phones.",[p("iQOO","iqoo",1,"iQOO 15 Series",img.google,["12GB/256GB","16GB/512GB"]),p("iQOO","iqoo",2,"iQOO Neo Series",img.google,["8GB/128GB","12GB/256GB"]),p("iQOO","iqoo",3,"iQOO Z Series",img.google,["6GB/128GB","8GB/256GB"])]),
-b("tecno","Tecno",img.mid,"Phantom, Camon, Pova and Spark.",[p("Tecno","tecno",1,"Tecno Phantom Series",img.mid,["12GB/256GB","12GB/512GB"]),p("Tecno","tecno",2,"Tecno Camon Series",img.mid,["8GB/128GB","8GB/256GB"]),p("Tecno","tecno",3,"Tecno Pova Series",img.mid,["6GB/128GB","8GB/256GB"]),p("Tecno","tecno",4,"Tecno Spark Series",img.mid,["4GB/64GB","4GB/128GB"])])];
+b("google","Google",img.google,"Pixel के models देखिए।",[p("Google","google",1,"Pixel 10 Pro XL",img.google,["256GB","512GB"]),p("Google","google",2,"Pixel 10 Pro",img.google,["128GB","256GB"]),p("Google","google",3,"Pixel 10",img.google,["128GB","256GB"]),p("Google","google",4,"Pixel 9 Series",img.google,["128GB","256GB"])]),
+b("vivo","Vivo",img.samsung,"V, X, T और Y series देखिए।",[p("Vivo","vivo",1,"Vivo X Series 2026",img.samsung,["12GB/256GB","16GB/512GB"]),p("Vivo","vivo",2,"Vivo V Series 2026",img.samsung,["8GB/128GB","8GB/256GB","12GB/256GB"]),p("Vivo","vivo",3,"Vivo T Series",img.samsung,["8GB/128GB","8GB/256GB"]),p("Vivo","vivo",4,"Vivo Y Series",img.samsung,["4GB/128GB","6GB/128GB"])]),
+b("oppo","Oppo",img.mid,"Find, Reno, F और A series देखिए।",[p("Oppo","oppo",1,"Oppo Find X Series",img.mid,["12GB/256GB","16GB/512GB"]),p("Oppo","oppo",2,"Oppo Reno Series 2026",img.mid,["8GB/256GB","12GB/256GB"]),p("Oppo","oppo",3,"Oppo F Series",img.mid,["8GB/128GB","8GB/256GB"]),p("Oppo","oppo",4,"Oppo A Series",img.mid,["4GB/128GB","6GB/128GB"])]),
+b("realme","Realme",img.mid,"GT, Number, P और Narzo series देखिए।",[p("Realme","realme",1,"Realme GT Series",img.mid,["12GB/256GB","16GB/512GB"]),p("Realme","realme",2,"Realme Number Series 2026",img.mid,["8GB/128GB","8GB/256GB"]),p("Realme","realme",3,"Realme P Series",img.mid,["6GB/128GB","8GB/256GB"]),p("Realme","realme",4,"Realme Narzo Series",img.mid,["4GB/128GB","6GB/128GB"])]),
+b("nothing","Nothing",img.nothing,"Nothing Phone और CMF के models देखिए।",[p("Nothing","nothing",1,"Nothing Phone (3)",img.nothing,["12GB/256GB","12GB/512GB"]),p("Nothing","nothing",2,"Nothing Phone (3a)",img.nothing,["8GB/128GB","8GB/256GB"]),p("Nothing","nothing",3,"CMF Phone Series",img.nothing,["6GB/128GB","8GB/128GB"])]),
+b("oneplus","OnePlus",img.google,"OnePlus और Nord के models देखिए।",[p("OnePlus","oneplus",1,"OnePlus 14",img.google,["12GB/256GB","16GB/512GB"]),p("OnePlus","oneplus",2,"OnePlus 13 Series",img.google,["12GB/256GB","16GB/512GB"]),p("OnePlus","oneplus",3,"OnePlus Nord 2026",img.google,["8GB/128GB","8GB/256GB"]),p("OnePlus","oneplus",4,"OnePlus Nord CE",img.google,["8GB/128GB","8GB/256GB"])]),
+b("poco","Poco",img.xiaomi,"F, X, M और C series देखिए।",[p("Poco","poco",1,"Poco F Series",img.xiaomi,["8GB/256GB","12GB/256GB"]),p("Poco","poco",2,"Poco X Series",img.xiaomi,["8GB/128GB","8GB/256GB"]),p("Poco","poco",3,"Poco M Series",img.xiaomi,["6GB/128GB","8GB/256GB"]),p("Poco","poco",4,"Poco C Series",img.xiaomi,["4GB/64GB","4GB/128GB"])]),
+b("iqoo","iQOO",img.google,"iQOO के models देखिए।",[p("iQOO","iqoo",1,"iQOO 15 Series",img.google,["12GB/256GB","16GB/512GB"]),p("iQOO","iqoo",2,"iQOO Neo Series",img.google,["8GB/128GB","12GB/256GB"]),p("iQOO","iqoo",3,"iQOO Z Series",img.google,["6GB/128GB","8GB/256GB"])]),
+b("tecno","Tecno",img.mid,"Phantom, Camon, Pova और Spark series देखिए।",[p("Tecno","tecno",1,"Tecno Phantom Series",img.mid,["12GB/256GB","12GB/512GB"]),p("Tecno","tecno",2,"Tecno Camon Series",img.mid,["8GB/128GB","8GB/256GB"]),p("Tecno","tecno",3,"Tecno Pova Series",img.mid,["6GB/128GB","8GB/256GB"]),p("Tecno","tecno",4,"Tecno Spark Series",img.mid,["4GB/64GB","4GB/128GB"])])];
 // Owner-confirmed sale / pre-booking offers, 7 October 2026.
 // Device specifications and catalogue images are from the official India pages.
 const redmi17C:PhoneModel={
@@ -738,6 +754,31 @@ for (const [id, size, resolution, capacity, watts, colours] of [
     note: `${model.name} की India specifications देखिए। Colour, variant और दुकान के stock की पुष्टि enquiry पर होगी।`,
     source: 'https://store.google.com/in/product/pixel_10_pro_specs?hl=en-IN', checked: '2026-11-03',
     reasons: { camera: '5x optical telephoto और 42MP autofocus selfie camera को जानिए।', everyday: `${capacity}mAh battery और ${size}-inch display की जानकारी देखिए।`, updates: 'Google का 7 years OS और security support commitment देखिए।' },
+  } satisfies Partial<PhoneModel>);
+}
+// Nothing's India product records settle memory options without creating stock.
+const nothingBrand = phoneBrands.find(brand => brand.slug === 'nothing')!;
+for (const [id, file, colour] of [
+  ['nothing-nothing-phone-3', '/images/nothing-phone-3-official-white.png', 'White'],
+  ['nothing-nothing-phone-3a', '/images/nothing-phone-3a-official-black.png', 'Black'],
+]) {
+  const model = nothingBrand.models.find(model => model.id === id)!;
+  const pro = id.endsWith('-3');
+  const source = `https://in.nothing.tech/products/${pro ? 'phone-3' : 'phone-3a'}`;
+  Object.assign(model, {
+    image: file, imageAlt: `${model.name} — ${colour} rear view, original Nothing India image`, imageKind: undefined,
+    imageCaption: `तस्वीर में ${colour} का rear view है। दूसरे colour और दुकान के stock की पुष्टि enquiry पर कीजिए।`,
+    imageSource: source, gallery: [{ src: file, alt: `${model.name} का ${colour} rear view · original Nothing image` }],
+    display: pro ? '6.67-inch flexible AMOLED · 1260 × 2800 · up to 120 Hz' : '6.77-inch flexible AMOLED · up to 120 Hz · Panda glass',
+    camera: pro ? '50MP main + 50MP ultra-wide + 50MP 3x periscope · 50MP front' : '50MP main OIS + 50MP 2x telephoto + 8MP ultra-wide · 32MP front',
+    processor: pro ? 'Snapdragon 8s Gen 4 · Adreno 825' : 'Snapdragon 7s Gen 3 · up to 2.5 GHz',
+    power: pro ? '5500mAh India battery · 65W wired · 15W wireless charging' : '5000mAh · 50W wired · 7.5W reverse wired charging',
+    software: pro ? 'India product page: Nothing OS 4 / Android 16 · 5 years Android + 7 years security updates' : 'India product page: Nothing OS 3.1 / Android 15 · 3 years Android + 6 years security updates',
+    colours: pro ? [{ name: 'White', hex: '#e9e9e5' }, { name: 'Black', hex: '#303033' }] : [{ name: 'White', hex: '#e9e9e5' }, { name: 'Black', hex: '#303033' }, { name: 'Blue', hex: '#9eafc7' }],
+    variants: pro ? ['12GB / 256GB', '16GB / 512GB'] : ['8GB / 128GB', '8GB / 256GB'],
+    note: `${model.name} की India specifications देखिए। Colour, variant और दुकान के stock की पुष्टि enquiry पर होगी।`,
+    source, checked: '2026-11-03',
+    reasons: { camera: pro ? 'चार 50MP cameras और 3x periscope को जानिए।' : '50MP main और 2x telephoto की जानकारी देखिए।', everyday: pro ? 'India की 5500mAh battery और 65W charging को जानिए।' : '5000mAh battery और AMOLED display की जानकारी देखिए।', updates: 'Manufacturer की Android और security support policy देखिए।' },
   } satisfies Partial<PhoneModel>);
 }
 xiaomiBrand.image = verified17Ultra.image;
