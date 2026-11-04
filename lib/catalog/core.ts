@@ -83,6 +83,7 @@ export function normalizeProduct(input: unknown): ProductDraft {
 }
 export function validatePublication(product: ProductDraft) {
   if (!product.brand || !product.name || !product.image || !product.imageAlt) throw new Error('Brand, model name, verified image और alt text भरिए।');
+  if (/\b(?:series|family|range)\b|\//i.test(product.name)) throw new Error('एक exact model का नाम भरिए। Series को अलग-अलग model entries में रखिए।');
   if (!product.verified || !product.imageVerified || !product.verifiedAt || !product.sources.length) throw new Error('India specifications, source, date और image verification पूरा करके Publish कीजिए।');
   if (product.verifiedAt > new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' })) throw new Error('Verification date भविष्य की नहीं हो सकती।');
   if (product.variants.some(v => v.image && !v.imageVerified)) throw new Error('हर variant image का model और colour verify कीजिए।');

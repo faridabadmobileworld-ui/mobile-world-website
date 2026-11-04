@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { phoneBrands, phoneModels, validModelIds, modelEnquiry, modelDisplayName, type PhoneModel } from "@/data/catalog";
+import { phoneBrands, phoneModels, searchPhoneModels, legacyGuideGroups, validModelIds, modelEnquiry, modelDisplayName, type PhoneModel } from "@/data/catalog";
 import { categorySearchAliases } from "@/data/search";
 import { shop } from "@/data/shop";
 import type { Item, NavCategory } from "@/data/content";
@@ -53,9 +53,10 @@ function ModelDetails({ model, save, saved, detailsHref }: { model: PhoneModel; 
 
 export function ProductExplorer({ categories, items, productPages = {} }: { categories: NavCategory[]; items: Item[]; productPages?: Record<string, string> }) {
   const params = useSearchParams();
-  const [query, setQuery] = useState(params.get("q") ?? "");
+  const legacyGroup = legacyGuideGroups[params.get("model") ?? ""];
+  const [query, setQuery] = useState(params.get("q") ?? legacyGroup?.query ?? "");
   const [category, setCategory] = useState("all");
-  const [brand, setBrand] = useState(phoneBrands.some((b) => b.slug === params.get("brand")) ? params.get("brand")! : "all");
+  const [brand, setBrand] = useState(phoneBrands.some((b) => b.slug === params.get("brand")) ? params.get("brand")! : legacyGroup?.brand ?? "all");
   const [saved, setSaved] = useState<string[]>(validModelIds(params.get("shortlist")));
   const [onlySaved, setOnlySaved] = useState(params.has("shortlist") || params.get("view") === "shortlist");
   const [compare, setCompare] = useState<string[]>([]);
@@ -70,10 +71,12 @@ export function ProductExplorer({ categories, items, productPages = {} }: { cate
       setCategory(categories.some((c) => c.slug === hash) ? hash : "all");
     };
     const frame = requestAnimationFrame(() => {
-      sync(); setQuery(params.get("q") ?? "");
-      setBrand(phoneBrands.some((b) => b.slug === params.get("brand")) ? params.get("brand")! : "all");
+      const group = legacyGuideGroups[params.get("model") ?? ""];
+      sync(); setQuery(params.get("q") ?? group?.query ?? "");
+      setBrand(phoneBrands.some((b) => b.slug === params.get("brand")) ? params.get("brand")! : group?.brand ?? "all");
       const selected = phoneModels.find((p) => p.id === params.get("model"));
-      if (selected) setModel(selected);
+      setModel(selected);
+      if (group) setNotice("इस series के अलग models नीचे हैं। अपना exact model चुनिए।");
       if (!params.has("shortlist")) {
         try { setSaved(validModelIds(localStorage.getItem(storageKey))); } catch { /* Session works without storage. */ }
       }
@@ -117,7 +120,7 @@ export function ProductExplorer({ categories, items, productPages = {} }: { cate
     catch { setNotice("नीचे दिए link को copy करके share कीजिए।"); }
   }
   const terms = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
-  const models = phoneModels.filter((p) => (category === "all" || category === "smartphones") && (brand === "all" || p.brandSlug === brand) && (!onlySaved || saved.includes(p.id)) && terms.every((w) => `${p.brand} ${p.name} ${p.note} ${p.display} ${p.system} phone mobile मोबाइल फोन फ़ोन smartphone 5g`.toLowerCase().includes(w)));
+  const models = searchPhoneModels(query).filter((p) => (category === "all" || category === "smartphones") && (brand === "all" || p.brandSlug === brand) && (!onlySaved || saved.includes(p.id)));
   const generic = onlySaved || brand !== "all" ? [] : items.filter((p) => (category === "all" || category === p.category) && terms.every((w) => `${p.title} ${p.kicker} ${p.tags.join(" ")} ${categorySearchAliases[p.category] ?? ""} ${categories.find((c) => c.slug === p.category)?.label ?? ""}`.toLowerCase().includes(w)));
   const chosen = saved.flatMap((id) => phoneModels.filter((p) => p.id === id));
   const comparing = compare.flatMap((id) => phoneModels.filter((p) => p.id === id));

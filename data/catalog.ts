@@ -1,4 +1,5 @@
 import { shop } from "./shop";
+import samsungAIndia from "./india-models/samsung-a.json";
 export type PhoneModel={id:string;brand:string;brandSlug:string;name:string;image:string;imageAlt:string;imageKind?:"creative";imageCaption?:string;imageSource?:string;gallery?:{src:string;alt:string}[];note:string;display:string;camera:string;processor:string;power:string;software:string;colours:{name:string;hex:string}[];variants:string[];system:"Android"|"iOS";reasons:Record<string,string>;source:string;checked:string;rank:number;status?:"available"|"upcoming"|"prebooking"};
 export type PhoneBrand={slug:string;name:string;image:string;imageAlt:string;headline:string;note:string;models:PhoneModel[]};
 const img={apple:"/images/iphone-display-at-the-mobile-world-counter-346d3e71.webp",samsung:"/images/flagship-phones-apple-samsung-xiaomi-vivo-c3df528a.webp",xiaomi:"/images/redmi-17-5g-colours-mobile-world-faridabad.webp",google:"/images/flagship-smartphone-e6739d50.webp",nothing:"/images/model-nothing3a.png",mid:"/images/mid-range-5g-phones-five-colours-v2-7c07be19.webp"};
@@ -783,7 +784,25 @@ for (const [id, file, colour] of [
 }
 xiaomiBrand.image = verified17Ultra.image;
 xiaomiBrand.imageAlt = verified17Ultra.imageAlt;
+// A family is a navigation group, never an individual selectable model.
+export const legacyGuideGroups: Record<string, { brand: string; query: string }> = {
+  'samsung-galaxy-a-series-2026': { brand: 'samsung', query: 'Galaxy A' },
+  'samsung-galaxy-a-series-2025': { brand: 'samsung', query: 'Galaxy A' },
+};
+const samsungBrand = phoneBrands.find(brand => brand.slug === 'samsung')!;
+samsungBrand.models = [
+  ...samsungBrand.models.filter(model => !(model.id in legacyGuideGroups)),
+  ...samsungAIndia.map(model => ({ ...model, system: 'Android' as const })),
+].sort((a, b) => a.rank - b.rank);
 export const phoneModels:PhoneModel[]=phoneBrands.flatMap(x=>x.models);
+export function searchPhoneModels(query: string): PhoneModel[] {
+  const phrase = query.trim().toLowerCase().replace(/\s+/g, ' ');
+  // Preserve a series phrase as a group: the letter A also occurs in Samsung.
+  const group = Object.values(legacyGuideGroups).find(group => group.query.toLowerCase() === phrase);
+  if (group) return phoneModels.filter(model => model.brandSlug === group.brand && model.name.toLowerCase().startsWith(phrase));
+  const terms = phrase.split(' ').filter(Boolean);
+  return phoneModels.filter(model => terms.every(term => `${model.brand} ${model.name} ${model.note} ${model.display} ${model.processor} ${model.system} phone mobile मोबाइल फोन फ़ोन smartphone`.toLowerCase().includes(term)));
+}
 export const availablePhoneModels=phoneModels.filter(x=>x.status!=="upcoming");
 export const upcomingPhoneModels:PhoneModel[]=[];
 export function validModelIds(value:string|null):string[]{return[...new Set((value??"").split(","))].filter(id=>phoneModels.some(p=>p.id===id)).slice(0,phoneModels.length)}

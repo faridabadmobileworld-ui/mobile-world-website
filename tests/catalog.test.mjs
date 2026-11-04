@@ -119,6 +119,59 @@ test('Invalid source/image URLs, fake placeholders, duplicate variants and unver
   assert.throws(() => core.validatePublication(core.normalizeProduct({ ...product(), verifiedAt: '2099-01-01' })));
   assert.throws(() => core.validatePublication(core.normalizeProduct({ ...product(), variants: [{ ...product().variants[0], image: '/images/fixture.png' }] })));
 });
+test('Publication requires an exact model while allowing a separate series grouping', () => {
+  for (const name of ['Galaxy A Series', 'Reno family', 'V range', 'Galaxy S26/S26+']) {
+    assert.throws(() => core.validatePublication(core.normalizeProduct({ ...product(), name })), /exact model/);
+  }
+  core.validatePublication(core.normalizeProduct({ ...product(), name: 'Galaxy A57 5G', series: 'Galaxy A Series' }));
+});
+test('Samsung A families resolve to six distinct selectable India models', () => {
+  const { phoneModels, searchPhoneModels, legacyGuideGroups, validModelIds, modelEnquiry } = load('data/catalog');
+  const models = phoneModels.filter(model => model.brandSlug === 'samsung' && /^Galaxy A/.test(model.name));
+  assert.deepEqual(models.map(model => model.name), ['Galaxy A57 5G', 'Galaxy A37 5G', 'Galaxy A27 5G', 'Galaxy A17 5G', 'Galaxy A08 LTE', 'Galaxy A07 5G']);
+  assert.equal(new Set(models.map(model => model.id)).size, 6);
+  assert.deepEqual(searchPhoneModels('Galaxy A').map(model => model.id), models.map(model => model.id));
+  assert.ok(!searchPhoneModels('5G').some(model => model.id === 'samsung-galaxy-a08-lte'));
+  for (const id of ['samsung-galaxy-a-series-2026', 'samsung-galaxy-a-series-2025']) {
+    assert.deepEqual(legacyGuideGroups[id], { brand: 'samsung', query: 'Galaxy A' });
+    assert.deepEqual(validModelIds(id), [], 'never silently replace a saved family with an arbitrary model');
+  }
+  assert.deepEqual(models[0].variants, ['8GB / 256GB', '12GB / 256GB']);
+  const message = new URL(modelEnquiry([models[4]], 'Colour preference: Dark Blue। Variant preference: 4GB / 64GB।')).searchParams.get('text');
+  assert.match(message, /Samsung Galaxy A08 LTE/);
+  assert.match(message, /4GB \/ 64GB/);
+  assert.doesNotMatch(message, /5G|Series/);
+});
+test('Samsung India references keep model-specific facts, unknowns and no-write behavior', async () => {
+  authenticated = true;
+  const before = writes;
+  for (const code of ['a57', 'a37', 'a27', 'a17', 'a08', 'a07']) {
+    const id = `samsung-galaxy-${code}-${code === 'a08' ? 'lte' : '5g'}`;
+    const result = await actions.productReferenceDraft(id);
+    assert.equal(result.ok, true, result.error);
+    const draft = result.data;
+    core.validatePublication(draft);
+    assert.equal(Object.keys(draft.values).length, 86);
+    assert.equal(draft.values.spec_007, '');
+    assert.equal(draft.values.spec_050, '', 'omitted wireless charging is not a confirmed No');
+    assert.ok(draft.variants.every(v => v.colour === '' && v.image === ''));
+    if (code === 'a08') {
+      assert.equal(draft.values.spec_060, '');
+      assert.doesNotMatch(draft.values.spec_059, /5G/);
+      assert.equal(draft.variants.length, 1);
+    }
+    if (code === 'a27') {
+      assert.match(draft.values.spec_015, /^IP64/);
+      assert.equal(draft.values.spec_022, 'Snapdragon 6 Gen 3');
+      assert.match(draft.values.spec_027, /limited to LPDDR5/);
+    }
+    if (['a57', 'a37', 'a27'].includes(code)) assert.doesNotMatch(draft.values.spec_056, /first global launch/);
+    draft.values.spec_026 = 'Unsaved edit';
+    assert.notEqual((await actions.productReferenceDraft(id)).data.values.spec_026, 'Unsaved edit');
+  }
+  assert.equal(writes, before);
+  authenticated = false;
+});
 test('Every editor action authenticates before reading, uploading or writing', async () => {
   const attempts = [
     () => actions.productEditorState(), () => actions.configureSanity(config.projectId, config.dataset, token),

@@ -13,9 +13,15 @@ import pixel10Pro from '@/data/verified-products/pixel-10-pro-india.json';
 import pixel10ProXL from '@/data/verified-products/pixel-10-pro-xl-india.json';
 import nothingPhone3 from '@/data/verified-products/nothing-phone-3-india.json';
 import nothingPhone3a from '@/data/verified-products/nothing-phone-3a-india.json';
+import samsungA57 from '@/data/verified-products/samsung-galaxy-a57-india.json';
+import samsungA37 from '@/data/verified-products/samsung-galaxy-a37-india.json';
+import samsungA27 from '@/data/verified-products/samsung-galaxy-a27-india.json';
+import samsungA17 from '@/data/verified-products/samsung-galaxy-a17-india.json';
+import samsungA08 from '@/data/verified-products/samsung-galaxy-a08-india.json';
+import samsungA07 from '@/data/verified-products/samsung-galaxy-a07-india.json';
 import { normalizeProduct } from './core';
 
-const references = [xiaomi17t, xiaomi17, xiaomi17Ultra, redmiNote17, redmiNote17ProMax, redmiNote17Pro, redmi17, redmi17c, iphone18Pro, iphone18ProMax, pixel10Pro, pixel10ProXL, nothingPhone3, nothingPhone3a];
+const references = [xiaomi17t, xiaomi17, xiaomi17Ultra, redmiNote17, redmiNote17ProMax, redmiNote17Pro, redmi17, redmi17c, iphone18Pro, iphone18ProMax, pixel10Pro, pixel10ProXL, nothingPhone3, nothingPhone3a, samsungA57, samsungA37, samsungA27, samsungA17, samsungA08, samsungA07];
 
 // Checked source data can start a draft, but never writes or publishes content.
 // Normalization returns a fresh copy, so editing cannot mutate the reference.
