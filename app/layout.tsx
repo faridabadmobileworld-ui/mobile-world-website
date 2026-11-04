@@ -1,11 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { shop } from "@/data/shop";
-import { SiteHeader } from "@/components/SiteHeader";
+import { SiteChrome } from "@/components/SiteChrome";
 import { buildSearchIndex } from "@/data/search";
-import { SiteFooter, MobileBar } from "@/components/SiteFooter";
 import { ArtSprite } from "@/components/ArtSprite";
-import { FestivalFrame } from "./FestivalFrame";
-import { WebsiteAnalytics } from "@/components/WebsiteAnalytics";
 import "./globals.css";
 import "./storefront.css";
 import "./campaigns.css";
@@ -87,12 +84,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 
 
         <ArtSprite />
-        <FestivalFrame />
-        <SiteHeader searchIndex={buildSearchIndex()} />
-        <main id="main">{children}</main>
-        <SiteFooter />
-        <MobileBar />
-        <WebsiteAnalytics />
+        <SiteChrome searchIndex={buildSearchIndex()}>{children}</SiteChrome>
       </body>
     </html>
   );

@@ -26,6 +26,10 @@ export default async function Home() {
 
       <ShoppingHero hiddenCampaigns={[...(!live("diwali") ? ["diwali"] : []), ...(!live("gifts") ? ["gifts"] : [])]} />
       <div className="wrap shopping-home">
+        <section className="mw-shopping-preview-entry" aria-labelledby="mw-shopping-preview-title">
+          <div><p>NEW SHOPPING EXPERIENCE</p><h2 id="mw-shopping-preview-title">अपना cart, अपना account, अपनी shopping।</h2><span>Exact models, favourites, addresses और order history का पूरा demo देखिए। Prices sample हैं; कोई payment नहीं लिया जाएगा।</span></div>
+          <Link href="/shop">Shopping preview खोलिए →</Link>
+        </section>
         <ShoppingCategories />
         <HomeBody current="/" section="discovery" />
         <CurrentOffers settings={campaigns} />

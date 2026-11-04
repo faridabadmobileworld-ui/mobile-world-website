@@ -108,6 +108,7 @@ export function SiteHeader({ searchIndex }: { searchIndex: SearchEntry[] }) {
 
       <nav className="cstrip shopping-nav" aria-label="Products और customer services">
         <div className="wrap">
+          <Link className="cs-pages" href="/shop"><IconGrid /> Shopping preview</Link>
           <Link className="cs-pages" href="/products"><IconGrid /> सभी products</Link>
           {primaryCategories.map((category) => (
             <Link key={category.slug} href={`/products#${category.slug}`}>{category.shortName ?? category.name}</Link>
@@ -155,6 +156,7 @@ export function SiteHeader({ searchIndex }: { searchIndex: SearchEntry[] }) {
           ))}
 
           <h2 className="dh">Customer services</h2>
+          <Link className="d" href="/shop" onClick={() => setOpen(false)}>Shopping preview · Cart, account और orders</Link>
           {sitePages.filter((page) => ["/products", "/finance", "/returns", "/repairing", "/after-sales-support", "/visit", "/contact"].includes(page.href)).map((page) => (
             <Link className="d" key={page.href} href={page.href} onClick={() => setOpen(false)}>{page.label}</Link>
           ))}

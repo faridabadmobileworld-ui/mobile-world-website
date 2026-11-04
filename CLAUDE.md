@@ -1,3 +1,7 @@
+# Shopping presentation priority — owner request, 4–5 November 2026
+
+The owner paused catalogue expansion to show a complete shopping experience to family. The new `/shop` preview includes visible sample prices, exact model/colour/memory selection, cart quantities, favourites, demo customer profiles, addresses, checkout and order history. Older “no checkout/account/prices” instructions remain applicable to the original enquiry catalogue, not this clearly labelled preview. No actual payment, live inventory, authenticated cloud customer account or merchant order transmission is connected. Use sample profile/address data, disclose local browser storage, exclude preview interactions from existing customer analytics and keep preview routes noindex. See `docs/SHOPPING-PREVIEW.md` and `docs/handover/STATUS.md` for acceptance evidence and the paused research checkpoint.
+
 # Progress reporting — owner request, 26 October 2026
 
 - Every progress update must show a percentage out of 100 for the explicitly stated current work phase. Describe completed verification and real remaining dependencies; never count a blocked integration as complete.
