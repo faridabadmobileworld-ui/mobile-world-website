@@ -62,13 +62,13 @@ const redmi17C:PhoneModel={
 };
 const vivoV80:PhoneModel={
   ...p("Vivo","vivo",1.5,"vivo V80 5G","/images/vivo-v80-sunrise-official.png",["8GB / 128GB","8GB / 256GB","8GB / 512GB"]),
-  status:"prebooking",imageAlt:"vivo V80 Sunrise Anthem — official vivo India product image",
-  note:"Pre-booking चालू है और live demo उपलब्ध है। Cashback, warranty benefit, backpack और finance की शर्तें दुकान से जानिए।",
+  status:"available",imageAlt:"vivo V80 Sunrise Anthem — official vivo India product image",
+  note:"vivo V80 के camera, display और storage options देखिए। अपने पसंदीदा colour की उपलब्धता दुकान से पूछिए।",
   display:"6.59-inch AMOLED · up to 144Hz",camera:"50MP OIS main + 50MP telephoto + 8MP wide · 50MP front",
   processor:"Snapdragon 7 Gen 4",power:"7200mAh · 90W FlashCharge",software:"OriginOS 7 / Android 17",
   colours:[{name:"Sunrise Anthem",hex:"#d59953"},{name:"Horizon Blue",hex:"#94bbb9"},{name:"Stellar Black",hex:"#363638"}],
-  source:"/posts/vivo-v80-prebooking-offers-specifications-faridabad",checked:"2026-10-07",
-  reasons:{camera:"ZEISS camera और portraits का live demo देखिए।",everyday:"बड़ी battery और AMOLED display को करीब से देखिए।",updates:"Pre-booking और उपलब्ध variants की पुष्टि team से कीजिए।"}
+  source:"https://www.vivo.com/in/products/param/v80",checked:"2026-10-07",
+  reasons:{camera:"ZEISS camera और portrait modes को जानिए।",everyday:"बड़ी battery और AMOLED display को करीब से देखिए।",updates:"अपने variant की software support policy की पुष्टि vivo से कीजिए।"}
 };
 phoneBrands.find(brand=>brand.slug==="xiaomi")?.models.push(redmi17C);
 phoneBrands.find(brand=>brand.slug==="vivo")?.models.push(vivoV80);
