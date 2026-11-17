@@ -65,6 +65,30 @@ test('Anonymous users cannot read reports or edit campaigns',async()=>{
  await assert.rejects(actions.analyticsReport(today,today),/owner login/);
  await assert.rejects(load('app/admin/campaigns/actions').saveCampaigns({},0),/owner login/);
 });
+test('Featured model links have independent visibility with saved and older offer settings', async () => {
+  const { defaultCampaigns, featuredModelIds, isFeaturedModel, validateCampaigns } = load('lib/campaigns/core');
+  const { CAMPAIGN_PATH, readCampaigns, publicCampaigns } = load('lib/campaigns/store');
+  const legacy = defaultCampaigns(false);
+  for (const id of featuredModelIds) delete legacy.items[id];
+  legacy.items.redmi.note = 'Expired promotion';
+  const original = files.get(CAMPAIGN_PATH);
+  files.set(CAMPAIGN_PATH, { text: JSON.stringify(legacy), etag: 'legacy-test' });
+  try {
+    const { items } = await readCampaigns();
+    for (const id of featuredModelIds) assert.deepEqual(items[id], { enabled: true, start: '', end: '', note: '' });
+    assert.deepEqual(items.redmi, legacy.items.redmi);
+    items[featuredModelIds[0]].enabled = false;
+    assert.deepEqual(validateCampaigns(legacy.items, items), items);
+    storageFailure = true;
+    const fallback = await publicCampaigns(true);
+    for (const [id, slot] of Object.entries(fallback.items)) assert.equal(slot.enabled, isFeaturedModel(id));
+    assert.equal(fallback.items.vivo.note, '');
+  } finally {
+    storageFailure = false;
+    if (original) files.set(CAMPAIGN_PATH, original);
+    else files.delete(CAMPAIGN_PATH);
+  }
+});
 test('Owner login unlocks reports; campaign expiry is enforced without invalidating issued codes',async()=>{
  assert.equal((await admin.setupAdmin(setupKey,'test-password-for-owner-only')).ok,true);
  const report=await actions.analyticsReport(today,today);assert.equal(report.pageViews,2);
