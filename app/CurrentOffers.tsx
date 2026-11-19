@@ -2,10 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { IconArrow } from "@/components/Icons";
 import { modelDisplayName, phoneModels } from "@/data/catalog";
+import { phoneGuideLinks } from "@/lib/catalog/guides";
 import { campaignIsLive, defaultCampaigns, featuredModelIds, type CampaignSettings } from "@/lib/campaigns/core";
 import "./current-offers.css";
 
 export function CurrentOffers({ settings = defaultCampaigns() }: { settings?: CampaignSettings }) {
+  const specificationLinks = phoneGuideLinks();
   const models = featuredModelIds.flatMap(id => {
     const model = phoneModels.find(phone => phone.id === id);
     return model && campaignIsLive(settings.items[id]) ? [model] : [];
@@ -22,7 +24,7 @@ export function CurrentOffers({ settings = defaultCampaigns() }: { settings?: Ca
             <Link
               key={model.id}
               className={`offer-card offer-${model.brandSlug}`}
-              href={`/products?model=${model.id}`}
+              href={specificationLinks[model.id] ?? `/products?model=${model.id}`}
               prefetch={false}
               aria-label={`${name} की specifications देखिए`}
             >

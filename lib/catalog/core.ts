@@ -11,6 +11,17 @@ export type ProductDraft = {
 export type PublicProduct = Omit<ProductDraft, 'sources'> & { updatedAt: string };
 export type EditorRecord = ProductDraft & { draftRevision: string; publishedRevision: string; publishedSlug: string };
 
+export function productDisplayName(product: Pick<ProductDraft, 'name' | 'brand'>) {
+  const name = product.name.toLowerCase(), brand = product.brand.toLowerCase();
+  return name.startsWith(brand + ' ') || (brand.includes('redmi') && name.startsWith('redmi ')) ? product.name : product.brand + ' ' + product.name;
+}
+
+export function selectProductVariant(variants: Variant[], current: Variant | undefined, field: 'ram' | 'storage' | 'colour', value: string) {
+  return variants.find(variant => variant[field] === value &&
+    (field === 'ram' || variant.ram === current?.ram) &&
+    (field !== 'colour' || variant.storage === current?.storage));
+}
+
 function record(value: unknown): Record<string, unknown> {
   return value && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : {};
 }

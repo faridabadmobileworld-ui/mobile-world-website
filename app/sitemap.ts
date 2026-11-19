@@ -3,6 +3,7 @@ import type { MetadataRoute } from "next";
 import { shop } from "@/data/shop";
 import { livePosts } from "@/data/content";
 import { publicProducts } from '@/lib/catalog/sanity';
+import { publicPhoneGuides } from '@/lib/catalog/guides';
 
 /**
  * `/sitemap.xml` अपने आप बन जाती है।
@@ -45,5 +46,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...(Number.isFinite(Date.parse(product.updatedAt)) ? { lastModified: new Date(product.updatedAt) } : {}),
     changeFrequency: 'weekly', priority: 0.7,
   }));
-  return [...pages, ...Object.keys(categoryGuides).map(category => ({ url: `${shop.siteUrl}/products/${category}`, lastModified: new Date("2026-10-24T00:00:00+05:30"), changeFrequency: "monthly" as const, priority: 0.8 })), ...articles, ...products];
+  const phoneGuides: MetadataRoute.Sitemap = publicPhoneGuides().map(product => ({
+    url: shop.siteUrl + '/phones/' + product.slug, lastModified: new Date(product.updatedAt), changeFrequency: 'monthly', priority: 0.7,
+  }));
+  return [...pages, ...Object.keys(categoryGuides).map(category => ({ url: `${shop.siteUrl}/products/${category}`, lastModified: new Date("2026-10-24T00:00:00+05:30"), changeFrequency: "monthly" as const, priority: 0.8 })), ...articles, ...products, ...phoneGuides];
 }

@@ -367,3 +367,42 @@ test('Reloading a saved shortlist preserves more than eight valid model IDs', ()
   assert.deepEqual(catalog.validModelIds(ids.join(',')), ids);
   assert.deepEqual(catalog.validModelIds([...ids, ids[0], 'not-a-real-model'].join(',')), ids);
 });
+
+test('Only explicitly released reference guides become public, with no CMS draft or private price leakage', async () => {
+  const before = writes;
+  const { publicPhoneGuides, phoneGuideLinks } = load('lib/catalog/guides');
+  const manifest = load('data/published-phone-guides.json');
+  const guides = publicPhoneGuides();
+  assert.equal(guides.length, manifest.modelIds.length);
+  assert.equal(new Set(guides.map(p => p.slug)).size, guides.length);
+  assert.equal(new Set(guides.map(p => p.id)).size, guides.length);
+  assert.ok(guides.length >= 20);
+  for (const guide of guides) {
+    assert.equal('sources' in guide, false);
+    assert.equal('spec_007' in guide.values, false);
+    assert.ok(guide.verified && guide.imageVerified);
+    assert.ok(core.visibleSections(guide).flatMap(s => s.fields).every(f => f.value !== '' && f.id !== 7));
+    assert.equal(phoneGuideLinks()[guide.id], '/phones/' + guide.slug);
+    assert.ok(fs.existsSync(path.join(root, 'public', guide.image)));
+  }
+  assert.equal(guides.some(p => p.id === 'fixture-phone'), false);
+  guides[0].values.spec_026 = 'Unsaved browser edit';
+  assert.notEqual(publicPhoneGuides()[0].values.spec_026, 'Unsaved browser edit');
+  assert.equal(writes, before);
+  assert.deepEqual(await cms.publicProducts(), [], 'editorial guide release never publishes or resurrects CMS records');
+});
+
+test('Dependent variant selection cannot create an unlisted RAM, storage or colour combination', () => {
+  const variants = [
+    { _key: 'one', ram: '8 GB', storage: '128 GB', colour: 'Black', image: '', imageVerified: false },
+    { _key: 'two', ram: '8 GB', storage: '256 GB', colour: 'Blue', image: '', imageVerified: false },
+    { _key: 'three', ram: '12 GB', storage: '256 GB', colour: 'Black', image: '', imageVerified: false },
+  ];
+  assert.equal(core.selectProductVariant(variants, variants[0], 'colour', 'Blue'), undefined);
+  assert.equal(core.selectProductVariant(variants, variants[0], 'storage', '256 GB'), variants[1]);
+  assert.equal(core.selectProductVariant(variants, variants[1], 'ram', '12 GB'), variants[2]);
+  assert.equal(core.selectProductVariant(variants, variants[2], 'storage', '128 GB'), undefined);
+  assert.equal(core.productDisplayName({ brand: 'Xiaomi', name: 'Xiaomi 17T' }), 'Xiaomi 17T');
+  assert.equal(core.productDisplayName({ brand: 'Samsung', name: 'Galaxy A57 5G' }), 'Samsung Galaxy A57 5G');
+  assert.equal(core.productDisplayName({ brand: 'Xiaomi Redmi', name: 'REDMI 17 5G' }), 'REDMI 17 5G');
+});
