@@ -1,5 +1,6 @@
 import { shop } from "./shop";
 import samsungAIndia from "./india-models/samsung-a.json";
+import oppoIndia from "./india-models/oppo-reno-f35.json";
 export type PhoneModel={id:string;brand:string;brandSlug:string;name:string;image:string;imageAlt:string;imageKind?:"creative";imageCaption?:string;imageSource?:string;gallery?:{src:string;alt:string}[];note:string;display:string;camera:string;processor:string;power:string;software:string;colours:{name:string;hex:string}[];variants:string[];system:"Android"|"iOS";reasons:Record<string,string>;source:string;checked:string;rank:number;status?:"available"|"upcoming"|"prebooking"};
 export type PhoneBrand={slug:string;name:string;image:string;imageAlt:string;headline:string;note:string;models:PhoneModel[]};
 const img={apple:"/images/iphone-display-at-the-mobile-world-counter-346d3e71.webp",samsung:"/images/flagship-phones-apple-samsung-xiaomi-vivo-c3df528a.webp",xiaomi:"/images/redmi-17-5g-colours-mobile-world-faridabad.webp",google:"/images/flagship-smartphone-e6739d50.webp",nothing:"/images/model-nothing3a.png",mid:"/images/mid-range-5g-phones-five-colours-v2-7c07be19.webp"};
@@ -788,11 +789,18 @@ xiaomiBrand.imageAlt = verified17Ultra.imageAlt;
 export const legacyGuideGroups: Record<string, { brand: string; query: string }> = {
   'samsung-galaxy-a-series-2026': { brand: 'samsung', query: 'Galaxy A' },
   'samsung-galaxy-a-series-2025': { brand: 'samsung', query: 'Galaxy A' },
+  'oppo-oppo-reno-series-2026': { brand: 'oppo', query: 'OPPO Reno' },
 };
 const samsungBrand = phoneBrands.find(brand => brand.slug === 'samsung')!;
 samsungBrand.models = [
   ...samsungBrand.models.filter(model => !(model.id in legacyGuideGroups)),
   ...samsungAIndia.map(model => ({ ...model, system: 'Android' as const })),
+].sort((a, b) => a.rank - b.rank);
+const oppoBrand = phoneBrands.find(brand => brand.slug === 'oppo')!;
+const auditedOppoIds = new Set(oppoIndia.map(model => model.id));
+oppoBrand.models = [
+  ...oppoBrand.models.filter(model => !(model.id in legacyGuideGroups) && !auditedOppoIds.has(model.id)),
+  ...oppoIndia.map(model => ({ ...model, system: 'Android' as const })),
 ].sort((a, b) => a.rank - b.rank);
 export const phoneModels:PhoneModel[]=phoneBrands.flatMap(x=>x.models);
 export function searchPhoneModels(query: string): PhoneModel[] {

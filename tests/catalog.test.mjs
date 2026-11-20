@@ -373,11 +373,13 @@ test('Only explicitly released reference guides become public, with no CMS draft
   const { publicPhoneGuides, phoneGuideLinks } = load('lib/catalog/guides');
   const manifest = load('data/published-phone-guides.json');
   const guides = publicPhoneGuides();
+  const { phoneModels } = load('data/catalog');
   assert.equal(guides.length, manifest.modelIds.length);
   assert.equal(new Set(guides.map(p => p.slug)).size, guides.length);
   assert.equal(new Set(guides.map(p => p.id)).size, guides.length);
   assert.ok(guides.length >= 20);
   for (const guide of guides) {
+    assert.ok(phoneModels.some(model => model.id === guide.id), 'Every released guide must retain an existing selectable model ID: ' + guide.id);
     assert.equal('sources' in guide, false);
     assert.equal('spec_007' in guide.values, false);
     assert.ok(guide.verified && guide.imageVerified);
@@ -405,4 +407,16 @@ test('Dependent variant selection cannot create an unlisted RAM, storage or colo
   assert.equal(core.productDisplayName({ brand: 'Xiaomi', name: 'Xiaomi 17T' }), 'Xiaomi 17T');
   assert.equal(core.productDisplayName({ brand: 'Samsung', name: 'Galaxy A57 5G' }), 'Samsung Galaxy A57 5G');
   assert.equal(core.productDisplayName({ brand: 'Xiaomi Redmi', name: 'REDMI 17 5G' }), 'REDMI 17 5G');
+});
+
+// Family navigation and the existing Home card must survive exact-model replacement.
+test('OPPO Reno group resolves to exact India models and F35 retains the Home model ID', () => {
+  const { phoneModels, searchPhoneModels, legacyGuideGroups, validModelIds } = load('data/catalog');
+  const { phoneGuideLinks } = load('lib/catalog/guides');
+  assert.deepEqual(searchPhoneModels('OPPO Reno').map(model => model.name), ['OPPO Reno16 5G', 'OPPO Reno16c 5G']);
+  assert.deepEqual(legacyGuideGroups['oppo-oppo-reno-series-2026'], { brand: 'oppo', query: 'OPPO Reno' });
+  assert.deepEqual(validModelIds('oppo-oppo-reno-series-2026,oppo-f35-pro-5g'), ['oppo-f35-pro-5g']);
+  assert.equal(phoneModels.filter(model => model.id === 'oppo-f35-pro-5g').length, 1);
+  assert.equal(phoneGuideLinks()['oppo-f35-pro-5g'], '/phones/oppo-f35-pro-5g');
+  assert.equal(phoneModels.some(model => model.id === 'oppo-oppo-f35-pro-5g'), false);
 });
