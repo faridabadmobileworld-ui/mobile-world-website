@@ -17,6 +17,7 @@ export function HomeProductVideo() {
     let disposed = false;
     let requestVersion = 0;
     let sourceAttached = false;
+    const motion = matchMedia('(prefers-reduced-motion: reduce)');
     function attachSource() {
       if (sourceAttached) return;
       sourceAttached = true;
@@ -24,7 +25,7 @@ export function HomeProductVideo() {
       video!.src = "/videos/mobile-world-products-original-128.mp4";
       video!.load();
     }
-    const shouldPlay = () => visible && pageActive && !document.hidden && !disposed;
+    const shouldPlay = () => visible && pageActive && !document.hidden && !disposed && !motion.matches && document.documentElement.dataset.festivalMotion !== 'paused';
 
     function syncPlayback() {
       const version = ++requestVersion;
@@ -75,6 +76,8 @@ export function HomeProductVideo() {
     video.addEventListener("playing", guardPlayback);
     video.addEventListener("volumechange", syncSound);
     document.addEventListener("visibilitychange", syncPlayback);
+    window.addEventListener("mw-festival-motion", syncPlayback);
+    motion.addEventListener('change', syncPlayback);
     window.addEventListener("pagehide", hidePage);
     window.addEventListener("pageshow", showPage);
 
@@ -90,6 +93,8 @@ export function HomeProductVideo() {
       video.removeEventListener("playing", guardPlayback);
       video.removeEventListener("volumechange", syncSound);
       document.removeEventListener("visibilitychange", syncPlayback);
+      window.removeEventListener("mw-festival-motion", syncPlayback);
+      motion.removeEventListener('change', syncPlayback);
       window.removeEventListener("pagehide", hidePage);
       window.removeEventListener("pageshow", showPage);
       video.pause();

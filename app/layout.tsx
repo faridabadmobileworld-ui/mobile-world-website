@@ -6,13 +6,16 @@ import { SiteFooter, MobileBar } from "@/components/SiteFooter";
 import { ArtSprite } from "@/components/ArtSprite";
 import { FestivalFrame } from "./FestivalFrame";
 import { WebsiteAnalytics } from "@/components/WebsiteAnalytics";
+import { SiteMotion } from "@/components/SiteMotion";
 import "./globals.css";
 import "./storefront.css";
 import "./campaigns.css";
 import "./festival.css";
-import { Inter, Noto_Sans_Devanagari } from "next/font/google";
+import "./motion.css";
+import { DM_Sans, Noto_Sans_Devanagari } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+// Retain the existing font token so every shared and route-specific style updates together.
+const inter = DM_Sans({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 const hindi = Noto_Sans_Devanagari({ subsets: ["devanagari"], variable: "--font-hindi", display: "swap" });
 
 /**
@@ -92,6 +95,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <main id="main">{children}</main>
         <SiteFooter />
         <MobileBar />
+        <SiteMotion />
         <WebsiteAnalytics />
       </body>
     </html>

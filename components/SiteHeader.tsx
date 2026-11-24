@@ -1,5 +1,6 @@
 "use client";
 
+import { MotionHeading } from "@/components/MotionHeading";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -133,7 +134,7 @@ export function SiteHeader({ searchIndex }: { searchIndex: SearchEntry[] }) {
             `<details>` से बनी है, इसलिए बिना JavaScript के भी खुलती-बंद होती
             है और Google को अंदर के सारे link पहले ही दिख जाते हैं।
           */}
-          <h2 className="dh">सामान — category से चुनिए</h2>
+          <MotionHeading as="h2" className="dh">सामान — category से चुनिए</MotionHeading>
           {productMenu.map((g) => (
             <details className="dsub" key={g.label} open>
               <summary>
@@ -154,11 +155,11 @@ export function SiteHeader({ searchIndex }: { searchIndex: SearchEntry[] }) {
             </details>
           ))}
 
-          <h2 className="dh">Customer services</h2>
+          <MotionHeading as="h2" className="dh">Customer services</MotionHeading>
           {sitePages.filter((page) => ["/products", "/finance", "/returns", "/repairing", "/after-sales-support", "/visit", "/contact"].includes(page.href)).map((page) => (
             <Link className="d" key={page.href} href={page.href} onClick={() => setOpen(false)}>{page.label}</Link>
           ))}
-          <h2 className="dh">Mobile World के बारे में</h2>
+          <MotionHeading as="h2" className="dh">Mobile World के बारे में</MotionHeading>
           {sitePages.filter((page) => ["/", "/about", "/team", "/posts", "/terms", "/privacy"].includes(page.href)).map((page) => (
             <Link className="d" key={page.href} href={page.href} onClick={() => setOpen(false)}>{page.label}</Link>
           ))}

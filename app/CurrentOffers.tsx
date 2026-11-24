@@ -1,3 +1,4 @@
+import { MotionHeading } from "@/components/MotionHeading";
 import Image from "next/image";
 import Link from "next/link";
 import { IconArrow } from "@/components/Icons";
@@ -16,7 +17,7 @@ export function CurrentOffers({ settings = defaultCampaigns() }: { settings?: Ca
 
   return (
     <section id="current-offers" className="current-offers" aria-labelledby="current-offers-title">
-      <h2 id="current-offers-title">चुनिंदा phones की specifications</h2>
+      <MotionHeading as="h2" id="current-offers-title">चुनिंदा phones की specifications</MotionHeading>
       <div className="current-offers-grid">
         {models.map(model => {
           const name = modelDisplayName(model);

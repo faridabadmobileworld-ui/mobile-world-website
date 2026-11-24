@@ -1,3 +1,4 @@
+import { MotionHeading } from "@/components/MotionHeading";
 import { withSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import { shop } from "@/data/shop";
@@ -31,10 +32,10 @@ export default function Contact() {
   return (
     <div className="wrap">
       <section className="sec">
-        <h1 style={{ fontSize: "clamp(1.4rem,4vw,2rem)", fontWeight: 800,
+        <MotionHeading as="h1" style={{ fontSize: "clamp(1.4rem,4vw,2rem)", fontWeight: 800,
                      letterSpacing: "-.03em", margin: "0 0 10px" }}>
           Contact Us — सीधे counter से बात कीजिए, बिना किसी form के!
-        </h1>
+        </MotionHeading>
         <TableOfContents items={toc} />
 
         <div className="prose" style={{ marginBottom: 18 }}>
@@ -47,7 +48,7 @@ export default function Contact() {
         </div>
 
         <div className="cband rv in" id="abhi-baat">
-          <h2>अभी बात कीजिए — हम आपके लिए खुले हैं</h2>
+          <MotionHeading as="h2">अभी बात कीजिए — हम आपके लिए खुले हैं</MotionHeading>
           <p style={{ marginBottom: 4 }}><LiveBadge /></p>
           <p><strong>Timing:</strong> रोज़ सुबह 10:00 बजे से रात 10:00 बजे तक, सातों दिन।</p>
           <p style={{ marginTop: 2 }}>
@@ -67,9 +68,9 @@ export default function Contact() {
 
         <div className="panel rv in" id="grievance"
              style={{ maxWidth: "var(--measure)", marginTop: 10 }}>
-          <h2 style={{ fontSize: "1.05rem", margin: "0 0 8px" }}>
+          <MotionHeading as="h2" style={{ fontSize: "1.05rem", margin: "0 0 8px" }}>
             ⚠️ शिकायत हो तो सीधे मालिक से बात कीजिए
-          </h2>
+          </MotionHeading>
           <p style={{ fontSize: 14.5, color: "var(--ink-2)", margin: "0 0 10px" }}>
             कोई बात counter पर हल न हो, या कोई शिकायत हो — तो {shop.owner} जी से
             सीधे बात कर लीजिए। बीच में कोई नहीं है।
@@ -92,9 +93,9 @@ export default function Contact() {
 
       <section className="sec">
         <div className="panel rv in" style={{ maxWidth: "var(--measure)" }}>
-          <h2 id="pata" style={{ fontSize: "1.1rem", margin: "0 0 10px" }}>
+          <MotionHeading as="h2" id="pata" style={{ fontSize: "1.1rem", margin: "0 0 10px" }}>
             हमारी दुकान का exact पता
-          </h2>
+          </MotionHeading>
           <address style={{ fontStyle: "normal", fontSize: 14.5, lineHeight: 1.85,
                             color: "var(--ink-2)", margin: 0 }}>
             <strong style={{ color: "var(--ink)" }}>{shop.name}</strong><br />
@@ -115,9 +116,9 @@ export default function Contact() {
 
       <section className="sec">
         <div className="panel rv in" style={{ maxWidth: "var(--measure)" }}>
-          <h2 id="pehle-message" style={{ fontSize: "1.1rem", margin: "0 0 10px" }}>
+          <MotionHeading as="h2" id="pehle-message" style={{ fontSize: "1.1rem", margin: "0 0 10px" }}>
             आने से पहले एक छोटा सा WhatsApp message कर दीजिए
-          </h2>
+          </MotionHeading>
           <p style={{ fontSize: 14.5, color: "var(--ink-2)", margin: "0 0 10px" }}>
             बाहर से आ रहे हैं, तो निकलने से पहले WhatsApp पर product का नाम भेज दीजिए।
           </p>
@@ -134,7 +135,7 @@ export default function Contact() {
       </section>
 
       <section className="sec">
-        <div className="shead"><h2 id="google">Google पर हमारी listing</h2></div>
+        <div className="shead"><MotionHeading as="h2" id="google">Google पर हमारी listing</MotionHeading></div>
         <p style={{ color: "var(--ink-2)", maxWidth: "62ch", margin: "0 0 14px" }}>
           Google Maps पर जो जानकारी दिखती है, वही यहाँ भी है — ताकि आपको दो जगह
           मिलान न करना पड़े।

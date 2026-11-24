@@ -1,3 +1,4 @@
+import { MotionHeading } from "@/components/MotionHeading";
 import { withSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import { shop } from "@/data/shop";
@@ -25,10 +26,10 @@ export default function Team() {
   return (
     <div className="wrap">
       <section className="sec">
-        <h1 style={{ fontSize: "clamp(1.4rem,4vw,2rem)", fontWeight: 800,
+        <MotionHeading as="h1" style={{ fontSize: "clamp(1.4rem,4vw,2rem)", fontWeight: 800,
                      letterSpacing: "-.03em", margin: "0 0 10px" }}>
           हमारी Team — वो चेहरे जो {shop.name} की असली ताक़त हैं ❤️
-        </h1>
+        </MotionHeading>
         <TableOfContents items={toc} />
 
         <div className="prose">
@@ -50,7 +51,7 @@ export default function Team() {
 
       <section className="sec">
         <div className="prose">
-          <h2 id="samarpan">हमारी Team का समर्पण और आपका भरोसा</h2>
+          <MotionHeading as="h2" id="samarpan">हमारी Team का समर्पण और आपका भरोसा</MotionHeading>
           <p>
             हम दिल से अपनी entire team का शुक्रिया अदा करते हैं, जो रोज़ सुबह से
             रात तक पूरी honesty और energy के साथ customers की service में लगी रहती है।
@@ -60,7 +61,7 @@ export default function Team() {
             {" "}{shop.address.city} में लोगों की पहली पसंद बना हुआ है।
           </p>
 
-          <h2 id="leadership">Leadership और Direct Oversight — Tarun Gupta जी</h2>
+          <MotionHeading as="h2" id="leadership">Leadership और Direct Oversight — Tarun Gupta जी</MotionHeading>
           <p>
             हमारे business की सबसे बड़ी ताक़त इसकी transparency और personal
             connection है।
@@ -74,7 +75,7 @@ export default function Team() {
             हर सवाल और हर support का जवाब आपको सीधे हमारे counter पर मिलता है।
           </p>
 
-          <h2 id="values">हमारी Team के Core Values</h2>
+          <MotionHeading as="h2" id="values">हमारी Team के Core Values</MotionHeading>
           <ul>
             <li>
               <strong>Genuine Guidance:</strong> हमारी team कभी भी आपको extra sales

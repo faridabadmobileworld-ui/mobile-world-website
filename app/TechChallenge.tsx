@@ -1,5 +1,6 @@
 "use client";
 
+import { MotionHeading } from "@/components/MotionHeading";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { IconArrow, IconCheck, IconWhatsApp } from "@/components/Icons";
@@ -66,7 +67,7 @@ export function TechChallenge() {
   return <section id="tech-challenge" className="tech-challenge" aria-labelledby="challenge-title">
     <div className="tech-challenge-intro">
       <p className="tech-challenge-overline">DIWALI TECH CHALLENGE · खेलते हुए सीखिए</p>
-      <h2 id="challenge-title">थोड़ा खेलिए।<br/><span>समझकर चुनिए।</span></h2>
+      <MotionHeading as="h2" id="challenge-title">थोड़ा खेलिए।<br/><span>समझकर चुनिए।</span></MotionHeading>
       <p className="tech-challenge-description">Phone ख़रीदने की पाँच छोटी बातें। अपना जवाब चुनिए, वजह समझिए और देखिए आप कितना जानते हैं।</p>
       <div className="tech-challenge-badges"><span>5 सवाल</span><span>लगभग 2 मिनट</span><span>Free · बिना login</span></div>
       <div className="tech-challenge-note"><span aria-hidden="true">✦</span><p>यह knowledge score है। इसके बदले cash, discount या gift नहीं मिलता।</p></div>

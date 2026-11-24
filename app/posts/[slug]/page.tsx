@@ -1,3 +1,4 @@
+import { MotionHeading } from "@/components/MotionHeading";
 import { publicCampaigns } from "@/lib/campaigns/store";
 import { campaignIsLive, type CampaignId } from "@/lib/campaigns/core";
 import type { Metadata } from "next";
@@ -111,7 +112,7 @@ export default async function PostPage({ params }: Params) {
             {campaign && <aside className="mw-offer-validity" role="note"><strong>{campaignIsLive(campaign) ? "Offer और stock की पुष्टि ज़रूरी है।" : "यह launch/offer की पुरानी जानकारी है; campaign अभी चालू नहीं है।"}</strong><p>इस post की जानकारी उसके प्रकाशन समय की है। आज के दाम, eligibility और उपलब्धता दुकान से पूछिए। {campaign.note}</p></aside>}
             <div className="rhead">
               <span className="k">{post.kicker}</span>
-              <h1 className="rtitle">{post.title}</h1>
+              <MotionHeading as="h1" className="rtitle">{post.title}</MotionHeading>
               {/* Ek nazar mein: kab likhi gayi, kitni der lagegi, kitne hisse
                   hain. Teeno gine hue hain — koi andaza nahi. */}
               <div className="rmeta">
@@ -170,7 +171,7 @@ export default async function PostPage({ params }: Params) {
             <PageFoot />
             <Byline date={post.date} dateISO={post.dateISO} time={time} />
 
-            <div className="shead" style={{ marginTop: 26 }}><h2>और भी पढ़िए</h2></div>
+            <div className="shead" style={{ marginTop: 26 }}><MotionHeading as="h2">और भी पढ़िए</MotionHeading></div>
             <div className="posts">
               {others.map((p) => (
                 <Link className="post" key={p.slug} href={`/posts/${p.slug}`}>

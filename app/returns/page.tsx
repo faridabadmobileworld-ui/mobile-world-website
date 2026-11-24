@@ -1,3 +1,4 @@
+import { MotionHeading } from "@/components/MotionHeading";
 import { withSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -71,10 +72,10 @@ export default function Returns() {
                  priority />
         </figure>
 
-        <h1 style={{ fontSize: "clamp(1.4rem,4vw,2rem)", fontWeight: 800,
+        <MotionHeading as="h1" style={{ fontSize: "clamp(1.4rem,4vw,2rem)", fontWeight: 800,
                      letterSpacing: "-.03em", margin: "0 0 10px" }}>
           Return, Refund और Exchange — साफ़ बात, पक्का भरोसा 🤝
-        </h1>
+        </MotionHeading>
         <TableOfContents items={toc} />
 
         <div className="prose">
@@ -91,7 +92,7 @@ export default function Returns() {
 
       <section className="sec">
         <div className="prose">
-          <h2 id="return">1. Return और refund के नियम</h2>
+          <MotionHeading as="h2" id="return">1. Return और refund के नियम</MotionHeading>
           <ul>
             <li>
               <strong>Seal खुलने के बाद</strong> किसी भी नए mobile, laptop या
@@ -108,7 +109,7 @@ export default function Returns() {
             </li>
           </ul>
 
-          <h2 id="doa">2. डिब्बा खोलते ही ख़राबी निकले तो</h2>
+          <MotionHeading as="h2" id="doa">2. डिब्बा खोलते ही ख़राबी निकले तो</MotionHeading>
           <ul>
             <li>
               नया डिब्बा खोलते ही सामान में कोई बड़ी manufacturing ख़राबी निकल आए, तो
@@ -126,7 +127,7 @@ export default function Returns() {
             </li>
           </ul>
 
-          <h2 id="exchange">3. पुराने phone के Exchange की शर्तें</h2>
+          <MotionHeading as="h2" id="exchange">3. पुराने phone के Exchange की शर्तें</MotionHeading>
           <ul>
             <li>
               नया phone लेते समय पुराना phone exchange में दिया जा सकता है।
@@ -147,7 +148,7 @@ export default function Returns() {
             </li>
           </ul>
 
-          <h2 id="accessories">4. Accessories और छोटा सामान</h2>
+          <MotionHeading as="h2" id="accessories">4. Accessories और छोटा सामान</MotionHeading>
           <ul>
             <li>
               Screen guard, tempered glass, cover, charging cable और बिना warranty
@@ -158,7 +159,7 @@ export default function Returns() {
             </li>
           </ul>
 
-          <h2 id="counter">5. सामान counter पर ही चेक करवा लीजिए</h2>
+          <MotionHeading as="h2" id="counter">5. सामान counter पर ही चेक करवा लीजिए</MotionHeading>
           <p>
             हर सामान हम counter पर आपके सामने खोलकर, चलाकर दिखाते हैं। कोई शक हो तो
             वहीं पूछ लीजिए — बाद में परेशान होने से यह हमेशा अच्छा है।

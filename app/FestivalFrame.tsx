@@ -1,4 +1,5 @@
 'use client';
+import { MotionHeading } from "@/components/MotionHeading";
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { IconArrow, IconPause, IconPlay } from '@/components/Icons';
@@ -14,7 +15,7 @@ export function FestivalFrame() {
     <div className="festival-rail festival-rail-left" aria-hidden="true"/>
     <div className="festival-rail festival-rail-right" aria-hidden="true"/>
     <div className="festival-crown" aria-hidden="true"/>
-    <div className="festival-greeting"><span className="festival-diya" aria-hidden="true"><i/></span><p><span className="festival-eyebrow">DIWALI AT MOBILE WORLD</span>रोशनी, भरोसा और ख़ुशियाँ।</p><button type="button" className="festival-motion" aria-pressed={paused} aria-label={paused ? 'Festival animations चलाइए' : 'Festival animations रोकिए'} onClick={() => setPaused(v => !v)}>{paused ? <IconPlay/> : <IconPause/>}<span>{paused ? 'Animation चलाइए' : 'Animation रोकिए'}</span></button></div>
+    <div className="festival-greeting"><span className="festival-diya" aria-hidden="true"><i/></span><p><span className="festival-eyebrow">DIWALI AT MOBILE WORLD</span>रोशनी, भरोसा और ख़ुशियाँ।</p><button type="button" className="festival-motion" aria-pressed={paused} aria-label={paused ? 'Website animations चलाइए' : 'Website animations रोकिए'} onClick={() => setPaused(v => !v)}>{paused ? <IconPlay/> : <IconPause/>}<span>{paused ? 'Animation चलाइए' : 'Animation रोकिए'}</span></button></div>
   </>;
 }
 
@@ -44,7 +45,7 @@ export function FestivalFlightScene() {
   }, []);
   return <section className="festival-flight-scene" ref={section} aria-labelledby="festival-flight-title">
     <Image className="festival-flight-landscape" src="/festival-v2/pilgrimage-panorama.webp" fill sizes="100vw" alt="साँझ के पहाड़ों में माँ वैष्णो देवी भवन से प्रेरित campaign artwork"/>
-    <div className="festival-flight-copy"><p>DIWALI की ख़ुशियों के साथ</p><h2 id="festival-flight-title">आस्था का सफ़र।<br/><span>ख़ुशियों की उड़ान।</span></h2><a href="#festival-highlights">Yatra campaign देखिए <IconArrow/></a></div>
+    <div className="festival-flight-copy"><p>DIWALI की ख़ुशियों के साथ</p><MotionHeading as="h2" id="festival-flight-title">आस्था का सफ़र।<br/><span>ख़ुशियों की उड़ान।</span></MotionHeading><a href="#festival-highlights">Yatra campaign देखिए <IconArrow/></a></div>
     <div className="festival-flight" ref={flight} aria-hidden="true"><div className="festival-flight-body"><Image src="/festival-v2/helicopter.webp" width={900} height={600} alt="" sizes="(max-width: 760px) 230px, 390px"/><span className="festival-beacon"/></div></div>
     <span className="festival-scene-note">MOBILE WORLD · DIWALI 2026</span>
   </section>;

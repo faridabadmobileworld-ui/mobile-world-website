@@ -1,3 +1,4 @@
+import { MotionHeading } from "@/components/MotionHeading";
 /**
  * "दुकान के video" — home page पर खिसकने वाली पट्टी।
  *
@@ -24,7 +25,7 @@ export function VideoRow() {
           सिर्फ़ card के अंदर `<b>` में था। Owner ने laptop पर यही पकड़ा:
           *"heading wagairah b nhi h kisi ki"*। हर हिस्से की अपनी `<h2>`
           होनी चाहिए — page की रूपरेखा भी इसी से बनती है। */}
-      <div className="shead"><h2 id="video">दुकान के video</h2></div>
+      <div className="shead"><MotionHeading as="h2" id="video">दुकान के video</MotionHeading></div>
       <div className="ytw fx">
         <div className="igw-h">
           <span className="yt-dp" aria-hidden="true"><IconYouTube /></span>

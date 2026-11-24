@@ -1,3 +1,4 @@
+import { MotionHeading } from "@/components/MotionHeading";
 /**
  * Instagram वाली पट्टी — असली post, खिसकने वाली slides में।
  *
@@ -29,7 +30,7 @@ export async function InstagramFeed() {
     <section className="sec" aria-labelledby="insta">
       {/* ⚠️ 11 Sep 2026 — इस हिस्से की भी heading नहीं थी। `id="insta"` अब
           इसी `<h2>` पर है, क्योंकि home की TOC का link यहीं आता है। */}
-      <div className="shead"><h2 id="insta">Follow us on Instagram</h2></div>
+      <div className="shead"><MotionHeading as="h2" id="insta">Follow us on Instagram</MotionHeading></div>
       <div className="igw fx">
         <div className="igw-h">
           <span className="igw-av">

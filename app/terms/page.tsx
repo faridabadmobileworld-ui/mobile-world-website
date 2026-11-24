@@ -1,3 +1,4 @@
+import { MotionHeading } from "@/components/MotionHeading";
 import { withSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -36,10 +37,10 @@ export default function Terms() {
   return (
     <div className="wrap">
       <section className="sec">
-        <h1 style={{ fontSize: "clamp(1.4rem,4vw,2rem)", fontWeight: 800,
+        <MotionHeading as="h1" style={{ fontSize: "clamp(1.4rem,4vw,2rem)", fontWeight: 800,
                      letterSpacing: "-.03em", margin: "0 0 10px" }}>
           Terms &amp; Conditions — हमारे नियम, आपका और हमारा साफ़ रिश्ता 📜
-        </h1>
+        </MotionHeading>
         <TableOfContents items={toc} />
 
         <div className="prose">
@@ -56,7 +57,7 @@ export default function Terms() {
 
       <section className="sec">
         <div className="prose">
-          <h2 id="website">1. Website सिर्फ़ जानकारी के लिए है</h2>
+          <MotionHeading as="h2" id="website">1. Website सिर्फ़ जानकारी के लिए है</MotionHeading>
           <ul>
             <li>
               यह website ({shop.siteUrl.replace("https://", "")}) products की जानकारी,
@@ -73,7 +74,7 @@ export default function Terms() {
           </ul>
 
           <span id="tech-challenge-terms" />
-          <h2 id="spin-wheel-terms">Diwali Spin Wheel</h2>
+          <MotionHeading as="h2" id="spin-wheel-terms">Diwali Spin Wheel</MotionHeading>
           <p>Spin free है। एक mobile number पर एक reward code मिलेगा; code इसी screen पर दिखेगा। वही number दोबारा देने पर नया reward नहीं मिलेगा। ₹ वाली reward ख़रीदारी के bill पर discount है।</p>
           <ul>{spinRewards.map(reward => <li key={reward.id}><strong>{reward.label}</strong></li>)}</ul>
           <p>अलग-अलग rewards के chances अलग हैं। Wheel के हिस्सों का आकार बराबर chance नहीं दर्शाता।</p>
@@ -81,7 +82,7 @@ export default function Terms() {
           <p>दुकान की team उसी number का access और code verify करेगी तथा reward देने पर bill और product के साथ Used status दर्ज करेगी। इस्तेमाल हुए code को दोबारा redeem नहीं किया जा सकता। Gift का उपलब्ध brand, model और colour दुकान पर बताया जाएगा। Demo result redeem नहीं होता।</p>
           <p>Number और reward record की जानकारी <Link href="/privacy#spin-wheel-privacy">Privacy</Link> में है।</p>
 
-          <h2 id="price">2. दाम, offer और stock</h2>
+          <MotionHeading as="h2" id="price">2. दाम, offer और stock</MotionHeading>
           <ul>
             <li>
               Smartphone, laptop और appliances के दाम market के हिसाब से बदलते रहते
@@ -100,7 +101,7 @@ export default function Terms() {
             </li>
           </ul>
 
-          <h2 id="bill">3. पक्का bill और genuine सामान</h2>
+          <MotionHeading as="h2" id="bill">3. पक्का bill और genuine सामान</MotionHeading>
           <ul>
             <li>
               दुकान पर मिलने वाला हर सामान <strong>पक्के GST Bill</strong> के साथ मिलता है।
@@ -114,7 +115,7 @@ export default function Terms() {
             </li>
           </ul>
 
-          <h2 id="warranty">4. Brand warranty और service</h2>
+          <MotionHeading as="h2" id="warranty">4. Brand warranty और service</MotionHeading>
           <ul>
             <li>
               दुकान पर बिकने वाले हर branded सामान पर <strong>बनाने वाली company
@@ -143,7 +144,7 @@ export default function Terms() {
             </li>
           </ul>
 
-          <h2 id="exchange">5. Return, Refund और Exchange</h2>
+          <MotionHeading as="h2" id="exchange">5. Return, Refund और Exchange</MotionHeading>
           <p>
             सामान वापस करने, पैसे लौटने, डिब्बा खोलते ही ख़राबी निकलने (DOA) और पुराने
             phone के exchange — इन सबके पूरे नियम अलग page पर एक जगह लिखे हैं, ताकि
@@ -155,7 +156,7 @@ export default function Terms() {
             </Link>
           </p>
 
-          <h2 id="delivery">6. Delivery की शर्तें</h2>
+          <MotionHeading as="h2" id="delivery">6. Delivery की शर्तें</MotionHeading>
           <ul>
             <li>
               {shop.address.city} में delivery की सुविधा है।
@@ -174,7 +175,7 @@ export default function Terms() {
             </li>
           </ul>
 
-          <h2 id="timing">7. खुलने और बंद होने का समय</h2>
+          <MotionHeading as="h2" id="timing">7. खुलने और बंद होने का समय</MotionHeading>
           <ul>
             <li>
               <strong>रोज़ सुबह 10:00 बजे से रात 10:00 बजे तक, सातों दिन।</strong>
@@ -188,7 +189,7 @@ export default function Terms() {
             </li>
           </ul>
 
-          <h2 id="ipr">8. Content किसका है</h2>
+          <MotionHeading as="h2" id="ipr">8. Content किसका है</MotionHeading>
           <ul>
             <li>
               इस website का अपना text और Mobile World branding
@@ -200,7 +201,7 @@ export default function Terms() {
             </li>
           </ul>
 
-          <h2 id="jaankari">9. जानकारी में ग़लती या बदलाव</h2>
+          <MotionHeading as="h2" id="jaankari">9. जानकारी में ग़लती या बदलाव</MotionHeading>
           <ul>
             <li>
               हम पूरी कोशिश करते हैं कि website पर लिखी हर बात सही हो।
@@ -211,7 +212,7 @@ export default function Terms() {
             </li>
           </ul>
 
-          <h2 id="kanoon">10. क़ानूनी अधिकार क्षेत्र</h2>
+          <MotionHeading as="h2" id="kanoon">10. क़ानूनी अधिकार क्षेत्र</MotionHeading>
           <ul>
             <li>
               हमारे कारोबार से जुड़ा कोई भी विवाद हो, तो उस पर सुनवाई
@@ -220,7 +221,7 @@ export default function Terms() {
             </li>
           </ul>
 
-          <h2 id="badlav">11. इन शर्तों में बदलाव</h2>
+          <MotionHeading as="h2" id="badlav">11. इन शर्तों में बदलाव</MotionHeading>
           <ul>
             <li>
               कारोबार की ज़रूरत या क़ानूनी नियमों के हिसाब से हम इन शर्तों को
@@ -229,7 +230,7 @@ export default function Terms() {
             <li>कोई भी बदलाव सबसे पहले इसी page पर दिखेगा।</li>
           </ul>
 
-          <h2 id="contact">12. हमसे संपर्क कीजिए</h2>
+          <MotionHeading as="h2" id="contact">12. हमसे संपर्क कीजिए</MotionHeading>
           <p>
             इन शर्तों को लेकर कोई सवाल हो तो सीधे हमसे जुड़िए:
           </p>

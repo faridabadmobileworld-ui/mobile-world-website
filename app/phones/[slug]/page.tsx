@@ -1,3 +1,4 @@
+import { MotionHeading } from "@/components/MotionHeading";
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -44,7 +45,7 @@ export default async function PhonePage({ params }: Props) {
     <nav aria-label="Breadcrumb" className="mp-breadcrumb"><Link href="/">Home</Link><span>/</span><Link href="/products">Products</Link><span>/</span><span>{name}</span></nav>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }} />
     <DetailedProduct product={product} productPath={productPath} referencePrices={referencePrices} />
-    {related.length > 0 && <section className="mp-published" aria-labelledby="related-phones"><h2 id="related-phones">इसी brand के और models</h2><div className="mp-published-list">{related.map(item => <Link href={'/phones/' + item.slug} key={item.id}><strong>{productDisplayName(item)}</strong><span>Specifications देखिए →</span></Link>)}</div></section>}
+    {related.length > 0 && <section className="mp-published" aria-labelledby="related-phones"><MotionHeading as="h2" id="related-phones">इसी brand के और models</MotionHeading><div className="mp-published-list">{related.map(item => <Link href={'/phones/' + item.slug} key={item.id}><strong>{productDisplayName(item)}</strong><span>Specifications देखिए →</span></Link>)}</div></section>}
     <Link className="mw-text-link" href="/products">← सभी products देखिए</Link>
   </div>;
 }

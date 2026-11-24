@@ -1,3 +1,4 @@
+import { MotionHeading } from "@/components/MotionHeading";
 import { faqSchema, jsonLdScript } from "@/data/schema";
 
 export type QA = { q: string; a: string };
@@ -34,7 +35,7 @@ export function Faq({
     <section className="sec" id={id}>
       <script type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLdScript(faqSchema(items)) }} />
-      <div className="shead"><h2>{heading}</h2></div>
+      <div className="shead"><MotionHeading as="h2">{heading}</MotionHeading></div>
       <div className="faq">
         {items.map((it) => (
           <details key={it.q}>

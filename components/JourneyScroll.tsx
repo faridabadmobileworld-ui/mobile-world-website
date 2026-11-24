@@ -1,5 +1,6 @@
 "use client";
 
+import { MotionHeading } from "@/components/MotionHeading";
 import Image from "next/image";
 import { ScrollCue } from "./ScrollCue";
 import { useEffect, useRef } from "react";
@@ -217,11 +218,13 @@ export function JourneyScroll({ hero = false }: { hero?: boolean }) {
       beats.forEach((b) => { b.style.removeProperty("opacity"); b.style.removeProperty("--k"); });
       videos.forEach((v) => v.style.removeProperty("opacity"));
     }
-    const apply = () => (mqls.some((m) => m.matches) ? disable() : enable());
+    const apply = () => (mqls.some((m) => m.matches) || document.documentElement.dataset.festivalMotion === "paused" ? disable() : enable());
     mqls.forEach((m) => m.addEventListener("change", apply));
+    window.addEventListener("mw-festival-motion", apply);
     apply();
 
     return () => {
+      window.removeEventListener("mw-festival-motion", apply);
       mqls.forEach((m) => m.removeEventListener("change", apply));
       removeEventListener("scroll", onScroll);
       videos.forEach((v, i) => v.removeEventListener("seeked", onSeeked[i]));
@@ -237,8 +240,8 @@ export function JourneyScroll({ hero = false }: { hero?: boolean }) {
           "h1 = 0" पकड़ा गया था (7 Sep 2026)। Home page पर यह hero नहीं है,
           वहाँ `h1` hero video वाले हिस्से का है। */}
       {hero
-        ? <h1 className="sr" id="hamara-safar">हमारा सफ़र — 1973 से आज तक</h1>
-        : <div className="shead"><h2 id="hamara-safar">हमारा सफ़र</h2></div>}
+        ? <MotionHeading as="h1" className="sr" id="hamara-safar">हमारा सफ़र — 1973 से आज तक</MotionHeading>
+        : <div className="shead"><MotionHeading as="h2" id="hamara-safar">हमारा सफ़र</MotionHeading></div>}
 
       <div className="jrn-scroll" ref={rootRef}>
         {/* ⚠️ यह `jrn-pin` वाली परत 7 Sep 2026 को जोड़ी गई। पहले `jrn-stage`

@@ -1,3 +1,4 @@
+import { MotionHeading } from "@/components/MotionHeading";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -27,10 +28,10 @@ export default function Posts() {
   return (
     <div className="wrap">
       <section className="sec">
-        <h1 style={{ fontSize: "clamp(1.4rem,4vw,2rem)", fontWeight: 800,
+        <MotionHeading as="h1" style={{ fontSize: "clamp(1.4rem,4vw,2rem)", fontWeight: 800,
                      letterSpacing: "-.03em", margin: "0 0 6px" }}>
           Tech Blog &amp; Guides 📝
-        </h1>
+        </MotionHeading>
         <div className="prose" style={{ margin: "0 0 16px" }}>
           <p>
             जो सवाल रोज़ counter पर पूछे जाते हैं — कितने ton का AC लूँ, कौन सा laptop
@@ -46,7 +47,7 @@ export default function Posts() {
         {postGroups().map((g) => (
           <div className="pgrp" key={g.id}>
             <div className="shead">
-              <h2 id={g.id}>{g.name}</h2>
+              <MotionHeading as="h2" id={g.id}>{g.name}</MotionHeading>
               <span className="pgrp-n">{g.posts.length}</span>
             </div>
             <p className="pgrp-note">{g.note}</p>

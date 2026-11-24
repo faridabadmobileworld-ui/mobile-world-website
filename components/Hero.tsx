@@ -1,5 +1,6 @@
 "use client";
 
+import { MotionHeading } from "@/components/MotionHeading";
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { slides, whatsappGeneral, hasDevanagari } from "@/data/content";
@@ -76,8 +77,8 @@ export function Hero() {
               <div className="hs-c">
                 <span className={hasDevanagari(s.kicker) ? "hs-k dev" : "hs-k"}>{s.kicker}</span>
                 {k === 0
-                  ? <h1 className={hasDevanagari(s.heading) ? "hs-h dev" : "hs-h"}>{s.heading.split("\n").map((l, n) => <span key={n}>{l}<br /></span>)}</h1>
-                  : <h2 className={hasDevanagari(s.heading) ? "hs-h dev" : "hs-h"}>{s.heading.split("\n").map((l, n) => <span key={n}>{l}<br /></span>)}</h2>}
+                  ? <MotionHeading as="h1" className={hasDevanagari(s.heading) ? "hs-h dev" : "hs-h"}>{s.heading.split("\n").map((l, n) => <span key={n}>{l}<br /></span>)}</MotionHeading>
+                  : <MotionHeading as="h2" className={hasDevanagari(s.heading) ? "hs-h dev" : "hs-h"}>{s.heading.split("\n").map((l, n) => <span key={n}>{l}<br /></span>)}</MotionHeading>}
                 <p className="hs-p">{s.body}</p>
 
                 <div className="hs-cta">

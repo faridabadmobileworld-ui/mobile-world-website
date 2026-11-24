@@ -1,5 +1,6 @@
 "use client";
 
+import { MotionHeading } from "@/components/MotionHeading";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -19,16 +20,18 @@ export function ShoppingHero({ hiddenCampaigns = [] }: { hiddenCampaigns?: strin
     let timer: ReturnType<typeof setInterval> | undefined;
     const sync = () => {
       clearInterval(timer);
-      if (!motion.matches && !document.hidden) {
+      if (!motion.matches && !document.hidden && document.documentElement.dataset.festivalMotion !== 'paused') {
         timer = setInterval(() => setIndex((n) => (n + 1) % slides.length), 9000);
       }
     };
     sync();
     document.addEventListener("visibilitychange", sync);
+    window.addEventListener("mw-festival-motion", sync);
     motion.addEventListener("change", sync);
     return () => {
       clearInterval(timer);
       document.removeEventListener("visibilitychange", sync);
+      window.removeEventListener("mw-festival-motion", sync);
       motion.removeEventListener("change", sync);
     };
   }, [playing, hovered, index, slides.length]);
@@ -56,7 +59,7 @@ export function ShoppingHero({ hiddenCampaigns = [] }: { hiddenCampaigns?: strin
         if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5) choose(index + (dx < 0 ? 1 : -1));
         touch.current = null;
       }} onTouchCancel={() => { touch.current = null; }}>
-      <h1 className="sr">Mobile World, Faridabad · Mobiles और Home Appliances</h1>
+      <MotionHeading as="h1" className="sr">Mobile World, Faridabad · Mobiles और Home Appliances</MotionHeading>
       <div className="campaign-stage" aria-live={playing ? "off" : "polite"}>
         {slides.map((slide, n) => (
           <div className={`campaign-slide campaign-${slide.theme}${index === n ? " is-active" : ""}`}
@@ -70,7 +73,7 @@ export function ShoppingHero({ hiddenCampaigns = [] }: { hiddenCampaigns?: strin
             <div className="campaign-inner">
               <div className="campaign-copy">
                 <p className="campaign-eyebrow">{slide.eyebrow}</p>
-                <h2>{slide.heading.split("\n").map((line) => <span key={line}>{line}</span>)}</h2>
+                <MotionHeading as="h2" aria-label={slide.heading.replace(/\n/g, ' ')}>{slide.heading.split("\n").map((line) => <span key={line}>{line}</span>)}</MotionHeading>
                 <p className="campaign-description">{slide.body}</p>
                 <div className="campaign-actions">
                   <Link className="shopping-primary" href={slide.href}>{slide.cta}<IconArrow /></Link>

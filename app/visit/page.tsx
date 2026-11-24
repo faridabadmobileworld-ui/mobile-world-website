@@ -1,3 +1,4 @@
+import { MotionHeading } from "@/components/MotionHeading";
 import { withSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -61,10 +62,10 @@ export default function Visit() {
   return (
     <div className="wrap">
       <section className="sec">
-        <h1 style={{ fontSize: "clamp(1.4rem,4vw,2rem)", fontWeight: 800,
+        <MotionHeading as="h1" style={{ fontSize: "clamp(1.4rem,4vw,2rem)", fontWeight: 800,
                      letterSpacing: "-.03em", margin: "0 0 6px" }}>
           दुकान पर आइए, और हमें सेवा का मौक़ा दीजिए
-        </h1>
+        </MotionHeading>
         <p style={{ color: "var(--ink-2)", maxWidth: "60ch", margin: "0 0 16px" }}>
           आने से पहले model का नाम WhatsApp कर दीजिए। हम बता देंगे कि वो दुकान पर
           मौजूद है या नहीं — ताकि आपका चक्कर बेकार न जाए।
@@ -79,7 +80,7 @@ export default function Visit() {
           <span className="cico" aria-hidden="true">
             <Image src="/images/icon-shop-2b14210e.webp" alt="" width={200} height={200} sizes="96px" />
           </span>
-          <h2 id="pata">{shop.name}</h2>
+          <MotionHeading as="h2" id="pata">{shop.name}</MotionHeading>
           <p>
             {shop.address.street}<br />
             {shop.address.landmark}<br />
@@ -114,20 +115,20 @@ export default function Visit() {
       <section className="sec">
         <div className="cols3">
           <div className="panel rv in">
-            <h2 id="kab-khuli" style={{ fontSize: "1.05rem", margin: "0 0 8px" }}>कब खुली रहती है</h2>
+            <MotionHeading as="h2" id="kab-khuli" style={{ fontSize: "1.05rem", margin: "0 0 8px" }}>कब खुली रहती है</MotionHeading>
             <p style={{ fontSize: 14.5, color: "var(--ink-2)", margin: 0 }}>
               सातों दिन, सुबह 10 से रात 10। कोई weekly off नहीं।
             </p>
           </div>
           <div className="panel rv in">
-            <h2 id="kab-band" style={{ fontSize: "1.05rem", margin: "0 0 8px" }}>कब बंद रहती है</h2>
+            <MotionHeading as="h2" id="kab-band" style={{ fontSize: "1.05rem", margin: "0 0 8px" }}>कब बंद रहती है</MotionHeading>
             <p style={{ fontSize: 14.5, color: "var(--ink-2)", margin: 0 }}>
               हर महीने की आख़िरी तारीख़ — 28, 29, 30 या 31, जो भी हो। उस दिन
               पूरा बाज़ार बंद रहता है।
             </p>
           </div>
           <div className="panel rv in">
-            <h2 id="pehchan" style={{ fontSize: "1.05rem", margin: "0 0 8px" }}>पहचान</h2>
+            <MotionHeading as="h2" id="pehchan" style={{ fontSize: "1.05rem", margin: "0 0 8px" }}>पहचान</MotionHeading>
             <p style={{ fontSize: 14.5, color: "var(--ink-2)", margin: 0 }}>
               {shop.address.landmark}। {shop.address.road} पर, {shop.address.locality} में।
             </p>

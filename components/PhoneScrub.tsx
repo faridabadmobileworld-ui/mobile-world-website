@@ -1,5 +1,6 @@
 "use client";
 
+import { MotionHeading } from "@/components/MotionHeading";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
@@ -221,7 +222,7 @@ export function PhoneScrub() {
             {/* Apple का hero वाला क्रम: ऊपर छोटा नारंगी label, फिर सबसे बड़ी
                 heading, फिर एक line का परिचय, फिर नीले link। */}
             <p className="phv-eyebrow">{shop.address.locality}, {shop.address.city}</p>
-            <h1 id="phv-h">Mobile, Laptop और घर का सारा सामान</h1>
+            <MotionHeading as="h1" id="phv-h">Mobile, Laptop और घर का सारा सामान</MotionHeading>
             <p className="phv-sub">
               फ़ोन से लेकर fridge, AC और washing machine तक — सब एक ही दुकान पर।
             </p>

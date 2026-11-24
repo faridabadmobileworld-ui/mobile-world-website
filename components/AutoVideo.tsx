@@ -41,42 +41,50 @@ export function AutoVideo({
   useEffect(() => {
     const box = boxRef.current;
     if (!box) return;
-    // Motion कम माँगी हो तो video माँगी ही नहीं जाती — तस्वीर ही रहती है।
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const v = box.querySelector<HTMLVideoElement>(".av-v");
-    if (!v) return;
-
-    let asked = false;
+    const motion = matchMedia("(prefers-reduced-motion: reduce)");
+    const video = box.querySelector<HTMLVideoElement>(".av-v");
+    if (!video) return;
+    let requested = false;
+    let nearby = false;
+    let visible = false;
+    let disposed = false;
     let timer = 0;
-
+    const allowed = () => !disposed && !motion.matches && document.documentElement.dataset.festivalMotion !== 'paused';
     function fetchVideo() {
-      const url = (srcSm && matchMedia("(max-width: 860px)").matches) ? srcSm : src;
-      v!.preload = "auto";
-      v!.src = url;                    // ⚠️ इसके बाद `load()` नहीं
-      v!.addEventListener("loadeddata", () => {
-        box!.classList.add("av-on");
-        const go = v!.play();
-        if (go && typeof go.then === "function") go.catch(() => { /* न चले तो तस्वीर ही सही */ });
-      }, { once: true });
+      timer = 0;
+      if (!allowed() || requested || !nearby) return;
+      requested = true;
+      video!.preload = "auto";
+      video!.src = (srcSm && matchMedia("(max-width: 860px)").matches) ? srcSm : src;
     }
-
-    const near = new IntersectionObserver((es) => {
-      if (!es[0].isIntersecting || asked) return;
-      asked = true;
-      near.disconnect();
-      // ⚠️ video **तुरंत** मत माँगिए। यह सजावट है, article नहीं। पहले page
-      // पूरा खुल जाए और browser फ़ुरसत में आ जाए, तब माँगिए — तब तक ग्राहक
-      // को वही तस्वीर दिखती रहती है जो video में है। इससे article की अपनी
-      // लिखाई और तस्वीरें पहले आती हैं, और धीमे 4G पर video उनसे bandwidth
-      // नहीं छीनती।
-      const later = () => { timer = window.setTimeout(fetchVideo, 1200); };
-      if (document.readyState === "complete") later();
-      else addEventListener("load", later, { once: true });
-    }, { rootMargin: "200px 0px" });
-
-    near.observe(box);
-    return () => { near.disconnect(); if (timer) clearTimeout(timer); };
+    function sync() {
+      if (!allowed() || document.hidden || !visible) video!.pause();
+      else if (video!.readyState >= 2) {
+        void video!.play().then(() => {
+          if (!allowed() || document.hidden || !visible) video!.pause();
+        }).catch(() => { /* Poster remains available when autoplay is restricted. */ });
+      }
+      if (allowed() && nearby && !requested && !timer && document.readyState === 'complete') {
+        timer = window.setTimeout(fetchVideo, 1200);
+      }
+    }
+    const loaded = () => { if (!disposed) { box!.classList.add('av-on'); sync(); } };
+    const near = new IntersectionObserver(([entry]) => { nearby = entry.isIntersecting; sync(); }, { rootMargin: '200px 0px' });
+    const view = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); });
+    near.observe(box); view.observe(box);
+    video.addEventListener('loadeddata', loaded);
+    window.addEventListener('load', sync);
+    window.addEventListener('mw-festival-motion', sync);
+    document.addEventListener('visibilitychange', sync);
+    motion.addEventListener('change', sync);
+    return () => {
+      disposed = true; near.disconnect(); view.disconnect(); clearTimeout(timer); video.pause();
+      video.removeEventListener('loadeddata', loaded);
+      window.removeEventListener('load', sync);
+      window.removeEventListener('mw-festival-motion', sync);
+      document.removeEventListener('visibilitychange', sync);
+      motion.removeEventListener('change', sync);
+    };
   }, [src, srcSm]);
 
   return (

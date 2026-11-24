@@ -1,3 +1,4 @@
+import { MotionHeading } from "@/components/MotionHeading";
 import { withSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import { shop } from "@/data/shop";
@@ -51,10 +52,10 @@ export default function Repairing() {
   return (
     <div className="wrap">
       <section className="sec">
-        <h1 style={{ fontSize: "clamp(1.4rem,4vw,2rem)", fontWeight: 800,
+        <MotionHeading as="h1" style={{ fontSize: "clamp(1.4rem,4vw,2rem)", fontWeight: 800,
                      letterSpacing: "-.03em", margin: "0 0 10px" }}>
           Mobile Repairing Services — भरोसेमंद और expert technical solutions ❤️
-        </h1>
+        </MotionHeading>
         <TableOfContents items={toc} />
 
         <div className="prose">
@@ -76,7 +77,7 @@ export default function Repairing() {
 
       <section className="sec">
         <div className="prose">
-          <h2 id="list">हमारी Repairing Services की पूरी list</h2>
+          <MotionHeading as="h2" id="list">हमारी Repairing Services की पूरी list</MotionHeading>
           <p>
             {shop.address.locality} की हमारी दुकान पर skilled technicians द्वारा इन
             सभी technical issues को fix किया जाता है:
@@ -116,7 +117,7 @@ export default function Repairing() {
             </li>
           </ul>
 
-          <h2 id="approach">हमारा Repairing Approach — 100% Transparency</h2>
+          <MotionHeading as="h2" id="approach">हमारा Repairing Approach — 100% Transparency</MotionHeading>
           <p>
             हम कभी भी आपको hidden charges या ग़ैर-ज़रूरी repairs के बारे में mislead
             नहीं करते:
@@ -135,7 +136,7 @@ export default function Repairing() {
             वहाँ पहुँचने और बात बनवाने में हम आपकी मदद कर देंगे।
           </p>
 
-          <h2 id="aaiye">अपने phone को लेकर सीधे दुकान पर आइए</h2>
+          <MotionHeading as="h2" id="aaiye">अपने phone को लेकर सीधे दुकान पर आइए</MotionHeading>
           <p>
             अगर आपके smartphone में किसी भी तरह का hardware या software issue है, तो
             ज़्यादा सोचने के बजाय सीधे {shop.address.road} वाली हमारी दुकान पर ले आइए।

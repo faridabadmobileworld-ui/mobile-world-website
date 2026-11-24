@@ -1,5 +1,6 @@
 "use client";
 
+import { MotionHeading } from "@/components/MotionHeading";
 import { Suspense, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -120,7 +121,7 @@ function SpinWheelContent({ enabled, note }: { enabled: boolean; note: string })
   if (!enabled && !shownCoupon && !isDemo) return null;
   return <section id="spin-wheel" className="spin-section" aria-labelledby="spin-title">
     {isDemo && <div className="spin-demo-notice" role="status">DEMO MODE · Animation की जाँच। कोई असली reward या claim code जारी नहीं होगा।</div>}
-    <div className="spin-intro"><p className="spin-eyebrow">MOBILE WORLD · DIWALI SPIN &amp; WIN</p><h2 id="spin-title">एक Spin.<br/><span>आपकी ख़ुशी का एक मौक़ा।</span></h2><p>{enabled ? "अपना number डालिए। Wheel घुमाइए। अपना reward code दुकान पर दिखाइए।" : "नए spins अभी बंद हैं। पहले जारी हुआ आपका code यहाँ सुरक्षित है।"}</p>{note && <p>{note}</p>}<div className="spin-pills"><span>Free Spin</span><span>एक number · एक reward</span><span>दुकान पर Claim</span></div></div>
+    <div className="spin-intro"><p className="spin-eyebrow">MOBILE WORLD · DIWALI SPIN &amp; WIN</p><MotionHeading as="h2" id="spin-title">एक Spin.<br/><span>आपकी ख़ुशी का एक मौक़ा।</span></MotionHeading><p>{enabled ? "अपना number डालिए। Wheel घुमाइए। अपना reward code दुकान पर दिखाइए।" : "नए spins अभी बंद हैं। पहले जारी हुआ आपका code यहाँ सुरक्षित है।"}</p>{note && <p>{note}</p>}<div className="spin-pills"><span>Free Spin</span><span>एक number · एक reward</span><span>दुकान पर Claim</span></div></div>
     <div className="spin-play-area">
       <div className="spin-visual">{shownCoupon && !spinRewards.some(item => item.id === shownCoupon.rewardId) ? <div className="spin-archived"><span>✦</span><h3>आपका पहले का reward</h3><p>अपना सुरक्षित code दुकान पर दिखाइए।</p></div> : <><WheelGraphic rotation={shownCoupon ? Math.floor(rotation / 360) * 360 + ((360 - spinRewards.findIndex(item => item.id === shownCoupon.rewardId) * segmentAngle) % 360) : rotation} moving={busy} onEnd={finishSpin}/><p className="spin-wheel-caption">ऊपर का pointer आपका reward दिखाएगा।</p></>}</div>
       <div className="spin-control">
@@ -143,5 +144,5 @@ function SpinWheelContent({ enabled, note }: { enabled: boolean; note: string })
 }
 
 export function SpinWheel({ enabled = true, note = "" }: { enabled?: boolean; note?: string }) {
-  return <Suspense fallback={<section className="spin-section spin-loading" id="spin-wheel"><p className="spin-eyebrow">MOBILE WORLD · DIWALI SPIN &amp; WIN</p><h2>आपका Spin Wheel तैयार हो रहा है…</h2><p>₹100 · ₹200 · ₹500 · ₹1000 discount · Neckband · Earbuds</p></section>}><SpinWheelContent enabled={enabled} note={note}/></Suspense>;
+  return <Suspense fallback={<section className="spin-section spin-loading" id="spin-wheel"><p className="spin-eyebrow">MOBILE WORLD · DIWALI SPIN &amp; WIN</p><MotionHeading as="h2">आपका Spin Wheel तैयार हो रहा है…</MotionHeading><p>₹100 · ₹200 · ₹500 · ₹1000 discount · Neckband · Earbuds</p></section>}><SpinWheelContent enabled={enabled} note={note}/></Suspense>;
 }

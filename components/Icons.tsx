@@ -62,7 +62,7 @@ export const IconHome = () => (
 );
 
 export const IconArrow = ({ size = 14 }: { size?: number }) => (
-  <svg {...S} width={size} height={size} aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+  <svg {...S} className="mw-icon-arrow" width={size} height={size} aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
 );
 
 export const IconChevL = () => (

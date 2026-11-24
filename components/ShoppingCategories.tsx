@@ -1,3 +1,4 @@
+import { MotionHeading } from "@/components/MotionHeading";
 import { categoryHref } from "@/data/category-guides";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,7 +10,7 @@ export function ShoppingCategories() {
   return (
     <section className="shopping-categories" aria-labelledby="shop-by-category">
       <div className="shopping-section-heading">
-        <div><p className="shopping-overline">CATEGORIES · अपनी ज़रूरत चुनिए</p><h2 id="shop-by-category">आपको क्या चाहिए?</h2></div>
+        <div><p className="shopping-overline">CATEGORIES · अपनी ज़रूरत चुनिए</p><MotionHeading as="h2" id="shop-by-category">आपको क्या चाहिए?</MotionHeading></div>
         <Link href="/products">सभी products <IconArrow /></Link>
       </div>
       <div className="shopping-category-grid">

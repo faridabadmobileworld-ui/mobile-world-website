@@ -1,3 +1,4 @@
+import { MotionHeading } from "@/components/MotionHeading";
 import { publicCampaigns } from "@/lib/campaigns/store";
 import { campaignIsLive } from "@/lib/campaigns/core";
 import Link from "next/link";
@@ -36,7 +37,7 @@ export default async function Home() {
         <section id="mobile-world-rap" className="mw-rap-highlight" aria-labelledby="mw-rap-title">
           <div className="mw-rap-heading">
             <p className="mw-rap-kicker">MOBILE WORLD ORIGINAL · OFFICIAL RAP</p>
-            <h2 id="mw-rap-title">अपनी कहानी। अपना Rap।</h2>
+            <MotionHeading as="h2" id="mw-rap-title">अपनी कहानी। अपना Rap।</MotionHeading>
             <p>1973 की छोटी Kiryana Store से आज की Mobile World तक—परिवार की मेहनत और आपके भरोसे का सफ़र, अब एक गाने में।</p>
             <span className="mw-rap-hint">पूरा गाना इसी player में सुनिए और देखिए।</span>
             <Link className="mw-rap-story" href="/posts/mobile-world-faridabad-official-rap-song">इस गाने के पीछे की कहानी पढ़िए →</Link>

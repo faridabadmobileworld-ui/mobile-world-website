@@ -1,3 +1,4 @@
+import { MotionHeading } from "@/components/MotionHeading";
 import Image from "next/image";
 import Link from "next/link";
 import { shop } from "@/data/shop";
@@ -14,7 +15,7 @@ export function HomeBody({ journey = true, section = "all" }: { current?: string
   return <>
     {section !== "details" && <>
     <section className="mw-section" id="selected-models">
-      <div className="shopping-section-heading"><div><p className="shopping-overline">करीब से देखिए · SELECTED MODELS</p><h2>आपकी अगली पसंद, यहाँ से।</h2></div><Link href="/products">Models compare कीजिए <IconArrow /></Link></div>
+      <div className="shopping-section-heading"><div><p className="shopping-overline">करीब से देखिए · SELECTED MODELS</p><MotionHeading as="h2">आपकी अगली पसंद, यहाँ से।</MotionHeading></div><Link href="/products">Models compare कीजिए <IconArrow /></Link></div>
       <nav className="mw-brand-logo-grid" aria-label="Brand चुनकर उसके phones देखिए">
         {homepageBrands.map((brand) => <Link href={`/products?brand=${brand.slug}#smartphones`} className={`mw-brand-logo mw-brand-logo-${brand.slug}`} key={brand.slug} aria-label={`${brand.name} के products देखिए`}>
           {brand.logo ? <Image src={brand.logo} alt={`${brand.name} logo`} width={180} height={70} sizes="(max-width:760px) 130px, 180px" /> : <span className="mw-brand-name">{brand.name}</span>}
@@ -23,7 +24,7 @@ export function HomeBody({ journey = true, section = "all" }: { current?: string
     </section>
 
     <section className="mw-section" id="services">
-      <div className="shopping-section-heading"><div><p className="shopping-overline">ख़रीदारी के साथ · हमारी SERVICES</p><h2>हर अगले क़दम पर, मदद।</h2></div></div>
+      <div className="shopping-section-heading"><div><p className="shopping-overline">ख़रीदारी के साथ · हमारी SERVICES</p><MotionHeading as="h2">हर अगले क़दम पर, मदद।</MotionHeading></div></div>
       <div className="mw-service-grid">
         {[
           {n:"01", title:"आसान EMI की जानकारी", body:"Card EMI, paper finance और ज़रूरी documents समझिए। Approval bank या lender तय करता है।", href:"/finance", link:"EMI की जानकारी लीजिए", mark:"₹"},
@@ -38,18 +39,18 @@ export function HomeBody({ journey = true, section = "all" }: { current?: string
 
     {section !== "discovery" && <>
     <section className="mw-community" aria-labelledby="community-title">
-      <div className="mw-community-copy"><p className="shopping-overline">MOBILE WORLD · अपने लोगों के साथ</p><h2 id="community-title">सिर्फ़ ख़रीदारी नहीं,<br />एक पहचान भी।</h2><p>दुकान पर मिलिए, products देखिए और अपनी ज़रूरत पर खुलकर बात कीजिए। हमारे साथ जुड़े परिवार ही हमारे सफ़र का हिस्सा हैं।</p><a className="mw-text-link" href={shop.social.googleMaps} target="_blank" rel="noopener noreferrer">Google पर ग्राहकों के अनुभव पढ़िए <IconArrow /></a>{journey && <div className="mw-story-mini"><span>1973 से परिवार का business · 2016 से Mobile World</span><Link href="/about">हमारा सफ़र जानिए <IconArrow /></Link></div>}</div>
+      <div className="mw-community-copy"><p className="shopping-overline">MOBILE WORLD · अपने लोगों के साथ</p><MotionHeading as="h2" id="community-title">सिर्फ़ ख़रीदारी नहीं,<br />एक पहचान भी।</MotionHeading><p>दुकान पर मिलिए, products देखिए और अपनी ज़रूरत पर खुलकर बात कीजिए। हमारे साथ जुड़े परिवार ही हमारे सफ़र का हिस्सा हैं।</p><a className="mw-text-link" href={shop.social.googleMaps} target="_blank" rel="noopener noreferrer">Google पर ग्राहकों के अनुभव पढ़िए <IconArrow /></a>{journey && <div className="mw-story-mini"><span>1973 से परिवार का business · 2016 से Mobile World</span><Link href="/about">हमारा सफ़र जानिए <IconArrow /></Link></div>}</div>
       <div className="mw-community-photos">{[storePhotos[3],storePhotos[2]].map((p) => <figure key={p.src}><Image src={p.src} alt={p.alt} width={p.w} height={p.h} sizes="(max-width:700px) 45vw, 280px" /><figcaption>{p.title} · Mobile World</figcaption></figure>)}</div>
     </section>
 
     <section className="mw-section">
-      <div className="shopping-section-heading"><div><p className="shopping-overline">ख़रीदने से पहले · उपयोगी GUIDES</p><h2>थोड़ी जानकारी। बेहतर फ़ैसला।</h2></div><Link href="/posts">सभी guides <IconArrow /></Link></div>
+      <div className="shopping-section-heading"><div><p className="shopping-overline">ख़रीदने से पहले · उपयोगी GUIDES</p><MotionHeading as="h2">थोड़ी जानकारी। बेहतर फ़ैसला।</MotionHeading></div><Link href="/posts">सभी guides <IconArrow /></Link></div>
       <div className="mw-guide-grid">{guides.map((p, i) => <Link className="mw-guide" href={`/posts/${p.slug}`} key={p.slug}><div className="mw-guide-image"><Image src={guideImages[i]} alt={p.title} width={800} height={530} sizes="(max-width:700px) 90vw, 380px" /></div><div><span>GUIDE · ख़रीदारी से पहले</span><h3>{p.title}</h3><b>Guide पढ़िए <IconArrow /></b></div></Link>)}</div>
     </section>
 
     <section className="mw-visit" id="visit" aria-labelledby="visit-title">
       <div className="mw-visit-image"><Image src={storePhotos[1].src} alt="Gurudwara Road पर Mobile World का असली storefront" width={720} height={340} sizes="(max-width:700px) 94vw, 550px" /><span><IconPin /> Jawahar Colony · NIT Faridabad</span></div>
-      <div className="mw-visit-copy"><p className="shopping-overline">ONLINE देखिए · STORE पर मिलिए</p><h2 id="visit-title">आपकी अपनी Mobile World.</h2><p>Product को हाथ में देखिए। अपनी पसंद की तुलना कीजिए। फिर फ़ैसला लीजिए।</p><address>{shop.address.street}, {shop.address.landmark}, {shop.address.locality}, {shop.address.city}, {shop.address.state} – {shop.address.postalCode}</address><div className="mw-hours"><LiveBadge /><span>10:00 AM–10:00 PM · महीने की आख़िरी तारीख़ को बंद</span></div><div className="btns"><a className="shopping-primary" href={shop.social.googleMaps} target="_blank" rel="noopener noreferrer"><IconPin /> रास्ता देखिए</a><a className="shopping-secondary" href={shop.phone.tel}><IconPhone /> Call कीजिए</a></div><a className="mw-text-link mw-visit-chat" href={shop.phone.whatsapp} target="_blank" rel="noopener noreferrer"><IconWhatsApp /> आने से पहले stock पूछ लीजिए</a></div>
+      <div className="mw-visit-copy"><p className="shopping-overline">ONLINE देखिए · STORE पर मिलिए</p><MotionHeading as="h2" id="visit-title">आपकी अपनी Mobile World.</MotionHeading><p>Product को हाथ में देखिए। अपनी पसंद की तुलना कीजिए। फिर फ़ैसला लीजिए।</p><address>{shop.address.street}, {shop.address.landmark}, {shop.address.locality}, {shop.address.city}, {shop.address.state} – {shop.address.postalCode}</address><div className="mw-hours"><LiveBadge /><span>10:00 AM–10:00 PM · महीने की आख़िरी तारीख़ को बंद</span></div><div className="btns"><a className="shopping-primary" href={shop.social.googleMaps} target="_blank" rel="noopener noreferrer"><IconPin /> रास्ता देखिए</a><a className="shopping-secondary" href={shop.phone.tel}><IconPhone /> Call कीजिए</a></div><a className="mw-text-link mw-visit-chat" href={shop.phone.whatsapp} target="_blank" rel="noopener noreferrer"><IconWhatsApp /> आने से पहले stock पूछ लीजिए</a></div>
     </section>
     </>}
   </>;

@@ -1,3 +1,4 @@
+import { MotionHeading } from "@/components/MotionHeading";
 import { withSocialMetadata } from "@/lib/page-metadata";
 import { AnalyticsPrivacy } from "@/components/WebsiteAnalytics";
 import type { Metadata } from "next";
@@ -35,10 +36,10 @@ export default function Privacy() {
   return (
     <div className="wrap">
       <section className="sec">
-        <h1 style={{ fontSize: "clamp(1.4rem,4vw,2rem)", fontWeight: 800,
+        <MotionHeading as="h1" style={{ fontSize: "clamp(1.4rem,4vw,2rem)", fontWeight: 800,
                      letterSpacing: "-.03em", margin: "0 0 10px" }}>
           Privacy Policy — आपका data, हमारा पारिवारिक भरोसा 🔒
-        </h1>
+        </MotionHeading>
         <TableOfContents items={toc} />
 
         <div className="prose">
@@ -60,7 +61,7 @@ export default function Privacy() {
 
       <section className="sec">
         <div className="prose">
-          <h2 id="collect">1. हम कौन सी information collect करते हैं?</h2>
+          <MotionHeading as="h2" id="collect">1. हम कौन सी information collect करते हैं?</MotionHeading>
           <p>
             हमारी website पर products की जानकारी और free Diwali Spin Wheel है। हम
             website के ज़रिए कोई online payment या order process नहीं करते।
@@ -90,7 +91,7 @@ export default function Privacy() {
             </li>
           </ul>
 
-          <h2 id="use">2. हम आपके data का use कैसे करते हैं?</h2>
+          <MotionHeading as="h2" id="use">2. हम आपके data का use कैसे करते हैं?</MotionHeading>
           <p>
             आपकी दी हुई जानकारी सिर्फ़ आपकी ही मदद के लिए इस्तेमाल होती है:
           </p>
@@ -102,7 +103,7 @@ export default function Privacy() {
             <li>एक mobile number का reward स्थिर रखने, code जाँचने और duplicate claim रोकने के लिए।</li>
           </ul>
 
-          <h2 id="security">3. Data protection और security</h2>
+          <MotionHeading as="h2" id="security">3. Data protection और security</MotionHeading>
           <p>हम आपकी जानकारी की हिफ़ाज़त को सबसे ऊपर रखते हैं।</p>
           <p>
             आपका mobile number, WhatsApp chat या कोई भी personal जानकारी किसी
@@ -114,7 +115,7 @@ export default function Privacy() {
             message उनकी अपनी terms के हिसाब से चलते हैं।
           </p>
 
-          <h2 id="cookies">4. Cookies और website analytics</h2>
+          <MotionHeading as="h2" id="cookies">4. Cookies और website analytics</MotionHeading>
           <p>Website को बेहतर बनाने के लिए public pages की visits, contact-button clicks, product interactions, scroll और active screen time दर्ज होते हैं। Random browser और session IDs को server पर keyed hash में बदलकर private storage में रखा जाता है। यह customer की पहचान नहीं बताता।</p>
           <p>Analytics में नाम, phone number, password, WhatsApp messages या form का पूरा text record नहीं होता। Search में केवल पहचाने गए shopping terms आते हैं। Referrer, campaign, device type और approximate country भी report में आ सकते हैं। Call/WhatsApp click से वास्तविक बातचीत की पुष्टि नहीं होती।</p>
           <p>Browser ID अधिकतम 90 दिन और session 30 मिनट की inactivity तक चलता है। Detailed reports पिछले 90 दिनों की हैं; पुराने server records owner dashboard की अगली maintenance पर हटाए जाते हैं। Hosting provider संचालन और सुरक्षा के request logs अलग रख सकता है।</p>
@@ -122,13 +123,13 @@ export default function Privacy() {
           <AnalyticsPrivacy />
 
           <span id="tech-challenge-privacy" />
-          <h2 id="spin-wheel-privacy">Spin Wheel और reward code</h2>
+          <MotionHeading as="h2" id="spin-wheel-privacy">Spin Wheel और reward code</MotionHeading>
           <p>Spin करने पर आपका mobile number, reward, code और entry की तारीख़ हमारे private store record में save होते हैं। पूरा number encrypted रूप में रखा जाता है। इसे केवल owner password से खुलने वाले dashboard में हमारी अधिकृत team देख सकती है। यह data public pages या search engines को नहीं दिया जाता।</p>
           <p>एक number का reward दोबारा बदलता नहीं है। Code इस्तेमाल होने पर bill number, product, bill line, amount और redemption की तारीख़ दर्ज होती है, ताकि उसी number या product पर दूसरा code न लगाया जा सके। इस form पर OTP, account password या payment नहीं माँगा जाता; code इसी screen पर दिखाई देता है।</p>
           <p>Browser में केवल reward code और number के आख़िरी चार अंक रखे जाते हैं। “इस browser से result हटाएँ” से यह local copy हटती है; दुकान का record नहीं मिटता। अपना record देखने या हटाने की request के लिए Contact page से हमारी team से संपर्क कीजिए। आवश्यक transaction records लागू record-keeping जरूरतों के अनुसार रखे जा सकते हैं।</p>
           <p>Private records हमारी hosting service Vercel पर सुरक्षित रखे जाते हैं। Login की सुरक्षा के लिए IP का keyed hash और सीमित समय का attempt count रखा जाता है। Customer numbers इस promotion को चलाने और claim की जाँच के लिए हैं; marketing messages के लिए अलग सहमति ली जाएगी।</p>
 
-          <h2 id="third-party">5. Third-party links</h2>
+          <MotionHeading as="h2" id="third-party">5. Third-party links</MotionHeading>
           <p>
             हमारी website पर हमारे social media pages (Instagram, Facebook, YouTube),
             WhatsApp और Google Maps के links हैं।
@@ -152,7 +153,7 @@ export default function Privacy() {
             किसी ने वो तस्वीर खोली। Instagram की अपनी privacy policy लागू होती है। हमारी website analytics की जानकारी ऊपर दी गई है।
           </p>
 
-          <h2 id="rights">6. आपके अधिकार</h2>
+          <MotionHeading as="h2" id="rights">6. आपके अधिकार</MotionHeading>
           <p>
             भारत के <strong>Digital Personal Data Protection Act, 2023</strong> के
             तहत आपकी जानकारी पर आपके कुछ अधिकार हैं। हम उन्हें पूरा मानते हैं:
@@ -181,7 +182,7 @@ export default function Privacy() {
             कोई form भरने या fees देने की ज़रूरत नहीं।
           </p>
 
-          <h2 id="retention">7. जानकारी कब तक रखी जाती है</h2>
+          <MotionHeading as="h2" id="retention">7. जानकारी कब तक रखी जाती है</MotionHeading>
           <ul>
             <li>
               <strong>WhatsApp की बातचीत</strong> — जब तक आपका काम चल रहा है, या
@@ -202,14 +203,14 @@ export default function Privacy() {
             इसलिए हम उसे रखते भी नहीं।
           </p>
 
-          <h2 id="children">8. बच्चों की जानकारी</h2>
+          <MotionHeading as="h2" id="children">8. बच्चों की जानकारी</MotionHeading>
           <p>
             हम जान-बूझकर 18 साल से कम उम्र के किसी बच्चे की कोई निजी जानकारी इकट्ठा
             नहीं करते। अगर कभी ग़लती से ऐसा हो जाए और उनके माता-पिता या अभिभावक हमें
             बता दें, तो हम वो जानकारी तुरंत हटा देंगे।
           </p>
 
-          <h2 id="photos">9. तस्वीरें और नाम</h2>
+          <MotionHeading as="h2" id="photos">9. तस्वीरें और नाम</MotionHeading>
           <p>
             हमारी website पर कुछ जगह ग्राहकों की असली तस्वीरें लगी हैं। <strong>हर
             तस्वीर उस ग्राहक से पूछकर, उनकी मर्ज़ी से ही लगाई जाती है।</strong> बिना
@@ -220,13 +221,13 @@ export default function Privacy() {
             message कर दीजिए। हम बिना कोई वजह पूछे हटा देंगे।
           </p>
 
-          <h2 id="updates">10. इस policy में बदलाव</h2>
+          <MotionHeading as="h2" id="updates">10. इस policy में बदलाव</MotionHeading>
           <p>
             ज़रूरत या क़ानूनी नियमों के हिसाब से हम इस Privacy Policy को समय-समय पर
             बदल सकते हैं। कोई भी बदलाव सबसे पहले इसी page पर दिखेगा।
           </p>
 
-          <h2 id="contact">11. शिकायत और संपर्क</h2>
+          <MotionHeading as="h2" id="contact">11. शिकायत और संपर्क</MotionHeading>
           <p>
             आपकी privacy या data को लेकर कोई सवाल हो, या आप जानना चाहें कि हमारे पास
             आपकी कौन सी जानकारी है — उसे ठीक करवाना हो या हटवाना हो — तो बेझिझक

@@ -1,3 +1,4 @@
+import { MotionHeading } from "@/components/MotionHeading";
 /**
  * Home page पर सबसे नई post का अलग highlight।
  *
@@ -29,7 +30,7 @@ export function LatestPost() {
           kuch, like Featured Post". Post का अपना title अब `h3` है, क्योंकि
           इस हिस्से की heading यह `h2` है। */}
       <div className="shopping-section-heading">
-        <div><p className="shopping-overline">TECH UPDATE · करीब से जानिए</p><h2 id="featured">Featured Post</h2></div>
+        <div><p className="shopping-overline">TECH UPDATE · करीब से जानिए</p><MotionHeading as="h2" id="featured">Featured Post</MotionHeading></div>
         <Link href="/posts">सारे articles <IconArrow /></Link>
       </div>
       <Link className="mw-latest-link" href={`/posts/${post.slug}`}>

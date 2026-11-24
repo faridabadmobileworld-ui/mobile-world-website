@@ -1,5 +1,6 @@
 "use client";
 
+import { MotionHeading } from "@/components/MotionHeading";
 import { useState } from "react";
 import Link from "next/link";
 import { modelEnquiry } from "@/data/catalog";
@@ -16,7 +17,7 @@ export function PhoneFinder() {
     <section className="mw-finder" id="phone-finder" aria-labelledby="finder-title">
       <div className="mw-finder-intro">
         <p className="shopping-overline">PHONE FINDER · आपकी पसंद</p>
-        <h2 id="finder-title">इतने सारे phones?<br /><span>चुनना आसान करें।</span></h2>
+        <MotionHeading as="h2" id="finder-title">इतने सारे phones?<br /><span>चुनना आसान करें।</span></MotionHeading>
         <p>अपनी ज़रूरत बताइए। अपनी प्राथमिकता समझिए और हमारी team से अपने budget में उपलब्ध options पूछिए।</p>
         <span className="mw-small">01 ज़रूरत चुनिए · 02 ज़रूरी बातें समझिए · 03 बात कीजिए</span>
       </div>

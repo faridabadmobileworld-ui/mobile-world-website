@@ -1,3 +1,4 @@
+import { MotionHeading } from "@/components/MotionHeading";
 import { withSocialMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
 import { shop } from "@/data/shop";
@@ -27,10 +28,10 @@ export default function AfterSalesSupport() {
   return (
     <div className="wrap">
       <section className="sec">
-        <h1 style={{ fontSize: "clamp(1.4rem,4vw,2rem)", fontWeight: 800,
+        <MotionHeading as="h1" style={{ fontSize: "clamp(1.4rem,4vw,2rem)", fontWeight: 800,
                      letterSpacing: "-.03em", margin: "0 0 10px" }}>
           After Sales Service और Support — सामान बिकने के बाद भी, हमारा साथ आपके साथ ❤️
-        </h1>
+        </MotionHeading>
         <TableOfContents items={toc} />
 
         <div className="prose">
@@ -53,7 +54,7 @@ export default function AfterSalesSupport() {
 
       <section className="sec">
         <div className="prose">
-          <h2 id="madad">सामान लेने के बाद, हम आपकी किस तरह मदद करते हैं?</h2>
+          <MotionHeading as="h2" id="madad">सामान लेने के बाद, हम आपकी किस तरह मदद करते हैं?</MotionHeading>
           <p>
             जब आप {shop.address.locality} की हमारी दुकान से कोई product ख़रीदते हैं,
             तो हमारी team इन सभी चीज़ों में आपकी पूरी assistance करती है:
@@ -79,7 +80,7 @@ export default function AfterSalesSupport() {
             </li>
           </ul>
 
-          <h2 id="warranty">Brand Warranty और Service Centre के बारे में पारदर्शिता</h2>
+          <MotionHeading as="h2" id="warranty">Brand Warranty और Service Centre के बारे में पारदर्शिता</MotionHeading>
           <p>हम हमेशा अपने customers के साथ 100% transparent रहते हैं:</p>
           <p>
             अगर आपका कोई भी product brand warranty के अंदर है और उसमें hardware या
@@ -92,7 +93,7 @@ export default function AfterSalesSupport() {
             मामला हल कराने की पूरी कोशिश करेंगे।
           </p>
 
-          <h2 id="vaada">हमारा वादा — honest guidance और पक्का भरोसा</h2>
+          <MotionHeading as="h2" id="vaada">हमारा वादा — honest guidance और पक्का भरोसा</MotionHeading>
           <p>हम कभी भी आपको false promises नहीं करते।</p>
           <p>
             जो support और guidance हमारी दुकान से पूरी honesty के साथ दी जा सकती है,

@@ -1,3 +1,4 @@
+import { MotionHeading } from "@/components/MotionHeading";
 import { campaignIsLive, defaultCampaigns, type CampaignSettings } from "@/lib/campaigns/core";
 import Image from "next/image";
 import { shop } from "@/data/shop";
@@ -8,7 +9,7 @@ export function FestivalHighlights({ settings = defaultCampaigns() }: { settings
   const diwali = campaignIsLive(settings.items.diwali), gifts = campaignIsLive(settings.items.gifts);
   if (!diwali && !gifts) return null;
   return <section className="festival-section" id="festival-highlights" aria-labelledby="festival-title">
-    <div className="shopping-section-heading"><div><p className="shopping-overline">DIWALI SPECIAL · ख़ुशियों के साथ</p><h2 id="festival-title">इस बार, कुछ ख़ास।</h2></div></div>
+    <div className="shopping-section-heading"><div><p className="shopping-overline">DIWALI SPECIAL · ख़ुशियों के साथ</p><MotionHeading as="h2" id="festival-title">इस बार, कुछ ख़ास।</MotionHeading></div></div>
     <div className="festival-grid">
       {diwali && <article className="festival-card festival-travel">
         <div className="festival-image"><Image src="/images/mw-diwali-2026.webp" alt="माँ वैष्णो देवी helicopter यात्रा और Diwali gifts का campaign artwork" fill sizes="(max-width:767px) 160vw, 850px" /></div>
@@ -32,7 +33,7 @@ export function CampaignSocial() {
     { name: "WhatsApp Channel", description: "नई updates देखिए", href: shop.social.whatsappChannel, Icon: IconWhatsApp },
   ];
   return <section className="campaign-social" aria-labelledby="social-title">
-    <div><p className="shopping-overline">MOBILE WORLD · जुड़े रहिए</p><h2 id="social-title">दुकान की ख़बरें, आपकी screen पर।</h2><p>नई ख़ुशियाँ, product videos और हमारी रोज़ की छोटी-बड़ी बातें।</p></div>
+    <div><p className="shopping-overline">MOBILE WORLD · जुड़े रहिए</p><MotionHeading as="h2" id="social-title">दुकान की ख़बरें, आपकी screen पर।</MotionHeading><p>नई ख़ुशियाँ, product videos और हमारी रोज़ की छोटी-बड़ी बातें।</p></div>
     <div className="campaign-social-links">{links.map(({name, description, href, Icon}) => <a key={name} href={href} target="_blank" rel="noopener noreferrer"><Icon /><span><b>{name}</b><small>{description}</small></span><IconArrow /></a>)}</div>
   </section>;
 }
