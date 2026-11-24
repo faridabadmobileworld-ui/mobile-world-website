@@ -231,7 +231,7 @@ test('India reference keeps unconfirmed fields and colour combinations empty, wi
     assert.equal(Object.keys(draft.values).length, 86);
     assert.equal(draft.values.spec_007, '', 'no public/store price inferred from manufacturer pricing');
     assert.equal(draft.values.spec_083, '', 'uncertain box charger must remain unknown, not No');
-    assert.equal(draft.variants.length, 1);
+    assert.equal(draft.variants.length, id === 'xiaomi-xiaomi-17-17t' ? 2 : 1);
     assert.equal(draft.variants[0].storage, '512 GB', 'conflicting/unconfirmed storage options are excluded');
     assert.equal(draft.variants[0].colour, '', 'model colours are not proof of every SKU combination');
     draft.variants[0].storage = 'Unsaved edit';
@@ -302,9 +302,12 @@ test('India reference keeps unconfirmed fields and colour combinations empty, wi
   authenticated = false;
 });
 test('Draft save/reload/edit is private; publication is sanitized, revision guarded and URL stable', async () => {
-  await cms.saveDraft(product(), '');
+  await cms.saveDraft({ ...product(), extraValues: { processor_process: '4 nm', front_autofocus: false, box_charger_power: '67 W', private_price: 'PRIVATE-PRICE-999' } }, '');
   assert.deepEqual(await cms.publicProducts(), []);
   let [saved] = await cms.editorRecords(); assert.equal(saved.values.spec_007, 'PRIVATE-PRICE-456');
+  assert.equal(saved.extraValues.box_charger_power, '67 W');
+  assert.equal(saved.extraValues.front_autofocus, 'No');
+  assert.equal('private_price' in saved.extraValues, false);
   const oldRev = saved.draftRevision;
   await cms.saveDraft({ ...saved, description: 'Edited fixture' }, oldRev);
   await assert.rejects(cms.saveDraft(saved, oldRev), /दूसरे tab/);
@@ -312,6 +315,7 @@ test('Draft save/reload/edit is private; publication is sanitized, revision guar
   assert.equal((await cms.publishProduct(saved.id, saved.draftRevision, '')).backupSaved, true);
   const [publicDoc] = await cms.publicProducts();
   assert.equal(publicDoc.description, 'Edited fixture');
+  assert.deepEqual(publicDoc.extraValues, { processor_process: '4 nm', front_autofocus: 'No', box_charger_power: '67 W' });
   assert.equal(JSON.stringify(publicDoc).includes('PRIVATE-PRICE'), false);
   assert.equal('spec_007' in documents.get('mw-product.fixture-phone').values, false);
   assert.equal('sources' in documents.get('mw-product.fixture-phone'), false);
@@ -407,6 +411,58 @@ test('Dependent variant selection cannot create an unlisted RAM, storage or colo
   assert.equal(core.productDisplayName({ brand: 'Xiaomi', name: 'Xiaomi 17T' }), 'Xiaomi 17T');
   assert.equal(core.productDisplayName({ brand: 'Samsung', name: 'Galaxy A57 5G' }), 'Samsung Galaxy A57 5G');
   assert.equal(core.productDisplayName({ brand: 'Xiaomi Redmi', name: 'REDMI 17 5G' }), 'REDMI 17 5G');
+});
+
+test('Independent specifications preserve meaningful No and zero while excluding unknown keys and private prices', () => {
+  const draft = core.normalizeProduct({ ...product(), extraValues: { front_autofocus: false, charging_pps: 0, ram_speed: '', spec_007: 'PRIVATE-PRICE-456', private_price: 'PRIVATE-PRICE-999' } });
+  const publicDoc = core.publicProduct(draft, '2026-11-24');
+  assert.deepEqual(publicDoc.extraValues, { front_autofocus: 'No', charging_pps: '0' });
+  const rows = core.visibleSections(publicDoc).flatMap(section => section.fields);
+  assert.equal(rows.find(row => row.key === 'front_autofocus').value, 'No');
+  assert.equal(rows.find(row => row.key === 'charging_pps').value, '0');
+  assert.equal(rows.some(row => row.key === 'ram_speed'), false);
+  assert.equal(JSON.stringify(publicDoc).includes('PRIVATE-PRICE'), false);
+  assert.throws(() => core.normalizeProduct({ ...product(), extraValues: { processor_process: 'Unknown' } }), /खाली/);
+});
+
+test('Xiaomi full guides separate battery, charging, in-box charger, cameras and variant-specific UFS', () => {
+  const guides = load('lib/catalog/guides').publicPhoneGuides();
+  const pro = guides.find(p => p.slug === 'redmi-note-17-pro-5g');
+  const rows = variant => new Map(core.visibleSections(pro, variant).flatMap(s => s.fields).map(f => [f.key, f.value]));
+  const small = pro.variants.find(v => v.storage === '128 GB'), large = pro.variants.find(v => v.storage === '256 GB');
+  assert.match(rows(small).get('spec_046'), /^9000 mAh/);
+  assert.equal(rows(small).get('spec_049'), '67 W');
+  assert.equal(rows(small).get('spec_083'), 'Yes');
+  assert.equal(rows(small).get('box_charger_power'), '67 W');
+  assert.equal(rows(small).get('spec_030'), '2.2');
+  assert.equal(rows(large).get('spec_030'), '3.1');
+  const mi = guides.find(p => p.slug === 'xiaomi-17');
+  const miRows = new Map(core.visibleSections(mi).flatMap(s => s.fields).map(f => [f.key, f.value]));
+  assert.equal(miRows.get('spec_034'), '50 MP');
+  assert.equal(miRows.get('telephoto_type'), 'Floating telephoto');
+  assert.equal(miRows.get('telephoto_aperture'), 'f/2.0');
+  assert.equal(miRows.get('processor_process'), '3 nm');
+});
+
+test('Model colour preferences and official price references never invent sellable SKU combinations', () => {
+  const { productColours, selectedPreference } = load('lib/catalog/preferences');
+  const guides = load('lib/catalog/guides').publicPhoneGuides();
+  const prices = load('data/phone-reference-prices.json');
+  assert.equal(Object.keys(prices).length, 8);
+  for (const [slug, references] of Object.entries(prices)) {
+    const guide = guides.find(p => p.slug === slug);
+    const before = JSON.stringify(guide.variants);
+    for (const price of references) {
+      assert.ok(price.amount > 0 && Number.isInteger(price.amount));
+      assert.equal(new URL(price.source).hostname.endsWith('mi.com'), true);
+      assert.ok(guide.variants.some(v => v.ram === price.ram && v.storage === price.storage));
+      assert.ok(productColours(guide).includes(price.colour));
+      assert.equal(guide.values.spec_007, undefined);
+      assert.match(selectedPreference(guide.variants[0], price.colour), /Colour preference:/);
+    }
+    assert.equal(JSON.stringify(guide.variants), before);
+    assert.ok(guide.variants.every(v => v.colour === ''), 'preferences do not fabricate confirmed colour SKUs');
+  }
 });
 
 // Family navigation and the existing Home card must survive exact-model replacement.

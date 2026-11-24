@@ -1,4 +1,6 @@
 import master from '@/data/mobile-specification-master.json';
+import { extraSpecificationFields } from './extra-fields';
+export { extraSpecificationFields } from './extra-fields';
 
 export const specificationSections = master.sections;
 export const specificationFields = specificationSections.flatMap(section => section.fields);
@@ -6,7 +8,7 @@ export type Variant = { _key: string; ram: string; storage: string; colour: stri
 export type ProductDraft = {
   id: string; slug: string; brand: string; series: string; name: string; description: string;
   image: string; imageAlt: string; imageVerified: boolean; verified: boolean; verifiedAt: string;
-  values: Record<string, string>; variants: Variant[]; sources: string[];
+  values: Record<string, string>; extraValues?: Record<string, string>; variants: Variant[]; sources: string[];
 };
 export type PublicProduct = Omit<ProductDraft, 'sources'> & { updatedAt: string };
 export type EditorRecord = ProductDraft & { draftRevision: string; publishedRevision: string; publishedSlug: string };
@@ -71,6 +73,14 @@ export function normalizeProduct(input: unknown): ProductDraft {
     if (/^(n\/?a|unknown|coming soon|contact store|[-—])$/i.test(result)) throw new Error(field.label + ': जानकारी नहीं है तो field बिल्कुल खाली रखें।');
     values[field.key] = result;
   }
+  const extra = record(raw.extraValues), extraValues: Record<string, string> = {};
+  for (const field of extraSpecificationFields) {
+    const value = extra[field.key];
+    const result = typeof value === 'boolean' ? (value ? 'Yes' : 'No') :
+      typeof value === 'number' && Number.isFinite(value) ? String(value) : text(value, 500);
+    if (/^(n\/?a|unknown|coming soon|contact store|[-—])$/i.test(result)) throw new Error(field.label + ': जानकारी नहीं है तो field बिल्कुल खाली रखें।');
+    if (result !== '') extraValues[field.key] = result;
+  }
   const brand = text(raw.brand, 80), name = text(raw.name, 120);
   values.spec_001 = brand; values.spec_002 = name;
   if (!Array.isArray(raw.variants) || raw.variants.length > 100) throw new Error('अधिकतम 100 actual variants जोड़िए।');
@@ -90,7 +100,7 @@ export function normalizeProduct(input: unknown): ProductDraft {
   if (verifiedAt && (!/^\d{4}-\d{2}-\d{2}$/.test(verifiedAt) || new Date(verifiedAt).toISOString().slice(0, 10) !== verifiedAt)) throw new Error('Verification date सही भरिए।');
   return { id: productId(raw.id), slug: productId(raw.slug), brand, series: text(raw.series, 100), name,
     description: text(raw.description, 2000), image: imageUrl(raw.image), imageAlt: text(raw.imageAlt, 200),
-    imageVerified: raw.imageVerified === true, verified: raw.verified === true, verifiedAt, values, variants, sources };
+    imageVerified: raw.imageVerified === true, verified: raw.verified === true, verifiedAt, values, extraValues, variants, sources };
 }
 export function validatePublication(product: ProductDraft) {
   if (!product.brand || !product.name || !product.image || !product.imageAlt) throw new Error('Brand, model name, verified image और alt text भरिए।');
@@ -106,6 +116,7 @@ export function publicProduct(product: ProductDraft, updatedAt: string): PublicP
   return { id: product.id, slug: product.slug, brand: product.brand, series: product.series, name: product.name,
     description: product.description, image: product.image, imageAlt: product.imageAlt, imageVerified: product.imageVerified,
     verified: product.verified, verifiedAt: product.verifiedAt, values,
+    extraValues: Object.fromEntries(extraSpecificationFields.filter(field => product.extraValues?.[field.key] !== undefined && product.extraValues[field.key] !== '').map(field => [field.key, product.extraValues![field.key]])),
     variants: product.variants.map(v => ({ _key: v._key, ram: v.ram, storage: v.storage, colour: v.colour,
       image: v.image, imageVerified: v.imageVerified })), updatedAt };
 }
@@ -114,7 +125,13 @@ export function visibleSections(product: PublicProduct, variant?: Variant) {
   if (variant?.ram) values.spec_026 = variant.ram;
   if (variant?.storage) values.spec_028 = variant.storage;
   if (variant?.colour) values.spec_006 = variant.colour;
-  return specificationSections.map(section => ({ ...section, fields: section.fields
-    .filter(field => field.id !== 7 && values[field.key] !== undefined && values[field.key] !== '')
-    .map(field => ({ ...field, value: values[field.key] })) })).filter(section => section.fields.length);
+  const extras = product.extraValues ?? {};
+  if (variant?.storage && extras['storage_version_' + variant.storage.split(' ')[0]]) {
+    values.spec_030 = extras['storage_version_' + variant.storage.split(' ')[0]];
+  }
+  return specificationSections.map(section => ({ ...section, fields: section.fields.flatMap(field => [
+    ...(field.id !== 7 && values[field.key] !== undefined && values[field.key] !== '' ? [{ ...field, label: field.id === 34 ? 'Telephoto Camera' : field.label, value: values[field.key] }] : []),
+    ...extraSpecificationFields.filter(extra => extra.after === field.key && extra.sectionId === section.id && extras[extra.key] !== undefined && extras[extra.key] !== '')
+      .map(extra => ({ ...extra, value: extras[extra.key] })),
+  ]) })).filter(section => section.fields.length);
 }

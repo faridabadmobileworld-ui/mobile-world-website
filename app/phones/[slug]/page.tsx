@@ -7,6 +7,8 @@ import { DetailedProduct } from '@/components/DetailedProduct';
 import { withSocialMetadata } from '@/lib/page-metadata';
 import { shop } from '@/data/shop';
 import '../../product-detail.css';
+import priceReferences from '@/data/phone-reference-prices.json';
+import type { ReferencePrice } from '@/lib/catalog/preferences';
 
 type Props = { params: Promise<{ slug: string }> };
 export function generateStaticParams() {
@@ -36,11 +38,12 @@ export default async function PhonePage({ params }: Props) {
   const schema = { '@context': 'https://schema.org', '@type': 'Product', name,
     description: product.description || undefined, image: new URL(product.image, shop.siteUrl).href,
     brand: { '@type': 'Brand', name: product.brand }, url: shop.siteUrl + productPath };
+  const referencePrices: ReferencePrice[] = (priceReferences[product.slug as keyof typeof priceReferences] ?? []).map(({ amount, ram, storage, colour, checkedAt }) => ({ amount, ram, storage, colour, checkedAt }));
   const related = products.filter(item => item.brand === product.brand && item.id !== product.id).slice(0, 3);
   return <div className="wrap mp-page">
     <nav aria-label="Breadcrumb" className="mp-breadcrumb"><Link href="/">Home</Link><span>/</span><Link href="/products">Products</Link><span>/</span><span>{name}</span></nav>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }} />
-    <DetailedProduct product={product} productPath={productPath} />
+    <DetailedProduct product={product} productPath={productPath} referencePrices={referencePrices} />
     {related.length > 0 && <section className="mp-published" aria-labelledby="related-phones"><h2 id="related-phones">इसी brand के और models</h2><div className="mp-published-list">{related.map(item => <Link href={'/phones/' + item.slug} key={item.id}><strong>{productDisplayName(item)}</strong><span>Specifications देखिए →</span></Link>)}</div></section>}
     <Link className="mw-text-link" href="/products">← सभी products देखिए</Link>
   </div>;

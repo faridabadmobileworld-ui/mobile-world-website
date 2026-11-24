@@ -131,7 +131,7 @@ export async function unpublishProduct(id: string, expectedRevision: string) {
   await mutate(config, [{ delete: { id: docId(id), ifRevisionID: expected } }]);
   return refreshCatalogSnapshot(config, generation);
 }
-const projection = '{id,slug,brand,series,name,description,image,imageAlt,imageVerified,verified,verifiedAt,values,variants,updatedAt}';
+const projection = '{id,slug,brand,series,name,description,image,imageAlt,imageVerified,verified,verifiedAt,values,extraValues,variants,updatedAt}';
 function sanitize(products: unknown[]): PublicProduct[] {
   return products.flatMap(input => {
     try {

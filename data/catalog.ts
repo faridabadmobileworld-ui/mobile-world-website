@@ -590,7 +590,7 @@ Object.assign(verified17, {
   power: '6330mAh · 100W wired · 50W wireless charging',
   software: 'HyperOS 3 / Android 16',
   colours: [{ name: 'Ice Blue', hex: '#c5e1e9' }, { name: 'Venture Green', hex: '#526b58' }, { name: 'Black', hex: '#242428' }],
-  variants: ['12GB / 512GB'],
+  variants: ['12GB / 512GB', '12GB / 256GB'],
   note: 'Leica cameras और 16 cm OLED display को जानिए। Colour, variant और दुकान के stock की पुष्टि enquiry पर होगी।',
   source: 'https://www.mi.com/in/product/xiaomi-17/specs/', checked: '2026-11-02',
   reasons: { camera: '50MP Leica cameras और 60mm floating telephoto की जानकारी देखिए।', everyday: '16 cm display और 6330mAh battery को जानिए।', updates: 'Android 16 और HyperOS 3 की जानकारी देखिए।' },

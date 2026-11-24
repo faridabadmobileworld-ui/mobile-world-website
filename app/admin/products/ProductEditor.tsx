@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { phoneModels } from '@/data/catalog';
-import { blankProduct, imageUrl, specificationSections, type EditorRecord, type ProductDraft } from '@/lib/catalog/core';
+import { blankProduct, imageUrl, specificationSections, extraSpecificationFields, type EditorRecord, type ProductDraft } from '@/lib/catalog/core';
 import { configureSanity, productEditorState, productReferenceDraft, publishSavedProduct, saveProductDraft, unpublishSavedProduct, uploadEditorImage } from './actions';
 
 type State = Awaited<ReturnType<typeof productEditorState>>;
@@ -95,7 +95,9 @@ export function ProductEditor({ initial }: { initial: State }) {
         {specificationSections.map(section => <details className="ma-card me-section" key={section.id} open={section.id === 1}><summary>{section.id}. {section.title}</summary><div className="me-grid">{section.fields.map(field => <label key={field.key}>{field.id}. {field.label}{field.id === 7 ? ' · केवल private admin' : ''}<input
           value={field.id === 1 ? draft.brand : field.id === 2 ? draft.name : draft.values[field.key] ?? ''}
           readOnly={field.id === 1 || field.id === 2} maxLength={500}
-          onChange={event => update({ values: { ...draft.values, [field.key]: event.target.value } })} /></label>)}</div></details>)}
+          onChange={event => update({ values: { ...draft.values, [field.key]: event.target.value } })} /></label>)}</div>
+          <details><summary>अतिरिक्त individual specifications</summary><div className="me-grid">{extraSpecificationFields.filter(field => field.sectionId === section.id).map(field => <label key={field.key}>{field.label}<input value={draft.extraValues?.[field.key] ?? ''} maxLength={500} onChange={event => update({ extraValues: { ...draft.extraValues, [field.key]: event.target.value } })} /></label>)}</div></details>
+        </details>)}
         <section className="ma-card"><h2>Actual variants</h2><p>केवल confirmed RAM + storage + colour combinations जोड़िए।</p>
           {draft.variants.map((variant, index) => <div className="me-variant" key={variant._key}><div className="me-grid">{(['ram', 'storage', 'colour', 'image'] as const).map(field => <label key={field}>{field === 'ram' ? 'RAM' : field === 'storage' ? 'Storage' : field === 'colour' ? 'Colour' : 'Variant image URL'}<input value={variant[field]} onChange={event => update({ variants: draft.variants.map((v, i) => i === index ? { ...v, [field]: event.target.value, imageVerified: field === 'image' ? false : v.imageVerified } : v) })} /></label>)}</div>
           <label className="me-check"><input type="checkbox" checked={variant.imageVerified} onChange={event => update({ variants: draft.variants.map((v, i) => i === index ? { ...v, imageVerified: event.target.checked } : v) })} /> Variant image का model और colour verified है।</label>

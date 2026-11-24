@@ -1,0 +1,82 @@
+{
+  "xiaomi-17t": [
+    {
+      "amount": 69999,
+      "ram": "12 GB",
+      "storage": "256 GB",
+      "colour": "Violet",
+      "checkedAt": "2026-11-24",
+      "source": "https://store.mi.com/in/products/448-0-10-0-0-0-1"
+    }
+  ],
+  "xiaomi-17-ultra": [
+    {
+      "amount": 139999,
+      "ram": "16 GB",
+      "storage": "512 GB",
+      "colour": "White",
+      "checkedAt": "2026-11-24",
+      "source": "https://store.mi.com/in/products/448-0-10-0-0-0-1"
+    }
+  ],
+  "redmi-note-17-pro-max-5g": [
+    {
+      "amount": 52999,
+      "ram": "8 GB",
+      "storage": "256 GB",
+      "colour": "Secret Sunrise",
+      "checkedAt": "2026-11-24",
+      "source": "https://store.mi.com/in/products/448-0-10-0-0-0-1"
+    }
+  ],
+  "redmi-note-17-pro-5g": [
+    {
+      "amount": 40999,
+      "ram": "8 GB",
+      "storage": "128 GB",
+      "colour": "Cloud Blue",
+      "checkedAt": "2026-11-24",
+      "source": "https://store.mi.com/in/products/448-0-10-0-0-0-1"
+    }
+  ],
+  "redmi-note-17-5g": [
+    {
+      "amount": 30999,
+      "ram": "6 GB",
+      "storage": "128 GB",
+      "colour": "Arctic Blue",
+      "checkedAt": "2026-11-24",
+      "source": "https://store.mi.com/in/products/448-0-10-0-0-0-1"
+    }
+  ],
+  "redmi-17-5g": [
+    {
+      "amount": 25999,
+      "ram": "6 GB",
+      "storage": "128 GB",
+      "colour": "Eternal Orange",
+      "checkedAt": "2026-11-24",
+      "source": "https://store.mi.com/in/products/448-0-10-0-0-0-1"
+    }
+  ],
+  "redmi-17c-5g": [
+    {
+      "amount": 21999,
+      "ram": "4 GB",
+      "storage": "128 GB",
+      "colour": "Coffee Brew",
+      "checkedAt": "2026-11-24",
+      "source": "https://store.mi.com/in/products/448-0-10-0-0-0-1"
+    }
+  ],
+  "xiaomi-17": [
+    {
+      "amount": 89999,
+      "ram": "12 GB",
+      "storage": "256 GB",
+      "colour": "Venture Green",
+      "checkedAt": "2026-11-24",
+      "source": "https://www.mi.com/in/product/xiaomi-17/buy/"
+    }
+  ]
+}

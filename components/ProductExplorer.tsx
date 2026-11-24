@@ -61,7 +61,7 @@ export function ProductExplorer({ categories, items, productPages = {} }: { cate
   const [onlySaved, setOnlySaved] = useState(params.has("shortlist") || params.get("view") === "shortlist");
   const [compare, setCompare] = useState<string[]>([]);
   const [compareOpen, setCompareOpen] = useState(false);
-  const [model, setModel] = useState<PhoneModel | undefined>(phoneModels.find((p) => p.id === params.get("model")));
+  const [model, setModel] = useState<PhoneModel | undefined>(phoneModels.find((p) => p.id === params.get("model") && !productPages[p.id]));
   const [notice, setNotice] = useState("");
   const [shareUrl, setShareUrl] = useState("");
 
@@ -74,7 +74,7 @@ export function ProductExplorer({ categories, items, productPages = {} }: { cate
       const group = legacyGuideGroups[params.get("model") ?? ""];
       sync(); setQuery(params.get("q") ?? group?.query ?? "");
       setBrand(phoneBrands.some((b) => b.slug === params.get("brand")) ? params.get("brand")! : group?.brand ?? "all");
-      const selected = phoneModels.find((p) => p.id === params.get("model"));
+      const selected = phoneModels.find((p) => p.id === params.get("model") && !productPages[p.id]);
       setModel(selected);
       if (group) setNotice("इस series के अलग models नीचे हैं। अपना exact model चुनिए।");
       if (!params.has("shortlist")) {
@@ -93,7 +93,7 @@ export function ProductExplorer({ categories, items, productPages = {} }: { cate
     document.addEventListener("click", anchorClick, true);
     window.addEventListener("hashchange", sync);
     return () => { cancelAnimationFrame(frame); window.removeEventListener("hashchange", sync); document.removeEventListener("click", anchorClick, true); };
-  }, [categories, params]);
+  }, [categories, params, productPages]);
 
   function openModel(item: PhoneModel) { trackAction("product", `${item.brand}: ${item.name}`); setModel(item); }
   function toggleSaved(id: string) {
@@ -137,8 +137,8 @@ export function ProductExplorer({ categories, items, productPages = {} }: { cate
     {onlySaved && <section className="mw-shortlist-head"><div><h2>आपकी पसंद, एक जगह।</h2><p>{saved.length ? `${saved.length} models आपकी shortlist में हैं।` : "किसी model पर ♡ दबाकर अपनी shortlist बनाइए।"}</p></div>{saved.length > 0 && <div className="btns"><button type="button" className="btn btn-o" onClick={share}>Link copy कीजिए</button><a className="btn btn-w" href={modelEnquiry(chosen)} target="_blank" rel="noopener noreferrer"><IconWhatsApp /> पूरी list भेजिए</a></div>}{shareUrl && <label className="mw-share-field">आपकी shortlist का link<input readOnly value={shareUrl} onFocus={(e) => e.currentTarget.select()} /></label>}</section>}
     {models.length > 0 && <section className="mw-model-section" aria-labelledby="models-title"><div className="shopping-section-heading"><div><p className="shopping-overline">MODELS · खूबियाँ जानिए</p><h2 id="models-title">{onlySaved ? "Shortlist के models" : "देखिए, समझिए, फिर चुनिए।"}</h2></div><span className="mw-small">{models.length} models</span></div>
       <div className="mw-model-grid">{models.map((p) => <article className={`mw-model-card${p.imageKind === "creative" ? " mw-model-creative" : ""}`} key={p.id}>
-        <div className="mw-model-media"><button type="button" className="mw-save" onClick={() => toggleSaved(p.id)} aria-label={`${modelDisplayName(p)} ${saved.includes(p.id) ? "shortlist से हटाइए" : "shortlist में रखिए"}`} aria-pressed={saved.includes(p.id)}>{saved.includes(p.id) ? "♥" : "♡"}</button><button className="mw-image-button" type="button" onClick={() => openModel(p)} aria-label={`${modelDisplayName(p)} की जानकारी`}><Image src={p.image} alt={p.imageAlt} width={700} height={520} sizes="(max-width:700px) 90vw, 380px" /></button><span className="mw-brand">{p.brand}</span></div>
-        <div className="mw-model-body">{p.imageCaption && <p className="mw-small">{p.imageCaption}</p>}<h3><button type="button" onClick={() => openModel(p)}>{p.name}</button></h3><p>{p.note}</p><div className="mw-swatches" aria-label="Brand के colour options">{p.colours.map((c) => <span key={c.name} style={{background:c.hex}} title={c.name}><span className="sr">{c.name}</span></span>)}</div><ul className="mw-model-specs"><li>{p.display}</li><li>{p.processor}</li></ul><div className="mw-model-actions">{productPages[p.id] ? <Link className="mw-text-link" href={productPages[p.id]}>Specifications <IconArrow /></Link> : <button className="mw-text-link" type="button" onClick={() => openModel(p)}>पूरी जानकारी <IconArrow /></button>}<label className="mw-compare-check"><input type="checkbox" checked={compare.includes(p.id)} onChange={() => toggleCompare(p.id)} />Compare</label></div></div>
+        <div className="mw-model-media"><button type="button" className="mw-save" onClick={() => toggleSaved(p.id)} aria-label={`${modelDisplayName(p)} ${saved.includes(p.id) ? "shortlist से हटाइए" : "shortlist में रखिए"}`} aria-pressed={saved.includes(p.id)}>{saved.includes(p.id) ? "♥" : "♡"}</button>{productPages[p.id] ? <Link className="mw-image-button" href={productPages[p.id]} onClick={() => trackAction("product", `${p.brand}: ${p.name}`)} aria-label={`${modelDisplayName(p)} की पूरी specifications`}><Image src={p.image} alt={p.imageAlt} width={700} height={520} sizes="(max-width:700px) 90vw, 380px" /></Link> : <button className="mw-image-button" type="button" onClick={() => openModel(p)} aria-label={`${modelDisplayName(p)} की जानकारी`}><Image src={p.image} alt={p.imageAlt} width={700} height={520} sizes="(max-width:700px) 90vw, 380px" /></button>}<span className="mw-brand">{p.brand}</span></div>
+        <div className="mw-model-body">{p.imageCaption && <p className="mw-small">{p.imageCaption}</p>}<h3>{productPages[p.id] ? <Link href={productPages[p.id]} onClick={() => trackAction("product", `${p.brand}: ${p.name}`)}>{p.name}</Link> : <button type="button" onClick={() => openModel(p)}>{p.name}</button>}</h3><p>{p.note}</p><div className="mw-swatches" aria-label="Brand के colour options">{p.colours.map((c) => <span key={c.name} style={{background:c.hex}} title={c.name}><span className="sr">{c.name}</span></span>)}</div><ul className="mw-model-specs"><li>{p.display}</li><li>{p.processor}</li></ul><div className="mw-model-actions">{productPages[p.id] ? <Link className="mw-text-link" href={productPages[p.id]}>Specifications <IconArrow /></Link> : <button className="mw-text-link" type="button" onClick={() => openModel(p)}>पूरी जानकारी <IconArrow /></button>}<label className="mw-compare-check"><input type="checkbox" checked={compare.includes(p.id)} onChange={() => toggleCompare(p.id)} />Compare</label></div></div>
       </article>)}</div>
     </section>}
     {generic.length > 0 && <section className="mw-model-section"><div className="shopping-section-heading"><div><p className="shopping-overline">CATEGORIES · अपनी ज़रूरत से</p><h2>दुकान में और क्या मिलता है?</h2></div></div><div className="pgrid">{generic.map((p) => <ProductCard key={p.title} item={p} />)}</div></section>}
