@@ -47,3 +47,46 @@ test('Screen-reader-only headings and long editorial headings stay unsplit', () 
   assert.equal(render(longText).replace(/<[^>]+>/g, ''), longText);
   assert.ok(!render(longText).includes('mw-motion-glyph'));
 });
+
+test('Device reduced motion, manual pause and tab visibility govern the same observer and clean up on navigation', async () => {
+  const { runInNewContext } = await import('node:vm');
+  const media = Object.assign(new EventTarget(), { matches: true });
+  const pointer = Object.assign(new EventTarget(), { matches: true });
+  const root = { dataset: {} };
+  const dom = Object.assign(new EventTarget(), { documentElement: root, body: { matches: () => false, querySelectorAll: () => [] }, hidden: false });
+  const win = new EventTarget();
+  let cleanup, disconnected = false;
+  const source = fs.readFileSync(new URL('../components/SiteMotion.tsx', import.meta.url), 'utf8');
+  const compiled = ts.transpileModule(source, { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX } }).outputText;
+  const exports = {};
+  runInNewContext(compiled, {
+    exports, window: win, document: dom, matchMedia: query => query.includes('reduced-motion') ? media : pointer,
+    IntersectionObserver: class { disconnect() { disconnected = true; } }, MutationObserver: class { observe() {} disconnect() {} },
+    cancelAnimationFrame() {},
+    require(id) {
+      if (id === 'react') return { useRef: current => ({ current }), useEffect: effect => { cleanup = effect(); } };
+      if (id === 'next/navigation') return { usePathname: () => '/phones/xiaomi-17t' };
+      return createRequire(filename)(id);
+    },
+  });
+  exports.SiteMotion();
+  assert.equal(root.dataset.siteMotion, 'paused');
+  media.matches = false;
+  media.dispatchEvent(new Event('change'));
+  assert.equal(root.dataset.siteMotion, 'playing');
+  root.dataset.festivalMotion = 'paused';
+  win.dispatchEvent(new Event('mw-festival-motion'));
+  assert.equal(root.dataset.siteMotion, 'paused');
+  root.dataset.festivalMotion = 'playing';
+  dom.hidden = true;
+  dom.dispatchEvent(new Event('visibilitychange'));
+  assert.equal(root.dataset.siteMotion, 'paused');
+  dom.hidden = false;
+  dom.dispatchEvent(new Event('visibilitychange'));
+  assert.equal(root.dataset.siteMotion, 'playing');
+  cleanup();
+  assert.equal(disconnected, true);
+  media.matches = true;
+  media.dispatchEvent(new Event('change'));
+  assert.equal(root.dataset.siteMotion, undefined);
+});

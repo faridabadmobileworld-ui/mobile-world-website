@@ -16,7 +16,7 @@ body.festival-site { font-family:var(--font-inter),var(--font-hindi),'Nirmala UI
 .mw-motion-heading .mw-motion-glyph:before,.mw-motion-heading .mw-motion-glyph:after { content:none; }
 .festival-site :is(.shopping-section-heading,.mw-page-heading) h2 { font-weight:550; letter-spacing:-.01em; }
 .festival-site :is(.mw-page-heading,.mp-heading) h1 { letter-spacing:-.025em; }
-.festival-site :is(.shopping-category,.mw-model-card,.mw-featured,.pc,.mw-service-card,.mw-guide,.post,.festival-card,.mw-latest-link) {
+.festival-site :is(.shopping-category,.mw-model-card,.mw-featured,.offer-card,.pc,.mw-service-card,.mw-guide,.post,.festival-card,.mw-latest-link) {
   border-radius:18px;
   transition:translate .45s var(--mw-motion-ease),border-color .3s,box-shadow .45s var(--mw-motion-ease),background-color .3s;
 }
@@ -33,10 +33,10 @@ body.festival-site { font-family:var(--font-inter),var(--font-hindi),'Nirmala UI
 }
 .festival-site .btn-w { background-image:linear-gradient(100deg,#087d4d,#136a61); background-size:200% 100%; }
 .festival-site .mw-icon-arrow { transition:rotate .4s var(--mw-motion-ease),translate .4s var(--mw-motion-ease); }
-.festival-site :is(.mw-text-link,.shopping-section-heading>a,.mw-latest-go) .mw-icon-arrow { rotate:-35deg; }
+.festival-site :is(.mw-text-link,.shopping-section-heading>a,.mw-latest-go,.offer-cta) .mw-icon-arrow { rotate:-35deg; }
 .festival-site :is(.shopping-nav a,.mw-footer a,.mp-section-links a,.mw-filter,.mp-thumbnails button,summary) { transition:background-color .3s,color .3s,border-color .3s,box-shadow .3s; }
-.festival-site :is(.mw-model-media,.pc-m,.mw-guide-image,.mw-visit-image,.mw-latest-image,.shopping-category-image,.festival-image,.rmedia,.mp-main-image,.mw-community-photos figure,.mw-about-photo) { position:relative; isolation:isolate; }
-.festival-site #main :is(.mw-model-media,.pc-m,.mw-guide-image,.mw-visit-image,.mw-latest-image,.shopping-category-image,.festival-image,.rmedia,.mp-main-image,.mw-community-photos figure)::after {
+.festival-site :is(.mw-model-media,.offer-image,.mp-guide-media,.pc-m,.mw-guide-image,.mw-visit-image,.mw-latest-image,.shopping-category-image,.festival-image,.rmedia,.mp-main-image,.mw-community-photos figure,.mw-about-photo) { position:relative; isolation:isolate; }
+.festival-site #main :is(.mw-model-media,.offer-image,.mp-guide-media,.pc-m,.mw-guide-image,.mw-visit-image,.mw-latest-image,.shopping-category-image,.festival-image,.rmedia,.mp-main-image,.mw-community-photos figure)::after {
   content:''; display:block; position:absolute; inset:0; z-index:3; pointer-events:none; border-radius:inherit; opacity:0;
   background:linear-gradient(115deg,transparent 30%,#fff0 38%,#ffffff65 50%,#fff0 62%,transparent 70%);
   background-size:260% 100%; background-position:100% 0;
@@ -58,19 +58,19 @@ body.festival-site { font-family:var(--font-inter),var(--font-hindi),'Nirmala UI
 .mw-motion-cursor.is-link { scale:3.2; opacity:.18; }
 
 @media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference) {
-  html:not([data-site-motion='paused']) .festival-site :is(.shopping-category,.mw-model-card,.mw-featured,.pc,.mw-service-card,.mw-guide,.post,.festival-card,.mw-latest-link):hover {
+  html:not([data-site-motion='paused']) .festival-site :is(.shopping-category,.mw-model-card,.mw-featured,.offer-card,.pc,.mw-service-card,.mw-guide,.post,.festival-card,.mw-latest-link):hover {
     translate:0 -5px; border-color:#c996a3; box-shadow:var(--mw-motion-shadow); transform:none;
   }
-  html:not([data-site-motion='paused']) .festival-site #main :is(.mw-model-card,.mw-featured,.pc,.mw-guide,.post,.festival-card,.mw-latest-link,.shopping-category,.mw-brand-logo,.mw-community-photos figure,.mw-about-photo,.mp-main-image,.rmedia):hover img,
+  html:not([data-site-motion='paused']) .festival-site #main :is(.mw-model-card,.mw-featured,.offer-card,.pc,.mw-guide,.post,.festival-card,.mw-latest-link,.shopping-category,.mw-brand-logo,.mw-community-photos figure,.mw-about-photo,.mp-main-image,.rmedia):hover img,
   html:not([data-site-motion='paused']) .festival-site #main img:hover { scale:1.045; }
-  html:not([data-site-motion='paused']) .festival-site #main :is(.mw-model-media,.pc-m,.mw-guide-image,.mw-visit-image,.mw-latest-image,.shopping-category-image,.festival-image,.rmedia,.mp-main-image,.mw-community-photos figure):hover::after {
+  html:not([data-site-motion='paused']) .festival-site #main :is(.mw-model-media,.offer-image,.mp-guide-media,.pc-m,.mw-guide-image,.mw-visit-image,.mw-latest-image,.shopping-category-image,.festival-image,.rmedia,.mp-main-image,.mw-community-photos figure):hover::after {
     animation:mw-glass-sweep .65s linear both;
   }
   html:not([data-site-motion='paused']) .festival-site :is(.shopping-primary,.shopping-secondary,.btn):hover {
     background-position:right center; translate:0 -2px; animation:mw-button-pulse .6s ease-in-out;
   }
   html:not([data-site-motion='paused']) .festival-site :is(a,button):hover>.mw-icon-arrow,
-  html:not([data-site-motion='paused']) .festival-site a:hover :is(.mw-latest-go,.mw-text-link,b)>.mw-icon-arrow { rotate:0deg; translate:3px 0; }
+  html:not([data-site-motion='paused']) .festival-site a:hover :is(.mw-latest-go,.mw-text-link,.offer-cta,b)>.mw-icon-arrow { rotate:0deg; translate:3px 0; }
 }
 @media (prefers-reduced-motion:no-preference) {
   html:not([data-site-motion='paused']) .festival-site details[open]>*:not(summary) { animation:mw-disclosure-in .35s var(--mw-motion-ease); }
@@ -86,7 +86,7 @@ html[data-site-motion='paused'] .mw-motion-cursor { display:none; }
 html[data-site-motion='paused'] .festival-site *,html[data-site-motion='paused'] .festival-site *::before,html[data-site-motion='paused'] .festival-site *::after { animation-play-state:paused!important; transition:none!important; }
 html[data-site-motion='paused'] .festival-site #main img { scale:1!important; }
 html[data-site-motion='paused'] .festival-site :is(.shopping-primary,.shopping-secondary,.btn,details>*,.mw-dialog) { animation:none!important; }
-html[data-site-motion='paused'] .festival-site #main :is(.mw-model-media,.pc-m,.mw-guide-image,.mw-visit-image,.mw-latest-image,.shopping-category-image,.festival-image,.rmedia,.mp-main-image,.mw-community-photos figure)::after { animation:none!important; opacity:0; }
+html[data-site-motion='paused'] .festival-site #main :is(.mw-model-media,.offer-image,.mp-guide-media,.pc-m,.mw-guide-image,.mw-visit-image,.mw-latest-image,.shopping-category-image,.festival-image,.rmedia,.mp-main-image,.mw-community-photos figure)::after { animation:none!important; opacity:0; }
 @media (hover:none),(pointer:coarse) { .mw-motion-cursor { display:none; } }
 @media (prefers-reduced-motion:reduce) {
   html { scroll-behavior:auto!important; }

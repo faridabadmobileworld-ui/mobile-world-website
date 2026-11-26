@@ -22,9 +22,10 @@ import samsungA07 from '@/data/verified-products/samsung-galaxy-a07-india.json';
 import oppoF35Pro from '@/data/verified-products/oppo-f35-pro-india.json';
 import oppoReno16 from '@/data/verified-products/oppo-reno16-india.json';
 import oppoReno16c from '@/data/verified-products/oppo-reno16c-india.json';
+import vivoV80 from '@/data/verified-products/vivo-v80-india.json';
 import { normalizeProduct } from './core';
 
-const references = [xiaomi17t, xiaomi17, xiaomi17Ultra, redmiNote17, redmiNote17ProMax, redmiNote17Pro, redmi17, redmi17c, iphone18Pro, iphone18ProMax, pixel10Pro, pixel10ProXL, nothingPhone3, nothingPhone3a, samsungA57, samsungA37, samsungA27, samsungA17, samsungA08, samsungA07, oppoF35Pro, oppoReno16, oppoReno16c];
+const references = [xiaomi17t, xiaomi17, xiaomi17Ultra, redmiNote17, redmiNote17ProMax, redmiNote17Pro, redmi17, redmi17c, iphone18Pro, iphone18ProMax, pixel10Pro, pixel10ProXL, nothingPhone3, nothingPhone3a, samsungA57, samsungA37, samsungA27, samsungA17, samsungA08, samsungA07, oppoF35Pro, oppoReno16, oppoReno16c, vivoV80];
 
 // Checked source data can start a draft, but never writes or publishes content.
 // Normalization returns a fresh copy, so editing cannot mutate the reference.

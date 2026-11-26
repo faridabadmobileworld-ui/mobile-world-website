@@ -28,6 +28,7 @@ export function DetailedProduct({ product, productPath = '/catalog/' + product.s
   const variantColours = product.variants.filter(v => v.ram === variant?.ram && v.storage === variant?.storage).map(v => v.colour).filter(Boolean);
   const colours = variantColours.length ? [...new Set(variantColours)] : modelColours;
   const selectedColour = variant?.colour || preferredColour;
+  const matchingPrices = referencePrices.filter(price => variant && price.ram === variant.ram && price.storage === variant.storage && (!selectedColour || price.colour === selectedColour));
   const preference = selectedPreference(variant, selectedColour);
   const name = productDisplayName(product);
   const enquiry = shop.phone.whatsapp + '?text=' + encodeURIComponent('नमस्ते Mobile World! मुझे ' + name + (preference ? ' (' + preference + ')' : '') + ' के बारे में जानकारी चाहिए। ' + shop.siteUrl + productPath);
@@ -64,14 +65,14 @@ export function DetailedProduct({ product, productPath = '/catalog/' + product.s
           <p className="mw-small" role="status">{preference}</p>
         </fieldset>
         {modelColours.length > 0 && <section className="mp-colours" aria-label="Official model colours"><MotionHeading as="h2">इस model के colours</MotionHeading><ul>{modelColours.map(colour => <li key={colour}>{colour}</li>)}</ul><p className="mw-small">चुने हुए RAM, storage और colour की उपलब्धता दुकान से confirm होगी।</p></section>}
-        {referencePrices.length > 0 && <section className="mp-prices" aria-label="Official India price reference"><MotionHeading as="h2">Official India price reference</MotionHeading><p>नीचे दिए variant की Xiaomi India online listing। Mobile World का selling price अलग हो सकता है।</p>
-          {referencePrices.map(price => <dl key={[price.ram, price.storage, price.colour].join('-')}>
+        <section className="mp-prices" aria-label="Official India price reference"><MotionHeading as="h2">Official India price reference</MotionHeading><p>{matchingPrices.length ? 'यह इस variant के लिए brand के India online store पर दिखा दाम है। दुकान का selling price Mobile World से पूछिए।' : 'इस पसंद के लिए official India price की पुष्टि बाकी है। दुकान का दाम enquiry पर जानिए।'}</p>
+          {matchingPrices.slice(0, 1).map(price => <dl key={[price.ram, price.storage, price.colour].join('-')}>
             <div><dt>Listed price</dt><dd className="mp-price-amount">{new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(price.amount)}</dd></div>
-            <div><dt>RAM</dt><dd>{price.ram}</dd></div><div><dt>Storage</dt><dd>{price.storage}</dd></div>
+            {price.ram && <div><dt>RAM</dt><dd>{price.ram}</dd></div>}<div><dt>Storage</dt><dd>{price.storage}</dd></div>
             {price.colour && <div><dt>Colour</dt><dd>{price.colour}</dd></div>}
             <div><dt>Price checked</dt><dd>{new Intl.DateTimeFormat('en-IN', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Kolkata' }).format(new Date(price.checkedAt + 'T12:00:00+05:30'))}</dd></div>
           </dl>)}
-        </section>}
+        </section>
         <div className="mp-enquiry"><MotionHeading as="h2">इस model के बारे में पूछिए</MotionHeading><p>अपनी पसंद दुकान को भेजिए। Colour और stock की पुष्टि हमारी team से होगी।</p><div className="btns"><a className="btn btn-w" href={enquiry} target="_blank" rel="noopener noreferrer"><IconWhatsApp /> WhatsApp पर पूछिए</a><a className="btn btn-o" href={shop.phone.tel}>दुकान पर call कीजिए</a></div></div>
       </div>
     </section>

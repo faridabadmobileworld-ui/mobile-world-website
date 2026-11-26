@@ -1,8 +1,7 @@
 import { MotionHeading } from "@/components/MotionHeading";
 import Image from "next/image";
-import Link from "next/link";
 import { IconArrow } from "@/components/Icons";
-import { modelDisplayName, phoneModels } from "@/data/catalog";
+import { catalogueGuidePath, modelDisplayName, phoneModels } from "@/data/catalog";
 import { phoneGuideLinks } from "@/lib/catalog/guides";
 import { campaignIsLive, defaultCampaigns, featuredModelIds, type CampaignSettings } from "@/lib/campaigns/core";
 import "./current-offers.css";
@@ -22,11 +21,10 @@ export function CurrentOffers({ settings = defaultCampaigns() }: { settings?: Ca
         {models.map(model => {
           const name = modelDisplayName(model);
           return (
-            <Link
+            <a
               key={model.id}
               className={`offer-card offer-${model.brandSlug}`}
-              href={specificationLinks[model.id] ?? `/products?model=${model.id}`}
-              prefetch={false}
+              href={specificationLinks[model.id] ?? catalogueGuidePath(model.id)}
               aria-label={`${name} की specifications देखिए`}
             >
               <div className="offer-image">
@@ -41,7 +39,7 @@ export function CurrentOffers({ settings = defaultCampaigns() }: { settings?: Ca
                 <h3>{name}</h3>
                 <span className="offer-cta">Specifications देखिए <IconArrow /></span>
               </div>
-            </Link>
+            </a>
           );
         })}
       </div>

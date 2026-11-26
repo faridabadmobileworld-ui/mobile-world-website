@@ -78,5 +78,295 @@
       "checkedAt": "2026-11-24",
       "source": "https://www.mi.com/in/product/xiaomi-17/buy/"
     }
+  ],
+  "vivo-v80-5g": [
+    {
+      "amount": 62999,
+      "ram": "8 GB",
+      "storage": "128 GB",
+      "colour": "Sunrise Anthem",
+      "checkedAt": "2026-11-25",
+      "source": "https://shop.vivo.com/in/product/10373?skuId=19585"
+    }
+  ],
+  "iphone-18-pro-max": [
+    {
+      "amount": 179900,
+      "ram": "",
+      "storage": "256 GB",
+      "colour": "Black",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.9%22-display-256gb-black"
+    },
+    {
+      "amount": 179900,
+      "ram": "",
+      "storage": "256 GB",
+      "colour": "Burgundy",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.9%22-display-256gb-burgundy"
+    },
+    {
+      "amount": 179900,
+      "ram": "",
+      "storage": "256 GB",
+      "colour": "Glacier",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.9%22-display-256gb-glacier"
+    },
+    {
+      "amount": 179900,
+      "ram": "",
+      "storage": "256 GB",
+      "colour": "Silver",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.9%22-display-256gb-silver"
+    },
+    {
+      "amount": 204900,
+      "ram": "",
+      "storage": "512 GB",
+      "colour": "Black",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.9%22-display-512gb-black"
+    },
+    {
+      "amount": 204900,
+      "ram": "",
+      "storage": "512 GB",
+      "colour": "Burgundy",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.9%22-display-512gb-burgundy"
+    },
+    {
+      "amount": 204900,
+      "ram": "",
+      "storage": "512 GB",
+      "colour": "Glacier",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.9%22-display-512gb-glacier"
+    },
+    {
+      "amount": 204900,
+      "ram": "",
+      "storage": "512 GB",
+      "colour": "Silver",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.9%22-display-512gb-silver"
+    },
+    {
+      "amount": 254900,
+      "ram": "",
+      "storage": "1 TB",
+      "colour": "Black",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.9%22-display-1tb-black"
+    },
+    {
+      "amount": 254900,
+      "ram": "",
+      "storage": "1 TB",
+      "colour": "Burgundy",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.9%22-display-1tb-burgundy"
+    },
+    {
+      "amount": 254900,
+      "ram": "",
+      "storage": "1 TB",
+      "colour": "Glacier",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.9%22-display-1tb-glacier"
+    },
+    {
+      "amount": 254900,
+      "ram": "",
+      "storage": "1 TB",
+      "colour": "Silver",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.9%22-display-1tb-silver"
+    },
+    {
+      "amount": 329900,
+      "ram": "",
+      "storage": "2 TB",
+      "colour": "Black",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.9%22-display-2tb-black"
+    },
+    {
+      "amount": 329900,
+      "ram": "",
+      "storage": "2 TB",
+      "colour": "Burgundy",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.9%22-display-2tb-burgundy"
+    },
+    {
+      "amount": 329900,
+      "ram": "",
+      "storage": "2 TB",
+      "colour": "Glacier",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.9%22-display-2tb-glacier"
+    },
+    {
+      "amount": 329900,
+      "ram": "",
+      "storage": "2 TB",
+      "colour": "Silver",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.9%22-display-2tb-silver"
+    }
+  ],
+  "iphone-18-pro": [
+    {
+      "amount": 164900,
+      "ram": "",
+      "storage": "256 GB",
+      "colour": "Black",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.3%22-display-256gb-black"
+    },
+    {
+      "amount": 164900,
+      "ram": "",
+      "storage": "256 GB",
+      "colour": "Burgundy",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.3%22-display-256gb-burgundy"
+    },
+    {
+      "amount": 164900,
+      "ram": "",
+      "storage": "256 GB",
+      "colour": "Glacier",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.3%22-display-256gb-glacier"
+    },
+    {
+      "amount": 164900,
+      "ram": "",
+      "storage": "256 GB",
+      "colour": "Silver",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.3%22-display-256gb-silver"
+    },
+    {
+      "amount": 189900,
+      "ram": "",
+      "storage": "512 GB",
+      "colour": "Black",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.3%22-display-512gb-black"
+    },
+    {
+      "amount": 189900,
+      "ram": "",
+      "storage": "512 GB",
+      "colour": "Burgundy",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.3%22-display-512gb-burgundy"
+    },
+    {
+      "amount": 189900,
+      "ram": "",
+      "storage": "512 GB",
+      "colour": "Glacier",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.3%22-display-512gb-glacier"
+    },
+    {
+      "amount": 189900,
+      "ram": "",
+      "storage": "512 GB",
+      "colour": "Silver",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.3%22-display-512gb-silver"
+    },
+    {
+      "amount": 239900,
+      "ram": "",
+      "storage": "1 TB",
+      "colour": "Black",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.3%22-display-1tb-black"
+    },
+    {
+      "amount": 239900,
+      "ram": "",
+      "storage": "1 TB",
+      "colour": "Burgundy",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.3%22-display-1tb-burgundy"
+    },
+    {
+      "amount": 239900,
+      "ram": "",
+      "storage": "1 TB",
+      "colour": "Glacier",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.3%22-display-1tb-glacier"
+    },
+    {
+      "amount": 239900,
+      "ram": "",
+      "storage": "1 TB",
+      "colour": "Silver",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.3%22-display-1tb-silver"
+    },
+    {
+      "amount": 314900,
+      "ram": "",
+      "storage": "2 TB",
+      "colour": "Black",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.3%22-display-2tb-black"
+    },
+    {
+      "amount": 314900,
+      "ram": "",
+      "storage": "2 TB",
+      "colour": "Burgundy",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.3%22-display-2tb-burgundy"
+    },
+    {
+      "amount": 314900,
+      "ram": "",
+      "storage": "2 TB",
+      "colour": "Glacier",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.3%22-display-2tb-glacier"
+    },
+    {
+      "amount": 314900,
+      "ram": "",
+      "storage": "2 TB",
+      "colour": "Silver",
+      "checkedAt": "2026-11-25",
+      "source": "https://www.apple.com/in/shop/buy-iphone/iphone-18-pro/6.3%22-display-2tb-silver"
+    }
+  ],
+  "pixel-10-pro": [
+    {
+      "amount": 109999,
+      "ram": "16 GB",
+      "storage": "256 GB",
+      "colour": "",
+      "checkedAt": "2026-11-25",
+      "source": "https://store.google.com/in/config/pixel_10_pro?hl=en-IN"
+    }
+  ],
+  "pixel-10-pro-xl": [
+    {
+      "amount": 124999,
+      "ram": "16 GB",
+      "storage": "256 GB",
+      "colour": "",
+      "checkedAt": "2026-11-25",
+      "source": "https://store.google.com/in/config/pixel_10_pro?hl=en-IN"
+    }
   ]
 }

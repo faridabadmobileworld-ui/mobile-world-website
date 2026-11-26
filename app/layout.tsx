@@ -76,7 +76,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="hi" className={`${inter.variable} ${hindi.variable}`}>
+    <html lang="hi" data-scroll-behavior="smooth" className={`${inter.variable} ${hindi.variable}`}>
       <body className="festival-site">
         <a className="skip" href="#main">सीधे content पर जाइए</a>
         {/*

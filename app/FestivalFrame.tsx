@@ -1,21 +1,46 @@
 'use client';
 import { MotionHeading } from "@/components/MotionHeading";
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useSyncExternalStore } from 'react';
 import Image from 'next/image';
 import { IconArrow, IconPause, IconPlay } from '@/components/Icons';
 
+const motionKey = 'mw-animation-paused';
+const motionEvent = 'mw-festival-motion';
+const subscribeMotion = (notify: () => void) => {
+  window.addEventListener(motionEvent, notify);
+  return () => window.removeEventListener(motionEvent, notify);
+};
+const isPaused = () => document.documentElement.dataset.festivalMotion === 'paused';
+const initialMotion = () => false;
+
+function applyMotion(paused: boolean) {
+  document.documentElement.dataset.festivalMotion = paused ? 'paused' : 'playing';
+  window.dispatchEvent(new Event(motionEvent));
+}
+
 export function FestivalFrame() {
-  const [paused, setPaused] = useState(false);
-  useEffect(() => {
-    document.documentElement.dataset.festivalMotion = paused ? 'paused' : 'playing';
-    window.dispatchEvent(new Event('mw-festival-motion'));
-    return () => { delete document.documentElement.dataset.festivalMotion; };
-  }, [paused]);
+  const paused = useSyncExternalStore(subscribeMotion, isPaused, initialMotion);
+  useLayoutEffect(() => {
+    const restore = () => {
+      try { applyMotion(localStorage.getItem(motionKey) === 'true'); }
+      catch { /* A storage-restricted browser keeps the current page's preference. */ }
+    };
+    const storageChanged = (event: StorageEvent) => { if (event.key === null || event.key === motionKey) restore(); };
+    restore();
+    window.addEventListener('pageshow', restore);
+    window.addEventListener('storage', storageChanged);
+    return () => { window.removeEventListener('pageshow', restore); window.removeEventListener('storage', storageChanged); };
+  }, []);
+  function toggleMotion() {
+    const next = !isPaused();
+    try { localStorage.setItem(motionKey, String(next)); } catch { /* Still applies on this page. */ }
+    applyMotion(next);
+  }
   return <>
     <div className="festival-rail festival-rail-left" aria-hidden="true"/>
     <div className="festival-rail festival-rail-right" aria-hidden="true"/>
     <div className="festival-crown" aria-hidden="true"/>
-    <div className="festival-greeting"><span className="festival-diya" aria-hidden="true"><i/></span><p><span className="festival-eyebrow">DIWALI AT MOBILE WORLD</span>रोशनी, भरोसा और ख़ुशियाँ।</p><button type="button" className="festival-motion" aria-pressed={paused} aria-label={paused ? 'Website animations चलाइए' : 'Website animations रोकिए'} onClick={() => setPaused(v => !v)}>{paused ? <IconPlay/> : <IconPause/>}<span>{paused ? 'Animation चलाइए' : 'Animation रोकिए'}</span></button></div>
+    <div className="festival-greeting"><span className="festival-diya" aria-hidden="true"><i/></span><p><span className="festival-eyebrow">DIWALI AT MOBILE WORLD</span>रोशनी, भरोसा और ख़ुशियाँ।</p><button type="button" className="festival-motion" aria-pressed={paused} aria-label={paused ? 'Website animations चलाइए' : 'Website animations रोकिए'} onClick={toggleMotion}>{paused ? <IconPlay/> : <IconPause/>}<span>{paused ? 'Animation चलाइए' : 'Animation रोकिए'}</span></button></div>
   </>;
 }
 

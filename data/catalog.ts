@@ -554,6 +554,17 @@ for (const brand of phoneBrands) {
   const cover = brand.models.find((model) => studioImageIds.has(model.id));
   if (cover) { brand.image = cover.image; brand.imageAlt = cover.imageAlt; }
 }
+// Prefer the verified product photo over campaign artwork on every V80 card.
+Object.assign(vivoV80, {
+  image: '/images/vivo-v80-sunrise-official.png',
+  imageAlt: 'vivo V80 5G का Sunrise Anthem colour',
+  imageKind: undefined,
+  imageCaption: 'तस्वीर में Sunrise Anthem colour है।',
+  imageSource: 'https://www.vivo.com/in/products/param/v80',
+  gallery: [{ src: '/images/vivo-v80-sunrise-official.png', alt: 'vivo V80 Sunrise Anthem' }],
+  checked: '2026-11-25',
+} satisfies Partial<PhoneModel>);
+
 // Verified India reference: override older promotional images only for this model.
 // Keep the existing model ID so saved shortlists and incoming links still work.
 const verified17T = xiaomiBrand.models.find(model => model.id === 'xiaomi-xiaomi-17t')!;
@@ -810,6 +821,16 @@ export function searchPhoneModels(query: string): PhoneModel[] {
   if (group) return phoneModels.filter(model => model.brandSlug === group.brand && model.name.toLowerCase().startsWith(phrase));
   const terms = phrase.split(' ').filter(Boolean);
   return phoneModels.filter(model => terms.every(term => `${model.brand} ${model.name} ${model.note} ${model.display} ${model.processor} ${model.system} phone mobile मोबाइल फोन फ़ोन smartphone`.toLowerCase().includes(term)));
+}
+export const shortlistStorageKey = 'mobile-world-shortlist-v1';
+export function catalogueGuidePath(id: string) { return '/products/guide/' + encodeURIComponent(id); }
+
+export function catalogueGuideReference(model: PhoneModel) {
+  const reference = studioImageReferences[model.id];
+  return {
+    isSeries: reference?.representative === true || /series|\s\/\s/i.test(model.name),
+    source: model.source || reference?.source || '',
+  };
 }
 export const availablePhoneModels=phoneModels.filter(x=>x.status!=="upcoming");
 export const upcomingPhoneModels:PhoneModel[]=[];

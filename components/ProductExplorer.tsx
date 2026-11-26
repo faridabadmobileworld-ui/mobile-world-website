@@ -3,17 +3,15 @@ import { MotionHeading } from "@/components/MotionHeading";
 import { trackAction } from "./WebsiteAnalytics";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { phoneBrands, phoneModels, searchPhoneModels, legacyGuideGroups, validModelIds, modelEnquiry, modelDisplayName, type PhoneModel } from "@/data/catalog";
+import { phoneBrands, phoneModels, searchPhoneModels, legacyGuideGroups, validModelIds, modelEnquiry, modelDisplayName, catalogueGuidePath, shortlistStorageKey } from "@/data/catalog";
 import { categorySearchAliases } from "@/data/search";
 import { shop } from "@/data/shop";
 import type { Item, NavCategory } from "@/data/content";
 import { ProductCard } from "./ProductCard";
 import { IconArrow, IconWhatsApp, IconSearch } from "./Icons";
 
-const storageKey = "mobile-world-shortlist-v1";
 const fields = [{key:"display",label:"Display"},{key:"camera",label:"Camera"},{key:"processor",label:"Processor"},{key:"power",label:"Battery / charging"},{key:"software",label:"Software"}] as const;
 
 function Modal({ title, children, close }: { title: string; children: React.ReactNode; close: () => void }) {
@@ -31,27 +29,6 @@ function Modal({ title, children, close }: { title: string; children: React.Reac
   </dialog>;
 }
 
-function ModelDetails({ model, save, saved, detailsHref }: { model: PhoneModel; save: () => void; saved: boolean; detailsHref?: string }) {
-  const [colour, setColour] = useState("");
-  const [variant, setVariant] = useState("");
-  const [imageIndex, setImageIndex] = useState(0);
-  const gallery = model.gallery ?? [{ src: model.image, alt: model.imageAlt }];
-  const selectedImage = gallery[imageIndex] ?? gallery[0];
-  return <div className="mw-detail">
-    <header className="mw-detail-intro"><p className="shopping-overline">{model.brand} · जानकारी देखिए</p><MotionHeading as="h2">{model.name}</MotionHeading><p>{model.note}</p></header>
-    <div className={`mw-detail-image${model.imageKind === "creative" ? " mw-detail-creative" : ""}`}><Image src={selectedImage.src} alt={selectedImage.alt} width={1122} height={1402} sizes="(max-width:760px) 90vw, 430px" />{gallery.length > 1 && <div className="mw-gallery-thumbnails" role="group" aria-label={`${model.name} की images`}>{gallery.map((item, index) => <button key={item.src} type="button" aria-label={`${model.name} की image ${index + 1} देखिए`} aria-pressed={imageIndex === index} onClick={() => setImageIndex(index)}><Image src={item.src} alt="" width={80} height={100}/></button>)}</div>}{model.imageCaption && <p className="mw-small">{model.imageCaption}</p>}<p className="mw-small">{model.imageKind === "creative" ? "Official reference पर आधारित product creative। चुना हुआ colour और accessories अलग हो सकते हैं।" : "Brand की product तस्वीर। चुना हुआ colour तस्वीर से अलग हो सकता है।"}</p>{model.imageSource && <a className="mw-source" href={model.imageSource} target="_blank" rel="noopener noreferrer">इस तस्वीर का official model देखिए ↗</a>}</div>
-    <div className="mw-detail-content">
-      {detailsHref && <p><Link className="btn btn-d" href={detailsHref}>पूरी specifications और variants →</Link></p>}
-      <dl className="mw-specs">{fields.map((f) => <div key={f.key}><dt>{f.label}</dt><dd>{model[f.key]}</dd></div>)}</dl>
-      <div className="mw-form-row"><label>कौन सा colour चाहिए?<select value={colour} onChange={(e) => setColour(e.target.value)}><option value="">दुकान से options पूछिए</option>{model.colours.map((c) => <option key={c.name}>{c.name}</option>)}</select></label>
-      <label>आपकी variant preference<select value={variant} onChange={(e) => setVariant(e.target.value)}><option value="">अभी तय नहीं</option>{model.variants.map((v) => <option key={v}>{v}</option>)}</select></label></div>
-      <p className="mw-small">Colour, variant और stock की पुष्टि दुकान से कीजिए। *Battery और charging के आँकड़े brand की testing पर आधारित हैं; असल इस्तेमाल अलग हो सकता है। Software support की शुरुआत और अवधि model की brand policy पर निर्भर है।</p>
-      <div className="btns"><a className="btn btn-w" href={modelEnquiry([model], `Colour preference: ${colour || "कोई भी"}। Variant preference: ${variant || "अभी तय नहीं"}।`)} target="_blank" rel="noopener noreferrer"><IconWhatsApp /> इस model के बारे में पूछिए</a><button className="btn btn-o" type="button" onClick={save} aria-pressed={saved}>{saved ? "✓ Shortlist में है" : "Shortlist में रखिए"}</button></div>
-      {model.source && model.source !== shop.siteUrl && model.source !== shop.siteUrl + "/" && (model.source.startsWith("/") ? <Link className="mw-source" href={model.source}>Offers और पूरी specifications पढ़िए <IconArrow /></Link> : <a className="mw-source" href={model.source} target="_blank" rel="noopener noreferrer">Brand की specifications देखिए ↗</a>)}
-    </div>
-  </div>;
-}
-
 export function ProductExplorer({ categories, items, productPages = {} }: { categories: NavCategory[]; items: Item[]; productPages?: Record<string, string> }) {
   const params = useSearchParams();
   const legacyGroup = legacyGuideGroups[params.get("model") ?? ""];
@@ -62,7 +39,6 @@ export function ProductExplorer({ categories, items, productPages = {} }: { cate
   const [onlySaved, setOnlySaved] = useState(params.has("shortlist") || params.get("view") === "shortlist");
   const [compare, setCompare] = useState<string[]>([]);
   const [compareOpen, setCompareOpen] = useState(false);
-  const [model, setModel] = useState<PhoneModel | undefined>(phoneModels.find((p) => p.id === params.get("model") && !productPages[p.id]));
   const [notice, setNotice] = useState("");
   const [shareUrl, setShareUrl] = useState("");
 
@@ -71,16 +47,17 @@ export function ProductExplorer({ categories, items, productPages = {} }: { cate
       const hash = window.location.hash.slice(1);
       setCategory(categories.some((c) => c.slug === hash) ? hash : "all");
     };
+    const syncSaved = () => {
+      if (!params.has("shortlist")) {
+        try { setSaved(validModelIds(localStorage.getItem(shortlistStorageKey))); } catch { /* Session works without storage. */ }
+      }
+    };
     const frame = requestAnimationFrame(() => {
       const group = legacyGuideGroups[params.get("model") ?? ""];
       sync(); setQuery(params.get("q") ?? group?.query ?? "");
       setBrand(phoneBrands.some((b) => b.slug === params.get("brand")) ? params.get("brand")! : group?.brand ?? "all");
-      const selected = phoneModels.find((p) => p.id === params.get("model") && !productPages[p.id]);
-      setModel(selected);
       if (group) setNotice("इस series के अलग models नीचे हैं। अपना exact model चुनिए।");
-      if (!params.has("shortlist")) {
-        try { setSaved(validModelIds(localStorage.getItem(storageKey))); } catch { /* Session works without storage. */ }
-      }
+      syncSaved();
     });
     const anchorClick = (event: MouseEvent) => {
       if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
@@ -93,15 +70,15 @@ export function ProductExplorer({ categories, items, productPages = {} }: { cate
     };
     document.addEventListener("click", anchorClick, true);
     window.addEventListener("hashchange", sync);
-    return () => { cancelAnimationFrame(frame); window.removeEventListener("hashchange", sync); document.removeEventListener("click", anchorClick, true); };
-  }, [categories, params, productPages]);
+    window.addEventListener("pageshow", syncSaved);
+    return () => { cancelAnimationFrame(frame); window.removeEventListener("hashchange", sync); window.removeEventListener("pageshow", syncSaved); document.removeEventListener("click", anchorClick, true); };
+  }, [categories, params]);
 
-  function openModel(item: PhoneModel) { trackAction("product", `${item.brand}: ${item.name}`); setModel(item); }
   function toggleSaved(id: string) {
     trackAction("shortlist", `${saved.includes(id) ? "remove" : "add"}: ${id}`);
     const next = saved.includes(id) ? saved.filter((v) => v !== id) : [...saved, id];
     setSaved(next);
-    try { localStorage.setItem(storageKey, next.join(",")); } catch { setNotice("इस browser में list save नहीं हो सकी। आप इसे अभी share कर सकते हैं।"); }
+    try { localStorage.setItem(shortlistStorageKey, next.join(",")); } catch { setNotice("इस browser में list save नहीं हो सकी। आप इसे अभी share कर सकते हैं।"); }
   }
   function toggleCompare(id: string) {
     trackAction("compare", id);
@@ -137,15 +114,35 @@ export function ProductExplorer({ categories, items, productPages = {} }: { cate
     <p className="mw-notice" role="status">{notice}</p>
     {onlySaved && <section className="mw-shortlist-head"><div><MotionHeading as="h2">आपकी पसंद, एक जगह।</MotionHeading><p>{saved.length ? `${saved.length} models आपकी shortlist में हैं।` : "किसी model पर ♡ दबाकर अपनी shortlist बनाइए।"}</p></div>{saved.length > 0 && <div className="btns"><button type="button" className="btn btn-o" onClick={share}>Link copy कीजिए</button><a className="btn btn-w" href={modelEnquiry(chosen)} target="_blank" rel="noopener noreferrer"><IconWhatsApp /> पूरी list भेजिए</a></div>}{shareUrl && <label className="mw-share-field">आपकी shortlist का link<input readOnly value={shareUrl} onFocus={(e) => e.currentTarget.select()} /></label>}</section>}
     {models.length > 0 && <section className="mw-model-section" aria-labelledby="models-title"><div className="shopping-section-heading"><div><p className="shopping-overline">MODELS · खूबियाँ जानिए</p><MotionHeading as="h2" id="models-title">{onlySaved ? "Shortlist के models" : "देखिए, समझिए, फिर चुनिए।"}</MotionHeading></div><span className="mw-small">{models.length} models</span></div>
-      <div className="mw-model-grid">{models.map((p) => <article className={`mw-model-card${p.imageKind === "creative" ? " mw-model-creative" : ""}`} key={p.id}>
-        <div className="mw-model-media"><button type="button" className="mw-save" onClick={() => toggleSaved(p.id)} aria-label={`${modelDisplayName(p)} ${saved.includes(p.id) ? "shortlist से हटाइए" : "shortlist में रखिए"}`} aria-pressed={saved.includes(p.id)}>{saved.includes(p.id) ? "♥" : "♡"}</button>{productPages[p.id] ? <Link className="mw-image-button" href={productPages[p.id]} onClick={() => trackAction("product", `${p.brand}: ${p.name}`)} aria-label={`${modelDisplayName(p)} की पूरी specifications`}><Image src={p.image} alt={p.imageAlt} width={700} height={520} sizes="(max-width:700px) 90vw, 380px" /></Link> : <button className="mw-image-button" type="button" onClick={() => openModel(p)} aria-label={`${modelDisplayName(p)} की जानकारी`}><Image src={p.image} alt={p.imageAlt} width={700} height={520} sizes="(max-width:700px) 90vw, 380px" /></button>}<span className="mw-brand">{p.brand}</span></div>
-        <div className="mw-model-body">{p.imageCaption && <p className="mw-small">{p.imageCaption}</p>}<h3>{productPages[p.id] ? <Link href={productPages[p.id]} onClick={() => trackAction("product", `${p.brand}: ${p.name}`)}>{p.name}</Link> : <button type="button" onClick={() => openModel(p)}>{p.name}</button>}</h3><p>{p.note}</p><div className="mw-swatches" aria-label="Brand के colour options">{p.colours.map((c) => <span key={c.name} style={{background:c.hex}} title={c.name}><span className="sr">{c.name}</span></span>)}</div><ul className="mw-model-specs"><li>{p.display}</li><li>{p.processor}</li></ul><div className="mw-model-actions">{productPages[p.id] ? <Link className="mw-text-link" href={productPages[p.id]}>Specifications <IconArrow /></Link> : <button className="mw-text-link" type="button" onClick={() => openModel(p)}>पूरी जानकारी <IconArrow /></button>}<label className="mw-compare-check"><input type="checkbox" checked={compare.includes(p.id)} onChange={() => toggleCompare(p.id)} />Compare</label></div></div>
-      </article>)}</div>
+      <div className="mw-model-grid">{models.map(p => {
+        const fullSpecs = productPages[p.id];
+        const href = fullSpecs ?? catalogueGuidePath(p.id);
+        const track = () => trackAction("product", modelDisplayName(p));
+        return <article className={`mw-model-card${p.imageKind === "creative" ? " mw-model-creative" : ""}`} key={p.id}>
+          <div className="mw-model-media">
+            <button type="button" className="mw-save" onClick={() => toggleSaved(p.id)} aria-label={`${modelDisplayName(p)} ${saved.includes(p.id) ? "shortlist से हटाइए" : "shortlist में रखिए"}`} aria-pressed={saved.includes(p.id)}>{saved.includes(p.id) ? "♥" : "♡"}</button>
+            <a className="mw-image-button" href={href} onClick={track} aria-label={modelDisplayName(p) + (fullSpecs ? " की पूरी specifications" : " की guide खोलिए")}>
+              <Image src={p.image} alt={p.imageAlt} width={700} height={520} sizes="(max-width:700px) 90vw, 380px" />
+            </a>
+            <span className="mw-brand">{p.brand}</span>
+          </div>
+          <div className="mw-model-body">
+            {p.imageCaption && <p className="mw-small">{p.imageCaption}</p>}
+            <h3><a href={href} onClick={track}>{p.name}</a></h3>
+            <p>{p.note}</p>
+            {p.colours.length > 0 && <div className="mw-swatches" aria-label="Model के colours">{p.colours.map(c => <span key={c.name} style={{background:c.hex}} title={c.name}><span className="sr">{c.name}</span></span>)}</div>}
+            {fullSpecs && <ul className="mw-model-specs"><li>{p.display}</li><li>{p.processor}</li></ul>}
+            <div className="mw-model-actions">
+              <a className="mw-text-link" href={href} onClick={track}>{fullSpecs ? "Specifications" : "Guide खोलिए"} <IconArrow /></a>
+              <label className="mw-compare-check"><input type="checkbox" checked={compare.includes(p.id)} onChange={() => toggleCompare(p.id)} />Compare</label>
+            </div>
+          </div>
+        </article>;
+      })}</div>
     </section>}
     {generic.length > 0 && <section className="mw-model-section"><div className="shopping-section-heading"><div><p className="shopping-overline">CATEGORIES · अपनी ज़रूरत से</p><MotionHeading as="h2">दुकान में और क्या मिलता है?</MotionHeading></div></div><div className="pgrid">{generic.map((p) => <ProductCard key={p.title} item={p} />)}</div></section>}
     {!models.length && !generic.length && <div className="mw-empty"><MotionHeading as="h2">{onlySaved ? "आपकी shortlist अभी खाली है।" : "यहाँ match नहीं मिला।"}</MotionHeading><p>आपकी ज़रूरत का सामान list में न दिखे तो हमारी team से पूछिए।</p><div className="btns"><button className="btn btn-d" type="button" onClick={() => {setQuery("");setCategory("all");setBrand("all");setOnlySaved(false);}}>सभी products देखिए</button><a className="btn btn-o" target="_blank" rel="noopener noreferrer" href={`${shop.phone.whatsapp}?text=${encodeURIComponent(`नमस्ते Mobile World! मुझे ${query || "एक product"} के बारे में जानकारी चाहिए।`)}`}>WhatsApp पर पूछिए</a></div></div>}
     {compare.length > 0 && <aside className="mw-compare-tray" aria-label="चुने हुए comparison models"><div><b>{compare.length}/3 models चुने हैं</b><span>{comparing.map((p) => p.name).join(" · ")}</span></div><button className="btn btn-d" type="button" disabled={compare.length < 2} onClick={() => setCompareOpen(true)}>Compare कीजिए <IconArrow /></button><button className="mw-tray-clear" type="button" onClick={() => {setCompare([]);setNotice("");}} aria-label="Comparison list खाली कीजिए">×</button></aside>}
-    {model && <Modal title={`${model.name} की जानकारी`} close={() => setModel(undefined)}><ModelDetails key={model.id} detailsHref={productPages[model.id]} model={model} saved={saved.includes(model.id)} save={() => toggleSaved(model.id)} /></Modal>}
     {compareOpen && <Modal title="Models का comparison" close={() => setCompareOpen(false)}><div className="mw-comparison"><p className="shopping-overline">COMPARE · साथ में देखिए</p><MotionHeading as="h2">फ़र्क़ साफ़ दिखे, फ़ैसला आसान हो।</MotionHeading><div className="mw-table-scroll" tabIndex={0} role="region" aria-label="Product comparison table"><table><caption className="sr">चुने हुए phone models की specifications</caption><thead><tr><th scope="col">ख़ूबी</th>{comparing.map((p) => <th key={p.id} scope="col">{modelDisplayName(p)}</th>)}</tr></thead><tbody>{fields.map((f) => <tr key={f.key}><th scope="row">{f.label}</th>{comparing.map((p) => <td key={p.id}>{p[f.key]}</td>)}</tr>)}<tr><th scope="row">दाम / stock</th>{comparing.map((p) => <td key={p.id}>दुकान से confirm कीजिए</td>)}</tr><tr><th scope="row">Specifications का source</th>{comparing.map((p) => <td key={p.id}>{p.source ? <a href={p.source} target="_blank" rel="noopener noreferrer">{p.brand} की जानकारी ↗</a> : "जानकारी दुकान से पूछिए"}</td>)}</tr></tbody></table></div><p className="mw-small">*Brand के test conditions लागू हैं। Battery playback और mAh अलग माप हैं। Software support की शुरुआत और अवधि model की brand policy पर निर्भर है।</p><a className="btn btn-w" href={modelEnquiry(comparing)} target="_blank" rel="noopener noreferrer"><IconWhatsApp /> इन models के बारे में पूछिए</a></div></Modal>}
   </>;
 }

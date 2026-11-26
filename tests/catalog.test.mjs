@@ -163,7 +163,8 @@ test('Samsung India references keep model-specific facts, unknowns and no-write 
     if (code === 'a27') {
       assert.match(draft.values.spec_015, /^IP64/);
       assert.equal(draft.values.spec_022, 'Snapdragon 6 Gen 3');
-      assert.match(draft.values.spec_027, /limited to LPDDR5/);
+      assert.equal(draft.values.spec_027, 'LPDDR5X');
+      assert.match(draft.extraValues.ram_performance, /limited to LPDDR5/);
     }
     if (['a57', 'a37', 'a27'].includes(code)) assert.doesNotMatch(draft.values.spec_056, /first global launch/);
     draft.values.spec_026 = 'Unsaved edit';
@@ -257,7 +258,8 @@ test('India reference keeps unconfirmed fields and colour combinations empty, wi
     core.validatePublication(draft);
     assert.equal(Object.keys(draft.values).length, 86);
     for (const key of ['spec_007', 'spec_024', 'spec_026', 'spec_046', 'spec_056', 'spec_057']) assert.equal(draft.values[key], '');
-    assert.equal(draft.values.spec_083, 'No · compatible power adapter sold separately');
+    assert.equal(draft.values.spec_083, 'No');
+    assert.equal(draft.extraValues.power_adapter_note, 'Sold separately');
     assert.equal(draft.variants.length, 4);
     assert.ok(draft.variants.every(v => v.ram === '' && v.colour === '' && v.image === ''));
     draft.variants[0].storage = 'Unsaved change';
@@ -448,17 +450,18 @@ test('Model colour preferences and official price references never invent sellab
   const { productColours, selectedPreference } = load('lib/catalog/preferences');
   const guides = load('lib/catalog/guides').publicPhoneGuides();
   const prices = load('data/phone-reference-prices.json');
-  assert.equal(Object.keys(prices).length, 8);
+  assert.ok(Object.keys(prices).length >= 13);
   for (const [slug, references] of Object.entries(prices)) {
     const guide = guides.find(p => p.slug === slug);
     const before = JSON.stringify(guide.variants);
     for (const price of references) {
       assert.ok(price.amount > 0 && Number.isInteger(price.amount));
-      assert.equal(new URL(price.source).hostname.endsWith('mi.com'), true);
+      const brandDomains = { Apple: ['www.apple.com'], Google: ['store.google.com'], vivo: ['shop.vivo.com'], OPPO: ['www.oppo.com'], Samsung: ['www.samsung.com'] };
+      assert.ok((brandDomains[guide.brand] ?? ['www.mi.com', 'store.mi.com']).includes(new URL(price.source).hostname));
       assert.ok(guide.variants.some(v => v.ram === price.ram && v.storage === price.storage));
-      assert.ok(productColours(guide).includes(price.colour));
+      if (price.colour) assert.ok(productColours(guide).includes(price.colour));
       assert.equal(guide.values.spec_007, undefined);
-      assert.match(selectedPreference(guide.variants[0], price.colour), /Colour preference:/);
+      if (price.colour) assert.match(selectedPreference(guide.variants[0], price.colour), /Colour preference:/);
     }
     assert.equal(JSON.stringify(guide.variants), before);
     assert.ok(guide.variants.every(v => v.colour === ''), 'preferences do not fabricate confirmed colour SKUs');
@@ -475,4 +478,55 @@ test('OPPO Reno group resolves to exact India models and F35 retains the Home mo
   assert.equal(phoneModels.filter(model => model.id === 'oppo-f35-pro-5g').length, 1);
   assert.equal(phoneGuideLinks()['oppo-f35-pro-5g'], '/phones/oppo-f35-pro-5g');
   assert.equal(phoneModels.some(model => model.id === 'oppo-oppo-f35-pro-5g'), false);
+});
+
+test('Every selectable catalogue entry has a full-page destination, with distinct series and verified model routes', () => {
+  const { phoneModels, catalogueGuidePath, catalogueGuideReference } = load('data/catalog');
+  const links = load('lib/catalog/guides').phoneGuideLinks();
+  const destinations = phoneModels.map(model => links[model.id] ?? catalogueGuidePath(model.id));
+  assert.equal(new Set(destinations).size, phoneModels.length);
+  assert.ok(destinations.every(href => /^\/(phones|products\/guide)\/[a-z0-9-]+$/.test(href)));
+  const series = phoneModels.find(p => p.id === 'vivo-vivo-v-series-2026');
+  assert.equal(catalogueGuideReference(series).isSeries, true);
+  assert.equal(links[series.id], undefined);
+  assert.equal(links['vivo-vivo-v80-5g'], '/phones/vivo-v80-5g');
+});
+
+test('vivo V80 keeps rated capacity, input power, camera details and the dated India price independent', () => {
+  const guide = load('lib/catalog/guides').publicPhoneGuides().find(p => p.slug === 'vivo-v80-5g');
+  const rows = new Map(core.visibleSections(guide, guide.variants[0]).flatMap(s => s.fields).map(f => [f.key, f.value]));
+  for (const [key, value] of Object.entries({ spec_046: '7200 mAh typical', battery_rated: '7015 mAh', spec_049: 'Up to 90 W', spec_083: 'Yes', spec_034: '50 MP', telephoto_sensor: 'Sony IMX882', telephoto_aperture: 'f/2.65', spec_035: '50 MP', front_autofocus: 'Yes' })) {
+    assert.equal(rows.get(key), value);
+  }
+  assert.equal(rows.has('box_charger_power'), false);
+  assert.equal(rows.has('spec_062'), false);
+  assert.equal(rows.has('spec_007'), false);
+  const [price] = load('data/phone-reference-prices.json')[guide.slug];
+  assert.deepEqual([price.amount, price.ram, price.storage, price.colour, price.checkedAt], [62999, '8 GB', '128 GB', 'Sunrise Anthem', '2026-11-25']);
+});
+
+test('Published Apple, Pixel, OPPO, Samsung and Nothing guides show independent rows without assuming charging input or accessory ratings', () => {
+  const guides = load('lib/catalog/guides').publicPhoneGuides();
+  function rows(slug) {
+    const guide = guides.find(p => p.slug === slug);
+    return Object.fromEntries(core.visibleSections(guide, guide.variants[0]).flatMap(s => s.fields).map(f => [f.key, f.value]));
+  }
+  const p = rows('pixel-10-pro');
+  assert.equal(p.spec_046, '4870 mAh (typical)');
+  assert.equal(p.battery_minimum, '4707 mAh');
+  assert.equal(p.spec_049, 'Supported');
+  assert.equal(p.adapter_recommendation, '30 W or higher');
+  assert.equal(p.spec_083, 'No');
+  const o = rows('oppo-reno16-5g');
+  assert.equal(o.spec_034, '50 MP');
+  assert.equal(o.telephoto_aperture, 'f/2.8');
+  assert.equal(o.spec_040, 'Up to 3.5×');
+  assert.equal(o.spec_049, 'Up to 80 W');
+  assert.equal(o.charging_pps, '55 W');
+  const apple = rows('iphone-18-pro');
+  assert.equal(apple.spec_032, '48 MP');
+  assert.equal(apple.rear_4k_main_fps, '100 / 120 fps');
+  assert.equal(apple.spec_046, undefined);
+  assert.equal(rows('samsung-galaxy-a27-5g').spec_027, 'LPDDR5X');
+  assert.equal(rows('nothing-phone-3a').spec_083, undefined);
 });

@@ -10,6 +10,7 @@ import { ProductExplorer } from "@/components/ProductExplorer";
 import { IconArrow } from "@/components/Icons";
 import { publicProducts } from '@/lib/catalog/sanity';
 import { phoneGuideLinks } from '@/lib/catalog/guides';
+import { catalogueGuidePath, phoneModels } from '@/data/catalog';
 import '../product-detail.css';
 
 export const dynamic = 'force-dynamic';
@@ -24,7 +25,10 @@ export default async function Products({ searchParams }: { searchParams: Promise
   const published = await publicProducts();
   const productPages = { ...phoneGuideLinks(), ...Object.fromEntries(published.map(product => [product.id, '/catalog/' + product.slug])) };
   const { model } = await searchParams;
-  if (typeof model === 'string' && productPages[model]) redirect(productPages[model]);
+  if (typeof model === 'string') {
+    if (Object.hasOwn(productPages, model)) redirect(productPages[model]);
+    if (phoneModels.some(phone => phone.id === model)) redirect(catalogueGuidePath(model));
+  }
   return <div className="wrap mw-catalog">
     <header className="mw-page-heading"><p className="shopping-overline">MOBILE WORLD · आपकी पसंद का सामान</p><MotionHeading as="h1">आपकी ज़रूरत।<br /><span>आपकी अगली पसंद।</span></MotionHeading><p>Models को समझिए, compare कीजिए और पसंद की list बनाइए। दाम और उपलब्धता के लिए सीधे दुकान से बात कीजिए।</p><Link className="mw-text-link" href="/#phone-finder">चुनने में मदद चाहिए? Phone Finder खोलिए <IconArrow /></Link></header>
     <section className="mw-section" aria-label="Category guides"><MotionHeading as="h2">खरीदारी से पहले category समझिए।</MotionHeading><div className="mw-service-grid">{Object.entries(categoryGuides).map(([slug, guide]) => <Link className="mw-service-card" href={`/products/${slug}`} key={slug}><h3>{guide.heading}</h3><p>{guide.description}</p><b>Category guide खोलिए →</b></Link>)}</div></section>

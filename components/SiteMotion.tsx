@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 
-const cards = '.mw-model-card,.mw-featured,.pc,.shopping-category,.mw-brand-logo,.mw-service-card,.mw-guide,.post,.festival-card,.mw-latest-link,.mw-related a,.mw-about-timeline li';
+const cards = '.offer-card,.mw-model-card,.mw-featured,.pc,.shopping-category,.mw-brand-logo,.mw-service-card,.mw-guide,.post,.festival-card,.mw-latest-link,.mw-related a,.mw-about-timeline li';
 const headings = 'h1,h2,h3';
 const images = 'img';
 const content = 'p,.shopping-overline,.campaign-eyebrow,.mp-spec-section dl>div,.mp-prices dl>div,details,.btns,.campaign-actions,.campaign-social-links>a,.mw-footer-top>div';
@@ -63,6 +63,7 @@ export function SiteMotion() {
 
     const observer = typeof IntersectionObserver === 'undefined' ? null : new IntersectionObserver((entries) => {
       let stagger = 0;
+      const target = document.querySelector(':target');
       for (const entry of entries) {
         const element = entry.target;
         if (!entry.isIntersecting || element.closest(exclude)) continue;
@@ -72,7 +73,6 @@ export function SiteMotion() {
         seen.current.add(element);
         if (!enabled || entry.boundingClientRect.bottom < 0 || element.contains(document.activeElement)) continue;
         // Hash navigation must reveal its destination immediately, without delaying reading.
-        const target = document.querySelector(':target');
         if (target && (target.contains(element) || element.contains(target))) continue;
         if (element.matches(headings)) {
           const glyphs = element.querySelectorAll<HTMLElement>('.mw-motion-glyph');

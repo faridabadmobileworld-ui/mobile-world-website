@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-20T00:00:00+05:30",
+  "updatedAt": "2026-11-25T00:00:00+05:30",
   "modelIds": [
     "xiaomi-xiaomi-17t",
     "xiaomi-xiaomi-17-17t",
@@ -23,6 +23,7 @@
     "samsung-galaxy-a07-5g",
     "oppo-f35-pro-5g",
     "oppo-reno16-5g",
-    "oppo-reno16c-5g"
+    "oppo-reno16c-5g",
+    "vivo-vivo-v80-5g"
   ]
 }
