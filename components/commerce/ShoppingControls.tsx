@@ -1,8 +1,7 @@
 'use client';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { addLine, type Choice } from '@/lib/commerce/core';
+import { addLine, directCheckoutHref, type Choice } from '@/lib/commerce/core';
 import { trackAction } from '../WebsiteAnalytics';
 import { browserStorageAvailable, toggleFavourite, updateBasket, useBasket } from './basket';
 import { ShopIcon } from './ShopIcon';
@@ -29,24 +28,22 @@ export function FavouriteButton({ productId, name }: { productId: string; name: 
   }
   return <><button type="button" className="ec-heart" aria-label={name + (selected ? ' को Favourites से हटाइए' : ' को Favourites में रखिए')} aria-pressed={selected} onClick={toggle}><ShopIcon name="heart" /><span>{selected ? 'पसंद में है' : 'Favourite'}</span></button>{notice && <small role="status">{notice}</small>}</>;
 }
-export function AddSelection({ choice, name, category = false }: { choice: Choice; name: string; category?: boolean }) {
-  const router = useRouter();
+export function AddSelection({ choice, name, category = false, quick = false }: { choice: Choice; name: string; category?: boolean; quick?: boolean }) {
   const [notice, setNotice] = useState('');
   const [added, setAdded] = useState(false);
   const [busy, setBusy] = useState(false);
-  async function add(checkout: boolean) {
+  async function add() {
     setBusy(true);
     try {
       await updateBasket(s => addLine(s, 'cart', { ...choice, quantity: 1 }));
       setAdded(true);
       setNotice(browserStorageAvailable() ? 'Cart में जोड़ दिया गया।' : 'Cart खुले browser session में है।');
-      if (checkout) router.push('/checkout');
     } catch (e) { setNotice(e instanceof Error ? e.message : 'Cart फिर खोलिए।'); }
     finally { setBusy(false); }
   }
   return <div className={'ec-purchase' + (category ? ' ec-compact' : '')}><div className="ec-controls">
-    <button type="button" className="ec-button" disabled={busy} onClick={() => add(false)} aria-label={name + ' को Cart में जोड़िए'}><ShopIcon name="bag" />{category ? 'पसंद Cart में रखें' : 'Cart में जोड़िए'}</button>
-    {!category && <button type="button" className="ec-button ec-secondary" disabled={busy} onClick={() => add(true)}>अभी Checkout करें <ShopIcon name="arrow" /></button>}
-    <FavouriteButton productId={choice.productId} name={name} /></div>
+    <button type="button" className="ec-button" disabled={busy} onClick={add} aria-label={name + ' को Cart में जोड़िए'}><ShopIcon name="bag" />{category ? 'पसंद Cart में रखें' : 'Cart में जोड़िए'}</button>
+    {!category && !quick && <Link className="ec-button ec-secondary" href={directCheckoutHref(choice)} prefetch={false}>अभी Checkout करें <ShopIcon name="arrow" /></Link>}
+    {!quick && <FavouriteButton productId={choice.productId} name={name} />}</div>
     <span className="ec-feedback" role="status">{notice} {added && <Link href="/cart">Cart देखिए →</Link>}</span></div>;
 }

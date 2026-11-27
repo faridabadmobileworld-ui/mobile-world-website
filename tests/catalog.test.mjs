@@ -579,6 +579,40 @@ test('Guest basket migrates shortlist and keeps distinct variants, quantities an
   assert.deepEqual(c.basketFrom('["legacy"]'),c.emptyBasket());
 });
 
+test('Cart selection survives reload, preserves unselected quantities and restores saved lines', () => {
+  const c = load('lib/commerce/core');
+  const blue = { productId:'mi-model', variant:'12-256', colour:'Blue', quantity:2 };
+  const white = { ...blue, colour:'White', quantity:3 };
+  const old = c.basketFrom(JSON.stringify({ cart:[blue,white] }));
+  assert.deepEqual(c.selectedLines(old), [blue,white]);
+  const partial = c.selectCartLines(old,false,white);
+  assert.deepEqual(c.selectedLines(c.basketFrom(JSON.stringify(partial))), [blue]);
+  assert.deepEqual(c.selectedLines(c.selectCartLines(partial,false)), []);
+  assert.deepEqual(c.selectedLines(c.selectCartLines(partial,true)), [blue,white]);
+  const receipt = { id:'MW-202611-AAAAAAAAAAAAAAAA',token:'a'.repeat(64) };
+  const checkedOut = c.finishRequest(partial,c.selectedLines(partial),receipt);
+  assert.deepEqual(checkedOut.cart,[white]);
+  assert.deepEqual(c.selectedLines(checkedOut),[]);
+  const saved = c.moveLine(checkedOut,'cart',white);
+  assert.deepEqual(saved.excluded,[]);
+  assert.deepEqual(c.selectedLines(c.moveLine(saved,'saved',white)),[white]);
+  assert.deepEqual(c.finishRequest(partial,[],receipt).cart,old.cart);
+  assert.deepEqual(c.basketFrom(JSON.stringify({cart:[blue],excluded:['stale']})).excluded,[]);
+});
+
+test('Direct checkout resolves one public variant independently of a browser cart', async () => {
+  const c = load('lib/commerce/core');
+  const catalogue = await load('lib/commerce/catalogue').shoppingCatalogue();
+  const model = catalogue.find(item => item.id === 'xiaomi-xiaomi-17t');
+  const line = { productId:model.id, variant:model.variants[0].key, colour:'Violet', quantity:1 };
+  const params = Object.fromEntries(new URL(c.directCheckoutHref(line),'https://example.test').searchParams);
+  assert.deepEqual(c.checkoutItem(params,catalogue),line);
+  assert.equal(c.checkoutItem({},catalogue),null);
+  for (const bad of [{...params,colour:'invented'}, {...params,variant:'unknown'}, {...params,item:['one','two']}, {item:catalogue.find(i => i.kind === 'guide').id}]) {
+    assert.equal(c.checkoutItem(bad,catalogue),'invalid');
+  }
+});
+
 test('Order retries, owner quotes, customer consent and fulfilment operate on private real selections', async () => {
   const { randomUUID }=await import('node:crypto');
   const c=load('lib/commerce/core'), o=load('lib/commerce/orders');

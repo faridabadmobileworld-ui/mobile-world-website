@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
-import { changeQuantity, choiceText, exactPrice, lineKey, maxUnits, moveLine, rupees, validChoice, type Basket, type Line, type List, type Listing } from '@/lib/commerce/core';
+import { changeQuantity, choiceText, exactPrice, lineKey, maxUnits, moveLine, rupees, selectCartLines, selectedLines, validChoice, type Basket, type Line, type List, type Listing } from '@/lib/commerce/core';
 import { updateBasket, useBasket } from './basket';
 import { AddSelection, FavouriteButton, ShopTabs } from './ShoppingControls';
 import { ShopIcon, type IconName } from './ShopIcon';
@@ -23,12 +23,12 @@ export function OrderSummary({ lines, catalogue, children }: { lines: Line[]; ca
   const byId = new Map(catalogue.map(item => [item.id, item]));
   const values = lines.map(line => { const item = byId.get(line.productId); return item && validChoice(item,line) ? exactPrice(item,line)?.amount : undefined; });
   const units = lines.reduce((sum, line) => sum + line.quantity, 0);
-  return <aside className="ec-summary"><div className="ec-summary-head"><ShopIcon name="bag" /><h2>Shopping summary</h2></div><dl><div><dt>कुल quantity</dt><dd>{units}</dd></div>
+  return <aside className="ec-summary"><div className="ec-summary-head"><ShopIcon name="bag" /><h2>Shopping summary</h2></div><dl><div><dt>चुने हुए items की quantity</dt><dd>{units}</dd></div>
     {lines.length > 0 && values.every((v): v is number => v !== undefined) && <div><dt>Official India references का जोड़</dt><dd>{rupees(values.reduce((sum,v,i) => sum + v * lines[i].quantity,0))}</dd></div>}
     <div className="ec-total"><dt>दुकान का कुल दाम</dt><dd>पुष्टि के बाद</dd></div></dl>
     <p>Mobile World आपकी पसंद का stock, दुकान का दाम और लागू delivery charge भेजेगा। आप पूरा दाम देखकर मंज़ूर कर सकेंगे।</p>{children}</aside>;
 }
-function BasketRow({ item, line, list, onNotice }: { item?: Listing; line: Line; list: List; onNotice: (s:string) => void }) {
+function BasketRow({ item, line, list, selected, onNotice }: { item?: Listing; line: Line; list: List; selected: boolean; onNotice: (s:string) => void }) {
   const [busy, setBusy] = useState(false);
   const available = item && item.kind !== 'guide' && validChoice(item, line);
   async function change(fn: (s: Basket) => Basket, message: string) {
@@ -41,7 +41,11 @@ function BasketRow({ item, line, list, onNotice }: { item?: Listing; line: Line;
       return current ? changeQuantity(s, list, current, Math.max(1,current.quantity + delta)) : s;
     }, 'Quantity बदल गई है।');
   }
-  return <article className="ec-line"><ProductPicture item={item} /><div className="ec-line-content">
+  const choiceName = item ? [item.name, choiceText(item,line)].filter(Boolean).join(' · ') : 'पुराना selection';
+  return <article className="ec-line">
+    {list === 'cart' && <label className="ec-line-select"><input type="checkbox" aria-label={choiceName + ' Checkout के लिए चुनिए'} checked={selected} disabled={busy}
+      onChange={event => { const checked = event.target.checked; void change(s => selectCartLines(s,checked,line), checked ? 'Item चुना गया।' : 'Item Cart में रखा है।'); }}/></label>}
+    <ProductPicture item={item} /><div className="ec-line-content">
     <small>{item?.kind === 'category' ? 'Category की ज़रूरत' : item?.group}</small>
     <h3>{item ? <Link href={item.href}>{item.name}</Link> : 'पुराना selection'}</h3>
     {item && <p>{choiceText(item,line)}</p>}{item && available && <Reference item={item} line={line}/>}
@@ -52,15 +56,20 @@ function BasketRow({ item, line, list, onNotice }: { item?: Listing; line: Line;
     </div></div></article>;
 }
 export function ShoppingLists({ catalogue, page }: { catalogue: Listing[]; page: 'cart' | 'favourites' }) {
-  const { cart, saved, favourites } = useBasket();
+  const basket = useBasket();
+  const { cart, saved, favourites } = basket;
+  const selected = selectedLines(basket);
   const [notice, setNotice] = useState('');
   const map = new Map(catalogue.map(item => [item.id, item]));
-  const valid = cart.every(l => { const i = map.get(l.productId); return i && i.kind !== 'guide' && validChoice(i,l); });
-  const rows = (list: List, lines: Line[]) => lines.map(l => <BasketRow key={lineKey(l)} list={list} item={map.get(l.productId)} line={l} onNotice={setNotice}/>);
+  const valid = selected.every(l => { const i = map.get(l.productId); return i && i.kind !== 'guide' && validChoice(i,l); });
+  const rows = (list: List, lines: Line[]) => lines.map(l => <BasketRow key={lineKey(l)} list={list} item={map.get(l.productId)} line={l} selected={!basket.excluded.includes(lineKey(l))} onNotice={setNotice}/>);
   return <div className="wrap ec-page"><div className="ec-crumb"><Link href="/">Home</Link> / आपकी shopping</div><MotionHeading as="h1">{page === 'cart' ? 'आपका Cart' : 'आपकी Favourites'}</MotionHeading><ShopTabs active={page}/><p className="ec-status" role="status">{notice}</p>
-    {page === 'cart' ? <div className="ec-grid"><div><section className="ec-panel" aria-label="Cart में सामान">{cart.length ? rows('cart',cart) : <EmptySelection icon="bag" text="आपका Cart अभी खाली है" hint="अपना model खोलिए और अपनी पसंद का variant जोड़िए।"/>}</section>
+    {page === 'cart' ? <div className="ec-grid"><div><section className="ec-panel" aria-label="Cart में सामान">{cart.length ? <>
+      <header className="ec-select-head"><p aria-live="polite">{cart.length} में से <strong>{selected.length} selections</strong> चुने हैं</p>
+        <button type="button" className="ec-text" onClick={() => updateBasket(s => selectCartLines(s, selectedLines(s).length !== s.cart.length))}>{selected.length === cart.length ? 'सभी का चुनाव हटाएँ' : 'सभी चुनें'}</button></header>
+      {rows('cart',cart)}</> : <EmptySelection icon="bag" text="आपका Cart अभी खाली है" hint="अपना model खोलिए और अपनी पसंद का variant जोड़िए।"/>}</section>
       <section id="saved" className="ec-panel ec-saved"><h2><ShopIcon name="clock"/> Save for later <small>{saved.length}</small></h2>{saved.length ? rows('saved',saved) : <p>Cart में किसी item पर “Save for later” चुनेंगे तो वह यहाँ मिलेगा।</p>}</section></div>
-      <OrderSummary lines={cart} catalogue={catalogue}>{cart.length > 0 && valid ? <Link className="ec-button" href="/checkout">Checkout पर जाएँ <ShopIcon name="arrow"/></Link> : <Link className="ec-button ec-secondary" href="/products">Shopping जारी रखें</Link>}</OrderSummary></div> :
+      <OrderSummary lines={selected} catalogue={catalogue}>{cart.length > 0 ? selected.length > 0 && valid ? <Link className="ec-button" href="/checkout">चुने हुए items का Checkout <ShopIcon name="arrow"/></Link> : <p className="ec-hint">{selected.length ? 'बदले हुए option को हटाएँ या उसका चुनाव हटाकर आगे बढ़ें।' : 'Checkout के लिए ऊपर कोई item चुनिए।'}</p> : <Link className="ec-button ec-secondary" href="/products">Shopping जारी रखें</Link>}</OrderSummary></div> :
       <section className="ec-panel ec-favourites">{favourites.length ? favourites.map(id => {
         const item = map.get(id);
         return <article key={id} className="ec-line"><ProductPicture item={item}/><div className="ec-line-content"><small>{item?.group}</small><h3>{item ? <Link href={item.href}>{item.name}</Link> : 'पुरानी पसंद'}</h3>

@@ -4,13 +4,13 @@ export type Choice = { productId: string; variant: string; colour: string };
 export type Line = Choice & { quantity: number };
 export type List = 'cart' | 'saved';
 export type Receipt = { id: string; token: string };
-export type Basket = { version: 1; cart: Line[]; saved: Line[]; favourites: string[]; receipts: Receipt[] };
+export type Basket = { version: 1; cart: Line[]; excluded: string[]; saved: Line[]; favourites: string[]; receipts: Receipt[] };
 export type Listing = {
   id: string; name: string; group: string; kind: 'model' | 'guide' | 'category'; href: string;
   image: string; imageAlt: string; colours: string[];
   variants: { key: string; ram: string; storage: string; colour: string }[]; prices: ReferencePrice[];
 };
-export const emptyBasket = (): Basket => ({ version: 1, cart: [], saved: [], favourites: [], receipts: [] });
+export const emptyBasket = (): Basket => ({ version: 1, cart: [], excluded: [], saved: [], favourites: [], receipts: [] });
 export const maxUnits = 99;
 export const maxLines = 50;
 export const lineKey = (line: Choice) => JSON.stringify([line.productId, line.variant, line.colour]);
@@ -42,9 +42,24 @@ export function basketFrom(raw: string | null, oldFavourites: string | null = nu
     return [...byKey.values()];
   }
   state.cart = lines(data.cart); state.saved = lines(data.saved);
+  const excluded = new Set(Array.isArray(data.excluded) ? data.excluded : []);
+  state.excluded = state.cart.map(lineKey).filter(key => excluded.has(key));
   state.favourites = [...new Set((Array.isArray(data.favourites) ? data.favourites : (oldFavourites ?? '').split(',')).filter(validId))];
   state.receipts = Array.isArray(data.receipts) ? data.receipts.filter(isReceipt).slice(0, 40) : [];
   return state;
+}
+
+export function selectedLines(state: Basket): Line[] {
+  const excluded = new Set(state.excluded);
+  return state.cart.filter(line => !excluded.has(lineKey(line)));
+}
+export function selectCartLines(state: Basket, selected: boolean, choice?: Choice): Basket {
+  if (!choice) return { ...state, excluded: selected ? [] : state.cart.map(lineKey) };
+  const key = lineKey(choice);
+  if (!state.cart.some(line => lineKey(line) === key)) return state;
+  const excluded = new Set(state.excluded);
+  if (selected) excluded.delete(key); else excluded.add(key);
+  return { ...state, excluded: [...excluded] };
 }
 
 export function addLine(state: Basket, list: List, line: Line): Basket {
@@ -53,12 +68,15 @@ export function addLine(state: Basket, list: List, line: Line): Basket {
   const previous = state[list].find(l => lineKey(l) === key);
   if (!previous && state[list].length >= maxLines) throw Error('एक list में अधिकतम 50 अलग selections रख सकते हैं।');
   if (previous && previous.quantity + line.quantity > maxUnits) throw Error('एक selection की अधिकतम quantity 99 है।');
-  return { ...state, [list]: previous ? state[list].map(l => lineKey(l) === key ? { ...l, quantity: l.quantity + line.quantity } : l) : [...state[list], { ...line }] };
+  const lines = previous ? state[list].map(l => lineKey(l) === key ? { ...l, quantity: l.quantity + line.quantity } : l) : [...state[list], { ...line }];
+  return { ...state, [list]: lines, excluded: list === 'cart' ? state.excluded.filter(id => id !== key) : state.excluded };
 }
 export function changeQuantity(state: Basket, list: List, choice: Choice, quantity: number): Basket {
   if (!Number.isSafeInteger(quantity) || quantity < 0 || quantity > maxUnits) throw Error('Quantity 1 से 99 के बीच रखिए।');
   const key = lineKey(choice);
-  return { ...state, [list]: state[list].flatMap(l => lineKey(l) !== key ? [l] : quantity ? [{ ...l, quantity }] : []) };
+  const lines = state[list].flatMap(l => lineKey(l) !== key ? [l] : quantity ? [{ ...l, quantity }] : []);
+  const excluded = list === 'cart' && quantity === 0 ? state.excluded.filter(id => id !== key) : state.excluded;
+  return { ...state, [list]: lines, excluded };
 }
 export function moveLine(state: Basket, from: List, choice: Choice): Basket {
   const line = state[from].find(l => lineKey(l) === lineKey(choice));
@@ -68,10 +86,24 @@ export function moveLine(state: Basket, from: List, choice: Choice): Basket {
 export function finishRequest(state: Basket, submitted: Line[], receipt: Receipt): Basket {
   if (state.receipts.some(r => r.id === receipt.id)) return state;
   const amounts = new Map(submitted.map(l => [lineKey(l), l.quantity]));
-  return { ...state, receipts: [receipt, ...state.receipts].slice(0, 40), cart: state.cart.flatMap(l => {
+  const cart = state.cart.flatMap(l => {
     const quantity = l.quantity - (amounts.get(lineKey(l)) ?? 0);
     return quantity > 0 ? [{ ...l, quantity }] : [];
-  }) };
+  });
+  const keys = new Set(cart.map(lineKey));
+  return { ...state, receipts: [receipt, ...state.receipts].slice(0, 40), cart, excluded: state.excluded.filter(key => keys.has(key)) };
+}
+export function directCheckoutHref(choice: Choice) {
+  return '/checkout?' + new URLSearchParams({ item: choice.productId, variant: choice.variant, colour: choice.colour });
+}
+type CheckoutParams = Record<string, string | string[] | undefined>;
+export function checkoutItem(params: CheckoutParams, catalogue: Listing[]): Line | 'invalid' | null {
+  if (params.item === undefined) return null;
+  const { item: productId, variant = '', colour = '' } = params;
+  if (typeof productId !== 'string' || typeof variant !== 'string' || typeof colour !== 'string') return 'invalid';
+  const item = catalogue.find(item => item.id === productId);
+  const line = { productId, variant, colour, quantity: 1 };
+  return item?.kind === 'model' && validLine(line) && validChoice(item, line) ? line : 'invalid';
 }
 export function validChoice(item: Listing, choice: Choice) {
   if (choice.productId !== item.id) return false;

@@ -3,9 +3,9 @@ import Link from 'next/link';
 import { useRef, useState, type FormEvent } from 'react';
 import { shop } from '@/data/shop';
 import { sendOrder } from '@/app/checkout/actions';
-import { choiceText, cleanContact, finishRequest, lineKey, validChoice, type Contact, type Line, type Listing, type Receipt } from '@/lib/commerce/core';
+import { choiceText, cleanContact, finishRequest, lineKey, selectedLines, validChoice, type Contact, type Line, type Listing, type Receipt } from '@/lib/commerce/core';
 import { updateBasket, useBasket } from './basket';
-import { EmptySelection, OrderSummary, ProductPicture } from './ShoppingLists';
+import { OrderSummary, ProductPicture } from './ShoppingLists';
 import { ShopTabs } from './ShoppingControls';
 import { ShopIcon } from './ShopIcon';
 import { MotionHeading } from '../MotionHeading';
@@ -23,8 +23,10 @@ async function identify(contact: Contact, cart: Line[], previous: Attempt | null
   try { sessionStorage.setItem(pendingKey,JSON.stringify(fresh)); } catch { /* The request can still be retried in memory. */ }
   return fresh;
 }
-export function Checkout({ catalogue }: { catalogue: Listing[] }) {
-  const { cart } = useBasket();
+export function Checkout({ catalogue, direct }: { catalogue: Listing[]; direct: Line | 'invalid' | null }) {
+  const basket = useBasket();
+  const directLine = direct && direct !== 'invalid' ? direct : null;
+  const cart = directLine ? [directLine] : direct === null ? selectedLines(basket) : [];
   const [fulfilment,setFulfilment] = useState<Contact['fulfilment']>('pickup');
   const [busy,setBusy] = useState(false);
   const [error,setError] = useState('');
@@ -46,7 +48,7 @@ export function Checkout({ catalogue }: { catalogue: Listing[] }) {
       const response = await sendOrder(attempt.current.nonce,submitted,contact);
       if (!response.ok) { setError(response.message); return; }
       const confirmed = response.value.receipt;
-      await updateBasket(s => finishRequest(s,submitted,confirmed));
+      await updateBasket(s => finishRequest(s,direct === null ? submitted : [],confirmed));
       setReceipt(confirmed);
       try { sessionStorage.removeItem(pendingKey); } catch { /* Receipt remains in the basket. */ }
       window.scrollTo({ top:0, behavior:'instant' });
@@ -55,9 +57,10 @@ export function Checkout({ catalogue }: { catalogue: Listing[] }) {
   }
   return <div className="wrap ec-page"><div className="ec-crumb"><Link href="/cart">Cart</Link> / Checkout</div><MotionHeading as="h1">{receipt ? 'आपकी request पहुँच गई' : 'Checkout'}</MotionHeading><ShopTabs active="checkout"/>
   {receipt ? <section className="ec-panel ec-receipt" role="status"><span className="ec-empty-icon"><ShopIcon name="check"/></span><h2>Mobile World को आपकी पसंद मिल गई है।</h2><p>आपका request number <strong>{receipt.id}</strong></p><p>दुकान stock और दाम जाँचकर इसी request में quote देगी। इस browser में “मेरे orders” खोलकर उसे देखिए।</p><Link className="ec-button" href="/orders">मेरे orders देखिए <ShopIcon name="arrow"/></Link></section> :
-  !cart.length ? <section className="ec-panel"><EmptySelection icon="bag" text="पहले अपना सामान चुनिए" hint="Cart में रखे हुए items यहाँ review कर सकेंगे।"/></section> :
+  !cart.length ? <section className="ec-panel ec-empty"><h2>{direct === 'invalid' ? 'यह variant उपलब्ध विकल्पों में नहीं मिला' : 'Checkout के लिए अपना सामान चुनिए'}</h2>
+    <Link className="ec-button" href={direct === 'invalid' ? '/products' : '/cart'}>{direct === 'invalid' ? 'मौजूदा models देखिए' : 'अपने Cart में चुनिए'} <ShopIcon name="arrow"/></Link></section> :
   <div className="ec-grid"><form className="ec-form" onSubmit={submit}><fieldset disabled={busy}><legend className="sr">Checkout details</legend>
-    <section className="ec-panel ec-section"><h2>आपका सामान</h2>{cart.map(line => { const item=map.get(line.productId); return <div className="ec-review" key={lineKey(line)}><ProductPicture item={item}/><div><strong>{item?.name ?? 'पुराना selection'}</strong><p>{item ? choiceText(item,line) : ''}</p><small>{item?.kind === 'category' ? 'Category request · ' : ''}Quantity {line.quantity}</small></div></div>; })}<Link className="ec-text" href="/cart">Cart में बदलाव करें</Link></section>
+    <section className="ec-panel ec-section"><h2>आपका सामान</h2>{cart.map(line => { const item=map.get(line.productId); return <div className="ec-review" key={lineKey(line)}><ProductPicture item={item}/><div><strong>{item?.name ?? 'पुराना selection'}</strong><p>{item ? choiceText(item,line) : ''}</p><small>{item?.kind === 'category' ? 'Category request · ' : ''}Quantity {line.quantity}</small></div></div>; })}<Link className="ec-text" href={directLine ? map.get(directLine.productId)?.href ?? '/products' : '/cart'}>{directLine ? 'Model के विकल्प देखिए' : 'Cart में बदलाव करें'}</Link></section>
     <section className="ec-panel ec-section"><h2>सामान कैसे लेना चाहेंगे?</h2><div className="ec-methods">
       <label><input type="radio" name="method" value="pickup" checked={fulfilment === 'pickup'} onChange={() => setFulfilment('pickup')}/><ShopIcon name="store"/><span><b>दुकान से pickup</b><small>{shop.address.road}, {shop.address.locality}</small></span></label>
       <label><input type="radio" name="method" value="delivery" checked={fulfilment === 'delivery'} onChange={() => setFulfilment('delivery')}/><ShopIcon name="truck"/><span><b>Delivery की request</b><small>आपके PIN code पर सुविधा और charge दुकान बताएगी।</small></span></label>
