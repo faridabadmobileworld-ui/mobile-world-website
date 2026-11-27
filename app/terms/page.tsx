@@ -18,7 +18,7 @@ export const metadata: Metadata = withSocialMetadata({
 });
 
 const toc: TocItem[] = [
-  { id: "website", label: "Website सिर्फ़ जानकारी के लिए है" },
+  { id: "website", label: "Website पर shopping" },
   { id: "spin-wheel-terms", label: "Diwali Spin Wheel के नियम" },
   { id: "price", label: "दाम, offer और stock" },
   { id: "bill", label: "पक्का bill और genuine सामान" },
@@ -57,20 +57,13 @@ export default function Terms() {
 
       <section className="sec">
         <div className="prose">
-          <MotionHeading as="h2" id="website">1. Website सिर्फ़ जानकारी के लिए है</MotionHeading>
+          <MotionHeading as="h2" id="website">1. Website पर shopping</MotionHeading>
           <ul>
             <li>
-              यह website ({shop.siteUrl.replace("https://", "")}) products की जानकारी,
-              customer services और free Diwali Spin Wheel के लिए है।
+              Cart में model, variant और quantity चुनिए। Favourites और Save for later आपकी पसंद इसी browser में रखते हैं।
             </li>
-            <li>
-              यहाँ <strong>कोई online ख़रीद-बिक्री या payment gateway नहीं है</strong>।
-              न कोई cart, न कोई checkout।
-            </li>
-            <li>
-              हर पूछताछ, stock check और ख़रीदारी सीधे {shop.address.road} वाली दुकान
-              के counter पर, या हमारे WhatsApp / Call ({shop.phone.display}) पर होती है।
-            </li>
+            <li>Checkout से दुकान को order request मिलती है। दुकान stock, exact item, पूरा दाम और लागू delivery charge जाँचकर quote देगी। “मेरे orders” में उसे देखकर मंज़ूर कर सकते हैं।</li>
+            <li>Pickup और delivery की उपलब्धता दुकान से confirm होगी। Website इस समय online payment नहीं लेती। सहायता के लिए दुकान पर {shop.phone.display} पर संपर्क कीजिए।</li>
           </ul>
 
           <span id="tech-challenge-terms" />

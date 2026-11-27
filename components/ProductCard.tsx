@@ -4,18 +4,16 @@ import { Art } from "./ArtSprite";
 import { IconArrow } from "./Icons";
 import { categorySearchAliases } from "@/data/search";
 
-/**
- * एक product card। पूरा card ही WhatsApp link है — customer tap करते ही
- * उसी चीज़ का सवाल तैयार मिलता है।
- */
+import { AddSelection } from './commerce/ShoppingControls';
+
 export function ProductCard({ item, badge }: { item: Item; badge?: string }) {
   return (
-    <a
-      className="pc rv in" href={ask(item.title)} target="_blank" rel="noopener"
+    <article
+      className="pc rv in"
       /* search isi text mein dhoondhta hai */
       data-search={`${item.title} ${item.kicker} ${item.category} ${item.tags.join(" ")} ${categorySearchAliases[item.category] ?? ""}`.toLowerCase()}
     >
-      <div className="pc-m">
+      <a className="ec-category-link" href={ask(item.title)} target="_blank" rel="noopener noreferrer"><div className="pc-m">
         {badge && <span className="badge v">{badge}</span>}
         {item.image ? (
           <Image
@@ -33,7 +31,9 @@ export function ProductCard({ item, badge }: { item: Item; badge?: string }) {
         <div className="pc-s">{item.tags.map((t) => <span key={t}>{t}</span>)}</div>
         <div className="pc-f"><span className="ask">जानकारी पूछिए <IconArrow /></span></div>
       </div>
-    </a>
+      </a>
+      <AddSelection name={item.title} choice={{productId:item.id,variant:"",colour:""}} category/>
+    </article>
   );
 }
 

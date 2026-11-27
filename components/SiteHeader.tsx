@@ -15,6 +15,8 @@ import { LiveBadge } from "./StoreStatus";
 import { IconMenu, IconSearch, IconPhone, IconWhatsApp, IconGrid, IconPin } from "./Icons";
 import { searchIn, type SearchEntry } from "@/data/search";
 
+import { HeaderShopping } from "./commerce/ShoppingControls";
+
 export function SiteHeader({ searchIndex }: { searchIndex: SearchEntry[] }) {
   const [open, setOpen] = useState(false);
   // जिस page पर ग्राहक अभी है, पट्टी में वो अलग दिखे।
@@ -92,6 +94,7 @@ export function SiteHeader({ searchIndex }: { searchIndex: SearchEntry[] }) {
           <SearchBox id="q-header" index={searchIndex} />
 
           <div className="hdr-a">
+            <HeaderShopping />
             {/* ⚠️ 11 Sep 2026 — owner: "call ka icon h header me wahan Mobile
                 number b show karo likhkar icon ke saath me hi"। बड़ी screen पर
                 नंबर icon के साथ लिखा दिखता है; phone पर सिर्फ़ icon (वहाँ जगह
@@ -134,6 +137,7 @@ export function SiteHeader({ searchIndex }: { searchIndex: SearchEntry[] }) {
             `<details>` से बनी है, इसलिए बिना JavaScript के भी खुलती-बंद होती
             है और Google को अंदर के सारे link पहले ही दिख जाते हैं।
           */}
+          <nav className="ec-drawer-links" aria-label="आपकी shopping">{[["/cart","मेरा Cart"],["/favourites","Favourites"],["/cart#saved","Save for later"],["/orders","मेरे orders"]].map(([href,label]) => <Link key={href} href={href} onClick={() => setOpen(false)}>{label}</Link>)}</nav>
           <MotionHeading as="h2" className="dh">सामान — category से चुनिए</MotionHeading>
           {productMenu.map((g) => (
             <details className="dsub" key={g.label} open>

@@ -18,7 +18,7 @@ export function WebsiteAnalytics() {
   const pathname = usePathname();
   const off = useSyncExternalStore(subscribe, disabled, () => true);
   useEffect(() => {
-    if (off || pathname.startsWith('/admin') || pathname.startsWith('/api') || navigator.webdriver) return;
+    if (off || pathname === '/checkout' || pathname === '/orders' || pathname.startsWith('/admin') || pathname.startsWith('/api') || navigator.webdriver) return;
     const now = Date.now();
     let visitor: { id: string; until: number }, session: { id: string; last: number };
     try {

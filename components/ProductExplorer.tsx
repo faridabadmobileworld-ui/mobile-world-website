@@ -5,13 +5,14 @@ import { trackAction } from "./WebsiteAnalytics";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { phoneBrands, phoneModels, searchPhoneModels, legacyGuideGroups, validModelIds, modelEnquiry, modelDisplayName, catalogueGuidePath, shortlistStorageKey } from "@/data/catalog";
+import { phoneBrands, phoneModels, searchPhoneModels, legacyGuideGroups, validModelIds, modelEnquiry, modelDisplayName, catalogueGuidePath } from "@/data/catalog";
 import { categorySearchAliases } from "@/data/search";
 import { shop } from "@/data/shop";
 import type { Item, NavCategory } from "@/data/content";
 import { ProductCard } from "./ProductCard";
 import { IconArrow, IconWhatsApp, IconSearch } from "./Icons";
 
+import { useBasket, updateBasket } from './commerce/basket';
 const fields = [{key:"display",label:"Display"},{key:"camera",label:"Camera"},{key:"processor",label:"Processor"},{key:"power",label:"Battery / charging"},{key:"software",label:"Software"}] as const;
 
 function Modal({ title, children, close }: { title: string; children: React.ReactNode; close: () => void }) {
@@ -35,7 +36,10 @@ export function ProductExplorer({ categories, items, productPages = {} }: { cate
   const [query, setQuery] = useState(params.get("q") ?? legacyGroup?.query ?? "");
   const [category, setCategory] = useState("all");
   const [brand, setBrand] = useState(phoneBrands.some((b) => b.slug === params.get("brand")) ? params.get("brand")! : legacyGroup?.brand ?? "all");
-  const [saved, setSaved] = useState<string[]>(validModelIds(params.get("shortlist")));
+  const { favourites } = useBasket();
+  const shared = params.get("shortlist");
+  const [sharedList, setSharedList] = useState<{source: string; ids:string[]} | null>(null);
+  const saved = shared !== null ? (sharedList?.source === shared ? sharedList.ids : validModelIds(shared)) : validModelIds(favourites.join(","));
   const [onlySaved, setOnlySaved] = useState(params.has("shortlist") || params.get("view") === "shortlist");
   const [compare, setCompare] = useState<string[]>([]);
   const [compareOpen, setCompareOpen] = useState(false);
@@ -47,17 +51,11 @@ export function ProductExplorer({ categories, items, productPages = {} }: { cate
       const hash = window.location.hash.slice(1);
       setCategory(categories.some((c) => c.slug === hash) ? hash : "all");
     };
-    const syncSaved = () => {
-      if (!params.has("shortlist")) {
-        try { setSaved(validModelIds(localStorage.getItem(shortlistStorageKey))); } catch { /* Session works without storage. */ }
-      }
-    };
     const frame = requestAnimationFrame(() => {
       const group = legacyGuideGroups[params.get("model") ?? ""];
       sync(); setQuery(params.get("q") ?? group?.query ?? "");
       setBrand(phoneBrands.some((b) => b.slug === params.get("brand")) ? params.get("brand")! : group?.brand ?? "all");
       if (group) setNotice("इस series के अलग models नीचे हैं। अपना exact model चुनिए।");
-      syncSaved();
     });
     const anchorClick = (event: MouseEvent) => {
       if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
@@ -70,15 +68,15 @@ export function ProductExplorer({ categories, items, productPages = {} }: { cate
     };
     document.addEventListener("click", anchorClick, true);
     window.addEventListener("hashchange", sync);
-    window.addEventListener("pageshow", syncSaved);
-    return () => { cancelAnimationFrame(frame); window.removeEventListener("hashchange", sync); window.removeEventListener("pageshow", syncSaved); document.removeEventListener("click", anchorClick, true); };
+    return () => { cancelAnimationFrame(frame); window.removeEventListener("hashchange", sync); document.removeEventListener("click", anchorClick, true); };
   }, [categories, params]);
 
-  function toggleSaved(id: string) {
-    trackAction("shortlist", `${saved.includes(id) ? "remove" : "add"}: ${id}`);
-    const next = saved.includes(id) ? saved.filter((v) => v !== id) : [...saved, id];
-    setSaved(next);
-    try { localStorage.setItem(shortlistStorageKey, next.join(",")); } catch { setNotice("इस browser में list save नहीं हो सकी। आप इसे अभी share कर सकते हैं।"); }
+  async function toggleSaved(id: string) {
+    const removing = saved.includes(id);
+    trackAction("shortlist", (removing ? "remove: " : "add: ") + id);
+    if (shared !== null) setSharedList({source:shared,ids:removing ? saved.filter(v => v !== id) : [...saved,id]});
+    try { await updateBasket(s => ({ ...s, favourites:removing ? s.favourites.filter(v => v !== id) : [...new Set([...s.favourites,id])] })); }
+    catch { setNotice("इस browser में पसंद save नहीं हो सकी।"); }
   }
   function toggleCompare(id: string) {
     trackAction("compare", id);
@@ -107,7 +105,7 @@ export function ProductExplorer({ categories, items, productPages = {} }: { cate
     <div className="mw-catalog-toolbar">
       <label className="mw-catalog-search"><span className="sr">Product या brand ढूँढ़िए</span><IconSearch /><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Model, brand या सामान का नाम…" type="search" /></label>
       <label><span className="sr">Brand चुनिए</span><select value={brand} onChange={(e) => { trackAction("brand", e.target.value); setBrand(e.target.value); setCategory("all"); }}><option value="all">सभी brands / सामान</option>{phoneBrands.map((b) => <option key={b.slug} value={b.slug}>{b.name}</option>)}</select></label>
-      <button className={`mw-filter ${onlySaved ? "active" : ""}`} type="button" aria-pressed={onlySaved} onClick={() => {setOnlySaved(!onlySaved);setCategory("all");setQuery("");setBrand("all");}}>♡ मेरी shortlist <span>{saved.length}</span></button>
+      <button className={`mw-filter ${onlySaved ? "active" : ""}`} type="button" aria-pressed={onlySaved} onClick={() => {setOnlySaved(!onlySaved);setCategory("all");setQuery("");setBrand("all");}}>♡ मेरी Favourites <span>{saved.length}</span></button>
     </div>
     <div className="mw-filter-row" aria-label="Product category"><button type="button" className={`mw-filter ${category === "all" ? "active" : ""}`} aria-pressed={category === "all"} onClick={() => chooseCategory("all")}>सभी products</button>{categories.map((c) => <button type="button" key={c.slug} className={`mw-filter ${category === c.slug ? "active" : ""}`} aria-pressed={category === c.slug} onClick={() => chooseCategory(c.slug)}>{c.label}</button>)}</div>
     <p className="mw-small mw-catalog-note">यह product guide है। दुकान पर उपलब्ध model, colour और दाम WhatsApp पर confirm कीजिए।</p>

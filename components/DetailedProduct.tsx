@@ -7,6 +7,8 @@ import { visibleSections, productDisplayName, selectProductVariant, type PublicP
 import { productColours, selectedPreference, type ReferencePrice } from '@/lib/catalog/preferences';
 import { IconWhatsApp } from './Icons';
 
+import { AddSelection } from './commerce/ShoppingControls';
+
 const sectionNames: Record<number, string> = {
   1: 'Model की जानकारी', 2: 'Design और बनावट', 3: 'Display', 4: 'Processor और memory',
   5: 'Camera और video', 6: 'Battery और charging', 7: 'Software', 8: 'Network और connectivity',
@@ -73,6 +75,7 @@ export function DetailedProduct({ product, productPath = '/catalog/' + product.s
             <div><dt>Price checked</dt><dd>{new Intl.DateTimeFormat('en-IN', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Kolkata' }).format(new Date(price.checkedAt + 'T12:00:00+05:30'))}</dd></div>
           </dl>)}
         </section>
+        <AddSelection key={JSON.stringify([variant?._key,selectedColour])} name={name} choice={{ productId:product.id, variant:variant?._key ?? '', colour:selectedColour }}/>
         <div className="mp-enquiry"><MotionHeading as="h2">इस model के बारे में पूछिए</MotionHeading><p>अपनी पसंद दुकान को भेजिए। Colour और stock की पुष्टि हमारी team से होगी।</p><div className="btns"><a className="btn btn-w" href={enquiry} target="_blank" rel="noopener noreferrer"><IconWhatsApp /> WhatsApp पर पूछिए</a><a className="btn btn-o" href={shop.phone.tel}>दुकान पर call कीजिए</a></div></div>
       </div>
     </section>

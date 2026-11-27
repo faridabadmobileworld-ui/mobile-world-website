@@ -12,6 +12,7 @@ import "./storefront.css";
 import "./campaigns.css";
 import "./festival.css";
 import "./motion.css";
+import "./shopping.css";
 import { DM_Sans, Noto_Sans_Devanagari } from "next/font/google";
 
 // Retain the existing font token so every shared and route-specific style updates together.

@@ -63,8 +63,7 @@ export default function Privacy() {
         <div className="prose">
           <MotionHeading as="h2" id="collect">1. हम कौन सी information collect करते हैं?</MotionHeading>
           <p>
-            हमारी website पर products की जानकारी और free Diwali Spin Wheel है। हम
-            website के ज़रिए कोई online payment या order process नहीं करते।
+            Products देखने और Cart, Favourites या Save for later इस्तेमाल करने के लिए account की ज़रूरत नहीं है। ये पसंद और आपकी order receipts इसी browser में रहती हैं।
           </p>
           <p>
             Account बनाए बिना website देख सकते हैं। Spin Wheel खेलने या reward code
@@ -76,6 +75,7 @@ export default function Privacy() {
             तो ज़रूरत के अनुसार यह जानकारी इस्तेमाल होती है:
           </p>
           <ul>
+            <li><strong>Shopping request</strong> — Checkout में दिया नाम, mobile number, चुना सामान और quantity दुकान को मिलते हैं। Delivery माँगने पर PIN code और पता भी मिलता है। Contact details private order record में encrypted रखे जाते हैं।</li>
             <li><strong>Spin का mobile number और code</strong> — reward तय करने और उसकी जाँच के लिए।</li>
             <li>
               <strong>आपका नाम और mobile number</strong> — जब आप WhatsApp पर message
@@ -96,6 +96,7 @@ export default function Privacy() {
             आपकी दी हुई जानकारी सिर्फ़ आपकी ही मदद के लिए इस्तेमाल होती है:
           </p>
           <ul>
+            <li>Order का stock जाँचने, दुकान का quote देने और मंज़ूर किए गए pickup या delivery को पूरा करने के लिए।</li>
             <li>आपके WhatsApp message या call का जवाब देने के लिए।</li>
             <li>Stock है या नहीं, यह बताने के लिए।</li>
             <li>Repairing या सामान लेने के बाद की मदद में आपसे बात करने के लिए।</li>
@@ -116,6 +117,7 @@ export default function Privacy() {
           </p>
 
           <MotionHeading as="h2" id="cookies">4. Cookies और website analytics</MotionHeading>
+          <p>Cart और order receipts आपके browser की local storage में रहते हैं। Browser का site data हटाने पर इसी device से पुरानी requests खोलने की सुविधा भी हट जाती है। दुकान से सहायता लेते समय अपना request number बताइए।</p>
           <p>Website को बेहतर बनाने के लिए public pages की visits, contact-button clicks, product interactions, scroll और active screen time दर्ज होते हैं। Random browser और session IDs को server पर keyed hash में बदलकर private storage में रखा जाता है। यह customer की पहचान नहीं बताता।</p>
           <p>Analytics में नाम, phone number, password, WhatsApp messages या form का पूरा text record नहीं होता। Search में केवल पहचाने गए shopping terms आते हैं। Referrer, campaign, device type और approximate country भी report में आ सकते हैं। Call/WhatsApp click से वास्तविक बातचीत की पुष्टि नहीं होती।</p>
           <p>Browser ID अधिकतम 90 दिन और session 30 मिनट की inactivity तक चलता है। Detailed reports पिछले 90 दिनों की हैं; पुराने server records owner dashboard की अगली maintenance पर हटाए जाते हैं। Hosting provider संचालन और सुरक्षा के request logs अलग रख सकता है।</p>
@@ -252,7 +254,7 @@ export default function Privacy() {
             पर दिया गया है।
           </p>
           <p style={{ color: "var(--ink-3)", fontSize: "13px" }}>
-            आख़िरी बार बदला: 5 October 2026
+            आख़िरी बार बदला: 27 November 2026
           </p>
         </div>
       </section>

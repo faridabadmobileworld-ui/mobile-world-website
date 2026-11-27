@@ -94,6 +94,7 @@ export function artForCategory(slug: string): string {
  * SVG drawing (`art`) — ताकि कोई खाली डिब्बा कभी न दिखे।
  */
 export type Item = {
+  id: string;
   kicker: string;
   title: string;
   tags: string[];
@@ -109,6 +110,7 @@ export type Item = {
 
 export const items: Item[] = [
   {
+    id: "category-5g-smartphones",
     category: "smartphones",
     kicker: "Smartphones",
     title: "हर बड़े brand के 5G Smartphones",
@@ -118,6 +120,7 @@ export const items: Item[] = [
     imageCaption: "तस्वीर: Xiaomi 17 Ultra",
   },
   {
+    id: "category-flagship-phones",
     category: "smartphones",
     kicker: "Smartphones",
     title: "Flagship phones — Apple और Samsung",
@@ -127,6 +130,7 @@ export const items: Item[] = [
     imageCaption: "तस्वीर: iPhone 18 Pro Max",
   },
   {
+    id: "category-everyday-phones",
     category: "smartphones",
     kicker: "Smartphones",
     title: "रोज़ के इस्तेमाल के लिए 5G phones",
@@ -136,6 +140,7 @@ export const items: Item[] = [
     imageCaption: "तस्वीर: REDMI 17C 5G",
   },
   {
+    id: "category-laptops",
     category: "laptops-tablets",
     kicker: "Laptops",
     title: "पढ़ाई, office और रोज़ के Laptops",
@@ -143,6 +148,7 @@ export const items: Item[] = [
     image: "/images/laptop-for-study-and-office-a146b020.webp",
   },
   {
+    id: "category-tablets",
     category: "laptops-tablets",
     kicker: "Tablets",
     title: "पढ़ाई और काम के लिए Tablets",
@@ -150,6 +156,7 @@ export const items: Item[] = [
     image: "/images/tablets-in-four-colours-9b68921c.webp",
   },
   {
+    id: "category-monitors",
     category: "laptops-tablets",
     kicker: "Monitors",
     title: "Office और gaming के Monitors",
@@ -157,6 +164,7 @@ export const items: Item[] = [
     image: "/images/computer-monitor-579cd6b9.webp",
   },
   {
+    id: "category-smart-televisions",
     category: "televisions",
     kicker: "Televisions",
     title: "32″ से 75″ तक Smart TV",
@@ -164,6 +172,7 @@ export const items: Item[] = [
     image: "/images/smart-television-on-white-4b38b4f8.webp",
   },
   {
+    id: "category-air-conditioners",
     category: "air-conditioners",
     kicker: "Air Conditioners",
     title: "Split और Window AC",
@@ -171,6 +180,7 @@ export const items: Item[] = [
     image: productImage("air-conditioners", "/images/split-air-conditioner-indoor-unit-24422a50.webp"),
   },
   {
+    id: "category-washing-machines",
     category: "washing-machines",
     kicker: "Washing Machines",
     title: "Semi, Top Load और Front Load",
@@ -178,6 +188,7 @@ export const items: Item[] = [
     image: "/images/semi-and-front-load-washing-machines-28ae1060.webp",
   },
   {
+    id: "category-refrigerators",
     category: "refrigerators",
     kicker: "Refrigerators",
     title: "Single door, Double door, Frost-free",
@@ -185,6 +196,7 @@ export const items: Item[] = [
     image: "/images/double-door-refrigerator-8c144446.webp",
   },
   {
+    id: "category-power-backup",
     category: "inverters-batteries",
     kicker: "Inverters & Batteries",
     title: "Inverter, Battery और Stabilizer",
@@ -192,6 +204,7 @@ export const items: Item[] = [
     image: "/images/inverter-and-battery-fbb02fc5.webp",
   },
   {
+    id: "category-audio-wearables",
     category: "audio-wearables",
     kicker: "Audio & Wearables",
     title: "Earbuds, Speakers और Smart Watches",
@@ -199,6 +212,7 @@ export const items: Item[] = [
     image: "/images/wireless-earbuds-0e160569.webp",
   },
   {
+    id: "category-bluetooth-speakers",
     category: "audio-wearables",
     kicker: "Audio",
     title: "Bluetooth Speakers",
@@ -207,6 +221,7 @@ export const items: Item[] = [
     image: productImage("bluetooth-speakers"),
   },
   {
+    id: "category-watches-bands",
     category: "audio-wearables",
     kicker: "Wearables",
     title: "Smart Watches और Bands",
@@ -215,6 +230,7 @@ export const items: Item[] = [
     image: productImage("smart-watches-bands"),
   },
   {
+    id: "category-headphones-earbuds",
     category: "audio-wearables",
     kicker: "Audio",
     title: "Headphones और Earbuds",
@@ -223,6 +239,7 @@ export const items: Item[] = [
     image: productImage("headphones-earbuds"),
   },
   {
+    id: "category-kitchen-appliances",
     category: "kitchen-appliances",
     kicker: "Kitchen",
     title: "Air Fryer, Microwave, Mixer",
@@ -230,6 +247,7 @@ export const items: Item[] = [
     image: productImage("kitchen-appliances", "/images/kitchen-appliances-on-the-counter-a35bd84a.webp"),
   },
   {
+    id: "category-vacuum-cleaners",
     category: "kitchen-appliances",
     kicker: "Home Appliances",
     title: "Vacuum Cleaner",
@@ -237,6 +255,7 @@ export const items: Item[] = [
     image: "/images/cordless-vacuum-cleaner-d6335ad5.webp",
   },
   {
+    id: "category-purifiers-geysers",
     category: "kitchen-appliances",
     kicker: "Home Appliances",
     title: "Water Purifier और Geyser",
@@ -244,6 +263,7 @@ export const items: Item[] = [
     image: productImage("water-purifier-geyser", "/images/home-appliances-at-mobile-world-0f587ac6.webp"),
   },
   {
+    id: "category-mobile-accessories",
     category: "accessories",
     kicker: "Accessories",
     title: "Cover, Tempered Glass, Charger",
@@ -251,6 +271,7 @@ export const items: Item[] = [
     image: productImage("mobile-accessories", "/images/mobile-accessories-at-mobile-world-55dedbfe.webp"),
   },
   {
+    id: "category-chargers-cables",
     category: "accessories",
     kicker: "Accessories",
     title: "Power Bank और Cable",
