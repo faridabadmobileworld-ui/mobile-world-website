@@ -85,3 +85,6 @@
   .current-offers h2 { margin-bottom: 16px; }
   .current-offers-grid { grid-template-columns: 1fr; gap: 18px; }
 }
+.offer-reference { display:grid; gap:2px; color:#483b3f; }
+.offer-reference strong { font-size:1.2rem; color:#802136; }
+.offer-reference span,.offer-reference small { font-size:.79rem; line-height:1.55; }

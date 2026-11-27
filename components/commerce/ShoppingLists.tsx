@@ -7,12 +7,15 @@ import { updateBasket, useBasket } from './basket';
 import { AddSelection, FavouriteButton, ShopTabs } from './ShoppingControls';
 import { ShopIcon, type IconName } from './ShopIcon';
 import { MotionHeading } from '../MotionHeading';
+import { choicePicture, modelHref } from '@/lib/commerce/discovery';
+import { ShareChoice } from './ShareChoice';
 
 export function EmptySelection({ icon, text, hint }: { icon: IconName; text: string; hint: string }) {
   return <div className="ec-empty"><span className="ec-empty-icon"><ShopIcon name={icon} /></span><h2>{text}</h2><p>{hint}</p><Link className="ec-button" href="/products">Products देखिए <ShopIcon name="arrow" /></Link></div>;
 }
-export function ProductPicture({ item }: { item?: Listing }) {
-  return <div className="ec-picture">{item?.image ? <Image src={item.image} alt={item.imageAlt} width={130} height={145} sizes="(max-width: 700px) 70px, 105px" /> : <ShopIcon name="box" />}</div>;
+export function ProductPicture({ item, line }: { item?: Listing; line?: Line }) {
+  const picture = item && choicePicture(item,line);
+  return <div className="ec-picture">{picture?.src ? <Image src={picture.src} alt={picture.alt} width={130} height={145} sizes="(max-width: 700px) 70px, 105px" /> : <ShopIcon name="box" />}</div>;
 }
 export function Reference({ item, line }: { item: Listing; line: Line }) {
   const price = exactPrice(item, line);
@@ -45,14 +48,15 @@ function BasketRow({ item, line, list, selected, onNotice }: { item?: Listing; l
   return <article className="ec-line">
     {list === 'cart' && <label className="ec-line-select"><input type="checkbox" aria-label={choiceName + ' Checkout के लिए चुनिए'} checked={selected} disabled={busy}
       onChange={event => { const checked = event.target.checked; void change(s => selectCartLines(s,checked,line), checked ? 'Item चुना गया।' : 'Item Cart में रखा है।'); }}/></label>}
-    <ProductPicture item={item} /><div className="ec-line-content">
+    <ProductPicture item={item} line={line}/><div className="ec-line-content">
     <small>{item?.kind === 'category' ? 'Category की ज़रूरत' : item?.group}</small>
-    <h3>{item ? <Link href={item.href}>{item.name}</Link> : 'पुराना selection'}</h3>
+    <h3>{item ? <Link href={modelHref(item,line)}>{item.name}</Link> : 'पुराना selection'}</h3>
     {item && <p>{choiceText(item,line)}</p>}{item && available && <Reference item={item} line={line}/>}
     {!available && <p className="ec-error">यह option बदल गया है। {item && <Link href={item.href}>मौजूदा options देखिए।</Link>}</p>}
     <div className="ec-row-actions"><div className="ec-quantity" role="group" aria-label={(item?.name ?? 'Item') + ' की quantity'}><button type="button" aria-label="Quantity घटाइए" disabled={busy || line.quantity === 1} onClick={() => adjust(-1)}><ShopIcon name="minus"/></button><span>{line.quantity}</span><button type="button" aria-label="Quantity बढ़ाइए" disabled={busy || line.quantity >= maxUnits} onClick={() => adjust(1)}><ShopIcon name="plus"/></button></div>
       <button type="button" className="ec-text" disabled={busy || (list === 'saved' && !available)} onClick={() => change(s => moveLine(s,list,line),list === 'cart' ? 'Save for later में रख दिया।' : 'वापस Cart में रख दिया।')}>{list === 'cart' ? 'Save for later' : 'Cart में वापस रखें'}</button>
       <button type="button" className="ec-text" disabled={busy} onClick={() => change(s => changeQuantity(s,list,line,0),'Item हटा दिया।')}>हटाएँ</button>
+      {item?.kind === 'model' && available && <ShareChoice href={modelHref(item,line)} name={item.name}/>}
     </div></div></article>;
 }
 export function ShoppingLists({ catalogue, page }: { catalogue: Listing[]; page: 'cart' | 'favourites' }) {

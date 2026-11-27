@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { publicProducts } from '@/lib/catalog/sanity';
 import { DetailedProduct } from '@/components/DetailedProduct';
+import { RelatedPhones } from '@/components/RelatedPhones';
+import { publicPhoneGuides } from '@/lib/catalog/guides';
 import { withSocialMetadata } from '@/lib/page-metadata';
 import { shop } from '@/data/shop';
 import '../../product-detail.css';
@@ -18,8 +20,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 export default async function Page({ params }: Props) {
   const { slug } = await params;
-  const product = (await publicProducts()).find(item => item.slug === slug);
+  const published = await publicProducts();
+  const product = published.find(item => item.slug === slug);
   if (!product) notFound();
   const schema = { '@context': 'https://schema.org', '@type': 'Product', name: product.name, description: product.description || undefined, image: new URL(product.image, shop.siteUrl).href, brand: { '@type': 'Brand', name: product.brand }, url: shop.siteUrl + '/catalog/' + product.slug };
-  return <main className="wrap mp-page"><nav aria-label="Breadcrumb" className="mp-breadcrumb"><Link href="/">Home</Link><span>/</span><Link href="/products">Products</Link><span>/</span><span>{product.name}</span></nav><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }} /><DetailedProduct product={product} /><Link className="mw-text-link" href="/products">← बाकी products देखिए</Link></main>;
+  const ids = new Set(published.map(p => p.id));
+  const related = [...published.map(p => ({product:p,href:'/catalog/'+p.slug})), ...publicPhoneGuides().filter(p => !ids.has(p.id)).map(p => ({product:p,href:'/phones/'+p.slug}))];
+  return <div className="wrap mp-page"><nav aria-label="Breadcrumb" className="mp-breadcrumb"><Link href="/">Home</Link><span>/</span><Link href="/products">Products</Link><span>/</span><span>{product.name}</span></nav><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }} /><DetailedProduct product={product} /><RelatedPhones current={product} options={related}/><Link className="mw-text-link" href="/products">← बाकी products देखिए</Link></div>;
 }

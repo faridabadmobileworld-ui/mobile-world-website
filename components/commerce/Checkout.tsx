@@ -6,6 +6,7 @@ import { sendOrder } from '@/app/checkout/actions';
 import { choiceText, cleanContact, finishRequest, lineKey, selectedLines, validChoice, type Contact, type Line, type Listing, type Receipt } from '@/lib/commerce/core';
 import { updateBasket, useBasket } from './basket';
 import { OrderSummary, ProductPicture } from './ShoppingLists';
+import { modelHref } from '@/lib/commerce/discovery';
 import { ShopTabs } from './ShoppingControls';
 import { ShopIcon } from './ShopIcon';
 import { MotionHeading } from '../MotionHeading';
@@ -60,7 +61,7 @@ export function Checkout({ catalogue, direct }: { catalogue: Listing[]; direct: 
   !cart.length ? <section className="ec-panel ec-empty"><h2>{direct === 'invalid' ? 'यह variant उपलब्ध विकल्पों में नहीं मिला' : 'Checkout के लिए अपना सामान चुनिए'}</h2>
     <Link className="ec-button" href={direct === 'invalid' ? '/products' : '/cart'}>{direct === 'invalid' ? 'मौजूदा models देखिए' : 'अपने Cart में चुनिए'} <ShopIcon name="arrow"/></Link></section> :
   <div className="ec-grid"><form className="ec-form" onSubmit={submit}><fieldset disabled={busy}><legend className="sr">Checkout details</legend>
-    <section className="ec-panel ec-section"><h2>आपका सामान</h2>{cart.map(line => { const item=map.get(line.productId); return <div className="ec-review" key={lineKey(line)}><ProductPicture item={item}/><div><strong>{item?.name ?? 'पुराना selection'}</strong><p>{item ? choiceText(item,line) : ''}</p><small>{item?.kind === 'category' ? 'Category request · ' : ''}Quantity {line.quantity}</small></div></div>; })}<Link className="ec-text" href={directLine ? map.get(directLine.productId)?.href ?? '/products' : '/cart'}>{directLine ? 'Model के विकल्प देखिए' : 'Cart में बदलाव करें'}</Link></section>
+    <section className="ec-panel ec-section"><h2>आपका सामान</h2>{cart.map(line => { const item=map.get(line.productId); return <div className="ec-review" key={lineKey(line)}><ProductPicture item={item} line={line}/><div><strong>{item?.name ?? 'पुराना selection'}</strong><p>{item ? choiceText(item,line) : ''}</p><small>{item?.kind === 'category' ? 'Category request · ' : ''}Quantity {line.quantity}</small></div></div>; })}<Link className="ec-text" href={directLine ? modelHref(map.get(directLine.productId)!,directLine) : '/cart'}>{directLine ? 'Model के विकल्प देखिए' : 'Cart में बदलाव करें'}</Link></section>
     <section className="ec-panel ec-section"><h2>सामान कैसे लेना चाहेंगे?</h2><div className="ec-methods">
       <label><input type="radio" name="method" value="pickup" checked={fulfilment === 'pickup'} onChange={() => setFulfilment('pickup')}/><ShopIcon name="store"/><span><b>दुकान से pickup</b><small>{shop.address.road}, {shop.address.locality}</small></span></label>
       <label><input type="radio" name="method" value="delivery" checked={fulfilment === 'delivery'} onChange={() => setFulfilment('delivery')}/><ShopIcon name="truck"/><span><b>Delivery की request</b><small>आपके PIN code पर सुविधा और charge दुकान बताएगी।</small></span></label>

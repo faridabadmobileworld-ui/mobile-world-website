@@ -61,6 +61,7 @@ body.festival-site { font-family:var(--font-inter),var(--font-hindi),'Nirmala UI
   html:not([data-site-motion='paused']) .festival-site :is(.shopping-category,.mw-model-card,.mw-featured,.offer-card,.pc,.mw-service-card,.mw-guide,.post,.festival-card,.mw-latest-link):hover {
     translate:0 -5px; border-color:#c996a3; box-shadow:var(--mw-motion-shadow); transform:none;
   }
+  html:not([data-site-motion='paused']) .festival-site .mw-model-card.ec-model-card:hover { translate:none; }
   html:not([data-site-motion='paused']) .festival-site #main :is(.mw-model-card,.mw-featured,.offer-card,.pc,.mw-guide,.post,.festival-card,.mw-latest-link,.shopping-category,.mw-brand-logo,.mw-community-photos figure,.mw-about-photo,.mp-main-image,.rmedia):hover img,
   html:not([data-site-motion='paused']) .festival-site #main img:hover { scale:1.045; }
   html:not([data-site-motion='paused']) .festival-site #main :is(.mw-model-media,.offer-image,.mp-guide-media,.pc-m,.mw-guide-image,.mw-visit-image,.mw-latest-image,.shopping-category-image,.festival-image,.rmedia,.mp-main-image,.mw-community-photos figure):hover::after {

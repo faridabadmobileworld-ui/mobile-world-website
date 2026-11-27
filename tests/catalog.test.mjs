@@ -613,6 +613,36 @@ test('Direct checkout resolves one public variant independently of a browser car
   }
 });
 
+test('Memory and colour searches preserve a real configuration, its photo and exact dated reference', async () => {
+  const catalogue = await load('lib/commerce/catalogue').shoppingCatalogue();
+  const c = load('lib/commerce/core'), d = load('lib/commerce/discovery');
+  const redmi = catalogue.find(item => item.id === 'xiaomi-redmi-note-17-pro-max');
+  const green = d.findChoice(redmi,'redmi note 17 pro max 12gb RAM 256 GB Matcha Green');
+  assert.equal(c.validChoice(redmi,green),true);
+  assert.equal(redmi.variants.find(v => v.key === green.variant).ram,'12 GB');
+  assert.equal(green.colour,'Matcha Green');
+  assert.match(d.choicePicture(redmi,green).src,/green-official/);
+  assert.equal(c.exactPrice(redmi,green),undefined);
+  const price = c.exactPrice(redmi,d.defaultChoice(redmi));
+  assert.equal(price.colour,'Secret Sunrise');
+  assert.equal(price.amount,52999);
+  assert.equal(d.findChoice(redmi,'redmi 8 GB 512 GB'),null);
+  assert.deepEqual(d.choiceFromHash(redmi,new URL(d.modelHref(redmi,green),'https://example.test').hash),green);
+  assert.equal(d.choiceFromHash(redmi,'#variant=bad&colour=Green'),null);
+  const restricted = {...redmi,colours:['Green','Blue'],prices:[],variants:[
+    {key:'a',ram:'8 GB',storage:'128 GB',colour:'Blue'},
+    {key:'b',ram:'12 GB',storage:'512 GB',colour:'Green'},
+  ]};
+  assert.equal(d.findChoice(restricted,'8gb 512gb'),null);
+  assert.equal(d.findChoice(restricted,'12GB Blue'),null);
+  assert.equal(d.findChoice(restricted,'8 GB Blue').variant,'a');
+  for (const item of catalogue.filter(i => i.kind === 'model')) {
+    const initial = d.defaultChoice(item);
+    assert.ok(c.validChoice(item,initial),item.name);
+    assert.equal(d.choiceFromHash(item,'#phone-spec_046'),null);
+  }
+});
+
 test('Order retries, owner quotes, customer consent and fulfilment operate on private real selections', async () => {
   const { randomUUID }=await import('node:crypto');
   const c=load('lib/commerce/core'), o=load('lib/commerce/orders');

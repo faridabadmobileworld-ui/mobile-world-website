@@ -1,4 +1,5 @@
 import type { Post } from "./content";
+import { colourPhotos } from './phone-colour-images';
 
 export const redmiNote17Post: Post = {
   slug: "redmi-note-17-pro-max-5g-features-faridabad",
@@ -12,11 +13,7 @@ export const redmiNote17Post: Post = {
   imageH: 760,
   imageFit: "contain",
   alt: "REDMI Note 17 Pro Max 5G, Stealth Black की Xiaomi India की official product image",
-  gallery: [
-    { src: "/images/redmi-note-17-pro-max-black-official.webp", alt: "REDMI Note 17 Pro Max 5G · Stealth Black" },
-    { src: "/images/redmi-note-17-pro-max-green-official.webp", alt: "REDMI Note 17 Pro Max 5G · Matcha Green" },
-    { src: "/images/redmi-note-17-pro-max-white-official.webp", alt: "REDMI Note 17 Pro Max 5G · Secret Sunrise" },
-  ],
+  gallery: colourPhotos('xiaomi-redmi-note-17-pro-max'),
   body: `
 <p>नया phone चुनते समय हम सबकी ज़रूरत थोड़ी अलग होती है। किसी को बड़ी battery चाहिए, किसी को साफ़ display और किसी को परिवार की photos के लिए अच्छा camera। <strong>REDMI Note 17 Pro Max 5G</strong> को चुनने से पहले उसकी मुख्य बातें समझ लेते हैं। यह जानकारी Xiaomi की <strong>India product page</strong> पर आधारित है।</p>
 

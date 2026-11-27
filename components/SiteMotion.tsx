@@ -74,7 +74,10 @@ export function SiteMotion() {
         if (!enabled || entry.boundingClientRect.bottom < 0 || element.contains(document.activeElement)) continue;
         // Hash navigation must reveal its destination immediately, without delaying reading.
         if (target && (target.contains(element) || element.contains(target))) continue;
-        if (element.matches(headings)) {
+        if (element.matches('.ec-model-card')) {
+          // A focus change during a pointer press must not move a purchase control.
+          animate(element, [{opacity:.35},{opacity:1}], {duration:400});
+        } else if (element.matches(headings)) {
           const glyphs = element.querySelectorAll<HTMLElement>('.mw-motion-glyph');
           if (glyphs.length) {
             glyphs.forEach((glyph, index) => animate(glyph,

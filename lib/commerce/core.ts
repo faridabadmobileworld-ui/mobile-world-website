@@ -8,7 +8,7 @@ export type Basket = { version: 1; cart: Line[]; excluded: string[]; saved: Line
 export type Listing = {
   id: string; name: string; group: string; kind: 'model' | 'guide' | 'category'; href: string;
   image: string; imageAlt: string; colours: string[];
-  variants: { key: string; ram: string; storage: string; colour: string }[]; prices: ReferencePrice[];
+  variants: { key: string; ram: string; storage: string; colour: string; image?: string }[]; prices: ReferencePrice[];
 };
 export const emptyBasket = (): Basket => ({ version: 1, cart: [], excluded: [], saved: [], favourites: [], receipts: [] });
 export const maxUnits = 99;

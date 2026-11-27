@@ -5,8 +5,7 @@ import { items } from '@/data/content';
 import prices from '@/data/phone-reference-prices.json';
 import { publicPhoneGuides } from '@/lib/catalog/guides';
 import { publicProducts } from '@/lib/catalog/sanity';
-import { productDisplayName } from '@/lib/catalog/core';
-import { productColours } from '@/lib/catalog/preferences';
+import { modelListing } from './model';
 import type { Listing } from './core';
 
 export const shoppingCatalogue = cache(async (): Promise<Listing[]> => {
@@ -19,9 +18,7 @@ export const shoppingCatalogue = cache(async (): Promise<Listing[]> => {
   const editorial = publicPhoneGuides().map(product => ({ product, path: '/phones/', prices: prices[product.slug as keyof typeof prices] ?? [] }));
   const merchant = (await publicProducts()).map(product => ({ product, path: '/catalog/', prices: [] }));
   for (const { product, path, prices: refs } of [...editorial, ...merchant]) {
-    catalogue.set(product.id, { id: product.id, name: productDisplayName(product), group: product.brand, kind: 'model', href: path + product.slug, image: product.image, imageAlt: product.imageAlt, colours: productColours(product),
-      variants: product.variants.map(v => ({ key: v._key, ram: v.ram, storage: v.storage, colour: v.colour })),
-      prices: refs.map(({ amount, ram, storage, colour, checkedAt }) => ({ amount, ram, storage, colour, checkedAt })) });
+    catalogue.set(product.id,modelListing(product,path + product.slug,refs));
   }
   return [...catalogue.values()];
 });
