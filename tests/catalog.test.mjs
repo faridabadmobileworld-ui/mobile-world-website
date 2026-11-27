@@ -643,6 +643,24 @@ test('Memory and colour searches preserve a real configuration, its photo and ex
   }
 });
 
+test('Public comparison links preserve separate configurations, reject old options, and allow differing versions of the same model', async () => {
+  const listings = await load('lib/commerce/catalogue').shoppingCatalogue();
+  const d = load('lib/commerce/discovery'), c = load('lib/commerce/comparison');
+  const redmi = listings.find(i => i.id === 'xiaomi-redmi-note-17-pro-max');
+  const first = d.defaultChoice(redmi);
+  const second = d.findChoice(redmi,'12gb Matcha Green');
+  const link = new URL(c.comparisonHref([first,second],true),'https://example.test');
+  const params = Object.fromEntries(link.searchParams);
+  assert.equal(link.pathname,'/compare');
+  assert.equal(params.different,'1');
+  assert.deepEqual(c.comparisonChoices(params,listings),{choices:[first,second],invalid:false});
+  assert.deepEqual(c.comparisonChoices({...params,v2:'expired'},listings),{choices:[first],invalid:true});
+  assert.deepEqual(c.comparisonChoices({m1:redmi.id,m2:redmi.id},listings).choices,[first]);
+  assert.equal(c.comparisonChoices({m1:listings.find(i => i.kind === 'guide').id},listings).invalid,true);
+  const empty = {...first,colour:''};
+  assert.deepEqual(c.comparisonChoices(Object.fromEntries(new URL(c.comparisonHref([empty]),'https://example.test').searchParams),listings).choices,[empty]);
+});
+
 test('Order retries, owner quotes, customer consent and fulfilment operate on private real selections', async () => {
   const { randomUUID }=await import('node:crypto');
   const c=load('lib/commerce/core'), o=load('lib/commerce/orders');

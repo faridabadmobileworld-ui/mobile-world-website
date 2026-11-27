@@ -1,0 +1,28 @@
+.cm-page { max-width:1240px; }
+.cm-picker { margin:20px 0 32px; }
+.cm-slots { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-bottom:14px; }
+.cm-slots fieldset { min-width:0; margin:0; padding:14px; border:1px solid #e3d9dc; border-radius:13px; background:#fbf8f8; }
+.cm-slots legend { padding:0 5px; font-weight:700; font-size:.91rem; color:#763244; }
+.cm-slots label { display:grid; gap:4px; font-size:.83rem; margin:4px 0 10px; }
+.cm-slots select { width:100%; min-width:0; min-height:44px; padding:8px 9px; border-radius:8px; border:1px solid #d5c9ce; font:inherit; background:white; color:#30272b; }
+.cm-tools,.mp-shortcuts { display:flex; flex-wrap:wrap; align-items:center; gap:8px 18px; }
+.cm-tools h2 { margin:0 auto 0 0; }
+.cm-scroll { overflow-x:auto; max-width:100%; border:1px solid #e3dcdf; border-radius:12px; overscroll-behavior-x:contain; }
+.cm-scroll table { border-collapse:separate; border-spacing:0; width:100%; font-size:.9rem; }
+.cm-scroll th,.cm-scroll td { text-align:start; vertical-align:top; border-bottom:1px solid #eae5e7; border-inline-end:1px solid #eae5e7; padding:11px 13px; line-height:1.55; min-width:155px; max-width:320px; overflow-wrap:anywhere; }
+.cm-scroll th:first-child { min-width:112px; }
+.cm-scroll tbody th { font-weight:600; color:#51454b; }
+.cm-scroll thead th { background:#fcf9f8; min-width:170px; }
+.cm-scroll thead a,.cm-scroll thead small { display:block; }
+.cm-scroll thead small { font-weight:450; margin-top:5px; color:#5d5356; }
+.cm-scroll thead img { display:block; width:100%; height:94px; object-fit:contain; margin-bottom:9px; }
+.cm-scroll .cm-group th { background:#f3edef; color:#65273c; }
+.cm-scroll tbody tr:nth-child(even) { background:#fcfbfa; }
+@media(max-width:700px) {
+  .cm-slots { grid-template-columns:1fr; }
+  .cm-slots fieldset { display:flex; flex-wrap:wrap; gap:5px 9px; }
+  .cm-slots label { flex:1 1 115px; }
+  .cm-slots label:first-of-type { flex-basis:100%; }
+  .cm-scroll th,.cm-scroll td { padding:9px 10px; }
+  .cm-scroll tbody th[scope=row] { position:sticky; left:0; background:#faf7f7; max-width:125px; }
+}

@@ -4,21 +4,16 @@ import Image from 'next/image';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { shop } from '@/data/shop';
 import { visibleSections, productDisplayName, selectProductVariant, type PublicProduct } from '@/lib/catalog/core';
-import { selectedPreference, type ReferencePrice } from '@/lib/catalog/preferences';
+import { sectionNames, selectedPreference, type ReferencePrice } from '@/lib/catalog/preferences';
 import { IconWhatsApp } from './Icons';
 
 import { colourPhotos } from '@/data/phone-colour-images';
 import { choiceFromHash, choicePicture, defaultChoice, modelHref } from '@/lib/commerce/discovery';
 import { exactPrice, lineKey, rupees } from '@/lib/commerce/core';
 import { modelListing } from '@/lib/commerce/model';
+import { comparisonHref } from '@/lib/commerce/comparison';
 import { ShareChoice } from './commerce/ShareChoice';
 import { AddSelection } from './commerce/ShoppingControls';
-
-const sectionNames: Record<number, string> = {
-  1: 'Model की जानकारी', 2: 'Design और बनावट', 3: 'Display', 4: 'Processor और memory',
-  5: 'Camera और video', 6: 'Battery और charging', 7: 'Software', 8: 'Network और connectivity',
-  9: 'Security और audio', 10: 'Warranty', 11: 'Box में क्या मिलता है',
-};
 
 const noPrices: ReferencePrice[] = [];
 const mainFeatures = ['spec_016','spec_022','spec_032','spec_046','spec_049'];
@@ -68,13 +63,19 @@ export function DetailedProduct({ product, productPath = '/catalog/' + product.s
   const href = modelHref(item,choice);
   const enquiry = shop.phone.whatsapp + '?text=' + encodeURIComponent('नमस्ते Mobile World! मुझे ' + name + (preference ? ' (' + preference + ')' : '') + ' के बारे में जानकारी चाहिए। ' + shop.siteUrl + href);
   function select(field: 'ram' | 'storage' | 'colour', value: string) {
+    let nextChoice;
     if (field === 'colour' && !variantColours.length) {
-      setChoice({...choice,colour:value});
+      nextChoice = {...choice,colour:value};
     } else {
       const next = selectProductVariant(product.variants,variant,field,value);
       if (!next) return;
-      setChoice({productId:item.id,variant:next._key,colour:next.colour || choice.colour});
+      nextChoice = {productId:item.id,variant:next._key,colour:next.colour || choice.colour};
     }
+    setChoice(nextChoice);
+    const target = new URL(modelHref(item,nextChoice),window.location.origin);
+    const url = new URL(window.location.href);
+    url.hash = target.hash;
+    window.history.replaceState(window.history.state,'',url);
     setGalleryImage('');
   }
   return <>
@@ -82,7 +83,8 @@ export function DetailedProduct({ product, productPath = '/catalog/' + product.s
       <header className="mp-heading">
         <p className="shopping-overline">{product.brand}{product.series ? ' · ' + product.series : ''}</p>
         <MotionHeading as="h1">{name}</MotionHeading>
-        <a className="mw-text-link" href="#product-specifications">पूरी specifications तक जाइए</a>
+        <nav className="mp-shortcuts" aria-label="इस model को समझिए"><a className="mw-text-link" href="#product-specifications">पूरी specifications</a>
+          <a className="mw-text-link" href={comparisonHref([choice])}>दूसरे phone से तुलना करें</a></nav>
       </header>
       <div className="mp-gallery">
         <button type="button" className="mp-main-image" onClick={() => dialog.current?.showModal()} aria-label={name + ' की image बड़ी देखिए'}>

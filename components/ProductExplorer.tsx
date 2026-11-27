@@ -14,7 +14,9 @@ import { IconArrow, IconWhatsApp, IconSearch } from "./Icons";
 
 import { useBasket, updateBasket } from './commerce/basket';
 import { defaultChoice, findChoice } from '@/lib/commerce/discovery';
-import { lineKey, type Listing } from '@/lib/commerce/core';
+import { lineKey, type Choice, type Listing } from '@/lib/commerce/core';
+import { comparisonHref } from '@/lib/commerce/comparison';
+import Link from 'next/link';
 import { ShopModelCard } from './commerce/ShopModelCard';
 const fields = [{key:"display",label:"Display"},{key:"camera",label:"Camera"},{key:"processor",label:"Processor"},{key:"power",label:"Battery / charging"},{key:"software",label:"Software"}] as const;
 
@@ -46,7 +48,8 @@ export function ProductExplorer({ categories, items, productPages = {}, listings
   const ids = shared !== null ? (sharedList?.source === shared ? sharedList.ids : shared.split(',')) : favourites;
   const saved = [...new Set(ids)].filter(id => modelIds.has(id));
   const [onlySaved, setOnlySaved] = useState(params.has("shortlist") || params.get("view") === "shortlist");
-  const [compare, setCompare] = useState<string[]>([]);
+  const [selections,setSelections] = useState<Choice[]>([]);
+  const compare = selections.map(choice => choice.productId);
   const [compareOpen, setCompareOpen] = useState(false);
   const [notice, setNotice] = useState("");
   const [shareUrl, setShareUrl] = useState("");
@@ -84,11 +87,11 @@ export function ProductExplorer({ categories, items, productPages = {}, listings
     try { await updateBasket(s => ({ ...s, favourites:removing ? s.favourites.filter(v => v !== id) : [...new Set([...s.favourites,id])] })); }
     catch { setNotice("इस browser में पसंद save नहीं हो सकी।"); }
   }
-  function toggleCompare(id: string) {
+  function toggleCompare(id: string, choice:Choice = {productId:id,variant:'',colour:''}) {
     trackAction("compare", id);
-    if (compare.includes(id)) { setCompare(compare.filter((v) => v !== id)); return; }
+    if (compare.includes(id)) { setSelections(current => current.filter(c => c.productId !== id)); return; }
     if (compare.length === 3) { setNotice("एक बार में 3 models compare कर सकते हैं। पहले किसी model को हटाइए।"); return; }
-    setCompare([...compare, id]); setNotice("");
+    setSelections(current => [...current,choice]); setNotice("");
   }
   function chooseCategory(slug: string) {
     trackAction("category", slug);
@@ -124,6 +127,7 @@ export function ProductExplorer({ categories, items, productPages = {}, listings
     return priority(a.id) - priority(b.id);
   });
   const generic = onlySaved || brand !== "all" ? [] : items.filter((p) => (category === "all" || category === p.category) && terms.every((w) => `${p.title} ${p.kicker} ${p.tags.join(" ")} ${categorySearchAliases[p.category] ?? ""} ${categories.find((c) => c.slug === p.category)?.label ?? ""}`.toLowerCase().includes(w)));
+  const useFullComparison = selections.length >= 2 && selections.every(c => byId.has(c.productId));
   const chosen = saved.flatMap((id) => phoneModels.filter((p) => p.id === id));
   const comparing = compare.flatMap((id) => phoneModels.filter((p) => p.id === id));
 
@@ -143,7 +147,7 @@ export function ProductExplorer({ categories, items, productPages = {}, listings
         if (listing) {
           const initial = matches.get(id) ?? defaultChoice(listing);
           return <ShopModelCard key={lineKey(initial)} item={listing} initial={initial} saved={saved.includes(id)} compared={compare.includes(id)}
-            onSave={() => toggleSaved(id)} onCompare={p ? () => toggleCompare(id) : undefined} onOpen={() => trackAction("product",listing.name)}/>;
+            onSave={() => toggleSaved(id)} onCompare={c => toggleCompare(id,c)} onChoice={c => setSelections(current => current.map(v => v.productId === id ? c : v))} onOpen={() => trackAction("product",listing.name)}/>;
         }
         if (!p) return null;
         const fullSpecs = productPages[p.id];
@@ -173,7 +177,7 @@ export function ProductExplorer({ categories, items, productPages = {}, listings
     </section>}
     {generic.length > 0 && <section className="mw-model-section"><div className="shopping-section-heading"><div><p className="shopping-overline">CATEGORIES · अपनी ज़रूरत से</p><MotionHeading as="h2">दुकान में और क्या मिलता है?</MotionHeading></div></div><div className="pgrid">{generic.map((p) => <ProductCard key={p.title} item={p} />)}</div></section>}
     {!results.length && !generic.length && <div className="mw-empty"><MotionHeading as="h2">{onlySaved ? "आपकी shortlist अभी खाली है।" : "यहाँ match नहीं मिला।"}</MotionHeading><p>आपकी ज़रूरत का सामान list में न दिखे तो हमारी team से पूछिए।</p><div className="btns"><button className="btn btn-d" type="button" onClick={() => {setQuery("");setCategory("all");setBrand("all");setOnlySaved(false);}}>सभी products देखिए</button><a className="btn btn-o" target="_blank" rel="noopener noreferrer" href={`${shop.phone.whatsapp}?text=${encodeURIComponent(`नमस्ते Mobile World! मुझे ${query || "एक product"} के बारे में जानकारी चाहिए।`)}`}>WhatsApp पर पूछिए</a></div></div>}
-    {compare.length > 0 && <aside className="mw-compare-tray" aria-label="चुने हुए comparison models"><div><b>{compare.length}/3 models चुने हैं</b><span>{comparing.map((p) => p.name).join(" · ")}</span></div><button className="btn btn-d" type="button" disabled={compare.length < 2} onClick={() => setCompareOpen(true)}>Compare कीजिए <IconArrow /></button><button className="mw-tray-clear" type="button" onClick={() => {setCompare([]);setNotice("");}} aria-label="Comparison list खाली कीजिए">×</button></aside>}
+    {compare.length > 0 && <aside className="mw-compare-tray" aria-label="चुने हुए comparison models"><div><b>{compare.length}/3 models चुने हैं</b><span>{compare.map(id => byId.get(id)?.name ?? phoneModels.find(p => p.id === id)?.name).filter(Boolean).join(" · ")}</span></div>{useFullComparison ? <Link className="btn btn-d" href={comparisonHref(selections)}>Compare कीजिए <IconArrow/></Link> : <button className="btn btn-d" type="button" disabled={compare.length < 2} onClick={() => setCompareOpen(true)}>Compare कीजिए <IconArrow /></button>}<button className="mw-tray-clear" type="button" onClick={() => {setSelections([]);setNotice("");}} aria-label="Comparison list खाली कीजिए">×</button></aside>}
     {compareOpen && <Modal title="Models का comparison" close={() => setCompareOpen(false)}><div className="mw-comparison"><p className="shopping-overline">COMPARE · साथ में देखिए</p><MotionHeading as="h2">फ़र्क़ साफ़ दिखे, फ़ैसला आसान हो।</MotionHeading><div className="mw-table-scroll" tabIndex={0} role="region" aria-label="Product comparison table"><table><caption className="sr">चुने हुए phone models की specifications</caption><thead><tr><th scope="col">ख़ूबी</th>{comparing.map((p) => <th key={p.id} scope="col">{modelDisplayName(p)}</th>)}</tr></thead><tbody>{fields.map((f) => <tr key={f.key}><th scope="row">{f.label}</th>{comparing.map((p) => <td key={p.id}>{p[f.key]}</td>)}</tr>)}<tr><th scope="row">दाम / stock</th>{comparing.map((p) => <td key={p.id}>दुकान से confirm कीजिए</td>)}</tr><tr><th scope="row">Specifications का source</th>{comparing.map((p) => <td key={p.id}>{p.source ? <a href={p.source} target="_blank" rel="noopener noreferrer">{p.brand} की जानकारी ↗</a> : "जानकारी दुकान से पूछिए"}</td>)}</tr></tbody></table></div><p className="mw-small">*Brand के test conditions लागू हैं। Battery playback और mAh अलग माप हैं। Software support की शुरुआत और अवधि model की brand policy पर निर्भर है।</p><a className="btn btn-w" href={modelEnquiry(comparing)} target="_blank" rel="noopener noreferrer"><IconWhatsApp /> इन models के बारे में पूछिए</a></div></Modal>}
   </>;
 }

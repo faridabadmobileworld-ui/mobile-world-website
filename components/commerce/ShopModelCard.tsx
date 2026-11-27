@@ -7,20 +7,21 @@ import { exactPrice, lineKey, rupees, type Choice, type Listing } from '@/lib/co
 import { choicePicture, coloursFor, modelHref } from '@/lib/commerce/discovery';
 import { IconArrow } from '../Icons';
 
-type Props = { item: Listing; initial: Choice; saved: boolean; compared?: boolean; onSave: () => void; onCompare?: () => void; onOpen: () => void };
+type Props = { item: Listing; initial: Choice; saved: boolean; compared?: boolean; onSave: () => void; onCompare?: (choice:Choice) => void; onChoice?: (choice:Choice) => void; onOpen: () => void };
 
-export function ShopModelCard({ item, initial, saved, compared, onSave, onCompare, onOpen }: Props) {
+export function ShopModelCard({ item, initial, saved, compared, onSave, onCompare, onChoice, onOpen }: Props) {
   const [choice,setChoice] = useState(initial);
   const variant = item.variants.find(v => v.key === choice.variant);
   const colours = coloursFor(item,variant);
   const photo = choicePicture(item,choice);
   const price = exactPrice(item,choice);
   const href = modelHref(item,choice);
+  function choose(next:Choice) { setChoice(next); if (compared) onChoice?.(next); }
   function selectMemory(key: string) {
     const next = item.variants.find(v => v.key === key);
     if (!next) return;
     const colour = next.colour || (coloursFor(item,next).includes(choice.colour) ? choice.colour : '');
-    setChoice({productId:item.id, variant:key, colour});
+    choose({productId:item.id, variant:key, colour});
   }
   return <article className="mw-model-card ec-model-card">
     <div className="mw-model-media">
@@ -36,7 +37,7 @@ export function ShopModelCard({ item, initial, saved, compared, onSave, onCompar
         {variant && <label>Memory<select value={variant.key} aria-label={item.name + ' का memory option'} onChange={e => selectMemory(e.target.value)}>
           {item.variants.map(v => <option key={v.key} value={v.key}>{[v.ram && v.ram + ' RAM',v.storage && v.storage + ' storage',v.colour].filter(Boolean).join(' · ')}</option>)}
         </select></label>}
-        {colours.length > 0 && <label>Colour preference<select value={choice.colour} aria-label={item.name + ' का colour'} onChange={e => setChoice({...choice, colour:e.target.value})}>
+        {colours.length > 0 && <label>Colour preference<select value={choice.colour} aria-label={item.name + ' का colour'} onChange={e => choose({...choice, colour:e.target.value})}>
           {!variant?.colour && <option value="">Colour चुनिए</option>}
           {colours.map(colour => <option key={colour}>{colour}</option>)}
         </select></label>}
@@ -44,7 +45,7 @@ export function ShopModelCard({ item, initial, saved, compared, onSave, onCompar
       <div className="ec-card-price" aria-live="polite">{price ? <><strong>{rupees(price.amount)}</strong><small>Official India reference · <time dateTime={price.checkedAt}>{new Intl.DateTimeFormat('hi-IN',{day:'numeric',month:'short',year:'numeric',timeZone:'Asia/Kolkata'}).format(new Date(price.checkedAt+'T12:00:00+05:30'))}</time></small></> : <span>इस पसंद का दाम दुकान से पूछिए</span>}</div>
       <AddSelection key={lineKey(choice)} choice={choice} name={item.name} quick/>
       <div className="mw-model-actions"><a className="mw-text-link" href={href} onClick={onOpen}>Specifications <IconArrow/></a>
-        {onCompare && <label className="mw-compare-check"><input type="checkbox" checked={compared} onChange={onCompare}/>Compare</label>}</div>
+        {onCompare && <label className="mw-compare-check"><input type="checkbox" checked={compared} onChange={() => onCompare(choice)}/>Compare</label>}</div>
     </div>
   </article>;
 }

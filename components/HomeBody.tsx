@@ -15,7 +15,7 @@ export function HomeBody({ journey = true, section = "all" }: { current?: string
   return <>
     {section !== "details" && <>
     <section className="mw-section" id="selected-models">
-      <div className="shopping-section-heading"><div><p className="shopping-overline">करीब से देखिए · SELECTED MODELS</p><MotionHeading as="h2">आपकी अगली पसंद, यहाँ से।</MotionHeading></div><Link href="/products">Models compare कीजिए <IconArrow /></Link></div>
+      <div className="shopping-section-heading"><div><p className="shopping-overline">करीब से देखिए · SELECTED MODELS</p><MotionHeading as="h2">आपकी अगली पसंद, यहाँ से।</MotionHeading></div><Link href="/compare">Models compare कीजिए <IconArrow /></Link></div>
       <nav className="mw-brand-logo-grid" aria-label="Brand चुनकर उसके phones देखिए">
         {homepageBrands.map((brand) => <Link href={`/products?brand=${brand.slug}#smartphones`} className={`mw-brand-logo mw-brand-logo-${brand.slug}`} key={brand.slug} aria-label={`${brand.name} के products देखिए`}>
           {brand.logo ? <Image src={brand.logo} alt={`${brand.name} logo`} width={180} height={70} sizes="(max-width:760px) 130px, 180px" /> : <span className="mw-brand-name">{brand.name}</span>}
